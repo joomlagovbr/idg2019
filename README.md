@@ -2,9 +2,9 @@
 IDG 2.0, nova versão da Identidade Digital do Governo Federal
 
 OBS: estamos iniciando o desenvolvimento para o idg 2.0 se voce pode contribuir com algo, favor manda email para:
-joomlacalango@gougorgroups.com
-tiagovtg@gmail.com
-esse githug
+- https://groups.google.com/forum/?hl=pt-BR#!forum/joomla-e-gov-br
+- tiagovtg@gmail.com
+- atravez desse git
 
 Portal padrão em CMS Joomla 3.9.6
 Sobre esta versão
