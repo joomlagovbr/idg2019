@@ -6,9 +6,9 @@ OBS: estamos iniciando o desenvolvimento para o idg 2.0 se voce pode contribuir 
 - tiagovtg@gmail.com
 - através desse git
 
-Portal padrão em CMS Joomla 3.9.6
+Portal padrão em CMS Joomla 3.9.8
 Sobre esta versão
-O Joomla 3.9.6 é recomendado para versões do PHP 5.3.10+. Melhor usando PHP 7.2.+
+O Joomla 3.9.8 é recomendado para versões do PHP 5.3.10+. Melhor usando PHP 7.2.+
 
 Acompanhe as atualizações do projeto
 Participe do grupo do google chamado Joomla! e-Gov para se manter informado sobre o Portal Padrão em CMS Joomla. As atualizações não possuem data programada e ocorrem de acordo com a disponibilidade dos voluntários participantes.
@@ -23,17 +23,14 @@ Recomenda-se a utilização de ambiente LAMP (Linux, Apache, MySQL, PHP), config
 ESTE PROJETO É RECOMENDADO PARA PROFISSIONAIS COM EXPERIÊNCIA NA UTILIZAÇÃO DO CMS JOOMLA.
 
 Configuração inicial
-Não é mais necessário alterar o arquivo configuration.php manualmente.
+Altere o arquivo configuration.php manualmente, até que um novo instalador seja gerado. Personalize o arquivo BANCO-DE-DADOS.sql substituindo "idg2019_" pelo prefixo de banco de dados desejado. Depois, é necessário alterar parâmetros do arquivo configuration.php como host, user, password, db e dbprefix.
 
-O instalador padrão do CMS Joomla! 3.x foi customizado para configurar uma instalação padrão do CMS Joomla! com componentes, módulos, template e conteúdo de exemplo do Portal Padrão.
+Um instalador do template em separado não foi gerado porque sua correta exibição depende dos menus criados e dos módulos configurados.
 
-Documentação
-Confira a documentação disponível até o momento no repositório provisório https://github.com/joomlagovbr/documentacao.
+IMPORTANTE: este é um projeto ainda em desenvolvimento, e a disponibilização antecipada visa a atender aos órgãos com maior pressa. O módulo de agenda de dirigentes da página inicial ainda está pendente de desenvolvimento (está apenas com css).
 
-###Links diretos:
-
-Manual Template Portal Padrão, vr. 0.1 - (as imagens são baseadas na versão Joomla 2.5, mas os princípios de alteração são os mesmos para a versão 3.3)
-Como criar uma manchete de página inicial ou editoria
-Posições de template do projeto Portal Padrão (importante) - (as posições são geradas dinamicamente, através de uma lógica própria)
 Desenvolvimento
 Comunidade Joomla Calango
+
+Agradecimentos especiais a (ordem alfabética):
+Adriano Lima Santos; Aline Cristina Moreira; Flávio Luciano Dias; Lucas Ávila Cosso; Maurício Oliveira; Sandro Oliveira de Jesus; Tiago Garcia
