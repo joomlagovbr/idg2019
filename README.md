@@ -5,6 +5,7 @@ OBS: estamos iniciando o desenvolvimento para o idg 2.0 se voce pode contribuir 
 - https://groups.google.com/forum/?hl=pt-BR#!forum/joomla-e-gov-br
 - tiagovtg@gmail.com
 - através desse git
+- DADOS DE ACESSO após leitura do trecho abaixo sobre configuração inicial: usuário admin e senha admin. (será solicitada a troca da senha no primeiro login)
 
 Portal padrão em CMS Joomla 3.9.8
 Sobre esta versão
