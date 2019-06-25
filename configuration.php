@@ -13,7 +13,7 @@ class JConfig {
 	public $debug_lang = '0';
 	public $dbtype = 'mysqli';
 	public $host = 'localhost';
-	public $user = 'root';
+	public $user = '';
 	public $password = '';
 	public $db = 'idg2019';
 	public $dbprefix = 'idg2019_';
@@ -56,8 +56,8 @@ class JConfig {
 	public $unicodeslugs = '0';
 	public $feed_limit = '10';
 	public $feed_email = 'none';
-	public $log_path = '/home/flaviodi/public_html/portalpadrao/administrator/logs';
-	public $tmp_path = '/home/flaviodi/public_html/portalpadrao/tmp';
+	public $log_path = '/home/portalpadrao/administrator/logs';
+	public $tmp_path = '/home/portalpadrao/tmp';
 	public $lifetime = '15';
 	public $session_handler = 'database';
 	public $shared_session = '0';
