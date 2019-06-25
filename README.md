@@ -32,11 +32,5 @@ IMPORTANTE: este é um projeto ainda em desenvolvimento, e a disponibilização 
 Desenvolvimento
 Comunidade Joomla Calango
 
-Agradecimentos especiais a:
-Adriano Lima Santos
-Aline Cristina Moreira
-Flávio Luciano Dias
-Lucas Ávila Cosso
-Maurício Oliveira
-Sandro Oliveira de Jesus
-Tiago Garcia
+Agradecimentos especiais a (ordem alfabética):
+Adriano Lima Santos; Aline Cristina Moreira; Flávio Luciano Dias; Lucas Ávila Cosso; Maurício Oliveira; Sandro Oliveira de Jesus; Tiago Garcia
