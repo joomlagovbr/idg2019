@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE install PUBLIC "-//Joomla! 3.9//DTD template 1.0//EN" "http://www.joomla.org/xml/dtd/1.6/template-install.dtd">
+<extension version="3.9" type="template" client="site">
+	<name>IDG 2019</name>
+	<creationDate>2019</creationDate>
+	<author>Comunidade Joomla Calango e Grupo de Trabalho de Ministérios</author>
+	<authorEmail>joomlagovbr@gmail.com</authorEmail>
+	<authorUrl>https://github.com/joomlagovbr</authorUrl>
+	<copyright>Copyright (C) 2013 Comunidade Joomla Calango e Grupo de Trabalho de Ministérios.</copyright>
+	<license>GNU General Public License version 2</license>
+	<version>4.0.0</version>
+	<description>Mais informacoes na URL do github.</description>
+
+	<files>
+		<folder>css</folder>
+		<folder>fontes</folder>
+		<folder>img</folder>
+		<folder>js</folder>
+		<filename>index.html</filename>
+		<filename>index.php</filename>
+		<filename>templateDetails.xml</filename>
+		<filename>template_preview.png</filename>
+		<filename>template_thumbnail.png</filename>
+		<filename>favicon.png</filename>
+		<filename>component.php</filename>
+		<filename>error.php</filename>
+	</files>
+
+	<positions>
+		<position>debug</position>
+		<position>barra-do-governo</position>
+		<position>logo</position>
+		<position>acessibilidade</position>
+		<position>menu-principal</position>
+		<position>rastro-navegacao</position>
+		<position>busca</position>
+		<position>menu-principal-interno</position>
+		<position>banners-menu-principal</position>
+		<position>redes-sociais-menu-principal</position>
+		<position>super-banner</position>
+		<position>modal-busca</position>
+		<position>menu-interno-busca</position>
+		<position>assunto-em-alta</position>
+		<position>pagina-inicial</position>
+		<position>voltar-topo</position>
+		<position>rodape-redes-sociais</position>
+		<position>barra-do-governo</position>
+		<position>rodape</position>
+		<position>menu-sobre</position>
+	</positions>
+
+	<config>
+		<fields name="params">
+			<fieldset name="advanced">
+				<field name="emblema" type="media" default=""
+					label="Emblema"
+					description="Para o caso de instituições militares, informe o caminho do emblema, a partir do diretório /images. Há exemplos de emblemas no endereço /images/exemplo_emblemas . Tamanho máximo preferencial: 112px de largura por 80px de altura" />
+				<field name="nome_principal" type="text" default="Nome principal"
+					label="Nome principal do órgão"
+					description="Informar nome principal do órgão. Exemplo: 'Planejamento'"
+					filter="string" />
+				<field name="denominacao" type="text" default=""
+					label="Denominação do órgão"
+					description="Informar denominação do órgão. Exemplo: 'Ministério do'"
+					filter="string" />
+				<field name="subordinacao" type="text" default=""
+					label="Subordinação"
+					description="Informar subordinação do órgão, quando não se tratar do site do órgão principal."
+					filter="string" />
+				<field name="classe_nome_principal" type="list" default=""
+					label="Classe de ajuste de nome principal"
+					description="Ajuste do nome principal do órgão, aumentando a fonte para o caso de palavras curtas ou restringindo o tamanho para o caso de nomes de órgãos que sejam mais longos."
+					filter="string"
+				>
+					<option value="">Padrão</option>
+					<option value="small">small - diminuir fonte</option>
+					<option value="big">big - aumentar fonte</option>
+				</field>	
+				<field name="cor" type="list" default="azul"
+					label="Padrão de cores"
+					description="Padrão de cores utilizado."
+					filter="word"
+				>
+					<option value="amarelo">amarelo</option>
+					<option value="azul">azul</option>
+					<option value="branco">branco</option>
+					<option value="verde">verde</option>
+				</field>
+				
+				<field name="rodape_acesso_informacao" type="list" default="1"
+					label="Exibir logo acesso à informação"
+					description="Logo no rodapé do acesso à informação"
+					filter="integer"
+				>
+					<option value="1">SIM</option>
+					<option value="0">NÃO</option>
+				</field>
+				<field name="rodape_logo_brasil" type="list" default="1"
+					label="Exibir logo BRASIL"
+					description="Logo no rodapé do Governo Federal"
+					filter="integer"
+				>
+					<option value="1">SIM</option>
+					<option value="0">NÃO</option>
+				</field>
+				<field name="mensagem_final_ferramenta" type="textarea" default=""
+					label="Mensagem final a respeito da ferramenta"
+					description="Mensagem final, a respeito da ferramenta utilizada. Mantenha em branco para deixar a mensagem padrão."
+					filter="raw" cols="50" rows="9" />
+				<field type="spacer" hr="true" />
+				<field name="clear_default_javascript" type="list" default="0"
+					label="Limpar chamadas mootools padrão do joomla"
+					description="Decidir se os scripts de mootools podem ser retirados da página. Pode causar incompatibilidade com algumas ferramentas."
+					filter="integer"
+				>
+					<option value="1">SIM</option>
+					<option value="0">NÃO</option>
+				</field>
+				<!-- <field name="local_mainscript" type="list" default="footer"
+					label="Local dos arquivos javascript principais"
+					description="De acordo com as possíveis incompatibilidades decorrentes do local de utilização, alterar local das chamadas jquery e do local do script principal do template, onde podem constar funções de apoio do template."
+					filter="string"
+				>
+					<option value="before_head">Antes do jmodule HEAD</option>
+					<option value="after_head">Depois do jmodule HEAD</option>
+					<option value="footer">no final da página</option>
+				</field> -->
+				<field type="spacer" hr="true" />
+		  		<field name="google_analytics_id" type="text" default=""
+					label="ID do google analytics"
+					description="Informe ID para acompanhamento no google analytics."
+					filter="raw" size="30" />
+				<field name="google_analytics_domain_name" type="text" default=""
+					label="Subdomínios"
+					description="Subdomínios. Verifique se deve utilizar essa configuração ou não no site do google analytics."
+					filter="string" size="30" />
+				<field name="google_analytics_allow_linker" type="list" default="0"
+					label="Domínios de nível mais alto"
+					description="Exemplo: dominio.gov; domínio.gov.br2 . Dificilmente será utilizado."
+					filter="integer"
+				>
+					<option value="0">Não</option>
+					<option value="1">Sim</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>
