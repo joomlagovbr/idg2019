@@ -16,7 +16,7 @@ class JConfig {
 	public $user = 'root';
 	public $password = '';
 	public $db = 'idg2019';
-	public $dbprefix = 'hd6zl_';
+	public $dbprefix = 'idg2019_';
 	public $live_site = '';
 	public $secret = 'MM7hwkMmtkrwCcJS';
 	public $gzip = '0';
@@ -31,7 +31,7 @@ class JConfig {
 	public $offset = 'UTC';
 	public $mailonline = '1';
 	public $mailer = 'mail';
-	public $mailfrom = 'adriano.santosweb20@gmail.com';
+	public $mailfrom = 'joomlagovbr@gmail.com';
 	public $fromname = 'idg2019';
 	public $sendmail = '/usr/sbin/sendmail';
 	public $smtpauth = '0';
