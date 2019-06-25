@@ -23,7 +23,7 @@ Recomenda-se a utilização de ambiente LAMP (Linux, Apache, MySQL, PHP), config
 ESTE PROJETO É RECOMENDADO PARA PROFISSIONAIS COM EXPERIÊNCIA NA UTILIZAÇÃO DO CMS JOOMLA.
 
 Configuração inicial
-Altere o arquivo configuration.php manualmente, até que um novo instalador seja gerado. Personalize o arquivo BANCO-DE-DADOS.sql substituindo "idg2019_" pelo prefixo de banco de dados desejado.
+Altere o arquivo configuration.php manualmente, até que um novo instalador seja gerado. Personalize o arquivo BANCO-DE-DADOS.sql substituindo "idg2019_" pelo prefixo de banco de dados desejado. Depois, é necessário alterar parâmetros do arquivo configuration.php como host, user, password, db e dbprefix.
 
 Um instalador do template em separado não foi gerado porque sua correta exibição depende dos menus criados e dos módulos configurados.
 
