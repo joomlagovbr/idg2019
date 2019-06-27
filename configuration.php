@@ -13,7 +13,7 @@ class JConfig {
 	public $debug_lang = '0';
 	public $dbtype = 'mysqli';
 	public $host = 'localhost';
-	public $user = '';
+	public $user = 'root';
 	public $password = '';
 	public $db = 'idg2019';
 	public $dbprefix = 'idg2019_';
