@@ -19,10 +19,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `idg2019git`
+-- Database: `idg2019`
 --
-CREATE DATABASE IF NOT EXISTS `idg2019git` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `idg2019git`;
+CREATE DATABASE IF NOT EXISTS `idg2019` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `idg2019`;
 
 -- --------------------------------------------------------
 

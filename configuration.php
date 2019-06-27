@@ -13,9 +13,9 @@ class JConfig {
 	public $debug_lang = '0';
 	public $dbtype = 'mysqli';
 	public $host = 'localhost';
-	public $user = 'root';
+	public $user = '';
 	public $password = '';
-	public $db = 'idg2019git';
+	public $db = 'idg2019';
 	public $dbprefix = 'idg2019_';
 	public $live_site = '';
 	public $secret = 'MM7hwkMmtkrwCcJS';
