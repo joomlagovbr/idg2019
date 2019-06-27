@@ -1,11 +1,11 @@
 <?php
 /**
  * @package         Regular Labs Library
- * @version         18.7.10792
+ * @version         19.6.9571
  * 
  * @author          Peter van Westen <info@regularlabs.com>
  * @link            http://www.regularlabs.com
- * @copyright       Copyright © 2018 Regular Labs All Rights Reserved
+ * @copyright       Copyright © 2019 Regular Labs All Rights Reserved
  * @license         http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
@@ -18,18 +18,23 @@
  * @package     Joomla.Site
  * @subpackage  com_search
  *
- * @copyright   Copyright (C) 2005 - 2018 Open Source Matters, Inc. All rights reserved.
+ * @copyright   Copyright (C) 2005 - 2019 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Factory as JFactory;
+use Joomla\CMS\MVC\Model\BaseDatabaseModel as JModel;
+use Joomla\CMS\Pagination\Pagination as JPagination;
+use Joomla\CMS\Plugin\PluginHelper as JPluginHelper;
 
 /**
  * Search Component Search Model
  *
  * @since  1.5
  */
-class SearchModelSearch extends JModelLegacy
+class SearchModelSearch extends JModel
 {
 	/**
 	 * Search data array

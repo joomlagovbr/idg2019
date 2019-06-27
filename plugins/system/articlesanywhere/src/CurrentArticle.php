@@ -1,19 +1,21 @@
 <?php
 /**
  * @package         Articles Anywhere
- * @version         8.0.3
+ * @version         9.3.4
  * 
  * @author          Peter van Westen <info@regularlabs.com>
  * @link            http://www.regularlabs.com
- * @copyright       Copyright © 2018 Regular Labs All Rights Reserved
+ * @copyright       Copyright © 2019 Regular Labs All Rights Reserved
  * @license         http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
 namespace RegularLabs\Plugin\System\ArticlesAnywhere;
 
-use JHelperTags;
-
 defined('_JEXEC') or die;
+
+use JEventDispatcher;
+use Joomla\CMS\Helper\TagsHelper as JTagsHelper;
+use Joomla\CMS\Plugin\PluginHelper as JPluginHelper;
 
 class CurrentArticle
 {
@@ -28,12 +30,56 @@ class CurrentArticle
 			return $article ?: (object) [];
 		}
 
-//		if ($key == 'id' && ! isset($article->id))
-//		{
-//			return 0;
-//		}
+		if (is_null($article))
+		{
+			return null;
+		}
 
-		return isset($article->{$key}) ? $article->{$key} : null;
+		if ($key == 'id' && ! isset($article->id))
+		{
+			return null;
+		}
+
+		if (isset($article->{$key}))
+		{
+			return $article->{$key};
+		}
+
+		if (isset($article->params) && $article->params->get($key))
+		{
+			return $article->params->get($key);
+		}
+
+		if ( ! isset($article->jcfields))
+		{
+			self::setCustomFields($article);
+		}
+
+		if ( ! empty($article->jcfields))
+		{
+			foreach ($article->jcfields as $field)
+			{
+				if ($field->name == $key)
+				{
+					return isset($field->rawvalue) ? $field->rawvalue : $field->value;
+				}
+			}
+		}
+
+		return null;
+	}
+
+	public static function setCustomFields(&$article)
+	{
+		if ( ! JPluginHelper::importPlugin('system', 'fields'))
+		{
+			return;
+		}
+
+		$dispatcher = JEventDispatcher::getInstance();
+		$params     = (array) JPluginHelper::getPlugin('system', 'fields');
+		$plugin     = new \PlgSystemFields($dispatcher, $params);
+		$plugin->onContentPrepare('com_content.article', $article);
 	}
 
 	public static function set($article)
@@ -53,7 +99,9 @@ class CurrentArticle
 			return self::$article;
 		}
 
-		return Factory::getCurrentItem($component)->get();
+		self::set(Factory::getCurrentItem($component)->get());
+
+		return self::$article;
 	}
 
 	public static function getTags($id = null)
@@ -65,7 +113,7 @@ class CurrentArticle
 			return [];
 		}
 
-		$tags = new JHelperTags;
+		$tags = new JTagsHelper;
 		$tags->getItemTags('com_content.article', $id);
 
 		return $tags->itemTags;
