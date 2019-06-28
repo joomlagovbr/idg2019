@@ -4,8 +4,9 @@ IDG 2.0, nova versão da Identidade Digital do Governo Federal
 OBS: estamos iniciando o desenvolvimento para o idg 2.0 se voce pode contribuir com algo, favor manda email para:
 - https://groups.google.com/forum/?hl=pt-BR#!forum/joomla-e-gov-br
 - tiagovtg@gmail.com
-- através desse git
-- DADOS DE ACESSO após leitura do trecho abaixo sobre configuração inicial: usuário admin e senha admin ou 123456. (será solicitada a troca da senha no primeiro login)
+- ou através desse git
+
+- DADOS DE ACESSO após leitura do trecho abaixo sobre configuração inicial: usuário admin e senha admin ou 123456. (será solicitada a troca da senha no primeiro login, se ainda nao tiver sido feito.)
 
 Portal padrão em CMS Joomla 3.9.8
 Sobre esta versão
@@ -24,11 +25,17 @@ Recomenda-se a utilização de ambiente LAMP (Linux, Apache, MySQL, PHP), config
 ESTE PROJETO É RECOMENDADO PARA PROFISSIONAIS COM EXPERIÊNCIA NA UTILIZAÇÃO DO CMS JOOMLA.
 
 Configuração inicial
-Altere o arquivo configuration.php manualmente, até que um novo instalador seja gerado. Personalize o arquivo BANCO-DE-DADOS.sql substituindo "idg2019_" pelo prefixo de banco de dados desejado. Depois, é necessário alterar parâmetros do arquivo configuration.php como host, user, password, db e dbprefix.
+Altere o arquivo configuration.php manualmente, até que um novo instalador seja gerado.
+Personalize o arquivo BANCO-DE-DADOS.sql substituindo "idg2019_" pelo prefixo de banco de dados desejado. OBS: existe 2 arquivos de Banco de dados atualemente, o mais atual é o Base-de-Dados-Atualizada.sql
+
+Depois, é necessário alterar parâmetros do arquivo configuration.php como host, user, password, db e dbprefix.
 
 Um instalador do template em separado não foi gerado porque sua correta exibição depende dos menus criados e dos módulos configurados.
 
-IMPORTANTE: este é um projeto ainda em desenvolvimento, e a disponibilização antecipada visa a atender aos órgãos com maior pressa. O módulo de agenda de dirigentes da página inicial ainda está pendente de desenvolvimento (está apenas com css).
+IMPORTANTE: este é um projeto ainda em desenvolvimento, e a disponibilização antecipada visa a atender aos órgãos com maior pressa.
+O módulo de agenda de dirigentes da página inicial ainda está pendente de desenvolvimento (está apenas com css).
+
+Posteriormente será gerado um instalador automatico, quando a versão estiver estavel.
 
 Desenvolvimento
 Comunidade Joomla Calango
