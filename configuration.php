@@ -20,7 +20,7 @@ class JConfig {
 	public $live_site = '';
 	public $secret = 'MM7hwkMmtkrwCcJS';
 	public $gzip = '0';
-	public $error_reporting = '0';
+	public $error_reporting = 'default';
 	public $helpurl = 'https://help.joomla.org/proxy?keyref=Help{major}{minor}:{keyref}&lang={langcode}';
 	public $ftp_host = '';
 	public $ftp_port = '';
@@ -98,4 +98,5 @@ class JConfig {
 	public $cookie_domain = '';
 	public $cookie_path = '';
 	public $asset_id = '1';
+	public $debug_lang_const = '1';
 }
