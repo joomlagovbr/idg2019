@@ -19,7 +19,11 @@ defined('_JEXEC') or die;
 				<?php
 					//Define link do artigo
 					$link = JRoute::_(ContentHelperRoute::getArticleRoute($lista->id, $lista->catid));	
-					$class_cor_de_fundo = substr($lista->extrafields->cor_de_fundo,0,1);
+					if(isset($lista->extrafields->cor_de_fundo)):
+						$class_cor_de_fundo = substr($lista->extrafields->cor_de_fundo,0,1);
+					else:
+						$class_cor_de_fundo = '';
+					endif;
 				?>
 				<div class="col-md-4">
 			        <div class="item-destaques <?php echo $lista->extrafields->cor_de_fundo == '' ? '' : 'tipo2'; ?>">
@@ -35,7 +39,7 @@ defined('_JEXEC') or die;
 
 			          		<?php switch ($lista->extrafields->tipo_de_link_do_item) {
 			          				case 'botao': ?>
-			          					<span class="chapeu-destaques"><?php echo $lista->titulo_alternativo == '' ? $lista->title : $lista->titulo_alternativo ?></span>
+			          					<span class="chapeu-destaques"><?php echo isset($lista->titulo_alternativo) == '' ? $lista->title : $lista->titulo_alternativo ?></span>
 				            			<a href="<?php echo $lista->extrafields->link_do_item; ?>" class="titulo-destaques"><?php echo $lista->extrafields->texto_do_botao_com_link; ?></a>
 				            			<?php
 			          					break;
@@ -45,7 +49,7 @@ defined('_JEXEC') or die;
 			          					break;
 		          					case 'titulo': ?>
 			          					<span class="chapeu-destaques"><?php echo $lista->extrafields->chapeu_box;?></span>
-				            			<a href="<?php echo $lista->extrafields->link_do_item; ?>" class="titulo-destaques"><?php echo $lista->extrafields->titulo_alternativo == '' ? $lista->title : $lista->extrafields->titulo_alternativo ?></a>
+				            			<a href="<?php echo $lista->extrafields->link_do_item; ?>" class="titulo-destaques"><?php echo isset($lista->extrafields->titulo_alternativo) == '' ? $lista->title : $lista->extrafields->titulo_alternativo ?></a>
 				            			<?php
 			          					break;
 			          			}

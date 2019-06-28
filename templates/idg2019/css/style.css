@@ -65,12 +65,11 @@ nav.menu-principal 	{position: absolute; z-index: 999999; width: 100%; color: #f
 
 header .header-wrapper 					{display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-pack: justify; -ms-flex-pack: justify; justify-content: space-between; -webkit-box-align: center; -ms-flex-align: center; align-items: center; height: 80px; border-bottom: 1px solid hsla(0,0%,100%,.2);}
 header #logo 							{-webkit-box-flex: 1; -ms-flex-positive: 1; flex-grow: 1; font-size: 1.625rem; font-weight: 400; margin: 0 20px 0 0;}
-header #logo img {float: left; margin: 0 10px 0 0;}
 header #portal-logo 					{margin: 0; display: -webkit-box; display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap;}
 header #logo #portal-title, #logo h1 	{display: inline; font-size: 1.625rem; font-weight: 900; color: #fff}
 header #logo #portal-title, #logo a 	{color: #fff}
 header #logo #portal-title, #logo a:hover 	{color: #fff}
-header #logo .portal-title-1 	{font-size: .625rem; font-weight: 700; width: 100%; -webkit-box-ordinal-group: -1; -ms-flex-order: -2; order: -2; opacity: .6; text-transform: uppercase; position: relative; margin: 0; padding: 0;}
+header #logo .portal-title-1 	{font-size: .625rem; font-weight: 700; width: 100%; -webkit-box-ordinal-group: -1; -ms-flex-order: -2; order: -2; opacity: .6; text-transform: uppercase; position: relative; float: left; margin: 0; padding: 0;}
 header .header-accessibility 			{width: 280px; text-align: right; text-transform: uppercase; font-size: .6875rem; line-height: 1.2rem; font-weight: 700;}
 header .header-accessibility ul 		{list-style: none; margin: 1rem 0;}
 header .header-accessibility ul li 		{display: inline;}

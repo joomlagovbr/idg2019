@@ -19,7 +19,7 @@ defined('_JEXEC') or die;
 			<?php //foreach ($lista_chamadas as $lista): ?>
 				<?php
 					//Define link do artigo
-					$link = JRoute::_(ContentHelperRoute::getArticleRoute($lista->id, $lista->catid));			
+					$link = JRoute::_(ContentHelperRoute::getArticleRoute(@$lista->id, @$lista->catid));			
 				?>
 			
 			<div class="<?php echo $params->get('header_class') ?> text-center" data-panel="">

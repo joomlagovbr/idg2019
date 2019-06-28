@@ -150,26 +150,27 @@ class ModeloArticle_content_teste
         }
         
         $query_raw = 'SELECT f.name, v.value, v.item_id FROM
-#__fields f
-LEFT JOIN #__fields_values v
-ON v.field_id = f.id
-WHERE f.id IN
-(SELECT fc.field_id FROM `#__fields_categories` fc
-WHERE fc.category_id IN ('.$cat.')) AND v.item_id IN ('.implode(',', $ids_itens).') AND f.state = 1
-ORDER BY f.ordering';
+		#__fields f
+		LEFT JOIN #__fields_values v
+		ON v.field_id = f.id
+		WHERE f.id IN
+		(SELECT fc.field_id FROM `#__fields_categories` fc
+		WHERE fc.category_id IN ('.$cat.')) AND v.item_id IN ('.implode(',', $ids_itens).') AND f.state = 1
+		ORDER BY f.ordering';
+
         $db->setQuery($query_raw);
-    $lista_fields = $db->loadObjectList();
-    $lista_fields_counter = count($lista_fields);
-    $lista_fields_values = array();
-    for ($i=0; $i < $lista_fields_counter; $i++) {
-        $item = $lista_fields[$i];
-        if(is_null($lista_fields_values[ $item->item_id ]))
-        {
-            $lista_fields_values[ $item->item_id ] = new StdClass();
-        }
-        $item->name = str_replace('-', '_', $item->name);
-        $lista_fields_values[ $item->item_id ]->{ $item->name } = $item->value;
-    }
+	    $lista_fields = $db->loadObjectList();
+	    $lista_fields_counter = count($lista_fields);
+	    $lista_fields_values = array();
+	    for ($i=0; $i < $lista_fields_counter; $i++) {
+	        $item = $lista_fields[$i];
+	        if(@is_null($lista_fields_values[ $item->item_id ]))
+	        {
+	            $lista_fields_values[ $item->item_id ] = new StdClass();
+	        }
+	        $item->name = str_replace('-', '_', $item->name);
+	        $lista_fields_values[ $item->item_id ]->{ $item->name } = $item->value;
+	    }
     
         //fim processamento de novos campos
 
