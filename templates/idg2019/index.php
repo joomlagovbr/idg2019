@@ -66,7 +66,7 @@ $active_item = TmplIdg2019Helper::getActiveItemid();
 		<script type="text/javascript" src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/js/jquery.js"></script>
 		<script type="text/javascript" src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/js/script-portal.js"></script>
 		<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+		<script type="text/javascript" src="https://idangero.us/swiper/dist/js/swiper.min.js"></script>
 		<!-- JS -->
 
 		<!-- CSS -->
@@ -340,56 +340,51 @@ $active_item = TmplIdg2019Helper::getActiveItemid();
 	    <jdoc:include type="modules" name="debug" />
 	    <?php TmplIdg2019Helper::debug( @$preffix, @$active_item); ?>
 
-
-	    <script type="text/javascript" src="https://idangero.us/swiper/dist/js/swiper.min.js"></script>
-
 		<script>
-
+		jQuery(document).ready(function(){	
 		    var swiperDados = new Swiper('.participacao-social', {
-		      slidesPerView: 4,
-		      pagination: {
-		        el: '.navegacao-participacao',
-		        clickable: true,
-		      },
-		      navigation: {
-		        nextEl: '.proximo-participacao',
-		        prevEl: '.anterior-participacao',
-		      },
+				slidesPerView: 4,
+				pagination: {
+					el: '.navegacao-participacao',
+					clickable: true,
+				},
+				navigation: {
+					nextEl: '.proximo-participacao',
+					prevEl: '.anterior-participacao',
+				},
 		    });
 
 		    var swiper = new Swiper('.swiper-agenda', {
-		      slidesPerView: 3,
-		      spaceBetween: 30,
-		      slidesPerGroup: 3,
-		      loop: true,
-		      loopFillGroupWithBlank: true,
-		      pagination: {
-		        el: '.navegacao-agenda',
-		        clickable: true,
-		      },
-		      navigation: {
-		        nextEl: '.proximo-agenda',
-		        prevEl: '.anterior-agenda',
-		      },
+				slidesPerView: 3,
+				spaceBetween: 30,
+				slidesPerGroup: 3,
+				loop: true,
+				loopFillGroupWithBlank: true,
+				pagination: {
+					el: '.navegacao-agenda',
+					clickable: true,
+				},
+				navigation: {
+					nextEl: '.proximo-agenda',
+					prevEl: '.anterior-agenda',
+				},
 		    });
 
-		 //    jQuery( function() {
-			//     jQuery( "#datepicker" ).datepicker();
-			// });
-
-		    $(document).ready(function(){
+		 	//jQuery( function() {
+			//	jQuery( "#datepicker" ).datepicker();
+			//});
 		    
-			    var $dp = $( "#datepicker" );  
-			    $dp.datepicker().hide();
-			    $("#abre-calendario").click(function(event){        
-			        event.preventDefault();
-			        if ($dp.is(':hidden')) {
-			            $dp.show();
-			        }else{
-			            $dp.hide();
-			        }
-			    }); 
-			}); 
+		    var $dp = jQuery( "#datepicker" );  
+		    $dp.datepicker().hide();
+		    jQuery("#abre-calendario").click(function(event){        
+		        event.preventDefault();
+		        if ($dp.is(':hidden')) {
+		            $dp.show();
+		        }else{
+		            $dp.hide();
+		        }
+		    }); 
+		}); 
 
 		</script>
 	    
