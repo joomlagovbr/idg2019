@@ -25,9 +25,10 @@ $jinput   = JFactory::getApplication()->input;
 $layout   = $app->input->getCmd('layout', '');
 $task     = $app->input->getCmd('task', '');
 $itemid   = $app->input->getCmd('Itemid', '');
-$sitename = $app->getCfg('sitename','');
-$metaDesc = $app->getCfg('MetaDesc','');
-$metaKey = $app->getCfg('MetaKeys','');
+$sitename = $app->get('sitename','');
+$metaDesc = $app->get('MetaDesc','');
+$metaKey = $app->get('MetaKeys','');
+
 $frontpage = ($option == 'com_content' && $view == 'featured');
 $article = ($option == 'com_content' && $view == 'article');
 

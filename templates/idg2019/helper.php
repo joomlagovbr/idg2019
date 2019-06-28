@@ -249,8 +249,9 @@ class TmplIdg2019Helper
 
     static function debug($preffix = '', $active_item = 0)
     {
+        $app = JFactory::getApplication();
         try {
-            if (JApplication::getCfg('debug') == 1) {
+            if ($app->get('debug') == 1) {
                 // var_dump($active_item);
                 echo '<strong>Debug de template</strong><br />';
                 echo '<strong>Prefixo de posicoes de modulo:</strong> ' . $preffix . '<br />';
