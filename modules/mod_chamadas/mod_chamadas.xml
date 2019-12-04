@@ -504,6 +504,8 @@
 					label="MOD_CHAMADA_FIELD_MANUAL_DESC02_LABEL"
 					description="MOD_CHAMADA_FIELD_MANUAL_DESC02_DESC"
 					width="500"
+					hide="readmore"
+					filter="raw"
 				/>
 				<field
 					type="spacer"
@@ -622,6 +624,8 @@
 					label="MOD_CHAMADA_FIELD_MANUAL_DESC03_LABEL"
 					description="MOD_CHAMADA_FIELD_MANUAL_DESC03_DESC"
 					width="500"
+					hide="readmore"
+					filter="raw"
 				/>
 				<field
 					type="spacer"
@@ -740,6 +744,8 @@
 					label="MOD_CHAMADA_FIELD_MANUAL_DESC04_LABEL"
 					description="MOD_CHAMADA_FIELD_MANUAL_DESC04_DESC"
 					width="500"
+					hide="readmore"
+					filter="raw"
 				/>
 				<field
 					type="spacer"

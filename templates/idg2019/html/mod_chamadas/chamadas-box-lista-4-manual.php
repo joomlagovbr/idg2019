@@ -40,7 +40,8 @@ defined('_JEXEC') or die;
 						<?php echo $lista->title ?>
 					<?php endif; ?>
 					
-					<div><?php echo strip_tags($lista->introtext); ?></div>
+					<!-- <div><?php //echo strip_tags($lista->introtext); ?></div> -->
+					<div><?php print_r($lista->introtext); ?></div>
 			       
 			    </div>
 
