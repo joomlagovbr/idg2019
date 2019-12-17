@@ -199,8 +199,14 @@ class TemplateContentFeaturedHelper {
 
 	static function displayMetakeyLinks( $metakey, $link = '' )
 	{
-		if(empty($link))
-			$link = 'index.php?ordering=newest&searchphrase=all&limit=20&Itemid=181&option=com_search&searchword=';
+		$app = JFactory::getApplication();
+		$jinput = $app->input;
+		$itemid = $jinput->get('Itemid', 0, 'integer');
+		$menu = $app->getMenu();
+
+		if(empty($link)){
+			$link = 'index.php?ordering=newest&searchphrase=all&Itemid='.$menu->getItem($itemid)->id.'&option=com_search&searchword=';
+		}
 
 		$keys = explode(',', $metakey);
 		$count_keys = count($keys);
