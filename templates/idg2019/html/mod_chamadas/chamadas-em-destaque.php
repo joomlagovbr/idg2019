@@ -49,7 +49,7 @@ defined('_JEXEC') or die;
 			          					break;
 		          					case 'titulo': ?>
 			          					<span class="chapeu-destaques"><?php echo $lista->extrafields->chapeu_box;?></span>
-				            			<a href="<?php echo $lista->extrafields->link_do_item; ?>" class="titulo-destaques"><?php echo isset($lista->extrafields->titulo_alternativo) == '' ? $lista->title : $lista->extrafields->titulo_alternativo ?></a>
+				            			<a href="<?php echo isset($lista->extrafields->link_do_item) ? $lista->extrafields->link_do_item : $link; ?>" class="titulo-destaques"><?php echo isset($lista->extrafields->titulo_alternativo) == '' ? $lista->title : $lista->extrafields->titulo_alternativo ?></a>
 				            			<?php
 			          					break;
 			          			}

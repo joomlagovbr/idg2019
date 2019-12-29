@@ -66,7 +66,7 @@ $active_item = TmplIdg2019Helper::getActiveItemid();
 		<script type="text/javascript" src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/js/jquery.js"></script>
 		<script type="text/javascript" src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/js/script-portal.js"></script>
 		<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-		<script type="text/javascript" src="https://idangero.us/swiper/dist/js/swiper.min.js"></script>
+		<script type="text/javascript" src="https://swiperjs.com/package/js/swiper.min.js"></script>
 		<!-- JS -->
 
 		<!-- CSS -->
@@ -212,7 +212,7 @@ $active_item = TmplIdg2019Helper::getActiveItemid();
     			$menuitem   = $app->getMenu()->getActive();
 			?>
 						
-			<?php if($menuitem->component == "com_blankcomponent"):?>
+			<?php if(@$menuitem->component == "com_blankcomponent"):?>
 				<?php if($menuitem->params->get("menu_text")) : ?>
 					<h1 class="documentFirstHeading">
 						<?php if($menuitem->params->get("menu-anchor_title")) : ?>

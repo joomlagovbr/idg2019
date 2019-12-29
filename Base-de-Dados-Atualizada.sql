@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 11-Jul-2019 às 22:49
--- Versão do servidor: 10.1.31-MariaDB
--- PHP Version: 7.2.3
+-- Generation Time: 24-Dez-2019 às 11:06
+-- Versão do servidor: 10.1.38-MariaDB
+-- versão do PHP: 7.1.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -24,27 +24,139 @@ SET time_zone = "+00:00";
 CREATE DATABASE IF NOT EXISTS `idg2019` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `idg2019`;
 
+-- Apaga a estrutura de tabelas se existir
+DROP TABLE IF EXISTS `idg2019_action_logs` ;
+DROP TABLE IF EXISTS `idg2019_action_logs_extensions` ;
+DROP TABLE IF EXISTS `idg2019_action_logs_users` ;
+DROP TABLE IF EXISTS `idg2019_action_log_config` ;
+DROP TABLE IF EXISTS `idg2019_agendadirigentes_agendaalterada` ;
+DROP TABLE IF EXISTS `idg2019_agendadirigentes_cargos` ;
+DROP TABLE IF EXISTS `idg2019_agendadirigentes_compromissos` ;
+DROP TABLE IF EXISTS `idg2019_agendadirigentes_dirigentes` ;
+DROP TABLE IF EXISTS `idg2019_agendadirigentes_dirigentes_compromissos` ;
+DROP TABLE IF EXISTS `idg2019_assets` ;
+DROP TABLE IF EXISTS `idg2019_associations` ;
+DROP TABLE IF EXISTS `idg2019_banners` ;
+DROP TABLE IF EXISTS `idg2019_banner_clients` ;
+DROP TABLE IF EXISTS `idg2019_banner_tracks` ;
+DROP TABLE IF EXISTS `idg2019_categories` ;
+DROP TABLE IF EXISTS `idg2019_contact_details` ;
+DROP TABLE IF EXISTS `idg2019_content` ;
+DROP TABLE IF EXISTS `idg2019_contentitem_tag_map` ;
+DROP TABLE IF EXISTS `idg2019_content_frontpage` ;
+DROP TABLE IF EXISTS `idg2019_content_rating` ;
+DROP TABLE IF EXISTS `idg2019_content_types` ;
+DROP TABLE IF EXISTS `idg2019_core_log_searches` ;
+DROP TABLE IF EXISTS `idg2019_extensions` ;
+DROP TABLE IF EXISTS `idg2019_fields` ;
+DROP TABLE IF EXISTS `idg2019_fields_categories` ;
+DROP TABLE IF EXISTS `idg2019_fields_groups` ;
+DROP TABLE IF EXISTS `idg2019_fields_values` ;
+DROP TABLE IF EXISTS `idg2019_finder_filters` ;
+DROP TABLE IF EXISTS `idg2019_finder_links` ;
+DROP TABLE IF EXISTS `idg2019_finder_links_terms0` ;
+DROP TABLE IF EXISTS `idg2019_finder_links_terms1` ;
+DROP TABLE IF EXISTS `idg2019_finder_links_terms2` ;
+DROP TABLE IF EXISTS `idg2019_finder_links_terms3` ;
+DROP TABLE IF EXISTS `idg2019_finder_links_terms4` ;
+DROP TABLE IF EXISTS `idg2019_finder_links_terms5` ;
+DROP TABLE IF EXISTS `idg2019_finder_links_terms6` ;
+DROP TABLE IF EXISTS `idg2019_finder_links_terms7` ;
+DROP TABLE IF EXISTS `idg2019_finder_links_terms8` ;
+DROP TABLE IF EXISTS `idg2019_finder_links_terms9` ;
+DROP TABLE IF EXISTS `idg2019_finder_links_termsa` ;
+DROP TABLE IF EXISTS `idg2019_finder_links_termsb` ;
+DROP TABLE IF EXISTS `idg2019_finder_links_termsc` ;
+DROP TABLE IF EXISTS `idg2019_finder_links_termsd` ;
+DROP TABLE IF EXISTS `idg2019_finder_links_termse` ;
+DROP TABLE IF EXISTS `idg2019_finder_links_termsf` ;
+DROP TABLE IF EXISTS `idg2019_finder_taxonomy` ;
+DROP TABLE IF EXISTS `idg2019_finder_taxonomy_map` ;
+DROP TABLE IF EXISTS `idg2019_finder_terms` ;
+DROP TABLE IF EXISTS `idg2019_finder_terms_common` ;
+DROP TABLE IF EXISTS `idg2019_finder_tokens` ;
+DROP TABLE IF EXISTS `idg2019_finder_tokens_aggregate` ;
+DROP TABLE IF EXISTS `idg2019_finder_types` ;
+DROP TABLE IF EXISTS `idg2019_k2_attachments` ;
+DROP TABLE IF EXISTS `idg2019_k2_categories` ;
+DROP TABLE IF EXISTS `idg2019_k2_comments` ;
+DROP TABLE IF EXISTS `idg2019_k2_extra_fields` ;
+DROP TABLE IF EXISTS `idg2019_k2_extra_fields_groups` ;
+DROP TABLE IF EXISTS `idg2019_k2_items` ;
+DROP TABLE IF EXISTS `idg2019_k2_log` ;
+DROP TABLE IF EXISTS `idg2019_k2_rating` ;
+DROP TABLE IF EXISTS `idg2019_k2_tags` ;
+DROP TABLE IF EXISTS `idg2019_k2_tags_xref` ;
+DROP TABLE IF EXISTS `idg2019_k2_users` ;
+DROP TABLE IF EXISTS `idg2019_k2_user_groups` ;
+DROP TABLE IF EXISTS `idg2019_languages` ;
+DROP TABLE IF EXISTS `idg2019_menu` ;
+DROP TABLE IF EXISTS `idg2019_menu_types` ;
+DROP TABLE IF EXISTS `idg2019_messages` ;
+DROP TABLE IF EXISTS `idg2019_messages_cfg` ;
+DROP TABLE IF EXISTS `idg2019_modules` ;
+DROP TABLE IF EXISTS `idg2019_modules_menu` ;
+DROP TABLE IF EXISTS `idg2019_newsfeeds` ;
+DROP TABLE IF EXISTS `idg2019_overrider` ;
+DROP TABLE IF EXISTS `idg2019_phocagallery` ;
+DROP TABLE IF EXISTS `idg2019_phocagallery_categories` ;
+DROP TABLE IF EXISTS `idg2019_phocagallery_comments` ;
+DROP TABLE IF EXISTS `idg2019_phocagallery_fb_users` ;
+DROP TABLE IF EXISTS `idg2019_phocagallery_img_comments` ;
+DROP TABLE IF EXISTS `idg2019_phocagallery_img_votes` ;
+DROP TABLE IF EXISTS `idg2019_phocagallery_img_votes_statistics` ;
+DROP TABLE IF EXISTS `idg2019_phocagallery_styles` ;
+DROP TABLE IF EXISTS `idg2019_phocagallery_tags` ;
+DROP TABLE IF EXISTS `idg2019_phocagallery_tags_ref` ;
+DROP TABLE IF EXISTS `idg2019_phocagallery_user` ;
+DROP TABLE IF EXISTS `idg2019_phocagallery_votes` ;
+DROP TABLE IF EXISTS `idg2019_phocagallery_votes_statistics` ;
+DROP TABLE IF EXISTS `idg2019_plg_system_adminexile` ;
+DROP TABLE IF EXISTS `idg2019_postinstall_messages` ;
+DROP TABLE IF EXISTS `idg2019_privacy_consents` ;
+DROP TABLE IF EXISTS `idg2019_privacy_requests` ;
+DROP TABLE IF EXISTS `idg2019_redirect_links` ;
+DROP TABLE IF EXISTS `idg2019_schemas` ;
+DROP TABLE IF EXISTS `idg2019_session` ;
+DROP TABLE IF EXISTS `idg2019_tags` ;
+DROP TABLE IF EXISTS `idg2019_template_styles` ;
+DROP TABLE IF EXISTS `idg2019_ucm_base` ;
+DROP TABLE IF EXISTS `idg2019_ucm_content` ;
+DROP TABLE IF EXISTS `idg2019_ucm_history` ;
+DROP TABLE IF EXISTS `idg2019_updates` ;
+DROP TABLE IF EXISTS `idg2019_update_sites` ;
+DROP TABLE IF EXISTS `idg2019_update_sites_extensions` ;
+DROP TABLE IF EXISTS `idg2019_usergroups` ;
+DROP TABLE IF EXISTS `idg2019_users` ;
+DROP TABLE IF EXISTS `idg2019_user_keys` ;
+DROP TABLE IF EXISTS `idg2019_user_notes` ;
+DROP TABLE IF EXISTS `idg2019_user_profiles` ;
+DROP TABLE IF EXISTS `idg2019_user_usergroup_map` ;
+DROP TABLE IF EXISTS `idg2019_utf8_conversion` ;
+DROP TABLE IF EXISTS `idg2019_viewlevels` ;
+DROP TABLE IF EXISTS `idg2019_weblinks` ;
+DROP TABLE IF EXISTS `idg2019_youtubegallery_categories` ;
+DROP TABLE IF EXISTS `idg2019_youtubegallery_settings` ;
+DROP TABLE IF EXISTS `idg2019_youtubegallery_themes` ;
+DROP TABLE IF EXISTS `idg2019_youtubegallery_videolists` ;
+DROP TABLE IF EXISTS `idg2019_youtubegallery_videos` ;
+
+
 -- --------------------------------------------------------
 
 --
 -- Estrutura da tabela `idg2019_action_logs`
 --
 
-DROP TABLE IF EXISTS `idg2019_action_logs`;
-CREATE TABLE IF NOT EXISTS `idg2019_action_logs` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_action_logs` (
+  `id` int(10) UNSIGNED NOT NULL,
   `message_language_key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `message` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `log_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `extension` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `user_id` int(11) NOT NULL DEFAULT '0',
   `item_id` int(11) NOT NULL DEFAULT '0',
-  `ip_address` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0.0.0.0',
-  PRIMARY KEY (`id`),
-  KEY `idx_user_id` (`user_id`),
-  KEY `idx_user_id_logdate` (`user_id`,`log_date`),
-  KEY `idx_user_id_extension` (`user_id`,`extension`),
-  KEY `idx_extension_item_id` (`extension`,`item_id`)
+  `ip_address` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0.0.0.0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -53,11 +165,9 @@ CREATE TABLE IF NOT EXISTS `idg2019_action_logs` (
 -- Estrutura da tabela `idg2019_action_logs_extensions`
 --
 
-DROP TABLE IF EXISTS `idg2019_action_logs_extensions`;
-CREATE TABLE IF NOT EXISTS `idg2019_action_logs_extensions` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `extension` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`)
+CREATE TABLE `idg2019_action_logs_extensions` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `extension` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -66,13 +176,10 @@ CREATE TABLE IF NOT EXISTS `idg2019_action_logs_extensions` (
 -- Estrutura da tabela `idg2019_action_logs_users`
 --
 
-DROP TABLE IF EXISTS `idg2019_action_logs_users`;
-CREATE TABLE IF NOT EXISTS `idg2019_action_logs_users` (
+CREATE TABLE `idg2019_action_logs_users` (
   `user_id` int(11) UNSIGNED NOT NULL,
   `notify` tinyint(1) UNSIGNED NOT NULL,
-  `extensions` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`user_id`),
-  KEY `idx_notify` (`notify`)
+  `extensions` text COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -81,16 +188,14 @@ CREATE TABLE IF NOT EXISTS `idg2019_action_logs_users` (
 -- Estrutura da tabela `idg2019_action_log_config`
 --
 
-DROP TABLE IF EXISTS `idg2019_action_log_config`;
-CREATE TABLE IF NOT EXISTS `idg2019_action_log_config` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_action_log_config` (
+  `id` int(10) UNSIGNED NOT NULL,
   `type_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `type_alias` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `id_holder` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `title_holder` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `table_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `text_prefix` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `text_prefix` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -99,14 +204,12 @@ CREATE TABLE IF NOT EXISTS `idg2019_action_log_config` (
 -- Estrutura da tabela `idg2019_agendadirigentes_agendaalterada`
 --
 
-DROP TABLE IF EXISTS `idg2019_agendadirigentes_agendaalterada`;
-CREATE TABLE IF NOT EXISTS `idg2019_agendadirigentes_agendaalterada` (
+CREATE TABLE `idg2019_agendadirigentes_agendaalterada` (
   `id_dirigente` int(11) NOT NULL,
   `data` date NOT NULL,
   `qtd_alteracoes` int(4) NOT NULL DEFAULT '0',
   `data_alteracao` datetime NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_dirigente`,`data`) USING BTREE
+  `user_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
@@ -135,9 +238,8 @@ INSERT INTO `idg2019_agendadirigentes_agendaalterada` (`id_dirigente`, `data`, `
 -- Estrutura da tabela `idg2019_agendadirigentes_cargos`
 --
 
-DROP TABLE IF EXISTS `idg2019_agendadirigentes_cargos`;
-CREATE TABLE IF NOT EXISTS `idg2019_agendadirigentes_cargos` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_agendadirigentes_cargos` (
+  `id` int(11) NOT NULL,
   `asset_id` int(11) NOT NULL DEFAULT '0',
   `name` varchar(255) DEFAULT NULL,
   `name_f` varchar(255) DEFAULT NULL,
@@ -146,10 +248,8 @@ CREATE TABLE IF NOT EXISTS `idg2019_agendadirigentes_cargos` (
   `ordering` int(11) NOT NULL DEFAULT '0',
   `featured` int(1) NOT NULL DEFAULT '0',
   `permitir_sobreposicao` int(1) NOT NULL DEFAULT '1',
-  `realizar_sobreposicao` char(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `idx_catid` (`catid`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `realizar_sobreposicao` char(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_agendadirigentes_cargos`
@@ -171,9 +271,8 @@ INSERT INTO `idg2019_agendadirigentes_cargos` (`id`, `asset_id`, `name`, `name_f
 -- Estrutura da tabela `idg2019_agendadirigentes_compromissos`
 --
 
-DROP TABLE IF EXISTS `idg2019_agendadirigentes_compromissos`;
-CREATE TABLE IF NOT EXISTS `idg2019_agendadirigentes_compromissos` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_agendadirigentes_compromissos` (
+  `id` int(11) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
   `state` int(11) DEFAULT '0',
   `data_inicial` date DEFAULT NULL,
@@ -195,15 +294,8 @@ CREATE TABLE IF NOT EXISTS `idg2019_agendadirigentes_compromissos` (
   `featured` int(1) DEFAULT '0',
   `published_once` int(1) NOT NULL DEFAULT '0',
   `language` char(7) DEFAULT NULL,
-  `version` int(11) DEFAULT '1',
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `idx_data_inicial` (`data_inicial`) USING BTREE,
-  KEY `idx_horario_inicio` (`horario_inicio`) USING BTREE,
-  KEY `idx_data_final` (`data_final`) USING BTREE,
-  KEY `idx_horario_fim` (`horario_fim`) USING BTREE,
-  KEY `idx_published` (`state`) USING BTREE,
-  KEY `idx_outros` (`dia_todo`,`compromisso_alterado`,`featured`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `version` int(11) DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_agendadirigentes_compromissos`
@@ -234,19 +326,16 @@ INSERT INTO `idg2019_agendadirigentes_compromissos` (`id`, `title`, `state`, `da
 -- Estrutura da tabela `idg2019_agendadirigentes_dirigentes`
 --
 
-DROP TABLE IF EXISTS `idg2019_agendadirigentes_dirigentes`;
-CREATE TABLE IF NOT EXISTS `idg2019_agendadirigentes_dirigentes` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_agendadirigentes_dirigentes` (
+  `id` int(11) NOT NULL,
   `asset_id` int(11) NOT NULL DEFAULT '0',
   `name` varchar(255) DEFAULT NULL,
   `cargo_id` int(11) NOT NULL,
   `state` tinyint(3) NOT NULL DEFAULT '0',
   `interino` int(1) UNSIGNED NOT NULL DEFAULT '0',
   `em_atividade` int(1) UNSIGNED NOT NULL DEFAULT '0',
-  `sexo` char(1) NOT NULL DEFAULT 'M',
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `idx_cargo_id` (`cargo_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `sexo` char(1) NOT NULL DEFAULT 'M'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_agendadirigentes_dirigentes`
@@ -268,15 +357,12 @@ INSERT INTO `idg2019_agendadirigentes_dirigentes` (`id`, `asset_id`, `name`, `ca
 -- Estrutura da tabela `idg2019_agendadirigentes_dirigentes_compromissos`
 --
 
-DROP TABLE IF EXISTS `idg2019_agendadirigentes_dirigentes_compromissos`;
-CREATE TABLE IF NOT EXISTS `idg2019_agendadirigentes_dirigentes_compromissos` (
+CREATE TABLE `idg2019_agendadirigentes_dirigentes_compromissos` (
   `dirigente_id` int(11) NOT NULL,
   `compromisso_id` int(11) NOT NULL,
   `owner` int(11) DEFAULT '0',
   `sobreposto` int(1) NOT NULL DEFAULT '0' COMMENT 'Compromissos sobrepostos não são exibidos porque uma autoridade convocou outra para reunião.',
-  `sobreposto_por` int(11) NOT NULL DEFAULT '0' COMMENT 'ID do compromisso que causou a sobreposição',
-  PRIMARY KEY (`dirigente_id`,`compromisso_id`) USING BTREE,
-  KEY `idx_owner` (`owner`) USING BTREE
+  `sobreposto_por` int(11) NOT NULL DEFAULT '0' COMMENT 'ID do compromisso que causou a sobreposição'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
@@ -319,61 +405,56 @@ INSERT INTO `idg2019_agendadirigentes_dirigentes_compromissos` (`dirigente_id`, 
 -- Estrutura da tabela `idg2019_assets`
 --
 
-DROP TABLE IF EXISTS `idg2019_assets`;
-CREATE TABLE IF NOT EXISTS `idg2019_assets` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
+CREATE TABLE `idg2019_assets` (
+  `id` int(10) UNSIGNED NOT NULL COMMENT 'Primary Key',
   `parent_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set parent.',
   `lft` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set lft.',
   `rgt` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set rgt.',
   `level` int(10) UNSIGNED NOT NULL COMMENT 'The cached level in the nested tree.',
   `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The unique name for the asset.\n',
   `title` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The descriptive title for the asset.',
-  `rules` varchar(5120) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'JSON encoded access control.',
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `idx_asset_name` (`name`) USING BTREE,
-  KEY `idx_lft_rgt` (`lft`,`rgt`) USING BTREE,
-  KEY `idx_parent_id` (`parent_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=348 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `rules` varchar(5120) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'JSON encoded access control.'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_assets`
 --
 
 INSERT INTO `idg2019_assets` (`id`, `parent_id`, `lft`, `rgt`, `level`, `name`, `title`, `rules`) VALUES
-(1, 0, 1, 637, 0, 'root.1', 'Root Asset', '{\"core.login.site\":{\"6\":1,\"2\":1},\"core.login.admin\":{\"6\":1,\"9\":1,\"13\":1},\"core.login.offline\":{\"6\":1},\"core.admin\":{\"8\":1},\"core.manage\":{\"7\":1},\"core.create\":{\"6\":1,\"3\":1},\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1},\"core.edit.own\":{\"6\":1,\"3\":1}}'),
+(1, 0, 1, 639, 0, 'root.1', 'Root Asset', '{\"core.login.site\":{\"6\":1,\"2\":1},\"core.login.admin\":{\"6\":1,\"9\":1,\"13\":1},\"core.login.offline\":{\"6\":1},\"core.admin\":{\"8\":1},\"core.manage\":{\"7\":1},\"core.create\":{\"6\":1,\"3\":1},\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1},\"core.edit.own\":{\"6\":1,\"3\":1}}'),
 (2, 1, 1, 2, 1, 'com_admin', 'com_admin', '{}'),
 (3, 1, 3, 12, 1, 'com_banners', 'com_banners', '{\"core.admin\":{\"7\":1,\"13\":0},\"core.manage\":{\"6\":1,\"9\":1,\"13\":0},\"core.create\":{\"13\":0},\"core.delete\":{\"13\":0},\"core.edit\":{\"13\":0},\"core.edit.state\":{\"13\":0}}'),
 (4, 1, 13, 14, 1, 'com_cache', 'com_cache', '{\"core.admin\":{\"7\":1},\"core.manage\":{\"7\":1}}'),
 (5, 1, 15, 16, 1, 'com_checkin', 'com_checkin', '{\"core.admin\":{\"7\":1},\"core.manage\":{\"7\":1}}'),
 (6, 1, 17, 18, 1, 'com_config', 'com_config', '{}'),
 (7, 1, 19, 24, 1, 'com_contact', 'com_contact', '{\"core.admin\":{\"7\":1},\"core.manage\":{\"6\":1},\"core.create\":[],\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[],\"core.edit.own\":[]}'),
-(8, 1, 25, 260, 1, 'com_content', 'com_content', '{\"core.admin\":{\"7\":1},\"core.manage\":{\"6\":1,\"13\":0},\"core.create\":{\"3\":1},\"core.delete\":[],\"core.edit\":{\"13\":1,\"4\":1},\"core.edit.state\":{\"5\":1},\"core.edit.own\":[]}'),
-(9, 1, 261, 262, 1, 'com_cpanel', 'com_cpanel', '{}'),
-(10, 1, 263, 264, 1, 'com_installer', 'com_installer', '{\"core.admin\":[],\"core.manage\":{\"7\":0},\"core.delete\":{\"7\":0},\"core.edit.state\":{\"7\":0}}'),
-(11, 1, 265, 266, 1, 'com_languages', 'com_languages', '{\"core.admin\":{\"7\":1},\"core.manage\":[],\"core.create\":[],\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
-(12, 1, 267, 268, 1, 'com_login', 'com_login', '{}'),
-(13, 1, 269, 270, 1, 'com_mailto', 'com_mailto', '{}'),
-(14, 1, 271, 272, 1, 'com_massmail', 'com_massmail', '{}'),
-(15, 1, 273, 274, 1, 'com_media', 'com_media', '{\"core.admin\":{\"7\":1},\"core.manage\":{\"6\":1},\"core.create\":{\"3\":1},\"core.delete\":{\"5\":1}}'),
-(16, 1, 275, 284, 1, 'com_menus', 'com_menus', '{\"core.admin\":{\"7\":1},\"core.manage\":[],\"core.create\":[],\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
-(17, 1, 285, 286, 1, 'com_messages', 'com_messages', '{\"core.admin\":{\"7\":1},\"core.manage\":{\"7\":1}}'),
-(18, 1, 287, 522, 1, 'com_modules', 'com_modules', '{\"core.admin\":{\"7\":1},\"core.manage\":[],\"core.create\":[],\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
-(19, 1, 523, 526, 1, 'com_newsfeeds', 'com_newsfeeds', '{\"core.admin\":{\"7\":1},\"core.manage\":{\"6\":1},\"core.create\":[],\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[],\"core.edit.own\":[]}'),
-(20, 1, 527, 528, 1, 'com_plugins', 'com_plugins', '{\"core.admin\":{\"7\":1},\"core.manage\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
-(21, 1, 529, 530, 1, 'com_redirect', 'com_redirect', '{\"core.admin\":{\"7\":1},\"core.manage\":[]}'),
-(22, 1, 531, 532, 1, 'com_search', 'com_search', '{\"core.admin\":{\"7\":1},\"core.manage\":{\"6\":1}}'),
-(23, 1, 533, 534, 1, 'com_templates', 'com_templates', '{\"core.admin\":{\"7\":1},\"core.manage\":[],\"core.create\":[],\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
-(24, 1, 535, 694, 1, 'com_users', 'com_users', '{\"core.admin\":{\"7\":1},\"core.manage\":[],\"core.create\":[],\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
-(25, 1, 539, 542, 1, 'com_weblinks', 'com_weblinks', '{\"core.admin\":{\"7\":1},\"core.manage\":{\"6\":1},\"core.create\":{\"3\":1},\"core.delete\":[],\"core.edit\":{\"4\":1},\"core.edit.state\":{\"5\":1},\"core.edit.own\":[]}'),
-(26, 1, 543, 544, 1, 'com_wrapper', 'com_wrapper', '{}'),
+(8, 1, 25, 262, 1, 'com_content', 'com_content', '{\"core.admin\":{\"7\":1},\"core.manage\":{\"6\":1,\"13\":0},\"core.create\":{\"3\":1},\"core.delete\":[],\"core.edit\":{\"13\":1,\"4\":1},\"core.edit.state\":{\"5\":1},\"core.edit.own\":[]}'),
+(9, 1, 263, 264, 1, 'com_cpanel', 'com_cpanel', '{}'),
+(10, 1, 265, 266, 1, 'com_installer', 'com_installer', '{\"core.admin\":[],\"core.manage\":{\"7\":0},\"core.delete\":{\"7\":0},\"core.edit.state\":{\"7\":0}}'),
+(11, 1, 267, 268, 1, 'com_languages', 'com_languages', '{\"core.admin\":{\"7\":1},\"core.manage\":[],\"core.create\":[],\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
+(12, 1, 269, 270, 1, 'com_login', 'com_login', '{}'),
+(13, 1, 271, 272, 1, 'com_mailto', 'com_mailto', '{}'),
+(14, 1, 273, 274, 1, 'com_massmail', 'com_massmail', '{}'),
+(15, 1, 275, 276, 1, 'com_media', 'com_media', '{\"core.admin\":{\"7\":1},\"core.manage\":{\"6\":1},\"core.create\":{\"3\":1},\"core.delete\":{\"5\":1}}'),
+(16, 1, 277, 286, 1, 'com_menus', 'com_menus', '{\"core.admin\":{\"7\":1},\"core.manage\":[],\"core.create\":[],\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
+(17, 1, 287, 288, 1, 'com_messages', 'com_messages', '{\"core.admin\":{\"7\":1},\"core.manage\":{\"7\":1}}'),
+(18, 1, 289, 524, 1, 'com_modules', 'com_modules', '{\"core.admin\":{\"7\":1},\"core.manage\":[],\"core.create\":[],\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
+(19, 1, 525, 528, 1, 'com_newsfeeds', 'com_newsfeeds', '{\"core.admin\":{\"7\":1},\"core.manage\":{\"6\":1},\"core.create\":[],\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[],\"core.edit.own\":[]}'),
+(20, 1, 529, 530, 1, 'com_plugins', 'com_plugins', '{\"core.admin\":{\"7\":1},\"core.manage\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
+(21, 1, 531, 532, 1, 'com_redirect', 'com_redirect', '{\"core.admin\":{\"7\":1},\"core.manage\":[]}'),
+(22, 1, 533, 534, 1, 'com_search', 'com_search', '{\"core.admin\":{\"7\":1},\"core.manage\":{\"6\":1}}'),
+(23, 1, 535, 536, 1, 'com_templates', 'com_templates', '{\"core.admin\":{\"7\":1},\"core.manage\":[],\"core.create\":[],\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
+(24, 1, 537, 696, 1, 'com_users', 'com_users', '{\"core.admin\":{\"7\":1},\"core.manage\":[],\"core.create\":[],\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
+(25, 1, 541, 544, 1, 'com_weblinks', 'com_weblinks', '{\"core.admin\":{\"7\":1},\"core.manage\":{\"6\":1},\"core.create\":{\"3\":1},\"core.delete\":[],\"core.edit\":{\"4\":1},\"core.edit.state\":{\"5\":1},\"core.edit.own\":[]}'),
+(26, 1, 545, 546, 1, 'com_wrapper', 'com_wrapper', '{}'),
 (27, 8, 26, 39, 2, 'com_content.category.2', 'Uncategorised', '{\"core.create\":[],\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[],\"core.edit.own\":[]}'),
 (28, 3, 4, 5, 2, 'com_banners.category.3', 'Sem categoria', '{\"core.create\":[],\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
 (29, 7, 20, 21, 2, 'com_contact.category.4', 'Uncategorised', '{\"core.create\":[],\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[],\"core.edit.own\":[]}'),
-(30, 19, 524, 525, 2, 'com_newsfeeds.category.5', 'Uncategorised', '{\"core.create\":[],\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[],\"core.edit.own\":[]}'),
-(31, 25, 540, 541, 2, 'com_weblinks.category.6', 'Uncategorised', '{\"core.create\":[],\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[],\"core.edit.own\":[]}'),
-(32, 24, 536, 537, 1, 'com_users.category.7', 'Uncategorised', '{\"core.create\":[],\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
-(33, 1, 545, 546, 1, 'com_finder', 'com_finder', '{\"core.admin\":{\"7\":1},\"core.manage\":{\"6\":1}}'),
-(34, 1, 547, 548, 1, 'com_joomlaupdate', 'com_joomlaupdate', '{\"core.admin\":[],\"core.manage\":[],\"core.delete\":[],\"core.edit.state\":[]}'),
+(30, 19, 526, 527, 2, 'com_newsfeeds.category.5', 'Uncategorised', '{\"core.create\":[],\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[],\"core.edit.own\":[]}'),
+(31, 25, 542, 543, 2, 'com_weblinks.category.6', 'Uncategorised', '{\"core.create\":[],\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[],\"core.edit.own\":[]}'),
+(32, 24, 538, 539, 1, 'com_users.category.7', 'Uncategorised', '{\"core.create\":[],\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
+(33, 1, 547, 548, 1, 'com_finder', 'com_finder', '{\"core.admin\":{\"7\":1},\"core.manage\":{\"6\":1}}'),
+(34, 1, 549, 550, 1, 'com_joomlaupdate', 'com_joomlaupdate', '{\"core.admin\":[],\"core.manage\":[],\"core.delete\":[],\"core.edit.state\":[]}'),
 (37, 8, 40, 97, 2, 'com_content.category.8', 'Assuntos', '{\"core.create\":{\"6\":1,\"3\":1},\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1},\"core.edit.own\":{\"6\":1,\"3\":1}}'),
 (38, 37, 41, 42, 3, 'com_content.article.2', 'Pagina 1: titulo do texto institucional', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
 (39, 43, 50, 51, 6, 'com_content.article.3', 'Página 2: título do texto institucional', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
@@ -387,15 +468,15 @@ INSERT INTO `idg2019_assets` (`id`, `parent_id`, `lft`, `rgt`, `level`, `name`, 
 (47, 37, 89, 96, 3, 'com_content.category.15', 'Editoria C', '{\"core.create\":{\"6\":1,\"3\":1},\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1},\"core.edit.own\":{\"6\":1,\"3\":1}}'),
 (48, 46, 76, 77, 4, 'com_content.article.5', 'Editoria B - Texto 01', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
 (50, 8, 98, 99, 2, 'com_content.category.16', 'Sobre', '{\"core.create\":{\"6\":1,\"3\":1},\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1},\"core.edit.own\":{\"6\":1,\"3\":1}}'),
-(51, 171, 201, 202, 3, 'com_content.article.7', 'Institucional', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(52, 171, 203, 204, 3, 'com_content.article.8', 'Ações e Programas', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(53, 171, 219, 220, 3, 'com_content.article.9', 'Auditoria', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(54, 171, 205, 206, 3, 'com_content.article.10', 'Convênios', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(55, 171, 207, 208, 3, 'com_content.article.11', 'Despesas', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(56, 171, 209, 210, 3, 'com_content.article.12', 'Licitações e contratos', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(57, 171, 211, 212, 3, 'com_content.article.13', 'Servidores', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(58, 172, 214, 215, 4, 'com_content.article.14', 'Informações classificadas', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(59, 172, 216, 217, 4, 'com_content.article.15', 'Serviço de Informação ao Cidadão (SIC)', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(51, 171, 203, 204, 3, 'com_content.article.7', 'Institucional', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(52, 171, 205, 206, 3, 'com_content.article.8', 'Ações e Programas', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(53, 171, 221, 222, 3, 'com_content.article.9', 'Auditoria', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(54, 171, 207, 208, 3, 'com_content.article.10', 'Convênios', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(55, 171, 209, 210, 3, 'com_content.article.11', 'Despesas', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(56, 171, 211, 212, 3, 'com_content.article.12', 'Licitações e contratos', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(57, 171, 213, 214, 3, 'com_content.article.13', 'Servidores', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(58, 172, 216, 217, 4, 'com_content.article.14', 'Informações classificadas', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(59, 172, 218, 219, 4, 'com_content.article.15', 'Serviço de Informação ao Cidadão (SIC)', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
 (60, 8, 100, 131, 2, 'com_content.category.17', 'Últimas notícias', '{\"core.create\":{\"6\":1,\"3\":1},\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1},\"core.edit.own\":{\"6\":1,\"3\":1}}'),
 (69, 60, 101, 102, 3, 'com_content.article.16', 'Texto 1 - Título da notícia entre 35 e 90 caracteres', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
 (70, 60, 103, 104, 3, 'com_content.article.17', 'Release 5: Título do release entre 35 e 90 caracteres', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
@@ -409,96 +490,96 @@ INSERT INTO `idg2019_assets` (`id`, `parent_id`, `lft`, `rgt`, `level`, `name`, 
 (78, 60, 119, 120, 3, 'com_content.article.25', 'Texto 2 - Título da notícia entre 35 e 90 caracteres', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
 (79, 60, 123, 124, 3, 'com_content.article.26', 'Conheça o novo modelo de plataforma digital do governo federal', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
 (81, 8, 132, 133, 2, 'com_content.category.26', 'manuais', '{\"core.create\":{\"6\":1,\"3\":1},\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1},\"core.edit.own\":{\"6\":1,\"3\":1}}'),
-(82, 8, 152, 153, 2, 'com_content.category.27', 'Sobre a nova identidade visual do Governo Federal', '{\"core.create\":{\"6\":1,\"3\":1},\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1},\"core.edit.own\":{\"6\":1,\"3\":1}}'),
-(83, 93, 145, 148, 3, 'com_content.category.28', 'Perguntas frequentes', '{\"core.create\":{\"6\":1,\"3\":1},\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1},\"core.edit.own\":{\"6\":1,\"3\":1}}'),
-(84, 93, 143, 144, 3, 'com_content.category.29', 'Contato', '{\"core.create\":{\"6\":1,\"3\":1},\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1},\"core.edit.own\":{\"6\":1,\"3\":1}}'),
+(82, 8, 154, 155, 2, 'com_content.category.27', 'Sobre a nova identidade visual do Governo Federal', '{\"core.create\":{\"6\":1,\"3\":1},\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1},\"core.edit.own\":{\"6\":1,\"3\":1}}'),
+(83, 93, 147, 150, 3, 'com_content.category.28', 'Perguntas frequentes', '{\"core.create\":{\"6\":1,\"3\":1},\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1},\"core.edit.own\":{\"6\":1,\"3\":1}}'),
+(84, 93, 143, 146, 3, 'com_content.category.29', 'Fale Conosco', '{\"core.create\":{\"6\":1,\"3\":1},\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1},\"core.edit.own\":{\"6\":1,\"3\":1}}'),
 (85, 93, 141, 142, 3, 'com_content.category.30', 'Servicos da Denominação', '{\"core.create\":{\"6\":1,\"3\":1},\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1},\"core.edit.own\":{\"6\":1,\"3\":1}}'),
 (86, 93, 139, 140, 3, 'com_content.category.31', 'Dados abertos', '{\"core.create\":{\"6\":1,\"3\":1},\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1},\"core.edit.own\":{\"6\":1,\"3\":1}}'),
 (87, 93, 135, 138, 3, 'com_content.category.32', 'Area de imprensa', '{\"core.create\":{\"6\":1,\"3\":1},\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1},\"core.edit.own\":{\"6\":1,\"3\":1}}'),
-(88, 83, 146, 147, 4, 'com_content.article.28', 'Perguntas frequentes', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(88, 83, 148, 149, 4, 'com_content.article.28', 'Perguntas frequentes', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
 (89, 27, 29, 30, 3, 'com_content.article.29', 'Contato', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
 (90, 27, 31, 32, 3, 'com_content.article.30', 'Servicos da Denominação', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
 (91, 27, 33, 34, 3, 'com_content.article.31', 'Dados abertos', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
 (92, 87, 136, 137, 4, 'com_content.article.32', 'Area de imprensa', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(93, 8, 134, 151, 2, 'com_content.category.33', 'Menu superior', '{\"core.create\":{\"6\":1,\"3\":1},\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1},\"core.edit.own\":{\"6\":1,\"3\":1}}'),
-(94, 93, 149, 150, 3, 'com_content.category.34', 'Acessibilidade', '{\"core.create\":{\"6\":1,\"3\":1},\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1},\"core.edit.own\":{\"6\":1,\"3\":1}}'),
+(93, 8, 134, 153, 2, 'com_content.category.33', 'Menu superior', '{\"core.create\":{\"6\":1,\"3\":1},\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1},\"core.edit.own\":{\"6\":1,\"3\":1}}'),
+(94, 93, 151, 152, 3, 'com_content.category.34', 'Acessibilidade', '{\"core.create\":{\"6\":1,\"3\":1},\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1},\"core.edit.own\":{\"6\":1,\"3\":1}}'),
 (95, 27, 27, 28, 3, 'com_content.article.33', 'Acessibilidade', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
 (97, 60, 121, 122, 3, 'com_content.article.34', 'Saiba como montar o menu da Lei de Acesso à Informação', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(98, 8, 154, 161, 2, 'com_content.category.35', 'Programas', '{\"core.create\":{\"6\":1,\"3\":1},\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1},\"core.edit.own\":{\"6\":1,\"3\":1}}'),
-(99, 98, 155, 156, 3, 'com_content.article.35', 'Texto 3 - Título da notícia entre 35 e 90 caracteres', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(100, 98, 157, 158, 3, 'com_content.article.36', 'Texto 4 - Título da notícia entre 35 e 90 caracteres', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
-(101, 98, 159, 160, 3, 'com_content.article.37', 'Texto 5 - Título da notícia entre 35 e 90 caracteres', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
-(103, 8, 162, 187, 2, 'com_content.category.36', 'Galeria de imagens', '{\"core.create\":{\"6\":1,\"3\":1},\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1},\"core.edit.own\":{\"6\":1,\"3\":1}}'),
-(104, 103, 163, 174, 3, 'com_content.category.37', 'Galeria 1', '{\"core.create\":{\"6\":1,\"3\":1},\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1},\"core.edit.own\":{\"6\":1,\"3\":1}}'),
-(105, 104, 164, 165, 4, 'com_content.article.39', 'Imagem 1: título com até 45 caracteres', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(106, 104, 166, 167, 4, 'com_content.article.40', 'Imagem 2: título com até 45 caracteres', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
-(107, 104, 168, 169, 4, 'com_content.article.41', 'Imagem 3: título com até 45 caracteres', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
-(108, 104, 170, 171, 4, 'com_content.article.42', 'Imagem 4: título com até 45 caracteres', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
-(109, 104, 172, 173, 4, 'com_content.article.43', 'SEM Imagem: título com até 45 caracteres', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
-(111, 1, 549, 550, 1, 'com_tags', 'com_tags', '{}'),
-(112, 1, 551, 552, 1, 'com_contenthistory', 'com_contenthistory', '{}'),
-(113, 1, 553, 554, 1, 'com_ajax', 'com_ajax', '{}'),
-(114, 1, 555, 556, 1, 'com_postinstall', 'com_postinstall', '{}'),
-(115, 18, 288, 289, 2, 'com_modules.module.138', 'Botões de compartilhamento, páginas internas', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(116, 1, 557, 558, 1, 'com_blankcomponent', 'blankcomponent', '{}'),
-(117, 18, 290, 291, 2, 'com_modules.module.139', 'Mapa do site: Título e Descrição', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(118, 18, 292, 293, 2, 'com_modules.module.140', 'Outros links', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(119, 18, 294, 295, 2, 'com_modules.module.141', 'Serviços', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(120, 18, 296, 297, 2, 'com_modules.module.142', 'Redes Sociais', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(121, 18, 298, 299, 2, 'com_modules.module.143', 'Colunas da página de mapa do site', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(122, 18, 300, 301, 2, 'com_modules.module.144', 'Assuntos', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(123, 18, 302, 303, 2, 'com_modules.module.145', 'Sobre', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
-(124, 18, 304, 305, 2, 'com_modules.module.146', 'Central conteúdos', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(125, 18, 306, 307, 2, 'com_modules.module.147', 'Acessibilidade', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(126, 18, 308, 309, 2, 'com_modules.module.148', 'Colunas da página de mapa do site, segunda linha', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
-(127, 18, 310, 311, 2, 'com_modules.module.149', 'RSS', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(128, 18, 312, 313, 2, 'com_modules.module.1', 'Manuais', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(129, 18, 314, 315, 2, 'com_modules.module.99', 'Assuntos', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(130, 18, 316, 317, 2, 'com_modules.module.87', 'Informação ao Cidadão', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(131, 18, 318, 319, 2, 'com_modules.module.100', 'Central de conteúdos', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(132, 18, 320, 321, 2, 'com_modules.module.17', 'Rastro de navegação', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(133, 18, 322, 323, 2, 'com_modules.module.93', 'Em destaque', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(134, 18, 324, 325, 2, 'com_modules.module.150', 'Em destaque', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
+(98, 8, 156, 163, 2, 'com_content.category.35', 'Programas', '{\"core.create\":{\"6\":1,\"3\":1},\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1},\"core.edit.own\":{\"6\":1,\"3\":1}}'),
+(99, 98, 157, 158, 3, 'com_content.article.35', 'Texto 3 - Título da notícia entre 35 e 90 caracteres', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(100, 98, 159, 160, 3, 'com_content.article.36', 'Texto 4 - Título da notícia entre 35 e 90 caracteres', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
+(101, 98, 161, 162, 3, 'com_content.article.37', 'Texto 5 - Título da notícia entre 35 e 90 caracteres', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
+(103, 8, 164, 189, 2, 'com_content.category.36', 'Galeria de imagens', '{\"core.create\":{\"6\":1,\"3\":1},\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1},\"core.edit.own\":{\"6\":1,\"3\":1}}'),
+(104, 103, 165, 176, 3, 'com_content.category.37', 'Galeria 1', '{\"core.create\":{\"6\":1,\"3\":1},\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1},\"core.edit.own\":{\"6\":1,\"3\":1}}'),
+(105, 104, 166, 167, 4, 'com_content.article.39', 'Imagem 1: título com até 45 caracteres', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(106, 104, 168, 169, 4, 'com_content.article.40', 'Imagem 2: título com até 45 caracteres', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
+(107, 104, 170, 171, 4, 'com_content.article.41', 'Imagem 3: título com até 45 caracteres', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
+(108, 104, 172, 173, 4, 'com_content.article.42', 'Imagem 4: título com até 45 caracteres', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
+(109, 104, 174, 175, 4, 'com_content.article.43', 'SEM Imagem: título com até 45 caracteres', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
+(111, 1, 551, 552, 1, 'com_tags', 'com_tags', '{}'),
+(112, 1, 553, 554, 1, 'com_contenthistory', 'com_contenthistory', '{}'),
+(113, 1, 555, 556, 1, 'com_ajax', 'com_ajax', '{}'),
+(114, 1, 557, 558, 1, 'com_postinstall', 'com_postinstall', '{}'),
+(115, 18, 290, 291, 2, 'com_modules.module.138', 'Botões de compartilhamento, páginas internas', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(116, 1, 559, 560, 1, 'com_blankcomponent', 'blankcomponent', '{}'),
+(117, 18, 292, 293, 2, 'com_modules.module.139', 'Mapa do site: Título e Descrição', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(118, 18, 294, 295, 2, 'com_modules.module.140', 'Outros links', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(119, 18, 296, 297, 2, 'com_modules.module.141', 'Serviços', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(120, 18, 298, 299, 2, 'com_modules.module.142', 'Redes Sociais', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(121, 18, 300, 301, 2, 'com_modules.module.143', 'Colunas da página de mapa do site', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(122, 18, 302, 303, 2, 'com_modules.module.144', 'Assuntos', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(123, 18, 304, 305, 2, 'com_modules.module.145', 'Sobre', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
+(124, 18, 306, 307, 2, 'com_modules.module.146', 'Central conteúdos', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(125, 18, 308, 309, 2, 'com_modules.module.147', 'Acessibilidade', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(126, 18, 310, 311, 2, 'com_modules.module.148', 'Colunas da página de mapa do site, segunda linha', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
+(127, 18, 312, 313, 2, 'com_modules.module.149', 'RSS', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(128, 18, 314, 315, 2, 'com_modules.module.1', 'Manuais', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(129, 18, 316, 317, 2, 'com_modules.module.99', 'Assuntos', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(130, 18, 318, 319, 2, 'com_modules.module.87', 'Informação ao Cidadão', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(131, 18, 320, 321, 2, 'com_modules.module.100', 'Central de conteúdos', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(132, 18, 322, 323, 2, 'com_modules.module.17', 'Rastro de navegação', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(133, 18, 324, 325, 2, 'com_modules.module.93', 'Em destaque', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(134, 18, 326, 327, 2, 'com_modules.module.150', 'Em destaque', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
 (135, 7, 22, 23, 2, 'com_contact.category.38', 'Contatos principais', '{\"core.create\":{\"6\":1,\"3\":1},\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1},\"core.edit.own\":{\"6\":1,\"3\":1}}'),
-(136, 18, 326, 327, 2, 'com_modules.module.94', 'Serviços', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(137, 18, 328, 329, 2, 'com_modules.module.151', 'Youtube Gallery Module', ''),
-(138, 1, 559, 560, 1, 'com_youtubegallery', 'com_youtubegallery', '{}'),
-(139, 18, 330, 331, 2, 'com_modules.module.152', 'ÁREA DE IMPRENSA', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(140, 18, 332, 333, 2, 'com_modules.module.153', 'Notícias', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(141, 18, 334, 335, 2, 'com_modules.module.154', 'Releases', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(142, 8, 188, 199, 2, 'com_content.category.39', 'Releases', '{\"core.create\":{\"6\":1,\"3\":1},\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1},\"core.edit.own\":{\"6\":1,\"3\":1}}'),
-(143, 142, 189, 190, 3, 'com_content.article.44', 'Release 1: Título do release entre 35 e 90 caracteres', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(144, 142, 191, 192, 3, 'com_content.article.45', 'Release 2: Título do release entre 35 e 90 caracteres', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
-(145, 142, 193, 194, 3, 'com_content.article.46', 'Release 3: Título do release entre 35 e 90 caracteres', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
-(146, 142, 195, 196, 3, 'com_content.article.47', 'Release 4: Título do release entre 35 e 90 caracteres', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
-(147, 142, 197, 198, 3, 'com_content.article.48', 'Release 5: Título do release entre 35 e 90 caracteres', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
-(148, 18, 336, 337, 2, 'com_modules.module.155', 'Assessoria de Comunicação do Órgão', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(149, 18, 338, 339, 2, 'com_modules.module.156', 'ÁREA DE IMPRENSA - linha 2', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
-(150, 18, 340, 341, 2, 'com_modules.module.157', 'Agenda do responsável pelo órgão', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(151, 18, 342, 343, 2, 'com_modules.module.158', 'Redes Sociais - Módulo twitter e facebook da área de imprensa', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(152, 18, 344, 345, 2, 'com_modules.module.159', 'Vídeos', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(153, 18, 346, 347, 2, 'com_modules.module.160', 'Galeria de vídeos alternativa', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(154, 1, 561, 562, 1, 'com_phocagallery', 'com_phocagallery', '{\"core.admin\":[],\"core.manage\":[],\"core.create\":[],\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
-(155, 18, 348, 349, 2, 'com_modules.module.161', 'Título Banco de imagens', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(156, 18, 350, 351, 2, 'com_modules.module.162', 'Banco de imagens', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(157, 18, 352, 353, 2, 'com_modules.module.163', 'Manuais', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(158, 18, 354, 355, 2, 'com_modules.module.164', 'Outros manuais', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(159, 1, 563, 564, 1, 'com_k2', 'com_k2', '{}'),
-(160, 18, 356, 357, 2, 'com_modules.module.165', 'K2 Comments', ''),
-(161, 18, 358, 359, 2, 'com_modules.module.166', 'K2 Content', ''),
-(162, 18, 360, 361, 2, 'com_modules.module.167', 'K2 Tools', ''),
-(163, 18, 362, 363, 2, 'com_modules.module.168', 'K2 Users', ''),
-(164, 18, 364, 365, 2, 'com_modules.module.169', 'K2 User', ''),
-(165, 18, 366, 367, 2, 'com_modules.module.170', 'K2 Quick Icons (admin)', ''),
-(166, 18, 368, 369, 2, 'com_modules.module.171', 'K2 Stats (admin)', ''),
-(167, 18, 370, 371, 2, 'com_modules.module.137', 'Áudio do órgão', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(168, 18, 372, 373, 2, 'com_modules.module.172', 'Redes Sociais - Módulo twitter e facebook da página inicial', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(170, 18, 374, 375, 2, 'com_modules.module.136', 'Galeria de imagens', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
-(171, 8, 200, 221, 2, 'com_content.category.40', 'Lei de acesso à informação', '{\"core.create\":{\"6\":1,\"3\":1},\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1},\"core.edit.own\":{\"6\":1,\"3\":1}}'),
-(172, 171, 213, 218, 3, 'com_content.category.41', 'Perguntas frequentes', '{\"core.create\":{\"6\":1,\"3\":1},\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1},\"core.edit.own\":{\"6\":1,\"3\":1}}'),
+(136, 18, 328, 329, 2, 'com_modules.module.94', 'Serviços', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(137, 18, 330, 331, 2, 'com_modules.module.151', 'Youtube Gallery Module', ''),
+(138, 1, 561, 562, 1, 'com_youtubegallery', 'com_youtubegallery', '{}'),
+(139, 18, 332, 333, 2, 'com_modules.module.152', 'ÁREA DE IMPRENSA', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(140, 18, 334, 335, 2, 'com_modules.module.153', 'Notícias', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(141, 18, 336, 337, 2, 'com_modules.module.154', 'Releases', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(142, 8, 190, 201, 2, 'com_content.category.39', 'Releases', '{\"core.create\":{\"6\":1,\"3\":1},\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1},\"core.edit.own\":{\"6\":1,\"3\":1}}'),
+(143, 142, 191, 192, 3, 'com_content.article.44', 'Release 1: Título do release entre 35 e 90 caracteres', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(144, 142, 193, 194, 3, 'com_content.article.45', 'Release 2: Título do release entre 35 e 90 caracteres', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
+(145, 142, 195, 196, 3, 'com_content.article.46', 'Release 3: Título do release entre 35 e 90 caracteres', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
+(146, 142, 197, 198, 3, 'com_content.article.47', 'Release 4: Título do release entre 35 e 90 caracteres', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
+(147, 142, 199, 200, 3, 'com_content.article.48', 'Release 5: Título do release entre 35 e 90 caracteres', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
+(148, 18, 338, 339, 2, 'com_modules.module.155', 'Assessoria de Comunicação do Órgão', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(149, 18, 340, 341, 2, 'com_modules.module.156', 'ÁREA DE IMPRENSA - linha 2', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
+(150, 18, 342, 343, 2, 'com_modules.module.157', 'Agenda do responsável pelo órgão', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(151, 18, 344, 345, 2, 'com_modules.module.158', 'Redes Sociais - Módulo twitter e facebook da área de imprensa', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(152, 18, 346, 347, 2, 'com_modules.module.159', 'Vídeos', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(153, 18, 348, 349, 2, 'com_modules.module.160', 'Galeria de vídeos alternativa', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(154, 1, 563, 564, 1, 'com_phocagallery', 'com_phocagallery', '{\"core.admin\":[],\"core.manage\":[],\"core.create\":[],\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
+(155, 18, 350, 351, 2, 'com_modules.module.161', 'Título Banco de imagens', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(156, 18, 352, 353, 2, 'com_modules.module.162', 'Banco de imagens', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(157, 18, 354, 355, 2, 'com_modules.module.163', 'Manuais', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(158, 18, 356, 357, 2, 'com_modules.module.164', 'Outros manuais', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(159, 1, 565, 566, 1, 'com_k2', 'com_k2', '{}'),
+(160, 18, 358, 359, 2, 'com_modules.module.165', 'K2 Comments', ''),
+(161, 18, 360, 361, 2, 'com_modules.module.166', 'K2 Content', ''),
+(162, 18, 362, 363, 2, 'com_modules.module.167', 'K2 Tools', ''),
+(163, 18, 364, 365, 2, 'com_modules.module.168', 'K2 Users', ''),
+(164, 18, 366, 367, 2, 'com_modules.module.169', 'K2 User', ''),
+(165, 18, 368, 369, 2, 'com_modules.module.170', 'K2 Quick Icons (admin)', ''),
+(166, 18, 370, 371, 2, 'com_modules.module.171', 'K2 Stats (admin)', ''),
+(167, 18, 372, 373, 2, 'com_modules.module.137', 'Áudio do órgão', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(168, 18, 374, 375, 2, 'com_modules.module.172', 'Redes Sociais - Módulo twitter e facebook da página inicial', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(170, 18, 376, 377, 2, 'com_modules.module.136', 'Galeria de imagens', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
+(171, 8, 202, 223, 2, 'com_content.category.40', 'Lei de acesso à informação', '{\"core.create\":{\"6\":1,\"3\":1},\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1},\"core.edit.own\":{\"6\":1,\"3\":1}}'),
+(172, 171, 215, 220, 3, 'com_content.category.41', 'Perguntas frequentes', '{\"core.create\":{\"6\":1,\"3\":1},\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1},\"core.edit.own\":{\"6\":1,\"3\":1}}'),
 (173, 27, 35, 36, 3, 'com_content.article.49', 'O que é RSS?', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(174, 18, 376, 377, 2, 'com_modules.module.173', 'EDITORIA A', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(175, 18, 378, 379, 2, 'com_modules.module.174', 'Notícias editoria A', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(174, 18, 378, 379, 2, 'com_modules.module.173', 'EDITORIA A', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(175, 18, 380, 381, 2, 'com_modules.module.174', 'Notícias editoria A', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
 (176, 41, 56, 57, 4, 'com_content.article.50', 'Título da notícia em 3 linhas - até 50 caracteres', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
 (177, 41, 58, 59, 4, 'com_content.article.51', 'Título da notícia em 3 linhas - até 50 caracteres', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
 (178, 41, 60, 61, 4, 'com_content.article.52', 'Título da notícia em 3 linhas - até 50 caracteres', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
@@ -508,140 +589,141 @@ INSERT INTO `idg2019_assets` (`id`, `parent_id`, `lft`, `rgt`, `level`, `name`, 
 (182, 181, 67, 68, 5, 'com_content.article.54', 'Pagina 1: titulo do texto institucional', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
 (183, 181, 69, 70, 5, 'com_content.article.55', 'Pagina 2: titulo do texto institucional', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
 (184, 181, 71, 72, 5, 'com_content.article.56', 'Pagina 3: titulo do texto institucional', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(185, 18, 380, 381, 2, 'com_modules.module.175', 'Galeria de vídeos - box01', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(186, 18, 382, 383, 2, 'com_modules.module.176', '3 colunas de assuntos', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(187, 18, 384, 385, 2, 'com_modules.module.177', 'Assunto 1 - Editoria A', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(188, 18, 386, 387, 2, 'com_modules.module.178', 'Assunto 2 - Editoria A', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
-(189, 18, 388, 389, 2, 'com_modules.module.179', 'Assunto 3 - Editoria A', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
-(190, 18, 390, 391, 2, 'com_modules.module.180', 'Últimas notícias - Editoria A', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(191, 18, 392, 393, 2, 'com_modules.module.181', 'Notícias da Editoria B - itens em destaque', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(185, 18, 382, 383, 2, 'com_modules.module.175', 'Galeria de vídeos - box01', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(186, 18, 384, 385, 2, 'com_modules.module.176', '3 colunas de assuntos', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(187, 18, 386, 387, 2, 'com_modules.module.177', 'Assunto 1 - Editoria A', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(188, 18, 388, 389, 2, 'com_modules.module.178', 'Assunto 2 - Editoria A', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
+(189, 18, 390, 391, 2, 'com_modules.module.179', 'Assunto 3 - Editoria A', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
+(190, 18, 392, 393, 2, 'com_modules.module.180', 'Últimas notícias - Editoria A', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(191, 18, 394, 395, 2, 'com_modules.module.181', 'Notícias da Editoria B - itens em destaque', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
 (192, 46, 78, 79, 4, 'com_content.article.57', 'Editoria B - Texto 02', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
 (193, 46, 80, 81, 4, 'com_content.article.58', 'Editoria B - Texto 03', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
 (194, 46, 82, 83, 4, 'com_content.article.59', 'Editoria B - Texto 04', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
 (195, 46, 84, 85, 4, 'com_content.article.60', 'Editoria B - Texto 05', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
 (196, 46, 86, 87, 4, 'com_content.article.61', 'Editoria B - Texto 06', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
-(197, 18, 394, 395, 2, 'com_modules.module.182', 'Notícias da Editoria B - itens comuns', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(198, 18, 396, 397, 2, 'com_modules.module.183', 'Galeria de vídeos alternativa', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(199, 18, 398, 399, 2, 'com_modules.module.184', 'Separador', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(200, 18, 400, 401, 2, 'com_modules.module.185', 'Programas: somente imagens', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(201, 18, 402, 403, 2, 'com_modules.module.186', 'EDITORIA C', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(202, 18, 404, 405, 2, 'com_modules.module.187', 'Assuntos destaque editoria C', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(203, 18, 406, 407, 2, 'com_modules.module.188', 'Galeria de imagens e áudios - Editoria C', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(204, 18, 408, 409, 2, 'com_modules.module.189', 'Assunto 1', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(197, 18, 396, 397, 2, 'com_modules.module.182', 'Notícias da Editoria B - itens comuns', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(198, 18, 398, 399, 2, 'com_modules.module.183', 'Galeria de vídeos alternativa', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(199, 18, 400, 401, 2, 'com_modules.module.184', 'Separador', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(200, 18, 402, 403, 2, 'com_modules.module.185', 'Programas: somente imagens', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(201, 18, 404, 405, 2, 'com_modules.module.186', 'EDITORIA C', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(202, 18, 406, 407, 2, 'com_modules.module.187', 'Assuntos destaque editoria C', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(203, 18, 408, 409, 2, 'com_modules.module.188', 'Galeria de imagens e áudios - Editoria C', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(204, 18, 410, 411, 2, 'com_modules.module.189', 'Assunto 1', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
 (205, 47, 90, 91, 4, 'com_content.article.62', 'Editoria C - Texto 01', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
 (206, 47, 92, 93, 4, 'com_content.article.63', 'Editoria C - Texto 02', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
 (207, 47, 94, 95, 4, 'com_content.article.64', 'Editoria C - Texto 03', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
-(208, 18, 410, 411, 2, 'com_modules.module.190', 'Assunto 2', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
-(209, 18, 412, 413, 2, 'com_modules.module.191', 'Assunto 3', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
-(210, 18, 414, 415, 2, 'com_modules.module.192', 'Galeria de imagens', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(211, 18, 416, 417, 2, 'com_modules.module.193', 'Áudios', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(212, 18, 418, 419, 2, 'com_modules.module.194', 'Manchete principal', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(213, 18, 420, 421, 2, 'com_modules.module.195', 'Manchete principal (2)', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
-(214, 18, 422, 423, 2, 'com_modules.module.196', 'Módulo de manchete lateral', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
-(215, 18, 424, 425, 2, 'com_modules.module.197', 'Módulo de manchete lateral - outro exemplo', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
-(216, 103, 175, 186, 3, 'com_content.category.44', 'Galeria 2', '{\"core.create\":[],\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[],\"core.edit.own\":[]}'),
-(217, 216, 176, 177, 4, 'com_content.article.65', 'Imagem 1: título com até 45 caracteres', ''),
-(218, 216, 178, 179, 4, 'com_content.article.66', 'Imagem 2: título com até 45 caracteres', ''),
-(219, 216, 180, 181, 4, 'com_content.article.67', 'Imagem 3: título com até 45 caracteres', ''),
-(220, 216, 182, 183, 4, 'com_content.article.68', 'Imagem 4: título com até 45 caracteres', ''),
-(221, 216, 184, 185, 4, 'com_content.article.69', 'SEM Imagem: título com até 45 caracteres', ''),
-(227, 1, 565, 606, 1, 'com_agendadirigentes', 'com_agendadirigentes', '{\"core.admin\":[],\"core.manage\":{\"13\":1},\"core.create\":[],\"core.delete\":{\"13\":1},\"core.edit\":{\"13\":1},\"core.edit.state\":{\"13\":1},\"core.edit.own\":{\"1\":1},\"categories.list\":{\"13\":1},\"cargos.list\":{\"13\":1},\"cargos.create\":{\"13\":1},\"cargos.delete\":{\"13\":1},\"cargos.edit\":{\"13\":1},\"cargos.edit.state\":{\"13\":1},\"dirigentes.list\":{\"13\":1},\"dirigentes.create\":{\"13\":1},\"dirigentes.delete\":{\"13\":1},\"dirigentes.edit\":{\"13\":1},\"dirigentes.edit.state\":{\"13\":1}}'),
-(228, 227, 566, 575, 2, 'com_agendadirigentes.category.49', 'Gabinete do Ministro', '{\"core.create\":{\"10\":0,\"11\":0,\"12\":0,\"13\":1},\"core.delete\":{\"10\":0,\"13\":1},\"core.edit\":{\"10\":0,\"11\":0,\"12\":0,\"13\":1},\"core.edit.state\":{\"13\":1},\"core.edit.own\":{\"13\":1},\"cargos.create\":{\"13\":1},\"cargos.delete\":{\"13\":1},\"cargos.edit\":{\"13\":1},\"cargos.edit.state\":{\"13\":1},\"dirigentes.create\":{\"13\":1},\"dirigentes.delete\":{\"13\":1},\"dirigentes.edit\":{\"13\":1},\"dirigentes.edit.state\":{\"13\":1}}'),
-(229, 227, 576, 589, 2, 'com_agendadirigentes.category.50', 'Secretaria Executiva', '{\"core.create\":{\"9\":0,\"13\":1},\"core.delete\":{\"13\":1},\"core.edit\":{\"9\":0,\"13\":1},\"core.edit.state\":{\"13\":1},\"core.edit.own\":{\"13\":1},\"cargos.create\":{\"13\":1},\"cargos.delete\":{\"13\":1},\"cargos.edit\":{\"13\":1},\"cargos.edit.state\":{\"13\":1},\"dirigentes.create\":{\"13\":1},\"dirigentes.delete\":{\"13\":1},\"dirigentes.edit\":{\"13\":1},\"dirigentes.edit.state\":{\"13\":1}}'),
-(230, 229, 579, 586, 3, 'com_agendadirigentes.category.51', 'Diretoria de Tecnologia da Informação', '{\"core.create\":{\"9\":0},\"core.delete\":[],\"core.edit\":{\"9\":0},\"core.edit.state\":[],\"cargos.admin\":[],\"cargos.manage\":[],\"dirigentes.manage\":[]}'),
-(231, 230, 580, 583, 4, 'com_agendadirigentes.category.52', 'Coordenação Geral de Infraestrutura', ''),
-(248, 18, 426, 427, 2, 'com_modules.module.198', 'Botões de compartilhamento, detalhe de autoridades', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
-(249, 18, 428, 429, 2, 'com_modules.module.199', 'Agenda da Autoridade', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(250, 18, 430, 431, 2, 'com_modules.module.130', 'Planejamento', ''),
-(251, 18, 432, 433, 2, 'com_modules.module.131', 'Lei de acesso à informação', ''),
-(252, 18, 434, 435, 2, 'com_modules.module.132', 'Agenda', ''),
-(253, 18, 436, 437, 2, 'com_modules.module.111', 'linha 02 (OLD)', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(255, 227, 590, 593, 2, 'com_agendadirigentes.category.53', 'Secretaria Executiva Adjunta', '{\"core.create\":[],\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[],\"core.edit.own\":[],\"compromissos.list\":[],\"cargos.admin\":[],\"cargos.manage\":[],\"dirigentes.manage\":[]}'),
-(256, 227, 594, 599, 2, 'com_agendadirigentes.category.54', 'Secretaria A', ''),
-(257, 227, 600, 605, 2, 'com_agendadirigentes.category.55', 'Secretaria B', ''),
+(208, 18, 412, 413, 2, 'com_modules.module.190', 'Assunto 2', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
+(209, 18, 414, 415, 2, 'com_modules.module.191', 'Assunto 3', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
+(210, 18, 416, 417, 2, 'com_modules.module.192', 'Galeria de imagens', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(211, 18, 418, 419, 2, 'com_modules.module.193', 'Áudios', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(212, 18, 420, 421, 2, 'com_modules.module.194', 'Manchete principal', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(213, 18, 422, 423, 2, 'com_modules.module.195', 'Manchete principal (2)', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
+(214, 18, 424, 425, 2, 'com_modules.module.196', 'Módulo de manchete lateral', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
+(215, 18, 426, 427, 2, 'com_modules.module.197', 'Módulo de manchete lateral - outro exemplo', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
+(216, 103, 177, 188, 3, 'com_content.category.44', 'Galeria 2', '{\"core.create\":[],\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[],\"core.edit.own\":[]}'),
+(217, 216, 178, 179, 4, 'com_content.article.65', 'Imagem 1: título com até 45 caracteres', ''),
+(218, 216, 180, 181, 4, 'com_content.article.66', 'Imagem 2: título com até 45 caracteres', ''),
+(219, 216, 182, 183, 4, 'com_content.article.67', 'Imagem 3: título com até 45 caracteres', ''),
+(220, 216, 184, 185, 4, 'com_content.article.68', 'Imagem 4: título com até 45 caracteres', ''),
+(221, 216, 186, 187, 4, 'com_content.article.69', 'SEM Imagem: título com até 45 caracteres', ''),
+(227, 1, 567, 608, 1, 'com_agendadirigentes', 'com_agendadirigentes', '{\"core.admin\":[],\"core.manage\":{\"13\":1},\"core.create\":[],\"core.delete\":{\"13\":1},\"core.edit\":{\"13\":1},\"core.edit.state\":{\"13\":1},\"core.edit.own\":{\"1\":1},\"categories.list\":{\"13\":1},\"cargos.list\":{\"13\":1},\"cargos.create\":{\"13\":1},\"cargos.delete\":{\"13\":1},\"cargos.edit\":{\"13\":1},\"cargos.edit.state\":{\"13\":1},\"dirigentes.list\":{\"13\":1},\"dirigentes.create\":{\"13\":1},\"dirigentes.delete\":{\"13\":1},\"dirigentes.edit\":{\"13\":1},\"dirigentes.edit.state\":{\"13\":1}}'),
+(228, 227, 568, 577, 2, 'com_agendadirigentes.category.49', 'Gabinete do Ministro', '{\"core.create\":{\"10\":0,\"11\":0,\"12\":0,\"13\":1},\"core.delete\":{\"10\":0,\"13\":1},\"core.edit\":{\"10\":0,\"11\":0,\"12\":0,\"13\":1},\"core.edit.state\":{\"13\":1},\"core.edit.own\":{\"13\":1},\"cargos.create\":{\"13\":1},\"cargos.delete\":{\"13\":1},\"cargos.edit\":{\"13\":1},\"cargos.edit.state\":{\"13\":1},\"dirigentes.create\":{\"13\":1},\"dirigentes.delete\":{\"13\":1},\"dirigentes.edit\":{\"13\":1},\"dirigentes.edit.state\":{\"13\":1}}'),
+(229, 227, 578, 591, 2, 'com_agendadirigentes.category.50', 'Secretaria Executiva', '{\"core.create\":{\"9\":0,\"13\":1},\"core.delete\":{\"13\":1},\"core.edit\":{\"9\":0,\"13\":1},\"core.edit.state\":{\"13\":1},\"core.edit.own\":{\"13\":1},\"cargos.create\":{\"13\":1},\"cargos.delete\":{\"13\":1},\"cargos.edit\":{\"13\":1},\"cargos.edit.state\":{\"13\":1},\"dirigentes.create\":{\"13\":1},\"dirigentes.delete\":{\"13\":1},\"dirigentes.edit\":{\"13\":1},\"dirigentes.edit.state\":{\"13\":1}}'),
+(230, 229, 581, 588, 3, 'com_agendadirigentes.category.51', 'Diretoria de Tecnologia da Informação', '{\"core.create\":{\"9\":0},\"core.delete\":[],\"core.edit\":{\"9\":0},\"core.edit.state\":[],\"cargos.admin\":[],\"cargos.manage\":[],\"dirigentes.manage\":[]}'),
+(231, 230, 582, 585, 4, 'com_agendadirigentes.category.52', 'Coordenação Geral de Infraestrutura', ''),
+(248, 18, 428, 429, 2, 'com_modules.module.198', 'Botões de compartilhamento, detalhe de autoridades', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
+(249, 18, 430, 431, 2, 'com_modules.module.199', 'Agenda da Autoridade', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(250, 18, 432, 433, 2, 'com_modules.module.130', 'Planejamento', ''),
+(251, 18, 434, 435, 2, 'com_modules.module.131', 'Lei de acesso à informação', ''),
+(252, 18, 436, 437, 2, 'com_modules.module.132', 'Agenda', ''),
+(253, 18, 438, 439, 2, 'com_modules.module.111', 'linha 02 (OLD)', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(255, 227, 592, 595, 2, 'com_agendadirigentes.category.53', 'Secretaria Executiva Adjunta', '{\"core.create\":[],\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[],\"core.edit.own\":[],\"compromissos.list\":[],\"cargos.admin\":[],\"cargos.manage\":[],\"dirigentes.manage\":[]}'),
+(256, 227, 596, 601, 2, 'com_agendadirigentes.category.54', 'Secretaria A', ''),
+(257, 227, 602, 607, 2, 'com_agendadirigentes.category.55', 'Secretaria B', ''),
 (264, 27, 37, 38, 3, 'com_content.article.70', 'teste', ''),
-(265, 229, 587, 588, 3, 'com_agendadirigentes.cargo.3', 'Secretário Executivo', ''),
-(266, 228, 571, 572, 3, 'com_agendadirigentes.cargo.1', 'Ministro', ''),
-(267, 228, 573, 574, 3, 'com_agendadirigentes.cargo.2', 'Chefe de Gabinete', ''),
-(268, 18, 438, 439, 2, 'com_modules.module.200', 'Título', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(269, 18, 440, 441, 2, 'com_modules.module.201', 'Título (2)', ''),
-(270, 256, 597, 598, 3, 'com_agendadirigentes.cargo.8', 'Secretário da Secretaria A', ''),
-(271, 257, 603, 604, 3, 'com_agendadirigentes.cargo.9', 'Secretário da Secretaria B', ''),
+(265, 229, 589, 590, 3, 'com_agendadirigentes.cargo.3', 'Secretário Executivo', ''),
+(266, 228, 573, 574, 3, 'com_agendadirigentes.cargo.1', 'Ministro', ''),
+(267, 228, 575, 576, 3, 'com_agendadirigentes.cargo.2', 'Chefe de Gabinete', ''),
+(268, 18, 440, 441, 2, 'com_modules.module.200', 'Título', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(269, 18, 442, 443, 2, 'com_modules.module.201', 'Título (2)', ''),
+(270, 256, 599, 600, 3, 'com_agendadirigentes.cargo.8', 'Secretário da Secretaria A', ''),
+(271, 257, 605, 606, 3, 'com_agendadirigentes.cargo.9', 'Secretário da Secretaria B', ''),
 (272, 3, 6, 7, 2, 'com_banners.category.56', 'Banner rotativo da página inicial', '{\"core.create\":{\"6\":1,\"3\":1},\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(273, 18, 442, 443, 2, 'com_modules.module.202', 'Portal Padrão', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(273, 18, 444, 445, 2, 'com_modules.module.202', 'Portal Padrão', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
 (274, 60, 125, 126, 3, 'com_content.article.71', 'Site Secom, Portal do Planalto e Portal Brasil adotam nova identidade digital', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(275, 1, 625, 626, 1, '#__ucm_content.1', '#__ucm_content.1', '[]'),
+(275, 1, 627, 628, 1, '#__ucm_content.1', '#__ucm_content.1', '[]'),
 (276, 60, 127, 128, 3, 'com_content.article.72', 'Saiba mais sobre o Portal Institucional Padrão do Governo Federal', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
 (277, 60, 129, 130, 3, 'com_content.article.73', 'Conheça os templates para informativos da Identidade Padrão', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(278, 18, 444, 445, 2, 'com_modules.module.135', 'Últimas notícias', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(279, 18, 446, 447, 2, 'com_modules.module.203', 'linha 01', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
-(280, 18, 448, 449, 2, 'com_modules.module.128', 'Portal Padrão', ''),
-(281, 18, 450, 451, 2, 'com_modules.module.134', 'linha 03', '{}'),
-(282, 18, 452, 453, 2, 'com_modules.module.204', 'Guia de Estilo', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(283, 18, 454, 455, 2, 'com_modules.module.205', 'Últimos textos', '{}'),
-(284, 18, 456, 457, 2, 'com_modules.module.206', 'container1, coluna 1', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(285, 18, 458, 459, 2, 'com_modules.module.207', 'Novo Release', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(286, 18, 460, 461, 2, 'com_modules.module.123', 'linha 2, coluna 1', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(287, 18, 462, 463, 2, 'com_modules.module.119', 'linha 02', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(288, 1, 627, 628, 1, '#__agendadirigentes_dirigentes.8', '#__agendadirigentes_dirigentes.8', ''),
-(289, 18, 464, 465, 2, 'com_modules.module.208', 'Agenda do responsável pelo órgão', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(291, 18, 466, 467, 2, 'com_modules.module.210', 'Vídeos em destaque', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
-(292, 1, 629, 630, 1, 'com_fields', 'com_fields', '{}'),
-(293, 1, 631, 632, 1, 'com_associations', 'com_associations', '{}'),
-(294, 18, 468, 469, 2, 'com_modules.module.12', 'Admin Menu', '{}'),
-(295, 18, 470, 471, 2, 'com_modules.module.126', 'mod_barradogoverno', '{}'),
+(278, 18, 446, 447, 2, 'com_modules.module.135', 'Últimas notícias', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(279, 18, 448, 449, 2, 'com_modules.module.203', 'linha 01', '{\"core.delete\":[],\"core.edit\":[],\"core.edit.state\":[]}'),
+(280, 18, 450, 451, 2, 'com_modules.module.128', 'Portal Padrão', ''),
+(281, 18, 452, 453, 2, 'com_modules.module.134', 'linha 03', '{}'),
+(282, 18, 454, 455, 2, 'com_modules.module.204', 'Guia de Estilo', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(283, 18, 456, 457, 2, 'com_modules.module.205', 'Últimos textos', '{}'),
+(284, 18, 458, 459, 2, 'com_modules.module.206', 'container1, coluna 1', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(285, 18, 460, 461, 2, 'com_modules.module.207', 'Novo Release', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(286, 18, 462, 463, 2, 'com_modules.module.123', 'linha 2, coluna 1', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(287, 18, 464, 465, 2, 'com_modules.module.119', 'linha 02', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(288, 1, 629, 630, 1, '#__agendadirigentes_dirigentes.8', '#__agendadirigentes_dirigentes.8', ''),
+(289, 18, 466, 467, 2, 'com_modules.module.208', 'Agenda do responsável pelo órgão', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(291, 18, 468, 469, 2, 'com_modules.module.210', 'Vídeos em destaque', '{\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1}}'),
+(292, 1, 631, 632, 1, 'com_fields', 'com_fields', '{}'),
+(293, 1, 633, 634, 1, 'com_associations', 'com_associations', '{}'),
+(294, 18, 470, 471, 2, 'com_modules.module.12', 'Admin Menu', '{}'),
+(295, 18, 472, 473, 2, 'com_modules.module.126', 'mod_barradogoverno', '{}'),
 (296, 3, 8, 9, 2, 'com_banners.category.57', 'Super Banner', '{}'),
-(297, 18, 472, 473, 2, 'com_modules.module.107', 'Buscar no portal', '{}'),
-(298, 18, 474, 475, 2, 'com_modules.module.101', 'Assuntos', '{}'),
-(299, 18, 476, 477, 2, 'com_modules.module.102', 'Serviços', '{}'),
-(300, 18, 478, 479, 2, 'com_modules.module.103', 'Redes Sociais', '{}'),
-(301, 18, 480, 481, 2, 'com_modules.module.105', 'RSS', '{}'),
-(302, 18, 482, 483, 2, 'com_modules.module.106', 'Sobre o site', '{}'),
-(303, 18, 484, 485, 2, 'com_modules.module.95', 'Redes Sociais', '{}'),
-(304, 8, 222, 239, 2, 'com_content.fieldgroup.1', 'Informações adicionais para chamadas em destaque', '{}'),
-(305, 304, 223, 224, 3, 'com_content.field.1', 'Tamanho do Título', '{}'),
-(306, 304, 225, 226, 3, 'com_content.field.2', 'Link do item', '{}'),
-(307, 310, 241, 242, 3, 'com_content.field.3', 'Chapéu', '{}'),
-(308, 304, 227, 228, 3, 'com_content.field.4', 'Imagem de fundo', '{}'),
-(309, 304, 229, 230, 3, 'com_content.field.5', 'Cor de fundo', '{}'),
-(310, 8, 240, 243, 2, 'com_content.fieldgroup.2', 'Informações adicionais para notícias', '{}'),
-(311, 18, 486, 487, 2, 'com_modules.module.211', 'Chamadas em destaque', '{}'),
-(312, 304, 231, 232, 3, 'com_content.field.6', 'Tipo de link do item', '{}'),
-(313, 8, 244, 259, 2, 'com_content.category.58', 'Chamadas em destaque', '{}'),
-(314, 304, 233, 234, 3, 'com_content.field.7', 'Texto do botão com link', '{}'),
-(315, 313, 245, 246, 3, 'com_content.article.74', 'Nova identidade digital de governo', '{}'),
-(316, 304, 235, 236, 3, 'com_content.field.8', 'Título alternativo', '{}'),
-(317, 313, 247, 248, 3, 'com_content.article.75', 'Manual orientador de instalação', '{}'),
-(318, 18, 488, 489, 2, 'com_modules.module.212', 'Estilos de capa', '{}'),
-(319, 16, 276, 277, 2, 'com_menus.menu.14', 'Estilos de capa', '{}'),
-(320, 16, 278, 279, 2, 'com_menus.menu.3', 'Informação ao Cidadão', '{}'),
-(321, 16, 280, 281, 2, 'com_menus.menu.15', 'Contato', '{}'),
-(322, 18, 490, 491, 2, 'com_modules.module.213', 'Contato', '{}'),
-(323, 16, 282, 283, 2, 'com_menus.menu.10', 'Manuais', '{}'),
-(324, 18, 492, 493, 2, 'com_modules.module.214', 'Estilos de capa', '{}'),
-(325, 18, 494, 495, 2, 'com_modules.module.215', 'Assuntos', '{}'),
-(326, 18, 496, 497, 2, 'com_modules.module.216', 'Informação ao Cidadão', '{}'),
-(327, 18, 498, 499, 2, 'com_modules.module.217', 'Central de conteúdos', '{}'),
-(328, 18, 500, 501, 2, 'com_modules.module.218', 'Contato', '{}'),
-(329, 18, 502, 503, 2, 'com_modules.module.219', 'Manuais', '{}'),
-(330, 18, 504, 505, 2, 'com_modules.module.220', 'Em destaque - na capa', '{}'),
-(331, 18, 506, 507, 2, 'com_modules.module.221', 'Serviços', '{}'),
-(332, 18, 508, 509, 2, 'com_modules.module.222', 'Rodapé - Marcas', '{}'),
-(333, 18, 510, 511, 2, 'com_modules.module.223', 'Dados Abertos', '{}'),
-(334, 18, 512, 513, 2, 'com_modules.module.224', 'Voltar ao topo', '{}'),
-(335, 18, 514, 515, 2, 'com_modules.module.225', 'Destaques', '{}'),
-(336, 313, 249, 250, 3, 'com_content.article.76', 'Acesso à Informação é prioridade no novo Portal Padrão', '{}'),
-(337, 304, 237, 238, 3, 'com_content.field.9', 'Chapéu', '{}'),
-(338, 313, 251, 252, 3, 'com_content.article.77', 'Oito dicas para planejar e criar uma capa', '{}'),
-(339, 18, 516, 517, 2, 'com_modules.module.226', 'Chamadas em destaque (2)', '{}'),
-(340, 313, 253, 254, 3, 'com_content.article.78', 'Entenda o que é o menu quente', '{}'),
-(341, 313, 255, 256, 3, 'com_content.article.79', 'Conheça os temas do Portal Institucional Padrão', '{}'),
-(342, 313, 257, 258, 3, 'com_content.article.80', 'Conheça os temas do Portal Institucional Padrão (2)', '{}'),
-(343, 18, 518, 519, 2, 'com_modules.module.227', 'Agenda de Autoridades - HTML', '{}'),
-(344, 18, 520, 521, 2, 'com_modules.module.228', 'Participação Social', '{}'),
+(297, 18, 474, 475, 2, 'com_modules.module.107', 'Buscar no portal', '{}'),
+(298, 18, 476, 477, 2, 'com_modules.module.101', 'Assuntos', '{}'),
+(299, 18, 478, 479, 2, 'com_modules.module.102', 'Serviços', '{}'),
+(300, 18, 480, 481, 2, 'com_modules.module.103', 'Redes Sociais', '{}'),
+(301, 18, 482, 483, 2, 'com_modules.module.105', 'RSS', '{}'),
+(302, 18, 484, 485, 2, 'com_modules.module.106', 'Sobre o site', '{}'),
+(303, 18, 486, 487, 2, 'com_modules.module.95', 'Redes Sociais', '{}'),
+(304, 8, 224, 241, 2, 'com_content.fieldgroup.1', 'Informações adicionais para chamadas em destaque', '{}'),
+(305, 304, 225, 226, 3, 'com_content.field.1', 'Tamanho do Título', '{}'),
+(306, 304, 227, 228, 3, 'com_content.field.2', 'Link do item', '{}'),
+(307, 310, 243, 244, 3, 'com_content.field.3', 'Chapéu', '{}'),
+(308, 304, 229, 230, 3, 'com_content.field.4', 'Imagem de fundo', '{}'),
+(309, 304, 231, 232, 3, 'com_content.field.5', 'Cor de fundo', '{}'),
+(310, 8, 242, 245, 2, 'com_content.fieldgroup.2', 'Informações adicionais para notícias', '{}'),
+(311, 18, 488, 489, 2, 'com_modules.module.211', 'Chamadas em destaque', '{}'),
+(312, 304, 233, 234, 3, 'com_content.field.6', 'Tipo de link do item', '{}'),
+(313, 8, 246, 261, 2, 'com_content.category.58', 'Chamadas em destaque', '{}'),
+(314, 304, 235, 236, 3, 'com_content.field.7', 'Texto do botão com link', '{}'),
+(315, 313, 247, 248, 3, 'com_content.article.74', 'Nova identidade digital de governo', '{}'),
+(316, 304, 237, 238, 3, 'com_content.field.8', 'Título alternativo', '{}'),
+(317, 313, 249, 250, 3, 'com_content.article.75', 'Manual orientador de instalação', '{}'),
+(318, 18, 490, 491, 2, 'com_modules.module.212', 'Estilos de capa', '{}'),
+(319, 16, 278, 279, 2, 'com_menus.menu.14', 'Estilos de capa', '{}'),
+(320, 16, 280, 281, 2, 'com_menus.menu.3', 'Informação ao Cidadão', '{}'),
+(321, 16, 282, 283, 2, 'com_menus.menu.15', 'Contato', '{}'),
+(322, 18, 492, 493, 2, 'com_modules.module.213', 'Contato', '{}'),
+(323, 16, 284, 285, 2, 'com_menus.menu.10', 'Manuais', '{}'),
+(324, 18, 494, 495, 2, 'com_modules.module.214', 'Estilos de capa', '{}'),
+(325, 18, 496, 497, 2, 'com_modules.module.215', 'Assuntos', '{}'),
+(326, 18, 498, 499, 2, 'com_modules.module.216', 'Informação ao Cidadão', '{}'),
+(327, 18, 500, 501, 2, 'com_modules.module.217', 'Central de conteúdos', '{}'),
+(328, 18, 502, 503, 2, 'com_modules.module.218', 'Contato', '{}'),
+(329, 18, 504, 505, 2, 'com_modules.module.219', 'Manuais', '{}'),
+(330, 18, 506, 507, 2, 'com_modules.module.220', 'Em destaque - na capa', '{}'),
+(331, 18, 508, 509, 2, 'com_modules.module.221', 'Serviços', '{}'),
+(332, 18, 510, 511, 2, 'com_modules.module.222', 'Rodapé - Marcas', '{}'),
+(333, 18, 512, 513, 2, 'com_modules.module.223', 'Dados Abertos', '{}'),
+(334, 18, 514, 515, 2, 'com_modules.module.224', 'Voltar ao topo', '{}'),
+(335, 18, 516, 517, 2, 'com_modules.module.225', 'Destaques', '{}'),
+(336, 313, 251, 252, 3, 'com_content.article.76', 'Acesso à Informação é prioridade no novo Portal Padrão', '{}'),
+(337, 304, 239, 240, 3, 'com_content.field.9', 'Chapéu', '{}'),
+(338, 313, 253, 254, 3, 'com_content.article.77', 'Oito dicas para planejar e criar uma capa', '{}'),
+(339, 18, 518, 519, 2, 'com_modules.module.226', 'Chamadas em destaque (2)', '{}'),
+(340, 313, 255, 256, 3, 'com_content.article.78', 'Entenda o que é o menu quente', '{}'),
+(341, 313, 257, 258, 3, 'com_content.article.79', 'Conheça os temas do Portal Institucional Padrão', '{}'),
+(342, 313, 259, 260, 3, 'com_content.article.80', 'Conheça os temas do Portal Institucional Padrão (2)', '{}'),
+(343, 18, 520, 521, 2, 'com_modules.module.227', 'Agenda de Autoridades - HTML', '{}'),
+(344, 18, 522, 523, 2, 'com_modules.module.228', 'Participação Social', '{}'),
 (345, 3, 10, 11, 2, 'com_banners.category.59', 'Swiper Participação Social', '{}'),
-(346, 1, 633, 634, 1, 'com_privacy', 'com_privacy', '{}'),
-(347, 1, 635, 636, 1, 'com_actionlogs', 'com_actionlogs', '{}');
+(346, 1, 635, 636, 1, 'com_privacy', 'com_privacy', '{}'),
+(347, 1, 637, 638, 1, 'com_actionlogs', 'com_actionlogs', '{}'),
+(348, 84, 144, 145, 4, 'com_content.article.81', 'Fale Conosco', '{}');
 
 -- --------------------------------------------------------
 
@@ -649,13 +731,10 @@ INSERT INTO `idg2019_assets` (`id`, `parent_id`, `lft`, `rgt`, `level`, `name`, 
 -- Estrutura da tabela `idg2019_associations`
 --
 
-DROP TABLE IF EXISTS `idg2019_associations`;
-CREATE TABLE IF NOT EXISTS `idg2019_associations` (
+CREATE TABLE `idg2019_associations` (
   `id` int(11) NOT NULL COMMENT 'A reference to the associated item.',
   `context` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The context of the associated item.',
-  `key` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The key for the association computed from an md5 on associated ids.',
-  PRIMARY KEY (`context`,`id`) USING BTREE,
-  KEY `idx_key` (`key`) USING BTREE
+  `key` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The key for the association computed from an md5 on associated ids.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -664,9 +743,8 @@ CREATE TABLE IF NOT EXISTS `idg2019_associations` (
 -- Estrutura da tabela `idg2019_banners`
 --
 
-DROP TABLE IF EXISTS `idg2019_banners`;
-CREATE TABLE IF NOT EXISTS `idg2019_banners` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_banners` (
+  `id` int(11) NOT NULL,
   `cid` int(11) NOT NULL DEFAULT '0',
   `type` int(11) NOT NULL DEFAULT '0',
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
@@ -699,14 +777,8 @@ CREATE TABLE IF NOT EXISTS `idg2019_banners` (
   `created_by_alias` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `modified` datetime NOT NULL,
   `modified_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `version` int(10) UNSIGNED NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `idx_state` (`state`) USING BTREE,
-  KEY `idx_own_prefix` (`own_prefix`) USING BTREE,
-  KEY `idx_banner_catid` (`catid`) USING BTREE,
-  KEY `idx_language` (`language`) USING BTREE,
-  KEY `idx_metakey_prefix` (`metakey_prefix`(100)) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `version` int(10) UNSIGNED NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_banners`
@@ -717,12 +789,12 @@ INSERT INTO `idg2019_banners` (`id`, `cid`, `type`, `name`, `alias`, `imptotal`,
 (2, 0, 0, 'Portais adotam nova identidade', 'portais-adotam-nova-identidade', 0, 481, 4, 'http://portalpadrao.joomlacalango.org/index.php/component/content/article?id=71', 1, 56, 'Todos os sítios e portais do Governo Federal podem adotar o modelo', '', 0, 2, '', '{\"imageurl\":\"images\\/banners\\/banner-rotativo-home-01.jpg\",\"width\":\"\",\"height\":\"\",\"alt\":\"Site Secom, Portal do Planalto e Portal Brasil adotam nova identidade digital\"}', 0, '', -1, 0, 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2019-04-03 17:02:20', '*', 0, '', '2019-04-03 17:02:20', 929, 5),
 (3, 0, 0, 'Saiba mais sobre o Portal Institucional Padrão do Governo Federal', 'saiba-mais-sobre-o-portal-institucional-padrao-do-governo-federal', 0, 469, 1, 'http://portalpadrao.joomlacalango.org/index.php/component/content/article?id=72', 1, 56, 'O modelo permite que o portal de cada órgão seja reconhecido como propriedade digital do Governo Federal', '', 0, 3, '', '{\"imageurl\":\"images\\/banners\\/banner-rotativo-home-02.jpg\",\"width\":\"\",\"height\":\"\",\"alt\":\"Saiba mais sobre o Portal Institucional Padr\\u00e3o do Governo Federal\"}', 0, '', -1, 0, 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2019-04-03 17:02:20', '*', 0, '', '2019-04-03 17:02:20', 929, 4),
 (4, 0, 0, 'Conheça os templates para informativos da Identidade Padrão', 'conheca-os-templates-para-informativos-da-identidade-padrao', 0, 469, 1, 'http://{SITE}/index.php/component/content/article?id=71', 1, 56, 'Modelos podem ser utilizados para comunicação digital via mailing', '', 0, 4, '', '{\"imageurl\":\"images\\/banners\\/banner-rotativo-home-03.jpg\",\"width\":\"\",\"height\":\"\",\"alt\":\"Conhe\\u00e7a os templates para informativos da Identidade Padr\\u00e3o\"}', 0, '', -1, 0, 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2019-04-03 17:02:20', '*', 0, '', '2019-04-03 17:02:20', 929, 4),
-(5, 0, 0, 'Nova IDG 2019 - Joomla', 'nova-idg-2019-joomla', 0, 602, 3, 'http://w096084.mec.gov.br/joomlaidg2019/', 1, 57, '<p>https://www.youtube.com/embed/ZZ4zg0kzP-w</p>', '', 0, 5, '', '{\"imageurl\":\"images\\/banners\\/banner1.jpeg\",\"width\":\"\",\"height\":\"\",\"alt\":\"Nova IDG 2019 - Joomla\"}', 0, '', -1, 0, 0, 936, '2019-05-03 17:45:15', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2019-05-04 00:00:00', '2019-04-04 16:56:38', '*', 929, '', '2019-05-03 17:45:15', 936, 10),
-(6, 0, 0, 'Dados Abertos', 'dados-abertos', 0, 79, 0, 'http://www.portalpadrao.gov.br/', 1, 59, '<p> sem ac rhoncus mollis ante nisi gravida nisl at fermentum nisl felis vestibulum turpis.</p>', '', 0, 6, '', '{\"imageurl\":\"images\\/sampledata\\/ico1.png\",\"width\":\"\",\"height\":\"\",\"alt\":\"Dados Abertos\"}', 0, '', -1, 0, 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2019-07-18 00:00:00', '2019-06-18 23:18:33', '*', 929, '', '2019-06-18 23:41:08', 929, 2),
-(7, 0, 0, 'Ouvidoria', 'ouvidoria', 0, 79, 0, 'http://www.portalpadrao.gov.br/', 1, 59, '', '', 0, 7, '', '{\"imageurl\":\"images\\/sampledata\\/ico2.png\",\"width\":\"\",\"height\":\"\",\"alt\":\"Ouvidoria\"}', 0, '', -1, 0, 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2019-07-18 00:00:00', '2019-06-18 23:19:21', '*', 929, '', '0000-00-00 00:00:00', 0, 1),
-(8, 0, 0, 'Participa BR', 'participa-br', 0, 79, 0, 'http://www.portalpadrao.gov.br/', 1, 59, '', '', 0, 8, '', '{\"imageurl\":\"images\\/sampledata\\/ico4.png\",\"width\":\"\",\"height\":\"\",\"alt\":\"Participa BR\"}', 0, '', -1, 0, 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2019-07-18 00:00:00', '2019-06-18 23:20:03', '*', 929, '', '0000-00-00 00:00:00', 0, 1),
-(9, 0, 0, 'Audiência Pública', 'audiencia-publica', 0, 79, 0, 'http://www.portalpadrao.gov.br/', 1, 59, '', '', 0, 9, '', '{\"imageurl\":\"images\\/sampledata\\/ico3.png\",\"width\":\"\",\"height\":\"\",\"alt\":\"Audi\\u00eancia P\\u00fablica\"}', 0, '', -1, 0, 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2019-07-18 00:00:00', '2019-06-18 23:20:38', '*', 929, '', '0000-00-00 00:00:00', 0, 1),
-(10, 0, 0, 'Lorem ipsum dolor sit', 'lorem-ipsum-dolor-sit', 0, 79, 0, 'http://www.portalpadrao.gov.br/', 1, 59, '', '', 0, 10, '', '{\"imageurl\":\"images\\/sampledata\\/ico2.png\",\"width\":\"\",\"height\":\"\",\"alt\":\"Lorem ipsum dolor sit\"}', 0, '', -1, 0, 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2019-07-18 00:00:00', '2019-06-18 23:21:27', '*', 929, '', '0000-00-00 00:00:00', 0, 1);
+(5, 0, 0, 'Nova IDG 2019 - Joomla', 'nova-idg-2019-joomla', 0, 650, 4, 'http://w096084.mec.gov.br/joomlaidg2019/', 1, 57, '<p>https://www.youtube.com/embed/ZZ4zg0kzP-w</p>', '', 0, 5, '', '{\"imageurl\":\"images\\/banners\\/banner1.jpeg\",\"width\":\"\",\"height\":\"\",\"alt\":\"Nova IDG 2019 - Joomla\"}', 0, '', -1, 0, 0, 936, '2019-05-03 17:45:15', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2019-05-04 00:00:00', '2019-04-04 16:56:38', '*', 929, '', '2019-05-03 17:45:15', 936, 10),
+(6, 0, 0, 'Dados Abertos', 'dados-abertos', 0, 127, 0, 'http://www.portalpadrao.gov.br/', 1, 59, '<p> sem ac rhoncus mollis ante nisi gravida nisl at fermentum nisl felis vestibulum turpis.</p>', '', 0, 6, '', '{\"imageurl\":\"images\\/sampledata\\/ico1.png\",\"width\":\"\",\"height\":\"\",\"alt\":\"Dados Abertos\"}', 0, '', -1, 0, 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2019-07-18 00:00:00', '2019-06-18 23:18:33', '*', 929, '', '2019-06-18 23:41:08', 929, 2),
+(7, 0, 0, 'Ouvidoria', 'ouvidoria', 0, 127, 0, 'http://www.portalpadrao.gov.br/', 1, 59, '', '', 0, 7, '', '{\"imageurl\":\"images\\/sampledata\\/ico2.png\",\"width\":\"\",\"height\":\"\",\"alt\":\"Ouvidoria\"}', 0, '', -1, 0, 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2019-07-18 00:00:00', '2019-06-18 23:19:21', '*', 929, '', '0000-00-00 00:00:00', 0, 1),
+(8, 0, 0, 'Participa BR', 'participa-br', 0, 127, 0, 'http://www.portalpadrao.gov.br/', 1, 59, '', '', 0, 8, '', '{\"imageurl\":\"images\\/sampledata\\/ico4.png\",\"width\":\"\",\"height\":\"\",\"alt\":\"Participa BR\"}', 0, '', -1, 0, 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2019-07-18 00:00:00', '2019-06-18 23:20:03', '*', 929, '', '0000-00-00 00:00:00', 0, 1),
+(9, 0, 0, 'Audiência Pública', 'audiencia-publica', 0, 127, 0, 'http://www.portalpadrao.gov.br/', 1, 59, '', '', 0, 9, '', '{\"imageurl\":\"images\\/sampledata\\/ico3.png\",\"width\":\"\",\"height\":\"\",\"alt\":\"Audi\\u00eancia P\\u00fablica\"}', 0, '', -1, 0, 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2019-07-18 00:00:00', '2019-06-18 23:20:38', '*', 929, '', '0000-00-00 00:00:00', 0, 1),
+(10, 0, 0, 'Lorem ipsum dolor sit', 'lorem-ipsum-dolor-sit', 0, 127, 0, 'http://www.portalpadrao.gov.br/', 1, 59, '', '', 0, 10, '', '{\"imageurl\":\"images\\/sampledata\\/ico2.png\",\"width\":\"\",\"height\":\"\",\"alt\":\"Lorem ipsum dolor sit\"}', 0, '', -1, 0, 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2019-07-18 00:00:00', '2019-06-18 23:21:27', '*', 929, '', '0000-00-00 00:00:00', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -730,9 +802,8 @@ INSERT INTO `idg2019_banners` (`id`, `cid`, `type`, `name`, `alias`, `imptotal`,
 -- Estrutura da tabela `idg2019_banner_clients`
 --
 
-DROP TABLE IF EXISTS `idg2019_banner_clients`;
-CREATE TABLE IF NOT EXISTS `idg2019_banner_clients` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_banner_clients` (
+  `id` int(11) NOT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `contact` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
@@ -745,10 +816,7 @@ CREATE TABLE IF NOT EXISTS `idg2019_banner_clients` (
   `metakey_prefix` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `purchase_type` tinyint(4) NOT NULL DEFAULT '-1',
   `track_clicks` tinyint(4) NOT NULL DEFAULT '-1',
-  `track_impressions` tinyint(4) NOT NULL DEFAULT '-1',
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `idx_own_prefix` (`own_prefix`) USING BTREE,
-  KEY `idx_metakey_prefix` (`metakey_prefix`(100)) USING BTREE
+  `track_impressions` tinyint(4) NOT NULL DEFAULT '-1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -757,16 +825,11 @@ CREATE TABLE IF NOT EXISTS `idg2019_banner_clients` (
 -- Estrutura da tabela `idg2019_banner_tracks`
 --
 
-DROP TABLE IF EXISTS `idg2019_banner_tracks`;
-CREATE TABLE IF NOT EXISTS `idg2019_banner_tracks` (
+CREATE TABLE `idg2019_banner_tracks` (
   `track_date` datetime NOT NULL,
   `track_type` int(10) UNSIGNED NOT NULL,
   `banner_id` int(10) UNSIGNED NOT NULL,
-  `count` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  PRIMARY KEY (`track_date`,`track_type`,`banner_id`) USING BTREE,
-  KEY `idx_track_date` (`track_date`) USING BTREE,
-  KEY `idx_track_type` (`track_type`) USING BTREE,
-  KEY `idx_banner_id` (`banner_id`) USING BTREE
+  `count` int(10) UNSIGNED NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -775,9 +838,8 @@ CREATE TABLE IF NOT EXISTS `idg2019_banner_tracks` (
 -- Estrutura da tabela `idg2019_categories`
 --
 
-DROP TABLE IF EXISTS `idg2019_categories`;
-CREATE TABLE IF NOT EXISTS `idg2019_categories` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_categories` (
+  `id` int(11) NOT NULL,
   `asset_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'FK to the x3dts_assets table.',
   `parent_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `lft` int(11) NOT NULL DEFAULT '0',
@@ -803,16 +865,8 @@ CREATE TABLE IF NOT EXISTS `idg2019_categories` (
   `modified_time` datetime NOT NULL,
   `hits` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `language` char(7) NOT NULL DEFAULT '',
-  `version` int(10) UNSIGNED NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `cat_idx` (`extension`,`published`,`access`) USING BTREE,
-  KEY `idx_access` (`access`) USING BTREE,
-  KEY `idx_checkout` (`checked_out`) USING BTREE,
-  KEY `idx_left_right` (`lft`,`rgt`) USING BTREE,
-  KEY `idx_language` (`language`) USING BTREE,
-  KEY `idx_path` (`path`(100)) USING BTREE,
-  KEY `idx_alias` (`alias`(100)) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `version` int(10) UNSIGNED NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_categories`
@@ -839,7 +893,7 @@ INSERT INTO `idg2019_categories` (`id`, `asset_id`, `parent_id`, `lft`, `rgt`, `
 (26, 81, 1, 45, 46, 1, 'manuais', 'com_content', 'manuais', 'manuais', '', '', -2, 0, '0000-00-00 00:00:00', 1, '{\"category_layout\":\"\",\"image\":\"\"}', '', '', '{\"author\":\"\",\"robots\":\"\"}', 929, '2019-04-03 17:02:20', 0, '0000-00-00 00:00:00', 0, '*', 1),
 (27, 82, 1, 61, 62, 1, 'sobre-a-nova-identidade-visual-do-governo-federal', 'com_content', 'Sobre a nova identidade visual do Governo Federal', 'sobre-a-nova-identidade-visual-do-governo-federal', '', '', 1, 0, '0000-00-00 00:00:00', 1, '{\"category_layout\":\"\",\"image\":\"\"}', '', '', '{\"author\":\"\",\"robots\":\"\"}', 929, '2019-04-03 17:02:20', 929, '2019-04-03 17:02:20', 0, '*', 1),
 (28, 83, 33, 56, 57, 2, 'menu-superior/perguntas-frequentes', 'com_content', 'Perguntas frequentes', 'perguntas-frequentes', '', '', 1, 0, '0000-00-00 00:00:00', 1, '{\"category_layout\":\"\",\"image\":\"\"}', '', '', '{\"author\":\"\",\"robots\":\"\"}', 929, '2019-04-03 17:02:20', 929, '2019-04-03 17:02:20', 0, '*', 1),
-(29, 84, 33, 54, 55, 2, 'menu-superior/contato', 'com_content', 'Contato', 'contato', '', '', 1, 0, '0000-00-00 00:00:00', 1, '{\"category_layout\":\"\",\"image\":\"\"}', '', '', '{\"author\":\"\",\"robots\":\"\"}', 929, '2019-04-03 17:02:20', 929, '2019-04-03 17:02:20', 0, '*', 1),
+(29, 84, 33, 54, 55, 2, 'menu-superior/fale-conosco', 'com_content', 'Fale Conosco', 'fale-conosco', '', '', 1, 0, '0000-00-00 00:00:00', 1, '{\"category_layout\":\"\",\"image\":\"\",\"image_alt\":\"\"}', '', '', '{\"author\":\"\",\"robots\":\"\"}', 929, '2019-04-03 17:02:20', 931, '2019-12-24 12:57:53', 0, '*', 1),
 (30, 85, 33, 52, 53, 2, 'menu-superior/servicos-da-denominacao', 'com_content', 'Servicos da Denominação', 'servicos-da-denominacao', '', '', 1, 0, '0000-00-00 00:00:00', 1, '{\"category_layout\":\"\",\"image\":\"\"}', '', '', '{\"author\":\"\",\"robots\":\"\"}', 929, '2019-04-03 17:02:20', 929, '2019-04-03 17:02:20', 0, '*', 1),
 (31, 86, 33, 50, 51, 2, 'menu-superior/dados-abertos', 'com_content', 'Dados abertos', 'dados-abertos', '', '', 1, 0, '0000-00-00 00:00:00', 1, '{\"category_layout\":\"\",\"image\":\"\"}', '', '', '{\"author\":\"\",\"robots\":\"\"}', 929, '2019-04-03 17:02:20', 929, '2019-04-03 17:02:20', 0, '*', 1),
 (32, 87, 33, 48, 49, 2, 'menu-superior/area-de-imprensa', 'com_content', 'Area de imprensa', 'area-de-imprensa', '', '', 1, 0, '0000-00-00 00:00:00', 1, '{\"category_layout\":\"\",\"image\":\"\"}', '', '', '{\"author\":\"\",\"robots\":\"\"}', 929, '2019-04-03 17:02:20', 929, '2019-04-03 17:02:20', 0, '*', 1),
@@ -873,9 +927,8 @@ INSERT INTO `idg2019_categories` (`id`, `asset_id`, `parent_id`, `lft`, `rgt`, `
 -- Estrutura da tabela `idg2019_contact_details`
 --
 
-DROP TABLE IF EXISTS `idg2019_contact_details`;
-CREATE TABLE IF NOT EXISTS `idg2019_contact_details` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_contact_details` (
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `alias` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `con_position` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -917,17 +970,8 @@ CREATE TABLE IF NOT EXISTS `idg2019_contact_details` (
   `publish_up` datetime NOT NULL,
   `publish_down` datetime NOT NULL,
   `version` int(10) UNSIGNED NOT NULL DEFAULT '1',
-  `hits` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `idx_access` (`access`) USING BTREE,
-  KEY `idx_checkout` (`checked_out`) USING BTREE,
-  KEY `idx_state` (`published`) USING BTREE,
-  KEY `idx_catid` (`catid`) USING BTREE,
-  KEY `idx_createdby` (`created_by`) USING BTREE,
-  KEY `idx_featured_catid` (`featured`,`catid`) USING BTREE,
-  KEY `idx_language` (`language`) USING BTREE,
-  KEY `idx_xreference` (`xreference`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `hits` int(10) UNSIGNED NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_contact_details`
@@ -942,9 +986,8 @@ INSERT INTO `idg2019_contact_details` (`id`, `name`, `alias`, `con_position`, `a
 -- Estrutura da tabela `idg2019_content`
 --
 
-DROP TABLE IF EXISTS `idg2019_content`;
-CREATE TABLE IF NOT EXISTS `idg2019_content` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_content` (
+  `id` int(10) UNSIGNED NOT NULL,
   `asset_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'FK to the x3dts_assets table.',
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `alias` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '',
@@ -974,18 +1017,8 @@ CREATE TABLE IF NOT EXISTS `idg2019_content` (
   `featured` tinyint(3) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Set if article is featured.',
   `language` char(7) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The language code for the article.',
   `xreference` varchar(50) NOT NULL DEFAULT '',
-  `note` varchar(255) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `idx_access` (`access`) USING BTREE,
-  KEY `idx_checkout` (`checked_out`) USING BTREE,
-  KEY `idx_state` (`state`) USING BTREE,
-  KEY `idx_catid` (`catid`) USING BTREE,
-  KEY `idx_createdby` (`created_by`) USING BTREE,
-  KEY `idx_featured_catid` (`featured`,`catid`) USING BTREE,
-  KEY `idx_language` (`language`) USING BTREE,
-  KEY `idx_xreference` (`xreference`) USING BTREE,
-  KEY `idx_alias` (`alias`(191)) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `note` varchar(255) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_content`
@@ -996,13 +1029,13 @@ INSERT INTO `idg2019_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, 
 (3, 39, 'Página 2: título do texto institucional', 'pagina-2-titulo-do-texto-institucional', '<p style=\"text-align: left;\">Espaço para inserir o subtítulo do texto institucional. Se em uma linha, usar 90 caracteres. Se em duas linhas usar 190 caracteres</p>\r\n<p style=\"text-align: left;\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p style=\"text-align: left;\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p style=\"text-align: left;\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p style=\"text-align: left;\">• Lorem ipsum dolor sit amet;</p>\r\n<p style=\"text-align: left;\">• Lorem ipsum dolor sit amet;</p>\r\n<p style=\"text-align: left;\">• Lorem ipsum dolor sit amet</p>\r\n<p style=\"text-align: left;\">• Lorem ipsum dolor sit amet</p>\r\n<p style=\"text-align: left;\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', '', 1, 11, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 4, 0, '', '', 1, 1, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
 (4, 40, 'Página 3: título do texto institucional', 'pagina-3-titulo-do-texto-institucional', '<p style=\"text-align: left;\"><span style=\"color: #c0c0c0;\"><strong>Espaço para inserir o subtítulo do texto institucional. Se em uma linha, usar 90 caracteres. Se em duas linhas usar 190 caracteres</strong></span></p>\r\n<p style=\"text-align: left;\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p style=\"text-align: left;\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p style=\"text-align: left;\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', '', 1, 11, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 5, 0, '', '', 1, 1, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
 (5, 48, 'Editoria B - Texto 01', 'editoria-b-texto-01', '<p>Subtítulo em três linhas com até 110 caracteres. Subtítulo em três linhas com até 110 caracteres.</p>\r\n', '\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<blockquote>Use o estilo citação, localizado no campo corpo do texto, para criar um olho na sua matéria. Não há um limite de caracteres</blockquote>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', 1, 14, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/imagens_menu\\/conteudos_de_marcacao\\/editoria_b\\/texto-1-titulo-da-noticia-entre-35-e-90-caracteres.jpeg\",\"float_intro\":\"\",\"image_intro_alt\":\"Foto no tamanho 230 pixels de largura por 136 pixels de altura\",\"image_intro_caption\":\"\",\"image_fulltext\":\"images\\/conteudo\\/thumb-imagem-conteudo.jpg\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"Legenda da foto (arquivo .JPG) deve ter at\\u00e9 60 caracteres, preferencialmente\",\"image_fulltext_caption\":\"Cr\\u00e9dito da imagem\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 22, 0, '', '', 1, 33, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 1, '*', 'Chapéu', ''),
-(7, 51, 'Institucional', 'institucional', '<p>Nesta seção são divulgadas informações institucionais e organizacionais do(a) [nome do órgão ou entidade], compreendendo suas funções, competências, estrutura organizacional, relação de autoridades (quem é quem), agenda de autoridades, horários de atendimento e legislação do órgão/entidade</p>\r\n', '\r\n<blockquote>\r\n<p><a href=\"http://tv1-lnx-04.grupotv1.com/portalmodelo/sobre/wireframes/wireframe_pagina_institucional.jpg\">Acesse o wireframe com o exemplo de uma página institucional</a></p>\r\n</blockquote>\r\n<p>Esse item deve apresentar as seguintes informações em relação ao órgão/entidade:</p>\r\n<blockquote>\r\n<p>Acesse uma página institucional já publicada (em breve)</p>\r\n</blockquote>\r\n<ul>\r\n<li>I. Estrutura organizacional (organograma);</li>\r\n<li>II. Competências;</li>\r\n<li>III. Base jurídica da estrutura organizacional e das competências do órgãos/entidade, inclusive regimentos</li>\r\n<li>internos, quando existirem;</li>\r\n<li>IV. Lista dos principais cargos e seus respectivos ocupantes (denominado \"Quem é quem\");</li>\r\n<li>V. Telefones, emails e endereços de contato dos ocupantes dos principais cargos; agenda de autoridades;</li>\r\n<li>VI.Horários de atendimento do órgãos/entidade.</li>\r\n</ul>\r\n<blockquote>\r\n<p><a href=\"http://tv1-lnx-04.grupotv1.com/portalmodelo/sobre/wireframes/como-montar-sua-pagina.zip\">Saiba como montar suas páginas. Baixe o wireframe</a></p>\r\n</blockquote>\r\n<p>As informações relativas aos subitens I a V devem ser apresentadas, ao menos, para as unidades do órgão/entidade em nível hierárquico equivalente ou superior às coordenações-gerais. Os órgãos/entidades que disponibilizam as informações relativas a esses itens em seus respectivos portais eletrônicos poderão disponibilizar links remetendo para a referida área já existente em seu portal. O órgão/entidade que não disponibiliza as informações referentes a esse item deverá produzir e disponibilizar a informação.</p>\r\n<p>O subitem V (agenda de autoridades) sugere-se que seja publicado para cargos de 1º e 2º escalão, autarquias, inclusive as especiais, fundações mantidas pelo Poder Público, empresas públicas e sociedades de economia mista. Esse item deverá apresentar:</p>\r\n<ul>\r\n<li>a) a agenda de reuniões com pessoas físicas e jurídicas com as quais se relacione funcionalmente, com registro sumário das matérias tratadas;</li>\r\n<li>b) audiências concedidas, com informações sobre seus objetivos, participantes e resultados;</li>\r\n<li>c) eventos político-eleitorais de que a autoridade participe, informando as condições de logística e financeira da participação.</li>\r\n</ul>\r\n<p>O subitem VII (horários de atendimento do órgão/entidade) refere-se às informações de horário de funcionamento e atendimento ao público do órgão/entidade e de suas respectivas unidades, em caso da existência de horários diferenciados entre as unidades ou da existência de unidades descentralizadas.</p>\r\n<p>O órgão/entidade que divulga o referido conjunto de informações em seu portal eletrônico poderá disponibilizar link remetendo para a área onde as informações já estão disponíveis.</p>\r\n<p>A <a class=\"external-link\" title=\"\" href=\"http://epwg.governoeletronico.gov.br/cartilha-redacao\" target=\"_self\">Cartilha e-PWG</a> – Redação para Web possui orientações para a escrita de áreas comuns de portais.</p>\r\n<p><strong>Guias</strong></p>\r\n<p>Para mais informações sobre a seção de Acesso à Informação, confira os guias elaborados pela Controladoria-Geral da União.</p>\r\n<ul>\r\n<li><a class=\"external-link\" title=\"\" href=\"http://www.acessoainformacao.gov.br/acessoainformacaogov/espaco-gestor/arquivos/Guia_SecaoSitios.pdf\" target=\"_self\">Guia para criação da seção de acesso à informação nos portais eletrônicos dos órgãos e entidades federais</a> (arquivo pdf, tamanho: 1,14 MB)</li>\r\n<li><a class=\"external-link\" title=\"\" href=\"http://www.cgu.gov.br/Publicacoes/BrasilTransparente/Guia_TransparenciaAtiva_EstadosMunicipios.pdf\" target=\"_self\">Guia para criação da Seção de Acesso à Informação nos portais eletrônicos dos Órgãos e Entidades Estaduais e Municipais</a> (arquivo pdf, tamanho:1,27 MB)</li>\r\n<li class=\"last-item\"><a class=\"external-link\" title=\"\" href=\"http://www.acessoainformacao.gov.br/acessoainformacaogov/espaco-gestor/arquivos/Guia_InformacoesClassificadas.pdf\" target=\"_self\">Publicação do rol de informações classificadas e desclassificadas e de relatórios estatísticos sobre a Lei de Acesso à Informação</a> (arquivo pdf, tamanho: 682 KB)</li>\r\n</ul>', 1, 40, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 6, 8, 'Internet, governo federal', '', 1, 35, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
+(7, 51, 'Institucional', 'institucional', '<p>Nesta seção são divulgadas informações institucionais e organizacionais do(a) [nome do órgão ou entidade], compreendendo suas funções, competências, estrutura organizacional, relação de autoridades (quem é quem), agenda de autoridades, horários de atendimento e legislação do órgão/entidade</p>\r\n', '\r\n<blockquote>\r\n<p><a href=\"http://tv1-lnx-04.grupotv1.com/portalmodelo/sobre/wireframes/wireframe_pagina_institucional.jpg\">Acesse o wireframe com o exemplo de uma página institucional</a></p>\r\n</blockquote>\r\n<p>Esse item deve apresentar as seguintes informações em relação ao órgão/entidade:</p>\r\n<blockquote>\r\n<p>Acesse uma página institucional já publicada (em breve)</p>\r\n</blockquote>\r\n<ul>\r\n<li>I. Estrutura organizacional (organograma);</li>\r\n<li>II. Competências;</li>\r\n<li>III. Base jurídica da estrutura organizacional e das competências do órgãos/entidade, inclusive regimentos</li>\r\n<li>internos, quando existirem;</li>\r\n<li>IV. Lista dos principais cargos e seus respectivos ocupantes (denominado \"Quem é quem\");</li>\r\n<li>V. Telefones, emails e endereços de contato dos ocupantes dos principais cargos; agenda de autoridades;</li>\r\n<li>VI.Horários de atendimento do órgãos/entidade.</li>\r\n</ul>\r\n<blockquote>\r\n<p><a href=\"http://tv1-lnx-04.grupotv1.com/portalmodelo/sobre/wireframes/como-montar-sua-pagina.zip\">Saiba como montar suas páginas. Baixe o wireframe</a></p>\r\n</blockquote>\r\n<p>As informações relativas aos subitens I a V devem ser apresentadas, ao menos, para as unidades do órgão/entidade em nível hierárquico equivalente ou superior às coordenações-gerais. Os órgãos/entidades que disponibilizam as informações relativas a esses itens em seus respectivos portais eletrônicos poderão disponibilizar links remetendo para a referida área já existente em seu portal. O órgão/entidade que não disponibiliza as informações referentes a esse item deverá produzir e disponibilizar a informação.</p>\r\n<p>O subitem V (agenda de autoridades) sugere-se que seja publicado para cargos de 1º e 2º escalão, autarquias, inclusive as especiais, fundações mantidas pelo Poder Público, empresas públicas e sociedades de economia mista. Esse item deverá apresentar:</p>\r\n<ul>\r\n<li>a) a agenda de reuniões com pessoas físicas e jurídicas com as quais se relacione funcionalmente, com registro sumário das matérias tratadas;</li>\r\n<li>b) audiências concedidas, com informações sobre seus objetivos, participantes e resultados;</li>\r\n<li>c) eventos político-eleitorais de que a autoridade participe, informando as condições de logística e financeira da participação.</li>\r\n</ul>\r\n<p>O subitem VII (horários de atendimento do órgão/entidade) refere-se às informações de horário de funcionamento e atendimento ao público do órgão/entidade e de suas respectivas unidades, em caso da existência de horários diferenciados entre as unidades ou da existência de unidades descentralizadas.</p>\r\n<p>O órgão/entidade que divulga o referido conjunto de informações em seu portal eletrônico poderá disponibilizar link remetendo para a área onde as informações já estão disponíveis.</p>\r\n<p>A <a class=\"external-link\" title=\"\" href=\"http://epwg.governoeletronico.gov.br/cartilha-redacao\" target=\"_self\">Cartilha e-PWG</a> – Redação para Web possui orientações para a escrita de áreas comuns de portais.</p>\r\n<p><strong>Guias</strong></p>\r\n<p>Para mais informações sobre a seção de Acesso à Informação, confira os guias elaborados pela Controladoria-Geral da União.</p>\r\n<ul>\r\n<li><a class=\"external-link\" title=\"\" href=\"http://www.acessoainformacao.gov.br/acessoainformacaogov/espaco-gestor/arquivos/Guia_SecaoSitios.pdf\" target=\"_self\">Guia para criação da seção de acesso à informação nos portais eletrônicos dos órgãos e entidades federais</a> (arquivo pdf, tamanho: 1,14 MB)</li>\r\n<li><a class=\"external-link\" title=\"\" href=\"http://www.cgu.gov.br/Publicacoes/BrasilTransparente/Guia_TransparenciaAtiva_EstadosMunicipios.pdf\" target=\"_self\">Guia para criação da Seção de Acesso à Informação nos portais eletrônicos dos Órgãos e Entidades Estaduais e Municipais</a> (arquivo pdf, tamanho:1,27 MB)</li>\r\n<li class=\"last-item\"><a class=\"external-link\" title=\"\" href=\"http://www.acessoainformacao.gov.br/acessoainformacaogov/espaco-gestor/arquivos/Guia_InformacoesClassificadas.pdf\" target=\"_self\">Publicação do rol de informações classificadas e desclassificadas e de relatórios estatísticos sobre a Lei de Acesso à Informação</a> (arquivo pdf, tamanho: 682 KB)</li>\r\n</ul>', 1, 40, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 6, 8, 'Internet, governo federal', '', 1, 36, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
 (8, 52, 'Ações e Programas', 'acoes-e-programas', '<p>Nesta seção são divulgadas as informações pertinentes aos programas, ações, projetos e atividades implementadas pelo (a) [nome do órgão ou entidade]</p>\r\n', '\r\n<blockquote>\r\n<p><a href=\"http://tv1-lnx-04.grupotv1.com/portalmodelo/sobre/wireframes/wireframe_pagina_acoes-e-programas.jpg\">Acesse o wireframe com o exemplo de uma página de Ações e Programas</a></p>\r\n</blockquote>\r\n<blockquote>\r\n<p>Acesse uma página de Ações e Programas já publicada (em breve)</p>\r\n</blockquote>\r\n<blockquote>\r\n<p><a href=\"http://tv1-lnx-04.grupotv1.com/portalmodelo/sobre/wireframes/como-montar-sua-pagina.zip\">Saiba como montar suas páginas. Baixe o wireframe</a></p>\r\n</blockquote>\r\n<p>Programas são o principal instrumento que os governos utilizam para promover a integração entre os entes e os setores para concretizar políticas públicas e otimizar seus recursos, sejam eles financeiros, humanos, logísticos ou materiais. Por outro lado, uma ação é um conjunto de operações, cujos produtos contribuem para os objetivos do programa governamental. A ação pode ser um projeto, atividade ou operação especial.</p>\r\n<p>O órgão/entidade deverá disponibilizar o seguinte conjunto mínimo de informações em relação a seus respectivos programas, projetos e ações:<br />I - lista dos programas e ações executados pelo órgão/entidade;<br />II - indicação da unidade responsável pelo desenvolvimento e implementação;<br />III - principais metas;<br />IV - indicadores de resultado e impacto, quando existentes;<br />V - principais resultados.</p>\r\n<p>Em relação aos programas e ações que se constituírem serviços diretamente prestados ao público pelo órgão/entidade, deverão ser apresentadas as seguintes informações adicionais:<br />I - o serviço oferecido;<br />II - os requisitos, documentos e informações necessários para acessar o serviço;<br />III - as principais etapas para processamento do serviço;<br />IV - o prazo máximo para a prestação do serviço;<br />V - a forma de prestação do serviço;<br />VI - a forma de comunicação com o solicitante do serviço;<br />VII - os locais e formas de acessar o serviço;<br />VIII - prioridades de atendimento;<br />IX - tempo de espera para atendimento;<br />X - prazos para a realização dos serviços;<br />XI - mecanismos de comunicação com os usuários;<br />XII - procedimentos para receber, atender, gerir e responder às sugestões e reclamações;<br />XIII - fornecimento de informações acerca das etapas, presentes e futuras, esperadas para a realização dos serviços, inclusive estimativas de prazos;<br />XIV - mecanismos de consulta, por parte dos usuários, acerca das etapas, cumpridas e pendentes, para a realização do serviço solicitado;<br />XV - tratamento a ser dispensado aos usuários quando do atendimento;<br />XVI - requisitos básicos para o sistema de sinalização visual das unidades de atendimento;<br />XVII - condições mínimas a serem observadas pelas unidades de atendimento, em especial no que se refere a acessibilidade, limpeza e conforto;<br />XVIII - procedimentos alternativos para atendimento quando o sistema informatizado se encontrar indisponível;<br />XIX - outras informações julgadas de interesse dos usuários.</p>\r\n<p>O órgão ou entidade que já divulga o referido conjunto de informações em seu portal eletrônico ou que já publica sua respectiva Carta de Serviços ao Cidadão poderá disponibilizar link remetendo para a área onde as informações já estão disponíveis.</p>\r\n<p>Se o órgão/entidade ainda não divulga tais informações em seu portal eletrônico, ele deverá produzir e disponibilizar o conteúdo. Duas opções que podem contribuir para o atendimento do órgão/entidade a esse item são:</p>\r\n<p>A publicação dos dados institucionais dos órgão/entidade disponíveis no Sistema Integrado de Planejamento e Orçamento do Brasil (SIOP), disponível em: <a class=\"external-link\" title=\"\" href=\"https://www.siop.planejamento.gov.br/siop/\" target=\"_self\">https://www.siop.planejamento.gov.br/siop/</a></p>\r\n<p>O direcionamento para o link do relatório de gestão do órgão/entidade, desde que esteja atualizado e as informações sejam de fácil localização.</p>\r\n<p>Caso o órgão/entidade possua informação extra no próprio site, ele poderá indicar o link. Exemplo seria o relatório de avaliação do PPA, no site da CGU: <a class=\"external-link\" title=\"\" href=\"http://www.cgu.gov.br/Publicacoes/AvaliacaoPPA/index.asp\" target=\"_self\">http://www.cgu.gov.br/Publicacoes/AvaliacaoPPA/index.asp</a></p>\r\n<p><strong>Guias</strong></p>\r\n<p>Para mais informações sobre a seção de Acesso à Informação, confira os guias elaborados pela Controladoria-Geral da União.</p>\r\n<p><a class=\"external-link\" title=\"\" href=\"http://www.acessoainformacao.gov.br/acessoainformacaogov/espaco-gestor/arquivos/Guia_SecaoSitios.pdf\" target=\"_self\">Guia para criação da seção de acesso à informação nos portais eletrônicos dos órgãos e entidades federais</a> (arquivo pdf)</p>\r\n<p><a class=\"external-link\" title=\"\" href=\"http://www.cgu.gov.br/Publicacoes/BrasilTransparente/Guia_TransparenciaAtiva_EstadosMunicipios.pdf\" target=\"_self\">Guia para criação da Seção de Acesso à Informação nos portais eletrônicos dos Órgãos e Entidades Estaduais e Municipais</a> (arquivo pdf)</p>\r\n<p><a class=\"external-link\" title=\"\" href=\"http://www.acessoainformacao.gov.br/acessoainformacaogov/espaco-gestor/arquivos/Guia_InformacoesClassificadas.pdf\" target=\"_self\">Publicação do rol de informações classificadas e desclassificadas e de relatórios estatísticos sobre a Lei de Acesso à Informação</a> (arquivo pdf)</p>', 1, 40, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 5, 7, 'Internet, Governo federal', '', 1, 15, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
 (9, 53, 'Auditoria', 'auditoria', '<p>Nesta seção são divulgadas informações referentes ao resultado de inspeções, auditorias, prestações e tomada de contas realizadas no (a) [nome do órgão ou entidade]</p>\r\n', '\r\n<blockquote><a class=\"internal-link\" title=\"\" href=\"http://tv1-lnx-04.grupotv1.com/portalmodelo/sobre/wireframes/wireframe_pagina_auditorias.jpg\" target=\"_self\">Acesse o wireframe com o exemplo de uma página de Auditoria</a></blockquote>\r\n<blockquote>Acesse uma página de Auditoria já publicada (em breve)</blockquote>\r\n<blockquote><a class=\"internal-link\" title=\"\" href=\"http://tv1-lnx-04.grupotv1.com/portalmodelo/sobre/wireframes/como-montar-sua-pagina.zip\" target=\"_self\">Saiba como montar suas páginas. Baixe o wireframe</a></blockquote>\r\n<p>Os órgãos/entidades deverão disponibilizar os relatórios de gestão, os relatórios e certificados de auditoria, com pareceres do órgão de controle interno, e dos pronunciamentos dos ministros de Estado supervisores das áreas das autoridades de nível hierárquico equivalente, contidos nos processos de contas anuais, contendo a íntegra das peças e informações complementares contendo, minimamente, os seguintes dados:</p>\r\n<ul>\r\n<li>I - exercício ao qual se referem as contas;</li>\r\n<li>II - código e descrição da respectiva unidade;</li>\r\n<li>III - número do processo no órgão ou entidade de origem;</li>\r\n<li>IV - número do processo no Tribunal de Contas da União;</li>\r\n<li>V - situação junto ao Tribunal de Contas da União, de modo que se informe se o processo foi entregue, sobrestado ou julgado.</li>\r\n</ul>\r\n<p>Caso o órgão/entidade já disponibilize as informações em seu portal eletrônico, poderá ser disponibilizado link para a área em que os relatórios já são divulgados.</p>\r\n<p>Se o órgão/entidade ainda não divulga a informação em seu portal eletrônico, deverá providenciá-lo.</p>\r\n<p><strong>Guias</strong></p>\r\n<p>Para mais informações sobre a seção de Acesso à Informação, confira os guias elaborados pela Controladoria-Geral da União.</p>\r\n<ul>\r\n<li><a class=\"external-link\" title=\"\" href=\"http://www.acessoainformacao.gov.br/acessoainformacaogov/espaco-gestor/arquivos/Guia_SecaoSitios.pdf\" target=\"_self\">Guia para criação da seção de acesso à informação nos portais eletrônicos dos órgãos e entidades federais</a> (arquivo pdf, tamanho: 1,14 MB)</li>\r\n<li><a class=\"external-link\" title=\"\" href=\"http://www.cgu.gov.br/Publicacoes/BrasilTransparente/Guia_TransparenciaAtiva_EstadosMunicipios.pdf\" target=\"_self\">Guia para criação da Seção de Acesso à Informação nos portais eletrônicos dos Órgãos e Entidades Estaduais e Municipais</a> (arquivo pdf, tamanho:1,27 MB)</li>\r\n<li class=\"last-item\"><a class=\"external-link\" title=\"\" href=\"http://www.acessoainformacao.gov.br/acessoainformacaogov/espaco-gestor/arquivos/Guia_InformacoesClassificadas.pdf\" target=\"_self\">Publicação do rol de informações classificadas e desclassificadas e de relatórios estatísticos sobre a Lei de Acesso à Informação</a> (arquivo pdf, tamanho: 682 KB)</li>\r\n</ul>', 1, 40, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 5, 6, 'Internet, Governo Federal', '', 1, 14, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
 (10, 54, 'Convênios', 'convenios', '<p>Nesta seção são divulgadas informações sobre os repasses e transferências de recursos financeiros efetuados pelo (a) [nome do órgão ou entidade]</p>\r\n', '\r\n<blockquote><a class=\"internal-link\" title=\"\" href=\"http://tv1-lnx-04.grupotv1.com/portalmodelo/sobre/wireframes/wireframe_pagina_convenios.jpg\" target=\"_self\">Acesse o wireframe com o exemplo de uma página de Convênios</a></blockquote>\r\n<blockquote>Acesse uma página de Convênios já publicada (em breve)</blockquote>\r\n<blockquote><a class=\"internal-link\" title=\"\" href=\"http://tv1-lnx-04.grupotv1.com/portalmodelo/sobre/wireframes/como-montar-sua-pagina.zip\" target=\"_self\">Saiba como montar suas páginas. Baixe o wireframe</a></blockquote>\r\n<p>As informações a serem divulgadas nesse item referem-se às transferências de recursos da União realizadas pelo órgão/entidade mediante convênios, contratos de repasse e termos de cooperação, ou instrumentos congêneres com órgãos ou entidades públicas ou privadas sem fins lucrativos. Incluem-se nesta seção as transferências constitucionais e legais, e as transferências de renda direta ao cidadão, realizadas pelo órgão ou entidade.</p>\r\n<p>Serão divulgadas as seguintes informações relativas aos convênios ou instrumentos congêneres celebrados pelo órgão/entidade:</p>\r\n<p>I - órgão superior;<br />II - órgão subordinado ou entidade vinculada;<br />III - unidade gestora;<br />IV - nome do conveniado;<br />V - número do convênio;<br />VI - número do processo;<br />VII - objeto;<br />VIII - valor de repasse;<br />IX - valor da contrapartida do conveniado;<br />X - valor total dos recursos;<br />XI - período de vigência.</p>\r\n<p>O órgão/entidade que divulga o referido conjunto de informações em seu portal eletrônico ou possui Página de Transparência poderá disponibilizar link remetendo para a área do portal onde as informações já estão disponíveis ou para sua respectiva Página de Transparência.</p>\r\n<p>Se o órgão/entidade ainda não divulgar tais informações em seu portal eletrônico, ele poderá disponibilizar link para as consultas do Portal da Transparência que apresentam os respectivos dados/informações ou para o Sistema de Gestão de Convênios e Contratos de Repasse do Governo Federal (SICONV). Os links a serem indicados são:</p>\r\n<p><strong>Para o Portal da Transparência do Governo Federal</strong></p>\r\n<ul>\r\n<li><a title=\"\" href=\"http://www.portaldatransparencia.gov.br/convenios/\" target=\"_self\">Seção Convênios</a></li>\r\n<li><a title=\"\" href=\"http://www.portaldatransparencia.gov.br/PortalTransparenciaPrincipal2.asp\" target=\"_self\">Seção Despesas - Transferências de Recursos</a></li>\r\n</ul>\r\n<p> </p>\r\n<p><strong>Para o Portal de Convênios (SICONV)</strong><br />O link indicado é a opção de consulta <a class=\"external-link\" title=\"\" href=\"https://www.convenios.gov.br/portal/acessoLivre.html\" target=\"_self\">Lista convênios por Órgão</a></p>\r\n<p> </p>\r\n<p><strong>Guias</strong></p>\r\n<p>Para mais informações sobre a seção de Acesso à Informação, confira os guias elaborados pela Controladoria-Geral da União.</p>\r\n<p><a class=\"external-link\" title=\"\" href=\"http://www.acessoainformacao.gov.br/acessoainformacaogov/espaco-gestor/arquivos/Guia_SecaoSitios.pdf\" target=\"_self\">Guia para criação da seção de acesso à informação nos portais eletrônicos dos órgãos e entidades federais</a> (arquivo pdf)</p>\r\n<p><a class=\"external-link\" title=\"\" href=\"http://www.cgu.gov.br/Publicacoes/BrasilTransparente/Guia_TransparenciaAtiva_EstadosMunicipios.pdf\" target=\"_self\">Guia para criação da Seção de Acesso à Informação nos portais eletrônicos dos Órgãos e Entidades Estaduais e Municipais</a> (arquivo pdf)</p>\r\n<p><a class=\"external-link\" title=\"\" href=\"http://www.acessoainformacao.gov.br/acessoainformacaogov/espaco-gestor/arquivos/Guia_InformacoesClassificadas.pdf\" target=\"_self\">Publicação do rol de informações classificadas e desclassificadas e de relatórios estatísticos sobre a Lei de Acesso à Informação</a> (arquivo pdf)</p>', 1, 40, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 4, 5, 'Internet, Governo Federal', '', 1, 15, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', '');
 INSERT INTO `idg2019_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, `fulltext`, `state`, `catid`, `created`, `created_by`, `created_by_alias`, `modified`, `modified_by`, `checked_out`, `checked_out_time`, `publish_up`, `publish_down`, `images`, `urls`, `attribs`, `version`, `ordering`, `metakey`, `metadesc`, `access`, `hits`, `metadata`, `featured`, `language`, `xreference`, `note`) VALUES
 (11, 55, 'Despesas', 'despesas', '<p>Nesta seção são divulgadas informações sobre a execução orçamentária e financeira detalhada do (a) [nome do Órgão ou entidade]</p>\r\n', '\r\n<blockquote><a class=\"internal-link\" title=\"\" href=\"http://tv1-lnx-04.grupotv1.com/portalmodelo/sobre/wireframes/wireframe_pagina_despesas.jpg\" target=\"_self\">Acesse o wireframe com o exemplo de uma página de Despesas</a></blockquote>\r\n<blockquote>Acesse uma página de Despesas já publicada (em breve)</blockquote>\r\n<blockquote><a class=\"internal-link\" title=\"\" href=\"http://tv1-lnx-04.grupotv1.com/portalmodelo/sobre/wireframes/como-montar-sua-pagina.zip\" target=\"_self\">Saiba como montar suas páginas. Baixe o wireframe</a></blockquote>\r\n<p>São consideradas despesas quaisquer gastos com aquisição e contratação de obras e compras governamentais. A execução financeira é a utilização dos recursos financeiros visando atender à realização dos programas, ações e projetos e/ou subatividades atribuídos às unidades orçamentárias.</p>\r\n<p>Deverão ser divulgados os seguintes dados e informações em relação à execução orçamentária e financeira dos órgãos/entidades:</p>\r\n<ul>\r\n<li>I - Quadro de Detalhamento de Programas, por unidade orçamentária do órgão/entidade, contendo:</li>\r\n<li>a) código e especificação dos programas orçamentários;</li>\r\n<li>b) orçamento atualizado, levando em consideração os recursos consignados por programa na Lei Orçamentária Anual e em seus créditos adicionais;</li>\r\n<li>c) valor liquidado no ano considerado, para exercícios encerrados, e valor liquidado até o mês considerado, para o exercício corrente;</li>\r\n<li>d) valor pago no ano considerado, para exercícios encerrados, e valor pago até o mês considerado, para o exercício corrente;</li>\r\n<li>e) percentual dos recursos liquidados comparados aos autorizados;</li>\r\n<li class=\"last-item\">f) percentual dos recursos pagos comparados aos autorizados.</li>\r\n</ul>\r\n<ul>\r\n<li>II - Quadro de Execução de Despesas, por unidade orçamentária dos órgãos e entidades, contendo:</li>\r\n<li>a) descrição da natureza das despesas;</li>\r\n<li>b) valor liquidado no ano considerado, para exercícios encerrados e valor liquidado até o mês considerado, para o exercício corrente;</li>\r\n<li class=\"last-item\">c) valor pago no ano considerado, para exercícios encerrados e valor pago até o mês considerado, para o exercício corrente.</li>\r\n</ul>\r\n<p>O órgão/entidade deverá detalhar suas despesas com diárias e passagens pagas a servidores públicos em viagens a trabalho ou a colaboradores eventuais em viagens no interesse da Administração, no seguinte nível de detalhe para cada trecho da viagem:</p>\r\n<ul>\r\n<li>I - órgão superior;</li>\r\n<li>II - órgão subordinado ou entidade vinculada;</li>\r\n<li>III - unidade gestora;</li>\r\n<li>IV - nome do servidor;</li>\r\n<li>V - cargo;</li>\r\n<li>VI - origem de todos os trechos da viagem;</li>\r\n<li>VII - destino de todos os trechos da viagem;</li>\r\n<li>VIII - período da viagem;</li>\r\n<li>IX - motivo da viagem;</li>\r\n<li>X - meio de transporte;</li>\r\n<li>XI - categoria da passagem;</li>\r\n<li>XII - valor da passagem;</li>\r\n<li>XIII - número de diárias;</li>\r\n<li>XIV - valor total das diárias;</li>\r\n<li class=\"last-item\">XV - valor total da viagem.</li>\r\n</ul>\r\n<p>O órgão/entidade que divulga o referido conjunto de informações em seu portal eletrônico ou possui Página de Transparência atualizada poderá disponibilizar link remetendo para a área do portal onde as informações já estão disponíveis ou para sua respectiva Página de Transparência.</p>\r\n<p>O órgão/entidade que não disponibiliza dados de despesa em seu portal eletrônico e não possui Página de Transparência poderá disponibilizar o link do <a class=\"external-link\" title=\"\" href=\"http://www.portaltransparencia.gov.br/despesasdiarias/\" target=\"_self\">Portal da Transparência</a> para cumprir este item, exceto detalhamento de diárias e passagens. O Portal da Transparência do Governo Federal disponibiliza informações de execução orçamentária e financeira dos órgãos/entidades da Administração Federal. As informações são extraídas do Sistema Integrado de Administração Financeira do Governo Federal (SIAFI), portanto, são publicados no Portal da Transparência apenas os dados dos órgãos/entidades que utilizam o SIAFI. Nesses casos, o órgão/entidade poderá disponibilizar link de acesso para o Portal da Transparência. Os órgãos/entidades que não utilizam o SIAFI e cujas informações, portanto, não se encontram no Portal da Transparência, deverão divulgar por meio próprio suas informações de execução orçamentária e financeira.</p>\r\n<p><strong>Guias</strong></p>\r\n<p>Para mais informações sobre a seção de Acesso à Informação, confira os guias elaborados pela Controladoria-Geral da União.</p>\r\n<ul>\r\n<li><a class=\"external-link\" title=\"\" href=\"http://www.acessoainformacao.gov.br/acessoainformacaogov/espaco-gestor/arquivos/Guia_SecaoSitios.pdf\" target=\"_self\">Guia para criação da seção de acesso à informação nos portais eletrônicos dos órgãos e entidades federais</a> (arquivo pdf, tamanho: 1,14 MB)</li>\r\n<li><a class=\"external-link\" title=\"\" href=\"http://www.cgu.gov.br/Publicacoes/BrasilTransparente/Guia_TransparenciaAtiva_EstadosMunicipios.pdf\" target=\"_self\">Guia para criação da Seção de Acesso à Informação nos portais eletrônicos dos Órgãos e Entidades Estaduais e Municipais</a> (arquivo pdf, tamanho:1,27 MB)</li>\r\n<li class=\"last-item\"><a class=\"external-link\" title=\"\" href=\"http://www.acessoainformacao.gov.br/acessoainformacaogov/espaco-gestor/arquivos/Guia_InformacoesClassificadas.pdf\" target=\"_self\">Publicação do rol de informações classificadas e desclassificadas e de relatórios estatísticos sobre a Lei de Acesso à Informação</a> (arquivo pdf, tamanho: 682 KB)</li>\r\n</ul>', 1, 40, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 4, 4, '', '', 1, 10, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
-(12, 56, 'Licitações e contratos', 'licitacoes-e-contratos', '<p>Nesta seção são divulgadas informações sobre a execução orçamentária e financeira detalhada do (a) [nome do Órgão ou entidade]</p>\r\n', '\r\n<blockquote><a class=\"internal-link\" title=\"\" href=\"http://tv1-lnx-04.grupotv1.com/portalmodelo/sobre/wireframes/wireframe_pagina_despesas.jpg\" target=\"_self\">Acesse o wireframe com o exemplo de uma página de Despesas</a></blockquote>\r\n<blockquote>Acesse uma página de Despesas já publicada (em breve)</blockquote>\r\n<blockquote><a class=\"internal-link\" title=\"\" href=\"http://tv1-lnx-04.grupotv1.com/portalmodelo/sobre/wireframes/como-montar-sua-pagina.zip\" target=\"_self\">Saiba como montar suas páginas. Baixe o wireframe</a></blockquote>\r\n<p>São consideradas despesas quaisquer gastos com aquisição e contratação de obras e compras governamentais. A execução financeira é a utilização dos recursos financeiros visando atender à realização dos programas, ações e projetos e/ou subatividades atribuídos às unidades orçamentárias.</p>\r\n<p>Deverão ser divulgados os seguintes dados e informações em relação à execução orçamentária e financeira dos órgãos/entidades:</p>\r\n<ul>\r\n<li>I - Quadro de Detalhamento de Programas, por unidade orçamentária do órgão/entidade, contendo:</li>\r\n<li>a) código e especificação dos programas orçamentários;</li>\r\n<li>b) orçamento atualizado, levando em consideração os recursos consignados por programa na Lei Orçamentária Anual e em seus créditos adicionais;</li>\r\n<li>c) valor liquidado no ano considerado, para exercícios encerrados, e valor liquidado até o mês considerado, para o exercício corrente;</li>\r\n<li>d) valor pago no ano considerado, para exercícios encerrados, e valor pago até o mês considerado, para o exercício corrente;</li>\r\n<li>e) percentual dos recursos liquidados comparados aos autorizados;</li>\r\n<li class=\"last-item\">f) percentual dos recursos pagos comparados aos autorizados.</li>\r\n</ul>\r\n<ul>\r\n<li>II - Quadro de Execução de Despesas, por unidade orçamentária dos órgãos e entidades, contendo:</li>\r\n<li>a) descrição da natureza das despesas;</li>\r\n<li>b) valor liquidado no ano considerado, para exercícios encerrados e valor liquidado até o mês considerado, para o exercício corrente;</li>\r\n<li class=\"last-item\">c) valor pago no ano considerado, para exercícios encerrados e valor pago até o mês considerado, para o exercício corrente.</li>\r\n</ul>\r\n<p>O órgão/entidade deverá detalhar suas despesas com diárias e passagens pagas a servidores públicos em viagens a trabalho ou a colaboradores eventuais em viagens no interesse da Administração, no seguinte nível de detalhe para cada trecho da viagem:</p>\r\n<ul>\r\n<li>I - órgão superior;</li>\r\n<li>II - órgão subordinado ou entidade vinculada;</li>\r\n<li>III - unidade gestora;</li>\r\n<li>IV - nome do servidor;</li>\r\n<li>V - cargo;</li>\r\n<li>VI - origem de todos os trechos da viagem;</li>\r\n<li>VII - destino de todos os trechos da viagem;</li>\r\n<li>VIII - período da viagem;</li>\r\n<li>IX - motivo da viagem;</li>\r\n<li>X - meio de transporte;</li>\r\n<li>XI - categoria da passagem;</li>\r\n<li>XII - valor da passagem;</li>\r\n<li>XIII - número de diárias;</li>\r\n<li>XIV - valor total das diárias;</li>\r\n<li class=\"last-item\">XV - valor total da viagem.</li>\r\n</ul>\r\n<p>O órgão/entidade que divulga o referido conjunto de informações em seu portal eletrônico ou possui Página de Transparência atualizada poderá disponibilizar link remetendo para a área do portal onde as informações já estão disponíveis ou para sua respectiva Página de Transparência.</p>\r\n<p>O órgão/entidade que não disponibiliza dados de despesa em seu portal eletrônico e não possui Página de Transparência poderá disponibilizar o link do <a class=\"external-link\" title=\"\" href=\"http://www.portaltransparencia.gov.br/despesasdiarias/\" target=\"_self\">Portal da Transparência</a> para cumprir este item, exceto detalhamento de diárias e passagens. O Portal da Transparência do Governo Federal disponibiliza informações de execução orçamentária e financeira dos órgãos/entidades da Administração Federal. As informações são extraídas do Sistema Integrado de Administração Financeira do Governo Federal (SIAFI), portanto, são publicados no Portal da Transparência apenas os dados dos órgãos/entidades que utilizam o SIAFI. Nesses casos, o órgão/entidade poderá disponibilizar link de acesso para o Portal da Transparência. Os órgãos/entidades que não utilizam o SIAFI e cujas informações, portanto, não se encontram no Portal da Transparência, deverão divulgar por meio próprio suas informações de execução orçamentária e financeira.</p>\r\n<p><strong>Guias</strong></p>\r\n<p>Para mais informações sobre a seção de Acesso à Informação, confira os guias elaborados pela Controladoria-Geral da União.</p>\r\n<ul>\r\n<li><a class=\"external-link\" title=\"\" href=\"http://www.acessoainformacao.gov.br/acessoainformacaogov/espaco-gestor/arquivos/Guia_SecaoSitios.pdf\" target=\"_self\">Guia para criação da seção de acesso à informação nos portais eletrônicos dos órgãos e entidades federais</a> (arquivo pdf, tamanho: 1,14 MB)</li>\r\n<li><a class=\"external-link\" title=\"\" href=\"http://www.cgu.gov.br/Publicacoes/BrasilTransparente/Guia_TransparenciaAtiva_EstadosMunicipios.pdf\" target=\"_self\">Guia para criação da Seção de Acesso à Informação nos portais eletrônicos dos Órgãos e Entidades Estaduais e Municipais</a> (arquivo pdf, tamanho:1,27 MB)</li>\r\n<li class=\"last-item\"><a class=\"external-link\" title=\"\" href=\"http://www.acessoainformacao.gov.br/acessoainformacaogov/espaco-gestor/arquivos/Guia_InformacoesClassificadas.pdf\" target=\"_self\">Publicação do rol de informações classificadas e desclassificadas e de relatórios estatísticos sobre a Lei de Acesso à Informação</a> (arquivo pdf, tamanho: 682 KB)</li>\r\n</ul>', 1, 40, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 3, 3, '', '', 1, 13, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
+(12, 56, 'Licitações e contratos', 'licitacoes-e-contratos', '<p>Nesta seção são divulgadas informações sobre a execução orçamentária e financeira detalhada do (a) [nome do Órgão ou entidade]</p>\r\n', '\r\n<blockquote><a class=\"internal-link\" title=\"\" href=\"http://tv1-lnx-04.grupotv1.com/portalmodelo/sobre/wireframes/wireframe_pagina_despesas.jpg\" target=\"_self\">Acesse o wireframe com o exemplo de uma página de Despesas</a></blockquote>\r\n<blockquote>Acesse uma página de Despesas já publicada (em breve)</blockquote>\r\n<blockquote><a class=\"internal-link\" title=\"\" href=\"http://tv1-lnx-04.grupotv1.com/portalmodelo/sobre/wireframes/como-montar-sua-pagina.zip\" target=\"_self\">Saiba como montar suas páginas. Baixe o wireframe</a></blockquote>\r\n<p>São consideradas despesas quaisquer gastos com aquisição e contratação de obras e compras governamentais. A execução financeira é a utilização dos recursos financeiros visando atender à realização dos programas, ações e projetos e/ou subatividades atribuídos às unidades orçamentárias.</p>\r\n<p>Deverão ser divulgados os seguintes dados e informações em relação à execução orçamentária e financeira dos órgãos/entidades:</p>\r\n<ul>\r\n<li>I - Quadro de Detalhamento de Programas, por unidade orçamentária do órgão/entidade, contendo:</li>\r\n<li>a) código e especificação dos programas orçamentários;</li>\r\n<li>b) orçamento atualizado, levando em consideração os recursos consignados por programa na Lei Orçamentária Anual e em seus créditos adicionais;</li>\r\n<li>c) valor liquidado no ano considerado, para exercícios encerrados, e valor liquidado até o mês considerado, para o exercício corrente;</li>\r\n<li>d) valor pago no ano considerado, para exercícios encerrados, e valor pago até o mês considerado, para o exercício corrente;</li>\r\n<li>e) percentual dos recursos liquidados comparados aos autorizados;</li>\r\n<li class=\"last-item\">f) percentual dos recursos pagos comparados aos autorizados.</li>\r\n</ul>\r\n<ul>\r\n<li>II - Quadro de Execução de Despesas, por unidade orçamentária dos órgãos e entidades, contendo:</li>\r\n<li>a) descrição da natureza das despesas;</li>\r\n<li>b) valor liquidado no ano considerado, para exercícios encerrados e valor liquidado até o mês considerado, para o exercício corrente;</li>\r\n<li class=\"last-item\">c) valor pago no ano considerado, para exercícios encerrados e valor pago até o mês considerado, para o exercício corrente.</li>\r\n</ul>\r\n<p>O órgão/entidade deverá detalhar suas despesas com diárias e passagens pagas a servidores públicos em viagens a trabalho ou a colaboradores eventuais em viagens no interesse da Administração, no seguinte nível de detalhe para cada trecho da viagem:</p>\r\n<ul>\r\n<li>I - órgão superior;</li>\r\n<li>II - órgão subordinado ou entidade vinculada;</li>\r\n<li>III - unidade gestora;</li>\r\n<li>IV - nome do servidor;</li>\r\n<li>V - cargo;</li>\r\n<li>VI - origem de todos os trechos da viagem;</li>\r\n<li>VII - destino de todos os trechos da viagem;</li>\r\n<li>VIII - período da viagem;</li>\r\n<li>IX - motivo da viagem;</li>\r\n<li>X - meio de transporte;</li>\r\n<li>XI - categoria da passagem;</li>\r\n<li>XII - valor da passagem;</li>\r\n<li>XIII - número de diárias;</li>\r\n<li>XIV - valor total das diárias;</li>\r\n<li class=\"last-item\">XV - valor total da viagem.</li>\r\n</ul>\r\n<p>O órgão/entidade que divulga o referido conjunto de informações em seu portal eletrônico ou possui Página de Transparência atualizada poderá disponibilizar link remetendo para a área do portal onde as informações já estão disponíveis ou para sua respectiva Página de Transparência.</p>\r\n<p>O órgão/entidade que não disponibiliza dados de despesa em seu portal eletrônico e não possui Página de Transparência poderá disponibilizar o link do <a class=\"external-link\" title=\"\" href=\"http://www.portaltransparencia.gov.br/despesasdiarias/\" target=\"_self\">Portal da Transparência</a> para cumprir este item, exceto detalhamento de diárias e passagens. O Portal da Transparência do Governo Federal disponibiliza informações de execução orçamentária e financeira dos órgãos/entidades da Administração Federal. As informações são extraídas do Sistema Integrado de Administração Financeira do Governo Federal (SIAFI), portanto, são publicados no Portal da Transparência apenas os dados dos órgãos/entidades que utilizam o SIAFI. Nesses casos, o órgão/entidade poderá disponibilizar link de acesso para o Portal da Transparência. Os órgãos/entidades que não utilizam o SIAFI e cujas informações, portanto, não se encontram no Portal da Transparência, deverão divulgar por meio próprio suas informações de execução orçamentária e financeira.</p>\r\n<p><strong>Guias</strong></p>\r\n<p>Para mais informações sobre a seção de Acesso à Informação, confira os guias elaborados pela Controladoria-Geral da União.</p>\r\n<ul>\r\n<li><a class=\"external-link\" title=\"\" href=\"http://www.acessoainformacao.gov.br/acessoainformacaogov/espaco-gestor/arquivos/Guia_SecaoSitios.pdf\" target=\"_self\">Guia para criação da seção de acesso à informação nos portais eletrônicos dos órgãos e entidades federais</a> (arquivo pdf, tamanho: 1,14 MB)</li>\r\n<li><a class=\"external-link\" title=\"\" href=\"http://www.cgu.gov.br/Publicacoes/BrasilTransparente/Guia_TransparenciaAtiva_EstadosMunicipios.pdf\" target=\"_self\">Guia para criação da Seção de Acesso à Informação nos portais eletrônicos dos Órgãos e Entidades Estaduais e Municipais</a> (arquivo pdf, tamanho:1,27 MB)</li>\r\n<li class=\"last-item\"><a class=\"external-link\" title=\"\" href=\"http://www.acessoainformacao.gov.br/acessoainformacaogov/espaco-gestor/arquivos/Guia_InformacoesClassificadas.pdf\" target=\"_self\">Publicação do rol de informações classificadas e desclassificadas e de relatórios estatísticos sobre a Lei de Acesso à Informação</a> (arquivo pdf, tamanho: 682 KB)</li>\r\n</ul>', 1, 40, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 3, 3, '', '', 1, 15, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
 (13, 57, 'Servidores', 'servidores', '<p>Nesta seção são divulgadas informações sobre concursos públicos de provimento de cargos e relação dos servidores públicos lotados ou em exercício no (a) [nome do órgão ou entidade]</p>\r\n', '\r\n<blockquote><a class=\"internal-link\" title=\"\" href=\"http://tv1-lnx-04.grupotv1.com/portalmodelo/sobre/wireframes/wireframe_paginas_servidores.jpg\" target=\"_self\">Acesse o wireframe com o exemplo de uma página de Servidores</a></blockquote>\r\n<blockquote>Acesse uma página de Servidores já publicada (em breve)</blockquote>\r\n<blockquote><a class=\"internal-link\" title=\"\" href=\"http://tv1-lnx-04.grupotv1.com/portalmodelo/sobre/wireframes/como-montar-sua-pagina.zip\" target=\"_self\">Saiba como montar suas páginas. Baixe o wireframe</a></blockquote>\r\n<p>Nesta seção, deverão ser publicadas as íntegras dos editais de concursos públicos para provimento de cargos realizados pelo órgão/entidade e a relação dos agentes públicos, efetivos ou não, lotados ou em exercício no órgão/entidade, apresentando as seguintes informações mínimas:</p>\r\n<ul>\r\n<li>I - número de identificação funcional;</li>\r\n<li>II - nome completo;</li>\r\n<li>III - CPF (ocultando os três primeiros dígitos e os dois dígitos verificadores do CPF);</li>\r\n<li>IV - cargo e função;</li>\r\n<li>V - lotação;</li>\r\n<li>VI - Regime Jurídico;</li>\r\n<li>VII - jornada de trabalho;</li>\r\n<li>VIII - ato de nomeação ou contratação;</li>\r\n<li>IX - respectiva data de publicação do ato;</li>\r\n<li>X - cargo efetivo ou permanente ou emprego permanente;</li>\r\n<li class=\"last-item\">XI - órgão ou entidade de origem, no caso de servidor requisitado ou cedido.</li>\r\n</ul>\r\n<p>Membros de conselhos de administração ou fiscal da administração indireta também devem figurar nesta relação, assim como militares das Forças Armadas. Agentes públicos cujo exercício profissional é protegido por sigilo, em atendimento à legislação vigente, não devem figurar nesta relação.</p>\r\n<p>O órgão/entidade que utiliza o Sistema Integrado de Administração de Recursos Humanos (SIAPE) poderá, para cumprir este item, disponibilizar link para consulta “Servidores” do Portal da Transparência, disponível no <a title=\"\" href=\"http://www.portaldatransparencia.gov.br/servidores\" target=\"_self\">Portal da Transparência</a>.<br /><br />A entidade da Administração Indireta, incluindo agências reguladoras e conselhos de administração e fiscal, cujos registros de servidores não estão no SIAPE, deverá disponibilizar a relação de servidores e agentes públicos, ou, caso já tenha a informação em seu portal eletrônico, remeter para área onde estão disponíveis essas informações.</p>\r\n<p><strong>Guias</strong></p>\r\n<p>Para mais informações sobre a seção de Acesso à Informação, confira os guias elaborados pela Controladoria-Geral da União.</p>\r\n<ul>\r\n<li><a title=\"\" href=\"http://www.acessoainformacao.gov.br/acessoainformacaogov/espaco-gestor/arquivos/Guia_SecaoSitios.pdf\" target=\"_self\">Guia para criação da seção de acesso à informação nos portais eletrônicos dos órgãos e entidades federais</a> (arquivo pdf, tamanho: 1,14 MB)</li>\r\n<li><a title=\"\" href=\"http://www.cgu.gov.br/Publicacoes/BrasilTransparente/Guia_TransparenciaAtiva_EstadosMunicipios.pdf\" target=\"_self\">Guia para criação da Seção de Acesso à Informação nos portais eletrônicos dos Órgãos e Entidades Estaduais e Municipais</a> (arquivo pdf, tamanho:1,27 MB)</li>\r\n<li class=\"last-item\"><a title=\"\" href=\"http://www.acessoainformacao.gov.br/acessoainformacaogov/espaco-gestor/arquivos/Guia_InformacoesClassificadas.pdf\" target=\"_self\">Publicação do rol de informações classificadas e desclassificadas e de relatórios estatísticos sobre a Lei de Acesso à Informação</a> (arquivo pdf, tamanho: 682 KB)</li>\r\n</ul>', 1, 40, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 4, 2, '', '', 1, 3, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
 (14, 58, 'Informações classificadas', 'informacoes-classificadas', '<p>Nesta seção são divulgados o rol das informações classificadas em cada grau de sigilo e o rol das informações desclassificadas nos últimos doze meses no âmbito do [nome do órgão ou entidade].</p>\r\n', '\r\n<blockquote><a title=\"\" href=\"images/conteudo/wireframe_pagina_informacoes-classificadas.jpg\" target=\"_blank\">Acesse o wireframe com o exemplo de uma página de Informações classificadas</a></blockquote>\r\n<blockquote>Acesse uma página de Informações classificadas já publicada (em breve)</blockquote>\r\n<blockquote><a title=\"\" href=\"images/conteudo/como-montar-sua-pagina.zip\" target=\"_self\">Saiba como montar suas páginas. Baixe o wireframe</a></blockquote>\r\n<p>O novo item de navegação \"Informações classificadas\" deverá trazer um texto explicativo sobre o seu objetivo de atender aos incisos I e II, do Art. 45, do <a title=\"\" href=\"http://www.planalto.gov.br/ccivil_03/_ato2011-2014/2012/Decreto/D7724.htm\" target=\"_self\">Decreto nº 7.724/2012</a>.</p>\r\n<p>A página deverá conter duas áreas específicas para a apresentação das listagens requeridas, com as seguintes nomenclaturas:</p>\r\n<ul>\r\n<li>Rol de informações classificadas</li>\r\n<li>Rol de informações desclassificadas</li>\r\n</ul>\r\n<p><strong>Conteúdo da área \"rol de informações desclassificadas\"</strong></p>\r\n<p>Essa área deverá conter os Números Únicos de Protocolo (NUP) de todos os documentos desclassificados desde a entrada em vigor da Lei de Acesso à Informação.</p>\r\n<p><strong>Conteúdo da área \"rol de informações classificadas\"</strong></p>\r\n<p>O conteúdo dessa área deverá apresentar as seguintes informações:</p>\r\n<ul>\r\n<li>Código de Indexação de Documento que contém Informação Classificada – CIDIC;</li>\r\n<li>Categoria na qual se enquadra a informação;</li>\r\n<li>Indicação do dispositivo legal que fundamenta a classificação;</li>\r\n<li>Data da produção da informação;</li>\r\n<li>Data da classificação;</li>\r\n<li>Prazo da classificação.</li>\r\n</ul>\r\n<p>Somente devem ser incluídas no \"Rol de informações classificadas\" as informações classificadas nos termos do §1º do art. 24 da <a title=\"\" href=\"http://www.planalto.gov.br/ccivil_03/_ato2011-2014/2011/lei/l12527.htm\" target=\"_self\">Lei nº 12.527/2011</a>, ou seja, como reservadas, secretas ou ultrassecretas. Por isso, informações cujo sigilo seja devido a outras legislações (como fiscal e tributária), documentos preparatórios e informações pessoais não estão sujeitos aos termos de divulgação apresentados neste guia.</p>\r\n<p><strong>a) Formato de apresentação do CIDIC</strong></p>\r\n<p>O formato de apresentação do Código de Indexação de Documento que contém Informação Classificada<br />(CIDIC) obedece às seguintes regras, de acordo com os artigos 50 a 54 do <a title=\"\" href=\"http://www.planalto.gov.br/ccivil_03/_ato2011-2014/2012/Decreto/D7845.htm\" target=\"_self\">Decreto nº 7.845/2012</a>:</p>\r\n<ol>\r\n<li>A 1ª parte do CIDIC corresponde ao Número Único de Protocolo – NUP do documento que contém a informação. Este é um código exclusivamente numérico;</li>\r\n<li>A 2ª parte do CIDIC, separada da 1ª parte por um \".\", iniciará sempre por um caractere alfabético (\"U\", \"S\" ou \"R\"), de acordo com o grau de sigilo. Além disso, deve prever até o máximo de 39 posições, com caracteres alfanuméricos e separadores;</li>\r\n<li>Os separadores utilizados serão: \".\" e \"/\" (este último, para as datas);</li>\r\n<li>Para as informações classificadas no grau reservado e secreto, a 2ª parte do CIDIC terá sempre 28 posições com caracteres alfanuméricos e separadores;</li>\r\n<li>Para as informações classificadas no grau ultrassecreto, a 2ª parte do CIDIC terá 28 posições com caracteres alfanuméricos e separadores, enquanto não ocorrer prorrogação do prazo do sigilo;</li>\r\n<li>Quando ocorrer a prorrogação do prazo de sigilo da informação classificada no grau ultrassecreto, a nova data deverá constar no final da 2ª parte do CIDIC, totalizando 39 posições com caracteres alfanuméricos e separadores;</li>\r\n</ol>\r\n<p><strong>b) Categoria na qual se enquadra a informação</strong></p>\r\n<p>A divulgação da informação \"categoria na qual se enquadra a informação\" deve obedecer os padrões estabelecidos no Vocabulário Controlado de Governo Eletrônico – VCGE (Anexo II do Decreto 7.845/2012). Trata-se de um padrão criado para facilitar e uniformizar a classificação dos tipos de informações tratadas em todo o Governo Federal.<br /><br />Para consultar o VCGE, acesse: <a href=\"http://vocab.e.gov.br/2011/03/vcge#esquema\">http://vocab.e.gov.br/2011/03/vcge#esquema</a> Deve-se utilizar apenas o primeiro nível do Vocabulário.</p>\r\n<p><strong>c) Fundamentação legal da classificação</strong></p>\r\n<p>Para indicar a fundamentação legal da classificação, deve-se fazer referência ao inciso do artigo 23 da <a title=\"\" href=\"http://www.planalto.gov.br/ccivil_03/_ato2011-2014/2011/lei/l12527.htm\" target=\"_self\">Lei nº 12.527/2011</a> utilizado como justificativa para a classificação da informação.</p>\r\n<p><strong>d) Formato para publicação das listagens</strong></p>\r\n<p>A disponibilização das listagens deve observar o disposto no artigo 8º, parágrafo 3, inciso II, da <a title=\"\" href=\"http://www.planalto.gov.br/ccivil_03/_Ato2011-2014/2011/Lei/L12527.htm\" target=\"_self\">Lei de Acesso à Informação</a>, ou seja, as informações devem ser publicadas em formatos \"abertos e não proprietários, tais como planilhas e texto, de modo a facilitar a análise das informações\". Também devem ser observados os padrões estabelecidos pela e-PING - Padrões de Interoperabilidade de Governo Eletrônico. O formato (como, por exemplo, html, csv, ods, etc.) a ser utilizado pode ser definido pelo próprio órgão ou entidade, considerando as normas e procedimentos internos de segurança da informação.</p>\r\n<p><strong>Guias</strong></p>\r\n<p>Para mais informações sobre a seção de Acesso à Informação, confira os guias elaborados pela Controladoria-Geral da União.</p>\r\n<p><a title=\"\" href=\"http://www.acessoainformacao.gov.br/acessoainformacaogov/espaco-gestor/arquivos/Guia_SecaoSitios.pdf\" target=\"_self\">Guia para criação da seção de acesso à informação nos portais eletrônicos dos órgãos e entidades federais</a> (arquivo pdf)</p>\r\n<p><a title=\"\" href=\"http://www.cgu.gov.br/Publicacoes/BrasilTransparente/Guia_TransparenciaAtiva_EstadosMunicipios.pdf\" target=\"_self\">Guia para criação da Seção de Acesso à Informação nos portais eletrônicos dos Órgãos e Entidades Estaduais e Municipais</a> (arquivo pdf)</p>\r\n<p><a title=\"\" href=\"http://www.acessoainformacao.gov.br/acessoainformacaogov/espaco-gestor/arquivos/Guia_InformacoesClassificadas.pdf\" target=\"_self\">Publicação do rol de informações classificadas e desclassificadas e de relatórios estatísticos sobre a Lei de Acesso à Informação</a> (arquivo pdf)</p>', 1, 41, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 9, 1, '', '', 1, 12, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
 (15, 59, 'Serviço de Informação ao Cidadão (SIC)', 'servico-de-informacao-ao-cidadao-sic', '<p>Nesta seção são divulgadas as informações sobre o Sistema de Informações ao Cidadão (SIC), pertinentes ao seu funcionamento, localização e dados de contato no âmbito do (a) [nome do órgão ou entidade]</p>\r\n', '\r\n<blockquote><a class=\"internal-link\" title=\"\" href=\"http://tv1-lnx-04.grupotv1.com/portalmodelo/sobre/wireframes/wireframe_pagina_servicos-de-informacao-ao-cidadao.jpg\" target=\"_self\">Acesse o wireframe com o exemplo de uma página de Serviço de Informação ao Cidadão</a></blockquote>\r\n<blockquote>Acesse uma página de Serviço de Informação ao Cidadão já publicada (em breve)</blockquote>\r\n<blockquote><a class=\"internal-link\" title=\"\" href=\"http://tv1-lnx-04.grupotv1.com/portalmodelo/sobre/wireframes/como-montar-sua-pagina.zip\" target=\"_self\">Saiba como montar suas páginas. Baixe o wireframe</a></blockquote>\r\n<p>Nesse tópico o órgão/entidade disponibilizará as seguintes informações sobre o(s) Serviço(s) de Informação ao Cidadão (SICs), de que trata o artigo 9º da Lei de Acesso à Informação:</p>\r\n<p>I - localização;<br />II - horário de funcionamento;<br />III - nome dos servidores responsáveis pelo SIC;<br />IV - telefone e e-mails específicos para orientação e esclarecimentos de dúvidas, tais como sobre a protocolização de requerimentos de acesso à informação; a tramitação de solicitação de informação;<br />V - nome da autoridade do órgão responsável pelo monitoramento da implementação da Lei de Acesso à Informação no âmbito do órgão/entidade (autoridade prevista no artigo 40º da Lei 12.527/11).</p>\r\n<p>Também será disponibilizado neste item modelo de formulário de solicitação de informação para aqueles que queiram apresentam o pedido em meio físico (papel) junto ao SIC.</p>\r\n<p>Adicionalmente, o órgão ou entidade deverá disponibilizar eventuais informações sobre os procedimentos que os cidadãos deverão adotar para solicitar acesso à informação perante o respectivo órgão/entidade.</p>\r\n<p>Neste item, o órgão/entidade deverá disponibilizar link para o Sistema de Solicitação de Acesso à Informação do Poder Executivo Federal, a ser disponibilizado pela Controladoria-Geral da União (CGU), o qual permitirá que o requerente selecione o órgão ou entidade para o qual deseja endereçar pedido de acesso à informação. A CGU entrará em contato com todas as autoridades responsáveis pela implementação da Lei de Acesso à Informação dos órgãos/entidades a fim de indicar o exato link onde estará disponível a referida informação, bem como receber indicação do nome do servidor que deverá ser cadastrado para ter acesso ao sistema.</p>\r\n<p><strong>Guias</strong></p>\r\n<p>Para mais informações sobre a seção de Acesso à Informação, confira os guias elaborados pela Controladoria-Geral da União.</p>\r\n<p><a class=\"external-link\" title=\"\" href=\"http://www.acessoainformacao.gov.br/acessoainformacaogov/espaco-gestor/arquivos/Guia_SecaoSitios.pdf\" target=\"_self\">Guia para criação da seção de acesso à informação nos portais eletrônicos dos órgãos e entidades federais</a> (arquivo pdf)</p>\r\n<p><a class=\"external-link\" title=\"\" href=\"http://www.cgu.gov.br/Publicacoes/BrasilTransparente/Guia_TransparenciaAtiva_EstadosMunicipios.pdf\" target=\"_self\">Guia para criação da Seção de Acesso à Informação nos portais eletrônicos dos Órgãos e Entidades Estaduais e Municipais</a> (arquivo pdf)</p>\r\n<p><a class=\"external-link\" title=\"\" href=\"http://www.acessoainformacao.gov.br/acessoainformacaogov/espaco-gestor/arquivos/Guia_InformacoesClassificadas.pdf\" target=\"_self\">Publicação do rol de informações classificadas e desclassificadas e de relatórios estatísticos sobre a Lei de Acesso à Informação</a> (arquivo pdf)</p>', 1, 41, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 4, 0, '', '', 1, 9, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
@@ -1013,12 +1046,12 @@ INSERT INTO `idg2019_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, 
 (19, 72, 'Release 1: Título do release entre 35 e 90 caracteres', 'release-1-titulo-do-release-entre-35-e-90-caracteres', '<p>Subtítulo do texto 1. Se em uma linha, usar 90 caracteres. Se em duas linhas usar 190 caracteres</p>\r\n', '\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<blockquote>\r\n<p>Use o estilo \"Block Quote\", localizado nas opções do bloco da matéria, para criar um olho na sua matéria. Não há um limite de caracteres</p>\r\n</blockquote>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><object width=\"640\" height=\"480\" data=\"http://www.youtube-nocookie.com/v/Vj1MpR3iER4?hl=pt_BR&amp;version=3&amp;rel=0\" type=\"application/x-shockwave-flash\"><param name=\"allowFullScreen\" value=\"true\" /><param name=\"allowscriptaccess\" value=\"always\" /><param name=\"src\" value=\"http://www.youtube-nocookie.com/v/Vj1MpR3iER4?hl=pt_BR&amp;version=3&amp;rel=0\" /></object></p>', 1, 17, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/conteudo\\/thumb-imagem-conteudo.jpg\",\"float_intro\":\"right\",\"image_intro_alt\":\"Legenda da foto (arquivo .JPG) deve ter at\\u00e9 60 caracteres, preferencialmente\",\"image_intro_caption\":\"por Nome do Autor\",\"image_fulltext\":\"images\\/conteudo\\/thumb-imagem-conteudo.jpg\",\"float_fulltext\":\"left\",\"image_fulltext_alt\":\"Legenda da foto (arquivo .JPG) deve ter at\\u00e9 60 caracteres, preferencialmente\",\"image_fulltext_caption\":\"por Nome do Autor\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 4, 11, '', '', 1, 4, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', 'Chapéu da editoria', ''),
 (20, 73, 'Release 2: Título do release entre 35 e 90 caracteres', 'release-2-titulo-do-release-entre-35-e-90-caracteres', '<p>Subtítulo do texto 1. Se em uma linha, usar 90 caracteres. Se em duas linhas usar 190 caracteres</p>\r\n', '\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<blockquote>\r\n<p>Use o estilo \"Block Quote\", localizado nas opções do bloco da matéria, para criar um olho na sua matéria. Não há um limite de caracteres</p>\r\n</blockquote>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><object width=\"640\" height=\"480\" data=\"http://www.youtube-nocookie.com/v/Vj1MpR3iER4?hl=pt_BR&amp;version=3&amp;rel=0\" type=\"application/x-shockwave-flash\"><param name=\"allowFullScreen\" value=\"true\" /><param name=\"allowscriptaccess\" value=\"always\" /><param name=\"src\" value=\"http://www.youtube-nocookie.com/v/Vj1MpR3iER4?hl=pt_BR&amp;version=3&amp;rel=0\" /></object></p>', 1, 17, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/conteudo\\/thumb-imagem-conteudo.jpg\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":\"http:\\/\\/www.brasil.gov.br\",\"urlatext\":\"Brasil.gov.br\",\"targeta\":\"1\",\"urlb\":\"http:\\/\\/www.sdh.gov.br\",\"urlbtext\":\"Secretaria de Direitos Humanos\",\"targetb\":\"\",\"urlc\":\"http:\\/\\/www.cnv.gov.br\",\"urlctext\":\"\",\"targetc\":\"3\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 3, 10, 'Notícia, Texto de marcação, Portal Padrão', 'Sobreposição de descrição de artigo por meio da descrição em meta-dado.', 1, 4, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', 'Chapéu da editoria', ''),
 (21, 74, 'Release 3: Título do release entre 35 e 90 caracteres', 'release-3-titulo-do-release-entre-35-e-90-caracteres', '<p>Subtítulo do texto 1. Se em uma linha, usar 90 caracteres. Se em duas linhas usar 190 caracteres</p>\r\n', '\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<blockquote>\r\n<p>Use o estilo \"Block Quote\", localizado nas opções do bloco da matéria, para criar um olho na sua matéria. Não há um limite de caracteres</p>\r\n</blockquote>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><object width=\"640\" height=\"480\" data=\"http://www.youtube-nocookie.com/v/Vj1MpR3iER4?hl=pt_BR&amp;version=3&amp;rel=0\" type=\"application/x-shockwave-flash\"><param name=\"allowFullScreen\" value=\"true\" /><param name=\"allowscriptaccess\" value=\"always\" /><param name=\"src\" value=\"http://www.youtube-nocookie.com/v/Vj1MpR3iER4?hl=pt_BR&amp;version=3&amp;rel=0\" /></object></p>', 1, 17, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/conteudo\\/thumb-imagem-conteudo.jpg\",\"float_intro\":\"\",\"image_intro_alt\":\"Legenda da foto (arquivo .JPG) deve ter at\\u00e9 60 caracteres, preferencialmente\",\"image_intro_caption\":\"por Nome do Autor\",\"image_fulltext\":\"images\\/conteudo\\/imagem-conteudo.jpg\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"Legenda da foto (arquivo .JPG) deve ter at\\u00e9 60 caracteres, preferencialmente\",\"image_fulltext_caption\":\"por Nome do Autor\"}', '{\"urla\":\"http:\\/\\/www.brasil.gov.br\",\"urlatext\":\"Brasil.gov.br\",\"targeta\":\"1\",\"urlb\":\"http:\\/\\/www.sdh.gov.br\",\"urlbtext\":\"Secretaria de Direitos Humanos\",\"targetb\":\"\",\"urlc\":\"http:\\/\\/www.cnv.gov.br\",\"urlctext\":\"\",\"targetc\":\"3\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 2, 9, 'Notícia, Texto de marcação, Portal Padrão', '', 1, 2, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', 'Chapéu da editoria', ''),
-(22, 75, 'Texto 3 - Título da notícia entre 35 e 90 caracteres', 'texto-3-titulo-da-noticia-entre-35-e-90-caracteres', '<p>Subtítulo do texto 1. Se em uma linha, usar 90 caracteres. Se em duas linhas usar 190 caracteres</p>\r\n', '\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<blockquote>\r\n<p>Use o estilo \"Block Quote\", localizado nas opções do bloco da matéria, para criar um olho na sua matéria. Não há um limite de caracteres</p>\r\n</blockquote>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><object width=\"640\" height=\"480\" data=\"http://www.youtube-nocookie.com/v/Vj1MpR3iER4?hl=pt_BR&amp;version=3&amp;rel=0\" type=\"application/x-shockwave-flash\"><param name=\"allowFullScreen\" value=\"true\" /><param name=\"allowscriptaccess\" value=\"always\" /><param name=\"src\" value=\"http://www.youtube-nocookie.com/v/Vj1MpR3iER4?hl=pt_BR&amp;version=3&amp;rel=0\" /></object></p>', 1, 17, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 17, 8, '', '', 1, 12, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
+(22, 75, 'Texto 3 - Título da notícia entre 35 e 90 caracteres', 'texto-3-titulo-da-noticia-entre-35-e-90-caracteres', '<p>Subtítulo do texto 1. Se em uma linha, usar 90 caracteres. Se em duas linhas usar 190 caracteres</p>\r\n', '\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<blockquote>\r\n<p>Use o estilo \"Block Quote\", localizado nas opções do bloco da matéria, para criar um olho na sua matéria. Não há um limite de caracteres</p>\r\n</blockquote>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><object width=\"640\" height=\"480\" data=\"http://www.youtube-nocookie.com/v/Vj1MpR3iER4?hl=pt_BR&amp;version=3&amp;rel=0\" type=\"application/x-shockwave-flash\"><param name=\"allowFullScreen\" value=\"true\" /><param name=\"allowscriptaccess\" value=\"always\" /><param name=\"src\" value=\"http://www.youtube-nocookie.com/v/Vj1MpR3iER4?hl=pt_BR&amp;version=3&amp;rel=0\" /></object></p>', 1, 17, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 17, 8, '', '', 1, 13, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
 (23, 76, 'Texto 4 - Título da notícia entre 35 e 90 caracteres', 'texto-4-titulo-da-noticia-entre-35-e-90-caracteres', '<p>Subtítulo do texto 1. Se em uma linha, usar 90 caracteres. Se em duas linhas usar 190 caracteres</p>\r\n', '\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<blockquote>\r\n<p>Use o estilo \"Block Quote\", localizado nas opções do bloco da matéria, para criar um olho na sua matéria. Não há um limite de caracteres</p>\r\n</blockquote>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><object width=\"640\" height=\"480\" data=\"http://www.youtube-nocookie.com/v/Vj1MpR3iER4?hl=pt_BR&amp;version=3&amp;rel=0\" type=\"application/x-shockwave-flash\"><param name=\"allowFullScreen\" value=\"true\" /><param name=\"allowscriptaccess\" value=\"always\" /><param name=\"src\" value=\"http://www.youtube-nocookie.com/v/Vj1MpR3iER4?hl=pt_BR&amp;version=3&amp;rel=0\" /></object></p>', 1, 17, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 13, 7, '', '', 1, 8, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
 (24, 77, 'Texto 5 - Título da notícia entre 35 e 90 caracteres', 'texto-5-titulo-da-noticia-entre-35-e-90-caracteres', '<p>Subtítulo do texto 1. Se em uma linha, usar 90 caracteres. Se em duas linhas usar 190 caracteres</p>\r\n', '\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<blockquote>\r\n<p>Use o estilo \"Block Quote\", localizado nas opções do bloco da matéria, para criar um olho na sua matéria. Não há um limite de caracteres</p>\r\n</blockquote>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><object width=\"640\" height=\"480\" data=\"http://www.youtube-nocookie.com/v/Vj1MpR3iER4?hl=pt_BR&amp;version=3&amp;rel=0\" type=\"application/x-shockwave-flash\"><param name=\"allowFullScreen\" value=\"true\" /><param name=\"allowscriptaccess\" value=\"always\" /><param name=\"src\" value=\"http://www.youtube-nocookie.com/v/Vj1MpR3iER4?hl=pt_BR&amp;version=3&amp;rel=0\" /></object></p>', 1, 17, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 3, 6, '', '', 1, 6, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', '');
 INSERT INTO `idg2019_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, `fulltext`, `state`, `catid`, `created`, `created_by`, `created_by_alias`, `modified`, `modified_by`, `checked_out`, `checked_out_time`, `publish_up`, `publish_down`, `images`, `urls`, `attribs`, `version`, `ordering`, `metakey`, `metadesc`, `access`, `hits`, `metadata`, `featured`, `language`, `xreference`, `note`) VALUES
 (25, 78, 'Texto 2 - Título da notícia entre 35 e 90 caracteres', 'texto-2-titulo-da-noticia-entre-35-e-90-caracteres', '<p>Subtítulo do texto 1. Se em uma linha, usar 90 caracteres. Se em duas linhas usar 190 caracteres</p>\r\n', '\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<blockquote>\r\n<p>Use o estilo \"Block Quote\", localizado nas opções do bloco da matéria, para criar um olho na sua matéria. Não há um limite de caracteres</p>\r\n</blockquote>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><object width=\"640\" height=\"480\" data=\"http://www.youtube-nocookie.com/v/Vj1MpR3iER4?hl=pt_BR&amp;version=3&amp;rel=0\" type=\"application/x-shockwave-flash\"><param name=\"allowFullScreen\" value=\"true\" /><param name=\"allowscriptaccess\" value=\"always\" /><param name=\"src\" value=\"http://www.youtube-nocookie.com/v/Vj1MpR3iER4?hl=pt_BR&amp;version=3&amp;rel=0\" /></object></p>', 1, 17, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 5, 5, '', '', 1, 1, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
-(26, 79, 'Conheça o novo modelo de plataforma digital do governo federal', 'conheca-o-novo-modelo-de-plataforma-digital-do-governo-federal', '<p style=\"text-align: left;\">Estrutura reúne o que há de mais adequado em soluções digitais de acessibilidade e de divulgação de informações nos mais variados formatos; conheça todos os detalhes deste novo modelo</p>\r\n', '\r\n<p style=\"text-align: left;\">Seja bem-vindo!</p>\r\n<blockquote>\r\n<p style=\"text-align: left;\"><a href=\"#\">Acesse os manuais que irão auxiliar na montagem de sites dos órgãos do governo federal</a></p>\r\n</blockquote>\r\n<p style=\"text-align: left;\">Para otimizar a comunicação com o cidadão, foi criada a Identidade Digital de Governo. Esse projeto busca padronizar os portais dos órgãos públicos federais e alinhar as informações com foco no cidadão.</p>\r\n<p style=\"text-align: left;\">Os conteúdos, módulos e funcionalidades foram criados para facilitar o acesso aos serviços oferecidos pelo Governo Federal, assim como possibilitam, por meio de vídeos, infográficos, textos, aplicativos, vídeos, que as notícias sejam facilmente compreendidas.</p>\r\n<p style=\"text-align: left;\">A nova Identidade também garante uma navegação acessível, para pessoas com deficiência, e adota conceito de web responsiva, ou seja, a páginas se adaptam automaticamente e podem ser visualizadas tanto em um computador quanto em smartphones e tablets, garantindo uma visualização mais uniforme.</p>\r\n<p style=\"text-align: left;\">Navegue pelo portal e conheça todas as aplicações possíveis para os mais variados conteúdos, sejam vídeos, imagens, áudios e textos.</p>\r\n<p style=\"text-align: left;\">Bom trabalho!</p>', 1, 17, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"www.youtube.com\\/v\\/BGzfIhIUF68?version=3&hl=pt_BR&rel=0\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"0\",\"link_author\":\"\",\"show_create_date\":\"1\",\"show_modify_date\":\"1\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"Saiba mais\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 16, 4, 'Internet, comunicação', '', 1, 82, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', 'identidade digital de governo', ''),
+(26, 79, 'Conheça o novo modelo de plataforma digital do governo federal', 'conheca-o-novo-modelo-de-plataforma-digital-do-governo-federal', '<p style=\"text-align: left;\">Estrutura reúne o que há de mais adequado em soluções digitais de acessibilidade e de divulgação de informações nos mais variados formatos; conheça todos os detalhes deste novo modelo</p>\r\n', '\r\n<p style=\"text-align: left;\">Seja bem-vindo!</p>\r\n<blockquote>\r\n<p style=\"text-align: left;\"><a href=\"#\">Acesse os manuais que irão auxiliar na montagem de sites dos órgãos do governo federal</a></p>\r\n</blockquote>\r\n<p style=\"text-align: left;\">Para otimizar a comunicação com o cidadão, foi criada a Identidade Digital de Governo. Esse projeto busca padronizar os portais dos órgãos públicos federais e alinhar as informações com foco no cidadão.</p>\r\n<p style=\"text-align: left;\">Os conteúdos, módulos e funcionalidades foram criados para facilitar o acesso aos serviços oferecidos pelo Governo Federal, assim como possibilitam, por meio de vídeos, infográficos, textos, aplicativos, vídeos, que as notícias sejam facilmente compreendidas.</p>\r\n<p style=\"text-align: left;\">A nova Identidade também garante uma navegação acessível, para pessoas com deficiência, e adota conceito de web responsiva, ou seja, a páginas se adaptam automaticamente e podem ser visualizadas tanto em um computador quanto em smartphones e tablets, garantindo uma visualização mais uniforme.</p>\r\n<p style=\"text-align: left;\">Navegue pelo portal e conheça todas as aplicações possíveis para os mais variados conteúdos, sejam vídeos, imagens, áudios e textos.</p>\r\n<p style=\"text-align: left;\">Bom trabalho!</p>', 1, 17, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"www.youtube.com\\/v\\/BGzfIhIUF68?version=3&hl=pt_BR&rel=0\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"0\",\"link_author\":\"\",\"show_create_date\":\"1\",\"show_modify_date\":\"1\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"Saiba mais\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 16, 4, 'Internet, comunicação', '', 1, 88, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', 'identidade digital de governo', ''),
 (28, 88, 'Perguntas frequentes', 'perguntas-frequentes', '<p>Nesta seção são divulgadas as perguntas frequentes sobre o (a) [nome do órgão ou entidade] e ações no âmbito de sua competência.</p>\r\n', '\r\n<p>Caso o órgão ou entidade disponibilize uma seção de “Perguntas frequentes” em seu portal eletrônico, deverá remeter para o link que dá acesso a tal seção. O órgão/entidade que não divulga “Perguntas frequentes” deverá fazê-la e mantê-la constantemente atualizada, disponibilizando proativamente as respostas às perguntas usualmente formuladas pelos cidadãos.</p>\r\n<p>A <a class=\"external-link\" title=\"\" href=\"http://www.planalto.gov.br/ccivIl_03/Resolu%C3%A7%C3%A3o/2002/RES07-02web.htm\" target=\"_self\">Resolução nº 7, de 29 de julho de 2002</a>, do Comitê Eletrônico de Governo Eletrônico e os Padrões Web em Governo Eletrônico (Guia de administração do MPOG 8) orientam acerca de criação de seção dedicada às respostas às perguntas mais frequentes da sociedade.</p>', 1, 28, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 4, 0, 'Internet, Comunicação, LAI', '', 1, 16, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
 (29, 89, 'Contato', 'contato', '<p>Área reúne as formas de contato entre o visitante do portal e o órgão</p>\r\n', '\r\n<p>Esta seção do portal deverá fornecer ao internauta todas as formas de contato disponíveis para ele interagir com o órgão.</p>\r\n<p>Aqui devem ser publicados os telefones de contato, a ouvidoria, o endereço físico e eletrônico do órgão, além do formulário de contato ( <a class=\"internal-link\" href=\"index.php/contato/formulario-de-contato/\">Página com exemplo de formulário para contato</a> ).</p>', 1, 2, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 3, 3, 'Internet, Comunicação', '', 1, 27, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
 (30, 90, 'Servicos da Denominação', 'servicos-da-denominacao', '<p>Página agrega todos os links de acessos a sistemas do órgão.</p>\r\n', '\r\n<p>Esta área deverá reunir os links de acesso a sistemas que um órgão ou entidade possua e que disponibilize para os seus visitantes. A página agregadora de conteúdo tem como objetivo facilitar a navegação para o internauta e por isso deverá listar os acessos a sistema com imagens, um breve descritivo sobre o que será encontrado na página em questão e o respectivo link para acesso.</p>\r\n<p>No exemplo abaixo, estão listados alguns sistemas do Ministério da Educação espalhados por todo o site da insituição. Nesta proposta, todos eles seriam publicados em uma única área:</p>', 1, 2, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 2, 4, '', '', 1, 20, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
@@ -1067,14 +1100,16 @@ INSERT INTO `idg2019_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, 
 (70, 264, 'teste', 'teste', '<p>teste</p>', '', 0, 2, '2019-04-03 17:02:20', 929, '', '0000-00-00 00:00:00', 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\"}', 1, 1, '', '', 1, 0, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
 (71, 274, 'Site Secom, Portal do Planalto e Portal Brasil adotam nova identidade digital', 'site-secom-portal-do-planalto-e-portal-brasil-adotam-nova-identidade-digital', '<p>Todos os sítios e portais do Governo Federal podem adotar o modelo</p>\r\n', '\r\n<blockquote>\r\n<p><a href=\"https://www.secom.gov.br/atuacao/comunicacao-digital/portal-institucional-padrao\" rel=\"alternate\">Acesse os manuais que irão auxiliar na montagem de sites dos órgãos do governo federal</a></p>\r\n</blockquote>\r\n<p>Os três sites administrados pela Secretaria de Comunicação Social da Presidência da República (Secom) adotam a Identidade Digital do Poder Executivo Federal. Desde o início de 2014, <a href=\"http://www.brasil.gov.br/\" rel=\"alternate\">Portal Brasil</a>, <a href=\"http://www.planalto.gov.br/\" rel=\"alternate\">Portal do Planalto</a> e <a href=\"http://www.secom.gov.br/\" rel=\"alternate\">Site Secom</a> passaram a seguir as premissas e estruturas definidas pela nova identidade digital.</p>\r\n<p>A Identidade Digital do Poder Executivo Federal é um conjunto de diretrizes, orientações, padrões e modelos a serem aplicados em elementos que compõem a Identidade Digital, como a barra de governo, portais institucionais, sítios temáticos, informativo, redes sociais, guia de serviços, guia de aplicativos e outras ferramentas digitais.</p>\r\n<p>A partir da adoção pelos órgãos do Poder Executivo Federal das premissas da identidade digital, é esperado alcançar os seguintes objetivos:</p>\r\n<ul>\r\n<li>Qualificar a comunicação, permitindo que o cidadão encontre, com mais facilidade, as informações sobre as políticas públicas, equipamentos e serviços ofertados pelo Governo Federal;</li>\r\n<li>Padronizar as propriedades digitais (ambientes digitais que possuem gestão e chancela de um órgão do governo) e alinhar a estratégia de comunicação dos órgãos do Poder Executivo Federal;</li>\r\n<li>Padronizar as soluções digitais dos órgãos públicos federais e alinhar as informações com foco no cidadão;<br />Garantir o acesso a todos, independentemente da forma ou dispositivo de conexão, garantindo a acessibilidade digital e o acesso a qualquer momento.</li>\r\n</ul>\r\n<p>As ações de comunicação digital devem seguir as instruções apresentadas nos manuais orientadores (link acima) e que tratam sobre o uso correto de nomenclaturas, cores, tipografias e recomendações gerais de boas práticas de design, arquitetura da informação, conteúdo e uso das plataformas digitais.</p>\r\n<h2>Portal Institucional Padrão</h2>\r\n<p>O Portal Institucional Padrão é uma infraestrutura de portal que tem como foco no seu desenvolvimento os eixos Conteúdo, Arquitetura da Informação e Identidade Visual permitindo que o portal de cada órgão seja identificado como propriedade digital do governo federal gerando credibilidade aos internautas e oferece uma experiência única de navegação para os cidadãos.</p>\r\n<p>Tendo em vista o crescimento no acesso à internet por meio de dispositivos móveis, a construção do Portal Padrão ocorreu de maneira responsiva. Isto é, o Portal já é concebido de maneira flexível para se adaptar a diferentes tamanhos de tela, atendendo a uma ampla variedade de dispositivos, mantendo a gestão do conteúdo organizada e eficaz. Dessa maneira, o acesso é garantido em várias plataformas.</p>\r\n<p>Para adequar seus sites e portais à estrutura do portal padrão, os órgãos do Poder Executivo Federal devem seguir o disposto no Manual de Diretrizes de Comunicação da Identidade Digital do Poder Executivo Federal e no Guia de Estilo do Portal Padrão para Identidade Digital do Poder Executivo.</p>', 1, 17, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/conteudo\\/thumb-modelos-portal-modelo.jpg\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"images\\/conteudo\\/thumb-modelos-portal-modelo.jpg\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"0\",\"show_modify_date\":\"0\",\"show_publish_date\":\"0\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"0\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 9, 2, '', '', 1, 10, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
 (72, 276, 'Saiba mais sobre o Portal Institucional Padrão do Governo Federal', 'saiba-mais-sobre-o-portal-institucional-padrao-do-governo-federal', '<p>O modelo permite que o portal de cada órgão seja reconhecido como propriedade digital do Governo Federal.</p>\r\n', '\r\n<p>O Portal Institucional Padrão é uma infraestrutura de portal desenvolvida com base nos eixos Conteúdo, Arquitetura da Informação e Identidade Visual. O modelo permite que o portal de cada órgão seja reconhecido como propriedade digital do Governo Federal, gerando um ambiente com credibilidade junto aos internautas.<br /><br />O Portal Institucional Padrão é responsivo, ou seja, foi concebido de maneira flexível para se adaptar a diferentes tamanhos de tela, atendendo a uma ampla variedade de dispositivos, mantendo a gestão do conteúdo organizada e eficaz. <br /><br />Para adequar seus sítios e portais à estrutura do Portal Institucional Padrão, os órgãos do Poder Executivo federal devem seguir o disposto no <a href=\"http://www.secom.gov.br/orientacoes-gerais/comunicacao-digital/diretrizes-comunicacao-digital-governo-federal.pdf\" rel=\"alternate\">manual de diretrizes de comunicação digital do Governo Federal</a>, no <a href=\"http://www.secom.gov.br/orientacoes-gerais/comunicacao-digital/guia-de-estilo-identidade-padrao-comunicacao-digital-mai2014.pdf\" rel=\"alternate\">guia de estilo de sítios e portais da identidade padrão da comunicação digital do Governo Federal</a> e no <a href=\"http://www.secom.gov.br/orientacoes-gerais/manuais-privados-periodo-eleitoral/acessibilidade\" rel=\"alternate\">Modelo de Acessibilidade de Governo Eletrônico (e-MAG)</a>.<br /><br />Para promover a troca de informações, a Secom publicou a  lista dos <a href=\"http://www.secom.gov.br/orientacoes-gerais/comunicacao-digital/listas-dos-orgaos-federais-e-cms-utilizado-no-portal-padrao\" rel=\"alternate\">órgãos do Poder Executivo federal com a indicação do Content Management System (CMS)</a>  - Sistema de Gerenciamento de Conteúdo - escolhido para adequação ao Portal Institucional Padrão e também a lista dos <a href=\"http://www.secom.gov.br/atuacao/comunicacao-digital/identidade-digital-1/portais-ja-adequados\" rel=\"alternate\">sítios e portais já adequados ao modelo</a>.<br /><br /> O portal padrão foi desenvolvido em CMS de código aberto e sua estrutura permite que o órgão, a partir da instalação do produto já desenvolvido, faça as adequações de arquitetura da informação e conteúdo necessários para a montagem do seu portal institucional. <br /><br /> <a href=\"http://www.secom.gov.br/atuacao/comunicacao-digital/identidade-digital-1/documentacao-por-cms\" rel=\"alternate\">Nesta página</a> você encontra os links para os ambientes e/ou documentação do portal padrão em alguns CMS.</p>', 1, 17, '2019-04-03 17:02:20', 929, '', '2019-04-12 03:29:05', 931, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/conteudo\\/thumb-monitor-portal.jpg\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"images\\/conteudo\\/thumb-monitor-portal.jpg\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"article_layout\":\"\",\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"info_block_show_title\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_associations\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"0\",\"show_modify_date\":\"0\",\"show_publish_date\":\"0\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"0\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_page_title\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 5, 1, '', '', 1, 5, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
-(73, 277, 'Conheça os templates para informativos da Identidade Padrão', 'conheca-os-templates-para-informativos-da-identidade-padrao', '<p>Modelos podem ser utilizados para comunicação institucional via <em>mailing</em>.</p>\r\n', '\r\n<p>O Informativo corresponde a um boletim digital que pode ser adotado para fazer a comunicação (via mailing) junto aos órgãos do Poder Executivo federal e seus diversos públicos, ao Sicom ou ao público em geral sobre notícias, eventos ou outras informações.</p>\r\n<p>A linha visual do Informativo segue os quatro temas do <a href=\"http://www.secom.gov.br/atuacao/comunicacao-digital/identidade-digital-1/portal-institucional-padrao\" rel=\"alternate\">Portal Institucional Padrão</a>. O órgão deverá usar o tema de acordo com o aplicado em seu portal institucional.</p>\r\n<ul>\r\n<li>cabeçalho: mais simplificado em relação ao cabeçalho do Portal institucional Padrão, com denominação do órgão, nome principal, subordinação e ícones de redes sociais;</li>\r\n<li>barra de data: logo abaixo do cabeçalho, existe uma barra com a data do dia do envio do informativo;</li>\r\n<li>miolo: com conteúdo livre, o miolo pode trazer apenas texto, texto e imagem, vídeos, áudios e outros conteúdos informativos a depender do que o gestor de conteúdo irá priorizar;</li>\r\n<li>informação para cancelamento: posicionado logo abaixo do miolo, a mensagem traz a opção para o destinatário cancelar o recebimento do informativo;</li>\r\n<li>rodapé: traz a logo do governo no canto direito.</li>\r\n</ul>\r\n<p>Os templates estão disponíveis para <a href=\"http://www.secom.gov.br/atuacao/comunicacao-digital/elementos-para-download\" rel=\"alternate\">download no repositório no site Secom</a>.</p>', 1, 17, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/conteudo\\/thumb-templates-informativos.jpg\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"images\\/conteudo\\/thumb-templates-informativos.jpg\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"0\",\"show_publish_date\":\"0\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"0\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 4, 0, '', '', 1, 6, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
-(74, 315, 'Nova identidade digital de governo', 'nova-identidade-digital-de-governo', '<p>ND.</p>', '', 1, 58, '2019-04-12 03:55:37', 931, '', '2019-06-15 02:51:33', 936, 0, '0000-00-00 00:00:00', '2019-04-12 03:55:37', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"article_layout\":\"\",\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"info_block_show_title\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_associations\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_page_title\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 5, 5, '', '', 1, 0, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
-(75, 317, 'Manual orientador de instalação', 'manual-orientador-de-instalacao', '<p>ND.</p>', '', 1, 58, '2019-04-12 05:15:55', 931, '', '2019-06-17 12:23:56', 932, 0, '0000-00-00 00:00:00', '2019-04-12 05:15:55', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/conteudo\\/8663ed40-e20d-4f22-825d-3a08b375dfc2.png\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"article_layout\":\"\",\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"info_block_show_title\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_associations\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_page_title\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 14, 6, '', '', 1, 0, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
-(76, 336, 'Acesso à Informação é prioridade no novo Portal Padrão', 'acesso-a-informacao-e-prioridade-no-novo-portal-padrao', '<p>nd.</p>', '', 1, 58, '2019-06-15 13:56:14', 936, '', '2019-06-15 15:54:58', 936, 936, '2019-06-15 15:54:58', '2019-06-15 13:56:14', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"article_layout\":\"\",\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"info_block_show_title\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_associations\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_page_title\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 15, 4, '', '', 1, 0, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
-(77, 338, 'Oito dicas para planejar e criar uma capa', 'oito-dicas-para-planejar-e-criar-uma-capa', '<p>ND.</p>', '', 1, 58, '2019-06-15 14:52:53', 936, '', '2019-06-15 14:52:53', 0, 0, '0000-00-00 00:00:00', '2019-06-15 14:52:53', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/conteudo\\/727515f8-7c48-49c2-bfb8-ec557be395d0.png\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"article_layout\":\"\",\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"info_block_show_title\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_associations\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_page_title\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 1, 3, '', '', 1, 0, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
-(78, 340, 'Entenda o que é o menu quente', 'entenda-o-que-e-o-menu-quente', '<p>ND.</p>', '', 1, 58, '2019-06-15 14:52:53', 936, '', '2019-06-15 14:59:09', 936, 0, '0000-00-00 00:00:00', '2019-06-15 14:52:53', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/conteudo\\/b39e4575-c6c3-462d-99db-4faaffbab4b0.png\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"article_layout\":\"\",\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"info_block_show_title\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_associations\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_page_title\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 3, 2, '', '', 1, 0, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
-(79, 341, 'Conheça os temas do Portal Institucional Padrão', 'conheca-os-temas-do-portal-institucional-padrao', '<p>ND.</p>', '', 1, 58, '2019-06-15 14:52:53', 936, '', '2019-06-15 14:57:14', 936, 931, '2019-06-27 20:31:22', '2019-06-15 14:52:53', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/conteudo\\/e89917a2-1493-441c-8e21-49fe15d48937.png\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"article_layout\":\"\",\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"info_block_show_title\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_associations\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_page_title\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 2, 1, '', '', 1, 0, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
-(80, 342, 'Conheça os temas do Portal Institucional Padrão (2)', 'conheca-os-temas-do-portal-institucional-padrao-2', '<p>ND.</p>', '', -2, 58, '2019-06-15 14:52:53', 936, '', '2019-06-15 14:58:19', 936, 0, '0000-00-00 00:00:00', '2019-06-15 14:52:53', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/conteudo\\/e89917a2-1493-441c-8e21-49fe15d48937.png\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"article_layout\":\"\",\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"info_block_show_title\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_associations\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_page_title\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 2, 0, '', '', 1, 0, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', '');
+(73, 277, 'Conheça os templates para informativos da Identidade Padrão', 'conheca-os-templates-para-informativos-da-identidade-padrao', '<p>Modelos podem ser utilizados para comunicação institucional via <em>mailing</em>.</p>\r\n', '\r\n<p>O Informativo corresponde a um boletim digital que pode ser adotado para fazer a comunicação (via mailing) junto aos órgãos do Poder Executivo federal e seus diversos públicos, ao Sicom ou ao público em geral sobre notícias, eventos ou outras informações.</p>\r\n<p>A linha visual do Informativo segue os quatro temas do <a href=\"http://www.secom.gov.br/atuacao/comunicacao-digital/identidade-digital-1/portal-institucional-padrao\" rel=\"alternate\">Portal Institucional Padrão</a>. O órgão deverá usar o tema de acordo com o aplicado em seu portal institucional.</p>\r\n<ul>\r\n<li>cabeçalho: mais simplificado em relação ao cabeçalho do Portal institucional Padrão, com denominação do órgão, nome principal, subordinação e ícones de redes sociais;</li>\r\n<li>barra de data: logo abaixo do cabeçalho, existe uma barra com a data do dia do envio do informativo;</li>\r\n<li>miolo: com conteúdo livre, o miolo pode trazer apenas texto, texto e imagem, vídeos, áudios e outros conteúdos informativos a depender do que o gestor de conteúdo irá priorizar;</li>\r\n<li>informação para cancelamento: posicionado logo abaixo do miolo, a mensagem traz a opção para o destinatário cancelar o recebimento do informativo;</li>\r\n<li>rodapé: traz a logo do governo no canto direito.</li>\r\n</ul>\r\n<p>Os templates estão disponíveis para <a href=\"http://www.secom.gov.br/atuacao/comunicacao-digital/elementos-para-download\" rel=\"alternate\">download no repositório no site Secom</a>.</p>', 1, 17, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/conteudo\\/thumb-templates-informativos.jpg\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"images\\/conteudo\\/thumb-templates-informativos.jpg\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"0\",\"show_publish_date\":\"0\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"0\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 4, 0, '', '', 1, 8, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
+(74, 315, 'Nova identidade digital de governo', 'nova-identidade-digital-de-governo', '<p>ND.</p>', '', 1, 58, '2019-04-12 03:55:37', 931, '', '2019-12-23 17:26:24', 931, 0, '0000-00-00 00:00:00', '2019-04-12 03:55:37', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"article_layout\":\"\",\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"info_block_show_title\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_associations\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_page_title\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 8, 5, '', '', 1, 0, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
+(75, 317, 'Manual orientador de instalação', 'manual-orientador-de-instalacao', '<p>ND.</p>', '', 1, 58, '2019-04-12 05:15:55', 931, '', '2019-12-23 17:27:30', 931, 0, '0000-00-00 00:00:00', '2019-04-12 05:15:55', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/conteudo\\/8663ed40-e20d-4f22-825d-3a08b375dfc2.png\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"article_layout\":\"\",\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"info_block_show_title\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_associations\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_page_title\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 16, 6, '', '', 1, 0, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
+(76, 336, 'Acesso à Informação é prioridade no novo Portal Padrão', 'acesso-a-informacao-e-prioridade-no-novo-portal-padrao', '<div id=\"content-core\">\r\n<div id=\"parent-fieldname-text\" class=\"\">\r\n<div>\r\n<p>Portal Padrão conta com estrutura específica para atender as determinações da Lei de Acesso à Informação e do Ministério da Transparência</p>\r\n<p>O Portal Padrão conta com uma nova arquitetura para a disponibilização de dados públicos institucionais sobre a atuação dos órgãos do Executivo Federal, em acordo com o que prevê a Lei de Acesso à Informação - LAI (Lei nº 12.527/2011). O objetivo é valorizar ainda mais este tipo de informação e facilitar a alimentação da área por parte dos gestores de conteúdo.</p>\r\n<p>O desenho da seção teve como base as orientações do Guia de Transparência Ativa para Órgãos e Entidades do Poder Executivo Federal, publicado pelo Ministério da Transparência e Controladoria-Geral da União para padronizar o modo de publicação dessas informações nos sites dos órgãos federais.</p>\r\n<p>O documento prevê que o menu, denominado agora de Informação ao Cidadão, deve apresentar os seguintes itens: Institucional, Ações e Programas, Participação Social, Auditorias, Convênios e Transferências, Receitas e Despesas, Licitações e Contratos, Servidores, Informações Classificadas, Serviço de Informação ao Cidadão – SIC, Perguntas Frequentes e Dados Abertos.</p>\r\n<p>A arquitetura da informação em cada uma dessas subáreas foi planejada em acordo com o tipo de dado previsto para ela. Para conhecer as orientações detalhadas sobre o conteúdo a ser publicado em cada um dos itens de navegação, <a href=\"http://www.acessoainformacao.gov.br/lai-para-sic/sic-apoio-orientacoes/guias-e-orientacoes/gta-5a-versao.pdf\">acesse a íntegra do documento</a>.</p>\r\n<p>A LAI regulamenta o direito constitucional de acesso às informações públicas. A norma estabelece que dados de interesse coletivo devem ser divulgados pelos órgãos públicos, espontânea e proativamente, independente de solicitações. Além disso, o texto criou mecanismos para que qualquer pessoa solicite e receba informações públicas dos órgãos e entidades.</p>\r\n</div>\r\n</div>\r\n</div>', '', 1, 58, '2019-06-15 13:56:14', 936, '', '2019-12-23 17:46:34', 931, 0, '0000-00-00 00:00:00', '2019-06-15 13:56:14', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"article_layout\":\"\",\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"info_block_show_title\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_associations\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_page_title\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 18, 4, '', '', 1, 4, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
+(77, 338, 'Oito dicas para planejar e criar uma capa', 'oito-dicas-para-planejar-e-criar-uma-capa', '<div id=\"content-core\">\r\n<div id=\"parent-fieldname-text\" class=\"\">\r\n<div>\r\n<p>As capas principal e internas de um portal são como uma vitrine, que apresentam os melhores itens de um ambiente. Ou seja, destacam os conteúdos mais importantes sobre uma área ou tema de atuação do órgão.</p>\r\n<p>A criação de uma capa exige planejamento e produção de conteúdos para torná-la atraente e relevante. A linguagem usada deve ser objetiva, simples e próxima daquela falada pelo cidadão.</p>\r\n<p>Conheça algumas dicas para auxiliar no processo de planejamento e criação de uma capa:</p>\r\n<p> </p>\r\n<ul>\r\n<li><strong>Selecione os conteúdos que serão destacados</strong></li>\r\n</ul>\r\n<p> </p>\r\n<p>É necessário que a equipe avalie quais conteúdos devem ser mostrados na capa, de acordo com a importância que têm para o público e com a necessidade de publicidade e transparência do órgão. Dados de acesso ao portal (businesss inteligence – BI) auxiliam nesse processo.</p>\r\n<p> </p>\r\n<ul>\r\n<li><strong>Defina uma hierarquia de relevância entre os conteúdos selecionados</strong></li>\r\n</ul>\r\n<p> </p>\r\n<p>Avaliar quais os conteúdos mais importantes e que precisam de destaque reflete na disposição dos conteúdos na capa. O topo do portal é sempre a área mais nobre e mais visualizada. Estudo realizado em 2017 pela consultoria Nielsen Norman Group mostrou que o padrão de leitura dos usuários na internet segue o formato F, com mais atenção para o lado esquerdo superior da tela e mapeamento visual do conteúdo de interesse sempre de cima para baixo e da esquerda para a direita.</p>\r\n<p> </p>\r\n<p>Conteúdos com pouca relevância podem ficar na parte inferior da tela, com chamadas para outras áreas que os agrupam por um mesmo tipo, quando for o caso.</p>\r\n<p> </p>\r\n<ul>\r\n<li><strong>Planeje blocos temáticos para agrupar conteúdos</strong></li>\r\n</ul>\r\n<p> </p>\r\n<p>Quando houver mais de um conteúdo sobre um mesmo assunto, organize-os em subáreas temáticas próximos uns dos outros. O módulo cabeçalho pode ser aplicado para dar título à seção, como no exemplo a seguir:</p>\r\n<p> </p>\r\n<p><img class=\"image-inline\" title=\"8 dicas para planejar e criar uma capa\" src=\"http://www.portalpadrao.gov.br/imagens/8-dicas-para-planejar-e-criar-uma-capa.png\" alt=\"8 dicas para planejar e criar uma capa\" /></p>\r\n<p>  </p>\r\n<p>Escolha e trate as imagens que serão utilizadas nas chamadas</p>\r\n<p> </p>\r\n<p>Destacar conteúdos com imagens atrai a atenção do usuário e incentiva o acesso ao mesmo, além de deixar a capa mais bonita. As imagens devem trazer novas informações sobre o assunto abordado e precisam ser tratadas por um profissional especializado. Levantamento da consultoria Content Tools de 2018 aponta que 49% dos entrevistados no Brasil afirmaram que fotografia é o conteúdo que mais gostam de ver.</p>\r\n<p> </p>\r\n<ul>\r\n<li><strong>Explore a diversidade de formatos</strong></li>\r\n</ul>\r\n<p> </p>\r\n<p>Sempre que possível, monte a capa com conteúdos em diversos formatos, como vídeos, fotografias, áudios e infográficos.</p>\r\n<p> </p>\r\n<ul>\r\n<li><strong>Use os diferentes tamanhos previstos para os módulos</strong></li>\r\n</ul>\r\n<p> </p>\r\n<p>Os módulos da Identidade Padrão são flexíveis e adaptáveis. Utilize-os em diferentes tamanhos e configurações. As variações possíveis estão detalhadas no Guia de Estilo da Identidade Padrão de Comunicação Digital e no Manual de Gestão de Conteúdo em Plone.</p>\r\n<p> </p>\r\n<ul>\r\n<li><strong>Use linguagem simples, objetiva e próxima da realidade do cidadão</strong></li>\r\n</ul>\r\n<p> </p>\r\n<p>Ir direto ao ponto e adotar uma linguagem simples torna a mensagem acessível a todos. É importante também não prometer informações e novidades que não serão entregues no conteúdo.</p>\r\n<p> </p>\r\n<p> </p>\r\n<ul>\r\n<li><strong>Sempre que possível misture conteúdos “quentes” e “frios”</strong></li>\r\n</ul>\r\n<p> </p>\r\n<p>Uma capa deve apresentar conteúdos novos, como notícias do dia, mas também é importante contar com informações perenes frias de interesse do cidadão, como serviços, canais de participação social e institucional.</p>\r\n</div>\r\n</div>\r\n</div>', '', 1, 58, '2019-06-15 14:52:53', 936, '', '2019-12-23 18:23:30', 931, 0, '0000-00-00 00:00:00', '2019-06-15 14:52:53', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/conteudo\\/727515f8-7c48-49c2-bfb8-ec557be395d0.png\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"article_layout\":\"\",\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"info_block_show_title\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_associations\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_page_title\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 3, 3, '', '', 1, 1, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', '');
+INSERT INTO `idg2019_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, `fulltext`, `state`, `catid`, `created`, `created_by`, `created_by_alias`, `modified`, `modified_by`, `checked_out`, `checked_out_time`, `publish_up`, `publish_down`, `images`, `urls`, `attribs`, `version`, `ordering`, `metakey`, `metadesc`, `access`, `hits`, `metadata`, `featured`, `language`, `xreference`, `note`) VALUES
+(78, 340, 'Entenda o que é o menu quente', 'entenda-o-que-e-o-menu-quente', '<p>Destinado a destacar os principais assuntos do dia, o menu quente é uma das novidades do novo Portal Institucional Padrão. O elemento permite que os gestores de conteúdo apresentem para o cidadão os temas mais quentes e importantes do dia, já no topo dos portais.</p>\r\n<p>Ao clicar em um dos itens do menu quente, o usuário acessa uma lista com todos os conteúdos que abordam o tema escolhido, organizados do mais recente para o mais antigo. Os profissionais de comunicação podem listar até cinco assuntos entre os mais buscados pelos usuários e estratégicos para o órgão.</p>\r\n<p> </p>\r\n<p><img class=\"image-inline\" title=\"Entenda o que é o menu quente (hot menu)\" src=\"http://www.portalpadrao.gov.br/imagens/entenda-o-que-e-o-menu-quente-hot-menu.png\" alt=\"Entenda o que é o menu quente (hot menu)\" /></p>\r\n<p> </p>\r\n<p>O menu quente permite que os cidadãos acessem, de forma direta e prática, os diversos materiais sobre um mesmo tema, de modo que possam se aprofundar e conhecer mais sobre ele. A opção é uma boa prática utilizada por diversos portais noticiosos nacionais e internacionais, pois amplia as possibilidades de navegação em uma propriedade digital.</p>\r\n<p>O menu quente é definido nas configurações do portal, na opção configurações do cabeçalho. Para saber mais sobre como aplicar esta ferramenta no seu portal, acesso o Manual de Gestão de Conteúdo em Joomla</p>', '', 1, 58, '2019-06-15 14:52:53', 936, '', '2019-12-23 18:25:06', 931, 0, '0000-00-00 00:00:00', '2019-06-15 14:52:53', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/conteudo\\/b39e4575-c6c3-462d-99db-4faaffbab4b0.png\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"article_layout\":\"\",\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"info_block_show_title\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_associations\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_page_title\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 5, 2, '', '', 1, 1, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
+(79, 341, 'Conheça os temas do Portal Institucional Padrão', 'conheca-os-temas-do-portal-institucional-padrao', '<div class=\"\">\r\n<div id=\"content\">\r\n<article>\r\n<div id=\"content-core\">\r\n<div id=\"parent-fieldname-text\" class=\"\">\r\n<div>\r\n<p>Os ministérios e demais órgãos do Poder Executivo Federal podem escolher entre dois temas para aplicar em seus sites e portais. A Identidade Padrão de Comunicação Digital do Executivo Federal prevê as seguintes possibilidades:</p>\r\n<p>1. Tema Azul com ícones brancos</p>\r\n<p>2. Tema Branco com ícones laranjas</p>\r\n<p>[Produzir e aplicar imagem com as opções]</p>\r\n<p>Embora o número geral de temas seja menor em relação à versão antiga, agora há mais possibilidades de configuração das capas principais (home pages) e internas. Conheça as opções:</p>\r\n<p> </p>\r\n<p>Capas principais e opções de busca</p>\r\n<p>Independente do tema definido, é possível adotar as seguintes opções para aplicar nas capas principais (home pages):</p>\r\n<blockquote>\r\n<ul>\r\n<li><strong>Busca expandida</strong></li>\r\n</ul>\r\n</blockquote>\r\n<p> É a solução em que uma busca expandida é aplicada no topo do portal e ocupa quase todo o grid. Para torná-la visualmente atraente, deve-se aplicar uma imagem temática de fundo (background), que pode, por exemplo, celebrar uma data comemorativa importante para o país, homenagear uma personalidade de destaque da história nacional ou fazer referência a uma ação do governo.</p>\r\n<p> </p>\r\n<p>Com esta opção, a imagem ocupa todo o grid e cabeçalho do portal. É possível ainda destacar para o usuário até cinco notícias e serviços. O objetivo é entregar rapidamente os conteúdos mais buscados pelos cidadãos e estratégicos para o governo. Nas páginas internas, a cor do cabeçalho permanece a mesma do tema definido.</p>\r\n<p>A busca expandida somente deve ser aplicada quando houver uma produção diária de conteúdos que justifiquem o uso dela. Essa opção é recomendada em propriedades digitais com mais de dez atualizações diárias ou que ofereçam, no mínimo, dez serviços.</p>\r\n<p><br /><img class=\"image-inline\" title=\"Conheça os temas do Portal Institucional Padrão\" src=\"http://www.portalpadrao.gov.br/imagens/conheca-os-temas-do-portal-institucional-padrao.png\" alt=\"Conheça os temas do Portal Institucional Padrão\" /><br /><br /></p>\r\n<p> </p>\r\n<ul>\r\n<li><b>Manchete com imagem de fundo e busca no cabeçalho</b></li>\r\n</ul>\r\n<p>Neste caso, a imagem utilizada na manchete ou no destaque principal ocupa todo o topo e se torna o fundo (background – BG) do cabeçalho. Ao lado do menu em formato “hambúrguer”, é destacado o menu de relevância com as quatro seções mais importantes do portal. A busca é apresentada no lado direito da mesma linha do menu.</p>\r\n<p> <br /><img class=\"image-inline\" title=\"Conheça os temas do Portal Institucional Padrão\" src=\"http://www.portalpadrao.gov.br/imagens/conheca-os-temas-do-portal-institucional-padrao_.png\" alt=\"Conheça os temas do Portal Institucional Padrão\" /><br /><br /></p>\r\n<ul>\r\n<li><b>Cabeçalho com a cor do tema</b></li>\r\n</ul>\r\n<p>É possível ainda manter o cabeçalho da capa principal na cor do tema definido e iniciar a apresentação dos conteúdos no miolo do portal, após o cabeçalho. Nessa opção, deve-se utilizar o menu de relevância com quatro itens destacados ao lado do “hambúrguer”, além da busca no cabeçalho.</p>\r\n<p> </p>\r\n<p><img class=\"image-inline\" title=\"Conheça os temas do Portal Institucional Padrão\" src=\"http://www.portalpadrao.gov.br/imagens/conheca-os-temas-do-portal-institucional-padrao_2.png\" alt=\"Conheça os temas do Portal Institucional Padrão\" /></p>\r\n</div>\r\n</div>\r\n</div>\r\n<div class=\"visualClear\"> </div>\r\n<div class=\"documentActions\"> </div>\r\n</article>\r\n</div>\r\n</div>\r\n<div id=\"viewlet-below-content\">\r\n<div class=\"voltar-topo\"><a href=\"http://www.portalpadrao.gov.br/noticias/conheca-os-temas-do-portal-institucional-padrao#wrapper\">Voltar ao topo</a></div>\r\n<div class=\"texto-copyright\">Todo o conteúdo deste site está publicado sob a licença<a href=\"https://creativecommons.org/licenses/by-nd/3.0/deed.pt_BR\" rel=\"license\">Creative Commons Atribuição-SemDerivações 3.0 </a></div>\r\n</div>', '', 1, 58, '2019-06-15 14:52:53', 936, '', '2019-12-23 18:30:13', 931, 0, '0000-00-00 00:00:00', '2019-06-15 14:52:53', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/conteudo\\/e89917a2-1493-441c-8e21-49fe15d48937.png\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"article_layout\":\"\",\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"info_block_show_title\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_associations\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_page_title\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 4, 1, '', '', 1, 1, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
+(80, 342, 'Conheça os temas do Portal Institucional Padrão (2)', 'conheca-os-temas-do-portal-institucional-padrao-2', '<p>ND.</p>', '', -2, 58, '2019-06-15 14:52:53', 936, '', '2019-06-15 14:58:19', 936, 0, '0000-00-00 00:00:00', '2019-06-15 14:52:53', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/conteudo\\/e89917a2-1493-441c-8e21-49fe15d48937.png\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"article_layout\":\"\",\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"info_block_show_title\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_associations\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_page_title\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 2, 0, '', '', 1, 0, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
+(81, 348, 'Fale Conosco', 'fale-conosco', '<div> Em caso de dúvidas, sugestões ou críticas, envie sua mensagem para o e-mail: <a id=\"LPlnk747847\" class=\"email-link\" title=\"\" href=\"mailto:idgsecom@presidencia.gov.br?subject=[Portal Padrão]\" target=\"_blank\" rel=\"noopener noreferrer\" data-auth=\"NotApplicable\" data-tippreview-enabled=\"false\" data-tippreview-image=\"\" data-tippreview-title=\"\">idgsecom@presidencia.gov.br</a>/. </div>\r\n<div>\r\n<div id=\"dffc0f3a-58f6-46d9-aa01-704d69f5950c\" class=\"tile tile-default\">\r\n<div class=\"cover-richtext-tile tile-content\">\r\n<p class=\" \">A equipe que coordena a Identidade Padrão de Comunicação Digital quer saber sua opinião.</p>\r\n</div>\r\n</div>\r\n</div>', '', 1, 29, '2019-12-24 12:55:02', 931, '', '2019-12-24 12:59:58', 931, 0, '0000-00-00 00:00:00', '2019-12-24 12:55:02', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"article_layout\":\"\",\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"info_block_show_title\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_associations\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_page_title\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 3, 0, '', '', 1, 2, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', '');
 
 -- --------------------------------------------------------
 
@@ -1082,18 +1117,13 @@ INSERT INTO `idg2019_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, 
 -- Estrutura da tabela `idg2019_contentitem_tag_map`
 --
 
-DROP TABLE IF EXISTS `idg2019_contentitem_tag_map`;
-CREATE TABLE IF NOT EXISTS `idg2019_contentitem_tag_map` (
+CREATE TABLE `idg2019_contentitem_tag_map` (
   `type_alias` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `core_content_id` int(10) UNSIGNED NOT NULL COMMENT 'PK from the core content table',
   `content_item_id` int(11) NOT NULL COMMENT 'PK from the content type table',
   `tag_id` int(10) UNSIGNED NOT NULL COMMENT 'PK from the tag table',
   `tag_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Date of most recent save for this tag-item',
-  `type_id` mediumint(8) NOT NULL COMMENT 'PK from the content_type table',
-  UNIQUE KEY `uc_ItemnameTagid` (`type_id`,`content_item_id`,`tag_id`) USING BTREE,
-  KEY `idx_tag_type` (`tag_id`,`type_id`) USING BTREE,
-  KEY `idx_date_id` (`tag_date`,`tag_id`) USING BTREE,
-  KEY `idx_core_content_id` (`core_content_id`) USING BTREE
+  `type_id` mediumint(8) NOT NULL COMMENT 'PK from the content_type table'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Maps items from content tables to tags' ROW_FORMAT=DYNAMIC;
 
 --
@@ -1110,11 +1140,9 @@ INSERT INTO `idg2019_contentitem_tag_map` (`type_alias`, `core_content_id`, `con
 -- Estrutura da tabela `idg2019_content_frontpage`
 --
 
-DROP TABLE IF EXISTS `idg2019_content_frontpage`;
-CREATE TABLE IF NOT EXISTS `idg2019_content_frontpage` (
+CREATE TABLE `idg2019_content_frontpage` (
   `content_id` int(11) NOT NULL DEFAULT '0',
-  `ordering` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`content_id`) USING BTREE
+  `ordering` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
@@ -1134,13 +1162,11 @@ INSERT INTO `idg2019_content_frontpage` (`content_id`, `ordering`) VALUES
 -- Estrutura da tabela `idg2019_content_rating`
 --
 
-DROP TABLE IF EXISTS `idg2019_content_rating`;
-CREATE TABLE IF NOT EXISTS `idg2019_content_rating` (
+CREATE TABLE `idg2019_content_rating` (
   `content_id` int(11) NOT NULL DEFAULT '0',
   `rating_sum` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `rating_count` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `lastip` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  PRIMARY KEY (`content_id`) USING BTREE
+  `lastip` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -1149,19 +1175,16 @@ CREATE TABLE IF NOT EXISTS `idg2019_content_rating` (
 -- Estrutura da tabela `idg2019_content_types`
 --
 
-DROP TABLE IF EXISTS `idg2019_content_types`;
-CREATE TABLE IF NOT EXISTS `idg2019_content_types` (
-  `type_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_content_types` (
+  `type_id` int(10) UNSIGNED NOT NULL,
   `type_title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `type_alias` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `table` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `rules` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `field_mappings` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `router` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `content_history_options` varchar(5120) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'JSON string for com_contenthistory options',
-  PRIMARY KEY (`type_id`) USING BTREE,
-  KEY `idx_alias` (`type_alias`(100)) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `content_history_options` varchar(5120) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'JSON string for com_contenthistory options'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_content_types`
@@ -1190,8 +1213,7 @@ INSERT INTO `idg2019_content_types` (`type_id`, `type_title`, `type_alias`, `tab
 -- Estrutura da tabela `idg2019_core_log_searches`
 --
 
-DROP TABLE IF EXISTS `idg2019_core_log_searches`;
-CREATE TABLE IF NOT EXISTS `idg2019_core_log_searches` (
+CREATE TABLE `idg2019_core_log_searches` (
   `search_term` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `hits` int(10) UNSIGNED NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
@@ -1202,9 +1224,8 @@ CREATE TABLE IF NOT EXISTS `idg2019_core_log_searches` (
 -- Estrutura da tabela `idg2019_extensions`
 --
 
-DROP TABLE IF EXISTS `idg2019_extensions`;
-CREATE TABLE IF NOT EXISTS `idg2019_extensions` (
-  `extension_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_extensions` (
+  `extension_id` int(11) NOT NULL,
   `package_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Parent package ID for extensions installed as a package.',
   `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1221,12 +1242,8 @@ CREATE TABLE IF NOT EXISTS `idg2019_extensions` (
   `checked_out` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `checked_out_time` datetime NOT NULL,
   `ordering` int(11) DEFAULT '0',
-  `state` int(11) DEFAULT '0',
-  PRIMARY KEY (`extension_id`) USING BTREE,
-  KEY `element_clientid` (`element`,`client_id`) USING BTREE,
-  KEY `element_folder_clientid` (`element`,`folder`,`client_id`) USING BTREE,
-  KEY `extension` (`type`,`element`,`folder`,`client_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=10152 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `state` int(11) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_extensions`
@@ -1269,7 +1286,7 @@ INSERT INTO `idg2019_extensions` (`extension_id`, `package_id`, `name`, `type`, 
 (100, 0, 'PHPMailer', 'library', 'phpmailer', '', 0, 1, 1, 1, 'false', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (101, 0, 'SimplePie', 'library', 'simplepie', '', 0, 1, 1, 1, '{\"name\":\"SimplePie\",\"type\":\"library\",\"creationDate\":\"2004\",\"author\":\"SimplePie\",\"copyright\":\"Copyright (c) 2004-2009, Ryan Parman and Geoffrey Sneddon\",\"authorEmail\":\"\",\"authorUrl\":\"http:\\/\\/simplepie.org\\/\",\"version\":\"1.2\",\"description\":\"LIB_SIMPLEPIE_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"simplepie\"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (102, 0, 'LIB_PHPUTF8', 'library', 'phputf8', '', 0, 1, 1, 1, '{\"name\":\"LIB_PHPUTF8\",\"type\":\"library\",\"creationDate\":\"2006\",\"author\":\"Harry Fuecks\",\"copyright\":\"Copyright various authors\",\"authorEmail\":\"hfuecks@gmail.com\",\"authorUrl\":\"http:\\/\\/sourceforge.net\\/projects\\/phputf8\",\"version\":\"0.5\",\"description\":\"LIB_PHPUTF8_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"phputf8\"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(103, 0, 'LIB_JOOMLA', 'library', 'joomla', '', 0, 1, 1, 1, '{\"name\":\"LIB_JOOMLA\",\"type\":\"library\",\"creationDate\":\"2008\",\"author\":\"Joomla! Project\",\"copyright\":\"Copyright (C) 2005 - 2018 Open Source Matters. All rights reserved.\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"https:\\/\\/www.joomla.org\",\"version\":\"13.1\",\"description\":\"LIB_JOOMLA_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"joomla\"}', '{\"mediaversion\":\"8c5671644c2d70574ae63c853e1daf23\"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(103, 0, 'LIB_JOOMLA', 'library', 'joomla', '', 0, 1, 1, 1, '{\"name\":\"LIB_JOOMLA\",\"type\":\"library\",\"creationDate\":\"2008\",\"author\":\"Joomla! Project\",\"copyright\":\"Copyright (C) 2005 - 2018 Open Source Matters. All rights reserved.\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"https:\\/\\/www.joomla.org\",\"version\":\"13.1\",\"description\":\"LIB_JOOMLA_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"joomla\"}', '{\"mediaversion\":\"159b06adc065772154e69e646deb7c3f\"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (104, 0, 'LIB_IDNA', 'library', 'idna_convert', '', 0, 1, 1, 1, '{\"name\":\"LIB_IDNA\",\"type\":\"library\",\"creationDate\":\"2004\",\"author\":\"phlyLabs\",\"copyright\":\"2004-2011 phlyLabs Berlin, http:\\/\\/phlylabs.de\",\"authorEmail\":\"phlymail@phlylabs.de\",\"authorUrl\":\"http:\\/\\/phlylabs.de\",\"version\":\"0.8.0\",\"description\":\"LIB_IDNA_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"idna_convert\"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (105, 0, 'FOF', 'library', 'fof', '', 0, 1, 1, 1, '{\"name\":\"FOF\",\"type\":\"library\",\"creationDate\":\"2015-04-22 13:15:32\",\"author\":\"Nicholas K. Dionysopoulos \\/ Akeeba Ltd\",\"copyright\":\"(C)2011-2015 Nicholas K. Dionysopoulos\",\"authorEmail\":\"nicholas@akeebabackup.com\",\"authorUrl\":\"https:\\/\\/www.akeebabackup.com\",\"version\":\"2.4.3\",\"description\":\"LIB_FOF_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"fof\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (106, 0, 'LIB_PHPASS', 'library', 'phpass', '', 0, 1, 1, 1, '{\"name\":\"LIB_PHPASS\",\"type\":\"library\",\"creationDate\":\"2004-2006\",\"author\":\"Solar Designer\",\"copyright\":\"\",\"authorEmail\":\"solar@openwall.com\",\"authorUrl\":\"http:\\/\\/www.openwall.com\\/phpass\\/\",\"version\":\"0.3\",\"description\":\"LIB_PHPASS_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"phpass\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
@@ -1393,7 +1410,7 @@ INSERT INTO `idg2019_extensions` (`extension_id`, `package_id`, `name`, `type`, 
 (480, 0, 'plg_system_sessiongc', 'plugin', 'sessiongc', 'system', 0, 1, 1, 0, '{\"name\":\"plg_system_sessiongc\",\"type\":\"plugin\",\"creationDate\":\"February 2018\",\"author\":\"Joomla! Project\",\"copyright\":\"Copyright (C) 2005 - 2018 Open Source Matters. All rights reserved.\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"www.joomla.org\",\"version\":\"3.8.6\",\"description\":\"PLG_SYSTEM_SESSIONGC_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"sessiongc\"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (600, 0, 'English (en-GB)', 'language', 'en-GB', '', 0, 1, 1, 1, '{\"name\":\"English (en-GB)\",\"type\":\"language\",\"creationDate\":\"June 2018\",\"author\":\"Joomla! Project\",\"copyright\":\"Copyright (C) 2005 - 2018 Open Source Matters. All rights reserved.\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"www.joomla.org\",\"version\":\"3.8.10\",\"description\":\"en-GB site language\",\"group\":\"\"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (601, 0, 'English (en-GB)', 'language', 'en-GB', '', 1, 1, 1, 1, '{\"name\":\"English (en-GB)\",\"type\":\"language\",\"creationDate\":\"June 2018\",\"author\":\"Joomla! Project\",\"copyright\":\"Copyright (C) 2005 - 2018 Open Source Matters. All rights reserved.\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"www.joomla.org\",\"version\":\"3.8.10\",\"description\":\"en-GB administrator language\",\"group\":\"\"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(700, 0, 'files_joomla', 'file', 'joomla', '', 0, 1, 1, 1, '{\"name\":\"files_joomla\",\"type\":\"file\",\"creationDate\":\"June 2018\",\"author\":\"Joomla! Project\",\"copyright\":\"(C) 2005 - 2018 Open Source Matters. All rights reserved\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"www.joomla.org\",\"version\":\"3.9.8\",\"description\":\"FILES_JOOMLA_XML_DESCRIPTION\",\"group\":\"\"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(700, 0, 'files_joomla', 'file', 'joomla', '', 0, 1, 1, 1, '{\"name\":\"files_joomla\",\"type\":\"file\",\"creationDate\":\"June 2018\",\"author\":\"Joomla! Project\",\"copyright\":\"(C) 2005 - 2018 Open Source Matters. All rights reserved\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"www.joomla.org\",\"version\":\"3.9.14\",\"description\":\"FILES_JOOMLA_XML_DESCRIPTION\",\"group\":\"\"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (10002, 0, 'Português do Brasil (pt-BR)', 'package', 'pkg_pt-BR', '', 0, 1, 1, 0, '{\"name\":\"Portugu\\u00eas do Brasil (pt-BR)\",\"type\":\"package\",\"creationDate\":\"Junho de 2019\",\"author\":\"Projeto Joomla!\",\"copyright\":\"Copyright (C) 2005 - 2019 Open Source Matters, Inc. Todos os direitos reservados.\",\"authorEmail\":\"helvecio.dasilva@community.joomla.org\",\"authorUrl\":\"http:\\/\\/brasil.joomla.com\",\"version\":\"3.9.8.1\",\"description\":\"<div style=\\\"text-align: left;\\\">\\n <h2>Tradu\\u00e7\\u00e3o Portugu\\u00eas Brasileiro (pt-BR) para Joomla! 3.9.8 instalada com sucesso!<\\/h2>\\n <h3>Vers\\u00e3o 3.9.8.1<\\/h3>\\n <p>Por favor, informe qualquer problema ou assunto relacionado encontrado, na p\\u00e1gina <a href=\\\"https:\\/\\/www. facebook. com\\/groups\\/traduzjoomla\\/\\\" target=\\\"_blank\\\">Grupo Tradu\\u00e7\\u00f5es Joomla pt-BR<\\/a> no Facebook.<\\/p>\\n <p>Traduzido pela <em>Equipe de Tradu\\u00e7\\u00e3o Portugu\\u00eas Brasileiro<\\/em>.<\\/p>\\n<\\/div>\",\"group\":\"\",\"filename\":\"pkg_pt-BR\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (10007, 0, 'padraogoverno01', 'template', 'padraogoverno01', '', 0, 1, 1, 0, '{\"legacy\":false,\"name\":\"padraogoverno01\",\"type\":\"template\",\"creationDate\":\"Outubro 2013\",\"author\":\"Comunidade Joomla Calango e Grupo de Trabalho de Minist\\u00e9rios\",\"copyright\":\"Copyright (C) 2013 Comunidade Joomla Calango e Grupo de Trabalho de Minist\\u00e9rios.\",\"authorEmail\":\"joomlagovbr@gmail.com\",\"authorUrl\":\"https:\\/\\/github.com\\/joomlagovbr\",\"version\":\"2.5.0\",\"description\":\"Mais informacoes na URL do github.\",\"group\":\"\"}', '{\"wrapperSmall\":\"53\",\"wrapperLarge\":\"72\",\"sitetitle\":\"\",\"sitedescription\":\"\",\"navposition\":\"center\",\"templatecolor\":\"nature\"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (10008, 0, 'mod_container', 'module', 'mod_container', '', 0, 1, 1, 0, '{\"legacy\":false,\"name\":\"mod_container\",\"type\":\"module\",\"creationDate\":\"Outubro 2013\",\"author\":\"Comunidade Joomla Calango e Grupo de Trabalho de Minist\\u00e9rios\",\"copyright\":\"Copyright (C) 2013 Comunidade Joomla Calango e Grupo de Trabalho de Minist\\u00e9rios\",\"authorEmail\":\"joomlagovbr@gmail.com\",\"authorUrl\":\"https:\\/\\/github.com\\/joomlagovbr\",\"version\":\"1.0\",\"description\":\"Mais informacoes na url do github.\",\"group\":\"\"}', '{\"posicao\":\"\",\"cache\":\"1\",\"cache_time\":\"900\"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
@@ -1467,7 +1484,10 @@ INSERT INTO `idg2019_extensions` (`extension_id`, `package_id`, `name`, `type`, 
 (10148, 0, 'PLG_SYSTEM_ACTIONLOGS', 'plugin', 'actionlogs', 'system', 0, 0, 1, 0, '{\"name\":\"PLG_SYSTEM_ACTIONLOGS\",\"type\":\"plugin\",\"creationDate\":\"May 2018\",\"author\":\"Joomla! Project\",\"copyright\":\"Copyright (C) 2005 - 2019 Open Source Matters. All rights reserved.\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"www.joomla.org\",\"version\":\"3.9.0\",\"description\":\"PLG_SYSTEM_ACTIONLOGS_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"actionlogs\"}', '{\"logDeletePeriod\":\"0\",\"lastrun\":\"0\"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (10149, 0, 'plg_system_logrotation', 'plugin', 'logrotation', 'system', 0, 0, 1, 0, '{\"name\":\"plg_system_logrotation\",\"type\":\"plugin\",\"creationDate\":\"May 2018\",\"author\":\"Joomla! Project\",\"copyright\":\"Copyright (C) 2005 - 2019 Open Source Matters. All rights reserved.\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"www.joomla.org\",\"version\":\"3.9.0\",\"description\":\"PLG_SYSTEM_LOGROTATION_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"logrotation\"}', '{\"cachetimeout\":\"30\",\"logstokeep\":\"1\",\"lastrun\":\"0\"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (10150, 0, 'plg_system_privacyconsent', 'plugin', 'privacyconsent', 'system', 0, 0, 1, 0, '{\"name\":\"plg_system_privacyconsent\",\"type\":\"plugin\",\"creationDate\":\"April 2018\",\"author\":\"Joomla! Project\",\"copyright\":\"(C) 2005 - 2019 Open Source Matters. All rights reserved.\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"www.joomla.org\",\"version\":\"3.9.0\",\"description\":\"PLG_SYSTEM_PRIVACYCONSENT_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"privacyconsent\"}', '{\"enabled\":\"0\",\"cachetimeout\":\"30\",\"consentexpiration\":\"360\",\"remind\":\"30\",\"lastrun\":\"0\"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(10151, 0, 'plg_user_terms', 'plugin', 'terms', 'user', 0, 0, 1, 0, '{\"name\":\"plg_user_terms\",\"type\":\"plugin\",\"creationDate\":\"June 2018\",\"author\":\"Joomla! Project\",\"copyright\":\"(C) 2005 - 2019 Open Source Matters. All rights reserved.\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"www.joomla.org\",\"version\":\"3.9.0\",\"description\":\"PLG_USER_TERMS_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"terms\"}', '[]', '', '', 0, '0000-00-00 00:00:00', 0, 0);
+(10151, 0, 'plg_user_terms', 'plugin', 'terms', 'user', 0, 0, 1, 0, '{\"name\":\"plg_user_terms\",\"type\":\"plugin\",\"creationDate\":\"June 2018\",\"author\":\"Joomla! Project\",\"copyright\":\"(C) 2005 - 2019 Open Source Matters. All rights reserved.\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"www.joomla.org\",\"version\":\"3.9.0\",\"description\":\"PLG_USER_TERMS_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"terms\"}', '[]', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(10152, 0, 'beez3', 'template', 'beez3', '', 0, 0, 1, 0, '{\"name\":\"beez3\",\"type\":\"template\",\"creationDate\":\"25 November 2009\",\"author\":\"Angie Radtke\",\"copyright\":\"Copyright (C) 2005 - 2019 Open Source Matters, Inc. All rights reserved.\",\"authorEmail\":\"a.radtke@derauftritt.de\",\"authorUrl\":\"http:\\/\\/www.der-auftritt.de\",\"version\":\"3.1.0\",\"description\":\"TPL_BEEZ3_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"templateDetails\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, -1),
+(10153, 0, 'protostar', 'template', 'protostar', '', 0, 0, 1, 0, '{\"name\":\"protostar\",\"type\":\"template\",\"creationDate\":\"4\\/30\\/2012\",\"author\":\"Kyle Ledbetter\",\"copyright\":\"Copyright (C) 2005 - 2019 Open Source Matters, Inc. All rights reserved.\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"\",\"version\":\"1.0\",\"description\":\"TPL_PROTOSTAR_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"templateDetails\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, -1),
+(10154, 0, 'hathor', 'template', 'hathor', '', 1, 0, 1, 0, '{\"name\":\"hathor\",\"type\":\"template\",\"creationDate\":\"May 2010\",\"author\":\"Andrea Tarr\",\"copyright\":\"Copyright (C) 2005 - 2019 Open Source Matters, Inc. All rights reserved.\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"\",\"version\":\"3.0.0\",\"description\":\"TPL_HATHOR_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"templateDetails\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, -1);
 
 -- --------------------------------------------------------
 
@@ -1475,9 +1495,8 @@ INSERT INTO `idg2019_extensions` (`extension_id`, `package_id`, `name`, `type`, 
 -- Estrutura da tabela `idg2019_fields`
 --
 
-DROP TABLE IF EXISTS `idg2019_fields`;
-CREATE TABLE IF NOT EXISTS `idg2019_fields` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_fields` (
+  `id` int(10) UNSIGNED NOT NULL,
   `asset_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `context` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `group_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
@@ -1500,15 +1519,8 @@ CREATE TABLE IF NOT EXISTS `idg2019_fields` (
   `created_user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `modified_time` datetime NOT NULL,
   `modified_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `access` int(11) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `idx_checkout` (`checked_out`) USING BTREE,
-  KEY `idx_state` (`state`) USING BTREE,
-  KEY `idx_created_user_id` (`created_user_id`) USING BTREE,
-  KEY `idx_access` (`access`) USING BTREE,
-  KEY `idx_context` (`context`(191)) USING BTREE,
-  KEY `idx_language` (`language`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+  `access` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_fields`
@@ -1531,11 +1543,9 @@ INSERT INTO `idg2019_fields` (`id`, `asset_id`, `context`, `group_id`, `title`, 
 -- Estrutura da tabela `idg2019_fields_categories`
 --
 
-DROP TABLE IF EXISTS `idg2019_fields_categories`;
-CREATE TABLE IF NOT EXISTS `idg2019_fields_categories` (
+CREATE TABLE `idg2019_fields_categories` (
   `field_id` int(11) NOT NULL DEFAULT '0',
-  `category_id` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`field_id`,`category_id`) USING BTREE
+  `category_id` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
@@ -1565,9 +1575,8 @@ INSERT INTO `idg2019_fields_categories` (`field_id`, `category_id`) VALUES
 -- Estrutura da tabela `idg2019_fields_groups`
 --
 
-DROP TABLE IF EXISTS `idg2019_fields_groups`;
-CREATE TABLE IF NOT EXISTS `idg2019_fields_groups` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_fields_groups` (
+  `id` int(10) UNSIGNED NOT NULL,
   `asset_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `context` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
@@ -1583,15 +1592,8 @@ CREATE TABLE IF NOT EXISTS `idg2019_fields_groups` (
   `created_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `modified` datetime NOT NULL,
   `modified_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `access` int(11) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `idx_checkout` (`checked_out`) USING BTREE,
-  KEY `idx_state` (`state`) USING BTREE,
-  KEY `idx_created_by` (`created_by`) USING BTREE,
-  KEY `idx_access` (`access`) USING BTREE,
-  KEY `idx_context` (`context`(191)) USING BTREE,
-  KEY `idx_language` (`language`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+  `access` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_fields_groups`
@@ -1607,13 +1609,10 @@ INSERT INTO `idg2019_fields_groups` (`id`, `asset_id`, `context`, `title`, `note
 -- Estrutura da tabela `idg2019_fields_values`
 --
 
-DROP TABLE IF EXISTS `idg2019_fields_values`;
-CREATE TABLE IF NOT EXISTS `idg2019_fields_values` (
+CREATE TABLE `idg2019_fields_values` (
   `field_id` int(10) UNSIGNED NOT NULL,
   `item_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Allow references to items which have strings as ids, eg. none db systems.',
-  `value` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  KEY `idx_field_id` (`field_id`) USING BTREE,
-  KEY `idx_item_id` (`item_id`(191)) USING BTREE
+  `value` text COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
@@ -1627,28 +1626,24 @@ INSERT INTO `idg2019_fields_values` (`field_id`, `item_id`, `value`) VALUES
 (5, '72', '#FFFFFF'),
 (1, '72', 'gr'),
 (7, '74', 'saiba mais'),
-(2, '74', 'http://www.portalpadrao.gov.br/noticias/conheca-o-novo-portal-padrao-do-governo-federal'),
+(2, '74', 'http://www.portalpadrao.gov.br/noticias/governo-lanca-a-nova-identidade-padrao-de-comunicacao-digital'),
 (6, '74', 'botao'),
 (5, '74', '#3ab09e'),
 (1, '74', 'gr'),
 (3, '74', 'novidade'),
-(2, '75', 'http://link.com'),
+(2, '75', 'https://identidade-digital-de-governo-plone.readthedocs.io/en/latest/'),
 (6, '75', 'geral'),
 (1, '75', 'gr'),
-(2, '76', 'http://flaviodias.com/portalpadrao/'),
 (6, '76', 'titulo'),
 (1, '76', 'gr'),
 (9, '76', 'Acessibilidade'),
 (9, '77', 'Dicas'),
-(2, '77', 'http://flaviodias.com/portalpadrao/'),
 (6, '77', 'titulo'),
 (1, '77', 'default'),
 (9, '78', 'Tendência'),
-(2, '78', 'http://flaviodias.com/portalpadrao/'),
 (6, '78', 'titulo'),
 (1, '78', 'default'),
 (9, '79', 'Temas'),
-(2, '79', 'http://flaviodias.com/portalpadrao/'),
 (6, '79', 'titulo'),
 (1, '79', 'default'),
 (9, '80', 'Temas'),
@@ -1662,9 +1657,8 @@ INSERT INTO `idg2019_fields_values` (`field_id`, `item_id`, `value`) VALUES
 -- Estrutura da tabela `idg2019_finder_filters`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_filters`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_filters` (
-  `filter_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_finder_filters` (
+  `filter_id` int(10) UNSIGNED NOT NULL,
   `title` varchar(255) NOT NULL,
   `alias` varchar(255) NOT NULL,
   `state` tinyint(1) NOT NULL DEFAULT '1',
@@ -1677,8 +1671,7 @@ CREATE TABLE IF NOT EXISTS `idg2019_finder_filters` (
   `checked_out_time` datetime NOT NULL,
   `map_count` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `data` mediumtext NOT NULL,
-  `params` longtext,
-  PRIMARY KEY (`filter_id`) USING BTREE
+  `params` longtext
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -1687,9 +1680,8 @@ CREATE TABLE IF NOT EXISTS `idg2019_finder_filters` (
 -- Estrutura da tabela `idg2019_finder_links`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_links`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_links` (
-  `link_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_finder_links` (
+  `link_id` int(10) UNSIGNED NOT NULL,
   `url` varchar(255) NOT NULL,
   `route` varchar(255) NOT NULL,
   `title` varchar(400) DEFAULT NULL,
@@ -1707,15 +1699,8 @@ CREATE TABLE IF NOT EXISTS `idg2019_finder_links` (
   `list_price` double UNSIGNED NOT NULL DEFAULT '0',
   `sale_price` double UNSIGNED NOT NULL DEFAULT '0',
   `type_id` int(11) NOT NULL,
-  `object` mediumblob NOT NULL,
-  PRIMARY KEY (`link_id`) USING BTREE,
-  KEY `idx_type` (`type_id`) USING BTREE,
-  KEY `idx_md5` (`md5sum`) USING BTREE,
-  KEY `idx_url` (`url`(75)) USING BTREE,
-  KEY `idx_published_list` (`published`,`state`,`access`,`publish_start_date`,`publish_end_date`,`list_price`) USING BTREE,
-  KEY `idx_published_sale` (`published`,`state`,`access`,`publish_start_date`,`publish_end_date`,`sale_price`) USING BTREE,
-  KEY `idx_title` (`title`(100)) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `object` mediumblob NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_finder_links`
@@ -1739,14 +1724,10 @@ INSERT INTO `idg2019_finder_links` (`link_id`, `url`, `route`, `title`, `descrip
 -- Estrutura da tabela `idg2019_finder_links_terms0`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_links_terms0`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_links_terms0` (
+CREATE TABLE `idg2019_finder_links_terms0` (
   `link_id` int(10) UNSIGNED NOT NULL,
   `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
-  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
+  `weight` float UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -1755,14 +1736,10 @@ CREATE TABLE IF NOT EXISTS `idg2019_finder_links_terms0` (
 -- Estrutura da tabela `idg2019_finder_links_terms1`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_links_terms1`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_links_terms1` (
+CREATE TABLE `idg2019_finder_links_terms1` (
   `link_id` int(10) UNSIGNED NOT NULL,
   `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
-  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
+  `weight` float UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -1771,14 +1748,10 @@ CREATE TABLE IF NOT EXISTS `idg2019_finder_links_terms1` (
 -- Estrutura da tabela `idg2019_finder_links_terms2`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_links_terms2`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_links_terms2` (
+CREATE TABLE `idg2019_finder_links_terms2` (
   `link_id` int(10) UNSIGNED NOT NULL,
   `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
-  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
+  `weight` float UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -1787,14 +1760,10 @@ CREATE TABLE IF NOT EXISTS `idg2019_finder_links_terms2` (
 -- Estrutura da tabela `idg2019_finder_links_terms3`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_links_terms3`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_links_terms3` (
+CREATE TABLE `idg2019_finder_links_terms3` (
   `link_id` int(10) UNSIGNED NOT NULL,
   `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
-  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
+  `weight` float UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -1803,14 +1772,10 @@ CREATE TABLE IF NOT EXISTS `idg2019_finder_links_terms3` (
 -- Estrutura da tabela `idg2019_finder_links_terms4`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_links_terms4`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_links_terms4` (
+CREATE TABLE `idg2019_finder_links_terms4` (
   `link_id` int(10) UNSIGNED NOT NULL,
   `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
-  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
+  `weight` float UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -1819,14 +1784,10 @@ CREATE TABLE IF NOT EXISTS `idg2019_finder_links_terms4` (
 -- Estrutura da tabela `idg2019_finder_links_terms5`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_links_terms5`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_links_terms5` (
+CREATE TABLE `idg2019_finder_links_terms5` (
   `link_id` int(10) UNSIGNED NOT NULL,
   `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
-  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
+  `weight` float UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -1835,14 +1796,10 @@ CREATE TABLE IF NOT EXISTS `idg2019_finder_links_terms5` (
 -- Estrutura da tabela `idg2019_finder_links_terms6`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_links_terms6`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_links_terms6` (
+CREATE TABLE `idg2019_finder_links_terms6` (
   `link_id` int(10) UNSIGNED NOT NULL,
   `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
-  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
+  `weight` float UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -1851,14 +1808,10 @@ CREATE TABLE IF NOT EXISTS `idg2019_finder_links_terms6` (
 -- Estrutura da tabela `idg2019_finder_links_terms7`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_links_terms7`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_links_terms7` (
+CREATE TABLE `idg2019_finder_links_terms7` (
   `link_id` int(10) UNSIGNED NOT NULL,
   `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
-  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
+  `weight` float UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -1867,14 +1820,10 @@ CREATE TABLE IF NOT EXISTS `idg2019_finder_links_terms7` (
 -- Estrutura da tabela `idg2019_finder_links_terms8`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_links_terms8`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_links_terms8` (
+CREATE TABLE `idg2019_finder_links_terms8` (
   `link_id` int(10) UNSIGNED NOT NULL,
   `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
-  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
+  `weight` float UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -1883,14 +1832,10 @@ CREATE TABLE IF NOT EXISTS `idg2019_finder_links_terms8` (
 -- Estrutura da tabela `idg2019_finder_links_terms9`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_links_terms9`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_links_terms9` (
+CREATE TABLE `idg2019_finder_links_terms9` (
   `link_id` int(10) UNSIGNED NOT NULL,
   `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
-  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
+  `weight` float UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -1899,14 +1844,10 @@ CREATE TABLE IF NOT EXISTS `idg2019_finder_links_terms9` (
 -- Estrutura da tabela `idg2019_finder_links_termsa`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_links_termsa`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_links_termsa` (
+CREATE TABLE `idg2019_finder_links_termsa` (
   `link_id` int(10) UNSIGNED NOT NULL,
   `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
-  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
+  `weight` float UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -1915,14 +1856,10 @@ CREATE TABLE IF NOT EXISTS `idg2019_finder_links_termsa` (
 -- Estrutura da tabela `idg2019_finder_links_termsb`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_links_termsb`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_links_termsb` (
+CREATE TABLE `idg2019_finder_links_termsb` (
   `link_id` int(10) UNSIGNED NOT NULL,
   `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
-  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
+  `weight` float UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -1931,14 +1868,10 @@ CREATE TABLE IF NOT EXISTS `idg2019_finder_links_termsb` (
 -- Estrutura da tabela `idg2019_finder_links_termsc`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_links_termsc`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_links_termsc` (
+CREATE TABLE `idg2019_finder_links_termsc` (
   `link_id` int(10) UNSIGNED NOT NULL,
   `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
-  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
+  `weight` float UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -1947,14 +1880,10 @@ CREATE TABLE IF NOT EXISTS `idg2019_finder_links_termsc` (
 -- Estrutura da tabela `idg2019_finder_links_termsd`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_links_termsd`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_links_termsd` (
+CREATE TABLE `idg2019_finder_links_termsd` (
   `link_id` int(10) UNSIGNED NOT NULL,
   `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
-  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
+  `weight` float UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -1963,14 +1892,10 @@ CREATE TABLE IF NOT EXISTS `idg2019_finder_links_termsd` (
 -- Estrutura da tabela `idg2019_finder_links_termse`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_links_termse`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_links_termse` (
+CREATE TABLE `idg2019_finder_links_termse` (
   `link_id` int(10) UNSIGNED NOT NULL,
   `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
-  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
+  `weight` float UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -1979,14 +1904,10 @@ CREATE TABLE IF NOT EXISTS `idg2019_finder_links_termse` (
 -- Estrutura da tabela `idg2019_finder_links_termsf`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_links_termsf`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_links_termsf` (
+CREATE TABLE `idg2019_finder_links_termsf` (
   `link_id` int(10) UNSIGNED NOT NULL,
   `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
-  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
+  `weight` float UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -1995,21 +1916,14 @@ CREATE TABLE IF NOT EXISTS `idg2019_finder_links_termsf` (
 -- Estrutura da tabela `idg2019_finder_taxonomy`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_taxonomy`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_taxonomy` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_finder_taxonomy` (
+  `id` int(10) UNSIGNED NOT NULL,
   `parent_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `title` varchar(255) NOT NULL,
   `state` tinyint(1) UNSIGNED NOT NULL DEFAULT '1',
   `access` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
-  `ordering` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `parent_id` (`parent_id`) USING BTREE,
-  KEY `state` (`state`) USING BTREE,
-  KEY `ordering` (`ordering`) USING BTREE,
-  KEY `access` (`access`) USING BTREE,
-  KEY `idx_parent_published` (`parent_id`,`state`,`access`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `ordering` tinyint(1) UNSIGNED NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_finder_taxonomy`
@@ -2035,13 +1949,9 @@ INSERT INTO `idg2019_finder_taxonomy` (`id`, `parent_id`, `title`, `state`, `acc
 -- Estrutura da tabela `idg2019_finder_taxonomy_map`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_taxonomy_map`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_taxonomy_map` (
+CREATE TABLE `idg2019_finder_taxonomy_map` (
   `link_id` int(10) UNSIGNED NOT NULL,
-  `node_id` int(10) UNSIGNED NOT NULL,
-  PRIMARY KEY (`link_id`,`node_id`) USING BTREE,
-  KEY `link_id` (`link_id`) USING BTREE,
-  KEY `node_id` (`node_id`) USING BTREE
+  `node_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
@@ -2088,9 +1998,8 @@ INSERT INTO `idg2019_finder_taxonomy_map` (`link_id`, `node_id`) VALUES
 -- Estrutura da tabela `idg2019_finder_terms`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_terms`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_terms` (
-  `term_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_finder_terms` (
+  `term_id` int(10) UNSIGNED NOT NULL,
   `term` varchar(75) NOT NULL,
   `stem` varchar(75) NOT NULL,
   `common` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
@@ -2098,12 +2007,7 @@ CREATE TABLE IF NOT EXISTS `idg2019_finder_terms` (
   `weight` float UNSIGNED NOT NULL DEFAULT '0',
   `soundex` varchar(75) NOT NULL,
   `links` int(10) NOT NULL DEFAULT '0',
-  `language` char(3) NOT NULL DEFAULT '',
-  PRIMARY KEY (`term_id`) USING BTREE,
-  UNIQUE KEY `idx_term` (`term`) USING BTREE,
-  KEY `idx_term_phrase` (`term`,`phrase`) USING BTREE,
-  KEY `idx_stem_phrase` (`stem`,`phrase`) USING BTREE,
-  KEY `idx_soundex_phrase` (`soundex`,`phrase`) USING BTREE
+  `language` char(3) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -2112,12 +2016,9 @@ CREATE TABLE IF NOT EXISTS `idg2019_finder_terms` (
 -- Estrutura da tabela `idg2019_finder_terms_common`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_terms_common`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_terms_common` (
+CREATE TABLE `idg2019_finder_terms_common` (
   `term` varchar(75) NOT NULL,
-  `language` varchar(3) NOT NULL,
-  KEY `idx_word_lang` (`term`,`language`) USING BTREE,
-  KEY `idx_lang` (`language`) USING BTREE
+  `language` varchar(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
@@ -2247,17 +2148,14 @@ INSERT INTO `idg2019_finder_terms_common` (`term`, `language`) VALUES
 -- Estrutura da tabela `idg2019_finder_tokens`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_tokens`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_tokens` (
+CREATE TABLE `idg2019_finder_tokens` (
   `term` varchar(75) NOT NULL,
   `stem` varchar(75) NOT NULL,
   `common` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `phrase` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `weight` float UNSIGNED NOT NULL DEFAULT '1',
   `context` tinyint(1) UNSIGNED NOT NULL DEFAULT '2',
-  `language` char(3) NOT NULL DEFAULT '',
-  KEY `idx_word` (`term`) USING HASH,
-  KEY `idx_context` (`context`) USING HASH
+  `language` char(3) NOT NULL DEFAULT ''
 ) ENGINE=MEMORY DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED;
 
 -- --------------------------------------------------------
@@ -2266,8 +2164,7 @@ CREATE TABLE IF NOT EXISTS `idg2019_finder_tokens` (
 -- Estrutura da tabela `idg2019_finder_tokens_aggregate`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_tokens_aggregate`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_tokens_aggregate` (
+CREATE TABLE `idg2019_finder_tokens_aggregate` (
   `term_id` int(10) UNSIGNED NOT NULL,
   `map_suffix` char(1) NOT NULL,
   `term` varchar(75) NOT NULL,
@@ -2278,9 +2175,7 @@ CREATE TABLE IF NOT EXISTS `idg2019_finder_tokens_aggregate` (
   `context` tinyint(1) UNSIGNED NOT NULL DEFAULT '2',
   `context_weight` float UNSIGNED NOT NULL,
   `total_weight` float UNSIGNED NOT NULL,
-  `language` char(3) NOT NULL DEFAULT '',
-  KEY `token` (`term`) USING HASH,
-  KEY `keyword_id` (`term_id`) USING HASH
+  `language` char(3) NOT NULL DEFAULT ''
 ) ENGINE=MEMORY DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED;
 
 -- --------------------------------------------------------
@@ -2289,14 +2184,11 @@ CREATE TABLE IF NOT EXISTS `idg2019_finder_tokens_aggregate` (
 -- Estrutura da tabela `idg2019_finder_types`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_types`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_types` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_finder_types` (
+  `id` int(10) UNSIGNED NOT NULL,
   `title` varchar(100) NOT NULL,
-  `mime` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `title` (`title`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `mime` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_finder_types`
@@ -2317,17 +2209,14 @@ INSERT INTO `idg2019_finder_types` (`id`, `title`, `mime`) VALUES
 -- Estrutura da tabela `idg2019_k2_attachments`
 --
 
-DROP TABLE IF EXISTS `idg2019_k2_attachments`;
-CREATE TABLE IF NOT EXISTS `idg2019_k2_attachments` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_k2_attachments` (
+  `id` int(11) NOT NULL,
   `itemID` int(11) NOT NULL,
   `filename` varchar(255) NOT NULL,
   `title` varchar(255) NOT NULL,
   `titleAttribute` text NOT NULL,
-  `hits` int(11) NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `itemID` (`itemID`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `hits` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_k2_attachments`
@@ -2342,9 +2231,8 @@ INSERT INTO `idg2019_k2_attachments` (`id`, `itemID`, `filename`, `title`, `titl
 -- Estrutura da tabela `idg2019_k2_categories`
 --
 
-DROP TABLE IF EXISTS `idg2019_k2_categories`;
-CREATE TABLE IF NOT EXISTS `idg2019_k2_categories` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_k2_categories` (
+  `id` int(11) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
   `alias` varchar(255) NOT NULL,
   `description` text NOT NULL,
@@ -2357,16 +2245,8 @@ CREATE TABLE IF NOT EXISTS `idg2019_k2_categories` (
   `params` text NOT NULL,
   `trash` smallint(6) NOT NULL DEFAULT '0',
   `plugins` text NOT NULL,
-  `language` char(7) NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `category` (`published`,`access`,`trash`) USING BTREE,
-  KEY `parent` (`parent`) USING BTREE,
-  KEY `ordering` (`ordering`) USING BTREE,
-  KEY `published` (`published`) USING BTREE,
-  KEY `access` (`access`) USING BTREE,
-  KEY `trash` (`trash`) USING BTREE,
-  KEY `language` (`language`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `language` char(7) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_k2_categories`
@@ -2385,9 +2265,8 @@ INSERT INTO `idg2019_k2_categories` (`id`, `name`, `alias`, `description`, `pare
 -- Estrutura da tabela `idg2019_k2_comments`
 --
 
-DROP TABLE IF EXISTS `idg2019_k2_comments`;
-CREATE TABLE IF NOT EXISTS `idg2019_k2_comments` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_k2_comments` (
+  `id` int(11) NOT NULL,
   `itemID` int(11) NOT NULL,
   `userID` int(11) NOT NULL,
   `userName` varchar(255) NOT NULL,
@@ -2395,13 +2274,7 @@ CREATE TABLE IF NOT EXISTS `idg2019_k2_comments` (
   `commentText` text NOT NULL,
   `commentEmail` varchar(255) NOT NULL,
   `commentURL` varchar(255) NOT NULL,
-  `published` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `itemID` (`itemID`) USING BTREE,
-  KEY `userID` (`userID`) USING BTREE,
-  KEY `published` (`published`) USING BTREE,
-  KEY `latestComments` (`published`,`commentDate`) USING BTREE,
-  KEY `countComments` (`itemID`,`published`) USING BTREE
+  `published` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -2410,20 +2283,15 @@ CREATE TABLE IF NOT EXISTS `idg2019_k2_comments` (
 -- Estrutura da tabela `idg2019_k2_extra_fields`
 --
 
-DROP TABLE IF EXISTS `idg2019_k2_extra_fields`;
-CREATE TABLE IF NOT EXISTS `idg2019_k2_extra_fields` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_k2_extra_fields` (
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `value` text NOT NULL,
   `type` varchar(255) NOT NULL,
   `group` int(11) NOT NULL,
   `published` tinyint(4) NOT NULL,
-  `ordering` int(11) NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `group` (`group`) USING BTREE,
-  KEY `published` (`published`) USING BTREE,
-  KEY `ordering` (`ordering`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `ordering` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_k2_extra_fields`
@@ -2439,12 +2307,10 @@ INSERT INTO `idg2019_k2_extra_fields` (`id`, `name`, `value`, `type`, `group`, `
 -- Estrutura da tabela `idg2019_k2_extra_fields_groups`
 --
 
-DROP TABLE IF EXISTS `idg2019_k2_extra_fields_groups`;
-CREATE TABLE IF NOT EXISTS `idg2019_k2_extra_fields_groups` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+CREATE TABLE `idg2019_k2_extra_fields_groups` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_k2_extra_fields_groups`
@@ -2460,9 +2326,8 @@ INSERT INTO `idg2019_k2_extra_fields_groups` (`id`, `name`) VALUES
 -- Estrutura da tabela `idg2019_k2_items`
 --
 
-DROP TABLE IF EXISTS `idg2019_k2_items`;
-CREATE TABLE IF NOT EXISTS `idg2019_k2_items` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_k2_items` (
+  `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `alias` varchar(255) DEFAULT NULL,
   `catid` int(11) NOT NULL,
@@ -2497,18 +2362,8 @@ CREATE TABLE IF NOT EXISTS `idg2019_k2_items` (
   `metadata` text NOT NULL,
   `metakey` text NOT NULL,
   `plugins` text NOT NULL,
-  `language` char(7) NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `item` (`published`,`publish_up`,`publish_down`,`trash`,`access`) USING BTREE,
-  KEY `catid` (`catid`) USING BTREE,
-  KEY `created_by` (`created_by`) USING BTREE,
-  KEY `ordering` (`ordering`) USING BTREE,
-  KEY `featured` (`featured`) USING BTREE,
-  KEY `featured_ordering` (`featured_ordering`) USING BTREE,
-  KEY `hits` (`hits`) USING BTREE,
-  KEY `created` (`created`) USING BTREE,
-  KEY `language` (`language`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `language` char(7) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_k2_items`
@@ -2530,8 +2385,7 @@ INSERT INTO `idg2019_k2_items` (`id`, `title`, `alias`, `catid`, `published`, `i
 -- Estrutura da tabela `idg2019_k2_log`
 --
 
-DROP TABLE IF EXISTS `idg2019_k2_log`;
-CREATE TABLE IF NOT EXISTS `idg2019_k2_log` (
+CREATE TABLE `idg2019_k2_log` (
   `status` int(11) NOT NULL,
   `response` text NOT NULL,
   `timestamp` datetime NOT NULL
@@ -2543,13 +2397,11 @@ CREATE TABLE IF NOT EXISTS `idg2019_k2_log` (
 -- Estrutura da tabela `idg2019_k2_rating`
 --
 
-DROP TABLE IF EXISTS `idg2019_k2_rating`;
-CREATE TABLE IF NOT EXISTS `idg2019_k2_rating` (
+CREATE TABLE `idg2019_k2_rating` (
   `itemID` int(11) NOT NULL DEFAULT '0',
   `rating_sum` int(11) UNSIGNED NOT NULL DEFAULT '0',
   `rating_count` int(11) UNSIGNED NOT NULL DEFAULT '0',
-  `lastip` varchar(50) NOT NULL DEFAULT '',
-  PRIMARY KEY (`itemID`) USING BTREE
+  `lastip` varchar(50) NOT NULL DEFAULT ''
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -2558,14 +2410,11 @@ CREATE TABLE IF NOT EXISTS `idg2019_k2_rating` (
 -- Estrutura da tabela `idg2019_k2_tags`
 --
 
-DROP TABLE IF EXISTS `idg2019_k2_tags`;
-CREATE TABLE IF NOT EXISTS `idg2019_k2_tags` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_k2_tags` (
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `published` smallint(6) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `published` (`published`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `published` smallint(6) NOT NULL DEFAULT '0'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_k2_tags`
@@ -2581,15 +2430,11 @@ INSERT INTO `idg2019_k2_tags` (`id`, `name`, `published`) VALUES
 -- Estrutura da tabela `idg2019_k2_tags_xref`
 --
 
-DROP TABLE IF EXISTS `idg2019_k2_tags_xref`;
-CREATE TABLE IF NOT EXISTS `idg2019_k2_tags_xref` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_k2_tags_xref` (
+  `id` int(11) NOT NULL,
   `tagID` int(11) NOT NULL,
-  `itemID` int(11) NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `tagID` (`tagID`) USING BTREE,
-  KEY `itemID` (`itemID`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED;
+  `itemID` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED;
 
 --
 -- Extraindo dados da tabela `idg2019_k2_tags_xref`
@@ -2611,9 +2456,8 @@ INSERT INTO `idg2019_k2_tags_xref` (`id`, `tagID`, `itemID`) VALUES
 -- Estrutura da tabela `idg2019_k2_users`
 --
 
-DROP TABLE IF EXISTS `idg2019_k2_users`;
-CREATE TABLE IF NOT EXISTS `idg2019_k2_users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_k2_users` (
+  `id` int(11) NOT NULL,
   `userID` int(11) NOT NULL,
   `userName` varchar(255) DEFAULT NULL,
   `gender` enum('m','f') NOT NULL DEFAULT 'm',
@@ -2624,10 +2468,7 @@ CREATE TABLE IF NOT EXISTS `idg2019_k2_users` (
   `plugins` text NOT NULL,
   `ip` varchar(15) NOT NULL,
   `hostname` varchar(255) NOT NULL,
-  `notes` text NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `userID` (`userID`) USING BTREE,
-  KEY `group` (`group`) USING BTREE
+  `notes` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -2636,13 +2477,11 @@ CREATE TABLE IF NOT EXISTS `idg2019_k2_users` (
 -- Estrutura da tabela `idg2019_k2_user_groups`
 --
 
-DROP TABLE IF EXISTS `idg2019_k2_user_groups`;
-CREATE TABLE IF NOT EXISTS `idg2019_k2_user_groups` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_k2_user_groups` (
+  `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
-  `permissions` text NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `permissions` text NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_k2_user_groups`
@@ -2658,9 +2497,8 @@ INSERT INTO `idg2019_k2_user_groups` (`id`, `name`, `permissions`) VALUES
 -- Estrutura da tabela `idg2019_languages`
 --
 
-DROP TABLE IF EXISTS `idg2019_languages`;
-CREATE TABLE IF NOT EXISTS `idg2019_languages` (
-  `lang_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_languages` (
+  `lang_id` int(11) UNSIGNED NOT NULL,
   `asset_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `lang_code` char(7) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `title` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2673,13 +2511,8 @@ CREATE TABLE IF NOT EXISTS `idg2019_languages` (
   `sitename` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `published` int(11) NOT NULL DEFAULT '0',
   `access` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `ordering` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`lang_id`) USING BTREE,
-  UNIQUE KEY `idx_sef` (`sef`) USING BTREE,
-  UNIQUE KEY `idx_langcode` (`lang_code`) USING BTREE,
-  KEY `idx_access` (`access`) USING BTREE,
-  KEY `idx_ordering` (`ordering`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `ordering` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_languages`
@@ -2694,9 +2527,8 @@ INSERT INTO `idg2019_languages` (`lang_id`, `asset_id`, `lang_code`, `title`, `t
 -- Estrutura da tabela `idg2019_menu`
 --
 
-DROP TABLE IF EXISTS `idg2019_menu`;
-CREATE TABLE IF NOT EXISTS `idg2019_menu` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_menu` (
+  `id` int(11) NOT NULL,
   `menutype` varchar(24) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The type of menu this item belongs to. FK to x3dts_menu_types.menutype',
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The display title of the menu item.',
   `alias` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT 'The SEF alias of the menu item.',
@@ -2719,16 +2551,8 @@ CREATE TABLE IF NOT EXISTS `idg2019_menu` (
   `rgt` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set rgt.',
   `home` tinyint(3) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Indicates if this menu item is the home or default page.',
   `language` char(7) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `client_id` tinyint(4) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `idx_client_id_parent_id_alias_language` (`client_id`,`parent_id`,`alias`(100),`language`) USING BTREE,
-  KEY `idx_componentid` (`component_id`,`menutype`,`published`,`access`) USING BTREE,
-  KEY `idx_menutype` (`menutype`) USING BTREE,
-  KEY `idx_left_right` (`lft`,`rgt`) USING BTREE,
-  KEY `idx_language` (`language`) USING BTREE,
-  KEY `idx_alias` (`alias`(100)) USING BTREE,
-  KEY `idx_path` (`path`(100)) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=308 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `client_id` tinyint(4) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_menu`
@@ -2771,7 +2595,7 @@ INSERT INTO `idg2019_menu` (`id`, `menutype`, `title`, `alias`, `note`, `path`, 
 (119, 'informacao-ao-cidadao', 'Informações classificadas', 'informacoes-classificadas', '', 'informacoes-classificadas', 'index.php?option=com_content&view=article&id=14', 'component', 1, 1, 1, 22, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{\"show_title\":\"\",\"link_titles\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"0\",\"link_author\":\"\",\"show_create_date\":\"0\",\"show_modify_date\":\"1\",\"show_publish_date\":\"1\",\"show_item_navigation\":\"\",\"show_vote\":\"\",\"show_tags\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_hits\":\"0\",\"show_noauth\":\"\",\"urls_position\":\"\",\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_text\":1,\"page_title\":\"\",\"show_page_heading\":0,\"page_heading\":\"\",\"pageclass_sfx\":\"\",\"menu-meta_description\":\"\",\"menu-meta_keywords\":\"\",\"robots\":\"\",\"secure\":0}', 27, 28, 0, '*', 0),
 (120, 'informacao-ao-cidadao', 'Serviço de Informação ao Cidadão (SIC)', 'servico-de-informacao-ao-cidadao-sic', '', 'servico-de-informacao-ao-cidadao-sic', 'index.php?option=com_content&view=article&id=15', 'component', 1, 1, 1, 22, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{\"show_title\":\"\",\"link_titles\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"0\",\"link_author\":\"\",\"show_create_date\":\"0\",\"show_modify_date\":\"1\",\"show_publish_date\":\"1\",\"show_item_navigation\":\"\",\"show_vote\":\"\",\"show_tags\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_hits\":\"0\",\"show_noauth\":\"\",\"urls_position\":\"\",\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_text\":1,\"page_title\":\"\",\"show_page_heading\":0,\"page_heading\":\"\",\"pageclass_sfx\":\"\",\"menu-meta_description\":\"\",\"menu-meta_keywords\":\"\",\"robots\":\"\",\"secure\":0}', 29, 30, 0, '*', 0),
 (121, 'mainmenu', 'Últimas Notícias', 'ultimas-noticias', '', 'ultimas-noticias', 'index.php?option=com_content&view=category&id=17', 'component', 1, 1, 1, 22, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{\"show_category_title\":\"\",\"show_description\":\"\",\"show_description_image\":\"\",\"maxLevel\":\"\",\"show_empty_categories\":\"\",\"show_no_articles\":\"\",\"show_category_heading_title\":\"\",\"show_subcat_desc\":\"\",\"show_cat_num_articles\":\"\",\"page_subheading\":\"\",\"show_pagination_limit\":\"\",\"filter_field\":\"\",\"show_headings\":\"\",\"list_show_date\":\"\",\"date_format\":\"\",\"list_show_hits\":\"\",\"list_show_author\":\"\",\"orderby_pri\":\"\",\"orderby_sec\":\"\",\"order_date\":\"\",\"show_pagination\":\"\",\"show_pagination_results\":\"\",\"display_num\":\"10\",\"show_title\":\"\",\"link_titles\":\"\",\"show_intro\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"0\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"1\",\"show_publish_date\":\"1\",\"show_item_navigation\":\"\",\"show_vote\":\"\",\"show_readmore\":\"\",\"show_readmore_title\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_hits\":\"0\",\"show_noauth\":\"\",\"show_feed_link\":\"\",\"feed_summary\":\"\",\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_text\":1,\"page_title\":\"\",\"show_page_heading\":0,\"page_heading\":\"\",\"pageclass_sfx\":\"\",\"menu-meta_description\":\"\",\"menu-meta_keywords\":\"\",\"robots\":\"\",\"secure\":0}', 167, 168, 0, '*', 0),
-(124, 'manuais', 'Guia de Estilo', 'guia-de-estilo', '', 'guia-de-estilo', 'index.php?option=com_content&view=article&id=26', 'component', 1, 1, 1, 22, 0, '0000-00-00 00:00:00', 0, 1, ' ', 0, '{\"show_title\":\"\",\"link_titles\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"info_block_show_title\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_associations\":\"\",\"show_author\":\"0\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"1\",\"show_publish_date\":\"1\",\"show_item_navigation\":\"\",\"show_vote\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_hits\":\"0\",\"show_tags\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_image_css\":\"\",\"menu_text\":1,\"menu_show\":1,\"page_title\":\"\",\"show_page_heading\":\"0\",\"page_heading\":\"\",\"pageclass_sfx\":\"identidade-digital-1\",\"menu-meta_description\":\"\",\"menu-meta_keywords\":\"\",\"robots\":\"\",\"secure\":0}', 3, 4, 0, '*', 0),
+(124, 'manuais', 'Guia de Estilo', 'guia-de-estilo', '', 'guia-de-estilo', 'http://www.portalpadrao.gov.br/manuais/guia-de-estilo/guia-de-estilo-2-0-1.pdf/@@download/file/guia-de-estilo-2.0.1.pdf', 'url', 1, 1, 1, 0, 0, '0000-00-00 00:00:00', 0, 1, ' ', 0, '{\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu-anchor_rel\":\"\",\"menu_image\":\"\",\"menu_image_css\":\"\",\"menu_text\":1,\"menu_show\":1}', 3, 4, 0, '*', 0),
 (125, 'mainmenu', 'Conteudo do Menu Superior', 'conteudo-do-menu-superior', '', 'conteudo-do-menu-superior', 'index.php?option=com_content&view=category&id=33', 'component', 1, 1, 1, 22, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{\"show_category_heading_title_text\":\"\",\"show_category_title\":\"\",\"show_description\":\"\",\"show_description_image\":\"\",\"maxLevel\":\"\",\"show_empty_categories\":\"\",\"show_no_articles\":\"\",\"show_subcat_desc\":\"\",\"show_cat_num_articles\":\"\",\"page_subheading\":\"\",\"show_pagination_limit\":\"\",\"filter_field\":\"\",\"show_headings\":\"\",\"list_show_date\":\"\",\"date_format\":\"\",\"list_show_hits\":\"\",\"list_show_author\":\"\",\"orderby_pri\":\"\",\"orderby_sec\":\"\",\"order_date\":\"\",\"show_pagination\":\"\",\"show_pagination_results\":\"\",\"display_num\":\"10\",\"show_title\":\"\",\"link_titles\":\"\",\"show_intro\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_vote\":\"\",\"show_readmore\":\"\",\"show_readmore_title\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"show_feed_link\":\"\",\"feed_summary\":\"\",\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_text\":1,\"page_title\":\"\",\"show_page_heading\":0,\"page_heading\":\"\",\"pageclass_sfx\":\"\",\"menu-meta_description\":\"\",\"menu-meta_keywords\":\"\",\"robots\":\"\",\"secure\":0}', 169, 170, 0, '*', 0),
 (126, 'em-destaque', 'Destaque 1', '2013-10-27-00-11-04', '', '2013-10-27-00-11-04', '#', 'url', 1, 1, 1, 0, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_text\":1}', 99, 100, 0, '*', 0),
 (127, 'em-destaque', 'Destaque 2', '2013-10-27-00-11-5', '', '2013-10-27-00-11-5', '#', 'url', 1, 1, 1, 0, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_text\":1}', 101, 102, 0, '*', 0),
@@ -2779,7 +2603,7 @@ INSERT INTO `idg2019_menu` (`id`, `menutype`, `title`, `alias`, `note`, `path`, 
 (129, 'em-destaque', 'Destaque 4', '2013-10-27-00-11-7', '', '2013-10-27-00-11-7', '#', 'url', 1, 1, 1, 0, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_text\":1}', 105, 106, 0, '*', 0),
 (130, 'em-destaque', 'Destaque 5', '2013-10-27-00-11-8', '', '2013-10-27-00-11-8', '#', 'url', 1, 1, 1, 0, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_text\":1}', 107, 108, 0, '*', 0),
 (131, 'servicos', 'Perguntas frequentes', 'perguntas-frequentes', '', 'perguntas-frequentes', 'index.php?option=com_content&view=article&id=28', 'component', 0, 1, 1, 22, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{\"show_title\":\"\",\"link_titles\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"0\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"1\",\"show_publish_date\":\"1\",\"show_item_navigation\":\"\",\"show_vote\":\"\",\"show_tags\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_hits\":\"0\",\"show_noauth\":\"\",\"urls_position\":\"\",\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_text\":1,\"page_title\":\"\",\"show_page_heading\":0,\"page_heading\":\"\",\"pageclass_sfx\":\"\",\"menu-meta_description\":\"\",\"menu-meta_keywords\":\"\",\"robots\":\"\",\"secure\":0}', 109, 110, 0, '*', 0),
-(132, 'servicos', 'Contato', 'contato', '', 'contato', 'index.php?option=com_content&view=article&id=29', 'component', 0, 1, 1, 22, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{\"show_title\":\"\",\"link_titles\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_vote\":\"\",\"show_tags\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_text\":1,\"page_title\":\"\",\"show_page_heading\":0,\"page_heading\":\"\",\"pageclass_sfx\":\"\",\"menu-meta_description\":\"\",\"menu-meta_keywords\":\"\",\"robots\":\"\",\"secure\":0}', 111, 114, 0, '*', 0),
+(132, 'servicos', 'Contato', 'contato', '', 'contato', 'index.php?option=com_content&view=article&id=81', 'component', 0, 1, 1, 22, 0, '0000-00-00 00:00:00', 0, 1, ' ', 0, '{\"show_title\":\"\",\"link_titles\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"info_block_show_title\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_associations\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_vote\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_hits\":\"\",\"show_tags\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_image_css\":\"\",\"menu_text\":1,\"menu_show\":1,\"page_title\":\"\",\"show_page_heading\":\"0\",\"page_heading\":\"\",\"pageclass_sfx\":\"\",\"menu-meta_description\":\"\",\"menu-meta_keywords\":\"\",\"robots\":\"\",\"secure\":0}', 111, 114, 0, '*', 0),
 (133, 'servicos', 'Serviços da [Denominação]', 'servicos-da-denominacao', '', 'servicos-da-denominacao', 'index.php?option=com_content&view=article&id=30', 'component', 0, 1, 1, 22, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{\"show_title\":\"\",\"link_titles\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"1\",\"show_publish_date\":\"1\",\"show_item_navigation\":\"\",\"show_vote\":\"\",\"show_tags\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_hits\":\"0\",\"show_noauth\":\"\",\"urls_position\":\"\",\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_text\":1,\"page_title\":\"\",\"show_page_heading\":0,\"page_heading\":\"\",\"pageclass_sfx\":\"\",\"menu-meta_description\":\"\",\"menu-meta_keywords\":\"\",\"robots\":\"\",\"secure\":0}', 115, 116, 0, '*', 0),
 (134, 'servicos', 'Dados abertos', 'dados-abertos', '', 'dados-abertos', 'index.php?option=com_content&view=article&id=31', 'component', 0, 1, 1, 22, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{\"show_title\":\"\",\"link_titles\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"0\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"1\",\"show_publish_date\":\"1\",\"show_item_navigation\":\"\",\"show_vote\":\"\",\"show_tags\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_hits\":\"0\",\"show_noauth\":\"\",\"urls_position\":\"\",\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_text\":1,\"page_title\":\"\",\"show_page_heading\":0,\"page_heading\":\"\",\"pageclass_sfx\":\"\",\"menu-meta_description\":\"\",\"menu-meta_keywords\":\"\",\"robots\":\"\",\"secure\":0}', 117, 118, 0, '*', 0),
 (135, 'servicos', 'Área de imprensa', 'area-de-imprensa', '', 'area-de-imprensa', 'index.php?option=com_blankcomponent&view=default', 'component', 0, 1, 1, 10024, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_text\":1,\"page_title\":\"\\u00c1rea de imprensa\",\"show_page_heading\":0,\"page_heading\":\"\",\"pageclass_sfx\":\"area-de-imprensa\",\"menu-meta_description\":\"\",\"menu-meta_keywords\":\"\",\"robots\":\"\",\"secure\":0}', 119, 120, 0, '*', 0),
@@ -2844,7 +2668,7 @@ INSERT INTO `idg2019_menu` (`id`, `menutype`, `title`, `alias`, `note`, `path`, 
 (196, 'main', 'COM_PHOCAGALLERY_TAGS', 'com-phocagallery-tags', '', 'com-phocagallery/com-phocagallery-tags', 'index.php?option=com_phocagallery&view=phocagallerytags', 'component', 1, 185, 2, 10034, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocagallery/images/administrator/icon-16-pg-menu-tags.png', 0, '', 248, 249, 0, '', 1),
 (197, 'main', 'COM_PHOCAGALLERY_STYLES', 'com-phocagallery-styles', '', 'com-phocagallery/com-phocagallery-styles', 'index.php?option=com_phocagallery&view=phocagalleryefs', 'component', 1, 185, 2, 10034, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocagallery/images/administrator/icon-16-pg-menu-styles.png', 0, '', 250, 251, 0, '', 1),
 (198, 'main', 'COM_PHOCAGALLERY_INFO', 'com-phocagallery-info', '', 'com-phocagallery/com-phocagallery-info', 'index.php?option=com_phocagallery&view=phocagalleryin', 'component', 1, 185, 2, 10034, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocagallery/images/administrator/icon-16-pg-menu-info.png', 0, '', 252, 253, 0, '', 1),
-(199, 'manuais', 'Manual de Uso de Redes Sociais', 'manual-de-uso-de-redes-sociais', '', 'manual-de-uso-de-redes-sociais', 'index.php?option=com_blankcomponent&view=default', 'component', 1, 1, 1, 10024, 0, '0000-00-00 00:00:00', 0, 1, ' ', 0, '{\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_image_css\":\"\",\"menu_text\":1,\"menu_show\":1,\"page_title\":\"Manuais\",\"show_page_heading\":\"0\",\"page_heading\":\"\",\"pageclass_sfx\":\"manuais\",\"menu-meta_description\":\"\",\"menu-meta_keywords\":\"\",\"robots\":\"\",\"secure\":0}', 9, 10, 0, '*', 0),
+(199, 'manuais', 'Manual de Uso de Redes Sociais', 'manual-de-uso-de-redes-sociais', '', 'manual-de-uso-de-redes-sociais', 'http://www.portalpadrao.gov.br/manuais/manual-de-uso-de-redes-sociais/manual-de-uso-de-redes-sociais-pagina-a-pagina-1.pdf/@@download/file/Manual%20de%20Uso%20de%20Redes%20Sociais%20pagina%20a%20pagina.pdf', 'url', 1, 1, 1, 0, 0, '0000-00-00 00:00:00', 0, 1, ' ', 0, '{\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu-anchor_rel\":\"\",\"menu_image\":\"\",\"menu_image_css\":\"\",\"menu_text\":1,\"menu_show\":1}', 9, 10, 0, '*', 0),
 (211, 'assuntos', 'Menu de 2. nível', 'menu-nivel-2', '', 'assunto-1/menu-nivel-2', 'index.php?option=com_content&view=article&id=54', 'component', 0, 107, 2, 22, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{\"show_title\":\"\",\"link_titles\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_vote\":\"\",\"show_tags\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_text\":1,\"page_title\":\"\",\"show_page_heading\":0,\"page_heading\":\"\",\"pageclass_sfx\":\"\",\"menu-meta_description\":\"\",\"menu-meta_keywords\":\"\",\"robots\":\"\",\"secure\":0}', 132, 145, 0, '*', 0),
 (212, 'assuntos', 'Menu de 3. nível', 'menu-nivel-3', '', 'assunto-1/menu-nivel-2/menu-nivel-3', 'index.php?option=com_content&view=featured', 'component', 0, 211, 3, 22, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{\"featured_categories\":[\"43\"],\"layout_type\":\"blog\",\"num_leading_articles\":\"2\",\"num_intro_articles\":\"0\",\"num_columns\":\"1\",\"num_links\":\"0\",\"multi_column_order\":\"\",\"orderby_pri\":\"\",\"orderby_sec\":\"\",\"order_date\":\"\",\"show_pagination\":\"\",\"show_pagination_results\":\"\",\"show_title\":\"\",\"link_titles\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_vote\":\"\",\"show_readmore\":\"\",\"show_readmore_title\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"show_feed_link\":\"\",\"feed_summary\":\"\",\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_text\":1,\"page_title\":\"\",\"show_page_heading\":1,\"page_heading\":\"Menu de 3. n\\u00edvel\",\"pageclass_sfx\":\"\",\"menu-meta_description\":\"\",\"menu-meta_keywords\":\"\",\"robots\":\"\",\"secure\":0}', 133, 144, 0, '*', 0),
 (213, 'assuntos', 'Página 2: título do texto institucional', 'pagina-2-titulo-do-texto-institucional', '', 'assunto-1/menu-nivel-2/menu-nivel-3/pagina-2-titulo-do-texto-institucional', 'index.php?option=com_content&view=article&id=55', 'component', 0, 212, 4, 22, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{\"show_title\":\"\",\"link_titles\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_vote\":\"\",\"show_tags\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_text\":1,\"page_title\":\"\",\"show_page_heading\":0,\"page_heading\":\"\",\"pageclass_sfx\":\"\",\"menu-meta_description\":\"\",\"menu-meta_keywords\":\"\",\"robots\":\"\",\"secure\":0}', 134, 141, 0, '*', 0),
@@ -2896,15 +2720,15 @@ INSERT INTO `idg2019_menu` (`id`, `menutype`, `title`, `alias`, `note`, `path`, 
 (294, 'informacao-ao-cidadao', 'Dados Abertos 1', 'dados-abertos-1', '', 'dados-abertos-1', '#', 'url', 1, 1, 1, 0, 0, '0000-00-00 00:00:00', 0, 1, ' ', 0, '{\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu-anchor_rel\":\"\",\"menu_image\":\"\",\"menu_image_css\":\"\",\"menu_text\":1,\"menu_show\":1}', 31, 32, 0, '*', 0),
 (295, 'informacao-ao-cidadao', 'Sistemas', 'sistemas', '', 'sistemas', '#', 'url', 1, 1, 1, 0, 0, '0000-00-00 00:00:00', 0, 1, ' ', 0, '{\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu-anchor_rel\":\"\",\"menu_image\":\"\",\"menu_image_css\":\"\",\"menu_text\":1,\"menu_show\":1}', 321, 322, 0, '*', 0),
 (296, 'informacao-ao-cidadao', 'Biblioteca', 'biblioteca', '', 'biblioteca', '#', 'url', 1, 1, 1, 0, 0, '0000-00-00 00:00:00', 0, 1, ' ', 0, '{\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu-anchor_rel\":\"\",\"menu_image\":\"\",\"menu_image_css\":\"\",\"menu_text\":1,\"menu_show\":1}', 323, 324, 0, '*', 0),
-(297, 'contato', 'Fale Conosco', 'fale-conosco', '', 'fale-conosco', '#', 'url', 1, 1, 1, 0, 0, '0000-00-00 00:00:00', 0, 1, ' ', 0, '{\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu-anchor_rel\":\"\",\"menu_image\":\"\",\"menu_image_css\":\"\",\"menu_text\":1,\"menu_show\":1}', 325, 326, 0, '*', 0),
-(298, 'manuais', 'Diretrizes', 'diretrizes', '', 'diretrizes', '#', 'url', 1, 1, 1, 0, 0, '0000-00-00 00:00:00', 0, 1, ' ', 0, '{\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu-anchor_rel\":\"\",\"menu_image\":\"\",\"menu_image_css\":\"\",\"menu_text\":1,\"menu_show\":1}', 1, 2, 0, '*', 0),
-(299, 'manuais', 'Gestão de Conteúdo', 'gestao-de-conteudo', '', 'gestao-de-conteudo', '#', 'url', 1, 1, 1, 0, 0, '0000-00-00 00:00:00', 0, 1, ' ', 0, '{\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu-anchor_rel\":\"\",\"menu_image\":\"\",\"menu_image_css\":\"\",\"menu_text\":1,\"menu_show\":1}', 5, 6, 0, '*', 0),
-(300, 'manuais', 'Barra de Identidade Visual', 'barra-de-identidade-visual', '', 'barra-de-identidade-visual', '#', 'url', 1, 1, 1, 0, 0, '0000-00-00 00:00:00', 0, 1, ' ', 0, '{\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu-anchor_rel\":\"\",\"menu_image\":\"\",\"menu_image_css\":\"\",\"menu_text\":1,\"menu_show\":1}', 7, 8, 0, '*', 0),
-(301, 'servicos', 'Notícias', 'noticias', '', 'noticias', '#', 'url', 1, 1, 1, 0, 0, '0000-00-00 00:00:00', 0, 1, ' ', 0, '{\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu-anchor_rel\":\"\",\"menu_image\":\"\",\"menu_image_css\":\"\",\"menu_text\":1,\"menu_show\":1}', 327, 328, 0, '*', 0),
-(302, 'servicos', 'Manuais', 'manuais', '', 'manuais', '#', 'url', 1, 1, 1, 0, 0, '0000-00-00 00:00:00', 0, 1, ' ', 0, '{\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu-anchor_rel\":\"\",\"menu_image\":\"\",\"menu_image_css\":\"\",\"menu_text\":1,\"menu_show\":1}', 329, 330, 0, '*', 0),
+(297, 'contato', 'Fale Conosco', 'fale-conosco', '', 'fale-conosco', 'index.php?option=com_content&view=article&id=81', 'component', 1, 1, 1, 22, 0, '0000-00-00 00:00:00', 0, 1, ' ', 0, '{\"show_title\":\"\",\"link_titles\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"info_block_show_title\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_associations\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_vote\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_hits\":\"\",\"show_tags\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_image_css\":\"\",\"menu_text\":1,\"menu_show\":1,\"page_title\":\"\",\"show_page_heading\":\"\",\"page_heading\":\"\",\"pageclass_sfx\":\"\",\"menu-meta_description\":\"\",\"menu-meta_keywords\":\"\",\"robots\":\"\",\"secure\":0}', 325, 326, 0, '*', 0),
+(298, 'manuais', 'Diretrizes', 'diretrizes', '', 'diretrizes', 'http://www.portalpadrao.gov.br/manuais/diretrizes/manual-de-diretrizes-1.pdf/@@download/file/Manual%20de%20Diretrizes.pdf', 'url', 1, 1, 1, 0, 0, '0000-00-00 00:00:00', 0, 1, ' ', 0, '{\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu-anchor_rel\":\"\",\"menu_image\":\"\",\"menu_image_css\":\"\",\"menu_text\":1,\"menu_show\":1}', 1, 2, 0, '*', 0),
+(299, 'manuais', 'Gestão de Conteúdo', 'gestao-de-conteudo', '', 'gestao-de-conteudo', 'http://www.portalpadrao.gov.br/manuais/gestao-de-conteudo/manual-gestao_rev.pdf/@@download/file/Manual%20Gestao_rev.pdf', 'url', 1, 1, 1, 0, 0, '0000-00-00 00:00:00', 0, 1, ' ', 0, '{\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu-anchor_rel\":\"\",\"menu_image\":\"\",\"menu_image_css\":\"\",\"menu_text\":1,\"menu_show\":1}', 5, 6, 0, '*', 0),
+(300, 'manuais', 'Barra de Identidade Visual', 'barra-de-identidade-visual', '', 'barra-de-identidade-visual', 'http://www.portalpadrao.gov.br/manuais/barra-de-identidade-visual/manual-da-barra-de-identidade-visual-1.pdf/@@download/file/Manual%20da%20Barra%20de%20Identidade%20Visual%20.pdf', 'url', 1, 1, 1, 0, 0, '0000-00-00 00:00:00', 0, 1, ' ', 0, '{\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu-anchor_rel\":\"\",\"menu_image\":\"\",\"menu_image_css\":\"\",\"menu_text\":1,\"menu_show\":1}', 7, 8, 0, '*', 0),
+(301, 'servicos', 'Notícias', 'noticias', '', 'noticias', 'index.php?option=com_content&view=category&id=17', 'component', 1, 1, 1, 22, 0, '0000-00-00 00:00:00', 0, 1, ' ', 0, '{\"show_category_title\":\"\",\"show_description\":\"\",\"show_description_image\":\"\",\"maxLevel\":\"\",\"show_empty_categories\":\"\",\"show_no_articles\":\"\",\"show_category_heading_title_text\":\"\",\"show_subcat_desc\":\"\",\"show_cat_num_articles\":\"\",\"show_cat_tags\":\"\",\"page_subheading\":\"\",\"show_pagination_limit\":\"\",\"filter_field\":\"\",\"show_headings\":\"\",\"list_show_date\":\"\",\"date_format\":\"\",\"list_show_hits\":\"\",\"list_show_author\":\"\",\"list_show_votes\":\"\",\"list_show_ratings\":\"\",\"orderby_pri\":\"\",\"orderby_sec\":\"\",\"order_date\":\"\",\"show_pagination\":\"\",\"show_pagination_results\":\"\",\"display_num\":\"10\",\"show_featured\":\"\",\"article_layout\":\"_:default\",\"show_title\":\"\",\"link_titles\":\"\",\"show_intro\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_associations\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_vote\":\"\",\"show_readmore\":\"\",\"show_readmore_title\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"show_feed_link\":\"\",\"feed_summary\":\"\",\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_image_css\":\"\",\"menu_text\":1,\"menu_show\":1,\"page_title\":\"\",\"show_page_heading\":\"\",\"page_heading\":\"\",\"pageclass_sfx\":\"\",\"menu-meta_description\":\"\",\"menu-meta_keywords\":\"\",\"robots\":\"\",\"secure\":0}', 327, 328, 0, '*', 0),
+(302, 'servicos', 'Manuais', 'manuais', '', 'manuais', 'http://www.portalpadrao.gov.br/manuais', 'url', 1, 1, 1, 0, 0, '0000-00-00 00:00:00', 0, 1, ' ', 0, '{\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu-anchor_rel\":\"\",\"menu_image\":\"\",\"menu_image_css\":\"\",\"menu_text\":1,\"menu_show\":1}', 329, 330, 0, '*', 0),
 (303, 'servicos', 'Assunto 1', 'assunto-11', '', 'assunto-11', '#', 'url', 1, 1, 1, 0, 0, '0000-00-00 00:00:00', 0, 1, ' ', 0, '{\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu-anchor_rel\":\"\",\"menu_image\":\"\",\"menu_image_css\":\"\",\"menu_text\":1,\"menu_show\":1}', 331, 332, 0, '*', 0),
 (304, 'servicos', 'Assunto 2', 'assunto-22', '', 'assunto-22', '#', 'url', 1, 1, 1, 0, 0, '0000-00-00 00:00:00', 0, 1, ' ', 0, '{\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu-anchor_rel\":\"\",\"menu_image\":\"\",\"menu_image_css\":\"\",\"menu_text\":1,\"menu_show\":1}', 333, 334, 0, '*', 0),
-(305, 'servicos', 'Todos Elementos', 'todos-elementos', '', 'todos-elementos', 'index.php?option=com_blankcomponent&view=default', 'component', 1, 1, 1, 10024, 0, '0000-00-00 00:00:00', 0, 1, ' ', 0, '{\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_image_css\":\"\",\"menu_text\":1,\"menu_show\":1,\"page_title\":\"Todos Elementos\",\"show_page_heading\":\"\",\"page_heading\":\"Todos Elementos\",\"pageclass_sfx\":\"todos\",\"menu-meta_description\":\"\",\"menu-meta_keywords\":\"\",\"robots\":\"\",\"secure\":0}', 335, 336, 0, '*', 0),
+(305, 'servicos', 'Todos Elementos', 'todos-elementos', '', 'todos-elementos', 'index.php?option=com_blankcomponent&view=default', 'component', 0, 1, 1, 10024, 0, '0000-00-00 00:00:00', 0, 1, ' ', 0, '{\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_image_css\":\"\",\"menu_text\":1,\"menu_show\":1,\"page_title\":\"Todos Elementos\",\"show_page_heading\":\"\",\"page_heading\":\"Todos Elementos\",\"pageclass_sfx\":\"todos\",\"menu-meta_description\":\"\",\"menu-meta_keywords\":\"\",\"robots\":\"\",\"secure\":0}', 335, 336, 0, '*', 0),
 (306, 'mainmenu', 'Agenda de autoridade', 'agenda-de-autoridade', '', 'agenda-de-autoridade', 'index.php?option=com_agendadirigentes&view=autoridade&id=3', 'component', 1, 1, 1, 10061, 0, '0000-00-00 00:00:00', 0, 1, ' ', 0, '{\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_image_css\":\"\",\"menu_text\":1,\"menu_show\":1,\"page_title\":\"\",\"show_page_heading\":\"\",\"page_heading\":\"\",\"pageclass_sfx\":\"\",\"menu-meta_description\":\"\",\"menu-meta_keywords\":\"\",\"robots\":\"\",\"secure\":0}', 337, 338, 0, '*', 0),
 (307, 'main', 'COM_ACTIONLOGS', 'com-actionlogs', '', 'com-actionlogs', 'index.php?option=com_actionlogs', 'component', 1, 1, 1, 10132, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '{}', 339, 340, 0, '', 1);
 
@@ -2914,17 +2738,14 @@ INSERT INTO `idg2019_menu` (`id`, `menutype`, `title`, `alias`, `note`, `path`, 
 -- Estrutura da tabela `idg2019_menu_types`
 --
 
-DROP TABLE IF EXISTS `idg2019_menu_types`;
-CREATE TABLE IF NOT EXISTS `idg2019_menu_types` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_menu_types` (
+  `id` int(10) UNSIGNED NOT NULL,
   `asset_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `menutype` varchar(24) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `title` varchar(48) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `client_id` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `idx_menutype` (`menutype`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `client_id` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_menu_types`
@@ -2952,9 +2773,8 @@ INSERT INTO `idg2019_menu_types` (`id`, `asset_id`, `menutype`, `title`, `descri
 -- Estrutura da tabela `idg2019_messages`
 --
 
-DROP TABLE IF EXISTS `idg2019_messages`;
-CREATE TABLE IF NOT EXISTS `idg2019_messages` (
-  `message_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_messages` (
+  `message_id` int(10) UNSIGNED NOT NULL,
   `user_id_from` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `user_id_to` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `folder_id` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
@@ -2962,9 +2782,7 @@ CREATE TABLE IF NOT EXISTS `idg2019_messages` (
   `state` tinyint(1) NOT NULL DEFAULT '0',
   `priority` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `subject` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `message` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`message_id`) USING BTREE,
-  KEY `useridto_state` (`user_id_to`,`state`) USING BTREE
+  `message` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -2973,12 +2791,10 @@ CREATE TABLE IF NOT EXISTS `idg2019_messages` (
 -- Estrutura da tabela `idg2019_messages_cfg`
 --
 
-DROP TABLE IF EXISTS `idg2019_messages_cfg`;
-CREATE TABLE IF NOT EXISTS `idg2019_messages_cfg` (
+CREATE TABLE `idg2019_messages_cfg` (
   `user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `cfg_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `cfg_value` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  UNIQUE KEY `idx_user_var_name` (`user_id`,`cfg_name`) USING BTREE
+  `cfg_value` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -2987,9 +2803,8 @@ CREATE TABLE IF NOT EXISTS `idg2019_messages_cfg` (
 -- Estrutura da tabela `idg2019_modules`
 --
 
-DROP TABLE IF EXISTS `idg2019_modules`;
-CREATE TABLE IF NOT EXISTS `idg2019_modules` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_modules` (
+  `id` int(11) NOT NULL,
   `asset_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'FK to the x3dts_assets table.',
   `title` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
@@ -3006,12 +2821,8 @@ CREATE TABLE IF NOT EXISTS `idg2019_modules` (
   `showtitle` tinyint(3) UNSIGNED NOT NULL DEFAULT '1',
   `params` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `client_id` tinyint(4) NOT NULL DEFAULT '0',
-  `language` char(7) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `published` (`published`,`access`) USING BTREE,
-  KEY `newsfeeds` (`module`,`published`) USING BTREE,
-  KEY `idx_language` (`language`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=229 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `language` char(7) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_modules`
@@ -3122,7 +2933,7 @@ INSERT INTO `idg2019_modules` (`id`, `asset_id`, `title`, `note`, `content`, `or
 (196, 214, 'Módulo de manchete lateral', '', '', 3, 'pagina-interna-capa-editoria-d', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_chamadas', 1, 1, '{\"layout\":\"padraogoverno01:manchete-texto-lateral\",\"variacao\":\"0\",\"modelo\":\"article_content\",\"quantidade\":\"6\",\"id_article_unico\":\"\",\"id_item_unico\":0,\"titulo_alternativo\":\"\",\"link_saiba_mais\":\"#\",\"link_saiba_mais_menu\":\"\",\"link_saiba_mais_article\":\"\",\"texto_saiba_mais\":\"\",\"habilitar_mensagem_vazia\":\"0\",\"mensagem_vazia\":\"\",\"chapeu\":\"cont.xreference\",\"destaque\":\"0\",\"somente_imagem\":\"0\",\"buscar_cat_tag\":\"1\",\"catid\":[\"17\"],\"catid_components\":\"\",\"visualizar_filho\":\"0\",\"nivel\":\"10\",\"ordem\":\"publish_up\",\"ordem_direction\":\"DESC\",\"chapeu_item1\":\"Tempo e clima\",\"title_item1\":\"Minist\\u00e9rio inaugura radar meteorol\\u00f3gico em Natal (RN)\",\"desc_item1\":\"<p>Aparelho atender\\u00e1 a uma das metas do Plano Nacional de Gest\\u00e3o de Riscos e Alertas de Desastres Naturais<\\/p>\",\"show_image_item1\":\"\",\"image_item1\":\"images\\/chamadas\\/foto_chamada_grande.jpg\",\"image_item1_align\":\"right\",\"image_item1_alt\":\"\",\"url_simple_item1\":\"\",\"url_menu_item1\":\"\",\"url_article_item1\":\"\",\"ordering_item1\":\"1\",\"variacao_item1\":\"0\",\"chapeu_item2\":\"\",\"title_item2\":\"\",\"desc_item2\":\"\",\"show_image_item2\":\"\",\"image_item2\":\"images\\/conteudo\\/imagem-conteudo-200x130-a.jpg\",\"image_item2_align\":\"\",\"image_item2_alt\":\"\",\"url_simple_item2\":\"\",\"url_menu_item2\":\"\",\"url_article_item2\":\"\",\"ordering_item2\":\"2\",\"variacao_item2\":\"0\",\"chapeu_item3\":\"\",\"title_item3\":\"\",\"desc_item3\":\"\",\"show_image_item3\":\"\",\"image_item3\":\"\",\"image_item3_align\":\"\",\"image_item3_alt\":\"\",\"url_simple_item3\":\"\",\"url_menu_item3\":\"\",\"url_article_item3\":\"\",\"ordering_item3\":\"3\",\"variacao_item3\":\"0\",\"chapeu_item4\":\"\",\"title_item4\":\"\",\"desc_item4\":\"\",\"show_image_item4\":\"\",\"image_item4\":\"\",\"image_item4_align\":\"\",\"image_item4_alt\":\"\",\"url_simple_item4\":\"\",\"url_menu_item4\":\"\",\"url_article_item4\":\"\",\"ordering_item4\":\"4\",\"variacao_item4\":\"0\",\"limitar_caractere\":\"0\",\"limite_caractere\":\"\",\"exibir_imagem\":\"1\",\"exibir_introtext\":\"1\",\"exibir_title\":\"1\",\"subitem_class\":\"\",\"header_tag\":\"h1\",\"moduleclass_sfx\":\"manchete-lateral-tit-menor\",\"owncache\":\"1\",\"cache_time\":\"900\",\"limite_campos_preenchimento_manual\":\"\",\"module_tag\":\"div\",\"bootstrap_size\":\"0\",\"header_class\":\"\",\"style\":\"0\"}', 0, '*'),
 (197, 215, 'Módulo de manchete lateral - outro exemplo', '', '', 4, 'pagina-interna-capa-editoria-d', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_chamadas', 1, 1, '{\"layout\":\"padraogoverno01:manchete-texto-lateral\",\"variacao\":\"0\",\"modelo\":\"article_content\",\"quantidade\":\"4\",\"id_article_unico\":\"\",\"id_item_unico\":0,\"titulo_alternativo\":\"\",\"link_saiba_mais\":\"#\",\"link_saiba_mais_menu\":\"\",\"link_saiba_mais_article\":\"\",\"texto_saiba_mais\":\"Simula\\u00e7\\u00e3o de link de rodap\\u00e9 do m\\u00f3dulo\",\"habilitar_mensagem_vazia\":\"0\",\"mensagem_vazia\":\"\",\"chapeu\":\"nenhum\",\"destaque\":\"0\",\"somente_imagem\":\"0\",\"buscar_cat_tag\":\"1\",\"catid\":[\"17\"],\"catid_components\":\"\",\"visualizar_filho\":\"0\",\"nivel\":\"10\",\"ordem\":\"publish_up\",\"ordem_direction\":\"DESC\",\"chapeu_item1\":\"Tempo e clima\",\"title_item1\":\"Minist\\u00e9rio inaugura radar meteorol\\u00f3gico em Natal (RN)\",\"desc_item1\":\"<p>Aparelho atender\\u00e1 a uma das metas do Plano Nacional de Gest\\u00e3o de Riscos e Alertas de Desastres Naturais<\\/p>\",\"show_image_item1\":\"1\",\"image_item1\":\"images\\/chamadas\\/foto_chamada_grande.jpg\",\"image_item1_align\":\"right\",\"image_item1_alt\":\"\",\"url_simple_item1\":\"\",\"url_menu_item1\":\"\",\"url_article_item1\":\"\",\"ordering_item1\":\"1\",\"variacao_item1\":\"0\",\"chapeu_item2\":\"\",\"title_item2\":\"\",\"desc_item2\":\"\",\"show_image_item2\":\"\",\"image_item2\":\"\",\"image_item2_align\":\"\",\"image_item2_alt\":\"\",\"url_simple_item2\":\"\",\"url_menu_item2\":\"\",\"url_article_item2\":\"\",\"ordering_item2\":\"2\",\"variacao_item2\":\"0\",\"chapeu_item3\":\"\",\"title_item3\":\"\",\"desc_item3\":\"\",\"show_image_item3\":\"\",\"image_item3\":\"\",\"image_item3_align\":\"\",\"image_item3_alt\":\"\",\"url_simple_item3\":\"\",\"url_menu_item3\":\"\",\"url_article_item3\":\"\",\"ordering_item3\":\"3\",\"variacao_item3\":\"0\",\"chapeu_item4\":\"\",\"title_item4\":\"\",\"desc_item4\":\"\",\"show_image_item4\":\"\",\"image_item4\":\"\",\"image_item4_align\":\"\",\"image_item4_alt\":\"\",\"url_simple_item4\":\"\",\"url_menu_item4\":\"\",\"url_article_item4\":\"\",\"ordering_item4\":\"4\",\"variacao_item4\":\"0\",\"limitar_caractere\":\"0\",\"limite_caractere\":\"\",\"exibir_imagem\":\"0\",\"exibir_introtext\":\"1\",\"exibir_title\":\"1\",\"subitem_class\":\"\",\"header_tag\":\"h1\",\"moduleclass_sfx\":\"manchete-lateral-tit-menor outstanding-02\",\"owncache\":\"1\",\"cache_time\":\"900\",\"limite_campos_preenchimento_manual\":\"\",\"module_tag\":\"div\",\"bootstrap_size\":\"0\",\"header_class\":\"\",\"style\":\"0\"}', 0, '*'),
 (198, 248, 'Botões de compartilhamento, detalhe de autoridades', 'Customize o código diretamente, copiando e colando os códigos na caixa à esquerda.', '', 1, 'com_agendadirigentes-aut-btns-social', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_htmlcustom', 1, 1, '{\"htmlcode\":\"<div class=\\\"pull-left googleplus\\\">\\r\\n <!-- bot\\u00e3o google plus -->\\r\\n <div class=\\\"g-plusone\\\" data-size=\\\"medium\\\" data-annotation=\\\"bubble\\\"><\\/div>\\r\\n <script type=\\\"text\\/javascript\\\">\\r\\n  window.___gcfg = {lang: \'pt-BR\'};\\r\\n  (function() {\\r\\n    var po = document.createElement(\'script\'); po.type = \'text\\/javascript\'; po.async = true;\\r\\n    po.src = \'https:\\/\\/apis.google.com\\/js\\/plusone.js\';\\r\\n    var s = document.getElementsByTagName(\'script\')[0]; s.parentNode.insertBefore(po, s);\\r\\n  })();\\r\\n <\\/script><noscript>&nbsp;<!-- item para fins de acessibilidade --><\\/noscript>\\r\\n <!-- fim bot\\u00e3o google plus -->\\t\\r\\n<\\/div>\\r\\n\\r\\n<div class=\\\"pull-left twitter\\\">\\r\\n <!-- bot\\u00e3o twitter -->\\r\\n <a href=\\\"https:\\/\\/twitter.com\\/share\\\" class=\\\"twitter-share-button\\\" data-via=\\\"portalbrasil\\\" data-lang=\\\"pt\\\">Tweetar<\\/a>\\r\\n <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=\\/^http:\\/.test(d.location)?\'http\':\'https\';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+\':\\/\\/platform.twitter.com\\/widgets.js\';fjs.parentNode.insertBefore(js,fjs);}}(document, \'script\', \'twitter-wjs\');<\\/script><noscript>&nbsp;<!-- item para fins de acessibilidade --><\\/noscript>\\r\\n <!-- fim bot\\u00e3o twitter -->\\t\\r\\n<\\/div>\\r\\n\\r\\n<div class=\\\"pull-left facebook\\\">\\r\\n <!-- bot\\u00e3o facebook -->\\r\\n <div class=\\\"fb-like\\\" data-href=\\\"http:\\/\\/www.brasil.gov.br\\\" data-layout=\\\"button_count\\\" data-action=\\\"like\\\" data-show-faces=\\\"false\\\" data-share=\\\"false\\\"><\\/div>\\r\\n <div id=\\\"fb-root\\\"><\\/div>\\r\\n <script>(function(d, s, id) {\\r\\n  var js, fjs = d.getElementsByTagName(s)[0];\\r\\n  if (d.getElementById(id)) return;\\r\\n  js = d.createElement(s); js.id = id;\\r\\n  js.src = \\\"\\/\\/connect.facebook.net\\/pt_BR\\/all.js#xfbml=1&appId=509544779073047\\\";\\r\\n  fjs.parentNode.insertBefore(js, fjs);\\r\\n }(document, \'script\', \'facebook-jssdk\'));<\\/script><noscript>&nbsp;<!-- item para fins de acessibilidade --><\\/noscript>\\r\\n <!-- fim bot\\u00e3o facebook -->\\t\\r\\n<\\/div>\",\"layout\":\"_:default\",\"moduleclass_sfx\":\"\",\"cache\":\"1\",\"cache_time\":\"900\",\"cachemode\":\"static\",\"module_tag\":\"div\",\"bootstrap_size\":\"0\",\"header_tag\":\"h3\",\"header_class\":\"\",\"style\":\"0\"}', 0, '*'),
-(199, 249, 'Agenda da Autoridade', '', '', 2, 'pagina-inicial', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'mod_agendadirigentes', 1, 1, '{\"autoridade\":\"1\",\"modo_agenda\":\"dia_atual\",\"link_todas_as_agendas\":\"1\",\"itemid\":\"254\",\"featured_compromissos\":\"\",\"limit_compromissos\":\"3\",\"limit_title_compromissos\":\"\",\"delimiter_title_compromissos\":\" [...]\",\"order_compromissos\":\"ASC\",\"layout\":\"_:default\",\"altura_lista\":\"342\",\"moduleclass_sfx\":\"module-box-01 module-box-01-white\",\"cache\":\"1\",\"cache_time\":\"900\",\"module_tag\":\"div\",\"bootstrap_size\":\"0\",\"header_tag\":\"h3\",\"header_class\":\"\",\"style\":\"0\"}', 0, '*'),
+(199, 249, 'Agenda da Autoridade', '', '', 2, 'pagina-inicial', 0, '0000-00-00 00:00:00', '2019-12-23 18:43:54', '0000-00-00 00:00:00', 0, 'mod_agendadirigentes', 1, 1, '{\"autoridade\":\"1\",\"modo_agenda\":\"dia_atual\",\"link_todas_as_agendas\":\"1\",\"itemid\":\"254\",\"featured_compromissos\":\"\",\"limit_compromissos\":\"3\",\"limit_title_compromissos\":\"\",\"delimiter_title_compromissos\":\" [...]\",\"order_compromissos\":\"ASC\",\"layout\":\"_:default\",\"altura_lista\":\"342\",\"moduleclass_sfx\":\"module-box-01 module-box-01-white\",\"cache\":\"1\",\"cache_time\":\"900\",\"module_tag\":\"div\",\"bootstrap_size\":\"0\",\"header_tag\":\"h3\",\"header_class\":\"\",\"style\":\"0\"}', 0, '*'),
 (200, 268, 'Título', '', '', 1, 'com_agendadirigentes-sidebar', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', -2, 'mod_htmlcustom', 1, 1, '{\"htmlcode\":\"Teste de componente.\",\"layout\":\"_:default\",\"moduleclass_sfx\":\"module-box-01 module variacao-module-00\",\"cache\":\"1\",\"cache_time\":\"900\",\"cachemode\":\"static\",\"module_tag\":\"div\",\"bootstrap_size\":\"0\",\"header_tag\":\"h3\",\"header_class\":\"\",\"style\":\"0\"}', 0, '*'),
 (201, 269, 'Título (2)', '', '', 1, 'com_agendadirigentes-sidebar', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', -2, 'mod_htmlcustom', 1, 1, '{\"htmlcode\":\"Teste de componente.\",\"layout\":\"_:default\",\"moduleclass_sfx\":\"module-box-01 module variacao-module-00\",\"cache\":\"1\",\"cache_time\":\"900\",\"cachemode\":\"static\",\"module_tag\":\"div\",\"bootstrap_size\":\"0\",\"header_tag\":\"h3\",\"header_class\":\"\",\"style\":\"0\"}', 0, '*'),
 (202, 273, 'Portal Padrão', '', '', 1, 'super-banner', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_banners', 1, 1, '{\"target\":\"0\",\"count\":1,\"cid\":\"0\",\"catid\":[\"57\"],\"tag_search\":\"0\",\"ordering\":\"0\",\"header_text\":\"\",\"footer_text\":\"\",\"layout\":\"idg2019:super-banner\",\"moduleclass_sfx\":\"\",\"cache\":\"1\",\"cache_time\":\"900\",\"module_tag\":\"div\",\"bootstrap_size\":\"0\",\"header_tag\":\"h3\",\"header_class\":\"\",\"style\":\"0\"}', 0, '*'),
@@ -3133,7 +2944,7 @@ INSERT INTO `idg2019_modules` (`id`, `asset_id`, `title`, `note`, `content`, `or
 (207, 285, 'Novo Release', '', '', 1, 'pagina-inicial-container1-col1', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'mod_htmlcustom', 1, 1, '{\"htmlcode\":\"<p>Est\\u00e1 dispon\\u00edvel nova vers\\u00e3o do release do Portal Padr\\u00e3o.<\\/p>\",\"layout\":\"_:default\",\"moduleclass_sfx\":\"\",\"cache\":\"1\",\"cache_time\":\"900\",\"cachemode\":\"static\",\"module_tag\":\"div\",\"bootstrap_size\":\"0\",\"header_tag\":\"h3\",\"header_class\":\"\",\"style\":\"0\"}', 0, '*'),
 (208, 289, 'Agenda do responsável pelo órgão', '', '', 1, 'pagina-interna-capa-area-de-imprensa-container-02', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_agendadirigentes', 1, 0, '{\"autoridade\":\"1\",\"modo_agenda\":\"dia_atual\",\"link_todas_as_agendas\":\"1\",\"itemid\":\"\",\"featured_compromissos\":\"\",\"limit_compromissos\":\"-1\",\"limit_title_compromissos\":\"\",\"delimiter_title_compromissos\":\" [...]\",\"order_compromissos\":\"ASC\",\"layout\":\"padraogoverno01:area-de-imprensa\",\"altura_lista\":\"\",\"moduleclass_sfx\":\"span8\",\"cache\":\"1\",\"cache_time\":\"900\",\"module_tag\":\"div\",\"bootstrap_size\":\"0\",\"header_tag\":\"h3\",\"header_class\":\"\",\"style\":\"0\"}', 0, '*'),
 (210, 291, 'Vídeos em destaque', '', '', 6, 'pagina-inicial', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'mod_videosdestaque', 1, 1, '{\"list_videos\":\"{\\\"order[]\\\":[\\\"0\\\",\\\"0\\\",\\\"0\\\"],\\\"url\\\":[\\\"https:\\/\\/www.youtube.com\\/watch?v=DIQrvQzUEM4\\\",\\\"https:\\/\\/www.youtube.com\\/watch?v=IEX9bOeTMZg\\\",\\\"https:\\/\\/www.youtube.com\\/watch?v=IEX9bOeTMZg\\\"],\\\"name\\\":[\\\"CPF: Saiba como tirar o CPF\\\",\\\"Rubem Alves - A Escola Ideal\\\",\\\"Rubem Alves - A Escola Ideal\\\"],\\\"description\\\":[\\\"Saiba como tirar o CPF, que serve para abrir uma conta no banco e declarar imposto de renda\\\\nhttp:\\/\\/www.brasil.gov.br\\/navegue_por\\/videos\\\",\\\"O educador e escritor Rubem Alves defende uma educa\\u00e7\\u00e3o ligada a vida do estudante\\\",\\\"O educador e escritor Rubem Alves defende uma educa\\u00e7\\u00e3o ligada a vida do estudante\\\"],\\\"original\\\":[\\\"Saiba como tirar o CPF, que serve para abrir uma conta no banco e declarar imposto de renda\\\\nhttp:\\/\\/www.brasil.gov.br\\/navegue_por\\/videos\\\",\\\"O educador e escritor Rubem Alves defende uma educa\\u00e7\\u00e3o ligada a vida do estudante\\\",\\\"O educador e escritor Rubem Alves defende uma educa\\u00e7\\u00e3o ligada a vida do estudante\\\"]}\",\"text_link_footer\":\"Mais v\\u00eddeos\",\"url_link_footer\":\"index.php\\/galeria-de-videos\",\"layout\":\"_:default\",\"limitar_caracteres\":\"120\",\"google_api_key\":\"AIzaSyBDPLGESeCrQC9ZqrBL6CUfPwwbtbryZoc\",\"moduleclass_sfx\":\"\",\"cache\":\"1\",\"cache_time\":\"900\",\"module_tag\":\"div\",\"bootstrap_size\":\"0\",\"header_tag\":\"h3\",\"header_class\":\"\",\"style\":\"0\"}', 0, '*'),
-(211, 311, 'Chamadas em destaque', '', '', 1, 'pagina-inicial', 0, '0000-00-00 00:00:00', '2019-05-03 14:34:02', '0000-00-00 00:00:00', 1, 'mod_chamadas', 1, 0, '{\"layout\":\"idg2019:chamadas-em-destaque\",\"variacao\":\"0\",\"modelo\":\"article_content_teste\",\"quantidade\":\"6\",\"sizeImage\":\"Original\",\"id_article_unico\":\"\",\"id_item_unico\":0,\"titulo_alternativo\":\"\",\"link_saiba_mais\":\"#\",\"link_saiba_mais_menu\":\"121\",\"link_saiba_mais_article\":\"\",\"texto_saiba_mais\":\"MAIS NOT\\u00cdCIAS\",\"link_secundario\":\"\",\"link_secundario_menu\":\"\",\"link_secundario_article\":\"\",\"texto_secundario\":\"\",\"habilitar_mensagem_vazia\":\"0\",\"mensagem_vazia\":\"\",\"chapeu\":\"cont.xreference\",\"largura_px\":\"\",\"altura_px\":\"\",\"destaque\":\"0\",\"somente_imagem\":\"0\",\"buscar_cat_tag\":\"1\",\"catid\":[\"58\"],\"catid_components\":\"\",\"visualizar_filho\":\"0\",\"nivel\":\"10\",\"ordem\":\"created\",\"ordem_direction\":\"ASC\",\"chapeu_item1\":\"\",\"title_item1\":\"\",\"desc_item1\":\"\",\"show_image_item1\":\"\",\"image_item1\":\"\",\"image_item1_align\":\"\",\"image_item1_alt\":\"\",\"url_simple_item1\":\"\",\"url_menu_item1\":\"\",\"url_article_item1\":\"\",\"ordering_item1\":\"1\",\"variacao_item1\":\"0\",\"chapeu_item2\":\"\",\"title_item2\":\"\",\"desc_item2\":\"\",\"show_image_item2\":\"\",\"image_item2\":\"\",\"image_item2_align\":\"\",\"image_item2_alt\":\"\",\"url_simple_item2\":\"\",\"url_menu_item2\":\"\",\"url_article_item2\":\"\",\"ordering_item2\":\"2\",\"variacao_item2\":\"0\",\"chapeu_item3\":\"\",\"title_item3\":\"\",\"desc_item3\":\"\",\"show_image_item3\":\"\",\"image_item3\":\"\",\"image_item3_align\":\"\",\"image_item3_alt\":\"\",\"url_simple_item3\":\"\",\"url_menu_item3\":\"\",\"url_article_item3\":\"\",\"ordering_item3\":\"3\",\"variacao_item3\":\"0\",\"chapeu_item4\":\"\",\"title_item4\":\"\",\"desc_item4\":\"\",\"show_image_item4\":\"\",\"image_item4\":\"\",\"image_item4_align\":\"\",\"image_item4_alt\":\"\",\"url_simple_item4\":\"\",\"url_menu_item4\":\"\",\"url_article_item4\":\"\",\"ordering_item4\":\"4\",\"variacao_item4\":\"0\",\"limitar_caractere\":\"1\",\"limite_caractere\":\"90\",\"exibir_imagem\":\"1\",\"exibir_introtext\":\"1\",\"exibir_title\":\"1\",\"subitem_class\":\"span12\",\"header_tag\":\"h3\",\"moduleclass_sfx\":\"module-box-01\",\"owncache\":\"1\",\"cache_time\":\"900\",\"limite_campos_preenchimento_manual\":\"\",\"module_tag\":\"div\",\"bootstrap_size\":\"0\",\"header_class\":\"\",\"style\":\"0\"}', 0, '*'),
+(211, 311, 'Chamadas em destaque', '', '', 1, 'pagina-inicial', 0, '0000-00-00 00:00:00', '2019-05-03 14:34:02', '0000-00-00 00:00:00', 1, 'mod_chamadas', 1, 0, '{\"layout\":\"idg2019:chamadas-em-destaque\",\"variacao\":\"0\",\"modelo\":\"article_content_teste\",\"quantidade\":\"6\",\"sizeImage\":\"Original\",\"id_article_unico\":\"\",\"id_item_unico\":0,\"titulo_alternativo\":\"\",\"link_saiba_mais\":\"\",\"link_saiba_mais_menu\":\"121\",\"link_saiba_mais_article\":\"\",\"texto_saiba_mais\":\"MAIS NOT\\u00cdCIAS\",\"link_secundario\":\"\",\"link_secundario_menu\":\"\",\"link_secundario_article\":\"\",\"texto_secundario\":\"\",\"habilitar_mensagem_vazia\":\"0\",\"mensagem_vazia\":\"\",\"chapeu\":\"cont.xreference\",\"largura_px\":\"\",\"altura_px\":\"\",\"destaque\":\"0\",\"somente_imagem\":\"0\",\"buscar_cat_tag\":\"1\",\"catid\":[\"58\"],\"catid_components\":\"\",\"visualizar_filho\":\"0\",\"nivel\":\"10\",\"ordem\":\"created\",\"ordem_direction\":\"ASC\",\"chapeu_item1\":\"\",\"title_item1\":\"\",\"desc_item1\":\"\",\"show_image_item1\":\"\",\"image_item1\":\"\",\"image_item1_align\":\"\",\"image_item1_alt\":\"\",\"url_simple_item1\":\"\",\"url_menu_item1\":\"\",\"url_article_item1\":\"\",\"ordering_item1\":\"1\",\"variacao_item1\":\"0\",\"chapeu_item2\":\"\",\"title_item2\":\"\",\"desc_item2\":\"\",\"show_image_item2\":\"\",\"image_item2\":\"\",\"image_item2_align\":\"\",\"image_item2_alt\":\"\",\"url_simple_item2\":\"\",\"url_menu_item2\":\"\",\"url_article_item2\":\"\",\"ordering_item2\":\"2\",\"variacao_item2\":\"0\",\"chapeu_item3\":\"\",\"title_item3\":\"\",\"desc_item3\":\"\",\"show_image_item3\":\"\",\"image_item3\":\"\",\"image_item3_align\":\"\",\"image_item3_alt\":\"\",\"url_simple_item3\":\"\",\"url_menu_item3\":\"\",\"url_article_item3\":\"\",\"ordering_item3\":\"3\",\"variacao_item3\":\"0\",\"chapeu_item4\":\"\",\"title_item4\":\"\",\"desc_item4\":\"\",\"show_image_item4\":\"\",\"image_item4\":\"\",\"image_item4_align\":\"\",\"image_item4_alt\":\"\",\"url_simple_item4\":\"\",\"url_menu_item4\":\"\",\"url_article_item4\":\"\",\"ordering_item4\":\"4\",\"variacao_item4\":\"0\",\"limitar_caractere\":\"1\",\"limite_caractere\":\"90\",\"exibir_imagem\":\"1\",\"exibir_introtext\":\"1\",\"exibir_title\":\"1\",\"subitem_class\":\"span12\",\"header_tag\":\"h3\",\"moduleclass_sfx\":\"module-box-01\",\"owncache\":\"1\",\"cache_time\":\"900\",\"limite_campos_preenchimento_manual\":\"\",\"module_tag\":\"div\",\"bootstrap_size\":\"0\",\"header_class\":\"\",\"style\":\"0\"}', 0, '*'),
 (212, 318, 'Estilos de capa', '', '', 1, 'menu-principal-interno', 0, '0000-00-00 00:00:00', '2019-04-12 14:13:02', '0000-00-00 00:00:00', 1, 'mod_menu', 1, 1, '{\"menutype\":\"estilos\",\"base\":\"\",\"startLevel\":\"1\",\"endLevel\":\"0\",\"showAllChildren\":\"0\",\"tag_id\":\"\",\"class_sfx\":\"col-md-2\",\"window_open\":\"\",\"layout\":\"idg2019:menuprincipal\",\"moduleclass_sfx\":\"\",\"cache\":\"1\",\"cache_time\":\"900\",\"cachemode\":\"itemid\",\"module_tag\":\"div\",\"bootstrap_size\":\"0\",\"header_tag\":\"h3\",\"header_class\":\"\",\"style\":\"0\"}', 0, '*'),
 (213, 322, 'Contato', '', '', 5, 'menu-principal-interno', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_menu', 1, 1, '{\"menutype\":\"contato\",\"base\":\"\",\"startLevel\":\"1\",\"endLevel\":\"0\",\"showAllChildren\":\"0\",\"tag_id\":\"\",\"class_sfx\":\"col-md-2\",\"window_open\":\"\",\"layout\":\"idg2019:menuprincipal\",\"moduleclass_sfx\":\"\",\"cache\":\"1\",\"cache_time\":\"900\",\"cachemode\":\"itemid\",\"module_tag\":\"div\",\"bootstrap_size\":\"0\",\"header_tag\":\"h3\",\"header_class\":\"\",\"style\":\"0\"}', 0, '*'),
 (214, 324, 'Estilos de capa', '', '', 1, 'menu-rodape', 0, '0000-00-00 00:00:00', '2019-04-12 14:13:02', '0000-00-00 00:00:00', 1, 'mod_menu', 1, 1, '{\"menutype\":\"estilos\",\"base\":\"\",\"startLevel\":\"1\",\"endLevel\":\"0\",\"showAllChildren\":\"0\",\"tag_id\":\"\",\"class_sfx\":\"col-md-2\",\"window_open\":\"\",\"layout\":\"idg2019:menuprincipal\",\"moduleclass_sfx\":\"\",\"cache\":\"1\",\"cache_time\":\"900\",\"cachemode\":\"itemid\",\"module_tag\":\"div\",\"bootstrap_size\":\"0\",\"header_tag\":\"h3\",\"header_class\":\"\",\"style\":\"0\"}', 0, '*'),
@@ -3150,7 +2961,7 @@ INSERT INTO `idg2019_modules` (`id`, `asset_id`, `title`, `note`, `content`, `or
 (224, 334, 'Voltar ao topo', '', '', 1, 'voltar-topo', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_htmlcustom', 1, 1, '{\"htmlcode\":\"<div class=\\\"container\\\">\\r\\n\\t\\t\\t\\t<div id=\\\"footer-conteudo\\\">\\r\\n\\t\\t\\t\\t\\t<div class=\\\"voltar-topo\\\">\\r\\n\\t\\t\\t\\t\\t\\t<a href=\\\"#logo\\\">Voltar ao topo<\\/a>\\r\\n\\t\\t\\t\\t\\t<\\/div>\\r\\n\\r\\n\\t\\t\\t\\t\\t<div class=\\\"texto-copyright\\\">\\r\\n\\t\\t\\t\\t\\t\\t<span omit-tag=\\\"\\\">Todo o conte\\u00fado deste site est\\u00e1 publicado sob a licen\\u00e7a<\\/span>\\r\\n\\t\\t\\t\\t\\t\\t<a rel=\\\"license\\\" href=\\\"https:\\/\\/creativecommons.org\\/licenses\\/by-nd\\/3.0\\/deed.pt_BR\\\">Creative Commons Atribui\\u00e7\\u00e3o-SemDeriva\\u00e7\\u00f5es 3.0 N\\u00e3o Adaptada<\\/a>.\\r\\n\\t\\t\\t\\t\\t<\\/div>\\r\\n\\t\\t\\t\\t<\\/div>\\r\\n\\t\\t\\t<\\/div>\",\"layout\":\"_:default\",\"moduleclass_sfx\":\"\",\"cache\":\"1\",\"cache_time\":\"900\",\"cachemode\":\"static\",\"module_tag\":\"div\",\"bootstrap_size\":\"0\",\"header_tag\":\"h3\",\"header_class\":\"\",\"style\":\"0\"}', 0, '*'),
 (225, 335, 'Destaques', '', '', 1, 'pagina-inicial', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'mod_htmlcustom', 1, 0, '{\"htmlcode\":\"<!-- DESTAQUES -->\\r\\n<section class=\\\"destaques\\\">\\r\\n  <div class=\\\"container\\\">\\r\\n    <div class=\\\"row\\\">\\r\\n\\r\\n      <div class=\\\"col-md-4\\\">\\r\\n        <div class=\\\"item-destaques tipo2\\\">\\r\\n          <!--<img src=\\\"img\\/d-periodicos.png\\\" class=\\\"foto-destaques\\\" alt=\\\"alt da imagem\\\">-->\\r\\n          <div class=\\\"chamada-destaques\\\" style=\\\"background:#3ab09e !important;\\\">\\r\\n            <span class=\\\"chapeu-destaques\\\">Nova Identidade Digital de Governo<\\/span>\\r\\n            <a href=\\\"\\\" class=\\\"titulo-destaques\\\">Saiba mais<\\/a>\\r\\n          <\\/div>\\r\\n        <\\/div>\\r\\n      <\\/div>\\r\\n\\r\\n      <div class=\\\"col-md-4\\\">\\r\\n        <div class=\\\"item-destaques\\\">\\r\\n          <img src=\\\"images\\/conteudo\\/8663ed40-e20d-4f22-825d-3a08b375dfc2.png\\\" class=\\\"foto-destaques\\\" alt=\\\"alt da imagem\\\">\\r\\n          <div class=\\\"chamada-destaques\\\">\\r\\n            <a href=\\\"\\\" class=\\\"titulo-destaques\\\">Manual orientador de instala\\u00e7\\u00e3o<\\/a>\\r\\n          <\\/div>\\r\\n        <\\/div>\\r\\n      <\\/div>\\r\\n\\r\\n      <div class=\\\"col-md-4\\\">\\r\\n        <div class=\\\"item-destaques\\\">\\r\\n          <!--<img src=\\\"img\\/d-infocapes.jpg\\\" class=\\\"foto-destaques\\\" alt=\\\"alt da imagem\\\">-->\\r\\n          <div class=\\\"chamada-destaques\\\">\\r\\n            <span class=\\\"chapeu-destaques\\\" style=\\\"color:#0094ff;\\\">Acessibilidade<\\/span>\\r\\n            <a href=\\\"\\\" class=\\\"titulo-destaques\\\">Acesso \\u00e0 Informa\\u00e7\\u00e3o \\u00e9 prioridade no novo Portal Padr\\u00e3o<\\/a>\\r\\n          <\\/div>\\r\\n        <\\/div>\\r\\n      <\\/div>\\r\\n\\r\\n      <div class=\\\"col-md-4\\\">\\r\\n        <div class=\\\"item-destaques\\\">\\r\\n          <img src=\\\"images\\/conteudo\\/727515f8-7c48-49c2-bfb8-ec557be395d0.png\\\" class=\\\"foto-destaques\\\" alt=\\\"alt da imagem\\\">\\r\\n          <div class=\\\"chamada-destaques\\\">\\r\\n            <span class=\\\"chapeu-destaques\\\">Dicas<\\/span>\\r\\n            <a href=\\\"\\\" class=\\\"titulo-destaques\\\">Oito dicas para planejar e criar uma capa<\\/a>\\r\\n          <\\/div>\\r\\n        <\\/div>\\r\\n      <\\/div>\\r\\n\\r\\n      <div class=\\\"col-md-4\\\">\\r\\n        <div class=\\\"item-destaques\\\">\\r\\n          <img src=\\\"images\\/conteudo\\/b39e4575-c6c3-462d-99db-4faaffbab4b0.png\\\" class=\\\"foto-destaques\\\" alt=\\\"alt da imagem\\\">\\r\\n          <div class=\\\"chamada-destaques\\\">\\r\\n            <span class=\\\"chapeu-destaques\\\">Tend\\u00eancia<\\/span>\\r\\n            <a href=\\\"\\\" class=\\\"titulo-destaques\\\">Entenda o que \\u00e9 o menu quente<\\/a>\\r\\n          <\\/div>\\r\\n        <\\/div>\\r\\n      <\\/div>\\r\\n\\r\\n      <div class=\\\"col-md-4\\\">\\r\\n        <div class=\\\"item-destaques\\\">\\r\\n          <img src=\\\"images\\/conteudo\\/e89917a2-1493-441c-8e21-49fe15d48937.png\\\" class=\\\"foto-destaques\\\" alt=\\\"alt da imagem\\\">\\r\\n          <div class=\\\"chamada-destaques\\\">\\r\\n            <span class=\\\"chapeu-destaques\\\">Temas<\\/span>\\r\\n            <a href=\\\"\\\" class=\\\"titulo-destaques\\\">Conhe\\u00e7a os temas do Portal Institucional Padr\\u00e3o<\\/a>\\r\\n          <\\/div>\\r\\n        <\\/div>\\r\\n      <\\/div>\\r\\n\\r\\n    <\\/div>\\r\\n  <\\/div>\\r\\n  <div class=\\\"botoes-centro\\\">\\r\\n    <a href=\\\"#\\\" class=\\\"btn-padrao\\\">Mais not\\u00edcias<\\/a>\\t\\r\\n  <\\/div>\\r\\n<\\/section>\\r\\n\\r\\n<!-- DESTAQUES END -->\",\"layout\":\"_:default\",\"moduleclass_sfx\":\"\",\"cache\":\"1\",\"cache_time\":\"900\",\"cachemode\":\"static\",\"module_tag\":\"div\",\"bootstrap_size\":\"0\",\"header_tag\":\"h3\",\"header_class\":\"\",\"style\":\"0\"}', 0, '*'),
 (226, 339, 'Chamadas em destaque (2)', '', '', 1, 'pagina-inicial', 0, '0000-00-00 00:00:00', '2019-05-03 14:34:02', '0000-00-00 00:00:00', -2, 'mod_chamadas', 1, 0, '{\"layout\":\"idg2019:chamadas-em-destaque\",\"variacao\":\"0\",\"modelo\":\"article_content_teste\",\"quantidade\":\"6\",\"sizeImage\":\"Original\",\"id_article_unico\":\"\",\"id_item_unico\":0,\"titulo_alternativo\":\"\",\"link_saiba_mais\":\"\",\"link_saiba_mais_menu\":\"121\",\"link_saiba_mais_article\":\"\",\"texto_saiba_mais\":\"Acesse a lista completa\",\"link_secundario\":\"\",\"link_secundario_menu\":\"\",\"link_secundario_article\":\"\",\"texto_secundario\":\"\",\"habilitar_mensagem_vazia\":\"0\",\"mensagem_vazia\":\"\",\"chapeu\":\"cont.xreference\",\"largura_px\":\"\",\"altura_px\":\"\",\"destaque\":\"0\",\"somente_imagem\":\"0\",\"buscar_cat_tag\":\"1\",\"catid\":[\"58\"],\"catid_components\":\"\",\"visualizar_filho\":\"0\",\"nivel\":\"10\",\"ordem\":\"created\",\"ordem_direction\":\"ASC\",\"chapeu_item1\":\"\",\"title_item1\":\"\",\"desc_item1\":\"\",\"show_image_item1\":\"\",\"image_item1\":\"\",\"image_item1_align\":\"\",\"image_item1_alt\":\"\",\"url_simple_item1\":\"\",\"url_menu_item1\":\"\",\"url_article_item1\":\"\",\"ordering_item1\":\"1\",\"variacao_item1\":\"0\",\"chapeu_item2\":\"\",\"title_item2\":\"\",\"desc_item2\":\"\",\"show_image_item2\":\"\",\"image_item2\":\"\",\"image_item2_align\":\"\",\"image_item2_alt\":\"\",\"url_simple_item2\":\"\",\"url_menu_item2\":\"\",\"url_article_item2\":\"\",\"ordering_item2\":\"2\",\"variacao_item2\":\"0\",\"chapeu_item3\":\"\",\"title_item3\":\"\",\"desc_item3\":\"\",\"show_image_item3\":\"\",\"image_item3\":\"\",\"image_item3_align\":\"\",\"image_item3_alt\":\"\",\"url_simple_item3\":\"\",\"url_menu_item3\":\"\",\"url_article_item3\":\"\",\"ordering_item3\":\"3\",\"variacao_item3\":\"0\",\"chapeu_item4\":\"\",\"title_item4\":\"\",\"desc_item4\":\"\",\"show_image_item4\":\"\",\"image_item4\":\"\",\"image_item4_align\":\"\",\"image_item4_alt\":\"\",\"url_simple_item4\":\"\",\"url_menu_item4\":\"\",\"url_article_item4\":\"\",\"ordering_item4\":\"4\",\"variacao_item4\":\"0\",\"limitar_caractere\":\"1\",\"limite_caractere\":\"90\",\"exibir_imagem\":\"1\",\"exibir_introtext\":\"1\",\"exibir_title\":\"1\",\"subitem_class\":\"span12\",\"header_tag\":\"h3\",\"moduleclass_sfx\":\"module-box-01\",\"owncache\":\"1\",\"cache_time\":\"900\",\"limite_campos_preenchimento_manual\":\"\",\"module_tag\":\"div\",\"bootstrap_size\":\"0\",\"header_class\":\"\",\"style\":\"0\"}', 0, '*'),
-(227, 343, 'Agenda de Autoridades - HTML', '', '', 1, 'pagina-inicial', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_htmlcustom', 1, 0, '{\"htmlcode\":\"<div class=\\\"agenda modulo-agenda\\\" style=\\\"background: url(https:\\/\\/images.unsplash.com\\/photo-1560420025-9453f02b4751?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2146&q=80) no-repeat;\\\">\\r\\n\\t<div class=\\\"outstanding-header\\\">\\r\\n\\t\\t<h2 class=\\\"outstanding-title\\\">\\r\\n\\t\\t<span>Agenda do Presidente<\\/span>\\r\\n\\t\\t<\\/h2>\\r\\n\\t\\t<br>\\r\\n\\t<\\/div>\\r\\n\\r\\n\\t<div class=\\\"container\\\" >\\r\\n\\t\\t<div class=\\\"row\\\">\\r\\n\\t\\t\\t<div class=\\\"daypicker-wrapper\\\">\\r\\n\\t\\t\\t    <ul class=\\\"daypicker\\\">\\r\\n\\r\\n\\t\\t\\t\\t    <li class=\\\"day has-appointment\\\">\\r\\n\\t\\t\\t\\t        <a href=\\\"#\\\" title=\\\"Dia 7\\\">\\r\\n\\t\\t\\t\\t            <div class=\\\"daypicker-day\\\">7<\\/div>\\r\\n\\t\\t\\t\\t            <div class=\\\"daypicker-weekday\\\">Sex<\\/div>\\r\\n\\t\\t\\t\\t        <\\/a>\\r\\n\\t\\t\\t\\t    <\\/li>\\r\\n\\r\\n\\t\\t\\t\\t    <li class=\\\"day has-appointment\\\">\\r\\n\\t\\t\\t\\t        <a href=\\\"#\\\" title=\\\"Dia 8\\\">\\r\\n\\t\\t\\t\\t            <div class=\\\"daypicker-day\\\">8<\\/div>\\r\\n\\t\\t\\t\\t            <div class=\\\"daypicker-weekday\\\">S\\u00e1b<\\/div>\\r\\n\\t\\t\\t\\t        <\\/a>\\r\\n\\t\\t\\t\\t    <\\/li>\\r\\n\\r\\n\\t\\t\\t\\t    <li class=\\\"day has-appointment\\\">\\r\\n\\t\\t\\t\\t        <a href=\\\"#\\\" title=\\\"Dia 9\\\">\\r\\n\\t\\t\\t\\t            <div class=\\\"daypicker-day\\\">9<\\/div>\\r\\n\\t\\t\\t\\t            <div class=\\\"daypicker-weekday\\\">Dom<\\/div>\\r\\n\\t\\t\\t\\t        <\\/a>\\r\\n\\t\\t\\t\\t    <\\/li>\\r\\n\\r\\n\\t\\t\\t\\t    <li class=\\\"day is-selected has-appointment\\\">\\r\\n\\t\\t\\t\\t        <a href=\\\"#\\\" title=\\\"Dia 10\\\">\\r\\n\\t\\t\\t\\t            <div class=\\\"daypicker-day\\\">10<\\/div>\\r\\n\\t\\t\\t\\t            <div class=\\\"daypicker-weekday\\\">Seg<\\/div>\\r\\n\\t\\t\\t\\t        <\\/a>\\r\\n\\t\\t\\t\\t    <\\/li>\\r\\n\\r\\n\\t\\t\\t\\t    <li class=\\\"day has-appointment\\\">\\r\\n\\t\\t\\t\\t        <a href=\\\"#\\\" title=\\\"Dia 11\\\">\\r\\n\\t\\t\\t\\t            <div class=\\\"daypicker-day\\\">11<\\/div>\\r\\n\\t\\t\\t\\t            <div class=\\\"daypicker-weekday\\\">Ter<\\/div>\\r\\n\\t\\t\\t\\t        <\\/a>\\r\\n\\t\\t\\t\\t    <\\/li>\\r\\n\\r\\n\\t\\t\\t\\t    <li class=\\\"day has-appointment\\\">\\r\\n\\t\\t\\t\\t       \\r\\n\\t\\t\\t\\t            <div class=\\\"daypicker-day\\\">12<\\/div>\\r\\n\\t\\t\\t\\t            <div class=\\\"daypicker-weekday\\\">Qua<\\/div>\\r\\n\\t\\t\\t\\t       \\r\\n\\t\\t\\t\\t    <\\/li>\\r\\n\\r\\n\\t\\t\\t\\t    <li class=\\\"day\\\">\\r\\n\\t\\t\\t\\t        \\r\\n\\t\\t\\t\\t            <div class=\\\"daypicker-day\\\">13<\\/div>\\r\\n\\t\\t\\t\\t            <div class=\\\"daypicker-weekday\\\">Qui<\\/div>\\r\\n\\t\\t\\t\\t        \\r\\n\\t\\t\\t\\t    <\\/li>\\r\\n\\r\\n\\t\\t\\t\\t<\\/ul>\\r\\n\\t\\t\\t<\\/div> <!-- end .daypicker-wrapper -->\\r\\n\\t\\t<\\/div><!-- end .row -->\\r\\n\\r\\n\\r\\n\\t\\t<div class=\\\"row\\\">\\r\\n\\t\\t\\t<div class=\\\"mostra-calendario\\\">\\r\\n\\t\\t\\t\\t<a href=\\\"#\\\" id=\\\"abre-calendario\\\">Jun 2019<\\/a>\\r\\n\\t\\t\\t<\\/div>\\r\\n\\t\\t\\t<div id=\\\"datepicker\\\"><\\/div>\\r\\n\\t\\t<\\/div><!-- end .row -->\\r\\n\\r\\n\\t\\t<div class=\\\"row\\\">\\r\\n\\t\\t\\t<div class=\\\"swiper-container swiper-agenda\\\">\\r\\n\\t\\t\\t\\t<div class=\\\"swiper-wrapper\\\">\\r\\n\\t\\t\\t\\t\\t<div class=\\\"swiper-slide\\\">\\r\\n\\t\\t\\t\\t\\t\\t<div class=\\\"collection-events-item\\\">\\r\\n\\t\\t\\t\\t\\t\\t    <a class=\\\"title-item\\\" href=\\\"#\\\">Lorem ipsum dolor sit amet, consectetur adipiscing elit<\\/a>\\r\\n\\t\\t\\t\\t\\t\\t    <div class=\\\"location-item\\\">\\r\\n\\t\\t\\t\\t\\t\\t        <span class=\\\"location\\\">Pal\\u00e1cio do Planalto<\\/span>\\r\\n\\t\\t\\t\\t\\t\\t    <\\/div>\\r\\n\\t\\t\\t\\t\\t\\t    <div class=\\\"timestamp-cell\\\">\\r\\n\\t\\t\\t\\t\\t\\t        <span class=\\\"timestamp\\\">09h00<\\/span>\\r\\n\\t\\t\\t\\t\\t\\t    <\\/div>\\r\\n\\t\\t\\t\\t\\t\\t<\\/div>\\r\\n\\t\\t\\t\\t\\t<\\/div>\\r\\n\\r\\n\\t\\t\\t\\t\\t<div class=\\\"swiper-slide\\\">\\r\\n\\t\\t\\t\\t\\t\\t<div class=\\\"collection-events-item\\\">\\r\\n\\t\\t\\t\\t\\t\\t    <a class=\\\"title-item\\\" href=\\\"#\\\"> Nullam dui risus, porttitor eu suscipit ut, posuere<\\/a>\\r\\n\\t\\t\\t\\t\\t\\t    <div class=\\\"location-item\\\">\\r\\n\\t\\t\\t\\t\\t\\t        <span class=\\\"location\\\">Pal\\u00e1cio do Planalto<\\/span>\\r\\n\\t\\t\\t\\t\\t\\t    <\\/div>\\r\\n\\t\\t\\t\\t\\t\\t    <div class=\\\"timestamp-cell\\\">\\r\\n\\t\\t\\t\\t\\t\\t        <span class=\\\"timestamp\\\">\\r\\n\\t\\t\\t\\t\\t\\t              10h00\\r\\n\\t\\t\\t\\t\\t\\t            <\\/span>\\r\\n\\t\\t\\t\\t\\t\\t    <\\/div>\\r\\n\\t\\t\\t\\t\\t\\t<\\/div>\\r\\n\\t\\t\\t\\t\\t<\\/div>\\r\\n\\r\\n\\t\\t\\t\\t\\t<div class=\\\"swiper-slide\\\">\\r\\n\\t\\t\\t\\t\\t\\t<div class=\\\"collection-events-item\\\">\\r\\n\\t\\t\\t\\t\\t\\t    <a class=\\\"title-item\\\" href=\\\"#\\\">Praesent sagittis dictum imperdiet<\\/a>\\r\\n\\t\\t\\t\\t\\t\\t    <div class=\\\"location-item\\\">\\r\\n\\t\\t\\t\\t\\t\\t        <span class=\\\"location\\\">Pal\\u00e1cio do Planalto<\\/span>\\r\\n\\t\\t\\t\\t\\t\\t    <\\/div>\\r\\n\\t\\t\\t\\t\\t\\t    <div class=\\\"timestamp-cell\\\">\\r\\n\\t\\t\\t\\t\\t\\t        <span class=\\\"timestamp\\\">\\r\\n\\t\\t\\t\\t\\t\\t              12h00\\r\\n\\t\\t\\t\\t\\t\\t            <\\/span>\\r\\n\\t\\t\\t\\t\\t\\t    <\\/div>\\r\\n\\t\\t\\t\\t\\t\\t<\\/div>\\r\\n\\t\\t\\t\\t\\t<\\/div>\\r\\n\\r\\n\\t\\t\\t\\t\\t<div class=\\\"swiper-slide\\\">\\r\\n\\t\\t\\t\\t\\t\\t<div class=\\\"collection-events-item\\\">\\r\\n\\t\\t\\t\\t\\t\\t    <a class=\\\"title-item\\\" href=\\\"#\\\">Mauro Biancamano Guimar\\u00e3es, Secret\\u00e1rio-<\\/a>\\r\\n\\t\\t\\t\\t\\t\\t    <div class=\\\"location-item\\\">\\r\\n\\t\\t\\t\\t\\t\\t        <span class=\\\"location\\\">Pal\\u00e1cio do Planalto<\\/span>\\r\\n\\t\\t\\t\\t\\t\\t    <\\/div>\\r\\n\\t\\t\\t\\t\\t\\t    <div class=\\\"timestamp-cell\\\">\\r\\n\\t\\t\\t\\t\\t\\t        <span class=\\\"timestamp\\\">\\r\\n\\t\\t\\t\\t\\t\\t              14h00\\r\\n\\t\\t\\t\\t\\t\\t            <\\/span>\\r\\n\\t\\t\\t\\t\\t\\t    <\\/div>\\r\\n\\t\\t\\t\\t\\t\\t<\\/div>\\r\\n\\t\\t\\t\\t\\t<\\/div>\\r\\n\\t\\t\\t\\t<\\/div> <!-- end .swiper-wrapper -->\\r\\n\\r\\n\\t\\t\\t\\t<!-- Add Pagination -->\\r\\n\\t\\t\\t\\t<div class=\\\"swiper-pagination navegacao-agenda\\\"><\\/div>\\r\\n\\r\\n\\t\\t\\t\\t<!-- Add Arrows -->\\r\\n\\t\\t\\t\\t<div class=\\\"swiper-button-next proximo-agenda\\\"><\\/div>\\r\\n\\t\\t\\t\\t<div class=\\\"swiper-button-prev anterior-agenda\\\"><\\/div>\\r\\n\\t\\t\\t<\\/div>\\r\\n\\t\\t<\\/div><!-- end .row -->\\r\\n\\r\\n\\t<\\/div> <!-- end .container -->\\r\\n\\r\\n\\t<div class=\\\"botoes-centro\\\">\\r\\n\\t\\t<a href=\\\"#\\\" class=\\\"btn-padrao\\\" title=\\\"Ver a agenda completa\\\">AGENDA COMPLETA<\\/a>\\r\\n\\t<\\/div>\\r\\n<\\/div> <!-- end .agenda -->\",\"layout\":\"_:default\",\"moduleclass_sfx\":\"\",\"cache\":\"1\",\"cache_time\":\"900\",\"cachemode\":\"static\",\"module_tag\":\"div\",\"bootstrap_size\":\"0\",\"header_tag\":\"h3\",\"header_class\":\"\",\"style\":\"0\"}', 0, '*'),
+(227, 343, 'Agenda de Autoridades - HTML', '', '', 1, 'pagina-inicial', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'mod_htmlcustom', 1, 0, '{\"htmlcode\":\"<div class=\\\"agenda modulo-agenda\\\" style=\\\"background: url(https:\\/\\/images.unsplash.com\\/photo-1560420025-9453f02b4751?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2146&q=80) no-repeat;\\\">\\r\\n\\t<div class=\\\"outstanding-header\\\">\\r\\n\\t\\t<h2 class=\\\"outstanding-title\\\">\\r\\n\\t\\t<span>Agenda do Presidente<\\/span>\\r\\n\\t\\t<\\/h2>\\r\\n\\t\\t<br>\\r\\n\\t<\\/div>\\r\\n\\r\\n\\t<div class=\\\"container\\\" >\\r\\n\\t\\t<div class=\\\"row\\\">\\r\\n\\t\\t\\t<div class=\\\"daypicker-wrapper\\\">\\r\\n\\t\\t\\t    <ul class=\\\"daypicker\\\">\\r\\n\\r\\n\\t\\t\\t\\t    <li class=\\\"day has-appointment\\\">\\r\\n\\t\\t\\t\\t        <a href=\\\"#\\\" title=\\\"Dia 7\\\">\\r\\n\\t\\t\\t\\t            <div class=\\\"daypicker-day\\\">7<\\/div>\\r\\n\\t\\t\\t\\t            <div class=\\\"daypicker-weekday\\\">Sex<\\/div>\\r\\n\\t\\t\\t\\t        <\\/a>\\r\\n\\t\\t\\t\\t    <\\/li>\\r\\n\\r\\n\\t\\t\\t\\t    <li class=\\\"day has-appointment\\\">\\r\\n\\t\\t\\t\\t        <a href=\\\"#\\\" title=\\\"Dia 8\\\">\\r\\n\\t\\t\\t\\t            <div class=\\\"daypicker-day\\\">8<\\/div>\\r\\n\\t\\t\\t\\t            <div class=\\\"daypicker-weekday\\\">S\\u00e1b<\\/div>\\r\\n\\t\\t\\t\\t        <\\/a>\\r\\n\\t\\t\\t\\t    <\\/li>\\r\\n\\r\\n\\t\\t\\t\\t    <li class=\\\"day has-appointment\\\">\\r\\n\\t\\t\\t\\t        <a href=\\\"#\\\" title=\\\"Dia 9\\\">\\r\\n\\t\\t\\t\\t            <div class=\\\"daypicker-day\\\">9<\\/div>\\r\\n\\t\\t\\t\\t            <div class=\\\"daypicker-weekday\\\">Dom<\\/div>\\r\\n\\t\\t\\t\\t        <\\/a>\\r\\n\\t\\t\\t\\t    <\\/li>\\r\\n\\r\\n\\t\\t\\t\\t    <li class=\\\"day is-selected has-appointment\\\">\\r\\n\\t\\t\\t\\t        <a href=\\\"#\\\" title=\\\"Dia 10\\\">\\r\\n\\t\\t\\t\\t            <div class=\\\"daypicker-day\\\">10<\\/div>\\r\\n\\t\\t\\t\\t            <div class=\\\"daypicker-weekday\\\">Seg<\\/div>\\r\\n\\t\\t\\t\\t        <\\/a>\\r\\n\\t\\t\\t\\t    <\\/li>\\r\\n\\r\\n\\t\\t\\t\\t    <li class=\\\"day has-appointment\\\">\\r\\n\\t\\t\\t\\t        <a href=\\\"#\\\" title=\\\"Dia 11\\\">\\r\\n\\t\\t\\t\\t            <div class=\\\"daypicker-day\\\">11<\\/div>\\r\\n\\t\\t\\t\\t            <div class=\\\"daypicker-weekday\\\">Ter<\\/div>\\r\\n\\t\\t\\t\\t        <\\/a>\\r\\n\\t\\t\\t\\t    <\\/li>\\r\\n\\r\\n\\t\\t\\t\\t    <li class=\\\"day has-appointment\\\">\\r\\n\\t\\t\\t\\t       \\r\\n\\t\\t\\t\\t            <div class=\\\"daypicker-day\\\">12<\\/div>\\r\\n\\t\\t\\t\\t            <div class=\\\"daypicker-weekday\\\">Qua<\\/div>\\r\\n\\t\\t\\t\\t       \\r\\n\\t\\t\\t\\t    <\\/li>\\r\\n\\r\\n\\t\\t\\t\\t    <li class=\\\"day\\\">\\r\\n\\t\\t\\t\\t        \\r\\n\\t\\t\\t\\t            <div class=\\\"daypicker-day\\\">13<\\/div>\\r\\n\\t\\t\\t\\t            <div class=\\\"daypicker-weekday\\\">Qui<\\/div>\\r\\n\\t\\t\\t\\t        \\r\\n\\t\\t\\t\\t    <\\/li>\\r\\n\\r\\n\\t\\t\\t\\t<\\/ul>\\r\\n\\t\\t\\t<\\/div> <!-- end .daypicker-wrapper -->\\r\\n\\t\\t<\\/div><!-- end .row -->\\r\\n\\r\\n\\r\\n\\t\\t<div class=\\\"row\\\">\\r\\n\\t\\t\\t<div class=\\\"mostra-calendario\\\">\\r\\n\\t\\t\\t\\t<a href=\\\"#\\\" id=\\\"abre-calendario\\\">Jun 2019<\\/a>\\r\\n\\t\\t\\t<\\/div>\\r\\n\\t\\t\\t<div id=\\\"datepicker\\\"><\\/div>\\r\\n\\t\\t<\\/div><!-- end .row -->\\r\\n\\r\\n\\t\\t<div class=\\\"row\\\">\\r\\n\\t\\t\\t<div class=\\\"swiper-container swiper-agenda\\\">\\r\\n\\t\\t\\t\\t<div class=\\\"swiper-wrapper\\\">\\r\\n\\t\\t\\t\\t\\t<div class=\\\"swiper-slide\\\">\\r\\n\\t\\t\\t\\t\\t\\t<div class=\\\"collection-events-item\\\">\\r\\n\\t\\t\\t\\t\\t\\t    <a class=\\\"title-item\\\" href=\\\"#\\\">Lorem ipsum dolor sit amet, consectetur adipiscing elit<\\/a>\\r\\n\\t\\t\\t\\t\\t\\t    <div class=\\\"location-item\\\">\\r\\n\\t\\t\\t\\t\\t\\t        <span class=\\\"location\\\">Pal\\u00e1cio do Planalto<\\/span>\\r\\n\\t\\t\\t\\t\\t\\t    <\\/div>\\r\\n\\t\\t\\t\\t\\t\\t    <div class=\\\"timestamp-cell\\\">\\r\\n\\t\\t\\t\\t\\t\\t        <span class=\\\"timestamp\\\">09h00<\\/span>\\r\\n\\t\\t\\t\\t\\t\\t    <\\/div>\\r\\n\\t\\t\\t\\t\\t\\t<\\/div>\\r\\n\\t\\t\\t\\t\\t<\\/div>\\r\\n\\r\\n\\t\\t\\t\\t\\t<div class=\\\"swiper-slide\\\">\\r\\n\\t\\t\\t\\t\\t\\t<div class=\\\"collection-events-item\\\">\\r\\n\\t\\t\\t\\t\\t\\t    <a class=\\\"title-item\\\" href=\\\"#\\\"> Nullam dui risus, porttitor eu suscipit ut, posuere<\\/a>\\r\\n\\t\\t\\t\\t\\t\\t    <div class=\\\"location-item\\\">\\r\\n\\t\\t\\t\\t\\t\\t        <span class=\\\"location\\\">Pal\\u00e1cio do Planalto<\\/span>\\r\\n\\t\\t\\t\\t\\t\\t    <\\/div>\\r\\n\\t\\t\\t\\t\\t\\t    <div class=\\\"timestamp-cell\\\">\\r\\n\\t\\t\\t\\t\\t\\t        <span class=\\\"timestamp\\\">\\r\\n\\t\\t\\t\\t\\t\\t              10h00\\r\\n\\t\\t\\t\\t\\t\\t            <\\/span>\\r\\n\\t\\t\\t\\t\\t\\t    <\\/div>\\r\\n\\t\\t\\t\\t\\t\\t<\\/div>\\r\\n\\t\\t\\t\\t\\t<\\/div>\\r\\n\\r\\n\\t\\t\\t\\t\\t<div class=\\\"swiper-slide\\\">\\r\\n\\t\\t\\t\\t\\t\\t<div class=\\\"collection-events-item\\\">\\r\\n\\t\\t\\t\\t\\t\\t    <a class=\\\"title-item\\\" href=\\\"#\\\">Praesent sagittis dictum imperdiet<\\/a>\\r\\n\\t\\t\\t\\t\\t\\t    <div class=\\\"location-item\\\">\\r\\n\\t\\t\\t\\t\\t\\t        <span class=\\\"location\\\">Pal\\u00e1cio do Planalto<\\/span>\\r\\n\\t\\t\\t\\t\\t\\t    <\\/div>\\r\\n\\t\\t\\t\\t\\t\\t    <div class=\\\"timestamp-cell\\\">\\r\\n\\t\\t\\t\\t\\t\\t        <span class=\\\"timestamp\\\">\\r\\n\\t\\t\\t\\t\\t\\t              12h00\\r\\n\\t\\t\\t\\t\\t\\t            <\\/span>\\r\\n\\t\\t\\t\\t\\t\\t    <\\/div>\\r\\n\\t\\t\\t\\t\\t\\t<\\/div>\\r\\n\\t\\t\\t\\t\\t<\\/div>\\r\\n\\r\\n\\t\\t\\t\\t\\t<div class=\\\"swiper-slide\\\">\\r\\n\\t\\t\\t\\t\\t\\t<div class=\\\"collection-events-item\\\">\\r\\n\\t\\t\\t\\t\\t\\t    <a class=\\\"title-item\\\" href=\\\"#\\\">Mauro Biancamano Guimar\\u00e3es, Secret\\u00e1rio-<\\/a>\\r\\n\\t\\t\\t\\t\\t\\t    <div class=\\\"location-item\\\">\\r\\n\\t\\t\\t\\t\\t\\t        <span class=\\\"location\\\">Pal\\u00e1cio do Planalto<\\/span>\\r\\n\\t\\t\\t\\t\\t\\t    <\\/div>\\r\\n\\t\\t\\t\\t\\t\\t    <div class=\\\"timestamp-cell\\\">\\r\\n\\t\\t\\t\\t\\t\\t        <span class=\\\"timestamp\\\">\\r\\n\\t\\t\\t\\t\\t\\t              14h00\\r\\n\\t\\t\\t\\t\\t\\t            <\\/span>\\r\\n\\t\\t\\t\\t\\t\\t    <\\/div>\\r\\n\\t\\t\\t\\t\\t\\t<\\/div>\\r\\n\\t\\t\\t\\t\\t<\\/div>\\r\\n\\t\\t\\t\\t<\\/div> <!-- end .swiper-wrapper -->\\r\\n\\r\\n\\t\\t\\t\\t<!-- Add Pagination -->\\r\\n\\t\\t\\t\\t<div class=\\\"swiper-pagination navegacao-agenda\\\"><\\/div>\\r\\n\\r\\n\\t\\t\\t\\t<!-- Add Arrows -->\\r\\n\\t\\t\\t\\t<div class=\\\"swiper-button-next proximo-agenda\\\"><\\/div>\\r\\n\\t\\t\\t\\t<div class=\\\"swiper-button-prev anterior-agenda\\\"><\\/div>\\r\\n\\t\\t\\t<\\/div>\\r\\n\\t\\t<\\/div><!-- end .row -->\\r\\n\\r\\n\\t<\\/div> <!-- end .container -->\\r\\n\\r\\n\\t<div class=\\\"botoes-centro\\\">\\r\\n\\t\\t<a href=\\\"#\\\" class=\\\"btn-padrao\\\" title=\\\"Ver a agenda completa\\\">AGENDA COMPLETA<\\/a>\\r\\n\\t<\\/div>\\r\\n<\\/div> <!-- end .agenda -->\",\"layout\":\"_:default\",\"moduleclass_sfx\":\"\",\"cache\":\"1\",\"cache_time\":\"900\",\"cachemode\":\"static\",\"module_tag\":\"div\",\"bootstrap_size\":\"0\",\"header_tag\":\"h3\",\"header_class\":\"\",\"style\":\"0\"}', 0, '*'),
 (228, 344, 'Participação Social', '', '', 6, 'pagina-inicial', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_banners', 1, 1, '{\"target\":\"1\",\"count\":5,\"cid\":\"0\",\"catid\":[\"59\"],\"tag_search\":\"0\",\"ordering\":\"0\",\"header_text\":\"\",\"footer_text\":\"\",\"layout\":\"idg2019:swiper-participacao-social\",\"moduleclass_sfx\":\"\",\"cache\":\"1\",\"cache_time\":\"900\",\"module_tag\":\"div\",\"bootstrap_size\":\"0\",\"header_tag\":\"h3\",\"header_class\":\"\",\"style\":\"0\"}', 0, '*');
 
 -- --------------------------------------------------------
@@ -3159,11 +2970,9 @@ INSERT INTO `idg2019_modules` (`id`, `asset_id`, `title`, `note`, `content`, `or
 -- Estrutura da tabela `idg2019_modules_menu`
 --
 
-DROP TABLE IF EXISTS `idg2019_modules_menu`;
-CREATE TABLE IF NOT EXISTS `idg2019_modules_menu` (
+CREATE TABLE `idg2019_modules_menu` (
   `moduleid` int(11) NOT NULL DEFAULT '0',
-  `menuid` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`moduleid`,`menuid`) USING BTREE
+  `menuid` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
@@ -3319,10 +3128,9 @@ INSERT INTO `idg2019_modules_menu` (`moduleid`, `menuid`) VALUES
 -- Estrutura da tabela `idg2019_newsfeeds`
 --
 
-DROP TABLE IF EXISTS `idg2019_newsfeeds`;
-CREATE TABLE IF NOT EXISTS `idg2019_newsfeeds` (
+CREATE TABLE `idg2019_newsfeeds` (
   `catid` int(11) NOT NULL DEFAULT '0',
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `alias` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '',
   `link` varchar(2048) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -3350,15 +3158,7 @@ CREATE TABLE IF NOT EXISTS `idg2019_newsfeeds` (
   `description` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `version` int(10) UNSIGNED NOT NULL DEFAULT '1',
   `hits` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `images` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `idx_access` (`access`) USING BTREE,
-  KEY `idx_checkout` (`checked_out`) USING BTREE,
-  KEY `idx_state` (`published`) USING BTREE,
-  KEY `idx_catid` (`catid`) USING BTREE,
-  KEY `idx_createdby` (`created_by`) USING BTREE,
-  KEY `idx_language` (`language`) USING BTREE,
-  KEY `idx_xreference` (`xreference`) USING BTREE
+  `images` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -3367,14 +3167,12 @@ CREATE TABLE IF NOT EXISTS `idg2019_newsfeeds` (
 -- Estrutura da tabela `idg2019_overrider`
 --
 
-DROP TABLE IF EXISTS `idg2019_overrider`;
-CREATE TABLE IF NOT EXISTS `idg2019_overrider` (
-  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
+CREATE TABLE `idg2019_overrider` (
+  `id` int(10) NOT NULL COMMENT 'Primary Key',
   `constant` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `string` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `file` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=4292 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `file` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_overrider`
@@ -7694,9 +7492,8 @@ INSERT INTO `idg2019_overrider` (`id`, `constant`, `string`, `file`) VALUES
 -- Estrutura da tabela `idg2019_phocagallery`
 --
 
-DROP TABLE IF EXISTS `idg2019_phocagallery`;
-CREATE TABLE IF NOT EXISTS `idg2019_phocagallery` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_phocagallery` (
+  `id` int(11) UNSIGNED NOT NULL,
   `catid` int(11) NOT NULL DEFAULT '0',
   `sid` int(11) NOT NULL DEFAULT '0',
   `title` varchar(250) NOT NULL DEFAULT '',
@@ -7734,10 +7531,8 @@ CREATE TABLE IF NOT EXISTS `idg2019_phocagallery` (
   `extw` varchar(255) NOT NULL DEFAULT '',
   `exth` varchar(255) NOT NULL DEFAULT '',
   `language` char(7) NOT NULL DEFAULT '',
-  `pcproductid` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `catid` (`catid`,`published`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `pcproductid` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_phocagallery`
@@ -7763,9 +7558,8 @@ INSERT INTO `idg2019_phocagallery` (`id`, `catid`, `sid`, `title`, `alias`, `fil
 -- Estrutura da tabela `idg2019_phocagallery_categories`
 --
 
-DROP TABLE IF EXISTS `idg2019_phocagallery_categories`;
-CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_categories` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_phocagallery_categories` (
+  `id` int(11) NOT NULL,
   `parent_id` int(11) NOT NULL DEFAULT '0',
   `owner_id` int(11) NOT NULL DEFAULT '0',
   `title` varchar(255) NOT NULL DEFAULT '',
@@ -7804,12 +7598,8 @@ CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_categories` (
   `metadesc` text,
   `metadata` text,
   `language` char(7) NOT NULL DEFAULT '',
-  `image_id` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `cat_idx` (`section`,`published`,`access`) USING BTREE,
-  KEY `idx_access` (`access`) USING BTREE,
-  KEY `idx_checkout` (`checked_out`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `image_id` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_phocagallery_categories`
@@ -7826,9 +7616,8 @@ INSERT INTO `idg2019_phocagallery_categories` (`id`, `parent_id`, `owner_id`, `t
 -- Estrutura da tabela `idg2019_phocagallery_comments`
 --
 
-DROP TABLE IF EXISTS `idg2019_phocagallery_comments`;
-CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_comments` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_phocagallery_comments` (
+  `id` int(11) NOT NULL,
   `catid` int(11) NOT NULL DEFAULT '0',
   `userid` int(11) NOT NULL DEFAULT '0',
   `date` datetime NOT NULL,
@@ -7840,8 +7629,7 @@ CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_comments` (
   `checked_out_time` datetime NOT NULL,
   `ordering` int(11) NOT NULL DEFAULT '0',
   `params` text,
-  `language` char(7) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`) USING BTREE
+  `language` char(7) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -7850,9 +7638,8 @@ CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_comments` (
 -- Estrutura da tabela `idg2019_phocagallery_fb_users`
 --
 
-DROP TABLE IF EXISTS `idg2019_phocagallery_fb_users`;
-CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_fb_users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_phocagallery_fb_users` (
+  `id` int(11) NOT NULL,
   `appid` varchar(255) NOT NULL DEFAULT '',
   `appsid` varchar(255) NOT NULL DEFAULT '',
   `uid` varchar(255) NOT NULL DEFAULT '',
@@ -7871,8 +7658,7 @@ CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_fb_users` (
   `ordering` int(11) NOT NULL DEFAULT '0',
   `comments` text,
   `params` text,
-  `language` char(7) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`) USING BTREE
+  `language` char(7) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -7881,9 +7667,8 @@ CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_fb_users` (
 -- Estrutura da tabela `idg2019_phocagallery_img_comments`
 --
 
-DROP TABLE IF EXISTS `idg2019_phocagallery_img_comments`;
-CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_img_comments` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_phocagallery_img_comments` (
+  `id` int(11) NOT NULL,
   `imgid` int(11) NOT NULL DEFAULT '0',
   `userid` int(11) NOT NULL DEFAULT '0',
   `date` datetime NOT NULL,
@@ -7895,8 +7680,7 @@ CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_img_comments` (
   `checked_out_time` datetime NOT NULL,
   `ordering` int(11) NOT NULL DEFAULT '0',
   `params` text,
-  `language` char(7) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`) USING BTREE
+  `language` char(7) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -7905,9 +7689,8 @@ CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_img_comments` (
 -- Estrutura da tabela `idg2019_phocagallery_img_votes`
 --
 
-DROP TABLE IF EXISTS `idg2019_phocagallery_img_votes`;
-CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_img_votes` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_phocagallery_img_votes` (
+  `id` int(11) NOT NULL,
   `imgid` int(11) NOT NULL DEFAULT '0',
   `userid` int(11) NOT NULL DEFAULT '0',
   `date` datetime NOT NULL,
@@ -7917,8 +7700,7 @@ CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_img_votes` (
   `checked_out_time` datetime NOT NULL,
   `ordering` int(11) NOT NULL DEFAULT '0',
   `params` text,
-  `language` char(7) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`) USING BTREE
+  `language` char(7) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -7927,14 +7709,12 @@ CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_img_votes` (
 -- Estrutura da tabela `idg2019_phocagallery_img_votes_statistics`
 --
 
-DROP TABLE IF EXISTS `idg2019_phocagallery_img_votes_statistics`;
-CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_img_votes_statistics` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_phocagallery_img_votes_statistics` (
+  `id` int(11) NOT NULL,
   `imgid` int(11) NOT NULL DEFAULT '0',
   `count` int(11) NOT NULL DEFAULT '0',
   `average` float(8,6) NOT NULL DEFAULT '0.000000',
-  `language` char(7) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`) USING BTREE
+  `language` char(7) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -7943,9 +7723,8 @@ CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_img_votes_statistics` (
 -- Estrutura da tabela `idg2019_phocagallery_styles`
 --
 
-DROP TABLE IF EXISTS `idg2019_phocagallery_styles`;
-CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_styles` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_phocagallery_styles` (
+  `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL DEFAULT '',
   `alias` varchar(255) NOT NULL DEFAULT '',
   `filename` varchar(255) NOT NULL DEFAULT '',
@@ -7956,9 +7735,8 @@ CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_styles` (
   `checked_out_time` datetime NOT NULL,
   `ordering` int(11) NOT NULL DEFAULT '0',
   `params` text,
-  `language` char(7) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `language` char(7) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_phocagallery_styles`
@@ -7976,9 +7754,8 @@ INSERT INTO `idg2019_phocagallery_styles` (`id`, `title`, `alias`, `filename`, `
 -- Estrutura da tabela `idg2019_phocagallery_tags`
 --
 
-DROP TABLE IF EXISTS `idg2019_phocagallery_tags`;
-CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_tags` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_phocagallery_tags` (
+  `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL DEFAULT '',
   `alias` varchar(255) NOT NULL DEFAULT '',
   `link_cat` int(11) NOT NULL DEFAULT '0',
@@ -7989,9 +7766,8 @@ CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_tags` (
   `checked_out_time` datetime NOT NULL,
   `ordering` int(11) NOT NULL DEFAULT '0',
   `params` text,
-  `language` char(7) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `language` char(7) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_phocagallery_tags`
@@ -8007,15 +7783,11 @@ INSERT INTO `idg2019_phocagallery_tags` (`id`, `title`, `alias`, `link_cat`, `li
 -- Estrutura da tabela `idg2019_phocagallery_tags_ref`
 --
 
-DROP TABLE IF EXISTS `idg2019_phocagallery_tags_ref`;
-CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_tags_ref` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_phocagallery_tags_ref` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `imgid` int(11) NOT NULL DEFAULT '0',
-  `tagid` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `id` (`id`) USING BTREE,
-  UNIQUE KEY `i_imgid` (`imgid`,`tagid`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `tagid` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_phocagallery_tags_ref`
@@ -8031,9 +7803,8 @@ INSERT INTO `idg2019_phocagallery_tags_ref` (`id`, `imgid`, `tagid`) VALUES
 -- Estrutura da tabela `idg2019_phocagallery_user`
 --
 
-DROP TABLE IF EXISTS `idg2019_phocagallery_user`;
-CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_phocagallery_user` (
+  `id` int(11) NOT NULL,
   `userid` int(11) NOT NULL DEFAULT '0',
   `avatar` varchar(40) NOT NULL DEFAULT '',
   `published` tinyint(1) NOT NULL DEFAULT '0',
@@ -8042,9 +7813,7 @@ CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_user` (
   `checked_out_time` datetime NOT NULL,
   `ordering` int(11) NOT NULL DEFAULT '0',
   `params` text,
-  `language` char(7) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `userid` (`userid`) USING BTREE
+  `language` char(7) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -8053,9 +7822,8 @@ CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_user` (
 -- Estrutura da tabela `idg2019_phocagallery_votes`
 --
 
-DROP TABLE IF EXISTS `idg2019_phocagallery_votes`;
-CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_votes` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_phocagallery_votes` (
+  `id` int(11) NOT NULL,
   `catid` int(11) NOT NULL DEFAULT '0',
   `userid` int(11) NOT NULL DEFAULT '0',
   `date` datetime NOT NULL,
@@ -8065,8 +7833,7 @@ CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_votes` (
   `checked_out_time` datetime NOT NULL,
   `ordering` int(11) NOT NULL DEFAULT '0',
   `params` text,
-  `language` char(7) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`) USING BTREE
+  `language` char(7) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -8075,14 +7842,12 @@ CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_votes` (
 -- Estrutura da tabela `idg2019_phocagallery_votes_statistics`
 --
 
-DROP TABLE IF EXISTS `idg2019_phocagallery_votes_statistics`;
-CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_votes_statistics` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_phocagallery_votes_statistics` (
+  `id` int(11) NOT NULL,
   `catid` int(11) NOT NULL DEFAULT '0',
   `count` int(11) NOT NULL DEFAULT '0',
   `average` float(8,6) NOT NULL DEFAULT '0.000000',
-  `language` char(7) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`) USING BTREE
+  `language` char(7) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -8091,14 +7856,12 @@ CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_votes_statistics` (
 -- Estrutura da tabela `idg2019_plg_system_adminexile`
 --
 
-DROP TABLE IF EXISTS `idg2019_plg_system_adminexile`;
-CREATE TABLE IF NOT EXISTS `idg2019_plg_system_adminexile` (
+CREATE TABLE `idg2019_plg_system_adminexile` (
   `ip` varchar(45) NOT NULL,
   `firstattempt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `lastattempt` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `attempts` int(11) NOT NULL,
-  `penalty` int(11) NOT NULL,
-  PRIMARY KEY (`ip`) USING BTREE
+  `penalty` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -8107,9 +7870,8 @@ CREATE TABLE IF NOT EXISTS `idg2019_plg_system_adminexile` (
 -- Estrutura da tabela `idg2019_postinstall_messages`
 --
 
-DROP TABLE IF EXISTS `idg2019_postinstall_messages`;
-CREATE TABLE IF NOT EXISTS `idg2019_postinstall_messages` (
-  `postinstall_message_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_postinstall_messages` (
+  `postinstall_message_id` bigint(20) UNSIGNED NOT NULL,
   `extension_id` bigint(20) NOT NULL DEFAULT '700' COMMENT 'FK to x3dts_extensions',
   `title_key` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'Lang key for the title',
   `description_key` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'Lang key for description',
@@ -8122,9 +7884,8 @@ CREATE TABLE IF NOT EXISTS `idg2019_postinstall_messages` (
   `condition_file` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'RAD URI to file holding display condition method',
   `condition_method` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Display condition method, must return boolean',
   `version_introduced` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '3.2.0' COMMENT 'Version when this message was introduced',
-  `enabled` tinyint(3) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`postinstall_message_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `enabled` tinyint(3) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_postinstall_messages`
@@ -8144,18 +7905,15 @@ INSERT INTO `idg2019_postinstall_messages` (`postinstall_message_id`, `extension
 -- Estrutura da tabela `idg2019_privacy_consents`
 --
 
-DROP TABLE IF EXISTS `idg2019_privacy_consents`;
-CREATE TABLE IF NOT EXISTS `idg2019_privacy_consents` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_privacy_consents` (
+  `id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `state` int(10) NOT NULL DEFAULT '1',
   `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `subject` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `remind` tinyint(4) NOT NULL DEFAULT '0',
-  `token` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`),
-  KEY `idx_user_id` (`user_id`)
+  `token` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -8164,16 +7922,14 @@ CREATE TABLE IF NOT EXISTS `idg2019_privacy_consents` (
 -- Estrutura da tabela `idg2019_privacy_requests`
 --
 
-DROP TABLE IF EXISTS `idg2019_privacy_requests`;
-CREATE TABLE IF NOT EXISTS `idg2019_privacy_requests` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_privacy_requests` (
+  `id` int(10) UNSIGNED NOT NULL,
   `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `requested_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `status` tinyint(4) NOT NULL DEFAULT '0',
   `request_type` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `confirm_token` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `confirm_token_created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`)
+  `confirm_token_created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -8182,9 +7938,8 @@ CREATE TABLE IF NOT EXISTS `idg2019_privacy_requests` (
 -- Estrutura da tabela `idg2019_redirect_links`
 --
 
-DROP TABLE IF EXISTS `idg2019_redirect_links`;
-CREATE TABLE IF NOT EXISTS `idg2019_redirect_links` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_redirect_links` (
+  `id` int(10) UNSIGNED NOT NULL,
   `old_url` varchar(2048) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `new_url` varchar(2048) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `referer` varchar(2048) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -8193,11 +7948,8 @@ CREATE TABLE IF NOT EXISTS `idg2019_redirect_links` (
   `published` tinyint(4) NOT NULL,
   `created_date` datetime NOT NULL,
   `modified_date` datetime NOT NULL,
-  `header` smallint(3) NOT NULL DEFAULT '301',
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `idx_link_modifed` (`modified_date`) USING BTREE,
-  KEY `idx_old_url` (`old_url`(100)) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `header` smallint(3) NOT NULL DEFAULT '301'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_redirect_links`
@@ -8226,11 +7978,9 @@ INSERT INTO `idg2019_redirect_links` (`id`, `old_url`, `new_url`, `referer`, `co
 -- Estrutura da tabela `idg2019_schemas`
 --
 
-DROP TABLE IF EXISTS `idg2019_schemas`;
-CREATE TABLE IF NOT EXISTS `idg2019_schemas` (
+CREATE TABLE `idg2019_schemas` (
   `extension_id` int(11) NOT NULL,
-  `version_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`extension_id`,`version_id`) USING BTREE
+  `version_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
@@ -8238,7 +7988,7 @@ CREATE TABLE IF NOT EXISTS `idg2019_schemas` (
 --
 
 INSERT INTO `idg2019_schemas` (`extension_id`, `version_id`) VALUES
-(700, '3.9.8-2019-06-11'),
+(700, '3.9.10-2019-07-09'),
 (10030, '4.2.9'),
 (10034, '4.3.7'),
 (10061, '0.0.6');
@@ -8249,19 +7999,14 @@ INSERT INTO `idg2019_schemas` (`extension_id`, `version_id`) VALUES
 -- Estrutura da tabela `idg2019_session`
 --
 
-DROP TABLE IF EXISTS `idg2019_session`;
-CREATE TABLE IF NOT EXISTS `idg2019_session` (
+CREATE TABLE `idg2019_session` (
   `session_id` varbinary(192) NOT NULL,
   `client_id` tinyint(3) UNSIGNED DEFAULT NULL,
   `guest` tinyint(3) UNSIGNED DEFAULT '1',
   `time` int(11) NOT NULL DEFAULT '0',
   `data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `userid` int(11) DEFAULT '0',
-  `username` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT '',
-  PRIMARY KEY (`session_id`) USING BTREE,
-  KEY `userid` (`userid`) USING BTREE,
-  KEY `time` (`time`) USING BTREE,
-  KEY `client_id_guest` (`client_id`,`guest`)
+  `username` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
@@ -8269,7 +8014,11 @@ CREATE TABLE IF NOT EXISTS `idg2019_session` (
 --
 
 INSERT INTO `idg2019_session` (`session_id`, `client_id`, `guest`, `time`, `data`, `userid`, `username`) VALUES
-(0x6567656d6a73316765396e33746d6a3838656a7631323264736a, 1, 0, 1561667485, 'joomla|s:1160:\"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjozOntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjM6e3M6NzoiY291bnRlciI7aTo5O3M6NToidGltZXIiO086ODoic3RkQ2xhc3MiOjM6e3M6NToic3RhcnQiO2k6MTU2MTY2NzQxNztzOjQ6Imxhc3QiO2k6MTU2MTY2NzQ4MTtzOjM6Im5vdyI7aToxNTYxNjY3NDgyO31zOjU6InRva2VuIjtzOjMyOiJuaXFxcW1UVXoxZ2k3VklOUm52QVNrbnhrY0xUdDBDaCI7fXM6ODoicmVnaXN0cnkiO086MjQ6Ikpvb21sYVxSZWdpc3RyeVxSZWdpc3RyeSI6Mzp7czo3OiIAKgBkYXRhIjtPOjg6InN0ZENsYXNzIjozOntzOjEzOiJjb21faW5zdGFsbGVyIjtPOjg6InN0ZENsYXNzIjoyOntzOjc6Im1lc3NhZ2UiO3M6MDoiIjtzOjE3OiJleHRlbnNpb25fbWVzc2FnZSI7czowOiIiO31zOjExOiJjb21fY29udGVudCI7Tzo4OiJzdGRDbGFzcyI6MTp7czo0OiJlZGl0IjtPOjg6InN0ZENsYXNzIjoxOntzOjc6ImFydGljbGUiO086ODoic3RkQ2xhc3MiOjI6e3M6MjoiaWQiO2E6MTp7aTowO2k6Nzk7fXM6NDoiZGF0YSI7Tjt9fX1zOjE5OiJwbGdfZWRpdG9yc190aW55bWNlIjtPOjg6InN0ZENsYXNzIjoxOntzOjI0OiJjb25maWdfbGVnYWN5X3dhcm5fY291bnQiO2k6MTt9fXM6MTQ6IgAqAGluaXRpYWxpemVkIjtiOjA7czo5OiJzZXBhcmF0b3IiO3M6MToiLiI7fXM6NDoidXNlciI7TzoyMDoiSm9vbWxhXENNU1xVc2VyXFVzZXIiOjE6e3M6MjoiaWQiO3M6MzoiOTMxIjt9fX1zOjE0OiIAKgBpbml0aWFsaXplZCI7YjowO3M6OToic2VwYXJhdG9yIjtzOjE6Ii4iO30=\";', 931, 'admin');
+(0x316d32717661726c356138366f7434646e636373676b65686c39, 1, 1, 1577124690, 'joomla|s:736:\"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjozOntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjM6e3M6NzoiY291bnRlciI7aToxO3M6NToidGltZXIiO086ODoic3RkQ2xhc3MiOjM6e3M6NToic3RhcnQiO2k6MTU3NzEyNDY5MDtzOjQ6Imxhc3QiO2k6MTU3NzEyNDY5MDtzOjM6Im5vdyI7aToxNTc3MTI0NjkwO31zOjU6InRva2VuIjtzOjMyOiJxYjRhOWR2dDBob0w0UERtOFZHSzJYbUZMYkY1d1RnSiI7fXM6ODoicmVnaXN0cnkiO086MjQ6Ikpvb21sYVxSZWdpc3RyeVxSZWdpc3RyeSI6Mzp7czo3OiIAKgBkYXRhIjtPOjg6InN0ZENsYXNzIjowOnt9czoxNDoiACoAaW5pdGlhbGl6ZWQiO2I6MDtzOjk6InNlcGFyYXRvciI7czoxOiIuIjt9czo0OiJ1c2VyIjtPOjIwOiJKb29tbGFcQ01TXFVzZXJcVXNlciI6MTp7czoyOiJpZCI7aTowO319fXM6MTQ6IgAqAGluaXRpYWxpemVkIjtiOjA7czo5OiJzZXBhcmF0b3IiO3M6MToiLiI7fQ==\";', 0, ''),
+(0x61366d697471696d6861317374317365683568696e317031696c, 0, 1, 1577125988, 'joomla|s:664:\"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjozOntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjI6e3M6NzoiY291bnRlciI7aToxO3M6NToidGltZXIiO086ODoic3RkQ2xhc3MiOjM6e3M6NToic3RhcnQiO2k6MTU3NzEyNTk4ODtzOjQ6Imxhc3QiO2k6MTU3NzEyNTk4ODtzOjM6Im5vdyI7aToxNTc3MTI1OTg4O319czo4OiJyZWdpc3RyeSI7TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjA6e31zOjE0OiIAKgBpbml0aWFsaXplZCI7YjowO3M6OToic2VwYXJhdG9yIjtzOjE6Ii4iO31zOjQ6InVzZXIiO086MjA6Ikpvb21sYVxDTVNcVXNlclxVc2VyIjoxOntzOjI6ImlkIjtpOjA7fX19czoxNDoiACoAaW5pdGlhbGl6ZWQiO2I6MDtzOjk6InNlcGFyYXRvciI7czoxOiIuIjt9\";', 0, ''),
+(0x637065726a76676a3735316964626668676d6e336d7368667562, 0, 1, 1577192367, 'joomla|s:664:\"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjozOntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjI6e3M6NzoiY291bnRlciI7aToxO3M6NToidGltZXIiO086ODoic3RkQ2xhc3MiOjM6e3M6NToic3RhcnQiO2k6MTU3NzE5MjM2NztzOjQ6Imxhc3QiO2k6MTU3NzE5MjM2NztzOjM6Im5vdyI7aToxNTc3MTkyMzY3O319czo4OiJyZWdpc3RyeSI7TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjA6e31zOjE0OiIAKgBpbml0aWFsaXplZCI7YjowO3M6OToic2VwYXJhdG9yIjtzOjE6Ii4iO31zOjQ6InVzZXIiO086MjA6Ikpvb21sYVxDTVNcVXNlclxVc2VyIjoxOntzOjI6ImlkIjtpOjA7fX19czoxNDoiACoAaW5pdGlhbGl6ZWQiO2I6MDtzOjk6InNlcGFyYXRvciI7czoxOiIuIjt9\";', 0, ''),
+(0x74696c387532666b32766c67336b63686772717538306b6a3270, 1, 0, 1577192399, 'joomla|s:3368:\"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjo0OntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjM6e3M6NzoiY291bnRlciI7aTo4ODtzOjU6InRva2VuIjtzOjMyOiJENkdHWTI2RU92enY1bWVMcnRadmNUQWI2Mnk3cUpvUCI7czo1OiJ0aW1lciI7Tzo4OiJzdGRDbGFzcyI6Mzp7czo1OiJzdGFydCI7aToxNTc3MTkxMzU1O3M6NDoibGFzdCI7aToxNTc3MTkyMzk4O3M6Mzoibm93IjtpOjE1NzcxOTIzOTg7fX1zOjg6InJlZ2lzdHJ5IjtPOjI0OiJKb29tbGFcUmVnaXN0cnlcUmVnaXN0cnkiOjM6e3M6NzoiACoAZGF0YSI7Tzo4OiJzdGRDbGFzcyI6Njp7czo5OiJjb21fbWVudXMiO086ODoic3RkQ2xhc3MiOjI6e3M6NToiaXRlbXMiO086ODoic3RkQ2xhc3MiOjc6e3M6ODoibWVudXR5cGUiO3M6MDoiIjtzOjQ6Imxpc3QiO2E6Mjp7czoxMjoiZnVsbG9yZGVyaW5nIjtzOjk6ImEubGZ0IEFTQyI7czo1OiJsaW1pdCI7czoyOiIyMCI7fXM6Njoic2VhcmNoIjtzOjQ6IkZhbGUiO3M6OToicHVibGlzaGVkIjtzOjA6IiI7czo2OiJmaWx0ZXIiO2E6Njp7czo2OiJzZWFyY2giO3M6NDoiRmFsZSI7czo5OiJwdWJsaXNoZWQiO3M6MDoiIjtzOjY6ImFjY2VzcyI7czowOiIiO3M6ODoibGFuZ3VhZ2UiO3M6MDoiIjtzOjU6ImxldmVsIjtzOjA6IiI7czo5OiJwYXJlbnRfaWQiO3M6MDoiIjt9czo5OiJjbGllbnRfaWQiO2k6MDtzOjEwOiJsaW1pdHN0YXJ0IjtpOjA7fXM6NDoiZWRpdCI7Tzo4OiJzdGRDbGFzcyI6MTp7czo0OiJpdGVtIjtPOjg6InN0ZENsYXNzIjo0OntzOjI6ImlkIjthOjA6e31zOjQ6ImRhdGEiO047czo0OiJ0eXBlIjtOO3M6NDoibGluayI7Tjt9fX1zOjE0OiJjb21fY2F0ZWdvcmllcyI7Tzo4OiJzdGRDbGFzcyI6Mjp7czoxMDoiY2F0ZWdvcmllcyI7Tzo4OiJzdGRDbGFzcyI6MTp7czo3OiJjb250ZW50IjtPOjg6InN0ZENsYXNzIjo1OntzOjU6Im1vZGFsIjtPOjg6InN0ZENsYXNzIjoyOntzOjY6ImZpbHRlciI7Tzo4OiJzdGRDbGFzcyI6MTp7czo5OiJleHRlbnNpb24iO3M6MTE6ImNvbV9jb250ZW50Ijt9czo0OiJsaXN0IjthOjQ6e3M6OToiZGlyZWN0aW9uIjtzOjM6ImFzYyI7czo1OiJsaW1pdCI7czoyOiIyMCI7czo4OiJvcmRlcmluZyI7czo1OiJhLmxmdCI7czo1OiJzdGFydCI7ZDowO319czo2OiJmaWx0ZXIiO2E6Nzp7czo2OiJzZWFyY2giO3M6NToiY29udGEiO3M6OToicHVibGlzaGVkIjtzOjA6IiI7czo2OiJhY2Nlc3MiO3M6MDoiIjtzOjg6Imxhbmd1YWdlIjtzOjA6IiI7czozOiJ0YWciO3M6MDoiIjtzOjU6ImxldmVsIjtzOjA6IiI7czo5OiJleHRlbnNpb24iO3M6MTE6ImNvbV9jb250ZW50Ijt9czo0OiJsaXN0IjthOjI6e3M6MTI6ImZ1bGxvcmRlcmluZyI7czo5OiJhLmxmdCBBU0MiO3M6NToibGltaXQiO3M6MjoiMjAiO31zOjY6InNlYXJjaCI7czo1OiJjb250YSI7czoxMDoibGltaXRzdGFydCI7aTowO319czo0OiJlZGl0IjtPOjg6InN0ZENsYXNzIjoxOntzOjg6ImNhdGVnb3J5IjtPOjg6InN0ZENsYXNzIjoyOntzOjI6ImlkIjthOjA6e31zOjQ6ImRhdGEiO047fX19czoxMToiY29tX21vZHVsZXMiO086ODoic3RkQ2xhc3MiOjE6e3M6NzoibW9kdWxlcyI7Tzo4OiJzdGRDbGFzcyI6NDp7czo2OiJmaWx0ZXIiO2E6Nzp7czo2OiJzZWFyY2giO3M6NToiZGVidWciO3M6NToic3RhdGUiO3M6MDoiIjtzOjg6InBvc2l0aW9uIjtzOjA6IiI7czo2OiJtb2R1bGUiO3M6MDoiIjtzOjg6Im1lbnVpdGVtIjtzOjA6IiI7czo2OiJhY2Nlc3MiO3M6MDoiIjtzOjg6Imxhbmd1YWdlIjtzOjA6IiI7fXM6OToiY2xpZW50X2lkIjtpOjA7czo0OiJsaXN0IjthOjI6e3M6MTI6ImZ1bGxvcmRlcmluZyI7czoxNDoiYS5wb3NpdGlvbiBBU0MiO3M6NToibGltaXQiO3M6MjoiMjAiO31zOjEwOiJsaW1pdHN0YXJ0IjtpOjA7fX1zOjEwOiJjb21fY29uZmlnIjtPOjg6InN0ZENsYXNzIjoxOntzOjY6ImNvbmZpZyI7Tzo4OiJzdGRDbGFzcyI6MTp7czo2OiJnbG9iYWwiO086ODoic3RkQ2xhc3MiOjE6e3M6NDoiZGF0YSI7Tjt9fX1zOjExOiJjb21fY29udGVudCI7Tzo4OiJzdGRDbGFzcyI6MTp7czo0OiJlZGl0IjtPOjg6InN0ZENsYXNzIjoxOntzOjc6ImFydGljbGUiO086ODoic3RkQ2xhc3MiOjI6e3M6NDoiZGF0YSI7TjtzOjI6ImlkIjthOjA6e319fX1zOjE5OiJwbGdfZWRpdG9yc190aW55bWNlIjtPOjg6InN0ZENsYXNzIjoxOntzOjI0OiJjb25maWdfbGVnYWN5X3dhcm5fY291bnQiO2k6Mjt9fXM6MTQ6IgAqAGluaXRpYWxpemVkIjtiOjA7czo5OiJzZXBhcmF0b3IiO3M6MToiLiI7fXM6NDoidXNlciI7TzoyMDoiSm9vbWxhXENNU1xVc2VyXFVzZXIiOjE6e3M6MjoiaWQiO3M6MzoiOTMxIjt9czoxMToiYXBwbGljYXRpb24iO086ODoic3RkQ2xhc3MiOjE6e3M6NToicXVldWUiO2E6MDp7fX19fXM6MTQ6IgAqAGluaXRpYWxpemVkIjtiOjA7czo5OiJzZXBhcmF0b3IiO3M6MToiLiI7fQ==\";', 931, 'admin'),
+(0x7471376a37753332683569706c32336a393773386a6d7634726e, 0, 1, 1577192401, 'joomla|s:736:\"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjozOntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjM6e3M6NzoiY291bnRlciI7aToyMDtzOjU6InRpbWVyIjtPOjg6InN0ZENsYXNzIjozOntzOjU6InN0YXJ0IjtpOjE1NzcxOTE1MDE7czo0OiJsYXN0IjtpOjE1NzcxOTIzNDA7czozOiJub3ciO2k6MTU3NzE5MjQwMTt9czo1OiJ0b2tlbiI7czozMjoiTkRhNnJXUUV4TFpIaVdXWHdJQ2NxWEhpZDlQRjAyV20iO31zOjg6InJlZ2lzdHJ5IjtPOjI0OiJKb29tbGFcUmVnaXN0cnlcUmVnaXN0cnkiOjM6e3M6NzoiACoAZGF0YSI7Tzo4OiJzdGRDbGFzcyI6MDp7fXM6MTQ6IgAqAGluaXRpYWxpemVkIjtiOjA7czo5OiJzZXBhcmF0b3IiO3M6MToiLiI7fXM6NDoidXNlciI7TzoyMDoiSm9vbWxhXENNU1xVc2VyXFVzZXIiOjE6e3M6MjoiaWQiO2k6MDt9fX1zOjE0OiIAKgBpbml0aWFsaXplZCI7YjowO3M6OToic2VwYXJhdG9yIjtzOjE6Ii4iO30=\";', 0, '');
 
 -- --------------------------------------------------------
 
@@ -8277,9 +8026,8 @@ INSERT INTO `idg2019_session` (`session_id`, `client_id`, `guest`, `time`, `data
 -- Estrutura da tabela `idg2019_tags`
 --
 
-DROP TABLE IF EXISTS `idg2019_tags`;
-CREATE TABLE IF NOT EXISTS `idg2019_tags` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_tags` (
+  `id` int(10) UNSIGNED NOT NULL,
   `parent_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `lft` int(11) NOT NULL DEFAULT '0',
   `rgt` int(11) NOT NULL DEFAULT '0',
@@ -8308,16 +8056,8 @@ CREATE TABLE IF NOT EXISTS `idg2019_tags` (
   `language` char(7) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `version` int(10) UNSIGNED NOT NULL DEFAULT '1',
   `publish_up` datetime NOT NULL,
-  `publish_down` datetime NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `tag_idx` (`published`,`access`) USING BTREE,
-  KEY `idx_access` (`access`) USING BTREE,
-  KEY `idx_checkout` (`checked_out`) USING BTREE,
-  KEY `idx_left_right` (`lft`,`rgt`) USING BTREE,
-  KEY `idx_language` (`language`) USING BTREE,
-  KEY `idx_path` (`path`(100)) USING BTREE,
-  KEY `idx_alias` (`alias`(100)) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `publish_down` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_tags`
@@ -8338,18 +8078,14 @@ INSERT INTO `idg2019_tags` (`id`, `parent_id`, `lft`, `rgt`, `level`, `path`, `t
 -- Estrutura da tabela `idg2019_template_styles`
 --
 
-DROP TABLE IF EXISTS `idg2019_template_styles`;
-CREATE TABLE IF NOT EXISTS `idg2019_template_styles` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_template_styles` (
+  `id` int(10) UNSIGNED NOT NULL,
   `template` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `client_id` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `home` char(7) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `params` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `idx_template` (`template`) USING BTREE,
-  KEY `idx_home` (`home`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `params` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_template_styles`
@@ -8368,16 +8104,11 @@ INSERT INTO `idg2019_template_styles` (`id`, `template`, `client_id`, `home`, `t
 -- Estrutura da tabela `idg2019_ucm_base`
 --
 
-DROP TABLE IF EXISTS `idg2019_ucm_base`;
-CREATE TABLE IF NOT EXISTS `idg2019_ucm_base` (
+CREATE TABLE `idg2019_ucm_base` (
   `ucm_id` int(10) UNSIGNED NOT NULL,
   `ucm_item_id` int(10) NOT NULL,
   `ucm_type_id` int(11) NOT NULL,
-  `ucm_language_id` int(11) NOT NULL,
-  PRIMARY KEY (`ucm_id`) USING BTREE,
-  KEY `idx_ucm_item_id` (`ucm_item_id`) USING BTREE,
-  KEY `idx_ucm_type_id` (`ucm_type_id`) USING BTREE,
-  KEY `idx_ucm_language_id` (`ucm_language_id`) USING BTREE
+  `ucm_language_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
@@ -8393,9 +8124,8 @@ INSERT INTO `idg2019_ucm_base` (`ucm_id`, `ucm_item_id`, `ucm_type_id`, `ucm_lan
 -- Estrutura da tabela `idg2019_ucm_content`
 --
 
-DROP TABLE IF EXISTS `idg2019_ucm_content`;
-CREATE TABLE IF NOT EXISTS `idg2019_ucm_content` (
-  `core_content_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_ucm_content` (
+  `core_content_id` int(10) UNSIGNED NOT NULL,
   `core_type_alias` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'FK to the content types table',
   `core_title` varchar(400) NOT NULL DEFAULT '',
   `core_alias` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '',
@@ -8426,21 +8156,8 @@ CREATE TABLE IF NOT EXISTS `idg2019_ucm_content` (
   `core_metadesc` text NOT NULL,
   `core_catid` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `core_xreference` varchar(50) NOT NULL DEFAULT '' COMMENT 'A reference to enable linkages to external data sets.',
-  `core_type_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  PRIMARY KEY (`core_content_id`) USING BTREE,
-  KEY `tag_idx` (`core_state`,`core_access`) USING BTREE,
-  KEY `idx_access` (`core_access`) USING BTREE,
-  KEY `idx_language` (`core_language`) USING BTREE,
-  KEY `idx_modified_time` (`core_modified_time`) USING BTREE,
-  KEY `idx_created_time` (`core_created_time`) USING BTREE,
-  KEY `idx_core_modified_user_id` (`core_modified_user_id`) USING BTREE,
-  KEY `idx_core_checked_out_user_id` (`core_checked_out_user_id`) USING BTREE,
-  KEY `idx_core_created_user_id` (`core_created_user_id`) USING BTREE,
-  KEY `idx_core_type_id` (`core_type_id`) USING BTREE,
-  KEY `idx_alias` (`core_alias`(100)) USING BTREE,
-  KEY `idx_title` (`core_title`(100)) USING BTREE,
-  KEY `idx_content_type` (`core_type_alias`(100)) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='Contains core content data in name spaced fields' ROW_FORMAT=DYNAMIC;
+  `core_type_id` int(10) UNSIGNED NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Contains core content data in name spaced fields' ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_ucm_content`
@@ -8455,9 +8172,8 @@ INSERT INTO `idg2019_ucm_content` (`core_content_id`, `core_type_alias`, `core_t
 -- Estrutura da tabela `idg2019_ucm_history`
 --
 
-DROP TABLE IF EXISTS `idg2019_ucm_history`;
-CREATE TABLE IF NOT EXISTS `idg2019_ucm_history` (
-  `version_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_ucm_history` (
+  `version_id` int(10) UNSIGNED NOT NULL,
   `ucm_item_id` int(10) UNSIGNED NOT NULL,
   `ucm_type_id` int(10) UNSIGNED NOT NULL,
   `version_note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'Optional version name',
@@ -8466,10 +8182,7 @@ CREATE TABLE IF NOT EXISTS `idg2019_ucm_history` (
   `character_count` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Number of characters in this version.',
   `sha1_hash` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'SHA1 hash of the version_data column.',
   `version_data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'json-encoded string of version data',
-  `keep_forever` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0=auto delete; 1=keep',
-  PRIMARY KEY (`version_id`) USING BTREE,
-  KEY `idx_ucm_item_id` (`ucm_type_id`,`ucm_item_id`) USING BTREE,
-  KEY `idx_save_date` (`save_date`) USING BTREE
+  `keep_forever` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0=auto delete; 1=keep'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -8478,9 +8191,8 @@ CREATE TABLE IF NOT EXISTS `idg2019_ucm_history` (
 -- Estrutura da tabela `idg2019_updates`
 --
 
-DROP TABLE IF EXISTS `idg2019_updates`;
-CREATE TABLE IF NOT EXISTS `idg2019_updates` (
-  `update_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_updates` (
+  `update_id` int(11) NOT NULL,
   `update_site_id` int(11) DEFAULT '0',
   `extension_id` int(11) DEFAULT '0',
   `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT '',
@@ -8493,8 +8205,7 @@ CREATE TABLE IF NOT EXISTS `idg2019_updates` (
   `data` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `detailsurl` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `infourl` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `extra_query` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT '',
-  PRIMARY KEY (`update_id`) USING BTREE
+  `extra_query` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Available Updates' ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -8503,17 +8214,15 @@ CREATE TABLE IF NOT EXISTS `idg2019_updates` (
 -- Estrutura da tabela `idg2019_update_sites`
 --
 
-DROP TABLE IF EXISTS `idg2019_update_sites`;
-CREATE TABLE IF NOT EXISTS `idg2019_update_sites` (
-  `update_site_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_update_sites` (
+  `update_site_id` int(11) NOT NULL,
   `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT '',
   `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT '',
   `location` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `enabled` int(11) DEFAULT '0',
   `last_check_timestamp` bigint(20) DEFAULT '0',
-  `extra_query` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT '',
-  PRIMARY KEY (`update_site_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 COMMENT='Update Sites' ROW_FORMAT=DYNAMIC;
+  `extra_query` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Update Sites' ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_update_sites`
@@ -8521,14 +8230,14 @@ CREATE TABLE IF NOT EXISTS `idg2019_update_sites` (
 
 INSERT INTO `idg2019_update_sites` (`update_site_id`, `name`, `type`, `location`, `enabled`, `last_check_timestamp`, `extra_query`) VALUES
 (1, 'Joomla Core', 'collection', 'https://update.joomla.org/core/list.xml', 1, 0, ''),
-(2, 'Joomla Extension Directory', 'collection', 'http://update.joomla.org/jed/list.xml', 1, 1561085308, ''),
-(8, 'Joomla! Update Component Update Site', 'extension', 'http://update.joomla.org/core/extensions/com_joomlaupdate.xml', 1, 1561085308, ''),
-(9, 'Joomla! Update Component Update Site', 'extension', 'https://update.joomla.org/core/extensions/com_joomlaupdate.xml', 1, 1561085308, ''),
-(22, 'Blackdale', 'extension', 'http://updates.blackdale.com/update/modblank250/modblank250.xml', 1, 1531742446, ''),
-(23, 'AllVideos', 'extension', 'http://cdn.joomlaworks.org/updates/allvideos.xml', 1, 1531742446, ''),
-(24, 'WebInstaller Update Site', 'extension', 'https://appscdn.joomla.org/webapps/jedapps/webinstaller.xml', 1, 1531742447, ''),
-(25, 'K2 Updates', 'extension', 'http://getk2.org/app/update.xml', 1, 1531742447, ''),
-(26, 'Regular Labs - Articles Anywhere', 'extension', 'https://download.regularlabs.com/updates.xml?e=articlesanywhere&type=.xml', 1, 1531742448, ''),
+(2, 'Joomla Extension Directory', 'collection', 'http://update.joomla.org/jed/list.xml', 1, 0, ''),
+(8, 'Joomla! Update Component Update Site', 'extension', 'http://update.joomla.org/core/extensions/com_joomlaupdate.xml', 1, 0, ''),
+(9, 'Joomla! Update Component Update Site', 'extension', 'https://update.joomla.org/core/extensions/com_joomlaupdate.xml', 1, 0, ''),
+(22, 'Blackdale', 'extension', 'http://updates.blackdale.com/update/modblank250/modblank250.xml', 1, 0, ''),
+(23, 'AllVideos', 'extension', 'http://cdn.joomlaworks.org/updates/allvideos.xml', 1, 0, ''),
+(24, 'WebInstaller Update Site', 'extension', 'https://appscdn.joomla.org/webapps/jedapps/webinstaller.xml', 1, 0, ''),
+(25, 'K2 Updates', 'extension', 'http://getk2.org/app/update.xml', 1, 0, ''),
+(26, 'Regular Labs - Articles Anywhere', 'extension', 'https://download.regularlabs.com/updates.xml?e=articlesanywhere&type=.xml', 1, 0, ''),
 (27, 'Youtube Gallery', 'extension', 'https://joomlaboat.com/updates/extensions/youtubegallery-free.xml', 1, 0, ''),
 (28, 'Accredited Joomla! Translations', 'collection', 'https://update.joomla.org/language/translationlist_3.xml', 1, 0, '');
 
@@ -8538,11 +8247,9 @@ INSERT INTO `idg2019_update_sites` (`update_site_id`, `name`, `type`, `location`
 -- Estrutura da tabela `idg2019_update_sites_extensions`
 --
 
-DROP TABLE IF EXISTS `idg2019_update_sites_extensions`;
-CREATE TABLE IF NOT EXISTS `idg2019_update_sites_extensions` (
+CREATE TABLE `idg2019_update_sites_extensions` (
   `update_site_id` int(11) NOT NULL DEFAULT '0',
-  `extension_id` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`update_site_id`,`extension_id`) USING BTREE
+  `extension_id` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Links extensions to update sites' ROW_FORMAT=FIXED;
 
 --
@@ -8568,19 +8275,13 @@ INSERT INTO `idg2019_update_sites_extensions` (`update_site_id`, `extension_id`)
 -- Estrutura da tabela `idg2019_usergroups`
 --
 
-DROP TABLE IF EXISTS `idg2019_usergroups`;
-CREATE TABLE IF NOT EXISTS `idg2019_usergroups` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
+CREATE TABLE `idg2019_usergroups` (
+  `id` int(10) UNSIGNED NOT NULL COMMENT 'Primary Key',
   `parent_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Adjacency List Reference Id',
   `lft` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set lft.',
   `rgt` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set rgt.',
-  `title` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `idx_usergroup_parent_title_lookup` (`parent_id`,`title`) USING BTREE,
-  KEY `idx_usergroup_title_lookup` (`title`) USING BTREE,
-  KEY `idx_usergroup_adjacency_lookup` (`parent_id`) USING BTREE,
-  KEY `idx_usergroup_nested_set_lookup` (`lft`,`rgt`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `title` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_usergroups`
@@ -8603,9 +8304,8 @@ INSERT INTO `idg2019_usergroups` (`id`, `parent_id`, `lft`, `rgt`, `title`) VALU
 -- Estrutura da tabela `idg2019_users`
 --
 
-DROP TABLE IF EXISTS `idg2019_users`;
-CREATE TABLE IF NOT EXISTS `idg2019_users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_users` (
+  `id` int(11) NOT NULL,
   `name` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `username` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
@@ -8620,20 +8320,15 @@ CREATE TABLE IF NOT EXISTS `idg2019_users` (
   `resetCount` int(11) NOT NULL DEFAULT '0' COMMENT 'Count of password resets since lastResetTime',
   `otpKey` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'Two factor authentication encrypted keys',
   `otep` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'One time emergency passwords',
-  `requireReset` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'Require user to reset password on next login',
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `idx_block` (`block`) USING BTREE,
-  KEY `username` (`username`) USING BTREE,
-  KEY `email` (`email`) USING BTREE,
-  KEY `idx_name` (`name`(100)) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=932 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `requireReset` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'Require user to reset password on next login'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_users`
 --
 
 INSERT INTO `idg2019_users` (`id`, `name`, `username`, `email`, `password`, `block`, `sendEmail`, `registerDate`, `lastvisitDate`, `activation`, `params`, `lastResetTime`, `resetCount`, `otpKey`, `otep`, `requireReset`) VALUES
-(931, 'admin', 'admin', 'joomlagovbr@gmail.com', '$2y$10$fd2lPt3.AedR9HmjU6mSf.Z62xT8rF/O356xYTXJKsu1bkBqRAhYS', 0, 0, '2019-04-05 16:25:23', '2019-06-27 20:30:51', '', '{\"admin_style\":\"\",\"admin_language\":\"\",\"language\":\"\",\"editor\":\"\",\"helpsite\":\"\",\"timezone\":\"\"}', '0000-00-00 00:00:00', 0, '', '', 0);
+(931, 'admin', 'admin', 'joomlagovbr@gmail.com', '$2y$10$fd2lPt3.AedR9HmjU6mSf.Z62xT8rF/O356xYTXJKsu1bkBqRAhYS', 0, 0, '2019-04-05 16:25:23', '2019-12-24 12:42:36', '', '{\"admin_style\":\"\",\"admin_language\":\"\",\"language\":\"\",\"editor\":\"\",\"helpsite\":\"\",\"timezone\":\"\"}', '0000-00-00 00:00:00', 0, '', '', 0);
 
 -- --------------------------------------------------------
 
@@ -8641,18 +8336,14 @@ INSERT INTO `idg2019_users` (`id`, `name`, `username`, `email`, `password`, `blo
 -- Estrutura da tabela `idg2019_user_keys`
 --
 
-DROP TABLE IF EXISTS `idg2019_user_keys`;
-CREATE TABLE IF NOT EXISTS `idg2019_user_keys` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_user_keys` (
+  `id` int(10) UNSIGNED NOT NULL,
   `user_id` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `series` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `invalid` tinyint(4) NOT NULL,
   `time` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `uastring` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `series` (`series`) USING BTREE,
-  KEY `user_id` (`user_id`) USING BTREE
+  `uastring` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -8661,9 +8352,8 @@ CREATE TABLE IF NOT EXISTS `idg2019_user_keys` (
 -- Estrutura da tabela `idg2019_user_notes`
 --
 
-DROP TABLE IF EXISTS `idg2019_user_notes`;
-CREATE TABLE IF NOT EXISTS `idg2019_user_notes` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_user_notes` (
+  `id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `catid` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `subject` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
@@ -8677,10 +8367,7 @@ CREATE TABLE IF NOT EXISTS `idg2019_user_notes` (
   `modified_time` datetime NOT NULL,
   `review_time` datetime NOT NULL,
   `publish_up` datetime NOT NULL,
-  `publish_down` datetime NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `idx_user_id` (`user_id`) USING BTREE,
-  KEY `idx_category_id` (`catid`) USING BTREE
+  `publish_down` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -8689,13 +8376,11 @@ CREATE TABLE IF NOT EXISTS `idg2019_user_notes` (
 -- Estrutura da tabela `idg2019_user_profiles`
 --
 
-DROP TABLE IF EXISTS `idg2019_user_profiles`;
-CREATE TABLE IF NOT EXISTS `idg2019_user_profiles` (
+CREATE TABLE `idg2019_user_profiles` (
   `user_id` int(11) NOT NULL,
   `profile_key` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `profile_value` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ordering` int(11) NOT NULL DEFAULT '0',
-  UNIQUE KEY `idx_user_id_profile_key` (`user_id`,`profile_key`) USING BTREE
+  `ordering` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Simple user profile storage table' ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -8704,11 +8389,9 @@ CREATE TABLE IF NOT EXISTS `idg2019_user_profiles` (
 -- Estrutura da tabela `idg2019_user_usergroup_map`
 --
 
-DROP TABLE IF EXISTS `idg2019_user_usergroup_map`;
-CREATE TABLE IF NOT EXISTS `idg2019_user_usergroup_map` (
+CREATE TABLE `idg2019_user_usergroup_map` (
   `user_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Foreign Key to x3dts_users.id',
-  `group_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Foreign Key to x3dts_usergroups.id',
-  PRIMARY KEY (`user_id`,`group_id`) USING BTREE
+  `group_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Foreign Key to x3dts_usergroups.id'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
@@ -8724,8 +8407,7 @@ INSERT INTO `idg2019_user_usergroup_map` (`user_id`, `group_id`) VALUES
 -- Estrutura da tabela `idg2019_utf8_conversion`
 --
 
-DROP TABLE IF EXISTS `idg2019_utf8_conversion`;
-CREATE TABLE IF NOT EXISTS `idg2019_utf8_conversion` (
+CREATE TABLE `idg2019_utf8_conversion` (
   `converted` tinyint(4) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
@@ -8742,15 +8424,12 @@ INSERT INTO `idg2019_utf8_conversion` (`converted`) VALUES
 -- Estrutura da tabela `idg2019_viewlevels`
 --
 
-DROP TABLE IF EXISTS `idg2019_viewlevels`;
-CREATE TABLE IF NOT EXISTS `idg2019_viewlevels` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
+CREATE TABLE `idg2019_viewlevels` (
+  `id` int(10) UNSIGNED NOT NULL COMMENT 'Primary Key',
   `title` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `ordering` int(11) NOT NULL DEFAULT '0',
-  `rules` varchar(5120) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'JSON encoded access control.',
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `idx_assetgroup_title_lookup` (`title`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `rules` varchar(5120) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'JSON encoded access control.'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_viewlevels`
@@ -8767,9 +8446,8 @@ INSERT INTO `idg2019_viewlevels` (`id`, `title`, `ordering`, `rules`) VALUES
 -- Estrutura da tabela `idg2019_weblinks`
 --
 
-DROP TABLE IF EXISTS `idg2019_weblinks`;
-CREATE TABLE IF NOT EXISTS `idg2019_weblinks` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_weblinks` (
+  `id` int(10) UNSIGNED NOT NULL,
   `catid` int(11) NOT NULL DEFAULT '0',
   `title` varchar(250) NOT NULL DEFAULT '',
   `alias` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
@@ -8796,16 +8474,7 @@ CREATE TABLE IF NOT EXISTS `idg2019_weblinks` (
   `publish_up` datetime NOT NULL,
   `publish_down` datetime NOT NULL,
   `version` int(10) UNSIGNED NOT NULL DEFAULT '1',
-  `images` text NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `idx_access` (`access`) USING BTREE,
-  KEY `idx_checkout` (`checked_out`) USING BTREE,
-  KEY `idx_state` (`state`) USING BTREE,
-  KEY `idx_catid` (`catid`) USING BTREE,
-  KEY `idx_createdby` (`created_by`) USING BTREE,
-  KEY `idx_featured_catid` (`featured`,`catid`) USING BTREE,
-  KEY `idx_language` (`language`) USING BTREE,
-  KEY `idx_xreference` (`xreference`) USING BTREE
+  `images` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -8814,14 +8483,12 @@ CREATE TABLE IF NOT EXISTS `idg2019_weblinks` (
 -- Estrutura da tabela `idg2019_youtubegallery_categories`
 --
 
-DROP TABLE IF EXISTS `idg2019_youtubegallery_categories`;
-CREATE TABLE IF NOT EXISTS `idg2019_youtubegallery_categories` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_youtubegallery_categories` (
+  `id` int(10) NOT NULL,
   `categoryname` varchar(50) NOT NULL,
   `description` text NOT NULL,
   `image` varchar(255) NOT NULL,
-  `parentid` int(11) NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE
+  `parentid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -8830,11 +8497,9 @@ CREATE TABLE IF NOT EXISTS `idg2019_youtubegallery_categories` (
 -- Estrutura da tabela `idg2019_youtubegallery_settings`
 --
 
-DROP TABLE IF EXISTS `idg2019_youtubegallery_settings`;
-CREATE TABLE IF NOT EXISTS `idg2019_youtubegallery_settings` (
+CREATE TABLE `idg2019_youtubegallery_settings` (
   `option` varchar(50) NOT NULL,
-  `value` varchar(1024) NOT NULL,
-  PRIMARY KEY (`option`) USING BTREE
+  `value` varchar(1024) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
@@ -8852,9 +8517,8 @@ INSERT INTO `idg2019_youtubegallery_settings` (`option`, `value`) VALUES
 -- Estrutura da tabela `idg2019_youtubegallery_themes`
 --
 
-DROP TABLE IF EXISTS `idg2019_youtubegallery_themes`;
-CREATE TABLE IF NOT EXISTS `idg2019_youtubegallery_themes` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_youtubegallery_themes` (
+  `id` int(10) NOT NULL,
   `themename` varchar(50) NOT NULL,
   `showtitle` tinyint(1) NOT NULL,
   `playvideo` tinyint(1) NOT NULL,
@@ -8904,9 +8568,8 @@ CREATE TABLE IF NOT EXISTS `idg2019_youtubegallery_themes` (
   `themedescription` text NOT NULL,
   `nocookie` tinyint(1) NOT NULL DEFAULT '0',
   `changepagetitle` smallint(6) NOT NULL DEFAULT '0',
-  `allowplaylist` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `allowplaylist` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_youtubegallery_themes`
@@ -8922,9 +8585,8 @@ INSERT INTO `idg2019_youtubegallery_themes` (`id`, `themename`, `showtitle`, `pl
 -- Estrutura da tabela `idg2019_youtubegallery_videolists`
 --
 
-DROP TABLE IF EXISTS `idg2019_youtubegallery_videolists`;
-CREATE TABLE IF NOT EXISTS `idg2019_youtubegallery_videolists` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_youtubegallery_videolists` (
+  `id` int(10) NOT NULL,
   `listname` varchar(50) NOT NULL,
   `videolist` text,
   `catid` int(11) NOT NULL,
@@ -8935,9 +8597,8 @@ CREATE TABLE IF NOT EXISTS `idg2019_youtubegallery_videolists` (
   `watchusergroup` smallint(6) NOT NULL,
   `authorurl` varchar(1024) NOT NULL,
   `image` varchar(1024) NOT NULL,
-  `note` varchar(256) NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `note` varchar(256) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_youtubegallery_videolists`
@@ -8952,9 +8613,8 @@ INSERT INTO `idg2019_youtubegallery_videolists` (`id`, `listname`, `videolist`, 
 -- Estrutura da tabela `idg2019_youtubegallery_videos`
 --
 
-DROP TABLE IF EXISTS `idg2019_youtubegallery_videos`;
-CREATE TABLE IF NOT EXISTS `idg2019_youtubegallery_videos` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `idg2019_youtubegallery_videos` (
+  `id` int(10) NOT NULL,
   `listid` int(11) NOT NULL,
   `parentid` int(11) NOT NULL,
   `videosource` varchar(30) NOT NULL,
@@ -8998,9 +8658,8 @@ CREATE TABLE IF NOT EXISTS `idg2019_youtubegallery_videos` (
   `channel_totaluploadviews` int(11) NOT NULL DEFAULT '0',
   `alias` varchar(255) NOT NULL,
   `rawdata` mediumtext NOT NULL,
-  `datalink` varchar(1024) NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=155 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `datalink` varchar(1024) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `idg2019_youtubegallery_videos`
@@ -9015,15 +8674,1348 @@ INSERT INTO `idg2019_youtubegallery_videos` (`id`, `listid`, `parentid`, `videos
 --
 
 --
+-- Indexes for table `idg2019_action_logs`
+--
+ALTER TABLE `idg2019_action_logs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_user_id` (`user_id`),
+  ADD KEY `idx_user_id_logdate` (`user_id`,`log_date`),
+  ADD KEY `idx_user_id_extension` (`user_id`,`extension`),
+  ADD KEY `idx_extension_item_id` (`extension`,`item_id`);
+
+--
+-- Indexes for table `idg2019_action_logs_extensions`
+--
+ALTER TABLE `idg2019_action_logs_extensions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `idg2019_action_logs_users`
+--
+ALTER TABLE `idg2019_action_logs_users`
+  ADD PRIMARY KEY (`user_id`),
+  ADD KEY `idx_notify` (`notify`);
+
+--
+-- Indexes for table `idg2019_action_log_config`
+--
+ALTER TABLE `idg2019_action_log_config`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `idg2019_agendadirigentes_agendaalterada`
+--
+ALTER TABLE `idg2019_agendadirigentes_agendaalterada`
+  ADD PRIMARY KEY (`id_dirigente`,`data`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_agendadirigentes_cargos`
+--
+ALTER TABLE `idg2019_agendadirigentes_cargos`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `idx_catid` (`catid`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_agendadirigentes_compromissos`
+--
+ALTER TABLE `idg2019_agendadirigentes_compromissos`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `idx_data_inicial` (`data_inicial`) USING BTREE,
+  ADD KEY `idx_horario_inicio` (`horario_inicio`) USING BTREE,
+  ADD KEY `idx_data_final` (`data_final`) USING BTREE,
+  ADD KEY `idx_horario_fim` (`horario_fim`) USING BTREE,
+  ADD KEY `idx_published` (`state`) USING BTREE,
+  ADD KEY `idx_outros` (`dia_todo`,`compromisso_alterado`,`featured`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_agendadirigentes_dirigentes`
+--
+ALTER TABLE `idg2019_agendadirigentes_dirigentes`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `idx_cargo_id` (`cargo_id`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_agendadirigentes_dirigentes_compromissos`
+--
+ALTER TABLE `idg2019_agendadirigentes_dirigentes_compromissos`
+  ADD PRIMARY KEY (`dirigente_id`,`compromisso_id`) USING BTREE,
+  ADD KEY `idx_owner` (`owner`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_assets`
+--
+ALTER TABLE `idg2019_assets`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD UNIQUE KEY `idx_asset_name` (`name`) USING BTREE,
+  ADD KEY `idx_lft_rgt` (`lft`,`rgt`) USING BTREE,
+  ADD KEY `idx_parent_id` (`parent_id`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_associations`
+--
+ALTER TABLE `idg2019_associations`
+  ADD PRIMARY KEY (`context`,`id`) USING BTREE,
+  ADD KEY `idx_key` (`key`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_banners`
+--
+ALTER TABLE `idg2019_banners`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `idx_state` (`state`) USING BTREE,
+  ADD KEY `idx_own_prefix` (`own_prefix`) USING BTREE,
+  ADD KEY `idx_banner_catid` (`catid`) USING BTREE,
+  ADD KEY `idx_language` (`language`) USING BTREE,
+  ADD KEY `idx_metakey_prefix` (`metakey_prefix`(100)) USING BTREE;
+
+--
+-- Indexes for table `idg2019_banner_clients`
+--
+ALTER TABLE `idg2019_banner_clients`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `idx_own_prefix` (`own_prefix`) USING BTREE,
+  ADD KEY `idx_metakey_prefix` (`metakey_prefix`(100)) USING BTREE;
+
+--
+-- Indexes for table `idg2019_banner_tracks`
+--
+ALTER TABLE `idg2019_banner_tracks`
+  ADD PRIMARY KEY (`track_date`,`track_type`,`banner_id`) USING BTREE,
+  ADD KEY `idx_track_date` (`track_date`) USING BTREE,
+  ADD KEY `idx_track_type` (`track_type`) USING BTREE,
+  ADD KEY `idx_banner_id` (`banner_id`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_categories`
+--
+ALTER TABLE `idg2019_categories`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `cat_idx` (`extension`,`published`,`access`) USING BTREE,
+  ADD KEY `idx_access` (`access`) USING BTREE,
+  ADD KEY `idx_checkout` (`checked_out`) USING BTREE,
+  ADD KEY `idx_left_right` (`lft`,`rgt`) USING BTREE,
+  ADD KEY `idx_language` (`language`) USING BTREE,
+  ADD KEY `idx_path` (`path`(100)) USING BTREE,
+  ADD KEY `idx_alias` (`alias`(100)) USING BTREE;
+
+--
+-- Indexes for table `idg2019_contact_details`
+--
+ALTER TABLE `idg2019_contact_details`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `idx_access` (`access`) USING BTREE,
+  ADD KEY `idx_checkout` (`checked_out`) USING BTREE,
+  ADD KEY `idx_state` (`published`) USING BTREE,
+  ADD KEY `idx_catid` (`catid`) USING BTREE,
+  ADD KEY `idx_createdby` (`created_by`) USING BTREE,
+  ADD KEY `idx_featured_catid` (`featured`,`catid`) USING BTREE,
+  ADD KEY `idx_language` (`language`) USING BTREE,
+  ADD KEY `idx_xreference` (`xreference`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_content`
+--
+ALTER TABLE `idg2019_content`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `idx_access` (`access`) USING BTREE,
+  ADD KEY `idx_checkout` (`checked_out`) USING BTREE,
+  ADD KEY `idx_state` (`state`) USING BTREE,
+  ADD KEY `idx_catid` (`catid`) USING BTREE,
+  ADD KEY `idx_createdby` (`created_by`) USING BTREE,
+  ADD KEY `idx_featured_catid` (`featured`,`catid`) USING BTREE,
+  ADD KEY `idx_language` (`language`) USING BTREE,
+  ADD KEY `idx_xreference` (`xreference`) USING BTREE,
+  ADD KEY `idx_alias` (`alias`(191)) USING BTREE;
+
+--
+-- Indexes for table `idg2019_contentitem_tag_map`
+--
+ALTER TABLE `idg2019_contentitem_tag_map`
+  ADD UNIQUE KEY `uc_ItemnameTagid` (`type_id`,`content_item_id`,`tag_id`) USING BTREE,
+  ADD KEY `idx_tag_type` (`tag_id`,`type_id`) USING BTREE,
+  ADD KEY `idx_date_id` (`tag_date`,`tag_id`) USING BTREE,
+  ADD KEY `idx_core_content_id` (`core_content_id`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_content_frontpage`
+--
+ALTER TABLE `idg2019_content_frontpage`
+  ADD PRIMARY KEY (`content_id`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_content_rating`
+--
+ALTER TABLE `idg2019_content_rating`
+  ADD PRIMARY KEY (`content_id`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_content_types`
+--
+ALTER TABLE `idg2019_content_types`
+  ADD PRIMARY KEY (`type_id`) USING BTREE,
+  ADD KEY `idx_alias` (`type_alias`(100)) USING BTREE;
+
+--
+-- Indexes for table `idg2019_extensions`
+--
+ALTER TABLE `idg2019_extensions`
+  ADD PRIMARY KEY (`extension_id`) USING BTREE,
+  ADD KEY `element_clientid` (`element`,`client_id`) USING BTREE,
+  ADD KEY `element_folder_clientid` (`element`,`folder`,`client_id`) USING BTREE,
+  ADD KEY `extension` (`type`,`element`,`folder`,`client_id`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_fields`
+--
+ALTER TABLE `idg2019_fields`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `idx_checkout` (`checked_out`) USING BTREE,
+  ADD KEY `idx_state` (`state`) USING BTREE,
+  ADD KEY `idx_created_user_id` (`created_user_id`) USING BTREE,
+  ADD KEY `idx_access` (`access`) USING BTREE,
+  ADD KEY `idx_context` (`context`(191)) USING BTREE,
+  ADD KEY `idx_language` (`language`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_fields_categories`
+--
+ALTER TABLE `idg2019_fields_categories`
+  ADD PRIMARY KEY (`field_id`,`category_id`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_fields_groups`
+--
+ALTER TABLE `idg2019_fields_groups`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `idx_checkout` (`checked_out`) USING BTREE,
+  ADD KEY `idx_state` (`state`) USING BTREE,
+  ADD KEY `idx_created_by` (`created_by`) USING BTREE,
+  ADD KEY `idx_access` (`access`) USING BTREE,
+  ADD KEY `idx_context` (`context`(191)) USING BTREE,
+  ADD KEY `idx_language` (`language`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_fields_values`
+--
+ALTER TABLE `idg2019_fields_values`
+  ADD KEY `idx_field_id` (`field_id`) USING BTREE,
+  ADD KEY `idx_item_id` (`item_id`(191)) USING BTREE;
+
+--
+-- Indexes for table `idg2019_finder_filters`
+--
+ALTER TABLE `idg2019_finder_filters`
+  ADD PRIMARY KEY (`filter_id`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_finder_links`
+--
+ALTER TABLE `idg2019_finder_links`
+  ADD PRIMARY KEY (`link_id`) USING BTREE,
+  ADD KEY `idx_type` (`type_id`) USING BTREE,
+  ADD KEY `idx_md5` (`md5sum`) USING BTREE,
+  ADD KEY `idx_url` (`url`(75)) USING BTREE,
+  ADD KEY `idx_published_list` (`published`,`state`,`access`,`publish_start_date`,`publish_end_date`,`list_price`) USING BTREE,
+  ADD KEY `idx_published_sale` (`published`,`state`,`access`,`publish_start_date`,`publish_end_date`,`sale_price`) USING BTREE,
+  ADD KEY `idx_title` (`title`(100)) USING BTREE;
+
+--
+-- Indexes for table `idg2019_finder_links_terms0`
+--
+ALTER TABLE `idg2019_finder_links_terms0`
+  ADD PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
+  ADD KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
+  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_finder_links_terms1`
+--
+ALTER TABLE `idg2019_finder_links_terms1`
+  ADD PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
+  ADD KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
+  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_finder_links_terms2`
+--
+ALTER TABLE `idg2019_finder_links_terms2`
+  ADD PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
+  ADD KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
+  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_finder_links_terms3`
+--
+ALTER TABLE `idg2019_finder_links_terms3`
+  ADD PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
+  ADD KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
+  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_finder_links_terms4`
+--
+ALTER TABLE `idg2019_finder_links_terms4`
+  ADD PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
+  ADD KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
+  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_finder_links_terms5`
+--
+ALTER TABLE `idg2019_finder_links_terms5`
+  ADD PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
+  ADD KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
+  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_finder_links_terms6`
+--
+ALTER TABLE `idg2019_finder_links_terms6`
+  ADD PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
+  ADD KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
+  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_finder_links_terms7`
+--
+ALTER TABLE `idg2019_finder_links_terms7`
+  ADD PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
+  ADD KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
+  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_finder_links_terms8`
+--
+ALTER TABLE `idg2019_finder_links_terms8`
+  ADD PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
+  ADD KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
+  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_finder_links_terms9`
+--
+ALTER TABLE `idg2019_finder_links_terms9`
+  ADD PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
+  ADD KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
+  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_finder_links_termsa`
+--
+ALTER TABLE `idg2019_finder_links_termsa`
+  ADD PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
+  ADD KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
+  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_finder_links_termsb`
+--
+ALTER TABLE `idg2019_finder_links_termsb`
+  ADD PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
+  ADD KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
+  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_finder_links_termsc`
+--
+ALTER TABLE `idg2019_finder_links_termsc`
+  ADD PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
+  ADD KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
+  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_finder_links_termsd`
+--
+ALTER TABLE `idg2019_finder_links_termsd`
+  ADD PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
+  ADD KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
+  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_finder_links_termse`
+--
+ALTER TABLE `idg2019_finder_links_termse`
+  ADD PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
+  ADD KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
+  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_finder_links_termsf`
+--
+ALTER TABLE `idg2019_finder_links_termsf`
+  ADD PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
+  ADD KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
+  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_finder_taxonomy`
+--
+ALTER TABLE `idg2019_finder_taxonomy`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `parent_id` (`parent_id`) USING BTREE,
+  ADD KEY `state` (`state`) USING BTREE,
+  ADD KEY `ordering` (`ordering`) USING BTREE,
+  ADD KEY `access` (`access`) USING BTREE,
+  ADD KEY `idx_parent_published` (`parent_id`,`state`,`access`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_finder_taxonomy_map`
+--
+ALTER TABLE `idg2019_finder_taxonomy_map`
+  ADD PRIMARY KEY (`link_id`,`node_id`) USING BTREE,
+  ADD KEY `link_id` (`link_id`) USING BTREE,
+  ADD KEY `node_id` (`node_id`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_finder_terms`
+--
+ALTER TABLE `idg2019_finder_terms`
+  ADD PRIMARY KEY (`term_id`) USING BTREE,
+  ADD UNIQUE KEY `idx_term` (`term`) USING BTREE,
+  ADD KEY `idx_term_phrase` (`term`,`phrase`) USING BTREE,
+  ADD KEY `idx_stem_phrase` (`stem`,`phrase`) USING BTREE,
+  ADD KEY `idx_soundex_phrase` (`soundex`,`phrase`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_finder_terms_common`
+--
+ALTER TABLE `idg2019_finder_terms_common`
+  ADD KEY `idx_word_lang` (`term`,`language`) USING BTREE,
+  ADD KEY `idx_lang` (`language`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_finder_tokens`
+--
+ALTER TABLE `idg2019_finder_tokens`
+  ADD KEY `idx_word` (`term`) USING HASH,
+  ADD KEY `idx_context` (`context`) USING HASH;
+
+--
+-- Indexes for table `idg2019_finder_tokens_aggregate`
+--
+ALTER TABLE `idg2019_finder_tokens_aggregate`
+  ADD KEY `token` (`term`) USING HASH,
+  ADD KEY `keyword_id` (`term_id`) USING HASH;
+
+--
+-- Indexes for table `idg2019_finder_types`
+--
+ALTER TABLE `idg2019_finder_types`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD UNIQUE KEY `title` (`title`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_k2_attachments`
+--
+ALTER TABLE `idg2019_k2_attachments`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `itemID` (`itemID`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_k2_categories`
+--
+ALTER TABLE `idg2019_k2_categories`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `category` (`published`,`access`,`trash`) USING BTREE,
+  ADD KEY `parent` (`parent`) USING BTREE,
+  ADD KEY `ordering` (`ordering`) USING BTREE,
+  ADD KEY `published` (`published`) USING BTREE,
+  ADD KEY `access` (`access`) USING BTREE,
+  ADD KEY `trash` (`trash`) USING BTREE,
+  ADD KEY `language` (`language`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_k2_comments`
+--
+ALTER TABLE `idg2019_k2_comments`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `itemID` (`itemID`) USING BTREE,
+  ADD KEY `userID` (`userID`) USING BTREE,
+  ADD KEY `published` (`published`) USING BTREE,
+  ADD KEY `latestComments` (`published`,`commentDate`) USING BTREE,
+  ADD KEY `countComments` (`itemID`,`published`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_k2_extra_fields`
+--
+ALTER TABLE `idg2019_k2_extra_fields`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `group` (`group`) USING BTREE,
+  ADD KEY `published` (`published`) USING BTREE,
+  ADD KEY `ordering` (`ordering`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_k2_extra_fields_groups`
+--
+ALTER TABLE `idg2019_k2_extra_fields_groups`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
 -- Indexes for table `idg2019_k2_items`
 --
+ALTER TABLE `idg2019_k2_items`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `item` (`published`,`publish_up`,`publish_down`,`trash`,`access`) USING BTREE,
+  ADD KEY `catid` (`catid`) USING BTREE,
+  ADD KEY `created_by` (`created_by`) USING BTREE,
+  ADD KEY `ordering` (`ordering`) USING BTREE,
+  ADD KEY `featured` (`featured`) USING BTREE,
+  ADD KEY `featured_ordering` (`featured_ordering`) USING BTREE,
+  ADD KEY `hits` (`hits`) USING BTREE,
+  ADD KEY `created` (`created`) USING BTREE,
+  ADD KEY `language` (`language`) USING BTREE;
 ALTER TABLE `idg2019_k2_items` ADD FULLTEXT KEY `search` (`title`,`introtext`,`fulltext`,`extra_fields_search`,`image_caption`,`image_credits`,`video_caption`,`video_credits`,`metadesc`,`metakey`);
 ALTER TABLE `idg2019_k2_items` ADD FULLTEXT KEY `title` (`title`);
 
 --
+-- Indexes for table `idg2019_k2_rating`
+--
+ALTER TABLE `idg2019_k2_rating`
+  ADD PRIMARY KEY (`itemID`) USING BTREE;
+
+--
 -- Indexes for table `idg2019_k2_tags`
 --
+ALTER TABLE `idg2019_k2_tags`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `published` (`published`) USING BTREE;
 ALTER TABLE `idg2019_k2_tags` ADD FULLTEXT KEY `name` (`name`);
+
+--
+-- Indexes for table `idg2019_k2_tags_xref`
+--
+ALTER TABLE `idg2019_k2_tags_xref`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `tagID` (`tagID`) USING BTREE,
+  ADD KEY `itemID` (`itemID`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_k2_users`
+--
+ALTER TABLE `idg2019_k2_users`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `userID` (`userID`) USING BTREE,
+  ADD KEY `group` (`group`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_k2_user_groups`
+--
+ALTER TABLE `idg2019_k2_user_groups`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_languages`
+--
+ALTER TABLE `idg2019_languages`
+  ADD PRIMARY KEY (`lang_id`) USING BTREE,
+  ADD UNIQUE KEY `idx_sef` (`sef`) USING BTREE,
+  ADD UNIQUE KEY `idx_langcode` (`lang_code`) USING BTREE,
+  ADD KEY `idx_access` (`access`) USING BTREE,
+  ADD KEY `idx_ordering` (`ordering`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_menu`
+--
+ALTER TABLE `idg2019_menu`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD UNIQUE KEY `idx_client_id_parent_id_alias_language` (`client_id`,`parent_id`,`alias`(100),`language`) USING BTREE,
+  ADD KEY `idx_componentid` (`component_id`,`menutype`,`published`,`access`) USING BTREE,
+  ADD KEY `idx_menutype` (`menutype`) USING BTREE,
+  ADD KEY `idx_left_right` (`lft`,`rgt`) USING BTREE,
+  ADD KEY `idx_language` (`language`) USING BTREE,
+  ADD KEY `idx_alias` (`alias`(100)) USING BTREE,
+  ADD KEY `idx_path` (`path`(100)) USING BTREE;
+
+--
+-- Indexes for table `idg2019_menu_types`
+--
+ALTER TABLE `idg2019_menu_types`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD UNIQUE KEY `idx_menutype` (`menutype`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_messages`
+--
+ALTER TABLE `idg2019_messages`
+  ADD PRIMARY KEY (`message_id`) USING BTREE,
+  ADD KEY `useridto_state` (`user_id_to`,`state`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_messages_cfg`
+--
+ALTER TABLE `idg2019_messages_cfg`
+  ADD UNIQUE KEY `idx_user_var_name` (`user_id`,`cfg_name`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_modules`
+--
+ALTER TABLE `idg2019_modules`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `published` (`published`,`access`) USING BTREE,
+  ADD KEY `newsfeeds` (`module`,`published`) USING BTREE,
+  ADD KEY `idx_language` (`language`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_modules_menu`
+--
+ALTER TABLE `idg2019_modules_menu`
+  ADD PRIMARY KEY (`moduleid`,`menuid`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_newsfeeds`
+--
+ALTER TABLE `idg2019_newsfeeds`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `idx_access` (`access`) USING BTREE,
+  ADD KEY `idx_checkout` (`checked_out`) USING BTREE,
+  ADD KEY `idx_state` (`published`) USING BTREE,
+  ADD KEY `idx_catid` (`catid`) USING BTREE,
+  ADD KEY `idx_createdby` (`created_by`) USING BTREE,
+  ADD KEY `idx_language` (`language`) USING BTREE,
+  ADD KEY `idx_xreference` (`xreference`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_overrider`
+--
+ALTER TABLE `idg2019_overrider`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_phocagallery`
+--
+ALTER TABLE `idg2019_phocagallery`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `catid` (`catid`,`published`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_phocagallery_categories`
+--
+ALTER TABLE `idg2019_phocagallery_categories`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `cat_idx` (`section`,`published`,`access`) USING BTREE,
+  ADD KEY `idx_access` (`access`) USING BTREE,
+  ADD KEY `idx_checkout` (`checked_out`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_phocagallery_comments`
+--
+ALTER TABLE `idg2019_phocagallery_comments`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_phocagallery_fb_users`
+--
+ALTER TABLE `idg2019_phocagallery_fb_users`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_phocagallery_img_comments`
+--
+ALTER TABLE `idg2019_phocagallery_img_comments`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_phocagallery_img_votes`
+--
+ALTER TABLE `idg2019_phocagallery_img_votes`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_phocagallery_img_votes_statistics`
+--
+ALTER TABLE `idg2019_phocagallery_img_votes_statistics`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_phocagallery_styles`
+--
+ALTER TABLE `idg2019_phocagallery_styles`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_phocagallery_tags`
+--
+ALTER TABLE `idg2019_phocagallery_tags`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_phocagallery_tags_ref`
+--
+ALTER TABLE `idg2019_phocagallery_tags_ref`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD UNIQUE KEY `id` (`id`) USING BTREE,
+  ADD UNIQUE KEY `i_imgid` (`imgid`,`tagid`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_phocagallery_user`
+--
+ALTER TABLE `idg2019_phocagallery_user`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `userid` (`userid`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_phocagallery_votes`
+--
+ALTER TABLE `idg2019_phocagallery_votes`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_phocagallery_votes_statistics`
+--
+ALTER TABLE `idg2019_phocagallery_votes_statistics`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_plg_system_adminexile`
+--
+ALTER TABLE `idg2019_plg_system_adminexile`
+  ADD PRIMARY KEY (`ip`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_postinstall_messages`
+--
+ALTER TABLE `idg2019_postinstall_messages`
+  ADD PRIMARY KEY (`postinstall_message_id`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_privacy_consents`
+--
+ALTER TABLE `idg2019_privacy_consents`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_user_id` (`user_id`);
+
+--
+-- Indexes for table `idg2019_privacy_requests`
+--
+ALTER TABLE `idg2019_privacy_requests`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `idg2019_redirect_links`
+--
+ALTER TABLE `idg2019_redirect_links`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `idx_link_modifed` (`modified_date`) USING BTREE,
+  ADD KEY `idx_old_url` (`old_url`(100)) USING BTREE;
+
+--
+-- Indexes for table `idg2019_schemas`
+--
+ALTER TABLE `idg2019_schemas`
+  ADD PRIMARY KEY (`extension_id`,`version_id`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_session`
+--
+ALTER TABLE `idg2019_session`
+  ADD PRIMARY KEY (`session_id`) USING BTREE,
+  ADD KEY `userid` (`userid`) USING BTREE,
+  ADD KEY `time` (`time`) USING BTREE,
+  ADD KEY `client_id_guest` (`client_id`,`guest`);
+
+--
+-- Indexes for table `idg2019_tags`
+--
+ALTER TABLE `idg2019_tags`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `tag_idx` (`published`,`access`) USING BTREE,
+  ADD KEY `idx_access` (`access`) USING BTREE,
+  ADD KEY `idx_checkout` (`checked_out`) USING BTREE,
+  ADD KEY `idx_left_right` (`lft`,`rgt`) USING BTREE,
+  ADD KEY `idx_language` (`language`) USING BTREE,
+  ADD KEY `idx_path` (`path`(100)) USING BTREE,
+  ADD KEY `idx_alias` (`alias`(100)) USING BTREE;
+
+--
+-- Indexes for table `idg2019_template_styles`
+--
+ALTER TABLE `idg2019_template_styles`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `idx_template` (`template`) USING BTREE,
+  ADD KEY `idx_client_id` (`client_id`),
+  ADD KEY `idx_client_id_home` (`client_id`,`home`);
+
+--
+-- Indexes for table `idg2019_ucm_base`
+--
+ALTER TABLE `idg2019_ucm_base`
+  ADD PRIMARY KEY (`ucm_id`) USING BTREE,
+  ADD KEY `idx_ucm_item_id` (`ucm_item_id`) USING BTREE,
+  ADD KEY `idx_ucm_type_id` (`ucm_type_id`) USING BTREE,
+  ADD KEY `idx_ucm_language_id` (`ucm_language_id`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_ucm_content`
+--
+ALTER TABLE `idg2019_ucm_content`
+  ADD PRIMARY KEY (`core_content_id`) USING BTREE,
+  ADD KEY `tag_idx` (`core_state`,`core_access`) USING BTREE,
+  ADD KEY `idx_access` (`core_access`) USING BTREE,
+  ADD KEY `idx_language` (`core_language`) USING BTREE,
+  ADD KEY `idx_modified_time` (`core_modified_time`) USING BTREE,
+  ADD KEY `idx_created_time` (`core_created_time`) USING BTREE,
+  ADD KEY `idx_core_modified_user_id` (`core_modified_user_id`) USING BTREE,
+  ADD KEY `idx_core_checked_out_user_id` (`core_checked_out_user_id`) USING BTREE,
+  ADD KEY `idx_core_created_user_id` (`core_created_user_id`) USING BTREE,
+  ADD KEY `idx_core_type_id` (`core_type_id`) USING BTREE,
+  ADD KEY `idx_alias` (`core_alias`(100)) USING BTREE,
+  ADD KEY `idx_title` (`core_title`(100)) USING BTREE,
+  ADD KEY `idx_content_type` (`core_type_alias`(100)) USING BTREE;
+
+--
+-- Indexes for table `idg2019_ucm_history`
+--
+ALTER TABLE `idg2019_ucm_history`
+  ADD PRIMARY KEY (`version_id`) USING BTREE,
+  ADD KEY `idx_ucm_item_id` (`ucm_type_id`,`ucm_item_id`) USING BTREE,
+  ADD KEY `idx_save_date` (`save_date`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_updates`
+--
+ALTER TABLE `idg2019_updates`
+  ADD PRIMARY KEY (`update_id`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_update_sites`
+--
+ALTER TABLE `idg2019_update_sites`
+  ADD PRIMARY KEY (`update_site_id`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_update_sites_extensions`
+--
+ALTER TABLE `idg2019_update_sites_extensions`
+  ADD PRIMARY KEY (`update_site_id`,`extension_id`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_usergroups`
+--
+ALTER TABLE `idg2019_usergroups`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD UNIQUE KEY `idx_usergroup_parent_title_lookup` (`parent_id`,`title`) USING BTREE,
+  ADD KEY `idx_usergroup_title_lookup` (`title`) USING BTREE,
+  ADD KEY `idx_usergroup_adjacency_lookup` (`parent_id`) USING BTREE,
+  ADD KEY `idx_usergroup_nested_set_lookup` (`lft`,`rgt`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_users`
+--
+ALTER TABLE `idg2019_users`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `idx_block` (`block`) USING BTREE,
+  ADD KEY `username` (`username`) USING BTREE,
+  ADD KEY `email` (`email`) USING BTREE,
+  ADD KEY `idx_name` (`name`(100)) USING BTREE;
+
+--
+-- Indexes for table `idg2019_user_keys`
+--
+ALTER TABLE `idg2019_user_keys`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD UNIQUE KEY `series` (`series`) USING BTREE,
+  ADD KEY `user_id` (`user_id`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_user_notes`
+--
+ALTER TABLE `idg2019_user_notes`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `idx_user_id` (`user_id`) USING BTREE,
+  ADD KEY `idx_category_id` (`catid`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_user_profiles`
+--
+ALTER TABLE `idg2019_user_profiles`
+  ADD UNIQUE KEY `idx_user_id_profile_key` (`user_id`,`profile_key`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_user_usergroup_map`
+--
+ALTER TABLE `idg2019_user_usergroup_map`
+  ADD PRIMARY KEY (`user_id`,`group_id`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_viewlevels`
+--
+ALTER TABLE `idg2019_viewlevels`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD UNIQUE KEY `idx_assetgroup_title_lookup` (`title`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_weblinks`
+--
+ALTER TABLE `idg2019_weblinks`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `idx_access` (`access`) USING BTREE,
+  ADD KEY `idx_checkout` (`checked_out`) USING BTREE,
+  ADD KEY `idx_state` (`state`) USING BTREE,
+  ADD KEY `idx_catid` (`catid`) USING BTREE,
+  ADD KEY `idx_createdby` (`created_by`) USING BTREE,
+  ADD KEY `idx_featured_catid` (`featured`,`catid`) USING BTREE,
+  ADD KEY `idx_language` (`language`) USING BTREE,
+  ADD KEY `idx_xreference` (`xreference`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_youtubegallery_categories`
+--
+ALTER TABLE `idg2019_youtubegallery_categories`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_youtubegallery_settings`
+--
+ALTER TABLE `idg2019_youtubegallery_settings`
+  ADD PRIMARY KEY (`option`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_youtubegallery_themes`
+--
+ALTER TABLE `idg2019_youtubegallery_themes`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_youtubegallery_videolists`
+--
+ALTER TABLE `idg2019_youtubegallery_videolists`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `idg2019_youtubegallery_videos`
+--
+ALTER TABLE `idg2019_youtubegallery_videos`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `idg2019_action_logs`
+--
+ALTER TABLE `idg2019_action_logs`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `idg2019_action_logs_extensions`
+--
+ALTER TABLE `idg2019_action_logs_extensions`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `idg2019_action_log_config`
+--
+ALTER TABLE `idg2019_action_log_config`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `idg2019_agendadirigentes_cargos`
+--
+ALTER TABLE `idg2019_agendadirigentes_cargos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `idg2019_agendadirigentes_compromissos`
+--
+ALTER TABLE `idg2019_agendadirigentes_compromissos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT for table `idg2019_agendadirigentes_dirigentes`
+--
+ALTER TABLE `idg2019_agendadirigentes_dirigentes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `idg2019_assets`
+--
+ALTER TABLE `idg2019_assets`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Primary Key', AUTO_INCREMENT=349;
+
+--
+-- AUTO_INCREMENT for table `idg2019_banners`
+--
+ALTER TABLE `idg2019_banners`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `idg2019_banner_clients`
+--
+ALTER TABLE `idg2019_banner_clients`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `idg2019_categories`
+--
+ALTER TABLE `idg2019_categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+
+--
+-- AUTO_INCREMENT for table `idg2019_contact_details`
+--
+ALTER TABLE `idg2019_contact_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `idg2019_content`
+--
+ALTER TABLE `idg2019_content`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+
+--
+-- AUTO_INCREMENT for table `idg2019_content_types`
+--
+ALTER TABLE `idg2019_content_types`
+  MODIFY `type_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `idg2019_extensions`
+--
+ALTER TABLE `idg2019_extensions`
+  MODIFY `extension_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10155;
+
+--
+-- AUTO_INCREMENT for table `idg2019_fields`
+--
+ALTER TABLE `idg2019_fields`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `idg2019_fields_groups`
+--
+ALTER TABLE `idg2019_fields_groups`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `idg2019_finder_filters`
+--
+ALTER TABLE `idg2019_finder_filters`
+  MODIFY `filter_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `idg2019_finder_links`
+--
+ALTER TABLE `idg2019_finder_links`
+  MODIFY `link_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- AUTO_INCREMENT for table `idg2019_finder_taxonomy`
+--
+ALTER TABLE `idg2019_finder_taxonomy`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `idg2019_finder_terms`
+--
+ALTER TABLE `idg2019_finder_terms`
+  MODIFY `term_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `idg2019_finder_types`
+--
+ALTER TABLE `idg2019_finder_types`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `idg2019_k2_attachments`
+--
+ALTER TABLE `idg2019_k2_attachments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `idg2019_k2_categories`
+--
+ALTER TABLE `idg2019_k2_categories`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `idg2019_k2_comments`
+--
+ALTER TABLE `idg2019_k2_comments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `idg2019_k2_extra_fields`
+--
+ALTER TABLE `idg2019_k2_extra_fields`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `idg2019_k2_extra_fields_groups`
+--
+ALTER TABLE `idg2019_k2_extra_fields_groups`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `idg2019_k2_items`
+--
+ALTER TABLE `idg2019_k2_items`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `idg2019_k2_tags`
+--
+ALTER TABLE `idg2019_k2_tags`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `idg2019_k2_tags_xref`
+--
+ALTER TABLE `idg2019_k2_tags_xref`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
+--
+-- AUTO_INCREMENT for table `idg2019_k2_users`
+--
+ALTER TABLE `idg2019_k2_users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `idg2019_k2_user_groups`
+--
+ALTER TABLE `idg2019_k2_user_groups`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `idg2019_languages`
+--
+ALTER TABLE `idg2019_languages`
+  MODIFY `lang_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `idg2019_menu`
+--
+ALTER TABLE `idg2019_menu`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=308;
+
+--
+-- AUTO_INCREMENT for table `idg2019_menu_types`
+--
+ALTER TABLE `idg2019_menu_types`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `idg2019_messages`
+--
+ALTER TABLE `idg2019_messages`
+  MODIFY `message_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `idg2019_modules`
+--
+ALTER TABLE `idg2019_modules`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=229;
+
+--
+-- AUTO_INCREMENT for table `idg2019_newsfeeds`
+--
+ALTER TABLE `idg2019_newsfeeds`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `idg2019_overrider`
+--
+ALTER TABLE `idg2019_overrider`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'Primary Key', AUTO_INCREMENT=4292;
+
+--
+-- AUTO_INCREMENT for table `idg2019_phocagallery`
+--
+ALTER TABLE `idg2019_phocagallery`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `idg2019_phocagallery_categories`
+--
+ALTER TABLE `idg2019_phocagallery_categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `idg2019_phocagallery_comments`
+--
+ALTER TABLE `idg2019_phocagallery_comments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `idg2019_phocagallery_fb_users`
+--
+ALTER TABLE `idg2019_phocagallery_fb_users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `idg2019_phocagallery_img_comments`
+--
+ALTER TABLE `idg2019_phocagallery_img_comments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `idg2019_phocagallery_img_votes`
+--
+ALTER TABLE `idg2019_phocagallery_img_votes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `idg2019_phocagallery_img_votes_statistics`
+--
+ALTER TABLE `idg2019_phocagallery_img_votes_statistics`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `idg2019_phocagallery_styles`
+--
+ALTER TABLE `idg2019_phocagallery_styles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `idg2019_phocagallery_tags`
+--
+ALTER TABLE `idg2019_phocagallery_tags`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `idg2019_phocagallery_tags_ref`
+--
+ALTER TABLE `idg2019_phocagallery_tags_ref`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `idg2019_phocagallery_user`
+--
+ALTER TABLE `idg2019_phocagallery_user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `idg2019_phocagallery_votes`
+--
+ALTER TABLE `idg2019_phocagallery_votes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `idg2019_phocagallery_votes_statistics`
+--
+ALTER TABLE `idg2019_phocagallery_votes_statistics`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `idg2019_postinstall_messages`
+--
+ALTER TABLE `idg2019_postinstall_messages`
+  MODIFY `postinstall_message_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `idg2019_privacy_consents`
+--
+ALTER TABLE `idg2019_privacy_consents`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `idg2019_privacy_requests`
+--
+ALTER TABLE `idg2019_privacy_requests`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `idg2019_redirect_links`
+--
+ALTER TABLE `idg2019_redirect_links`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `idg2019_tags`
+--
+ALTER TABLE `idg2019_tags`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `idg2019_template_styles`
+--
+ALTER TABLE `idg2019_template_styles`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `idg2019_ucm_content`
+--
+ALTER TABLE `idg2019_ucm_content`
+  MODIFY `core_content_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `idg2019_ucm_history`
+--
+ALTER TABLE `idg2019_ucm_history`
+  MODIFY `version_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `idg2019_updates`
+--
+ALTER TABLE `idg2019_updates`
+  MODIFY `update_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `idg2019_update_sites`
+--
+ALTER TABLE `idg2019_update_sites`
+  MODIFY `update_site_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- AUTO_INCREMENT for table `idg2019_usergroups`
+--
+ALTER TABLE `idg2019_usergroups`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Primary Key', AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `idg2019_users`
+--
+ALTER TABLE `idg2019_users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=932;
+
+--
+-- AUTO_INCREMENT for table `idg2019_user_keys`
+--
+ALTER TABLE `idg2019_user_keys`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `idg2019_user_notes`
+--
+ALTER TABLE `idg2019_user_notes`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `idg2019_viewlevels`
+--
+ALTER TABLE `idg2019_viewlevels`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Primary Key', AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `idg2019_weblinks`
+--
+ALTER TABLE `idg2019_weblinks`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `idg2019_youtubegallery_categories`
+--
+ALTER TABLE `idg2019_youtubegallery_categories`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `idg2019_youtubegallery_themes`
+--
+ALTER TABLE `idg2019_youtubegallery_themes`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `idg2019_youtubegallery_videolists`
+--
+ALTER TABLE `idg2019_youtubegallery_videolists`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `idg2019_youtubegallery_videos`
+--
+ALTER TABLE `idg2019_youtubegallery_videos`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=155;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
