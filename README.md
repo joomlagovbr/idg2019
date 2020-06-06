@@ -1,10 +1,7 @@
 # IDG 2019 (Egov2)
-IDG 2.0, nova versão da Identidade Digital do Governo Federal
+Baseada na IDG 2.0, versão da Identidade Digital do Governo Federal
 
-OBS: estamos iniciando o desenvolvimento para o idg 2.0 se voce pode contribuir com algo, favor manda email para:
-- https://groups.google.com/forum/?hl=pt-BR#!forum/joomla-e-gov-br
-- tiagovtg@gmail.com
-- ou através desse git
+Se tiverem dificuldades, podem entrar em contato: tiagovtg@gmail.com
 
 - DADOS DE ACESSO após leitura do trecho abaixo sobre configuração inicial: usuário admin e senha admin ou 123456. (será solicitada a troca da senha no primeiro login, se ainda nao tiver sido feito.)
 
