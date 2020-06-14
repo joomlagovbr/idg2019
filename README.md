@@ -3,7 +3,7 @@ Baseada na IDG 2.0, versão da Identidade Digital do Governo Federal, versão ai
 
 Se tiverem dificuldades, podem entrar em contato: tiagovtg@gmail.com
 
-- DADOS DE ACESSO após leitura do trecho abaixo sobre configuração inicial: usuário admin e senha admin ou 123456. (será solicitada a troca da senha no primeiro login, se ainda nao tiver sido feito.)
+- DADOS DE ACESSO essa versão é auto instalável, crie seu banco, user, senha e use a versão sample_padrao_egov para gerar o conteudo.
 
 Portal padrão em CMS Joomla 3.9.18 06/2020
 
