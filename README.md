@@ -22,18 +22,8 @@ Recomenda-se a utilização de ambiente LAMP (Linux, Apache, MySQL, PHP), config
 
 ESTE PROJETO É RECOMENDADO PARA PROFISSIONAIS COM EXPERIÊNCIA NA UTILIZAÇÃO DO CMS JOOMLA.
 
-Configuração inicial
-Altere o arquivo configuration.php manualmente, até que um novo instalador seja gerado.
-Personalize o arquivo BANCO-DE-DADOS.sql substituindo "idg2019_" pelo prefixo de banco de dados desejado. OBS: existe 2 arquivos de Banco de dados atualemente, o mais atual é o Base-de-Dados-Atualizada.sql
-
-Depois, é necessário alterar parâmetros do arquivo configuration.php como host, user, password, db e dbprefix.
-
-Um instalador do template em separado não foi gerado porque sua correta exibição depende dos menus criados e dos módulos configurados.
-
 IMPORTANTE: este é um projeto ainda em desenvolvimento, e a disponibilização antecipada visa a atender aos órgãos com maior pressa.
 O módulo de agenda de dirigentes da página inicial ainda está pendente de desenvolvimento (está apenas com css).
-
-Posteriormente será gerado um instalador automatico, quando a versão estiver estavel.
 
 Desenvolvimento
 Comunidade Joomla Calango
