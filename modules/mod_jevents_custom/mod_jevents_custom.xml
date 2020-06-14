@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.0" client="site" method="upgrade">
+	<name>MOD_JEV_CUSTOM_MODULE_TITLE</name>
+	<creationDate>May 2020</creationDate>
+	<author>GWE Systems Ltd</author>
+	<copyright>(C) 2013-2019 GWE Systems Ltd</copyright>
+	<license>http://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
+	<authorEmail></authorEmail>
+	<authorUrl>http://www.jevents.net</authorUrl>
+	<version>3.4.57</version>
+	<description>MOD_JEV_CUSTOM_MODULE_DESC</description>
+	<files>
+		<filename>mod_jevents_custom.xml</filename>
+		<filename module="mod_jevents_custom">mod_jevents_custom.php</filename>
+		<filename>helper.php</filename>
+		<folder>tmpl</folder>
+	</files>
+	<languages folder="language">
+		<language tag="en-GB">en-GB/en-GB.mod_jevents_custom.ini</language>
+		<language tag="en-GB">en-GB/en-GB.mod_jevents_custom.sys.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="basic"  addfieldpath="/administrator/components/com_jevents/fields/">
+				<field
+					name="moduleclass_sfx"
+					type="text"
+					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+				<field
+					name="dynmodid"
+					type="text"
+					label="JEV_DEFAULTS_MODULE_ID"
+					description="JEV_DEFAULTS_MODULE_ID_DESC" />
+			</fieldset>
+		</fields>
+	</config>
+</extension>

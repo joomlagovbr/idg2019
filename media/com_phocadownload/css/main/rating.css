@@ -1,0 +1,268 @@
+/* Rating */
+/* Voting - style by http://www.jluvip.com/works/css/starvote/index2-1.html*/
+#phoca-dl-category-box ul.star-rating li,
+#phoca-dl-category-box ul.star-rating-small li,
+#phoca-dl-file-box ul.star-rating li,
+#phoca-dl-file-box ul.star-rating-small li{
+	background: none;
+	list-style-type:none;
+}
+
+#phoca-dl-file-box .star-rating,
+#phoca-dl-category-box .star-rating,
+.star-rating{
+	list-style:none;
+	margin: 0px;
+	margin-bottom:5px;
+	padding:0px;
+	width: 110px;
+	height: 22px;
+	position: relative;
+	background: url(../../images/icon-voting.png) top left repeat-x;
+}
+
+#phoca-dl-file-box .star-rating li,
+#phoca-dl-category-box .star-rating li,
+.star-rating li{
+	list-style-type:none;
+	padding:0px;
+	margin:0px;
+	/*\*/
+	float: left;
+	/* */
+}
+
+#phoca-dl-file-box .star-rating li a,
+#phoca-dl-category-box .star-rating li a,
+.star-rating li a{
+	display:block;
+	width:22px;
+	height: 22px;
+	text-decoration: none;
+	text-indent: -9000px;
+	z-index: 20;
+	position: absolute;
+	padding: 0px;
+}
+
+#phoca-dl-file-box .star-rating li a:hover,
+#phoca-dl-category-box .star-rating li a:hover,
+.star-rating li a:hover{
+	background: url(../../images/icon-voting.png) left center;
+	z-index: 2;
+	left: 0px;
+}
+
+#phoca-dl-file-box .star-rating a.star1,
+#phoca-dl-category-box .star-rating a.star1,
+.star-rating a.star1{
+	left: 0px;
+}
+
+#phoca-dl-file-box .star-rating a.star1:hover,
+#phoca-dl-category-box .star-rating a.star1:hover,
+.star-rating a.star1:hover{
+	width:22px;
+}
+
+#phoca-dl-file-box .star-rating a.stars2,
+#phoca-dl-category-box .star-rating a.stars2,
+.star-rating a.stars2{
+	left:22px;
+}
+
+#phoca-dl-file-box .star-rating a.stars2:hover,
+#phoca-dl-category-box .star-rating a.stars2:hover,
+.star-rating a.stars2:hover{
+	width: 44px;
+}
+
+#phoca-dl-file-box .star-rating a.stars3,
+#phoca-dl-category-box .star-rating a.stars3,
+.star-rating a.stars3{
+	left: 44px;
+}
+
+#phoca-dl-file-box .star-rating a.stars3:hover,
+#phoca-dl-category-box .star-rating a.stars3:hover,
+.star-rating a.stars3:hover{
+	width: 66px;
+}
+
+#phoca-dl-file-box .star-rating a.stars4,
+#phoca-dl-category-box .star-rating a.stars4,
+.star-rating a.stars4{
+	left: 66px;
+}
+
+#phoca-dl-file-box .star-rating a.stars4:hover,
+#phoca-dl-category-box .star-rating a.stars4:hover,
+.star-rating a.stars4:hover{
+	width: 88px;
+}
+
+#phoca-dl-file-box .star-rating a.stars5,
+#phoca-dl-category-box .star-rating a.stars5,
+.star-rating a.stars5{
+	left: 88px;
+}
+
+#phoca-dl-file-box .star-rating a.stars5:hover,
+#phoca-dl-category-box .star-rating a.stars5:hover,
+.star-rating a.stars5:hover{
+	width: 110px;
+}
+
+#phoca-dl-file-box .star-rating li.current-rating,
+#phoca-dl-category-box .star-rating li.current-rating,
+.star-rating li.current-rating{
+	background: url(../../images/icon-voting.png) left bottom;
+	position: absolute;
+	height: 22px;
+	/*width:77px;*/
+	display: block;
+	text-indent: -9000px;
+	z-index: 1;
+}
+
+
+/* Voting small */
+#phoca-dl-file-box .star-rating-small,
+#phoca-dl-category-box .star-rating-small,
+.star-rating-small{
+	list-style:none;
+	margin: 0px;
+	margin-bottom:5px;
+	padding:0px;
+	width: 90px;
+	height: 18px;
+	position: relative;
+	background: url(../../images/icon-voting-small.png) top left repeat-x;
+}
+
+#phoca-dl-file-box .star-rating-small li,
+#phoca-dl-category-box .star-rating-small li,
+.star-rating-small li{
+	list-style-type:none;
+	padding:0px;
+	margin:0px;
+	/*\*/
+	float: left;
+	/* */
+}
+
+#phoca-dl-file-box .star-rating-small li a,
+#phoca-dl-category-box .star-rating-small li a,
+.star-rating-small li a{
+	display:block;
+	width:18px;
+	height: 18px;
+	text-decoration: none;
+	text-indent: -9000px;
+	z-index: 20;
+	position: absolute;
+	padding: 0px;
+}
+
+#phoca-dl-file-box .star-rating-small li a:hover,
+#phoca-dl-category-box .star-rating-small li a:hover,
+.star-rating-small li a:hover{
+	background: url(../../images/icon-voting-small.png) left center;
+	z-index: 2;
+	left: 0px;
+}
+
+#phoca-dl-file-box .star-rating-small a.star1,
+#phoca-dl-category-box .star-rating-small a.star1,
+.star-rating-small a.star1{
+	left: 0px;
+}
+
+#phoca-dl-file-box .star-rating-small a.star1:hover,
+#phoca-dl-category-box .star-rating-small a.star1:hover,
+.star-rating-small a.star1:hover{
+	width:18px;
+}
+
+#phoca-dl-file-box .star-rating-small a.stars2,
+#phoca-dl-category-box .star-rating-small a.stars2,
+.star-rating-small a.stars2{
+	left:18px;
+}
+
+#phoca-dl-file-box .star-rating-small a.stars2:hover,
+#phoca-dl-category-box .star-rating-small a.stars2:hover,
+.star-rating-small a.stars2:hover{
+	width: 36px;
+}
+
+#phoca-dl-file-box .star-rating-small a.stars3,
+#phoca-dl-category-box .star-rating-small a.stars3,
+.star-rating-small a.stars3{
+	left: 36px;
+}
+
+#phoca-dl-file-box .star-rating-small a.stars3:hover,
+#phoca-dl-category-box .star-rating-small a.stars3:hover,
+.star-rating-small a.stars3:hover{
+	width: 54px;
+}
+
+#phoca-dl-file-box .star-rating-small a.stars4,
+#phoca-dl-category-box .star-rating-small a.stars4,
+.star-rating-small a.stars4{
+	left: 54px;
+}
+
+#phoca-dl-file-box .star-rating-small a.stars4:hover,
+#phoca-dl-category-box .star-rating-small a.stars4:hover,
+.star-rating-small a.stars4:hover{
+	width: 72px;
+}
+
+#phoca-dl-file-box  .star-rating-small a.stars5,
+#phoca-dl-category-box  .star-rating-small a.stars5,
+.star-rating-small a.stars5{
+	left: 72px;
+}
+
+#phoca-dl-file-box  .star-rating-small a.stars5:hover, 
+#phoca-dl-category-box  .star-rating-small a.stars5:hover,
+.star-rating-small a.stars5:hover{
+	width: 90px;
+}
+
+#phoca-dl-file-box .star-rating-small li.current-rating,
+#phoca-dl-category-box .star-rating-small li.current-rating,
+.star-rating-small li.current-rating{
+	background: url(../../images/icon-voting-small.png) left bottom;
+	position: absolute;
+	height: 18px;
+	/*width:77px;*/
+	display: block;
+	text-indent: -9000px;
+	z-index: 1;
+}
+
+
+
+.pd-small,
+.pd-result,
+#phoca-dl-file-box .pd-small,
+#phoca-dl-file-box .pd-result,
+#phoca-dl-category-box .pd-small,
+#phoca-dl-category-box .pd-result {
+	font-size: x-small;
+}
+
+
+#phoca-dl-file-box ul.star-rating-small,
+#phoca-dl-category-box ul.star-rating-small,
+#phoca-dl-file-box ul.star-rating-small li,
+#phoca-dl-category-box ul.star-rating-small li,
+#phoca-dl-file-box ul.star-rating,
+#phoca-dl-category-box ul.star-rating,
+#phoca-dl-file-box ul.star-rating li,
+#phoca-dl-category-box ul.star-rating li {
+	list-style: none !important;
+}

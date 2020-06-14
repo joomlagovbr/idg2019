@@ -1,0 +1,18 @@
+/* 
+Phoca Download
+https://www.phoca.cz/ 
+https://www.phoca.cz/phocadownload
+*/
+#phoca-dl-download-box .pd-button-download a,
+#phoca-dl-category-box .pd-button-mirror1 a,
+#phoca-dl-category-box .pd-button-mirror2 a,
+#phoca-dl-file-box .pd-button-mirror1 a,
+#phoca-dl-file-box .pd-button-mirror2 a,
+#phoca-dl-category-box .pd-button-play a,
+#phoca-dl-category-box .pd-button-preview a,
+#phoca-dl-category-box .pd-button-download a,
+#phoca-dl-category-box .pd-button-details a {
+	border-radius: 6px;
+	-moz-border-radius: 6px; 
+	-webkit-border-radius: 6px;
+}

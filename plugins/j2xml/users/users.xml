@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.0" type="plugin" group="j2xml" method="upgrade">
+  <name>PLG_J2XML_USERS</name>
+  <author>Helios Ciancio</author>
+  <creationDate>April 2019</creationDate>
+  <copyright>(C) 2016 - 2019 Helios Ciancio. All rights reserved.</copyright>
+  <license>http://www.gnu.org/licenses/gpl-3.0.html GNU/GPL v3</license>
+  <authorEmail>info@eshiol.it</authorEmail>
+  <authorUrl>www.eshiol.it</authorUrl>
+  <version>3.7.10.95</version>
+  <description>PLG_J2XML_USERS_XML_DESCRIPTION</description>
+  <updateservers>
+    <server type="extension" priority="2" name="J2XML - Users">https://www.eshiol.it/files/plg_j2xml_users/update.xml</server>
+  </updateservers>
+  <scriptfile>enable.php</scriptfile>
+  <files>
+    <filename plugin="users">users.php</filename>
+  </files>
+  <languages folder="language">
+    <language tag="en-GB">en-GB/en-GB.plg_j2xml_users.ini</language>
+    <language tag="en-GB">en-GB/en-GB.plg_j2xml_users.sys.ini</language>
+    <language tag="it-IT">it-IT/it-IT.plg_j2xml_users.ini</language>
+    <language tag="it-IT">it-IT/it-IT.plg_j2xml_users.sys.ini</language>
+  </languages>
+  <media destination="plg_j2xml_users" folder="media">
+    <folder>js</folder>
+  </media>
+  <config>
+    <fields name="params">
+      <fieldset name="basic">
+        <field name="new_usertype" type="usergrouplist" default="" description="PLG_J2XML_USERS_FIELD_DEFAULT_GROUP_DESC" label="PLG_J2XML_USERS_FIELD_DEFAULT_GROUP_LABEL">
+          <option value="">JOPTION_USE_DEFAULT</option>
+        </field>
+        <field name="requireReset" type="radio" class="btn-group" default="1" label="PLG_J2XML_USERS_FIELD_REQUIRE_RESET_LABEL" description="PLG_J2XML_USERS_FIELD_REQUIRE_RESET_DESC">
+          <option value="1">JYES</option>
+          <option value="0">JNO</option>
+        </field>
+      </fieldset>
+      <fieldset name="advanced">
+        <field name="debug" type="list" default="" filter="integer" description="PLG_J2XML_USERS_DEBUG_SYSTEM_DESC" label="PLG_J2XML_USERS_DEBUG_SYSTEM_LABEL">
+          <option value="">JGLOBAL_USE_GLOBAL</option>
+          <option value="1">JYES</option>
+          <option value="0">JNO</option>
+        </field>
+        <field name="log" type="text" label="PLG_J2XML_USERS_DEBUG_FILENAME_LABEL" description="PLG_J2XML_USERS_DEBUG_FILENAME_DESC" default="eshiol.log.php" showon="debug:1"/>
+        <field name="phpconsole" type="radio" class="btn-group btn-group-yesno" default="0" description="PLG_J2XML_USERS_DEBUG_PHPCONSOLE_DESC" label="PLG_J2XML_USERS_DEBUG_PHPCONSOLE_LABEL">
+          <option value="1">JYES</option>
+          <option value="0">JNO</option>
+        </field>
+      </fieldset>
+    </fields>
+  </config>
+</extension>

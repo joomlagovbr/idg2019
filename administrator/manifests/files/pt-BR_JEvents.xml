@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension version="1.6" type="file" client="site" method="upgrade">
+<packagename>pt-BR JEvents</packagename>
+<name>Brazilian Portuguese Translation for JEvents</name>
+<tag>pt-BR</tag>
+<version>3.20160826</version>
+<creationDate>2016.08.26</creationDate>
+<author>Tradução por Bruno Sappadina</author>
+<authoremail>bruno@boawebdesign.com</authoremail>
+<authorurl>www.boawebdesign.com</authorurl>
+<copyright>2010 GWE Systems Ltd</copyright>
+<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+<description>Arquivo em Português do Brasil para Jevents</description>
+<scriptfile>install.php</scriptfile>
+<fileset>
+<files folder="admin" target="administrator/language/pt-BR">
+	<filename>pt-BR.com_jevents.ini</filename>
+	<filename>pt-BR.com_jevents.menu.ini</filename>
+	<filename>pt-BR.com_jevents.sys.ini</filename>
+	<filename>pt-BR.mod_jevents_latest.ini</filename>
+	<filename>pt-BR.pkg_jevents.sys.ini</filename>
+	<filename>pt-BR.plg_content_jevents.ini</filename>
+	<filename>pt-BR.plg_content_jevents.sys.ini</filename>
+	<filename>pt-BR.plg_finder_jevents.ini</filename>
+	<filename>pt-BR.plg_finder_jevents.sys.ini</filename>
+	<filename>pt-BR.plg_search_eventsearch.ini</filename>
+	<filename>pt-BR.plg_system_gwejson.ini</filename>
+	<filename>pt-BR.plg_system_gwejson.sys.ini</filename>
+</files>
+<files folder="site" target="language/pt-BR">
+	<filename>pt-BR.com_jevents.ini</filename>
+	<filename>pt-BR.mod_jevents_cal.ini</filename>
+	<filename>pt-BR.mod_jevents_custom.ini</filename>
+	<filename>pt-BR.mod_jevents_detail.ini</filename>
+	<filename>pt-BR.mod_jevents_latest.ini</filename>
+</files>
+</fileset>
+</extension>

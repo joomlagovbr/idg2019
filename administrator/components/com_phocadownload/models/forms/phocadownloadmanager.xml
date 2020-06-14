@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset addfieldpath="/administrator/components/com_phocadownload/models/fields">
+
+<field name="title" type="text" class="inputbox" size="40" label="COM_PHOCADOWNLOAD_FIELD_TITLE_LABEL" description="COM_PHOCADOWNLOAD_FIELD_TITLE_M_DESC"  />
+
+<field name="alias" type="text" class="inputbox" size="40" label="COM_PHOCADOWNLOAD_FIELD_ALIAS_LABEL" description="COM_PHOCADOWNLOAD_FIELD_ALIAS_M_DESC" />
+
+<field name="catid" type="phocadownloadcategory" label="COM_PHOCADOWNLOAD_FIELD_CATEGORY_LABEL" description="COM_PHOCADOWNLOAD_FIELD_CATEGORY_DESC" class="inputbox" />
+
+
+
+<field name="published" type="list" label="COM_PHOCADOWNLOAD_FIELD_PUBLISHED_LABEL" description="COM_PHOCADOWNLOAD_FIELD_PUBLISHED_DESC" class="inputbox" size="1" default="1">
+	<option value="1">JPUBLISHED</option>
+	<option	value="0">JUNPUBLISHED</option>
+</field>
+
+<field name="approved" type="list" label="COM_PHOCADOWNLOAD_FIELD_APPROVED_LABEL" description="COM_PHOCADOWNLOAD_FIELD_APPROVED_DESC" class="inputbox" size="1" default="1">
+	<option value="1">COM_PHOCADOWNLOAD_APPROVED</option>
+	<option	value="0">COM_PHOCADOWNLOAD_NOT_APPROVED</option>
+</field>
+
+<field name="language" type="contentlanguage" label="JFIELD_LANGUAGE_LABEL" description="COM_PHOCADOWNLOAD_FIELD_LANGUAGE_FILE_DESC" class="inputbox">
+	<option value="*">JALL</option>
+</field>
+<!--
+<field name="pap_copy_m" type="list" label="COM_PHOCADOWNLOAD_FIELD_COPY_PAP_LABEL" description="COM_PHOCADOWNLOAD_FIELD_COPY_PAP_DESC" class="inputbox" size="1" default="0">
+	<option value="0">COM_PHOCADOWNLOAD_NO</option>
+	<option	value="1">COM_PHOCADOWNLOAD_YES</option>
+</field>-->
+
+	</fieldset>
+</form>

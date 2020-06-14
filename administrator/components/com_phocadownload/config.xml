@@ -1,0 +1,581 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+<fields addfieldpath="/administrator/components/com_phocadownload/models/fields">
+	<fieldset name="display" label="COM_PHOCADOWNLOAD_CONFIG_HEAD_DISPLAY_LABEL">
+
+<field name="phocahead1" type="phocahead"  default="COM_PHOCADOWNLOAD_CONFIG_CATEGORY_CATEGORIES_VIEW_LABEL" label="" description=""/>
+	
+<field name="filename_or_name" type="list" default="filenametitle" label="COM_PHOCADOWNLOAD_FIELD_FILENAME_OR_NAME_LABEL" description="COM_PHOCADOWNLOAD_FIELD_FILENAME_OR_NAME_LABEL_DESC">
+	<option value="filename">COM_PHOCADOWNLOAD_FILENAME</option>
+	<option value="title">COM_PHOCADOWNLOAD_TITLE</option>
+	<option value="filenametitle">COM_PHOCADOWNLOAD_FILENAME_AND_TITLE</option>
+</field>
+		
+
+	
+<field name="display_downloads" type="list" default="0" label="COM_PHOCADOWNLOAD_FIELD_DISPLAY_DOWNLOADS_LABEL" description="COM_PHOCADOWNLOAD_FIELD_DISPLAY_DOWNLOADS_DESC">
+		<option value="1">COM_PHOCADOWNLOAD_YES</option>
+		<option value="0">COM_PHOCADOWNLOAD_NO</option>
+	</field>
+	
+<field name="display_description" type="list" default="3" label="COM_PHOCADOWNLOAD_FIELD_DISPLAY_DESCRIPTION_LABEL" description="COM_PHOCADOWNLOAD_FIELD_DISPLAY_DESCRIPTION_DESC">
+	<option value="0">COM_PHOCADOWNLOAD_NONE</option>
+	<option value="1">COM_PHOCADOWNLOAD_TOP</option>
+	<option value="2">COM_PHOCADOWNLOAD_BOTTOM</option>
+	<option value="3">COM_PHOCADOWNLOAD_OVERLIB</option>
+	<option value="4">COM_PHOCADOWNLOAD_TOP_AND_OVERLIB</option>
+	<option value="5">COM_PHOCADOWNLOAD_BOTTOM_AND_OVERLIB</option>
+	<option value="6">COM_PHOCADOWNLOAD_TOP_WITH_DETAIL_AND_OVERLIB</option>
+	<option value="7">COM_PHOCADOWNLOAD_BOTTOM_WITH_DETAIL_AND_OVERLIB</option>
+	<option value="8">COM_PHOCADOWNLOAD_OVERLIB_WIDTH_DETAIL</option>
+</field>
+
+<field name="display_main_cat_desc" type="list" default="0" label="COM_PHOCADOWNLOAD_FIELD_DISPLAY_MAIN_CAT_DESC_LABEL" description="COM_PHOCADOWNLOAD_FIELD_DISPLAY_MAIN_CAT_DESC_DESC">
+	<option value="0">COM_PHOCADOWNLOAD_NO</option>
+	<option value="1">COM_PHOCADOWNLOAD_YES</option>
+</field>
+	
+<field name="display_detail" type="list" default="1" label="COM_PHOCADOWNLOAD_FIELD_DISPLAY_DETAIL_BUTTON_LABEL" description="COM_PHOCADOWNLOAD_FIELD_DISPLAY_DETAIL_BUTTON_DESC">
+	<option value="1">COM_PHOCADOWNLOAD_YES_OVERLIB</option>
+	<option value="2">COM_PHOCADOWNLOAD_YES_MODAL</option>
+	<option value="3">COM_PHOCADOWNLOAD_YES_STANDARD_POPUP_WINDOW</option>
+	<option value="0">COM_PHOCADOWNLOAD_NO</option>
+</field>
+	
+<field name="display_new" default="0" size="10" type="text" label="COM_PHOCADOWNLOAD_FIELD_DISPLAY_NEW_ICON_LABEL" description="COM_PHOCADOWNLOAD_FIELD_DISPLAY_NEW_ICON_DESC" />
+
+<field name="display_hot" default="0" size="10" type="text" label="COM_PHOCADOWNLOAD_FIELD_DISPLAY_HOT_ICON_LABEL" description="COM_PHOCADOWNLOAD_FIELD_DISPLAY_HOT_ICON_DESC" />
+
+<field name="display_most_download" type="list" default="1" label="COM_PHOCADOWNLOAD_FIELD_DISPLAY_MOST_DOWNLOAD_FILES_LABEL" description="COM_PHOCADOWNLOAD_FIELD_DISPLAY_MOST_DOWNLOAD_FILES_DESC">
+	<option value="1">COM_PHOCADOWNLOAD_YES</option>
+	<option value="0">COM_PHOCADOWNLOAD_NO</option>
+</field>
+
+<field name="most_download_files_num" default="5" size="10" type="text" label="COM_PHOCADOWNLOAD_FIELD_MOST_DOWNLOAD_FILES_NUMBER_LABEL" description="COM_PHOCADOWNLOAD_FIELD_MOST_DOWNLOAD_FILES_NUMBER_DESC" />
+	
+<field name="display_file_view" type="list" default="0" label="COM_PHOCADOWNLOAD_FIELD_DISPLAY_FILE_VIEW_LABEL" description="COM_PHOCADOWNLOAD_FIELD_DISPLAY_FILE_VIEW_DESC">
+	<option value="0">COM_PHOCADOWNLOAD_NO</option>
+	<option value="1">COM_PHOCADOWNLOAD_YES</option>
+	<option value="2">COM_PHOCADOWNLOAD_YES_ONLY_MODALBOX</option>
+	</field>
+	
+<field name="display_date_type" type="list" default="0" label="COM_PHOCADOWNLOAD_FIELD_DISPLAY_DATE_TYPE_LABEL" description="COM_PHOCADOWNLOAD_FIELD_DISPLAY_DATE_TYPE_DESC">
+	<option value="0">COM_PHOCADOWNLOAD_DATABASE_TIME</option>
+	<option value="1">COM_PHOCADOWNLOAD_FILE_FILEMTIME</option>
+	<option value="2">COM_PHOCADOWNLOAD_FILE_FILECTIME</option>
+	<option value="3">COM_PHOCADOWNLOAD_FILE_FILEATIME</option>
+</field>
+
+<field name="download_external_link" type="list" default="_self" label="COM_PHOCADOWNLOAD_FIELD_EXTERNAL_DOWNLOAD_LINK_LABEL" description="COM_PHOCADOWNLOAD_FIELD_EXTERNAL_DOWNLOAD_LINK_DESC">
+	<option value="_self">COM_PHOCADOWNLOAD_SELF</option>
+	<option value="_blank">COM_PHOCADOWNLOAD_BLANK</option>
+</field>
+	
+
+<field name="download_metadesc" type="textarea" label="COM_PHOCADOWNLOAD_FIELD_METADESC_LABEL" description="COM_PHOCADOWNLOAD_FIELD_METADESC_DESC" rows="2" cols="26" default="" />
+
+<field name="download_metakey" type="textarea" label="COM_PHOCADOWNLOAD_FIELD_METAKEY_LABEL" description="COM_PHOCADOWNLOAD_FIELD_METAKEY_DESC" rows="2" cols="26" default="" />	
+	
+
+	
+<field name="category_ordering" type="list" default="1" label="COM_PHOCADOWNLOAD_FIELD_CATEGORY_ORDERING_LABEL" description="COM_PHOCADOWNLOAD_FIELD_CATEGORY_ORDERING_DESC">
+	<option value="1">COM_PHOCADOWNLOAD_ORDERING_ASC</option>
+	<option value="2">COM_PHOCADOWNLOAD_ORDERING_DESC</option>
+	<option value="3">COM_PHOCADOWNLOAD_TITLE_ASC</option>
+	<option value="4">COM_PHOCADOWNLOAD_TITLE_DESC</option>
+	<option value="5">COM_PHOCADOWNLOAD_DATE_ASC</option>
+	<option value="6">COM_PHOCADOWNLOAD_DATE_DESC</option>
+	<option value="7">COM_PHOCADOWNLOAD_ID_ASC</option>
+	<option value="8">COM_PHOCADOWNLOAD_ID_DESC</option>
+</field>
+
+<field name="file_ordering" type="list" default="1" label="COM_PHOCADOWNLOAD_FIELD_FILE_ORDERING_LABEL" description="COM_PHOCADOWNLOAD_FIELD_FILE_ORDERING_DESC">
+	<option value="1">COM_PHOCADOWNLOAD_ORDERING_ASC</option>
+	<option value="2">COM_PHOCADOWNLOAD_ORDERING_DESC</option>
+	<option value="3">COM_PHOCADOWNLOAD_TITLE_ASC</option>
+	<option value="4">COM_PHOCADOWNLOAD_TITLE_DESC</option>
+	<option value="5">COM_PHOCADOWNLOAD_DATE_ASC</option>
+	<option value="6">COM_PHOCADOWNLOAD_DATE_DESC</option>
+	<option value="7">COM_PHOCADOWNLOAD_ID_ASC</option>
+	<option value="8">COM_PHOCADOWNLOAD_ID_DESC</option>
+	<option value="11">COM_PHOCADOWNLOAD_FILENAME_ASC</option>
+	<option value="12">COM_PHOCADOWNLOAD_FILENAME_DESC</option>
+	<option value="15">COM_PHOCADOWNLOAD_COUNT_ASC</option>
+	<option value="16">COM_PHOCADOWNLOAD_COUNT_DESC</option>
+	<option value="13">COM_PHOCADOWNLOAD_AVERAGE_ASC</option>
+	<option value="14">COM_PHOCADOWNLOAD_AVERAGE_DESC</option>
+	<option value="9">COM_PHOCADOWNLOAD_DOWNLOADS_ASC</option>
+	<option value="10">COM_PHOCADOWNLOAD_DOWNLOADS_DESC</option>
+</field>
+
+
+<field name="file_ordering_values" default="1,2,3,4,5,6,11,12,15,16,13,14,9,10" size="18" type="text" label="COM_PHOCADOWNLOAD_FIELD_FILE_ORDERING_VALUES_LABEL" description="COM_PHOCADOWNLOAD_FIELD_FILE_ORDERING_VALUES_DESC"/>
+
+<field name="ordering_asc_desc_arrows" default="0" type="radio" class="btn-group btn-group-yesno" label="COM_PHOCADOWNLOAD_FIELD_ORDERING_ASC_DESC_ARROWS_LABEL"
+                   description="COM_PHOCADOWNLOAD_FIELD_ORDERING_ASC_DESC_ARROWS_DESC">
+                <option value="1">COM_PHOCADOWNLOAD_YES</option>
+                <option value="0">COM_PHOCADOWNLOAD_NO</option>
+            </field>
+
+
+<field name="default_pagination" default="20" size="18" type="text" label="COM_PHOCADOWNLOAD_FIELD_DEFAULT_VALUE_PAGINATION_LABEL" description="COM_PHOCADOWNLOAD_FIELD_DEFAULT_VALUE_PAGINATION_DESC" />
+
+<field name="pagination" default="5,10,15,20,50" size="18" type="text" label="COM_PHOCADOWNLOAD_FIELD_CATEGORY_VIEW_PAGINATION_LABEL" description="COM_PHOCADOWNLOAD_FIELD_CATEGORY_VIEW_PAGINATION_DESC" />
+
+
+<field name="display_num_doc_secs" type="list" default="0" label="COM_PHOCADOWNLOAD_FIELD_DISPLAY_NUM_FILES_CATEGORIES_VIEW_LABEL" description="COM_PHOCADOWNLOAD_FIELD_DISPLAY_NUM_FILES_CATEGORIES_VIEW_DESC">
+		<option value="1">COM_PHOCADOWNLOAD_YES</option>
+		<option value="0">COM_PHOCADOWNLOAD_NO</option>
+	</field>
+<field name="display_num_doc_secs_header" type="list" default="1" label="COM_PHOCADOWNLOAD_FIELD_DISPLAY_NUM_FILES_CATEGORIES_VIEW_HEADER_LABEL" description="COM_PHOCADOWNLOAD_FIELD_DISPLAY_NUM_FILES_CATEGORIES_VIEW_HEADER_DESC">
+		<option value="1">COM_PHOCADOWNLOAD_YES</option>
+		<option value="0">COM_PHOCADOWNLOAD_NO</option>
+	</field>
+
+<field name="display_up_icon" type="list" default="1" label="COM_PHOCADOWNLOAD_FIELD_DISPLAY_UP_ICON_LABEL" description="COM_PHOCADOWNLOAD_FIELD_DISPLAY_UP_ICON_DESC">
+	<option value="1">COM_PHOCADOWNLOAD_YES</option>
+	<option value="0">COM_PHOCADOWNLOAD_NO</option>
+</field>
+
+<field name="display_mirror_links" type="list" default="0" label="COM_PHOCADOWNLOAD_FIELD_DISPLAY_MIRROR_LINKS_LABEL" description="COM_PHOCADOWNLOAD_FIELD_DISPLAY_MIRROR_LINKS_DESC">
+<option value="0">COM_PHOCADOWNLOAD_NO</option>
+<option value="1">COM_PHOCADOWNLOAD_YES_CATEGORY_VIEW</option>
+<option value="2">COM_PHOCADOWNLOAD_YES_FILE_VIEW</option>
+<option value="3">COM_PHOCADOWNLOAD_YES_CATEGORY_FILE_VIEW</option>
+<option value="4">COM_PHOCADOWNLOAD_YES_CATEGORY_VIEW_BUTTON</option>
+<option value="5">COM_PHOCADOWNLOAD_YES_FILE_VIEW_BUTTON</option>
+<option value="6">COM_PHOCADOWNLOAD_YES_CATEGORY_FILE_VIEW_BUTTON</option>
+</field>
+
+<field name="display_report_link" type="list" default="0" label="COM_PHOCADOWNLOAD_FIELD_DISPLAY_REPORT_LINK_LABEL" description="COM_PHOCADOWNLOAD_FIELD_DISPLAY_REPORT_LINK_DESC">
+<option value="0">COM_PHOCADOWNLOAD_NO</option>
+<option value="1">COM_PHOCADOWNLOAD_YES_CATEGORY_VIEW</option>
+<option value="2">COM_PHOCADOWNLOAD_YES_FILE_VIEW</option>
+<option value="3">COM_PHOCADOWNLOAD_YES_CATEGORY_FILE_VIEW</option>
+</field>
+
+
+
+<field name="report_link_guestbook_id" default="" size="10" type="text" label="COM_PHOCADOWNLOAD_FIELD_REPORT_LINK_GUESTBOOK_ID_LABEL" description="COM_PHOCADOWNLOAD_FIELD_REPORT_LINK_GUESTBOOK_ID_DESC" />
+
+<field name="tags_links" type="list" default="0" label="COM_PHOCADOWNLOAD_FIELD_TAGS_LINKS_LABEL" description="COM_PHOCADOWNLOAD_FIELD_TAGS_LINKS_DESC">
+<option value="0">COM_PHOCADOWNLOAD_NO</option>
+<option value="1">COM_PHOCADOWNLOAD_EXTERNAL_LINK</option>
+<option value="2">COM_PHOCADOWNLOAD_CATEGORY_LINK</option>
+<option value="3">COM_PHOCADOWNLOAD_SEARCH_OUTCOME</option>
+</field>
+
+<field name="display_tags_links" type="list" default="0" label="COM_PHOCADOWNLOAD_FIELD_DISPLAY_TAGS_LINKS_LABEL" description="COM_PHOCADOWNLOAD_FIELD_DISPLAY_TAGS_LINKS_DESC">
+<option value="0">COM_PHOCADOWNLOAD_NO</option>
+<option value="1">COM_PHOCADOWNLOAD_YES_CATEGORY_VIEW</option>
+<option value="2">COM_PHOCADOWNLOAD_YES_FILE_VIEW</option>
+<option value="3">COM_PHOCADOWNLOAD_YES_CATEGORY_FILE_VIEW</option>
+<option value="4">COM_PHOCADOWNLOAD_YES_CATEGORY_VIEW_TITLE_SUFFIX</option>
+<option value="5">COM_PHOCADOWNLOAD_YES_FILE_VIEW_TITLE_SUFFIX</option>
+<option value="6">COM_PHOCADOWNLOAD_YES_CATEGORY_FILE_VIEW_TITLE_SUFFIX</option>
+</field>
+
+<field name="disable_breadcrumbs_category_view" type="list" default="0" label="COM_PHOCADOWNLOAD_FIELD_DISABLE_BREADCRUMBS_CATEGORY_VIEW_LABEL" description="COM_PHOCADOWNLOAD_FIELD_DISABLE_BREADCRUMBS_CATEGORY_VIEW_DESC">
+	<option value="1">COM_PHOCADOWNLOAD_YES</option>
+	<option value="0">COM_PHOCADOWNLOAD_NO</option>
+</field>
+
+
+<field name="phocahead4" type="phocahead"  default="COM_PHOCADOWNLOAD_FILE_VIEW_LABEL" label="" description=""/>
+	
+<field name="license_box_height" default="300" size="10" type="text" label="COM_PHOCADOWNLOAD_FIELD_LICENSE_BOX_HEIGHT_LABEL" description="COM_PHOCADOWNLOAD_FIELD_LICENSE_BOX_HEIGHT_DESC" />
+
+<field name="phocahead2" type="phocahead"  default="COM_PHOCADOWNLOAD_CONFIG_COMMENTS_SETTINGS_LABEL" label="" description=""/>
+
+<field name="display_category_comments" type="list" default="0" label="COM_PHOCADOWNLOAD_FIELD_DISPLAY_CATEGORY_COMMENTS_LABEL" description="COM_PHOCADOWNLOAD_FIELD_DISPLAY_CATEGORY_COMMENTS_DESC">
+<option value="0">COM_PHOCADOWNLOAD_NO</option>
+<option value="1">COM_PHOCADOWNLOAD_JCOMMENTS</option>
+<option value="2">COM_PHOCADOWNLOAD_FACEBOOK</option>
+</field>
+<field name="display_file_comments" type="list" default="0" label="COM_PHOCADOWNLOAD_FIELD_DISPLAY_FILE_COMMENTS_LABEL" description="COM_PHOCADOWNLOAD_FIELD_DISPLAY_FILE_COMMENTS_DESC">
+<option value="0">COM_PHOCADOWNLOAD_NO</option>
+<option value="1">COM_PHOCADOWNLOAD_JCOMMENTS</option>
+<option value="2">COM_PHOCADOWNLOAD_FACEBOOK</option>
+</field>
+
+<field name="fb_comment_app_id" default="" size="18" type="phocaselectfbuser" label="COM_PHOCADOWNLOAD_FIELD_FB_COMMENT_APP_ID_LABEL" description="COM_PHOCADOWNLOAD_FIELD_FB_COMMENT_APP_ID_DESC" />
+
+<field name="fb_comment_width" default="550" size="6" type="text" label="COM_PHOCADOWNLOAD_FACEBOOK_COMMENTS_WIDTH_LABEL" description="COM_PHOCADOWNLOAD_FACEBOOK_COMMENTS_WIDTH_DESC" />
+<field name="fb_comment_lang" type="text" size="30" default="en_US" label="COM_PHOCADOWNLOAD_FACEBOOK_FIELD_COMMENT_LANG_LABEL" description="COM_PHOCADOWNLOAD_FACEBOOK_FIELD_COMMENT_LANG_DESC" />
+<field name="fb_comment_count" type="text" size="6" default="" label="COM_PHOCADOWNLOAD_FACEBOOK_FIELD_COMMENT_COUNT_LABEL" description="COM_PHOCADOWNLOAD_FACEBOOK_FIELD_COMMENT_COUNT_DESC" />
+
+<field name="phocahead7" type="phocahead"  default="COM_PHOCADOWNLOAD_CONFIG_RATING_SETTINGS_LABEL" label="" description=""/>
+
+<field name="display_rating_file" type="list" default="0" label="COM_PHOCADOWNLOAD_FIELD_DISPLAY_RATING_FILE_LABEL" description="COM_PHOCADOWNLOAD_FIELD_DISPLAY_RATING_FILE_DESC">
+<option value="0">COM_PHOCADOWNLOAD_NO</option>
+<option value="1">COM_PHOCADOWNLOAD_YES_CATEGORY_VIEW</option>
+<option value="2">COM_PHOCADOWNLOAD_YES_FILE_VIEW</option>
+<option value="3">COM_PHOCADOWNLOAD_YES_CATEGORY_FILE_VIEW</option>
+</field>
+
+	
+<field name="phocahead3" type="phocahead"  default="COM_PHOCADOWNLOAD_CONFIG_THEME_SETTINGS_LABEL" label="" description=""/>
+
+<field name="file_icon_size" type="list" default="16" label="COM_PHOCADOWNLOAD_FIELD_FILE_ICON_SIZE_LABEL" description="COM_PHOCADOWNLOAD_FIELD_FILE_ICON_SIZE_DESC">
+	<option value="16">16px</option>
+	<option value="32">32px</option>
+	<option value="48">48px</option>
+	<option value="64">64px</option>
+</field>
+<field name="file_icon_size_md" type="list" default="16" label="COM_PHOCADOWNLOAD_FIELD_FILE_ICON_SIZE_MD_LABEL" description="COM_PHOCADOWNLOAD_FIELD_FILE_ICON_SIZE_MD_DESC">
+	<option value="16">16px</option>
+	<option value="32">32px</option>
+	<option value="48">48px</option>
+	<option value="64">64px</option>
+</field>
+
+<field name="file_icon_mime" type="list" default="1" label="COM_PHOCADOWNLOAD_FIELD_FILE_ICON_MIME_LABEL" description="COM_PHOCADOWNLOAD_FIELD_FILE_ICON_MIME_DESC">
+	<option value="0">COM_PHOCADOWNLOAD_NO</option>
+	<option value="1">COM_PHOCADOWNLOAD_YES</option>
+</field>
+
+
+	
+	
+<field name="display_specific_layout" type="list" default="0" label="COM_PHOCADOWNLOAD_DISPLAY_SPEC_LAYOUT_LABEL" description="COM_PHOCADOWNLOAD_DISPLAY_SPEC_LAYOUT_DESC">
+		<option value="0">COM_PHOCADOWNLOAD_NO</option>
+		<option value="1">COM_PHOCADOWNLOAD_YES</option>
+	</field>
+	
+<field name="display_bootstrap3_layout" type="list" default="0" label="COM_PHOCADOWNLOAD_DISPLAY_BOOTSTRAP3_LAYOUT_LABEL" description="COM_PHOCADOWNLOAD_DISPLAY_BOOTSTRAP3_LAYOUT_DESC">
+		<option value="0">COM_PHOCADOWNLOAD_NO</option>
+		<option value="1">COM_PHOCADOWNLOAD_YES</option>
+		<option value="2">COM_PHOCADOWNLOAD_YES_LOAD_BOOTSTRAP_LIBRARY</option>
+	</field>
+	
+
+
+
+<field name="phocahead5" type="phocahead"  default="COM_PHOCADOWNLOAD_PLAY_SETTINGS_LABEL" label="" description=""/>
+<field name="display_play" type="list" default="0" label="COM_PHOCADOWNLOAD_FIELD_DISPLAY_PLAY_BUTTON_LABEL" description="COM_PHOCADOWNLOAD_FIELD_DISPLAY_PLAY_BUTTON_DESC">
+	<option value="1">COM_PHOCADOWNLOAD_YES</option>
+	<option value="0">COM_PHOCADOWNLOAD_NO</option>
+</field>
+
+<field name="player_width" default="328" size="10" type="text" label="COM_PHOCADOWNLOAD_FIELD_PLAYER_WIDTH_LABEL" description="COM_PHOCADOWNLOAD_FIELD_PLAYER_WIDTH_DESC" />
+<field name="player_height" default="200" size="10" type="text" label="COM_PHOCADOWNLOAD_FIELD_PLAYER_HEIGHT_LABEL" description="COM_PHOCADOWNLOAD_FIELD_PLAYER_HEIGHT_DESC" />
+<field name="player_mp3_height" default="30" size="10" type="text" label="COM_PHOCADOWNLOAD_FIELD_PLAYER_MP3_HEIGHT_LABEL" description="COM_PHOCADOWNLOAD_FIELD_PLAYER_MP3_HEIGHT_DESC" />
+
+<field name="play_popup_window" type="list" default="0" label="COM_PHOCADOWNLOAD_FIELD_PLAY_POPUP_WINDOW_LABEL" description="COM_PHOCADOWNLOAD_FIELD_PLAY_POPUP_WINDOW_DESC">
+	<option value="1">COM_PHOCADOWNLOAD_STANDARD_POPUP_WINDOW</option>
+	<option value="0">COM_PHOCADOWNLOAD_MODAL_BOX</option>
+</field>
+
+<field name="html5_play" type="list" default="1" label="COM_PHOCADOWNLOAD_FIELD_HTML5_AUDIO_VIDEO_LABEL" description="COM_PHOCADOWNLOAD_FIELD_HTML5_AUDIO_VIDEO_DESC">
+	<option value="1">COM_PHOCADOWNLOAD_YES</option>
+	<option value="0">COM_PHOCADOWNLOAD_NO</option>
+</field>
+
+
+<field name="phocahead6" type="phocahead"  default="COM_PHOCADOWNLOAD_PREVIEW_SETTINGS_LABEL" label="" description=""/>
+<field name="display_preview" type="list" default="0" label="COM_PHOCADOWNLOAD_FIELD_DISPLAY_PREVIEW_BUTTON_LABEL" description="COM_PHOCADOWNLOAD_FIELD_DISPLAY_PREVIEW_BUTTON_DESC">
+	<option value="1">COM_PHOCADOWNLOAD_YES</option>
+	<option value="0">COM_PHOCADOWNLOAD_NO</option>
+</field>
+
+<field name="preview_width" default="640" size="10" type="text" label="COM_PHOCADOWNLOAD_FIELD_PREVIEW_WIDTH_LABEL" description="COM_PHOCADOWNLOAD_FIELD_PREVIEW_WIDTH_DESC" />
+<field name="preview_height" default="480" size="10" type="text" label="COM_PHOCADOWNLOAD_FIELD_PREVIEW_HEIGHT_LABEL" description="COM_PHOCADOWNLOAD_FIELD_PREVIEW_HEIGHT_DESC" />
+
+<field name="preview_popup_window" type="list" default="0" label="COM_PHOCADOWNLOAD_FIELD_PREVIEW_POPUP_WINDOW_LABEL" description="COM_PHOCADOWNLOAD_FIELD_PREVIEW_POPUP_WINDOW_DESC">
+	<option value="1">COM_PHOCADOWNLOAD_STANDARD_POPUP_WINDOW</option>
+	<option value="0">COM_PHOCADOWNLOAD_MODAL_BOX</option>
+</field>
+
+<field name="youtube_height_cv" default="240" size="10" type="text" label="COM_PHOCADOWNLOAD_FIELD_VIDEO_HEIGHT_CV_LABEL" description="COM_PHOCADOWNLOAD_FIELD_VIDEO_HEIGHT_CV_DESC" />
+<field name="youtube_width_cv" default="320" size="10" type="text" label="COM_PHOCADOWNLOAD_FIELD_VIDEO_WIDTH_CV_LABEL" description="COM_PHOCADOWNLOAD_FIELD_VIDEO_WIDTH_CV_DESC" />
+
+<field name="youtube_height_dv" default="360" size="10" type="text" label="COM_PHOCADOWNLOAD_FIELD_VIDEO_HEIGHT_DV_LABEL" description="COM_PHOCADOWNLOAD_FIELD_VIDEO_HEIGHT_DV_DESC" />
+<field name="youtube_width_dv" default="480" size="10" type="text" label="COM_PHOCADOWNLOAD_FIELD_VIDEO_WIDTH_DV_LABEL" description="COM_PHOCADOWNLOAD_FIELD_VIDEO_WIDTH_DV_DESC" />
+
+</fieldset>
+
+<fieldset name="user_download" label="COM_PHOCADOWNLOAD_CONFIG_HEAD_DOWNLOADS_LABEL">
+
+<field name="ignore_file_types_check" default="2" type="list" label="COM_PHOCADOWNLOAD_IGNORE_FILE_TYPES_CHECK_LABEL" description="COM_PHOCADOWNLOAD_IGNORE_FILE_TYPES_CHECK_DESC" >
+	<option value="1">COM_PHOCADOWNLOAD_YES_UPLOAD_PARAM</option>
+	<option value="2">COM_PHOCADOWNLOAD_YES_UPLOAD_PARAM_ADMIN</option>
+	<option value="3">COM_PHOCADOWNLOAD_YES_DOWNLOAD_PARAM</option>
+	<option value="4">COM_PHOCADOWNLOAD_YES_DOWNLOAD_UPLOAD_PARAM</option>
+	<option value="5">COM_PHOCADOWNLOAD_YES_DOWNLOAD_UPLOAD_PARAM_ADMIN</option>
+	<option value="0">COM_PHOCADOWNLOAD_NO</option>
+</field>
+
+<field name="allowed_file_types_download" default="{hqx=application/mac-binhex40}
+{cpt=application/mac-compactpro}
+{csv=text/x-comma-separated-values}
+{bin=application/macbinary}
+{dms=application/octet-stream}
+{lha=application/octet-stream}
+{lzh=application/octet-stream}
+{exe=application/octet-stream}
+{class=application/octet-stream}
+{psd=application/x-photoshop}
+{so=application/octet-stream}
+{sea=application/octet-stream}
+{dll=application/octet-stream}
+{oda=application/oda}
+{pdf=application/pdf}
+{ai=application/postscript}
+{eps=application/postscript}
+{ps=application/postscript}
+{smi=application/smil}
+{smil=application/smil}
+{mif=application/vnd.mif}
+{xls=application/vnd.ms-excel}
+{ppt=application/powerpoint}
+{wbxml=application/wbxml}
+{wmlc=application/wmlc}
+{dcr=application/x-director}
+{dir=application/x-director}
+{dxr=application/x-director}
+{dvi=application/x-dvi}
+{gtar=application/x-gtar}
+{gz=application/x-gzip}
+{php=application/x-httpd-php}
+{php4=application/x-httpd-php}
+{php3=application/x-httpd-php}
+{phtml=application/x-httpd-php}
+{phps=application/x-httpd-php-source}
+{js=application/x-javascript}
+{swf=application/x-shockwave-flash}
+{sit=application/x-stuffit}
+{tar=application/x-tar}
+{tgz=application/x-tar}
+{xhtml=application/xhtml+xml}
+{xht=application/xhtml+xml}
+{zip=application/x-zip}
+{mid=audio/midi}
+{midi=audio/midi}
+{mpga=audio/mpeg}
+{mp2=audio/mpeg}
+{mp3=audio/mpeg}
+{aif=audio/x-aiff}
+{aiff=audio/x-aiff}
+{aifc=audio/x-aiff}
+{ram=audio/x-pn-realaudio}
+{rm=audio/x-pn-realaudio}
+{rpm=audio/x-pn-realaudio-plugin}
+{ra=audio/x-realaudio}
+{rv=video/vnd.rn-realvideo}
+{wav=audio/x-wav}
+{bmp=image/bmp}
+{gif=image/gif}
+{jpeg=image/jpeg}
+{jpg=image/jpeg}
+{jpe=image/jpeg}
+{png=image/png}
+{tiff=image/tiff}
+{tif=image/tiff}
+{css=text/css}
+{html=text/html}
+{htm=text/html}
+{shtml=text/html}
+{txt=text/plain}
+{text=text/plain}
+{log=text/plain}
+{rtx=text/richtext}
+{rtf=text/rtf}
+{xml=text/xml}
+{xsl=text/xml}
+{mpeg=video/mpeg}
+{mpg=video/mpeg}
+{mpe=video/mpeg}
+{qt=video/quicktime}
+{mov=video/quicktime}
+{avi=video/x-msvideo}
+{flv=video/x-flv}
+{movie=video/x-sgi-movie}
+{doc=application/msword}
+{xl=application/excel}
+{eml=message/rfc822}
+{pptx=application/vnd.openxmlformats-officedocument.presentationml.presentation}
+{xlsx=application/vnd.openxmlformats-officedocument.spreadsheetml.sheet}
+{docx=application/vnd.openxmlformats-officedocument.wordprocessingml.document}
+{rar=application/x-rar-compressed}
+{odb=application/vnd.oasis.opendocument.database}
+{odc=application/vnd.oasis.opendocument.chart}
+{odf=application/vnd.oasis.opendocument.formula}
+{odg=application/vnd.oasis.opendocument.graphics}
+{odi=application/vnd.oasis.opendocument.image}
+{odm=application/vnd.oasis.opendocument.text-master}
+{odp=application/vnd.oasis.opendocument.presentation}
+{ods=application/vnd.oasis.opendocument.spreadsheet}
+{odt=application/vnd.oasis.opendocument.text}
+{sxc=application/vnd.sun.xml.calc}
+{sxd=application/vnd.sun.xml.draw}
+{sxg=application/vnd.sun.xml.writer.global}
+{sxi=application/vnd.sun.xml.impress}
+{sxm=application/vnd.sun.xml.math}
+{sxw=application/vnd.sun.xml.writer}
+{ogv=video/ogg}
+{ogg=audio/ogg}
+{mp4=video/mp4}
+{mp4=application/octet-stream}" rows="8" cols="35" type="textarea" label="COM_PHOCADOWNLOAD_FIELD_ALLOWED_FILE_TYPES_DOWNLOAD_LABEL" description="COM_PHOCADOWNLOAD_FIELD_ALLOWED_FILE_TYPES_DOWNLOAD_DESC" />
+
+<field name="allowed_file_types_upload" default="{pdf=application/pdf}
+{ppt=application/powerpoint}
+{gz=application/x-gzip}
+{tar=application/x-tar}
+{tgz=application/x-tar}
+{zip=application/x-zip}
+{bmp=image/bmp}
+{gif=image/gif}
+{jpeg=image/jpeg}
+{jpg=image/jpeg}
+{jpe=image/jpeg}
+{png=image/png}
+{tiff=image/tiff}
+{tif=image/tiff}
+{txt=text/plain}
+{mpeg=video/mpeg}
+{mpg=video/mpeg}
+{mpe=video/mpeg}
+{qt=video/quicktime}
+{mov=video/quicktime}
+{avi=video/x-msvideo}
+{flv=video/x-flv}
+{doc=application/msword}
+{ogv=video/ogg}
+{ogg=audio/ogg}
+{mp4=video/mp4}
+{mp4=application/octet-stream}" rows="8" cols="35" type="textarea" label="COM_PHOCADOWNLOAD_FIELD_ALLOWED_FILE_TYPES_UPLOAD_LABEL" description="COM_PHOCADOWNLOAD_FIELD_ALLOWED_FILE_TYPES_UPLOAD_DESC" />
+
+<field name="disallowed_file_types_download" default="" rows="2" cols="35" type="textarea" label="COM_PHOCADOWNLOAD_FIELD_DISALLOWED_FILE_TYPES_DOWNLOAD_LABEL" description="COM_PHOCADOWNLOAD_FIELD_DISALLOWED_FILE_TYPES_DOWNLOAD_DESC" />
+
+<field name="disallowed_file_types_upload" default="" rows="2" cols="35" type="textarea" label="COM_PHOCADOWNLOAD_FIELD_DISALLOWED_FILE_TYPES_UPLOAD_LABEL" description="COM_PHOCADOWNLOAD_FIELD_DISALLOWED_FILE_TYPES_UPLOAD_DESC" />
+
+<field name="send_mail_download" type="user" section="com_phocadownload" default="0" label="COM_PHOCADOWNLOAD_FIELD_SEND_EMAIL_DOWNLOAD_LABEL" description="COM_PHOCADOWNLOAD_FIELD_SEND_EMAIL_DOWNLOAD_DESC" />
+
+<field name="user_files_max_count_download" type="text" size="20" default="0" label="COM_PHOCADOWNLOAD_FIELD_MAX_COUNT_USER_DOWNLOADS_LABEL" description="COM_PHOCADOWNLOAD_FIELD_MAX_COUNT_USER_DOWNLOADS_DESC" />
+
+<field name="enable_token_download" type="list" default="0" label="COM_PHOCADOWNLOAD_FIELD_ENABLE_TOKEN_DOWNLOAD_LABEL" description="COM_PHOCADOWNLOAD_FIELD_ENABLE_TOKEN_DOWNLOAD_DESC">
+<option value="1">COM_PHOCADOWNLOAD_YES</option>
+<option value="0">COM_PHOCADOWNLOAD_NO</option>
+</field>
+
+<field name="token_files_max_count_download" type="text" size="20" default="0" label="COM_PHOCADOWNLOAD_FIELD_MAX_COUNT_TOKEN_DOWNLOADS_LABEL" description="COM_PHOCADOWNLOAD_FIELD_MAX_COUNT_TOKEN_DOWNLOADS_DESC" />
+
+</fieldset>
+
+<fieldset name="user_upload" label="COM_PHOCADOWNLOAD_CONFIG_HEAD_UPLOADS_LABEL">
+<field name="enable_user_cp" type="list" default="0" label="COM_PHOCADOWNLOAD_FIELD_USER_UPLOAD_ENABLE_LABEL" description="COM_PHOCADOWNLOAD_FIELD_USER_UPLOAD_ENABLE_DESC">
+<option value="1">COM_PHOCADOWNLOAD_YES</option>
+<option value="0">COM_PHOCADOWNLOAD_NO</option>
+</field>
+<field name="user_files_max_count" type="text" size="20" default="5" label="COM_PHOCADOWNLOAD_FIELD_MAX_COUNT_USER_FILES_LABEL" description="COM_PHOCADOWNLOAD_FIELD_MAX_COUNT_USER_FILES_DESC" />
+
+<field name="user_files_max_size" type="text" size="20" default="20971520" label="COM_PHOCADOWNLOAD_FIELD_MAX_SIZE_USER_FILES_LABEL" description="COM_PHOCADOWNLOAD_FIELD_MAX_SIZE_USER_FILES_DESC" />
+
+<field name="user_file_upload_size" type="text" size="20" default="3145728" label="COM_PHOCADOWNLOAD_FIELD_USER_FILE_UPLOAD_SIZE_LABEL" description="COM_PHOCADOWNLOAD_FIELD_USER_FILE_UPLOAD_SIZE_DESC" />
+
+<field name="enable_user_upload_approve" type="list" default="0" label="COM_PHOCADOWNLOAD_FIELD_ENABLE_APPROVE_USERFILE_LABEL" description="COM_PHOCADOWNLOAD_FIELD_ENABLE_APPROVE_USERFILE_DESC">
+<option value="1">COM_PHOCADOWNLOAD_YES</option>
+<option value="0">COM_PHOCADOWNLOAD_NO</option>
+</field>
+
+<field name="user_ucp_lang" type="list" default="0" label="COM_PHOCADOWNLOAD_FIELD_USER_UCP_LANG_LABEL" description="COM_PHOCADOWNLOAD_FIELD_USER_UCP_LANG_DESC">
+	<option value="1">COM_PHOCADOWNLOAD_ALL</option>
+	<option value="2">COM_PHOCADOWNLOAD_USER_LANG</option>
+	<option value="3">COM_PHOCADOWNLOAD_SITE_LANG</option>
+</field>
+
+<field name="send_mail_upload" type="user" section="com_phocadownload" default="0" label="COM_PHOCADOWNLOAD_FIELD_SEND_EMAIL_UPLOAD_LABEL" description="COM_PHOCADOWNLOAD_FIELD_SEND_EMAIL_UPLOAD_DESC" />
+
+<field name="overwrite_existing_files" default="0" type="list" label="COM_PHOCADOWNLOAD_FIELD_OVERWRITE_EXISTING_FILES_LABEL" description="COM_PHOCADOWNLOAD_FIELD_OVERWRITE_EXISTING_FILES_DESC" >
+	<option value="1">COM_PHOCADOWNLOAD_YES</option>
+	<option value="0">COM_PHOCADOWNLOAD_NO</option>
+</field>
+
+<field name="pap_copy" default="0" type="list" label="COM_PHOCADOWNLOAD_FIELD_PLAY_OR_PREVIEW_COPY_LABEL" description="COM_PHOCADOWNLOAD_FIELD_PLAY_OR_PREVIEW_COPY_DESC" >
+	<option value="1">COM_PHOCADOWNLOAD_YES_FRONTEND</option>
+	<option value="2">COM_PHOCADOWNLOAD_YES_BACKEND</option>
+	<option value="3">COM_PHOCADOWNLOAD_YES_FRONTEND_BACKEND</option>
+	<option value="0">COM_PHOCADOWNLOAD_NO</option>
+</field>
+
+<field name="upload_maxsize" type="text" size="20" default="3145728" label="COM_PHOCADOWNLOAD_FIELD_UPLOAD_MAX_SIZE_ADMIN_LABEL" description="COM_PHOCADOWNLOAD_FIELD_UPLOAD_MAX_SIZE_ADMIN_DESC" />
+<field name="enable_multiple_upload_admin" type="list" default="1" label="COM_PHOCADOWNLOAD_FIELD_ENABLE_MU_ADMIN_LABEL" description="COM_PHOCADOWNLOAD_FIELD_ENABLE_MU_ADMIN_DESC">
+	<option value="1">COM_PHOCADOWNLOAD_YES</option>
+	<option value="0">COM_PHOCADOWNLOAD_NO</option>
+</field>
+
+<field name="multiple_upload_method" type="list" default="4" label="COM_PHOCADOWNLOAD_FIELD_MULTIPLE_UPLOAD_METHOD_LABEL" description="COM_PHOCADOWNLOAD_FIELD_MULTIPLE_UPLOAD_METHOD_DESC">
+	<option value="4">COM_PHOCADOWNLOAD_HTML5_UPLOADER</option>
+	<option value="5">COM_PHOCADOWNLOAD_BROWSERPLUS_UPLOADER</option>
+	<option value="6">COM_PHOCADOWNLOAD_HTML4_UPLOADER</option>
+</field>
+
+<field name="default_access" default="1" type="accesslevel" label="COM_PHOCADOWNLOAD_FIELD_DEFAULT_ACCESS_LABEL" description="COM_PHOCADOWNLOAD_FIELD_DEFAULT_ACCESS_DESC" class="inputbox" size="1" />
+
+<field name="enable_xss_check" type="list" default="1" label="COM_PHOCADOWNLOAD_FIELD_ENABLE_XSS_CHECK_LABEL" description="COM_PHOCADOWNLOAD_FIELD_ENABLE_XSS_CHECK_DESC">
+	<option value="1">COM_PHOCADOWNLOAD_YES_FRONTEND</option>
+	<option value="2">COM_PHOCADOWNLOAD_YES_BACKEND</option>
+	<option value="3">COM_PHOCADOWNLOAD_YES_FRONTEND_BACKEND</option>
+	<option value="0">COM_PHOCADOWNLOAD_NO</option>
+</field>
+
+</fieldset>
+
+<fieldset name="general" label="COM_PHOCADOWNLOAD_CONFIG_HEAD_GENERAL_LABEL">
+
+
+
+<field name="enable_user_statistics" default="1" type="list" label="COM_PHOCADOWNLOAD_FIELD_ENABLE_USER_STAT_LABEL" description="COM_PHOCADOWNLOAD_FIELD_ENABLE_USER_STAT_DESC" >
+	<option value="1">COM_PHOCADOWNLOAD_YES</option>
+	<option value="0">COM_PHOCADOWNLOAD_NO</option>
+</field>
+
+<field name="enable_logging" default="0" type="list" label="COM_PHOCADOWNLOAD_FIELD_ENABLE_LOGGING_LABEL" description="COM_PHOCADOWNLOAD_FIELD_ENABLE_LOGGING_DESC" >
+	<option value="0">COM_PHOCADOWNLOAD_NO</option>
+	<option value="2">COM_PHOCADOWNLOAD_YES_UPLOADS_ONLY</option>
+	<option value="1">COM_PHOCADOWNLOAD_YES_DOWNLOADS_ONLY</option>
+	<option value="3">COM_PHOCADOWNLOAD_YES_UPLOADS_DOWNLOADS</option>
+</field>
+
+
+<field name="delete_existing_files" default="0" type="list" label="COM_PHOCADOWNLOAD_FIELD_DELETE_EXISTING_FILES_LABEL" description="COM_PHOCADOWNLOAD_FIELD_DELETE_EXISTING_FILES_DESC" >
+	<option value="1">COM_PHOCADOWNLOAD_YES</option>
+	<option value="0">COM_PHOCADOWNLOAD_NO</option>
+</field>
+
+<field name="description" default="" type="editor" class="inputbox" label="COM_PHOCADOWNLOAD_FIELD_DESCRIPTION_LABEL" description="COM_PHOCADOWNLOAD_FIELD_DESCRIPTION_DESC" filter="JComponentHelper::filterText" />
+
+
+<field name="registered_access_level" type="phocaaccesslevel" label="COM_PHOCADOWNLOAD_FIELD_REGISTERED_ACCESS_LEVEL_LABEL" description="COM_PHOCADOWNLOAD_FIELD_REGISTERED_ACCESS_LEVEL_DESC" multiple="true" size="10" >
+
+</field>
+
+<field name="phocaheadexpert1" type="phocaheadexpert"  default="COM_PHOCADOWNLOAD_EXPERTS_ONLY_LABEL" label="" description=""/>
+
+<field name="download_folder" default="phocadownload" size="40" type="text" label="COM_PHOCADOWNLOAD_FIELD_DOWNLOAD_FOLDER_LABEL" description="COM_PHOCADOWNLOAD_FIELD_DOWNLOAD_FOLDER_DESC" />
+<field name="download_folder_pap" default="phocadownloadpap" size="40" type="text" label="COM_PHOCADOWNLOAD_FIELD_DOWNLOAD_FOLDER_PAP_LABEL" description="COM_PHOCADOWNLOAD_FIELD_DOWNLOAD_FOLDER_PAP_DESC" />
+
+<field name="absolute_path" default="" size="40" type="text" label="COM_PHOCADOWNLOAD_FIELD_ABSOLUTE_PATH_LABEL" description="COM_PHOCADOWNLOAD_FIELD_ABSOLUTE_PATH_DESC" />
+
+<field name="enable_plugin_query" type="list" default="0" label="COM_PHOCADOWNLOAD_FIELD_ENABLE_PLUGIN_QUERY_LABEL" description="COM_PHOCADOWNLOAD_FIELD_ENABLE_PLUGIN_QUERY_DESC">
+	<option value="1">COM_PHOCADOWNLOAD_YES</option>
+	<option value="0">COM_PHOCADOWNLOAD_NO</option>
+</field>
+
+		
+<field name="enable_cache" type="list" default="0" label="COM_PHOCADOWNLOAD_FIELD_ENABLE_CACHE_LABEL" description="COM_PHOCADOWNLOAD_FIELD_ENABLE_CACHE_DESC">
+	<option value="1">COM_PHOCADOWNLOAD_YES</option>
+	<option value="0">COM_PHOCADOWNLOAD_NO</option>
+</field>	
+
+<field name="bt_cat_col_left" default="" size="40" type="text" label="COM_PHOCADOWNLOAD_FIELD_COLUMN_SIZE_CATEGORY_VIEW_LABEL" description="COM_PHOCADOWNLOAD_FIELD_COLUMN_SIZE_CATEGORY_VIEW_DESC" />
+
+</fieldset>
+
+
+<fieldset name="permissions" description="JCONFIG_PERMISSIONS_DESC" label="JCONFIG_PERMISSIONS_LABEL">
+	<field name="rules" type="rules" component="com_phocadownload" filter="rules" label="COM_PHOCADOWNLOAD_FIELD_JCONFIG_PERMISSIONS_LABEL" section="component" description="COM_PHOCADOWNLOAD_FIELD_JCONFIG_PERMISSIONS_DESC"/>
+</fieldset>
+	
+	</fields>
+</config>

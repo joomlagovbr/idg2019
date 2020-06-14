@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="COM_PHOCADOWNLOAD_CATEGORIES_LIST_LAYOUT">
+		<message>
+			<![CDATA[COM_PHOCADOWNLOAD_CATEGORIES_LIST_LAYOUT_DESC]]>
+		</message>
+	</layout>
+	
+		<name>COM_PHOCADOWNLOAD_CATEGORIES_LIST_LAYOUT</name>
+		<description>COM_PHOCADOWNLOAD_CATEGORIES_LIST_LAYOUT_DESC</description>
+		
+		<fields name="params">
+<fieldset name="basic" addfieldpath="/administrator/components/com_phocadownload/models/fields" >
+
+		
+			<field name="show_pagination" type="list" default="1" label="COM_PHOCADOWNLOAD_FIELD_SHOW_PAGINATION_LABEL" description="COM_PHOCADOWNLOAD_FIELD_SHOW_PAGINATION_DESC">
+				<option value="0">COM_PHOCADOWNLOAD_HIDE</option>
+				<option value="1">COM_PHOCADOWNLOAD_DISPLAY</option>
+			</field>
+			
+			<field name="show_pagination_limit" type="list" default="1" label="COM_PHOCADOWNLOAD_FIELD_SHOW_PAGINATION_LIMIT_LABEL" description="COM_PHOCADOWNLOAD_FIELD_SHOW_PAGINATION_LIMIT_DESC">
+				<option value="0">COM_PHOCADOWNLOAD_HIDE</option>
+				<option value="1">COM_PHOCADOWNLOAD_DISPLAY</option>
+			</field>
+			
+			<field name="show_ordering_files" type="list" default="1" label="COM_PHOCADOWNLOAD_FIELD_DISPLAY_ORDERING_CATEGORY_VIEW_LABEL" description="COM_PHOCADOWNLOAD_FIELD_DISPLAY_ORDERING_CATEGORY_VIEW_DESC">
+			<option value="0">COM_PHOCADOWNLOAD_HIDE</option>
+			<option value="1">COM_PHOCADOWNLOAD_DISPLAY</option>
+		</field>
+			
+			
+		</fieldset>
+</fields>
+
+</metadata>

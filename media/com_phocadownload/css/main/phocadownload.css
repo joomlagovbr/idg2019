@@ -1,0 +1,819 @@
+/* Phoca Download https://www.phoca.cz/ https://www.phoca.cz/phocadownload */
+
+/* Main */
+.pd-hr-cb {
+	border-bottom: 3px solid #e9e9e9;
+	margin-bottom: 10px;
+	clear:both;
+}
+.pd-hr {
+	border-bottom: 3px solid #e9e9e9;
+	margin-bottom: 10px;
+}
+.pd-fl {
+	position: relative;
+	float: left;
+}
+.pd-fl-m {
+	position: relative;
+	float: left;
+	margin: 5px 0;
+}
+.pd-fr {
+	position: relative;
+	float: right;
+}
+.pd-cb {
+	clear:both;
+}
+.pd-cl {
+	clear:left;
+}
+
+.pd-cr-m {
+	clear: right;
+	margin-top: 20px;
+}
+
+.pd-not-found {
+	text-align: center;
+	font-weight: bold;
+}
+.pd-center {
+  text-align:center;
+  vertical-align:middle;
+}
+.pd-inline {
+  margin:0 10px 0 10px;
+  display:inline;
+}
+
+/* Top */
+#phoca-dl-category-box .pd-category h3.pd-ctitle,
+#phoca-dl-file-box .pd-file h3.pd-ctitle,
+#phoca-dl-download-box .pd-file h3.pd-ctitle{
+	margin:			0;
+	padding:		5px;
+	background: 	#fafafa;
+	border:			1px solid #e9e9e9;
+	margin-bottom:	7px;
+}
+
+#phoca-dl-category-box .pd-category div.pdtop,
+#phoca-dl-file-box .pd-file div.pdtop,
+#phoca-dl-download-box .pd-file div.pdtop {
+	float:			right;
+	position:		relative;
+	width:			16px;
+	margin-top:		5px;
+	margin-right:	7px;
+	padding-top: 	2px;
+}
+
+
+/* Category, File, Overlib */
+#phoca-dl-category-box .pd-filesize-txt,
+#phoca-dl-file-box  .pd-filesize-txt,
+#phoca-dl-category-box .pd-version-txt,
+#phoca-dl-file-box  .pd-version-txt,
+#phoca-dl-category-box .pd-license-txt,
+#phoca-dl-file-box  .pd-license-txt,
+#phoca-dl-category-box .pd-author-txt,
+#phoca-dl-file-box .pd-author-txt,
+#phoca-dl-category-box .pd-email-txt,
+#phoca-dl-file-box .pd-email-txt,
+#phoca-dl-category-box .pd-date-txt,
+#phoca-dl-file-box  .pd-date-txt,
+#phoca-dl-category-box .pd-downloads-txt,
+#phoca-dl-file-box  .pd-downloads-txt{
+	font-weight: bold;
+	clear:left;
+	margin:5px 0;
+	float:left;
+	width: 100px;
+}
+
+#phoca-dl-category-box .pd-notes-txt,
+#phoca-dl-file-box .pd-notes-txt,
+#phoca-dl-category-box .pd-features-txt,
+#phoca-dl-file-box .pd-features-txt,
+#phoca-dl-category-box .pd-changelog-txt,
+#phoca-dl-file-box .pd-changelog-txt {
+	margin: 7px 0;
+	font-weight: bold;
+	clear:left;
+}
+
+#overDiv .pd-filesize-txt,
+#overDiv .pd-version-txt,
+#overDiv .pd-license-txt,
+#overDiv .pd-author-txt,
+#overDiv .pd-email-txt,
+#overDiv .pd-date-txt,
+#overDiv .pd-downloads-txt{
+	font-weight: bold;
+	clear:left;
+	margin:5px 0;
+	float:left;
+	width: 80px;
+}
+
+#overDiv .pd-title,
+#phoca-dl-category-box .pd-title,
+#phoca-dl-file-box .pd-title,
+#phoca-dl-download-box .pd-title {
+	font-weight: bold;
+} 
+
+#overDiv .pd-image,
+#phoca-dl-category-box .pd-image,
+#phoca-dl-file-box .pd-image,
+#phoca-dl-download-box .pd-image {
+	position:relative;
+	float:right;
+	margin:10px;
+}
+
+#overDiv .pd-textonly,
+#overDiv .pd-cdesc,
+#phoca-dl-category-box .pd-textonly,
+#phoca-dl-category-box .pd-cdesc,
+#phoca-dl-file-box .pd-cdesc,
+#phoca-dl-download-box .pd-cdesc {
+	margin: 10px 0px;
+	padding: 5px 0px;
+	clear:both;
+}
+#overDiv  .pd-fdesc,
+#phoca-dl-category-box .pd-fdesc,
+#phoca-dl-file-box .pd-fdesc,
+#phoca-dl-download-box .pd-fdesc {
+	padding: 5px 0px;
+	clear:both;
+}
+
+#phoca-dl-category-box .pd-buttons,
+#phoca-dl-file-box .pd-buttons,
+#phoca-dl-download-box .pd-buttons {
+	position: relative;
+	float: right;
+	margin: 5px;
+}
+#phoca-dl-download-box .pd-filenamebox,
+#phoca-dl-category-box .pd-filenamebox {
+	position: relative;
+	float: left;
+	margin: 5px;
+}
+
+#phoca-dl-file-box .pd-filenamebox {
+	position: relative;
+	float: left;
+	margin: 5px 0px;
+}
+
+
+
+#phoca-dl-download-box .pd-downloadbox-direct {
+	margin: 0 auto;
+	margin-top: 20px;
+	background: #f5f5f5;
+	border: 1px solid #d9d9d9;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	padding: 10px;
+}
+
+#phoca-dl-category-box .pd-filebox {
+	margin-top:		10px;
+	margin-bottom:	10px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #f0f0f0;
+}
+
+#phoca-dl-download-box .pd-filebox,
+#phoca-dl-file-box .pd-filebox {
+	padding: 5px;
+}	
+
+#phoca-dl-category-box .pd-title,
+#phoca-dl-file-box .pd-title,
+#phoca-dl-download-box .pd-title {
+	margin-bottom: 3px;
+}
+
+
+#phoca-dl-category-box .pd-mirrors,
+#phoca-dl-file-box .pd-mirrors {
+	position: relative;
+	float: right;
+	clear: right;
+	margin-top: 0px;
+}
+
+#phoca-dl-category-box .pd-rating,
+#phoca-dl-file-box .pd-rating {
+	position: relative;
+	float: left;
+	clear: both;
+	margin-top: 15px;
+}
+
+#phoca-dl-category-box .pd-tags,
+#phoca-dl-category-box .pd-report,
+#phoca-dl-file-box .pd-tags,
+#phoca-dl-file-box .pd-report {
+	position: relative;
+	float: right;
+	clear: right;
+	margin-top: 15px;
+}
+
+#phoca-dl-download-box,
+#phoca-dl-file-box {
+	text-align: left;
+}
+#phoca-dl-download-box .pd-file,
+#phoca-dl-file-box .pd-file {
+	
+	margin:5px 0;
+}
+
+/* Categories */
+#phoca-dl-categories-box a img {
+	border:		0px;
+	padding:	0;
+	margin:		0;
+}
+
+#phoca-dl-categories-box div.pd-desc {
+	margin: 10px 0 10px 0;
+}
+#phoca-dl-categories-box div.pd-categoriesbox {
+	width:		28%;
+	position:	relative;
+	float:		left;
+	margin:		1%;
+	padding:	1%;
+}
+
+#phoca-dl-categories-box div.pd-title{
+	font-weight:bold;
+	font-size: 120%;
+	margin: 5px 0px 8px 0px;
+}
+
+#phoca-dl-category-box .pagination,
+#phoca-dl-category-box .pagination div ul {
+	text-align:		center;
+	margin: 		auto;
+	margin:			5px;
+	border: 		none;
+	
+}
+
+#phoca-dl-category-box .pd-subcategory,
+#phoca-dl-file-box .pd-file {
+	margin:			5px;
+}
+
+#phoca-dl-download-box .pd-file-details,
+#phoca-dl-file-box .pd-file-details {
+	border: 0;
+}
+
+#phoca-dl-categories-box .pd-subcategory,
+#phoca-dl-category-box .pd-subcategory {
+	padding-left:	20px;
+	background: 	transparent url('../../images/folder.png') 0 center no-repeat;
+}
+
+#phoca-dl-category-box .pd-category div.pdtop,
+#phoca-dl-file-box .pd-file div.pdtop,
+#phoca-dl-download-box .pd-file div.pdtop {
+	float:			right;
+	position:		relative;
+	width:			16px;
+	margin-top:		5px;
+	margin-right:	7px;
+}
+
+#phoca-dl-categories-box  a img,
+#phoca-dl-category-box a img,
+#phoca-dl-file-box a img,
+#phoca-dl-download-box a img {
+	border: none;
+}
+
+/* Icons - icon next to file*/
+.phoca-dl-file-box-mod .pd-document16,
+#phoca-dl-file-box .pd-document16,
+#phoca-dl-category-box .pd-document16,
+#phoca-dl-download-box .pd-document16 {
+	padding-left:	20px;
+	background: 	url('../../images/icon-document-16.png') 0px center no-repeat;
+	height:			16px;
+    line-height:	16px;
+}
+#phoca-dl-most-viewed-box .pd-document16  {
+	padding-left:	20px;
+	background: 	url('../../images/icon-document-16.png') 0px center no-repeat;
+}
+.phoca-dl-file-box-mod .pd-document32,
+#phoca-dl-file-box .pd-document32,
+#phoca-dl-category-box .pd-document32,
+#phoca-dl-most-viewed-box .pd-document32,
+#phoca-dl-download-box .pd-document32 {
+	background: 	url('../../images/icon-document-32.png')  0px center no-repeat;
+	height:			32px;
+    line-height:	32px;
+	padding-left:	36px;
+}
+.phoca-dl-file-box-mod .pd-document48,
+#phoca-dl-file-box .pd-document48,
+#phoca-dl-category-box .pd-document48,
+#phoca-dl-most-viewed-box .pd-document48,
+#phoca-dl-download-box .pd-document48 {
+	background: 	url('../../images/icon-document-48.png') 0px center no-repeat;
+	height:			48px;
+    line-height:	48px;
+	padding-left:	52px;
+}
+.phoca-dl-file-box-mod .pd-document64,
+#phoca-dl-file-box .pd-document64,
+#phoca-dl-category-box .pd-document64,
+#phoca-dl-most-viewed-box .pd-document64,
+#phoca-dl-download-box .pd-document64 {
+	background: 	url('../../images/icon-document-64.png')  0px center no-repeat;
+	height:			64px;
+    line-height:	64px;
+	padding-left:	70px;
+}
+
+/* Plugin */
+#phoca-dl-category-box-plugin .pd-document {
+	padding-left:	20px;
+	background: 	url('../../images/document.png') 0 center no-repeat;
+	text-align:		left;
+	padding-top:	4px;
+	padding-bottom:	4px;
+	
+}
+
+/* Module */
+.phoca-dl-categories-box-module .pd-categories {
+	color:			#BF6070;	
+}
+
+.phocadownload-navigation {
+	padding:		2px;
+	border:		 	1px dotted #D6D6D6;
+	width:			6em;
+	position:		relative;
+	float:			right;
+	text-align:		center;
+	margin-left:	5px;
+}
+
+.phocadownload-navigation .navigation-text {
+	color:				#BF6070;
+	background-color:	#D6D6D6;
+	padding:			2px;
+	margin-bottom:		3px;
+	font-size:			10px;
+	text-align:			center;
+}
+
+#phoca-dl-license {
+	border: 			1px solid #ccc;
+	background: 		#f5f5f5;
+	overflow: 			auto;
+	margin-top:			10px;
+	margin-bottom:		10px;
+}
+
+.pd-pagination {
+	margin-top:			20px;
+}
+
+.pd-float {
+	position:			relative;
+	float:				left;
+	margin:				0px 3px;
+}
+
+#phocadownload-upload .comment-input{
+	width: 				98%;
+}
+
+#phocadownload-upload .comment-input2 {
+	width: 				40px;
+	border:				0px;
+	font-weight:		bold;
+
+}
+
+/* tabs */
+form {
+  margin: 0;
+  padding: 0;
+}
+
+dl.tabs {
+	float: left;
+	margin: 10px 0 -1px 2px;
+	z-index: 50;
+	
+}
+
+dl.tabs dt {
+	float: left;
+	padding: 4px 10px;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+	margin-left: 3px;
+	background: #f0f0f0;
+	color: #666;
+	
+}
+
+dl.tabs dt.open {
+	background: #ffffff;
+	border-bottom: 1px solid #ffffff;
+	z-index: 100;
+	color: #000;
+	
+}
+
+dl.tabs a {
+	text-decoration: none;
+	font-weight: normal;
+}
+dl.tabs a:hover {
+	background: transparent !important;
+}
+
+div.current {
+	clear: both;
+	border: 1px solid #ccc;
+	padding: 10px 10px;
+	background: #ffffff;
+	
+}
+
+div.current dd {
+	padding: 0;
+	margin: 0;
+}
+
+#loading-label-file{
+	text-align:		center;
+	display:		none;
+}
+
+/** Table styles **/
+#phocadownload-upload  table.adminlist {
+	width: 				100%;
+	border-spacing: 	1px;
+	background-color: 	#e7e7e7;
+	color: 				#666;
+}
+
+#phocadownload-upload  .pagination {
+	margin:				0;
+	padding:			0;
+	display:			inline;
+}
+
+#phocadownload-upload  table.adminlist td,
+#phocadownload-upload  table.adminlist th { 
+	padding: 			4px;
+}
+
+#phocadownload-upload  table.adminlist thead th {
+	text-align: 		center;
+	background: 		#f0f0f0;
+	color: 				#666;
+	border-bottom: 		1px solid #999;
+	border-left:		1px solid #fff;
+}
+
+#phocadownload-upload  table.adminlist thead a:hover 			{ text-decoration: none; }
+#phocadownload-upload  table.adminlist thead th img 				{ vertical-align: middle; }
+#phocadownload-upload  table.adminlist tbody th 					{ font-weight: bold; }
+#phocadownload-upload  table.adminlist tbody tr					{ background-color: #fff;  text-align: left; }
+#phocadownload-upload  table.adminlist tbody tr.row1 				{ background: #f9f9f9; border-top: 1px solid #fff; }
+#phocadownload-upload  table.adminlist tbody tr.row0:hover td,
+#phocadownload-upload  table.adminlist tbody tr.row1:hover td 		{ background-color: #ffd ; }
+#phocadownload-upload  table.adminlist tbody tr td 	  			{ height: 25px; background: #fff; border: 1px solid #fff; }
+#phocadownload-upload  table.adminlist tbody tr.row1 td 			{ background: #f9f9f9; border-top: 1px solid #FFF; }
+#phocadownload-upload  table.adminlist tfoot tr 					{ text-align: center;  color: #333; }
+#phocadownload-upload  table.adminlist tfoot td,
+#phocadownload-upload  table.adminlist tfoot th 					{ background-color: #f3f3f3; border-top: 1px solid #999; text-align: center; }
+#phocadownload-upload  table.adminlist td.order					{ text-align: center; white-space: nowrap; }
+#phocadownload-upload  table.adminlist td.order span 			{ float: left; display: block; width: 20px; text-align: center; }
+
+#phocadownload-upload .error,
+#phoca-dl-file-box .error,
+#phoca-dl-category-box .pd-error,
+#phoca-dl-category-box .error {
+	background:		#FFC2C2;
+	border:			1px solid #bf3030;
+	color: 			#a60000;
+	padding:		10px;
+	margin-top:		5px;
+	margin-bottom:	5px;
+}
+
+#phoca-dl-categories-box .pd-no-subcat {
+	margin-left: 5px;
+}
+
+/* not conflict with beez */
+#phocadownload-upload table,
+#phocadownload-upload table tr,
+#phocadownload-upload table tr td,
+#phoca-dl-file-box table,
+#phoca-dl-file-box table tr,
+#phoca-dl-file-box table tr td,
+#phoca-dl-download-box table,
+#phoca-dl-download-box table tr,
+#phoca-dl-download-box table tr td,
+#phoca-dl-category-box table,
+#phoca-dl-category-box table tr,
+#phoca-dl-category-box table tr td {
+	border: none;
+}
+#overDiv table,
+#overDiv table tr,
+#overDiv table tr td{
+	border: none;
+	padding:5px;
+	
+}
+
+#phoca-dl-category-box .pagination.pd-pagination {
+	border: none;
+}
+/*
+#phocadownload-pane div.current,
+#phocadownload-pane div.current dd,
+#phocadownload-pane .tabs,
+#phocadownload-pane #pane {
+	width: 100%;
+}
+*/
+#phoca-dl-category-box .pdtop a:hover,
+#phoca-dl-category-box .pdtop a:active,
+#phoca-dl-category-box .pdtop a:focus,
+#phoca-dl-category-box .pdfile a:hover,
+#phoca-dl-category-box .pdfile a:active,
+#phoca-dl-category-box .pdfile a:focus,
+#phoca-dl-file-box .pdtop a:hover,
+#phoca-dl-file-box .pdtop a:active,
+#phoca-dl-file-box .pdtop a:focus,
+#phoca-dl-download-box .pdtop a:hover,
+#phoca-dl-download-box .pdtop a:active,
+#phoca-dl-download-box .pdtop a:focus {
+	background: transparent;
+}
+
+/* overlib */
+#overDiv table,
+#overDiv table tr,
+#overDiv table tr td {
+	border: 0px
+}
+
+#overDiv .fontPhocaPDClass {
+	color: #999;
+	margin:0;padding:0;
+}
+
+#overDiv .fgPhocaPDClass {
+	background-color: #f0f0f0;
+	margin:0;padding:0;
+}
+#overDiv .bgPhocaPDClass {
+	background-color: #f0f0f0;
+	margin:0;padding:0;
+	border: 1px solid #999;
+}
+#overDiv .capfontPhocaPDClass {
+	color: #999;
+	margin:0;padding:0;
+}
+#overDiv .capfontclosePhocaPDClass,
+#overDiv .capfontclosePhocaPDClass a {
+	color: #999;
+	text-decoration: underline;
+	text-align: right;
+	margin:0;padding:0;
+}
+
+#phoca-dl-category-box .pagination #pg-pagination  ul {
+	margin: 10px auto;
+	text-align: center;
+}
+
+.pd-mirror,
+.pd-report  {
+	margin: 0px 0px 5px 5px;
+	float:right;
+}
+
+.pd-mirror-file,
+.pd-report-file {
+	margin: 0px 5px 5px 0px;
+	float:right;
+}
+
+.pd-fbcomments {
+	margin-top:		10px;
+	margin-bottom:	10px;
+}
+
+/*
+ * If Beez template is not used, the following code
+ * can be removed
+ * Because of using !important methods in Beez
+ */
+
+#phocadownload table,
+#phocadownload-pane table,
+#phocadownload-pane table tr,
+#phocadownload-pane table tr td{
+	border-style: none !important;
+}
+
+#phocadownload-pane table tr td {
+	padding:3px;
+}
+#phocadownload-multipleupload form fieldset {
+	text-align:left;
+	padding:5px;
+}
+
+#phocadownload-pane .actions {
+    text-align:left;
+	width: auto;
+    padding:10px 5px !important;
+	margin:10px 0 !important;
+}
+
+#phocadownload-pane ul#flash_uploader_filelist {
+    margin:0px;
+}
+
+.label {
+    border-radius: 3px 3px 3px 3px;
+    padding: 1px 4px 2px;
+	color: #FFFFFF;
+    font-size: 10.998px;
+    font-weight: bold;
+    line-height: 14px;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    vertical-align: baseline;
+    white-space: nowrap;
+}
+
+.label-warning {
+	background-color: #f89406;
+}
+.label-important {
+	background-color: #b94a48;
+}
+
+.ph-cb {
+	clear:both
+}
+
+
+/* Bootstrap */
+#phoca-dl-category-box .pd-rating {
+	position: relative;
+	float: left;
+	clear: both;
+	margin-top: 5px;
+	margin-left: 5px;
+}
+
+#phoca-dl-category-box .pd-tags-bp,
+#phoca-dl-file-box .pd-tags-bp {
+	position: relative;
+	margin: 0px 5px 0px 5px;
+	float: right;
+	clear: right;
+}
+#phoca-dl-category-box .pd-mirror-bp  {
+	margin: 0px 5px 0px 5px;
+	float:right;
+}
+
+#phoca-dl-file-box .pd-mirror-bp {
+	margin: 0px 0px 0px 5px;
+	float:right;
+}
+#phoca-dl-category-box .pd-report-bp,
+#phoca-dl-file-box .pd-report-bp  {
+	margin: 0px 5px 0px 5px;
+	clear: right;
+	float:right;
+}
+
+#phoca-dl-category-box .pd-video {
+margin-left: 5px;
+}
+
+#phoca-dl-file-box .pd-video {
+	padding-top: 10px;
+	clear:both;
+	padding: 10px;
+}
+
+.pd-row2-bp {
+	border-bottom: 1px solid #e9e9e9;
+	margin: 0px 0px 8px 0px;
+	padding-bottom:5px;
+}
+
+
+#phoca-dl-file-box  .pd-buttons-bp {
+	position: relative;
+	float: right;
+	margin: 0px 0px 0px 5px;
+}
+.ph-right {
+	text-align:right;
+}
+
+.btn-file {
+	position: relative;
+	overflow: hidden;
+}
+.btn-file input[type=file] {
+	position: absolute;
+	top: 0;
+	right: 0;
+	min-width: 100%;
+	min-height: 100%;
+	font-size: 100px;
+	text-align: right;
+	filter: alpha(opacity=0);
+	opacity: 0;
+	outline: none;
+	background: white;
+	cursor: inherit;
+	display: block;
+}
+.pd-input-small {
+	width: 15em !important;
+}
+.pd-comment-input {
+	width: 100%;
+}
+.pd-user-upload-table tr td {
+	padding: 5px;
+}
+
+#phocadownload-upload .footer {
+	text-align: center;
+}
+#phocadownload-upload .pd-file-upload-form {
+	padding-right: 10px;
+}
+
+.ph-th-50 {
+	width: 50%;
+}
+.ph-th-3 {
+	width: 3%;
+}
+.ph-td-center {
+	text-align: center;
+}
+
+.pd-button-box-bt a.btn {
+	float: right;
+	margin: 5px;
+}
+
+#phoca-dl-download-box .pd-filenamebox-bt,
+#phoca-dl-category-box .pd-filenamebox-bt {
+	position: relative;
+	float: left;
+	margin: 5px 0px;
+}
+
+/* Specific colors for string tags */
+.pd-j-15 {background-color: #559d22;}
+.pd-j-17 {background-color: #f25c14;}
+.pd-j-25 {background-color: #6a379b;}
+.pd-j-3x {background-color: #bc8b02;}
+.pd-j-35 {background-color: #bc8b02;}
+
+#phoca-dl-license pre {
+	border: 0px;
+	border-radius:0px;
+}

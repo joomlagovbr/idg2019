@@ -1,0 +1,36 @@
+/*!
+ * Bootstrap v3.0.2
+ *
+ * Copyright 2013 Twitter, Inc
+ * Licensed under the Apache License v2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Designed and built with all the love in the world @twitter by @mdo and @fat.
+ */
+
+#phoca-dl-category-box .ph-thumbnail h3,
+#phoca-dl-categories-box .ph-thumbnail h3 {
+	margin-top: 5px;
+	margin-left: 5px;
+}
+#phoca-dl-category-box .ph-subcategories,
+#phoca-dl-categories-box .ph-subcategories {
+	margin: 5px;
+}
+/*
+.modal .modal-body {
+    height: 300px;
+    overflow-y: auto;
+}*/
+/*
+.grid7 .col-md-1 { width: 10%; }
+.grid7 .col-md-2 { width: 20%; }
+.grid7 .col-md-3 { width: 30%; }
+.grid7 .col-md-4 { width: 40%; }
+.grid7 .col-md-5 { width: 5%; }
+.grid7 .col-md-6 { width: 60%; }
+.grid7 .col-md-7 { width: 70%; }
+.grid7 .col-md-8 { width: 80%; }
+.grid7 .col-md-9 { width: 90%; }
+.grid7 .col-md-10 { width: 100%; }*/
+

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+<layout title="COM_PHOCADOWNLOAD_CATEGORY_LIST_LAYOUT">
+		<message>
+			<![CDATA[COM_PHOCADOWNLOAD_CATEGORY_LIST_LAYOUT_DESC]]>
+		</message>
+	</layout>
+		<name>COM_PHOCADOWNLOAD_CATEGORY_LIST_LAYOUT</name>
+		<description>COM_PHOCADOWNLOAD_CATEGORY_LIST_LAYOUT_DESC</description>
+		<fields name="request">
+		<fieldset name="request" addfieldpath="/administrator/components/com_phocadownload/models/fields">
+
+			<field name="id" type="phocadownloadcategory" section="com_phocadownload" default="0" label="COM_PHOCADOWNLOAD_FIELD_SELECT_CATEGORY_LABEL" description="COM_PHOCADOWNLOAD_FIELD_SELECT_CATEGORY_DESC" required="true" />
+		</fieldset>
+	</fields>
+	
+	<fields name="params">
+<fieldset name="basic" addfieldpath="/administrator/components/com_phocadownload/models/fields" >
+
+		<field name="show_pagination" type="list" default="1" label="COM_PHOCADOWNLOAD_FIELD_SHOW_PAGINATION_LABEL" description="COM_PHOCADOWNLOAD_FIELD_SHOW_PAGINATION_DESC">
+				<option value="0">COM_PHOCADOWNLOAD_HIDE</option>
+				<option value="1">COM_PHOCADOWNLOAD_DISPLAY</option>
+			</field>
+			
+			<field name="show_pagination_limit" type="list" default="1" label="COM_PHOCADOWNLOAD_FIELD_SHOW_PAGINATION_LIMIT_LABEL" description="COM_PHOCADOWNLOAD_FIELD_SHOW_PAGINATION_LIMIT_DESC">
+				<option value="0">COM_PHOCADOWNLOAD_HIDE</option>
+				<option value="1">COM_PHOCADOWNLOAD_DISPLAY</option>
+			</field>
+			
+			<field name="show_ordering_files" type="list" default="1" label="COM_PHOCADOWNLOAD_FIELD_DISPLAY_ORDERING_CATEGORY_VIEW_LABEL" description="COM_PHOCADOWNLOAD_FIELD_DISPLAY_ORDERING_CATEGORY_VIEW_DESC">
+         <option value="0">COM_PHOCADOWNLOAD_HIDE</option>
+         <option value="1">COM_PHOCADOWNLOAD_DISPLAY</option>
+      </field>
+	  
+	  <field name="file_ordering" type="list" useglobal="true" label="COM_PHOCADOWNLOAD_FIELD_FILE_ORDERING_LABEL" description="COM_PHOCADOWNLOAD_FIELD_FILE_ORDERING_DESC">
+	<option value="1">COM_PHOCADOWNLOAD_ORDERING_ASC</option>
+	<option value="2">COM_PHOCADOWNLOAD_ORDERING_DESC</option>
+	<option value="3">COM_PHOCADOWNLOAD_TITLE_ASC</option>
+	<option value="4">COM_PHOCADOWNLOAD_TITLE_DESC</option>
+	<option value="5">COM_PHOCADOWNLOAD_DATE_ASC</option>
+	<option value="6">COM_PHOCADOWNLOAD_DATE_DESC</option>
+	<option value="7">COM_PHOCADOWNLOAD_ID_ASC</option>
+	<option value="8">COM_PHOCADOWNLOAD_ID_DESC</option>
+	<option value="11">COM_PHOCADOWNLOAD_FILENAME_ASC</option>
+	<option value="12">COM_PHOCADOWNLOAD_FILENAME_DESC</option>
+	<option value="15">COM_PHOCADOWNLOAD_COUNT_ASC</option>
+	<option value="16">COM_PHOCADOWNLOAD_COUNT_DESC</option>
+	<option value="13">COM_PHOCADOWNLOAD_AVERAGE_ASC</option>
+	<option value="14">COM_PHOCADOWNLOAD_AVERAGE_DESC</option>
+	<option value="9">COM_PHOCADOWNLOAD_DOWNLOADS_ASC</option>
+	<option value="10">COM_PHOCADOWNLOAD_DOWNLOADS_DESC</option>
+</field>
+
+		</fieldset>
+</fields>
+</metadata>

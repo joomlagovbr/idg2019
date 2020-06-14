@@ -1,0 +1,97 @@
+.cards {
+	margin-bottom:10px;
+}
+.card {
+	margin-bottom:10px;
+}
+.card-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+.mod-articles-category-title  {
+	font-size: 20px;
+}
+.field-value p{
+	font-size: 16px!important;
+}
+.servico {
+	display: block;
+	font-size: 24px;
+    font-weight: 700;
+	margin-bottom: 20px;
+}
+.cardaltura{
+	padding-top:50px;
+	padding-bottom:50px;
+}
+#interna figcaption {
+    margin-left: 0%;
+    float: none;
+    text-align: center;
+}
+#interna img{
+	max-width: 100%; 
+	height: auto;
+ }
+ header #logo img {
+    float: left;
+	margin: 0 10px 0 0;
+} 
+ header #logo .portal-title-1 {
+	display: block;
+	float: none!important;
+} 
+.mosaico .item-mosaico .chamada-mosaico a{
+	font-size: 1.3em;
+	font-weight: 700;
+    color: #FFFFFF;
+	text-decoration: none;
+}
+.mosaico .item-mosaico .chamada-mosaico a:hover {
+    color: #0094ff;
+	text-decoration: none;
+}
+.mosaico .item-mosaico .chamada-mosaico {
+    bottom: 10px!important;
+}
+.mosaico .item-mosaico .chamada-mosaico .chapeu-mosaico:before {
+    content: " ";
+    width: 40px;
+    height: 4px;
+    background: #06acff;
+    display: block;
+    text-indent: -3000px;
+}
+/* nav.menu-principal {
+	background: #2969BD;
+    position: relative;
+} */
+.super-destaque a {
+    font-size: 2em!important;
+}
+.super-destaque .chamada-super-destaque {
+    bottom: 10%!important;
+}
+ #logo a {
+    text-decoration: none;
+}
+header .header-accessibility #siteaction-international>a 				{display: inline-block; position: relative; padding: 0 20px 0 25px; border-right: 1px solid hsla(0,0%,100%,.2); color: #fff;}
+header .header-accessibility #siteaction-international>a:before 		{content: ""; position: absolute; left: 0; background-image: url(../img/globo.png); width: 18px; height: 18px; -webkit-filter: none; filter: none;}
+header .header-accessibility #siteaction-contraste>a {margin-left: 20px;}
+header .header-accessibility{
+	width: auto;
+}
+@media only screen and (max-width : 480px) {
+	 
+ header #logo 	{
+	margin: 0 0 0 0;
+} 
+
+header .header-wrapper {
+	height: 110px;
+}
+.box-menu {
+	top: 10.5rem;
+}
+        
+    }

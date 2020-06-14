@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+
+	<fieldset addfieldpath="/administrator/components/com_phocadownload/models/fields">
+
+<field name="id" type="text" default="0" label="JGLOBAL_FIELD_ID_LABEL" required="true" readonly="true" class="readonly" />
+
+<field name="textonly" type="hidden" default="0" label="COM_PHOCADOWNLOAD_FIELD_TEXTONLY_LABEL"  readonly="true" class="readonly" />
+
+
+<field name="title" type="text" class="inputbox" size="40" label="COM_PHOCADOWNLOAD_FIELD_TITLE_LABEL" description="COM_PHOCADOWNLOAD_FIELD_TITLE_DESC"  />
+
+<field name="alias" type="text" class="inputbox" size="40" label="COM_PHOCADOWNLOAD_FIELD_ALIAS_LABEL" description="COM_PHOCADOWNLOAD_FIELD_ALIAS_DESC" />
+
+<field name="project_name" type="text" class="inputbox" size="128" label="COM_PHOCADOWNLOAD_FIELD_PROJECT_NAME_LABEL" description="COM_PHOCADOWNLOAD_FIELD_PROJECT_NAME_DESC" />
+
+<field name="catid" type="phocadownloadcategory" label="COM_PHOCADOWNLOAD_FIELD_CATEGORY_LABEL" description="COM_PHOCADOWNLOAD_FIELD_CATEGORY_DESC" class="inputbox" required="true" />
+
+<field name="ordering" type="PhocaDownloadOrdering" table="file" class="inputbox" label="COM_PHOCADOWNLOAD_FIELD_ORDERING_LABEL" description="COM_PHOCADOWNLOAD_FIELD_ORDERING_DESC" />
+
+<field name="filename" type="phocaselectfilename" manager="file" label="COM_PHOCADOWNLOAD_FIELD_FILENAME_LABEL" required="true" description="COM_PHOCADOWNLOAD_FIELD_FILENAME_DESC" class="inputbox" size="40" />
+<field name="filename_play" type="phocaselectfilename" manager="fileplay" label="COM_PHOCADOWNLOAD_FIELD_FILEPLAY_LABEL"  description="COM_PHOCADOWNLOAD_FIELD_FILEPLAY_DESC" class="inputbox" size="40" />
+<field name="filename_preview" type="phocaselectfilename" manager="filepreview" label="COM_PHOCADOWNLOAD_FIELD_FILEPREVIEW_LABEL"  description="COM_PHOCADOWNLOAD_FIELD_FILEPREVIEW_DESC" class="inputbox" size="40" />
+
+<field name="image_filename" type="phocaselectfilename" manager="icon" label="COM_PHOCADOWNLOAD_FIELD_ICON_LABEL"  description="COM_PHOCADOWNLOAD_FIELD_ICON_DESC" class="inputbox" size="40" />
+
+<field name="image_filename_spec1" type="phocaselectfilename" manager="iconspec1" label="COM_PHOCADOWNLOAD_FIELD_ICON_SPEC1_LABEL" description="COM_PHOCADOWNLOAD_FIELD_ICON_SPEC1_DESC" class="inputbox" size="40" />
+
+<field name="image_filename_spec2" type="phocaselectfilename" manager="iconspec2" label="COM_PHOCADOWNLOAD_FIELD_ICON_SPEC2_LABEL"  description="COM_PHOCADOWNLOAD_FIELD_ICON_SPEC2_DESC" class="inputbox" size="40" />
+
+<field name="image_download" type="phocaselectfilename" manager="image" label="COM_PHOCADOWNLOAD_FIELD_IMAGE_DOWNLOAD_LABEL"  description="COM_PHOCADOWNLOAD_FIELD_IMAGE_DOWNLOAD_DESC" class="inputbox" size="40" />
+
+<field name="version" type="text" label="COM_PHOCADOWNLOAD_FIELD_VERSION_LABEL"  description="COM_PHOCADOWNLOAD_FIELD_VERSION_DESC" class="inputbox" size="40" />
+<field name="author_url" type="text" label="COM_PHOCADOWNLOAD_FIELD_AUTHOR_URL_LABEL"  description="COM_PHOCADOWNLOAD_FIELD_AUTHOR_URL_DESC" class="inputbox" size="40" />
+
+<field name="author" type="text" label="COM_PHOCADOWNLOAD_FIELD_AUTHOR_LABEL"  description="COM_PHOCADOWNLOAD_FIELD_AUTHOR_DESC" class="inputbox" size="40" />
+<field name="author_email" type="text" label="COM_PHOCADOWNLOAD_FIELD_AUTHOR_EMAIL_LABEL"  description="COM_PHOCADOWNLOAD_FIELD_AUTHOR_EMAIL_DESC" class="inputbox" size="40" />
+<field name="license" type="text" label="COM_PHOCADOWNLOAD_FIELD_LICENSE_LABEL"  description="COM_PHOCADOWNLOAD_FIELD_LICENSE_DESC" class="inputbox" size="40" />
+<field name="license_url" type="text" label="COM_PHOCADOWNLOAD_FIELD_LICENSE_URL_LABEL"  description="COM_PHOCADOWNLOAD_FIELD_LICENSE_URL_DESC" class="inputbox" size="40" />
+<field name="confirm_license" type="phocadownloadlicense" label="COM_PHOCADOWNLOAD_FIELD_CONFIRM_LICENSE_LABEL"  description="COM_PHOCADOWNLOAD_FIELD_CONFIRM_LICENSE_DESC" class="inputbox" size="40" />
+
+<field name="directlink" type="list" label="COM_PHOCADOWNLOAD_FIELD_DIRECT_LINK_LABEL" default="0"  description="COM_PHOCADOWNLOAD_FIELD_DIRECT_LINK_DESC" class="inputbox"  >
+	<option value="1">COM_PHOCADOWNLOAD_YES</option>
+	<option	value="0">COM_PHOCADOWNLOAD_NO</option>
+</field>
+
+<field name="link_external" type="text" label="COM_PHOCADOWNLOAD_FIELD_EXTERNAL_LINK_LABEL"  description="COM_PHOCADOWNLOAD_FIELD_EXTERNAL_LINK_DESC" class="inputbox" size="40" />
+
+<field name="access" type="accesslevel" label="JFIELD_ACCESS_LABEL" description="JFIELD_ACCESS_DESC" class="inputbox" size="1" />
+
+<field name="unaccessible_file" type="list" label="COM_PHOCADOWNLOAD_FIELD_DISPLAY_INACCESSIBLE_FILE_LABEL" default="0" description="COM_PHOCADOWNLOAD_FIELD_DISPLAY_INACCESSIBLE_FILE_DESC" class="inputbox"  >
+	<option value="1">COM_PHOCADOWNLOAD_YES</option>
+	<option	value="0">COM_PHOCADOWNLOAD_NO</option>
+</field>
+
+
+<field name="userid" type="user" section="com_phocadownload" default="" label="COM_PHOCADOWNLOAD_UPLOADED_BY_LABEL" description="COM_PHOCADOWNLOAD_UPLOADED_BY_DESC"/>
+<field name="owner_id" type="user" section="com_phocadownload" default="" label="COM_PHOCADOWNLOAD_OWNER_LABEL" description="COM_PHOCADOWNLOAD_OWNER_DESC"/>
+
+
+<field name="mirror1link" type="Text" class="inputbox" size="40" label="COM_PHOCADOWNLOAD_MIRROR_LINK_LINK_LABEL" description="COM_PHOCADOWNLOAD_FIELD_MIRROR_LINK_LINK_DESC"  />
+<field name="mirror1title" type="Text" class="inputbox" size="40" label="COM_PHOCADOWNLOAD_MIRROR_LINK_TITLE_LABEL" description="COM_PHOCADOWNLOAD_FIELD_MIRROR_LINK_TITLE_DESC"  />
+
+<field name="mirror1target" type="list" class="inputbox"  label="COM_PHOCADOWNLOAD_MIRROR_LINK_TARGET_LABEL" description="COM_PHOCADOWNLOAD_FIELD_MIRROR_LINK_TARGET_DESC"  default="_self" >
+	<option value="_self">COM_PHOCADOWNLOAD_OPEN_WINDOW_SELF</option>
+	<option value="_blank">COM_PHOCADOWNLOAD_OPEN_WINDOW_BLANK</option>
+	<option value="_parent">COM_PHOCADOWNLOAD_OPEN_WINDOW_PARENT</option>
+	<option value="_top">COM_PHOCADOWNLOAD_OPEN_WINDOW_TOP</option>
+</field>
+
+<field name="mirror2link" type="Text" class="inputbox" size="40" label="COM_PHOCADOWNLOAD_MIRROR_LINK_LINK2_LABEL" description="COM_PHOCADOWNLOAD_FIELD_MIRROR_LINK_LINK2_DESC"  />
+<field name="mirror2title" type="Text" class="inputbox" size="40" label="COM_PHOCADOWNLOAD_MIRROR_LINK_TITLE2_LABEL" description="COM_PHOCADOWNLOAD_FIELD_MIRROR_LINK_TITLE2_DESC"  />
+
+<field name="mirror2target" type="list" class="inputbox"  label="COM_PHOCADOWNLOAD_MIRROR_LINK_TARGET2_LABEL" description="COM_PHOCADOWNLOAD_FIELD_MIRROR_LINK_TARGET2_DESC"  default="_self" >
+	<option value="_self">COM_PHOCADOWNLOAD_OPEN_WINDOW_SELF</option>
+	<option value="_blank">COM_PHOCADOWNLOAD_OPEN_WINDOW_BLANK</option>
+	<option value="_parent">COM_PHOCADOWNLOAD_OPEN_WINDOW_PARENT</option>
+	<option value="_top">COM_PHOCADOWNLOAD_OPEN_WINDOW_TOP</option>
+</field>
+
+
+<field name="video_filename" type="text" class="inputbox" size="40" label="COM_PHOCADOWNLOAD_VIDEO_LINK_LABEL" description="COM_PHOCADOWNLOAD_VIDEO_LINK_DESC"  />
+
+
+
+<field name="description" type="editor" buttons="true" hide="pagebreak,readmore" class="inputbox" label="COM_PHOCADOWNLOAD_FIELD_DESCRIPTION_LABEL" filter="JComponentHelper::filterText" description="COM_PHOCADOWNLOAD_FIELD_DESCRIPTION_DESC" />
+<field name="features" type="editor" buttons="true" hide="pagebreak,readmore" class="inputbox" label="COM_PHOCADOWNLOAD_FIELD_FEATURES_LABEL" filter="JComponentHelper::filterText" description="COM_PHOCADOWNLOAD_FIELD_FEATURES_DESC" />
+<field name="changelog" type="editor" buttons="true" hide="pagebreak,readmore" class="inputbox" label="COM_PHOCADOWNLOAD_FIELD_CHANGELOG_LABEL" filter="JComponentHelper::filterText" description="COM_PHOCADOWNLOAD_FIELD_CHANGELOG_DESC" />
+<field name="notes" type="editor" buttons="true" hide="pagebreak,readmore" class="inputbox" label="COM_PHOCADOWNLOAD_FIELD_NOTES_LABEL" filter="JComponentHelper::filterText" description="COM_PHOCADOWNLOAD_FIELD_NOTES_DESC" />
+
+<field name="metakey" type="textarea"
+			label="JField_Meta_Keywords_Label" description="JField_Meta_Keywords_Desc"
+			class="inputbox" rows="3" cols="30" />
+
+<field name="metadesc" type="textarea"
+	label="JField_Meta_Description_Label" description="JField_Meta_Description_Desc"
+	class="inputbox" rows="3" cols="30" />
+
+
+
+	</fieldset>
+
+
+	<fieldset name="publish" label="COM_PHOCADOWNLOAD_GROUP_LABEL_PUBLISHING_DETAILS" >
+
+<field name="published" type="list" label="COM_PHOCADOWNLOAD_FIELD_PUBLISHED_LABEL" description="COM_PHOCADOWNLOAD_FIELD_PUBLISHED_DESC" class="inputbox" size="1" default="1">
+	<option value="1">JPUBLISHED</option>
+	<option	value="0">JUNPUBLISHED</option>
+</field>
+
+<field name="approved" type="list" label="COM_PHOCADOWNLOAD_FIELD_APPROVED_LABEL" description="COM_PHOCADOWNLOAD_FIELD_APPROVED_DESC" class="inputbox" size="1" default="1">
+	<option value="1">COM_PHOCADOWNLOAD_APPROVED</option>
+	<option	value="0">COM_PHOCADOWNLOAD_NOT_APPROVED</option>
+</field>
+
+<field name="language" type="contentlanguage" label="JFIELD_LANGUAGE_LABEL" description="COM_PHOCADOWNLOAD_FIELD_LANGUAGE_FILE_DESC" class="inputbox">
+	<option value="*">JALL</option>
+</field>
+
+<field name="date" type="Calendar" class="inputbox" label="COM_PHOCADOWNLOAD_FIELD_DATE_LABEL" description="COM_PHOCADOWNLOAD_FIELD_DATE_DESC" format="%Y-%m-%d %H:%M:%S" size="20" filter="user_utc" />
+
+<field name="publish_up" type="Calendar" class="inputbox" label="COM_PHOCADOWNLOAD_FIELD_START_PUBLISHING_LABEL" description="COM_PHOCADOWNLOAD_FIELD_START_PUBLISHING_DESC" format="%Y-%m-%d %H:%M:%S" size="20" filter="user_utc" />
+<field name="publish_down" type="Calendar" class="inputbox" label="COM_PHOCADOWNLOAD_FIELD_FINISH_PUBLISHING_LABEL" description="COM_PHOCADOWNLOAD_FIELD_FINISH_PUBLISHING_DESC" format="%Y-%m-%d %H:%M:%S" size="20" filter="user_utc" />
+
+<field name="hits" type="Text" class="inputbox" size="6" label="COM_PHOCADOWNLOAD_FIELD_DOWNLOADS_LABEL" description="COM_PHOCADOWNLOAD_FIELD_DOWNLOADS_DESC" />
+
+<field name="tags" type="phocatags" multiple="1" label="COM_PHOCADOWNLOAD_FIELD_TAGS_LABEL" description="COM_PHOCADOWNLOAD_FIELD_TAGS_DESC" class="inputbox" size="1" />
+
+<field name="tags_string" type="text" label="COM_PHOCADOWNLOAD_FIELD_TAGS_STRING_LABEL" description="COM_PHOCADOWNLOAD_FIELD_TAGS_STRING_DESC" class="inputbox" size="1" />
+
+<field name="token" type="phocadownloadtoken" label="COM_PHOCADOWNLOAD_FIELD_TOKEN_LABEL"  description="COM_PHOCADOWNLOAD_FIELD_TOKEN_DESC" class="inputbox" size="40" />
+<field name="tokenhits" type="text" label="COM_PHOCADOWNLOAD_FIELD_TOKENHITS_LABEL"  description="COM_PHOCADOWNLOAD_FIELD_TOKENHITS_DESC" class="inputbox" size="40" />
+
+
+	</fieldset>
+
+<fields name="metadata">
+<fieldset name="metadata" label="JGLOBAL_FIELDSET_METADATA_OPTIONS">
+
+<!--
+	<field name="robots" type="list"
+		label="JField_Metadata_Robots_Label" description="JField_Metadata_Robots_Desc"
+	>
+		<option value="">JGLOBAL_USE_GLOBAL</option>
+		<option value="0">JGLOBAL_INDEX_FOLLOW</option>
+		<option value="1">JGLOBAL_NOINDEX_FOLLOW</option>
+		<option value="2">JGLOBAL_INDEX_NOFOLLOW</option>
+		<option value="3">JGLOBAL_NOINDEX_NOFOLLOW</option>
+		<option value="4">JGLOBAL_NO_ROBOTS_TAG</option>
+	</field>
+
+	<field name="author" type="text" label="JAUTHOR"
+		description="JField_Metadata_Author_Desc" size="20" />
+
+	<field name="rights" type="text"
+		label="JFIELD_META_RIGHTS_LABEL" description="JFIELD_META_RIGHTS_DESC"
+		required="" filter="string" cols="30" rows="2" /> -->
+</fieldset>
+</fields>
+
+</form>

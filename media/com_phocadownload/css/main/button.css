@@ -1,0 +1,110 @@
+/* 
+Phoca Download
+https://www.phoca.cz/ 
+https://www.phoca.cz/phocadownload
+*/
+
+#phoca-dl-category-box .pd-button-mirror1 a,
+#phoca-dl-category-box .pd-button-mirror2 a,
+#phoca-dl-file-box .pd-button-mirror1 a,
+#phoca-dl-file-box .pd-button-mirror2 a,
+#phoca-dl-file-box .pd-button-download,
+#phoca-dl-category-box .pd-button-play a,
+#phoca-dl-category-box .pd-button-preview a,
+#phoca-dl-category-box .pd-button-download a,
+#phoca-dl-category-box .pd-button-details a,
+#phoca-dl-download-box .pd-button-download a {
+	background: url(../../images/btn.png) repeat-x; 
+	display: inline-block; 
+	padding: 7px 12px 8px; 
+	text-decoration: none;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.6);
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,0.6);
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.6);
+	
+	border-bottom: 1px solid rgba(0,0,0,0.25);
+	position: relative;
+	cursor: pointer;
+	text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+	font-weight: bold;
+	font-size: 110%;
+	padding-left: 28px;
+	color: #fff;
+}
+
+#phoca-dl-category-box .pd-button-play a {
+	background: url(../../images/btn.png) repeat-x, url(../../images/icon-play.png) 6px center no-repeat; 
+	background-color: #b8301e;
+}
+#phoca-dl-category-box .pd-button-preview a {
+	
+	background: url(../../images/btn.png) repeat-x, url(../../images/icon-preview.png) 6px center no-repeat; 
+	background-color: #bf8e2f;
+}
+
+#phoca-dl-file-box .pd-button-download {
+	background: url(../../images/btn.png) repeat-x, url(../../images/icon-download.png) 6px center no-repeat; 
+	background-color: #269926;
+}
+#phoca-dl-download-box .pd-button-download a, 
+#phoca-dl-category-box .pd-button-download a {
+	background: url(../../images/btn.png) repeat-x, url(../../images/icon-download.png) 6px center no-repeat; 
+	background-color: #269926;
+}
+#phoca-dl-category-box .pd-button-details a {
+	background: url(../../images/btn.png) repeat-x, url(../../images/icon-details.png) 6px center no-repeat; 
+	background-color: #294580;
+}
+
+#phoca-dl-file-box .pd-button-mirror1 a,
+#phoca-dl-category-box .pd-button-mirror1 a {
+	background: url(../../images/btn.png) repeat-x, url(../../images/icon-extlink1.png) 6px center no-repeat; 
+	background-color: #1d786c;
+}
+#phoca-dl-file-box .pd-button-mirror2 a,
+#phoca-dl-category-box .pd-button-mirror2 a {
+	background: url(../../images/btn.png) repeat-x, url(../../images/icon-extlink2.png) 6px center no-repeat; 
+	background-color: #aabb2d;
+}
+
+#phoca-dl-category-box .pd-button-play a:hover {
+	background: url(../../images/btn.png) repeat-x, url(../../images/icon-play.png) 6px center no-repeat; 
+	background-color: #78160a;
+}
+#phoca-dl-category-box .pd-button-preview a:hover {
+	background: url(../../images/btn.png) repeat-x, url(../../images/icon-preview.png) 6px center no-repeat; 
+	background-color: #7c570f;
+}
+#phoca-dl-download-box .pd-button-download a:hover,
+#phoca-dl-category-box .pd-button-download a:hover {
+	background: url(../../images/btn.png) repeat-x, url(../../images/icon-download.png) 6px center no-repeat;
+	background-color: #0c630c;
+}
+#phoca-dl-category-box .pd-button-details a:hover {
+	
+	background: url(../../images/btn.png) repeat-x, url(../../images/icon-details.png) 6px center no-repeat; 
+	background-color: #0d2453;
+}
+#phoca-dl-category-box .pd-button-mirror1 a:hover {
+	background: url(../../images/btn.png) repeat-x, url(../../images/icon-extlink1.png) 6px center no-repeat; 
+	background-color: #094e45;
+}
+#phoca-dl-category-box .pd-button-mirror2 a:hover {
+	background: url(../../images/btn.png) repeat-x, url(../../images/icon-extlink2.png) 6px center no-repeat; 
+	background-color: #6d7a0f;
+}
+
+#phoca-dl-download-box .pd-button-download a,
+#phoca-dl-category-box .pd-button-mirror1 a,
+#phoca-dl-category-box .pd-button-mirror2 a,
+#phoca-dl-file-box .pd-button-mirror1 a,
+#phoca-dl-file-box .pd-button-mirror2 a,
+#phoca-dl-category-box .pd-button-play a,
+#phoca-dl-category-box .pd-button-preview a,
+#phoca-dl-category-box .pd-button-download a,
+#phoca-dl-category-box .pd-button-details a {
+	border-radius: 0px;
+	-moz-border-radius: 0px; 
+	-webkit-border-radius: 0px;
+}
+

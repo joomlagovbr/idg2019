@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="COM_PHOCADOWNLOAD_USER_UPLOAD_LAYOUT">
+		<message>
+			<![CDATA[COM_PHOCADOWNLOAD_USER_UPLOAD_LAYOUT_DESC]]>
+		</message>
+	</layout>
+
+		<name>COM_PHOCADOWNLOAD_USER_UPLOAD_LAYOUT</name>
+		<description>COM_PHOCADOWNLOAD_USER_UPLOAD_LAYOUT_DESC</description>
+		<fields name="params">
+<fieldset name="basic" addfieldpath="/administrator/components/com_phocadownload/models/fields" >
+
+		
+			
+			
+			
+			
+		</fieldset>
+</fields>
+
+</metadata>
