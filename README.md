@@ -1,13 +1,14 @@
-# IDG 2019 (Egov2)
-Baseada na IDG 2.0, versão da Identidade Digital do Governo Federal
+# IDG 2020 (Egov2)
+Baseada na IDG 2.0, versão da Identidade Digital do Governo Federal, versão ainda em desenvolvimento, cedida em parceria com Cesar da UFRB de conteúdo fiction apneas como demonstração(ipsum) para montagem de layout.
 
 Se tiverem dificuldades, podem entrar em contato: tiagovtg@gmail.com
 
 - DADOS DE ACESSO após leitura do trecho abaixo sobre configuração inicial: usuário admin e senha admin ou 123456. (será solicitada a troca da senha no primeiro login, se ainda nao tiver sido feito.)
 
-Portal padrão em CMS Joomla 3.9.8
+Portal padrão em CMS Joomla 3.9.18 06/2020
+
 Sobre esta versão
-O Joomla 3.9.8 é recomendado para versões do PHP 5.3.10+. Melhor usando PHP 7.2.+
+O Joomla 3.9.18 é recomendado PHP 7.2.+, mas funciona com PHP 5.3+
 
 Acompanhe as atualizações do projeto
 Participe do grupo do google chamado Joomla! e-Gov para se manter informado sobre o Portal Padrão em CMS Joomla. As atualizações não possuem data programada e ocorrem de acordo com a disponibilidade dos voluntários participantes.
