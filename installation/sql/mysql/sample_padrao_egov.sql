@@ -1,103 +1,124 @@
--- phpMyAdmin SQL Dump
--- version 4.8.5
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1:3306
--- Generation Time: 14-Jun-2020 às 19:16
--- Versão do servidor: 5.7.26
--- versão do PHP: 7.2.18
-
+SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
-SET NAMES utf8mb4;
-SET FOREIGN_KEY_CHECKS = 0;
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-
-
-
--- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_action_logs`
+-- Database: `joomla`
 --
 
-DROP TABLE IF EXISTS `idg2019_action_logs`;
-CREATE TABLE IF NOT EXISTS `idg2019_action_logs` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `message_language_key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `message` text COLLATE utf8mb4_unicode_ci NOT NULL,
+--
+-- Estrutura da tabela `#__action_logs`
+--
+
+CREATE TABLE IF NOT EXISTS `#__action_logs` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `message_language_key` varchar(255) NOT NULL DEFAULT '',
+  `message` text NOT NULL,
   `log_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `extension` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `user_id` int(11) NOT NULL DEFAULT '0',
-  `item_id` int(11) NOT NULL DEFAULT '0',
-  `ip_address` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0.0.0.0',
+  `extension` varchar(50) NOT NULL DEFAULT '',
+  `user_id` int(11) NOT NULL DEFAULT 0,
+  `item_id` int(11) NOT NULL DEFAULT 0,
+  `ip_address` VARCHAR(40) NOT NULL DEFAULT '0.0.0.0',
   PRIMARY KEY (`id`),
   KEY `idx_user_id` (`user_id`),
-  KEY `idx_user_id_logdate` (`user_id`,`log_date`),
-  KEY `idx_user_id_extension` (`user_id`,`extension`),
-  KEY `idx_extension_item_id` (`extension`,`item_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  KEY `idx_user_id_logdate` (`user_id`, `log_date`),
+  KEY `idx_user_id_extension` (`user_id`, `extension`),
+  KEY `idx_extension_item_id` (`extension`, `item_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_action_logs_extensions`
+-- Estrutura da tabela `#__action_logs_extensions`
 --
 
-DROP TABLE IF EXISTS `idg2019_action_logs_extensions`;
-CREATE TABLE IF NOT EXISTS `idg2019_action_logs_extensions` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `extension` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+CREATE TABLE IF NOT EXISTS `#__action_logs_extensions` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `extension` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `#__action_logs_extensions` (`id`, `extension`) VALUES
+(1, 'com_banners'),
+(2, 'com_cache'),
+(3, 'com_categories'),
+(4, 'com_config'),
+(5, 'com_contact'),
+(6, 'com_content'),
+(7, 'com_installer'),
+(8, 'com_media'),
+(9, 'com_menus'),
+(10, 'com_messages'),
+(11, 'com_modules'),
+(12, 'com_newsfeeds'),
+(13, 'com_plugins'),
+(14, 'com_redirect'),
+(15, 'com_tags'),
+(16, 'com_templates'),
+(17, 'com_users'),
+(18, 'com_checkin');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_action_logs_users`
+-- Estrutura da tabela `#__action_logs_users`
 --
 
-DROP TABLE IF EXISTS `idg2019_action_logs_users`;
-CREATE TABLE IF NOT EXISTS `idg2019_action_logs_users` (
+CREATE TABLE IF NOT EXISTS `#__action_logs_users` (
   `user_id` int(11) UNSIGNED NOT NULL,
   `notify` tinyint(1) UNSIGNED NOT NULL,
-  `extensions` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `extensions` text NOT NULL,
   PRIMARY KEY (`user_id`),
   KEY `idx_notify` (`notify`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_action_log_config`
+-- Estrutura da tabela `#__action_log_config`
 --
 
-DROP TABLE IF EXISTS `idg2019_action_log_config`;
-CREATE TABLE IF NOT EXISTS `idg2019_action_log_config` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `type_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `type_alias` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `id_holder` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `title_holder` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `table_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `text_prefix` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+CREATE TABLE IF NOT EXISTS `#__action_log_config` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `type_title` varchar(255) NOT NULL DEFAULT '',
+  `type_alias` varchar(255) NOT NULL DEFAULT '',
+  `id_holder` varchar(255),
+  `title_holder` varchar(255),
+  `table_name` varchar(255),
+  `text_prefix` varchar(255),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `#__action_log_config` (`id`, `type_title`, `type_alias`, `id_holder`, `title_holder`, `table_name`, `text_prefix`) VALUES
+(1, 'article', 'com_content.article', 'id' ,'title' , '#__content', 'PLG_ACTIONLOG_JOOMLA'),
+(2, 'article', 'com_content.form', 'id', 'title' , '#__content', 'PLG_ACTIONLOG_JOOMLA'),
+(3, 'banner', 'com_banners.banner', 'id' ,'name' , '#__banners', 'PLG_ACTIONLOG_JOOMLA'),
+(4, 'user_note', 'com_users.note', 'id', 'subject' ,'#__user_notes', 'PLG_ACTIONLOG_JOOMLA'),
+(5, 'media', 'com_media.file', '' , 'name' , '',  'PLG_ACTIONLOG_JOOMLA'),
+(6, 'category', 'com_categories.category', 'id' , 'title' , '#__categories', 'PLG_ACTIONLOG_JOOMLA'),
+(7, 'menu', 'com_menus.menu', 'id' ,'title' , '#__menu_types', 'PLG_ACTIONLOG_JOOMLA'),
+(8, 'menu_item', 'com_menus.item', 'id' , 'title' , '#__menu', 'PLG_ACTIONLOG_JOOMLA'),
+(9, 'newsfeed', 'com_newsfeeds.newsfeed', 'id' ,'name' , '#__newsfeeds', 'PLG_ACTIONLOG_JOOMLA'),
+(10, 'link', 'com_redirect.link', 'id', 'old_url' , '#__redirect_links', 'PLG_ACTIONLOG_JOOMLA'),
+(11, 'tag', 'com_tags.tag', 'id', 'title' , '#__tags', 'PLG_ACTIONLOG_JOOMLA'),
+(12, 'style', 'com_templates.style', 'id' , 'title' , '#__template_styles', 'PLG_ACTIONLOG_JOOMLA'),
+(13, 'plugin', 'com_plugins.plugin', 'extension_id' , 'name' , '#__extensions', 'PLG_ACTIONLOG_JOOMLA'),
+(14, 'component_config', 'com_config.component', 'extension_id' , 'name', '', 'PLG_ACTIONLOG_JOOMLA'),
+(15, 'contact', 'com_contact.contact', 'id', 'name', '#__contact_details', 'PLG_ACTIONLOG_JOOMLA'),
+(16, 'module', 'com_modules.module', 'id' ,'title', '#__modules', 'PLG_ACTIONLOG_JOOMLA'),
+(17, 'access_level', 'com_users.level', 'id' , 'title', '#__viewlevels', 'PLG_ACTIONLOG_JOOMLA'),
+(18, 'banner_client', 'com_banners.client', 'id', 'name', '#__banner_clients', 'PLG_ACTIONLOG_JOOMLA'),
+(19, 'application_config', 'com_config.application', '', 'name', '', 'PLG_ACTIONLOG_JOOMLA');
+
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_agendadirigentes_agendaalterada`
+-- Estrutura da tabela `#__agendadirigentes_agendaalterada`
 --
 
-DROP TABLE IF EXISTS `idg2019_agendadirigentes_agendaalterada`;
-CREATE TABLE IF NOT EXISTS `idg2019_agendadirigentes_agendaalterada` (
+DROP TABLE IF EXISTS `#__agendadirigentes_agendaalterada`;
+CREATE TABLE IF NOT EXISTS `#__agendadirigentes_agendaalterada` (
   `id_dirigente` int(11) NOT NULL,
   `data` date NOT NULL,
   `qtd_alteracoes` int(4) NOT NULL DEFAULT '0',
@@ -107,10 +128,10 @@ CREATE TABLE IF NOT EXISTS `idg2019_agendadirigentes_agendaalterada` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
--- Extraindo dados da tabela `idg2019_agendadirigentes_agendaalterada`
+-- Extraindo dados da tabela `#__agendadirigentes_agendaalterada`
 --
 
-INSERT INTO `idg2019_agendadirigentes_agendaalterada` (`id_dirigente`, `data`, `qtd_alteracoes`, `data_alteracao`, `user_id`) VALUES
+INSERT INTO `#__agendadirigentes_agendaalterada` (`id_dirigente`, `data`, `qtd_alteracoes`, `data_alteracao`, `user_id`) VALUES
 (1, '2014-10-31', 99, '2014-10-21 01:23:44', 578),
 (1, '2014-11-01', 11, '2014-10-21 01:23:44', 578),
 (2, '2014-10-31', 16, '2014-10-21 01:23:44', 578),
@@ -129,11 +150,11 @@ INSERT INTO `idg2019_agendadirigentes_agendaalterada` (`id_dirigente`, `data`, `
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_agendadirigentes_cargos`
+-- Estrutura da tabela `#__agendadirigentes_cargos`
 --
 
-DROP TABLE IF EXISTS `idg2019_agendadirigentes_cargos`;
-CREATE TABLE IF NOT EXISTS `idg2019_agendadirigentes_cargos` (
+DROP TABLE IF EXISTS `#__agendadirigentes_cargos`;
+CREATE TABLE IF NOT EXISTS `#__agendadirigentes_cargos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `asset_id` int(11) NOT NULL DEFAULT '0',
   `name` varchar(255) DEFAULT NULL,
@@ -149,10 +170,10 @@ CREATE TABLE IF NOT EXISTS `idg2019_agendadirigentes_cargos` (
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
--- Extraindo dados da tabela `idg2019_agendadirigentes_cargos`
+-- Extraindo dados da tabela `#__agendadirigentes_cargos`
 --
 
-INSERT INTO `idg2019_agendadirigentes_cargos` (`id`, `asset_id`, `name`, `name_f`, `catid`, `published`, `ordering`, `featured`, `permitir_sobreposicao`, `realizar_sobreposicao`) VALUES
+INSERT INTO `#__agendadirigentes_cargos` (`id`, `asset_id`, `name`, `name_f`, `catid`, `published`, `ordering`, `featured`, `permitir_sobreposicao`, `realizar_sobreposicao`) VALUES
 (1, 266, 'Ministro', 'Ministra', 49, 1, 5, 1, 0, '*'),
 (2, 267, 'Chefe de Gabinete', 'Chefe de Gabinete', 49, 1, 6, 0, 1, '1'),
 (3, 265, 'Secretário Executivo', 'Secretária Executiva', 50, 1, 1, 0, 1, '0'),
@@ -165,11 +186,11 @@ INSERT INTO `idg2019_agendadirigentes_cargos` (`id`, `asset_id`, `name`, `name_f
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_agendadirigentes_compromissos`
+-- Estrutura da tabela `#__agendadirigentes_compromissos`
 --
 
-DROP TABLE IF EXISTS `idg2019_agendadirigentes_compromissos`;
-CREATE TABLE IF NOT EXISTS `idg2019_agendadirigentes_compromissos` (
+DROP TABLE IF EXISTS `#__agendadirigentes_compromissos`;
+CREATE TABLE IF NOT EXISTS `#__agendadirigentes_compromissos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL,
   `state` int(11) DEFAULT '0',
@@ -203,10 +224,10 @@ CREATE TABLE IF NOT EXISTS `idg2019_agendadirigentes_compromissos` (
 ) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
--- Extraindo dados da tabela `idg2019_agendadirigentes_compromissos`
+-- Extraindo dados da tabela `#__agendadirigentes_compromissos`
 --
 
-INSERT INTO `idg2019_agendadirigentes_compromissos` (`id`, `title`, `state`, `data_inicial`, `horario_inicio`, `data_final`, `horario_fim`, `dia_todo`, `local`, `compromisso_alterado`, `description`, `participantes_externos`, `params`, `created`, `created_by`, `modified`, `modified_by`, `checked_out`, `checked_out_time`, `featured`, `published_once`, `language`, `version`) VALUES
+INSERT INTO `#__agendadirigentes_compromissos` (`id`, `title`, `state`, `data_inicial`, `horario_inicio`, `data_final`, `horario_fim`, `dia_todo`, `local`, `compromisso_alterado`, `description`, `participantes_externos`, `params`, `created`, `created_by`, `modified`, `modified_by`, `checked_out`, `checked_out_time`, `featured`, `published_once`, `language`, `version`) VALUES
 (3, 'Reuniões internas', 1, '2014-09-30', '10:00:00', '2014-09-30', '12:00:00', 0, 'teste', 0, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod<br />tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,<br />quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo<br />consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse<br />cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non<br />proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', '', '{\"exibir_horario_inicio\":\"0\",\"exibir_horario_fim\":\"\",\"exibir_local\":\"\",\"exibir_pauta\":\"\",\"exibir_participantes_locais\":\"\",\"exibir_participantes_externos\":\"\"}', '2014-08-30 15:54:57', 578, '2014-09-28 03:40:51', 578, 0, '0000-00-00 00:00:00', 0, 0, 'pt-BR', 60),
 (4, 'Reuniões e despachos internos', 1, '2014-09-25', '08:00:00', '2014-09-25', '18:00:00', 1, 'teste', 0, '<p>teste teste <strong>teste</strong></p>', 'Teste de indivíduo 1; Teste de indivíduo externo 2; Teste de indivíduo externo 3', '{\"exibir_horario_inicio\":\"\",\"exibir_horario_fim\":\"\",\"exibir_local\":\"\",\"exibir_pauta\":\"\",\"exibir_participantes_locais\":\"\",\"exibir_participantes_externos\":\"\"}', '2014-08-30 15:27:25', 578, '2014-09-28 03:41:08', 578, 0, '0000-00-00 00:00:00', 0, 0, 'pt-BR', 29),
 (5, 'Partida para viagem Internacional', 1, '2014-09-01', '20:00:00', '2014-09-01', '00:00:00', 0, '', 0, '<p>Descrição do compromisso com pauta.</p>', 'teste', '{\"exibir_horario_inicio\":\"\",\"exibir_horario_fim\":\"\",\"exibir_local\":\"\",\"exibir_pauta\":\"\",\"exibir_participantes_locais\":\"\",\"exibir_participantes_externos\":\"\"}', '2014-09-22 18:09:01', 578, '2014-10-17 05:02:12', 578, 0, '0000-00-00 00:00:00', 0, 0, 'pt-BR', 14),
@@ -228,11 +249,11 @@ INSERT INTO `idg2019_agendadirigentes_compromissos` (`id`, `title`, `state`, `da
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_agendadirigentes_dirigentes`
+-- Estrutura da tabela `#__agendadirigentes_dirigentes`
 --
 
-DROP TABLE IF EXISTS `idg2019_agendadirigentes_dirigentes`;
-CREATE TABLE IF NOT EXISTS `idg2019_agendadirigentes_dirigentes` (
+DROP TABLE IF EXISTS `#__agendadirigentes_dirigentes`;
+CREATE TABLE IF NOT EXISTS `#__agendadirigentes_dirigentes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `asset_id` int(11) NOT NULL DEFAULT '0',
   `name` varchar(255) DEFAULT NULL,
@@ -246,10 +267,10 @@ CREATE TABLE IF NOT EXISTS `idg2019_agendadirigentes_dirigentes` (
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
--- Extraindo dados da tabela `idg2019_agendadirigentes_dirigentes`
+-- Extraindo dados da tabela `#__agendadirigentes_dirigentes`
 --
 
-INSERT INTO `idg2019_agendadirigentes_dirigentes` (`id`, `asset_id`, `name`, `cargo_id`, `state`, `interino`, `em_atividade`, `sexo`) VALUES
+INSERT INTO `#__agendadirigentes_dirigentes` (`id`, `asset_id`, `name`, `cargo_id`, `state`, `interino`, `em_atividade`, `sexo`) VALUES
 (1, 232, 'José Silva', 1, 1, 0, 1, 'M'),
 (2, 236, 'Fulano Alves', 4, 1, 0, 0, 'M'),
 (3, 237, 'Maria Souza', 7, 1, 0, 0, 'F'),
@@ -262,11 +283,11 @@ INSERT INTO `idg2019_agendadirigentes_dirigentes` (`id`, `asset_id`, `name`, `ca
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_agendadirigentes_dirigentes_compromissos`
+-- Estrutura da tabela `#__agendadirigentes_dirigentes_compromissos`
 --
 
-DROP TABLE IF EXISTS `idg2019_agendadirigentes_dirigentes_compromissos`;
-CREATE TABLE IF NOT EXISTS `idg2019_agendadirigentes_dirigentes_compromissos` (
+DROP TABLE IF EXISTS `#__agendadirigentes_dirigentes_compromissos`;
+CREATE TABLE IF NOT EXISTS `#__agendadirigentes_dirigentes_compromissos` (
   `dirigente_id` int(11) NOT NULL,
   `compromisso_id` int(11) NOT NULL,
   `owner` int(11) DEFAULT '0',
@@ -277,10 +298,10 @@ CREATE TABLE IF NOT EXISTS `idg2019_agendadirigentes_dirigentes_compromissos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
--- Extraindo dados da tabela `idg2019_agendadirigentes_dirigentes_compromissos`
+-- Extraindo dados da tabela `#__agendadirigentes_dirigentes_compromissos`
 --
 
-INSERT INTO `idg2019_agendadirigentes_dirigentes_compromissos` (`dirigente_id`, `compromisso_id`, `owner`, `sobreposto`, `sobreposto_por`) VALUES
+INSERT INTO `#__agendadirigentes_dirigentes_compromissos` (`dirigente_id`, `compromisso_id`, `owner`, `sobreposto`, `sobreposto_por`) VALUES
 (1, 5, 1, 0, 0),
 (1, 6, 1, 0, 0),
 (1, 20, 1, 0, 0),
@@ -313,30 +334,29 @@ INSERT INTO `idg2019_agendadirigentes_dirigentes_compromissos` (`dirigente_id`, 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_assets`
+-- Estrutura da tabela `#__assets`
 --
 
-DROP TABLE IF EXISTS `idg2019_assets`;
-CREATE TABLE IF NOT EXISTS `idg2019_assets` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
-  `parent_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set parent.',
-  `lft` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set lft.',
-  `rgt` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set rgt.',
-  `level` int(10) UNSIGNED NOT NULL COMMENT 'The cached level in the nested tree.',
-  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The unique name for the asset.\n',
-  `title` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The descriptive title for the asset.',
-  `rules` varchar(5120) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'JSON encoded access control.',
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `idx_asset_name` (`name`) USING BTREE,
-  KEY `idx_lft_rgt` (`lft`,`rgt`) USING BTREE,
-  KEY `idx_parent_id` (`parent_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=421 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+CREATE TABLE IF NOT EXISTS `#__assets` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
+  `parent_id` int(11) NOT NULL DEFAULT 0 COMMENT 'Nested set parent.',
+  `lft` int(11) NOT NULL DEFAULT 0 COMMENT 'Nested set lft.',
+  `rgt` int(11) NOT NULL DEFAULT 0 COMMENT 'Nested set rgt.',
+  `level` int(10) unsigned NOT NULL COMMENT 'The cached level in the nested tree.',
+  `name` varchar(50) NOT NULL COMMENT 'The unique name for the asset.\n',
+  `title` varchar(100) NOT NULL COMMENT 'The descriptive title for the asset.',
+  `rules` varchar(5120) NOT NULL COMMENT 'JSON encoded access control.',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_asset_name` (`name`),
+  KEY `idx_lft_rgt` (`lft`,`rgt`),
+  KEY `idx_parent_id` (`parent_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 --
--- Extraindo dados da tabela `idg2019_assets`
+-- Extraindo dados da tabela `#__assets`
 --
 
-INSERT INTO `idg2019_assets` (`id`, `parent_id`, `lft`, `rgt`, `level`, `name`, `title`, `rules`) VALUES
+INSERT INTO `#__assets` (`id`, `parent_id`, `lft`, `rgt`, `level`, `name`, `title`, `rules`) VALUES
 (1, 0, 1, 771, 0, 'root.1', 'Root Asset', '{\"core.login.site\":{\"6\":1,\"2\":1},\"core.login.admin\":{\"6\":1,\"9\":1,\"13\":1},\"core.login.offline\":{\"6\":1},\"core.admin\":{\"8\":1},\"core.manage\":{\"7\":1},\"core.create\":{\"6\":1,\"3\":1},\"core.delete\":{\"6\":1},\"core.edit\":{\"6\":1,\"4\":1},\"core.edit.state\":{\"6\":1,\"5\":1},\"core.edit.own\":{\"6\":1,\"3\":1}}'),
 (2, 1, 1, 2, 1, 'com_admin', 'com_admin', '{}'),
 (3, 1, 3, 12, 1, 'com_banners', 'com_banners', '{\"core.admin\":{\"7\":1,\"13\":0},\"core.manage\":{\"6\":1,\"9\":1,\"13\":0},\"core.create\":{\"13\":0},\"core.delete\":{\"13\":0},\"core.edit\":{\"13\":0},\"core.edit.state\":{\"13\":0}}'),
@@ -700,7 +720,7 @@ INSERT INTO `idg2019_assets` (`id`, `parent_id`, `lft`, `rgt`, `level`, `name`, 
 (412, 27, 47, 48, 3, 'com_content.article.98', 'Agenda de Autoridades', '{}'),
 (413, 16, 374, 375, 2, 'com_menus.menu.19', 'Agenda de Autoridades', '{}'),
 (414, 396, 331, 332, 3, 'com_content.article.99', 'Cargos e Responsáveis', '{}');
-INSERT INTO `idg2019_assets` (`id`, `parent_id`, `lft`, `rgt`, `level`, `name`, `title`, `rules`) VALUES
+INSERT INTO `#__assets` (`id`, `parent_id`, `lft`, `rgt`, `level`, `name`, `title`, `rules`) VALUES
 (415, 8, 336, 343, 2, 'com_content.category.67', 'Superintendência de Regulação e Registros Acadêmicos - SURRAC', '{}'),
 (416, 415, 337, 338, 3, 'com_content.article.100', 'Superintendência de Regulação e Registros Acadêmicos - SURRAC', '{}'),
 (417, 415, 339, 340, 3, 'com_content.category.68', 'SURRAC - Serviços', '{}'),
@@ -711,73 +731,71 @@ INSERT INTO `idg2019_assets` (`id`, `parent_id`, `lft`, `rgt`, `level`, `name`, 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_associations`
+-- Estrutura da tabela `#__associations`
 --
 
-DROP TABLE IF EXISTS `idg2019_associations`;
-CREATE TABLE IF NOT EXISTS `idg2019_associations` (
+CREATE TABLE IF NOT EXISTS `#__associations` (
   `id` int(11) NOT NULL COMMENT 'A reference to the associated item.',
-  `context` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The context of the associated item.',
-  `key` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The key for the association computed from an md5 on associated ids.',
-  PRIMARY KEY (`context`,`id`) USING BTREE,
-  KEY `idx_key` (`key`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `context` varchar(50) NOT NULL COMMENT 'The context of the associated item.',
+  `key` char(32) NOT NULL COMMENT 'The key for the association computed from an md5 on associated ids.',
+  PRIMARY KEY (`context`,`id`),
+  KEY `idx_key` (`key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_banners`
+-- Estrutura da tabela `#__banners`
 --
 
-DROP TABLE IF EXISTS `idg2019_banners`;
-CREATE TABLE IF NOT EXISTS `idg2019_banners` (
+CREATE TABLE IF NOT EXISTS `#__banners` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `cid` int(11) NOT NULL DEFAULT '0',
-  `type` int(11) NOT NULL DEFAULT '0',
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `cid` int(11) NOT NULL DEFAULT 0,
+  `type` int(11) NOT NULL DEFAULT 0,
+  `name` varchar(255) NOT NULL DEFAULT '',
   `alias` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '',
-  `imptotal` int(11) NOT NULL DEFAULT '0',
-  `impmade` int(11) NOT NULL DEFAULT '0',
-  `clicks` int(11) NOT NULL DEFAULT '0',
-  `clickurl` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `state` tinyint(3) NOT NULL DEFAULT '0',
-  `catid` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `description` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `custombannercode` varchar(2048) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `sticky` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
-  `ordering` int(11) NOT NULL DEFAULT '0',
-  `metakey` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `params` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `own_prefix` tinyint(1) NOT NULL DEFAULT '0',
-  `metakey_prefix` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `purchase_type` tinyint(4) NOT NULL DEFAULT '-1',
-  `track_clicks` tinyint(4) NOT NULL DEFAULT '-1',
-  `track_impressions` tinyint(4) NOT NULL DEFAULT '-1',
-  `checked_out` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `checked_out_time` datetime NOT NULL,
-  `publish_up` datetime NOT NULL,
-  `publish_down` datetime NOT NULL,
-  `reset` datetime NOT NULL,
-  `created` datetime NOT NULL,
-  `language` char(7) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `created_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `created_by_alias` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `modified` datetime NOT NULL,
-  `modified_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `version` int(10) UNSIGNED NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `idx_state` (`state`) USING BTREE,
-  KEY `idx_own_prefix` (`own_prefix`) USING BTREE,
-  KEY `idx_banner_catid` (`catid`) USING BTREE,
-  KEY `idx_language` (`language`) USING BTREE,
-  KEY `idx_metakey_prefix` (`metakey_prefix`(100)) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `imptotal` int(11) NOT NULL DEFAULT 0,
+  `impmade` int(11) NOT NULL DEFAULT 0,
+  `clicks` int(11) NOT NULL DEFAULT 0,
+  `clickurl` varchar(200) NOT NULL DEFAULT '',
+  `state` tinyint(3) NOT NULL DEFAULT 0,
+  `catid` int(10) unsigned NOT NULL DEFAULT 0,
+  `description` text NOT NULL,
+  `custombannercode` varchar(2048) NOT NULL,
+  `sticky` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `ordering` int(11) NOT NULL DEFAULT 0,
+  `metakey` text NOT NULL,
+  `params` text NOT NULL,
+  `own_prefix` tinyint(1) NOT NULL DEFAULT 0,
+  `metakey_prefix` varchar(400) NOT NULL DEFAULT '',
+  `purchase_type` tinyint(4) NOT NULL DEFAULT -1,
+  `track_clicks` tinyint(4) NOT NULL DEFAULT -1,
+  `track_impressions` tinyint(4) NOT NULL DEFAULT -1,
+  `checked_out` int(10) unsigned NOT NULL DEFAULT 0,
+  `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `publish_up` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `reset` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `language` char(7) NOT NULL DEFAULT '',
+  `created_by` int(10) unsigned NOT NULL DEFAULT 0,
+  `created_by_alias` varchar(255) NOT NULL DEFAULT '',
+  `modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `modified_by` int(10) unsigned NOT NULL DEFAULT 0,
+  `version` int(10) unsigned NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id`),
+  KEY `idx_state` (`state`),
+  KEY `idx_own_prefix` (`own_prefix`),
+  KEY `idx_metakey_prefix` (`metakey_prefix`(100)),
+  KEY `idx_banner_catid` (`catid`),
+  KEY `idx_language` (`language`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 --
--- Extraindo dados da tabela `idg2019_banners`
+-- Extraindo dados da tabela `#__banners`
 --
 
-INSERT INTO `idg2019_banners` (`id`, `cid`, `type`, `name`, `alias`, `imptotal`, `impmade`, `clicks`, `clickurl`, `state`, `catid`, `description`, `custombannercode`, `sticky`, `ordering`, `metakey`, `params`, `own_prefix`, `metakey_prefix`, `purchase_type`, `track_clicks`, `track_impressions`, `checked_out`, `checked_out_time`, `publish_up`, `publish_down`, `reset`, `created`, `language`, `created_by`, `created_by_alias`, `modified`, `modified_by`, `version`) VALUES
+INSERT INTO `#__banners` (`id`, `cid`, `type`, `name`, `alias`, `imptotal`, `impmade`, `clicks`, `clickurl`, `state`, `catid`, `description`, `custombannercode`, `sticky`, `ordering`, `metakey`, `params`, `own_prefix`, `metakey_prefix`, `purchase_type`, `track_clicks`, `track_impressions`, `checked_out`, `checked_out_time`, `publish_up`, `publish_down`, `reset`, `created`, `language`, `created_by`, `created_by_alias`, `modified`, `modified_by`, `version`) VALUES
 (1, 0, 0, 'teste', 'teste', 0, 10, 0, 'http://teste', 1, 3, 'teste', '', 0, 1, '', '{\"imageurl\":\"images\\/banners\\/osmbanner2.png\",\"width\":\"\",\"height\":\"\",\"alt\":\"teste\"}', 0, '', -1, 0, 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2019-04-03 17:02:20', '*', 0, '', '0000-00-00 00:00:00', 0, 1),
 (2, 0, 0, 'Portais adotam nova identidade', 'portais-adotam-nova-identidade', 0, 481, 4, 'http://portalpadrao.joomlacalango.org/index.php/component/content/article?id=71', 1, 56, 'Todos os sítios e portais do Governo Federal podem adotar o modelo', '', 0, 2, '', '{\"imageurl\":\"images\\/banners\\/banner-rotativo-home-01.jpg\",\"width\":\"\",\"height\":\"\",\"alt\":\"Site Secom, Portal do Planalto e Portal Brasil adotam nova identidade digital\"}', 0, '', -1, 0, 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2019-04-03 17:02:20', '*', 0, '', '2019-04-03 17:02:20', 929, 5),
 (3, 0, 0, 'Saiba mais sobre o Portal Institucional Padrão do Governo Federal', 'saiba-mais-sobre-o-portal-institucional-padrao-do-governo-federal', 0, 469, 1, 'http://portalpadrao.joomlacalango.org/index.php/component/content/article?id=72', 1, 56, 'O modelo permite que o portal de cada órgão seja reconhecido como propriedade digital do Governo Federal', '', 0, 3, '', '{\"imageurl\":\"images\\/banners\\/banner-rotativo-home-02.jpg\",\"width\":\"\",\"height\":\"\",\"alt\":\"Saiba mais sobre o Portal Institucional Padr\\u00e3o do Governo Federal\"}', 0, '', -1, 0, 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2019-04-03 17:02:20', '*', 0, '', '2019-04-03 17:02:20', 929, 4),
@@ -793,98 +811,95 @@ INSERT INTO `idg2019_banners` (`id`, `cid`, `type`, `name`, `alias`, `imptotal`,
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_banner_clients`
+-- Estrutura da tabela `#__banner_clients`
 --
 
-DROP TABLE IF EXISTS `idg2019_banner_clients`;
-CREATE TABLE IF NOT EXISTS `idg2019_banner_clients` (
+CREATE TABLE IF NOT EXISTS `#__banner_clients` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `contact` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `extrainfo` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `state` tinyint(3) NOT NULL DEFAULT '0',
-  `checked_out` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `checked_out_time` datetime NOT NULL,
-  `metakey` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `own_prefix` tinyint(4) NOT NULL DEFAULT '0',
-  `metakey_prefix` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `purchase_type` tinyint(4) NOT NULL DEFAULT '-1',
-  `track_clicks` tinyint(4) NOT NULL DEFAULT '-1',
-  `track_impressions` tinyint(4) NOT NULL DEFAULT '-1',
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `idx_own_prefix` (`own_prefix`) USING BTREE,
-  KEY `idx_metakey_prefix` (`metakey_prefix`(100)) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `name` varchar(255) NOT NULL DEFAULT '',
+  `contact` varchar(255) NOT NULL DEFAULT '',
+  `email` varchar(255) NOT NULL DEFAULT '',
+  `extrainfo` text NOT NULL,
+  `state` tinyint(3) NOT NULL DEFAULT 0,
+  `checked_out` int(10) unsigned NOT NULL DEFAULT 0,
+  `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `metakey` text NOT NULL,
+  `own_prefix` tinyint(4) NOT NULL DEFAULT 0,
+  `metakey_prefix` varchar(400) NOT NULL DEFAULT '',
+  `purchase_type` tinyint(4) NOT NULL DEFAULT -1,
+  `track_clicks` tinyint(4) NOT NULL DEFAULT -1,
+  `track_impressions` tinyint(4) NOT NULL DEFAULT -1,
+  PRIMARY KEY (`id`),
+  KEY `idx_own_prefix` (`own_prefix`),
+  KEY `idx_metakey_prefix` (`metakey_prefix`(100))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_banner_tracks`
+-- Estrutura da tabela `#__banner_tracks`
 --
 
-DROP TABLE IF EXISTS `idg2019_banner_tracks`;
-CREATE TABLE IF NOT EXISTS `idg2019_banner_tracks` (
+CREATE TABLE IF NOT EXISTS `#__banner_tracks` (
   `track_date` datetime NOT NULL,
-  `track_type` int(10) UNSIGNED NOT NULL,
-  `banner_id` int(10) UNSIGNED NOT NULL,
-  `count` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  PRIMARY KEY (`track_date`,`track_type`,`banner_id`) USING BTREE,
-  KEY `idx_track_date` (`track_date`) USING BTREE,
-  KEY `idx_track_type` (`track_type`) USING BTREE,
-  KEY `idx_banner_id` (`banner_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `track_type` int(10) unsigned NOT NULL,
+  `banner_id` int(10) unsigned NOT NULL,
+  `count` int(10) unsigned NOT NULL DEFAULT 0,
+  PRIMARY KEY (`track_date`,`track_type`,`banner_id`),
+  KEY `idx_track_date` (`track_date`),
+  KEY `idx_track_type` (`track_type`),
+  KEY `idx_banner_id` (`banner_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_categories`
+-- Estrutura da tabela `#__categories`
 --
 
-DROP TABLE IF EXISTS `idg2019_categories`;
-CREATE TABLE IF NOT EXISTS `idg2019_categories` (
+CREATE TABLE IF NOT EXISTS `#__categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `asset_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'FK to the x3dts_assets table.',
-  `parent_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `lft` int(11) NOT NULL DEFAULT '0',
-  `rgt` int(11) NOT NULL DEFAULT '0',
-  `level` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `path` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `extension` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `asset_id` int(10) unsigned NOT NULL DEFAULT 0 COMMENT 'FK to the #__assets table.',
+  `parent_id` int(10) unsigned NOT NULL DEFAULT 0,
+  `lft` int(11) NOT NULL DEFAULT 0,
+  `rgt` int(11) NOT NULL DEFAULT 0,
+  `level` int(10) unsigned NOT NULL DEFAULT 0,
+  `path` varchar(400) NOT NULL DEFAULT '',
+  `extension` varchar(50) NOT NULL DEFAULT '',
   `title` varchar(255) NOT NULL DEFAULT '',
   `alias` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '',
-  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `note` varchar(255) NOT NULL DEFAULT '',
   `description` mediumtext,
-  `published` tinyint(1) NOT NULL DEFAULT '0',
-  `checked_out` int(11) UNSIGNED NOT NULL DEFAULT '0',
-  `checked_out_time` datetime NOT NULL,
-  `access` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `published` tinyint(1) NOT NULL DEFAULT 0,
+  `checked_out` int(11) unsigned NOT NULL DEFAULT 0,
+  `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `access` int(10) unsigned NOT NULL DEFAULT 0,
   `params` text,
   `metadesc` varchar(1024) NOT NULL DEFAULT '' COMMENT 'The meta description for the page.',
   `metakey` varchar(1024) NOT NULL DEFAULT '' COMMENT 'The meta keywords for the page.',
   `metadata` varchar(2048) NOT NULL DEFAULT '' COMMENT 'JSON encoded metadata properties.',
-  `created_user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `created_time` datetime NOT NULL,
-  `modified_user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `modified_time` datetime NOT NULL,
-  `hits` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `created_user_id` int(10) unsigned NOT NULL DEFAULT 0,
+  `created_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `modified_user_id` int(10) unsigned NOT NULL DEFAULT 0,
+  `modified_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `hits` int(10) unsigned NOT NULL DEFAULT 0,
   `language` char(7) NOT NULL DEFAULT '',
-  `version` int(10) UNSIGNED NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `cat_idx` (`extension`,`published`,`access`) USING BTREE,
-  KEY `idx_access` (`access`) USING BTREE,
-  KEY `idx_checkout` (`checked_out`) USING BTREE,
-  KEY `idx_left_right` (`lft`,`rgt`) USING BTREE,
-  KEY `idx_language` (`language`) USING BTREE,
-  KEY `idx_path` (`path`(100)) USING BTREE,
-  KEY `idx_alias` (`alias`(100)) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `version` int(10) unsigned NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id`),
+  KEY `cat_idx` (`extension`,`published`,`access`),
+  KEY `idx_access` (`access`),
+  KEY `idx_checkout` (`checked_out`),
+  KEY `idx_path` (`path`(100)),
+  KEY `idx_left_right` (`lft`,`rgt`),
+  KEY `idx_alias` (`alias`(100)),
+  KEY `idx_language` (`language`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 --
--- Extraindo dados da tabela `idg2019_categories`
+-- Extraindo dados da tabela `#__categories`
 --
 
-INSERT INTO `idg2019_categories` (`id`, `asset_id`, `parent_id`, `lft`, `rgt`, `level`, `path`, `extension`, `title`, `alias`, `note`, `description`, `published`, `checked_out`, `checked_out_time`, `access`, `params`, `metadesc`, `metakey`, `metadata`, `created_user_id`, `created_time`, `modified_user_id`, `modified_time`, `hits`, `language`, `version`) VALUES
+INSERT INTO `#__categories` (`id`, `asset_id`, `parent_id`, `lft`, `rgt`, `level`, `path`, `extension`, `title`, `alias`, `note`, `description`, `published`, `checked_out`, `checked_out_time`, `access`, `params`, `metadesc`, `metakey`, `metadata`, `created_user_id`, `created_time`, `modified_user_id`, `modified_time`, `hits`, `language`, `version`) VALUES
 (1, 0, 0, 0, 111, 0, '', 'system', 'ROOT', 'root', '', '', 1, 0, '0000-00-00 00:00:00', 1, '{}', '', '', '', 929, '2019-04-03 17:02:20', 0, '0000-00-00 00:00:00', 0, '*', 1),
 (2, 27, 1, 1, 2, 1, 'uncategorised', 'com_content', 'Uncategorised', 'uncategorised', '', '', 1, 0, '0000-00-00 00:00:00', 1, '{\"target\":\"\",\"image\":\"\"}', '', '', '{\"page_title\":\"\",\"author\":\"\",\"robots\":\"\"}', 929, '2019-04-03 17:02:20', 0, '0000-00-00 00:00:00', 4, '*', 1),
 (3, 28, 1, 11, 12, 1, 'uncategorised', 'com_banners', 'Sem categoria', 'uncategorised', '', '', 1, 0, '0000-00-00 00:00:00', 1, '{\"category_layout\":\"\",\"image\":\"\"}', '', '', '{\"author\":\"\",\"robots\":\"\"}', 929, '2019-04-03 17:02:20', 929, '2019-04-03 17:02:20', 0, '*', 1),
@@ -945,128 +960,126 @@ INSERT INTO `idg2019_categories` (`id`, `asset_id`, `parent_id`, `lft`, `rgt`, `
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_contact_details`
+-- Estrutura da tabela `#__contact_details`
 --
 
-DROP TABLE IF EXISTS `idg2019_contact_details`;
-CREATE TABLE IF NOT EXISTS `idg2019_contact_details` (
+CREATE TABLE IF NOT EXISTS `#__contact_details` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `alias` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `con_position` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `suburb` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `state` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `country` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `postcode` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `telephone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `fax` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `misc` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email_to` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `default_con` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
-  `published` tinyint(1) NOT NULL DEFAULT '0',
-  `checked_out` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `checked_out_time` datetime NOT NULL,
-  `ordering` int(11) NOT NULL DEFAULT '0',
-  `params` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `user_id` int(11) NOT NULL DEFAULT '0',
-  `catid` int(11) NOT NULL DEFAULT '0',
-  `access` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `mobile` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `webpage` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `con_position` varchar(255),
+  `address` text,
+  `suburb` varchar(100),
+  `state` varchar(100),
+  `country` varchar(100),
+  `postcode` varchar(100),
+  `telephone` varchar(255),
+  `fax` varchar(255),
+  `misc` mediumtext,
+  `image` varchar(255),
+  `email_to` varchar(255),
+  `default_con` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `published` tinyint(1) NOT NULL DEFAULT 0,
+  `checked_out` int(10) unsigned NOT NULL DEFAULT 0,
+  `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `ordering` int(11) NOT NULL DEFAULT 0,
+  `params` text NOT NULL,
+  `user_id` int(11) NOT NULL DEFAULT 0,
+  `catid` int(11) NOT NULL DEFAULT 0,
+  `access` int(10) unsigned NOT NULL DEFAULT 0,
+  `mobile` varchar(255) NOT NULL DEFAULT '',
+  `webpage` varchar(255) NOT NULL DEFAULT '',
   `sortname1` varchar(255) NOT NULL DEFAULT '',
   `sortname2` varchar(255) NOT NULL DEFAULT '',
   `sortname3` varchar(255) NOT NULL DEFAULT '',
   `language` varchar(7) NOT NULL,
-  `created` datetime NOT NULL,
-  `created_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `created_by_alias` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `modified` datetime NOT NULL,
-  `modified_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `metakey` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `metadesc` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `metadata` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `featured` tinyint(3) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Set if article is featured.',
+  `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `created_by` int(10) unsigned NOT NULL DEFAULT 0,
+  `created_by_alias` varchar(255) NOT NULL DEFAULT '',
+  `modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `modified_by` int(10) unsigned NOT NULL DEFAULT 0,
+  `metakey` text NOT NULL,
+  `metadesc` text NOT NULL,
+  `metadata` text NOT NULL,
+  `featured` tinyint(3) unsigned NOT NULL DEFAULT 0 COMMENT 'Set if contact is featured.',
   `xreference` varchar(50) NOT NULL DEFAULT '' COMMENT 'A reference to enable linkages to external data sets.',
-  `publish_up` datetime NOT NULL,
-  `publish_down` datetime NOT NULL,
-  `version` int(10) UNSIGNED NOT NULL DEFAULT '1',
-  `hits` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `idx_access` (`access`) USING BTREE,
-  KEY `idx_checkout` (`checked_out`) USING BTREE,
-  KEY `idx_state` (`published`) USING BTREE,
-  KEY `idx_catid` (`catid`) USING BTREE,
-  KEY `idx_createdby` (`created_by`) USING BTREE,
-  KEY `idx_featured_catid` (`featured`,`catid`) USING BTREE,
-  KEY `idx_language` (`language`) USING BTREE,
-  KEY `idx_xreference` (`xreference`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `publish_up` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `version` int(10) unsigned NOT NULL DEFAULT 1,
+  `hits` int(10) unsigned NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  KEY `idx_access` (`access`),
+  KEY `idx_checkout` (`checked_out`),
+  KEY `idx_state` (`published`),
+  KEY `idx_catid` (`catid`),
+  KEY `idx_createdby` (`created_by`),
+  KEY `idx_featured_catid` (`featured`,`catid`),
+  KEY `idx_language` (`language`),
+  KEY `idx_xreference` (`xreference`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 --
--- Extraindo dados da tabela `idg2019_contact_details`
+-- Extraindo dados da tabela `#__contact_details`
 --
 
-INSERT INTO `idg2019_contact_details` (`id`, `name`, `alias`, `con_position`, `address`, `suburb`, `state`, `country`, `postcode`, `telephone`, `fax`, `misc`, `image`, `email_to`, `default_con`, `published`, `checked_out`, `checked_out_time`, `ordering`, `params`, `user_id`, `catid`, `access`, `mobile`, `webpage`, `sortname1`, `sortname2`, `sortname3`, `language`, `created`, `created_by`, `created_by_alias`, `modified`, `modified_by`, `metakey`, `metadesc`, `metadata`, `featured`, `xreference`, `publish_up`, `publish_down`, `version`, `hits`) VALUES
+INSERT INTO `#__contact_details` (`id`, `name`, `alias`, `con_position`, `address`, `suburb`, `state`, `country`, `postcode`, `telephone`, `fax`, `misc`, `image`, `email_to`, `default_con`, `published`, `checked_out`, `checked_out_time`, `ordering`, `params`, `user_id`, `catid`, `access`, `mobile`, `webpage`, `sortname1`, `sortname2`, `sortname3`, `language`, `created`, `created_by`, `created_by_alias`, `modified`, `modified_by`, `metakey`, `metadesc`, `metadata`, `featured`, `xreference`, `publish_up`, `publish_down`, `version`, `hits`) VALUES
 (1, 'Denominação do órgão', 'ministerio', 'nome do cargo', 'Esplanada dos Ministérios, Bloco A', 'Brasília', 'DF', 'Brasil', '72000-000', '61-8000-9000', 'fax', '', 'images/imagens_menu/foto-230-por-136-01.jpg', 'joomlagovbr@gmail.com', 0, 1, 0, '0000-00-00 00:00:00', 1, '{\"show_contact_category\":\"show_with_link\",\"show_contact_list\":\"1\",\"presentation_style\":\"\",\"show_tags\":\"\",\"show_name\":\"1\",\"show_position\":\"0\",\"show_email\":\"1\",\"show_street_address\":\"1\",\"show_suburb\":\"1\",\"show_state\":\"1\",\"show_postcode\":\"1\",\"show_country\":\"1\",\"show_telephone\":\"1\",\"show_mobile\":\"0\",\"show_fax\":\"0\",\"show_webpage\":\"0\",\"show_misc\":\"1\",\"show_image\":\"1\",\"allow_vcard\":\"1\",\"show_articles\":\"1\",\"show_profile\":\"1\",\"show_links\":\"1\",\"linka_name\":\"teste1\",\"linka\":\"http:\\/\\/www.teste1.com.br\",\"linkb_name\":\"teste2\",\"linkb\":\"http:\\/\\/www.teste2.com.br\",\"linkc_name\":\"teste3\",\"linkc\":\"http:\\/\\/www.teste3.com.br\",\"linkd_name\":\"teste4\",\"linkd\":\"http:\\/\\/www.teste4.com.br\",\"linke_name\":\"teste5\",\"linke\":\"\",\"contact_layout\":\"\",\"show_email_form\":\"\",\"show_email_copy\":\"\",\"banned_email\":\"\",\"banned_subject\":\"\",\"banned_text\":\"\",\"validate_session\":\"\",\"custom_reply\":\"\",\"redirect\":\"\"}', 0, 38, 1, '61-8000-9000', 'http://www.site.com.br', '', '', '', '*', '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, '', '', '{\"robots\":\"\",\"rights\":\"\"}', 0, '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 4, 14);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_content`
+-- Estrutura da tabela `#__content`
 --
 
-DROP TABLE IF EXISTS `idg2019_content`;
-CREATE TABLE IF NOT EXISTS `idg2019_content` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `asset_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'FK to the x3dts_assets table.',
-  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+CREATE TABLE IF NOT EXISTS `#__content` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `asset_id` int(10) unsigned NOT NULL DEFAULT 0 COMMENT 'FK to the #__assets table.',
+  `title` varchar(255) NOT NULL DEFAULT '',
   `alias` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '',
-  `introtext` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fulltext` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `state` tinyint(3) NOT NULL DEFAULT '0',
-  `catid` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `created` datetime NOT NULL,
-  `created_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `created_by_alias` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `modified` datetime NOT NULL,
-  `modified_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `checked_out` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `checked_out_time` datetime NOT NULL,
-  `publish_up` datetime NOT NULL,
-  `publish_down` datetime NOT NULL,
-  `images` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `urls` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `attribs` varchar(5120) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `version` int(10) UNSIGNED NOT NULL DEFAULT '1',
-  `ordering` int(11) NOT NULL DEFAULT '0',
-  `metakey` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `metadesc` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `access` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `hits` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `metadata` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `featured` tinyint(3) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Set if article is featured.',
-  `language` char(7) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The language code for the article.',
-  `xreference` varchar(50) NOT NULL DEFAULT '',
+  `introtext` mediumtext NOT NULL,
+  `fulltext` mediumtext NOT NULL,
+  `state` tinyint(3) NOT NULL DEFAULT 0,
+  `catid` int(10) unsigned NOT NULL DEFAULT 0,
+  `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `created_by` int(10) unsigned NOT NULL DEFAULT 0,
+  `created_by_alias` varchar(255) NOT NULL DEFAULT '',
+  `modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `modified_by` int(10) unsigned NOT NULL DEFAULT 0,
+  `checked_out` int(10) unsigned NOT NULL DEFAULT 0,
+  `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `publish_up` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `images` text NOT NULL,
+  `urls` text NOT NULL,
+  `attribs` varchar(5120) NOT NULL,
+  `version` int(10) unsigned NOT NULL DEFAULT 1,
+  `ordering` int(11) NOT NULL DEFAULT 0,
+  `metakey` text NOT NULL,
+  `metadesc` text NOT NULL,
+  `access` int(10) unsigned NOT NULL DEFAULT 0,
+  `hits` int(10) unsigned NOT NULL DEFAULT 0,
+  `metadata` text NOT NULL,
+  `featured` tinyint(3) unsigned NOT NULL DEFAULT 0 COMMENT 'Set if article is featured.',
+  `language` char(7) NOT NULL COMMENT 'The language code for the article.',
+  `xreference` varchar(50) NOT NULL DEFAULT '' COMMENT 'A reference to enable linkages to external data sets.',
   `note` varchar(255) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `idx_access` (`access`) USING BTREE,
-  KEY `idx_checkout` (`checked_out`) USING BTREE,
-  KEY `idx_state` (`state`) USING BTREE,
-  KEY `idx_catid` (`catid`) USING BTREE,
-  KEY `idx_createdby` (`created_by`) USING BTREE,
-  KEY `idx_featured_catid` (`featured`,`catid`) USING BTREE,
-  KEY `idx_language` (`language`) USING BTREE,
-  KEY `idx_xreference` (`xreference`) USING BTREE,
-  KEY `idx_alias` (`alias`(191)) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=102 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  PRIMARY KEY (`id`),
+  KEY `idx_access` (`access`),
+  KEY `idx_checkout` (`checked_out`),
+  KEY `idx_state` (`state`),
+  KEY `idx_catid` (`catid`),
+  KEY `idx_createdby` (`created_by`),
+  KEY `idx_featured_catid` (`featured`,`catid`),
+  KEY `idx_language` (`language`),
+  KEY `idx_xreference` (`xreference`),
+  KEY `idx_alias` (`alias`(191))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 --
--- Extraindo dados da tabela `idg2019_content`
+-- Extraindo dados da tabela `#__content`
 --
 
-INSERT INTO `idg2019_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, `fulltext`, `state`, `catid`, `created`, `created_by`, `created_by_alias`, `modified`, `modified_by`, `checked_out`, `checked_out_time`, `publish_up`, `publish_down`, `images`, `urls`, `attribs`, `version`, `ordering`, `metakey`, `metadesc`, `access`, `hits`, `metadata`, `featured`, `language`, `xreference`, `note`) VALUES
+INSERT INTO `#__content` (`id`, `asset_id`, `title`, `alias`, `introtext`, `fulltext`, `state`, `catid`, `created`, `created_by`, `created_by_alias`, `modified`, `modified_by`, `checked_out`, `checked_out_time`, `publish_up`, `publish_down`, `images`, `urls`, `attribs`, `version`, `ordering`, `metakey`, `metadesc`, `access`, `hits`, `metadata`, `featured`, `language`, `xreference`, `note`) VALUES
 (2, 38, 'Pagina 1: titulo do texto institucional', 'pagina-1-titulo-do-texto-institucional', '<p style=\"text-align: left;\">Espaço para inserir o subtítulo do texto institucional. Se em uma linha, usar 90 caracteres. Se em duas linhas usar 190 caracteres</p>\r\n<p style=\"text-align: left;\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p style=\"text-align: left;\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p style=\"text-align: left;\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p style=\"text-align: left;\">Segundo subtítulo em negrito</p>\r\n<p style=\"text-align: left;\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p style=\"text-align: left;\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p style=\"text-align: left;\">Terceiro subtítulo em negrito</p>\r\n<p style=\"text-align: left;\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p style=\"text-align: left;\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p style=\"text-align: left;\">Link externo 1<br />Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p style=\"text-align: left;\">Link externo 2<br />Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p style=\"text-align: left;\">Link externo 3<br />Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p style=\"text-align: left;\">Link externo 4<br />Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p style=\"text-align: left;\">Link externo 5<br />Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', '', 1, 8, '2019-04-03 17:02:20', 929, '', '0000-00-00 00:00:00', 0, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_intro\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 1, 1, '', '', 1, 17, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
 (3, 39, 'Página 2: título do texto institucional', 'pagina-2-titulo-do-texto-institucional', '<p style=\"text-align: left;\">Espaço para inserir o subtítulo do texto institucional. Se em uma linha, usar 90 caracteres. Se em duas linhas usar 190 caracteres</p>\r\n<p style=\"text-align: left;\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p style=\"text-align: left;\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p style=\"text-align: left;\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p style=\"text-align: left;\">• Lorem ipsum dolor sit amet;</p>\r\n<p style=\"text-align: left;\">• Lorem ipsum dolor sit amet;</p>\r\n<p style=\"text-align: left;\">• Lorem ipsum dolor sit amet</p>\r\n<p style=\"text-align: left;\">• Lorem ipsum dolor sit amet</p>\r\n<p style=\"text-align: left;\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', '', 1, 11, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 4, 0, '', '', 1, 1, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
 (4, 40, 'Página 3: título do texto institucional', 'pagina-3-titulo-do-texto-institucional', '<p style=\"text-align: left;\"><span style=\"color: #c0c0c0;\"><strong>Espaço para inserir o subtítulo do texto institucional. Se em uma linha, usar 90 caracteres. Se em duas linhas usar 190 caracteres</strong></span></p>\r\n<p style=\"text-align: left;\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p style=\"text-align: left;\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p style=\"text-align: left;\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', '', 1, 11, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 5, 0, '', '', 1, 1, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
@@ -1075,7 +1088,7 @@ INSERT INTO `idg2019_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, 
 (8, 52, 'Ações e Programas', 'acoes-e-programas', '<p>Nesta seção são divulgadas as informações pertinentes aos programas, ações, projetos e atividades implementadas pelo (a) [nome do órgão ou entidade]</p>\r\n', '\r\n<blockquote>\r\n<p><a href=\"http://tv1-lnx-04.grupotv1.com/portalmodelo/sobre/wireframes/wireframe_pagina_acoes-e-programas.jpg\">Acesse o wireframe com o exemplo de uma página de Ações e Programas</a></p>\r\n</blockquote>\r\n<blockquote>\r\n<p>Acesse uma página de Ações e Programas já publicada (em breve)</p>\r\n</blockquote>\r\n<blockquote>\r\n<p><a href=\"http://tv1-lnx-04.grupotv1.com/portalmodelo/sobre/wireframes/como-montar-sua-pagina.zip\">Saiba como montar suas páginas. Baixe o wireframe</a></p>\r\n</blockquote>\r\n<p>Programas são o principal instrumento que os governos utilizam para promover a integração entre os entes e os setores para concretizar políticas públicas e otimizar seus recursos, sejam eles financeiros, humanos, logísticos ou materiais. Por outro lado, uma ação é um conjunto de operações, cujos produtos contribuem para os objetivos do programa governamental. A ação pode ser um projeto, atividade ou operação especial.</p>\r\n<p>O órgão/entidade deverá disponibilizar o seguinte conjunto mínimo de informações em relação a seus respectivos programas, projetos e ações:<br />I - lista dos programas e ações executados pelo órgão/entidade;<br />II - indicação da unidade responsável pelo desenvolvimento e implementação;<br />III - principais metas;<br />IV - indicadores de resultado e impacto, quando existentes;<br />V - principais resultados.</p>\r\n<p>Em relação aos programas e ações que se constituírem serviços diretamente prestados ao público pelo órgão/entidade, deverão ser apresentadas as seguintes informações adicionais:<br />I - o serviço oferecido;<br />II - os requisitos, documentos e informações necessários para acessar o serviço;<br />III - as principais etapas para processamento do serviço;<br />IV - o prazo máximo para a prestação do serviço;<br />V - a forma de prestação do serviço;<br />VI - a forma de comunicação com o solicitante do serviço;<br />VII - os locais e formas de acessar o serviço;<br />VIII - prioridades de atendimento;<br />IX - tempo de espera para atendimento;<br />X - prazos para a realização dos serviços;<br />XI - mecanismos de comunicação com os usuários;<br />XII - procedimentos para receber, atender, gerir e responder às sugestões e reclamações;<br />XIII - fornecimento de informações acerca das etapas, presentes e futuras, esperadas para a realização dos serviços, inclusive estimativas de prazos;<br />XIV - mecanismos de consulta, por parte dos usuários, acerca das etapas, cumpridas e pendentes, para a realização do serviço solicitado;<br />XV - tratamento a ser dispensado aos usuários quando do atendimento;<br />XVI - requisitos básicos para o sistema de sinalização visual das unidades de atendimento;<br />XVII - condições mínimas a serem observadas pelas unidades de atendimento, em especial no que se refere a acessibilidade, limpeza e conforto;<br />XVIII - procedimentos alternativos para atendimento quando o sistema informatizado se encontrar indisponível;<br />XIX - outras informações julgadas de interesse dos usuários.</p>\r\n<p>O órgão ou entidade que já divulga o referido conjunto de informações em seu portal eletrônico ou que já publica sua respectiva Carta de Serviços ao Cidadão poderá disponibilizar link remetendo para a área onde as informações já estão disponíveis.</p>\r\n<p>Se o órgão/entidade ainda não divulga tais informações em seu portal eletrônico, ele deverá produzir e disponibilizar o conteúdo. Duas opções que podem contribuir para o atendimento do órgão/entidade a esse item são:</p>\r\n<p>A publicação dos dados institucionais dos órgão/entidade disponíveis no Sistema Integrado de Planejamento e Orçamento do Brasil (SIOP), disponível em: <a class=\"external-link\" title=\"\" href=\"https://www.siop.planejamento.gov.br/siop/\" target=\"_self\">https://www.siop.planejamento.gov.br/siop/</a></p>\r\n<p>O direcionamento para o link do relatório de gestão do órgão/entidade, desde que esteja atualizado e as informações sejam de fácil localização.</p>\r\n<p>Caso o órgão/entidade possua informação extra no próprio site, ele poderá indicar o link. Exemplo seria o relatório de avaliação do PPA, no site da CGU: <a class=\"external-link\" title=\"\" href=\"http://www.cgu.gov.br/Publicacoes/AvaliacaoPPA/index.asp\" target=\"_self\">http://www.cgu.gov.br/Publicacoes/AvaliacaoPPA/index.asp</a></p>\r\n<p><strong>Guias</strong></p>\r\n<p>Para mais informações sobre a seção de Acesso à Informação, confira os guias elaborados pela Controladoria-Geral da União.</p>\r\n<p><a class=\"external-link\" title=\"\" href=\"http://www.acessoainformacao.gov.br/acessoainformacaogov/espaco-gestor/arquivos/Guia_SecaoSitios.pdf\" target=\"_self\">Guia para criação da seção de acesso à informação nos portais eletrônicos dos órgãos e entidades federais</a> (arquivo pdf)</p>\r\n<p><a class=\"external-link\" title=\"\" href=\"http://www.cgu.gov.br/Publicacoes/BrasilTransparente/Guia_TransparenciaAtiva_EstadosMunicipios.pdf\" target=\"_self\">Guia para criação da Seção de Acesso à Informação nos portais eletrônicos dos Órgãos e Entidades Estaduais e Municipais</a> (arquivo pdf)</p>\r\n<p><a class=\"external-link\" title=\"\" href=\"http://www.acessoainformacao.gov.br/acessoainformacaogov/espaco-gestor/arquivos/Guia_InformacoesClassificadas.pdf\" target=\"_self\">Publicação do rol de informações classificadas e desclassificadas e de relatórios estatísticos sobre a Lei de Acesso à Informação</a> (arquivo pdf)</p>', 1, 40, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 5, 7, 'Internet, Governo federal', '', 1, 15, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
 (9, 53, 'Auditoria', 'auditoria', '<p>Nesta seção são divulgadas informações referentes ao resultado de inspeções, auditorias, prestações e tomada de contas realizadas no (a) [nome do órgão ou entidade]</p>\r\n', '\r\n<blockquote><a class=\"internal-link\" title=\"\" href=\"http://tv1-lnx-04.grupotv1.com/portalmodelo/sobre/wireframes/wireframe_pagina_auditorias.jpg\" target=\"_self\">Acesse o wireframe com o exemplo de uma página de Auditoria</a></blockquote>\r\n<blockquote>Acesse uma página de Auditoria já publicada (em breve)</blockquote>\r\n<blockquote><a class=\"internal-link\" title=\"\" href=\"http://tv1-lnx-04.grupotv1.com/portalmodelo/sobre/wireframes/como-montar-sua-pagina.zip\" target=\"_self\">Saiba como montar suas páginas. Baixe o wireframe</a></blockquote>\r\n<p>Os órgãos/entidades deverão disponibilizar os relatórios de gestão, os relatórios e certificados de auditoria, com pareceres do órgão de controle interno, e dos pronunciamentos dos ministros de Estado supervisores das áreas das autoridades de nível hierárquico equivalente, contidos nos processos de contas anuais, contendo a íntegra das peças e informações complementares contendo, minimamente, os seguintes dados:</p>\r\n<ul>\r\n<li>I - exercício ao qual se referem as contas;</li>\r\n<li>II - código e descrição da respectiva unidade;</li>\r\n<li>III - número do processo no órgão ou entidade de origem;</li>\r\n<li>IV - número do processo no Tribunal de Contas da União;</li>\r\n<li>V - situação junto ao Tribunal de Contas da União, de modo que se informe se o processo foi entregue, sobrestado ou julgado.</li>\r\n</ul>\r\n<p>Caso o órgão/entidade já disponibilize as informações em seu portal eletrônico, poderá ser disponibilizado link para a área em que os relatórios já são divulgados.</p>\r\n<p>Se o órgão/entidade ainda não divulga a informação em seu portal eletrônico, deverá providenciá-lo.</p>\r\n<p><strong>Guias</strong></p>\r\n<p>Para mais informações sobre a seção de Acesso à Informação, confira os guias elaborados pela Controladoria-Geral da União.</p>\r\n<ul>\r\n<li><a class=\"external-link\" title=\"\" href=\"http://www.acessoainformacao.gov.br/acessoainformacaogov/espaco-gestor/arquivos/Guia_SecaoSitios.pdf\" target=\"_self\">Guia para criação da seção de acesso à informação nos portais eletrônicos dos órgãos e entidades federais</a> (arquivo pdf, tamanho: 1,14 MB)</li>\r\n<li><a class=\"external-link\" title=\"\" href=\"http://www.cgu.gov.br/Publicacoes/BrasilTransparente/Guia_TransparenciaAtiva_EstadosMunicipios.pdf\" target=\"_self\">Guia para criação da Seção de Acesso à Informação nos portais eletrônicos dos Órgãos e Entidades Estaduais e Municipais</a> (arquivo pdf, tamanho:1,27 MB)</li>\r\n<li class=\"last-item\"><a class=\"external-link\" title=\"\" href=\"http://www.acessoainformacao.gov.br/acessoainformacaogov/espaco-gestor/arquivos/Guia_InformacoesClassificadas.pdf\" target=\"_self\">Publicação do rol de informações classificadas e desclassificadas e de relatórios estatísticos sobre a Lei de Acesso à Informação</a> (arquivo pdf, tamanho: 682 KB)</li>\r\n</ul>', 1, 40, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 5, 6, 'Internet, Governo Federal', '', 1, 16, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
 (10, 54, 'Convênios', 'convenios', '<p>Nesta seção são divulgadas informações sobre os repasses e transferências de recursos financeiros efetuados pelo (a) [nome do órgão ou entidade]</p>\r\n', '\r\n<blockquote><a class=\"internal-link\" title=\"\" href=\"http://tv1-lnx-04.grupotv1.com/portalmodelo/sobre/wireframes/wireframe_pagina_convenios.jpg\" target=\"_self\">Acesse o wireframe com o exemplo de uma página de Convênios</a></blockquote>\r\n<blockquote>Acesse uma página de Convênios já publicada (em breve)</blockquote>\r\n<blockquote><a class=\"internal-link\" title=\"\" href=\"http://tv1-lnx-04.grupotv1.com/portalmodelo/sobre/wireframes/como-montar-sua-pagina.zip\" target=\"_self\">Saiba como montar suas páginas. Baixe o wireframe</a></blockquote>\r\n<p>As informações a serem divulgadas nesse item referem-se às transferências de recursos da União realizadas pelo órgão/entidade mediante convênios, contratos de repasse e termos de cooperação, ou instrumentos congêneres com órgãos ou entidades públicas ou privadas sem fins lucrativos. Incluem-se nesta seção as transferências constitucionais e legais, e as transferências de renda direta ao cidadão, realizadas pelo órgão ou entidade.</p>\r\n<p>Serão divulgadas as seguintes informações relativas aos convênios ou instrumentos congêneres celebrados pelo órgão/entidade:</p>\r\n<p>I - órgão superior;<br />II - órgão subordinado ou entidade vinculada;<br />III - unidade gestora;<br />IV - nome do conveniado;<br />V - número do convênio;<br />VI - número do processo;<br />VII - objeto;<br />VIII - valor de repasse;<br />IX - valor da contrapartida do conveniado;<br />X - valor total dos recursos;<br />XI - período de vigência.</p>\r\n<p>O órgão/entidade que divulga o referido conjunto de informações em seu portal eletrônico ou possui Página de Transparência poderá disponibilizar link remetendo para a área do portal onde as informações já estão disponíveis ou para sua respectiva Página de Transparência.</p>\r\n<p>Se o órgão/entidade ainda não divulgar tais informações em seu portal eletrônico, ele poderá disponibilizar link para as consultas do Portal da Transparência que apresentam os respectivos dados/informações ou para o Sistema de Gestão de Convênios e Contratos de Repasse do Governo Federal (SICONV). Os links a serem indicados são:</p>\r\n<p><strong>Para o Portal da Transparência do Governo Federal</strong></p>\r\n<ul>\r\n<li><a title=\"\" href=\"http://www.portaldatransparencia.gov.br/convenios/\" target=\"_self\">Seção Convênios</a></li>\r\n<li><a title=\"\" href=\"http://www.portaldatransparencia.gov.br/PortalTransparenciaPrincipal2.asp\" target=\"_self\">Seção Despesas - Transferências de Recursos</a></li>\r\n</ul>\r\n<p> </p>\r\n<p><strong>Para o Portal de Convênios (SICONV)</strong><br />O link indicado é a opção de consulta <a class=\"external-link\" title=\"\" href=\"https://www.convenios.gov.br/portal/acessoLivre.html\" target=\"_self\">Lista convênios por Órgão</a></p>\r\n<p> </p>\r\n<p><strong>Guias</strong></p>\r\n<p>Para mais informações sobre a seção de Acesso à Informação, confira os guias elaborados pela Controladoria-Geral da União.</p>\r\n<p><a class=\"external-link\" title=\"\" href=\"http://www.acessoainformacao.gov.br/acessoainformacaogov/espaco-gestor/arquivos/Guia_SecaoSitios.pdf\" target=\"_self\">Guia para criação da seção de acesso à informação nos portais eletrônicos dos órgãos e entidades federais</a> (arquivo pdf)</p>\r\n<p><a class=\"external-link\" title=\"\" href=\"http://www.cgu.gov.br/Publicacoes/BrasilTransparente/Guia_TransparenciaAtiva_EstadosMunicipios.pdf\" target=\"_self\">Guia para criação da Seção de Acesso à Informação nos portais eletrônicos dos Órgãos e Entidades Estaduais e Municipais</a> (arquivo pdf)</p>\r\n<p><a class=\"external-link\" title=\"\" href=\"http://www.acessoainformacao.gov.br/acessoainformacaogov/espaco-gestor/arquivos/Guia_InformacoesClassificadas.pdf\" target=\"_self\">Publicação do rol de informações classificadas e desclassificadas e de relatórios estatísticos sobre a Lei de Acesso à Informação</a> (arquivo pdf)</p>', 1, 40, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 4, 5, 'Internet, Governo Federal', '', 1, 15, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', '');
-INSERT INTO `idg2019_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, `fulltext`, `state`, `catid`, `created`, `created_by`, `created_by_alias`, `modified`, `modified_by`, `checked_out`, `checked_out_time`, `publish_up`, `publish_down`, `images`, `urls`, `attribs`, `version`, `ordering`, `metakey`, `metadesc`, `access`, `hits`, `metadata`, `featured`, `language`, `xreference`, `note`) VALUES
+INSERT INTO `#__content` (`id`, `asset_id`, `title`, `alias`, `introtext`, `fulltext`, `state`, `catid`, `created`, `created_by`, `created_by_alias`, `modified`, `modified_by`, `checked_out`, `checked_out_time`, `publish_up`, `publish_down`, `images`, `urls`, `attribs`, `version`, `ordering`, `metakey`, `metadesc`, `access`, `hits`, `metadata`, `featured`, `language`, `xreference`, `note`) VALUES
 (11, 55, 'Despesas', 'despesas', '<p>Nesta seção são divulgadas informações sobre a execução orçamentária e financeira detalhada do (a) [nome do Órgão ou entidade]</p>\r\n', '\r\n<blockquote><a class=\"internal-link\" title=\"\" href=\"http://tv1-lnx-04.grupotv1.com/portalmodelo/sobre/wireframes/wireframe_pagina_despesas.jpg\" target=\"_self\">Acesse o wireframe com o exemplo de uma página de Despesas</a></blockquote>\r\n<blockquote>Acesse uma página de Despesas já publicada (em breve)</blockquote>\r\n<blockquote><a class=\"internal-link\" title=\"\" href=\"http://tv1-lnx-04.grupotv1.com/portalmodelo/sobre/wireframes/como-montar-sua-pagina.zip\" target=\"_self\">Saiba como montar suas páginas. Baixe o wireframe</a></blockquote>\r\n<p>São consideradas despesas quaisquer gastos com aquisição e contratação de obras e compras governamentais. A execução financeira é a utilização dos recursos financeiros visando atender à realização dos programas, ações e projetos e/ou subatividades atribuídos às unidades orçamentárias.</p>\r\n<p>Deverão ser divulgados os seguintes dados e informações em relação à execução orçamentária e financeira dos órgãos/entidades:</p>\r\n<ul>\r\n<li>I - Quadro de Detalhamento de Programas, por unidade orçamentária do órgão/entidade, contendo:</li>\r\n<li>a) código e especificação dos programas orçamentários;</li>\r\n<li>b) orçamento atualizado, levando em consideração os recursos consignados por programa na Lei Orçamentária Anual e em seus créditos adicionais;</li>\r\n<li>c) valor liquidado no ano considerado, para exercícios encerrados, e valor liquidado até o mês considerado, para o exercício corrente;</li>\r\n<li>d) valor pago no ano considerado, para exercícios encerrados, e valor pago até o mês considerado, para o exercício corrente;</li>\r\n<li>e) percentual dos recursos liquidados comparados aos autorizados;</li>\r\n<li class=\"last-item\">f) percentual dos recursos pagos comparados aos autorizados.</li>\r\n</ul>\r\n<ul>\r\n<li>II - Quadro de Execução de Despesas, por unidade orçamentária dos órgãos e entidades, contendo:</li>\r\n<li>a) descrição da natureza das despesas;</li>\r\n<li>b) valor liquidado no ano considerado, para exercícios encerrados e valor liquidado até o mês considerado, para o exercício corrente;</li>\r\n<li class=\"last-item\">c) valor pago no ano considerado, para exercícios encerrados e valor pago até o mês considerado, para o exercício corrente.</li>\r\n</ul>\r\n<p>O órgão/entidade deverá detalhar suas despesas com diárias e passagens pagas a servidores públicos em viagens a trabalho ou a colaboradores eventuais em viagens no interesse da Administração, no seguinte nível de detalhe para cada trecho da viagem:</p>\r\n<ul>\r\n<li>I - órgão superior;</li>\r\n<li>II - órgão subordinado ou entidade vinculada;</li>\r\n<li>III - unidade gestora;</li>\r\n<li>IV - nome do servidor;</li>\r\n<li>V - cargo;</li>\r\n<li>VI - origem de todos os trechos da viagem;</li>\r\n<li>VII - destino de todos os trechos da viagem;</li>\r\n<li>VIII - período da viagem;</li>\r\n<li>IX - motivo da viagem;</li>\r\n<li>X - meio de transporte;</li>\r\n<li>XI - categoria da passagem;</li>\r\n<li>XII - valor da passagem;</li>\r\n<li>XIII - número de diárias;</li>\r\n<li>XIV - valor total das diárias;</li>\r\n<li class=\"last-item\">XV - valor total da viagem.</li>\r\n</ul>\r\n<p>O órgão/entidade que divulga o referido conjunto de informações em seu portal eletrônico ou possui Página de Transparência atualizada poderá disponibilizar link remetendo para a área do portal onde as informações já estão disponíveis ou para sua respectiva Página de Transparência.</p>\r\n<p>O órgão/entidade que não disponibiliza dados de despesa em seu portal eletrônico e não possui Página de Transparência poderá disponibilizar o link do <a class=\"external-link\" title=\"\" href=\"http://www.portaltransparencia.gov.br/despesasdiarias/\" target=\"_self\">Portal da Transparência</a> para cumprir este item, exceto detalhamento de diárias e passagens. O Portal da Transparência do Governo Federal disponibiliza informações de execução orçamentária e financeira dos órgãos/entidades da Administração Federal. As informações são extraídas do Sistema Integrado de Administração Financeira do Governo Federal (SIAFI), portanto, são publicados no Portal da Transparência apenas os dados dos órgãos/entidades que utilizam o SIAFI. Nesses casos, o órgão/entidade poderá disponibilizar link de acesso para o Portal da Transparência. Os órgãos/entidades que não utilizam o SIAFI e cujas informações, portanto, não se encontram no Portal da Transparência, deverão divulgar por meio próprio suas informações de execução orçamentária e financeira.</p>\r\n<p><strong>Guias</strong></p>\r\n<p>Para mais informações sobre a seção de Acesso à Informação, confira os guias elaborados pela Controladoria-Geral da União.</p>\r\n<ul>\r\n<li><a class=\"external-link\" title=\"\" href=\"http://www.acessoainformacao.gov.br/acessoainformacaogov/espaco-gestor/arquivos/Guia_SecaoSitios.pdf\" target=\"_self\">Guia para criação da seção de acesso à informação nos portais eletrônicos dos órgãos e entidades federais</a> (arquivo pdf, tamanho: 1,14 MB)</li>\r\n<li><a class=\"external-link\" title=\"\" href=\"http://www.cgu.gov.br/Publicacoes/BrasilTransparente/Guia_TransparenciaAtiva_EstadosMunicipios.pdf\" target=\"_self\">Guia para criação da Seção de Acesso à Informação nos portais eletrônicos dos Órgãos e Entidades Estaduais e Municipais</a> (arquivo pdf, tamanho:1,27 MB)</li>\r\n<li class=\"last-item\"><a class=\"external-link\" title=\"\" href=\"http://www.acessoainformacao.gov.br/acessoainformacaogov/espaco-gestor/arquivos/Guia_InformacoesClassificadas.pdf\" target=\"_self\">Publicação do rol de informações classificadas e desclassificadas e de relatórios estatísticos sobre a Lei de Acesso à Informação</a> (arquivo pdf, tamanho: 682 KB)</li>\r\n</ul>', 1, 40, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 4, 4, '', '', 1, 10, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
 (12, 56, 'Licitações e contratos', 'licitacoes-e-contratos', '<p>Nesta seção são divulgadas informações sobre a execução orçamentária e financeira detalhada do (a) [nome do Órgão ou entidade]</p>\r\n', '\r\n<blockquote><a class=\"internal-link\" title=\"\" href=\"http://tv1-lnx-04.grupotv1.com/portalmodelo/sobre/wireframes/wireframe_pagina_despesas.jpg\" target=\"_self\">Acesse o wireframe com o exemplo de uma página de Despesas</a></blockquote>\r\n<blockquote>Acesse uma página de Despesas já publicada (em breve)</blockquote>\r\n<blockquote><a class=\"internal-link\" title=\"\" href=\"http://tv1-lnx-04.grupotv1.com/portalmodelo/sobre/wireframes/como-montar-sua-pagina.zip\" target=\"_self\">Saiba como montar suas páginas. Baixe o wireframe</a></blockquote>\r\n<p>São consideradas despesas quaisquer gastos com aquisição e contratação de obras e compras governamentais. A execução financeira é a utilização dos recursos financeiros visando atender à realização dos programas, ações e projetos e/ou subatividades atribuídos às unidades orçamentárias.</p>\r\n<p>Deverão ser divulgados os seguintes dados e informações em relação à execução orçamentária e financeira dos órgãos/entidades:</p>\r\n<ul>\r\n<li>I - Quadro de Detalhamento de Programas, por unidade orçamentária do órgão/entidade, contendo:</li>\r\n<li>a) código e especificação dos programas orçamentários;</li>\r\n<li>b) orçamento atualizado, levando em consideração os recursos consignados por programa na Lei Orçamentária Anual e em seus créditos adicionais;</li>\r\n<li>c) valor liquidado no ano considerado, para exercícios encerrados, e valor liquidado até o mês considerado, para o exercício corrente;</li>\r\n<li>d) valor pago no ano considerado, para exercícios encerrados, e valor pago até o mês considerado, para o exercício corrente;</li>\r\n<li>e) percentual dos recursos liquidados comparados aos autorizados;</li>\r\n<li class=\"last-item\">f) percentual dos recursos pagos comparados aos autorizados.</li>\r\n</ul>\r\n<ul>\r\n<li>II - Quadro de Execução de Despesas, por unidade orçamentária dos órgãos e entidades, contendo:</li>\r\n<li>a) descrição da natureza das despesas;</li>\r\n<li>b) valor liquidado no ano considerado, para exercícios encerrados e valor liquidado até o mês considerado, para o exercício corrente;</li>\r\n<li class=\"last-item\">c) valor pago no ano considerado, para exercícios encerrados e valor pago até o mês considerado, para o exercício corrente.</li>\r\n</ul>\r\n<p>O órgão/entidade deverá detalhar suas despesas com diárias e passagens pagas a servidores públicos em viagens a trabalho ou a colaboradores eventuais em viagens no interesse da Administração, no seguinte nível de detalhe para cada trecho da viagem:</p>\r\n<ul>\r\n<li>I - órgão superior;</li>\r\n<li>II - órgão subordinado ou entidade vinculada;</li>\r\n<li>III - unidade gestora;</li>\r\n<li>IV - nome do servidor;</li>\r\n<li>V - cargo;</li>\r\n<li>VI - origem de todos os trechos da viagem;</li>\r\n<li>VII - destino de todos os trechos da viagem;</li>\r\n<li>VIII - período da viagem;</li>\r\n<li>IX - motivo da viagem;</li>\r\n<li>X - meio de transporte;</li>\r\n<li>XI - categoria da passagem;</li>\r\n<li>XII - valor da passagem;</li>\r\n<li>XIII - número de diárias;</li>\r\n<li>XIV - valor total das diárias;</li>\r\n<li class=\"last-item\">XV - valor total da viagem.</li>\r\n</ul>\r\n<p>O órgão/entidade que divulga o referido conjunto de informações em seu portal eletrônico ou possui Página de Transparência atualizada poderá disponibilizar link remetendo para a área do portal onde as informações já estão disponíveis ou para sua respectiva Página de Transparência.</p>\r\n<p>O órgão/entidade que não disponibiliza dados de despesa em seu portal eletrônico e não possui Página de Transparência poderá disponibilizar o link do <a class=\"external-link\" title=\"\" href=\"http://www.portaltransparencia.gov.br/despesasdiarias/\" target=\"_self\">Portal da Transparência</a> para cumprir este item, exceto detalhamento de diárias e passagens. O Portal da Transparência do Governo Federal disponibiliza informações de execução orçamentária e financeira dos órgãos/entidades da Administração Federal. As informações são extraídas do Sistema Integrado de Administração Financeira do Governo Federal (SIAFI), portanto, são publicados no Portal da Transparência apenas os dados dos órgãos/entidades que utilizam o SIAFI. Nesses casos, o órgão/entidade poderá disponibilizar link de acesso para o Portal da Transparência. Os órgãos/entidades que não utilizam o SIAFI e cujas informações, portanto, não se encontram no Portal da Transparência, deverão divulgar por meio próprio suas informações de execução orçamentária e financeira.</p>\r\n<p><strong>Guias</strong></p>\r\n<p>Para mais informações sobre a seção de Acesso à Informação, confira os guias elaborados pela Controladoria-Geral da União.</p>\r\n<ul>\r\n<li><a class=\"external-link\" title=\"\" href=\"http://www.acessoainformacao.gov.br/acessoainformacaogov/espaco-gestor/arquivos/Guia_SecaoSitios.pdf\" target=\"_self\">Guia para criação da seção de acesso à informação nos portais eletrônicos dos órgãos e entidades federais</a> (arquivo pdf, tamanho: 1,14 MB)</li>\r\n<li><a class=\"external-link\" title=\"\" href=\"http://www.cgu.gov.br/Publicacoes/BrasilTransparente/Guia_TransparenciaAtiva_EstadosMunicipios.pdf\" target=\"_self\">Guia para criação da Seção de Acesso à Informação nos portais eletrônicos dos Órgãos e Entidades Estaduais e Municipais</a> (arquivo pdf, tamanho:1,27 MB)</li>\r\n<li class=\"last-item\"><a class=\"external-link\" title=\"\" href=\"http://www.acessoainformacao.gov.br/acessoainformacaogov/espaco-gestor/arquivos/Guia_InformacoesClassificadas.pdf\" target=\"_self\">Publicação do rol de informações classificadas e desclassificadas e de relatórios estatísticos sobre a Lei de Acesso à Informação</a> (arquivo pdf, tamanho: 682 KB)</li>\r\n</ul>', 1, 40, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 3, 3, '', '', 1, 15, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
 (13, 57, 'Servidores', 'servidores', '<p>Nesta seção são divulgadas informações sobre concursos públicos de provimento de cargos e relação dos servidores públicos lotados ou em exercício no (a) [nome do órgão ou entidade]</p>\r\n', '\r\n<blockquote><a class=\"internal-link\" title=\"\" href=\"http://tv1-lnx-04.grupotv1.com/portalmodelo/sobre/wireframes/wireframe_paginas_servidores.jpg\" target=\"_self\">Acesse o wireframe com o exemplo de uma página de Servidores</a></blockquote>\r\n<blockquote>Acesse uma página de Servidores já publicada (em breve)</blockquote>\r\n<blockquote><a class=\"internal-link\" title=\"\" href=\"http://tv1-lnx-04.grupotv1.com/portalmodelo/sobre/wireframes/como-montar-sua-pagina.zip\" target=\"_self\">Saiba como montar suas páginas. Baixe o wireframe</a></blockquote>\r\n<p>Nesta seção, deverão ser publicadas as íntegras dos editais de concursos públicos para provimento de cargos realizados pelo órgão/entidade e a relação dos agentes públicos, efetivos ou não, lotados ou em exercício no órgão/entidade, apresentando as seguintes informações mínimas:</p>\r\n<ul>\r\n<li>I - número de identificação funcional;</li>\r\n<li>II - nome completo;</li>\r\n<li>III - CPF (ocultando os três primeiros dígitos e os dois dígitos verificadores do CPF);</li>\r\n<li>IV - cargo e função;</li>\r\n<li>V - lotação;</li>\r\n<li>VI - Regime Jurídico;</li>\r\n<li>VII - jornada de trabalho;</li>\r\n<li>VIII - ato de nomeação ou contratação;</li>\r\n<li>IX - respectiva data de publicação do ato;</li>\r\n<li>X - cargo efetivo ou permanente ou emprego permanente;</li>\r\n<li class=\"last-item\">XI - órgão ou entidade de origem, no caso de servidor requisitado ou cedido.</li>\r\n</ul>\r\n<p>Membros de conselhos de administração ou fiscal da administração indireta também devem figurar nesta relação, assim como militares das Forças Armadas. Agentes públicos cujo exercício profissional é protegido por sigilo, em atendimento à legislação vigente, não devem figurar nesta relação.</p>\r\n<p>O órgão/entidade que utiliza o Sistema Integrado de Administração de Recursos Humanos (SIAPE) poderá, para cumprir este item, disponibilizar link para consulta “Servidores” do Portal da Transparência, disponível no <a title=\"\" href=\"http://www.portaldatransparencia.gov.br/servidores\" target=\"_self\">Portal da Transparência</a>.<br /><br />A entidade da Administração Indireta, incluindo agências reguladoras e conselhos de administração e fiscal, cujos registros de servidores não estão no SIAPE, deverá disponibilizar a relação de servidores e agentes públicos, ou, caso já tenha a informação em seu portal eletrônico, remeter para área onde estão disponíveis essas informações.</p>\r\n<p><strong>Guias</strong></p>\r\n<p>Para mais informações sobre a seção de Acesso à Informação, confira os guias elaborados pela Controladoria-Geral da União.</p>\r\n<ul>\r\n<li><a title=\"\" href=\"http://www.acessoainformacao.gov.br/acessoainformacaogov/espaco-gestor/arquivos/Guia_SecaoSitios.pdf\" target=\"_self\">Guia para criação da seção de acesso à informação nos portais eletrônicos dos órgãos e entidades federais</a> (arquivo pdf, tamanho: 1,14 MB)</li>\r\n<li><a title=\"\" href=\"http://www.cgu.gov.br/Publicacoes/BrasilTransparente/Guia_TransparenciaAtiva_EstadosMunicipios.pdf\" target=\"_self\">Guia para criação da Seção de Acesso à Informação nos portais eletrônicos dos Órgãos e Entidades Estaduais e Municipais</a> (arquivo pdf, tamanho:1,27 MB)</li>\r\n<li class=\"last-item\"><a title=\"\" href=\"http://www.acessoainformacao.gov.br/acessoainformacaogov/espaco-gestor/arquivos/Guia_InformacoesClassificadas.pdf\" target=\"_self\">Publicação do rol de informações classificadas e desclassificadas e de relatórios estatísticos sobre a Lei de Acesso à Informação</a> (arquivo pdf, tamanho: 682 KB)</li>\r\n</ul>', 1, 40, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 4, 2, '', '', 1, 3, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
@@ -1083,7 +1096,7 @@ INSERT INTO `idg2019_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, 
 (15, 59, 'Serviço de Informação ao Cidadão (SIC)', 'servico-de-informacao-ao-cidadao-sic', '<p>Nesta seção são divulgadas as informações sobre o Sistema de Informações ao Cidadão (SIC), pertinentes ao seu funcionamento, localização e dados de contato no âmbito do (a) [nome do órgão ou entidade]</p>\r\n', '\r\n<blockquote><a class=\"internal-link\" title=\"\" href=\"http://tv1-lnx-04.grupotv1.com/portalmodelo/sobre/wireframes/wireframe_pagina_servicos-de-informacao-ao-cidadao.jpg\" target=\"_self\">Acesse o wireframe com o exemplo de uma página de Serviço de Informação ao Cidadão</a></blockquote>\r\n<blockquote>Acesse uma página de Serviço de Informação ao Cidadão já publicada (em breve)</blockquote>\r\n<blockquote><a class=\"internal-link\" title=\"\" href=\"http://tv1-lnx-04.grupotv1.com/portalmodelo/sobre/wireframes/como-montar-sua-pagina.zip\" target=\"_self\">Saiba como montar suas páginas. Baixe o wireframe</a></blockquote>\r\n<p>Nesse tópico o órgão/entidade disponibilizará as seguintes informações sobre o(s) Serviço(s) de Informação ao Cidadão (SICs), de que trata o artigo 9º da Lei de Acesso à Informação:</p>\r\n<p>I - localização;<br />II - horário de funcionamento;<br />III - nome dos servidores responsáveis pelo SIC;<br />IV - telefone e e-mails específicos para orientação e esclarecimentos de dúvidas, tais como sobre a protocolização de requerimentos de acesso à informação; a tramitação de solicitação de informação;<br />V - nome da autoridade do órgão responsável pelo monitoramento da implementação da Lei de Acesso à Informação no âmbito do órgão/entidade (autoridade prevista no artigo 40º da Lei 12.527/11).</p>\r\n<p>Também será disponibilizado neste item modelo de formulário de solicitação de informação para aqueles que queiram apresentam o pedido em meio físico (papel) junto ao SIC.</p>\r\n<p>Adicionalmente, o órgão ou entidade deverá disponibilizar eventuais informações sobre os procedimentos que os cidadãos deverão adotar para solicitar acesso à informação perante o respectivo órgão/entidade.</p>\r\n<p>Neste item, o órgão/entidade deverá disponibilizar link para o Sistema de Solicitação de Acesso à Informação do Poder Executivo Federal, a ser disponibilizado pela Controladoria-Geral da União (CGU), o qual permitirá que o requerente selecione o órgão ou entidade para o qual deseja endereçar pedido de acesso à informação. A CGU entrará em contato com todas as autoridades responsáveis pela implementação da Lei de Acesso à Informação dos órgãos/entidades a fim de indicar o exato link onde estará disponível a referida informação, bem como receber indicação do nome do servidor que deverá ser cadastrado para ter acesso ao sistema.</p>\r\n<p><strong>Guias</strong></p>\r\n<p>Para mais informações sobre a seção de Acesso à Informação, confira os guias elaborados pela Controladoria-Geral da União.</p>\r\n<p><a class=\"external-link\" title=\"\" href=\"http://www.acessoainformacao.gov.br/acessoainformacaogov/espaco-gestor/arquivos/Guia_SecaoSitios.pdf\" target=\"_self\">Guia para criação da seção de acesso à informação nos portais eletrônicos dos órgãos e entidades federais</a> (arquivo pdf)</p>\r\n<p><a class=\"external-link\" title=\"\" href=\"http://www.cgu.gov.br/Publicacoes/BrasilTransparente/Guia_TransparenciaAtiva_EstadosMunicipios.pdf\" target=\"_self\">Guia para criação da Seção de Acesso à Informação nos portais eletrônicos dos Órgãos e Entidades Estaduais e Municipais</a> (arquivo pdf)</p>\r\n<p><a class=\"external-link\" title=\"\" href=\"http://www.acessoainformacao.gov.br/acessoainformacaogov/espaco-gestor/arquivos/Guia_InformacoesClassificadas.pdf\" target=\"_self\">Publicação do rol de informações classificadas e desclassificadas e de relatórios estatísticos sobre a Lei de Acesso à Informação</a> (arquivo pdf)</p>', 1, 41, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 4, 0, '', '', 1, 9, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
 (16, 69, 'Texto 1 - Título da notícia entre 35 e 90 caracteres', 'texto-1-titulo-da-noticia-entre-35-e-90-caracteres', '<p>Subtítulo do texto 1. Se em uma linha, usar 90 caracteres. Se em duas linhas usar 190 caracteres</p>\r\n', '\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<blockquote>\r\n<p>Use o estilo \"Block Quote\", localizado nas opções do bloco da matéria, para criar um olho na sua matéria. Não há um limite de caracteres</p>\r\n</blockquote>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><object width=\"640\" height=\"480\" data=\"http://www.youtube-nocookie.com/v/Vj1MpR3iER4?hl=pt_BR&amp;version=3&amp;rel=0\" type=\"application/x-shockwave-flash\"><param name=\"allowFullScreen\" value=\"true\" /><param name=\"allowscriptaccess\" value=\"always\" /><param name=\"src\" value=\"http://www.youtube-nocookie.com/v/Vj1MpR3iER4?hl=pt_BR&amp;version=3&amp;rel=0\" /></object></p>', 0, 17, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/conteudo\\/thumb-imagem-conteudo.jpg\",\"float_intro\":\"\",\"image_intro_alt\":\"Legenda da foto (arquivo .JPG) deve ter at\\u00e9 60 caracteres, preferencialmente\",\"image_intro_caption\":\"por Nome do Autor\",\"image_fulltext\":\"images\\/conteudo\\/thumb-imagem-conteudo.jpg\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"Legenda da foto (arquivo .JPG) deve ter at\\u00e9 60 caracteres, preferencialmente\",\"image_fulltext_caption\":\"por Nome do Autor\"}', '{\"urla\":\"http:\\/\\/www.brasil.gov.br\",\"urlatext\":\"Brasil.gov.br\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 7, 17, 'Notícia, Texto de marcação, Portal Padrão', '', 1, 16, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
 (17, 70, 'Release 5: Título do release entre 35 e 90 caracteres', 'release-5-titulo-do-release-entre-35-e-90-caracteres', '<p>Subtítulo do texto 1. Se em uma linha, usar 90 caracteres. Se em duas linhas usar 190 caracteres</p>\r\n', '\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<blockquote>\r\n<p>Use o estilo \"Block Quote\", localizado nas opções do bloco da matéria, para criar um olho na sua matéria. Não há um limite de caracteres</p>\r\n</blockquote>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><object width=\"640\" height=\"480\" data=\"http://www.youtube-nocookie.com/v/Vj1MpR3iER4?hl=pt_BR&amp;version=3&amp;rel=0\" type=\"application/x-shockwave-flash\"><param name=\"allowFullScreen\" value=\"true\" /><param name=\"allowscriptaccess\" value=\"always\" /><param name=\"src\" value=\"http://www.youtube-nocookie.com/v/Vj1MpR3iER4?hl=pt_BR&amp;version=3&amp;rel=0\" /></object></p>', 0, 17, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/conteudo\\/thumb-imagem-conteudo.jpg\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"images\\/conteudo\\/thumb-imagem-conteudo.jpg\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"Exemplo de aplica\\u00e7\\u00e3o alternativa de foto no corpo do texto\",\"image_fulltext_caption\":\"por Nome do Autor\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 11, 16, 'Notícia, Texto de marcação, Portal Padrão', '', 1, 13, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', 'Chapéu da editoria', '');
-INSERT INTO `idg2019_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, `fulltext`, `state`, `catid`, `created`, `created_by`, `created_by_alias`, `modified`, `modified_by`, `checked_out`, `checked_out_time`, `publish_up`, `publish_down`, `images`, `urls`, `attribs`, `version`, `ordering`, `metakey`, `metadesc`, `access`, `hits`, `metadata`, `featured`, `language`, `xreference`, `note`) VALUES
+INSERT INTO `#__content` (`id`, `asset_id`, `title`, `alias`, `introtext`, `fulltext`, `state`, `catid`, `created`, `created_by`, `created_by_alias`, `modified`, `modified_by`, `checked_out`, `checked_out_time`, `publish_up`, `publish_down`, `images`, `urls`, `attribs`, `version`, `ordering`, `metakey`, `metadesc`, `access`, `hits`, `metadata`, `featured`, `language`, `xreference`, `note`) VALUES
 (18, 71, 'Release 4: Título do release entre 35 e 90 caracteres', 'release-4-titulo-do-release-entre-35-e-90-caracteres', '<p>Subtitulo do texto 1. Se em uma linha, usar 90 caracteres. Se em duas linhas usar 190 caracteres</p>\r\n', '\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<blockquote>Use o estilo \"block quote\", localizado nas ferramentas do editor de texto, para criar um olho na sua matéria. Não há um limite de caracteres</blockquote>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><object width=\"640\" height=\"480\" data=\"http://www.youtube-nocookie.com/v/Vj1MpR3iER4?hl=pt_BR&amp;version=3&amp;rel=0\" type=\"application/x-shockwave-flash\"><param name=\"allowFullScreen\" value=\"true\" /><param name=\"allowscriptaccess\" value=\"always\" /><param name=\"src\" value=\"http://www.youtube-nocookie.com/v/Vj1MpR3iER4?hl=pt_BR&amp;version=3&amp;rel=0\" /></object></p>', 0, 17, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/conteudo\\/imagem-conteudo-inicio-apresentacao-direta.png\",\"float_intro\":\"\",\"image_intro_alt\":\"Legenda da foto (arquivo .JPG) deve ter at\\u00e9 60 caracteres, preferencialmente\",\"image_intro_caption\":\"por Nome do Autor\",\"image_fulltext\":\"images\\/conteudo\\/imagem-conteudo-vertical-thumb.png\",\"float_fulltext\":\"right\",\"image_fulltext_alt\":\"Legenda da foto (arquivo .JPG) deve ter at\\u00e9 60 caracteres, preferencialmente\",\"image_fulltext_caption\":\"por Nome do Autor\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 4, 15, 'Notícia, Texto de marcação, Portal Padrão', '', 1, 1, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', 'Chapéu da editoria', ''),
 (19, 72, 'Release 1: Título do release entre 35 e 90 caracteres', 'release-1-titulo-do-release-entre-35-e-90-caracteres', '<p>Subtítulo do texto 1. Se em uma linha, usar 90 caracteres. Se em duas linhas usar 190 caracteres</p>\r\n', '\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<blockquote>\r\n<p>Use o estilo \"Block Quote\", localizado nas opções do bloco da matéria, para criar um olho na sua matéria. Não há um limite de caracteres</p>\r\n</blockquote>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><object width=\"640\" height=\"480\" data=\"http://www.youtube-nocookie.com/v/Vj1MpR3iER4?hl=pt_BR&amp;version=3&amp;rel=0\" type=\"application/x-shockwave-flash\"><param name=\"allowFullScreen\" value=\"true\" /><param name=\"allowscriptaccess\" value=\"always\" /><param name=\"src\" value=\"http://www.youtube-nocookie.com/v/Vj1MpR3iER4?hl=pt_BR&amp;version=3&amp;rel=0\" /></object></p>', 0, 17, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/conteudo\\/thumb-imagem-conteudo.jpg\",\"float_intro\":\"right\",\"image_intro_alt\":\"Legenda da foto (arquivo .JPG) deve ter at\\u00e9 60 caracteres, preferencialmente\",\"image_intro_caption\":\"por Nome do Autor\",\"image_fulltext\":\"images\\/conteudo\\/thumb-imagem-conteudo.jpg\",\"float_fulltext\":\"left\",\"image_fulltext_alt\":\"Legenda da foto (arquivo .JPG) deve ter at\\u00e9 60 caracteres, preferencialmente\",\"image_fulltext_caption\":\"por Nome do Autor\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 4, 14, '', '', 1, 4, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', 'Chapéu da editoria', ''),
 (20, 73, 'Release 2: Título do release entre 35 e 90 caracteres', 'release-2-titulo-do-release-entre-35-e-90-caracteres', '<p>Subtítulo do texto 1. Se em uma linha, usar 90 caracteres. Se em duas linhas usar 190 caracteres</p>\r\n', '\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<blockquote>\r\n<p>Use o estilo \"Block Quote\", localizado nas opções do bloco da matéria, para criar um olho na sua matéria. Não há um limite de caracteres</p>\r\n</blockquote>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><object width=\"640\" height=\"480\" data=\"http://www.youtube-nocookie.com/v/Vj1MpR3iER4?hl=pt_BR&amp;version=3&amp;rel=0\" type=\"application/x-shockwave-flash\"><param name=\"allowFullScreen\" value=\"true\" /><param name=\"allowscriptaccess\" value=\"always\" /><param name=\"src\" value=\"http://www.youtube-nocookie.com/v/Vj1MpR3iER4?hl=pt_BR&amp;version=3&amp;rel=0\" /></object></p>', 0, 17, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/conteudo\\/thumb-imagem-conteudo.jpg\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":\"http:\\/\\/www.brasil.gov.br\",\"urlatext\":\"Brasil.gov.br\",\"targeta\":\"1\",\"urlb\":\"http:\\/\\/www.sdh.gov.br\",\"urlbtext\":\"Secretaria de Direitos Humanos\",\"targetb\":\"\",\"urlc\":\"http:\\/\\/www.cnv.gov.br\",\"urlctext\":\"\",\"targetc\":\"3\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 3, 13, 'Notícia, Texto de marcação, Portal Padrão', 'Sobreposição de descrição de artigo por meio da descrição em meta-dado.', 1, 4, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', 'Chapéu da editoria', ''),
@@ -1091,7 +1104,7 @@ INSERT INTO `idg2019_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, 
 (22, 75, 'Texto 3 - Título da notícia entre 35 e 90 caracteres', 'texto-3-titulo-da-noticia-entre-35-e-90-caracteres', '<p>Subtítulo do texto 1. Se em uma linha, usar 90 caracteres. Se em duas linhas usar 190 caracteres</p>\r\n', '\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<blockquote>\r\n<p>Use o estilo \"Block Quote\", localizado nas opções do bloco da matéria, para criar um olho na sua matéria. Não há um limite de caracteres</p>\r\n</blockquote>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><object width=\"640\" height=\"480\" data=\"http://www.youtube-nocookie.com/v/Vj1MpR3iER4?hl=pt_BR&amp;version=3&amp;rel=0\" type=\"application/x-shockwave-flash\"><param name=\"allowFullScreen\" value=\"true\" /><param name=\"allowscriptaccess\" value=\"always\" /><param name=\"src\" value=\"http://www.youtube-nocookie.com/v/Vj1MpR3iER4?hl=pt_BR&amp;version=3&amp;rel=0\" /></object></p>', 0, 17, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 17, 11, '', '', 1, 12, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
 (23, 76, 'Texto 4 - Título da notícia entre 35 e 90 caracteres', 'texto-4-titulo-da-noticia-entre-35-e-90-caracteres', '<p>Subtítulo do texto 1. Se em uma linha, usar 90 caracteres. Se em duas linhas usar 190 caracteres</p>\r\n', '\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<blockquote>\r\n<p>Use o estilo \"Block Quote\", localizado nas opções do bloco da matéria, para criar um olho na sua matéria. Não há um limite de caracteres</p>\r\n</blockquote>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><object width=\"640\" height=\"480\" data=\"http://www.youtube-nocookie.com/v/Vj1MpR3iER4?hl=pt_BR&amp;version=3&amp;rel=0\" type=\"application/x-shockwave-flash\"><param name=\"allowFullScreen\" value=\"true\" /><param name=\"allowscriptaccess\" value=\"always\" /><param name=\"src\" value=\"http://www.youtube-nocookie.com/v/Vj1MpR3iER4?hl=pt_BR&amp;version=3&amp;rel=0\" /></object></p>', 0, 17, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 13, 10, '', '', 1, 8, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
 (24, 77, 'Texto 5 - Título da notícia entre 35 e 90 caracteres', 'texto-5-titulo-da-noticia-entre-35-e-90-caracteres', '<p>Subtítulo do texto 1. Se em uma linha, usar 90 caracteres. Se em duas linhas usar 190 caracteres</p>\r\n', '\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<blockquote>\r\n<p>Use o estilo \"Block Quote\", localizado nas opções do bloco da matéria, para criar um olho na sua matéria. Não há um limite de caracteres</p>\r\n</blockquote>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><object width=\"640\" height=\"480\" data=\"http://www.youtube-nocookie.com/v/Vj1MpR3iER4?hl=pt_BR&amp;version=3&amp;rel=0\" type=\"application/x-shockwave-flash\"><param name=\"allowFullScreen\" value=\"true\" /><param name=\"allowscriptaccess\" value=\"always\" /><param name=\"src\" value=\"http://www.youtube-nocookie.com/v/Vj1MpR3iER4?hl=pt_BR&amp;version=3&amp;rel=0\" /></object></p>', 0, 17, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 3, 9, '', '', 1, 6, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', '');
-INSERT INTO `idg2019_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, `fulltext`, `state`, `catid`, `created`, `created_by`, `created_by_alias`, `modified`, `modified_by`, `checked_out`, `checked_out_time`, `publish_up`, `publish_down`, `images`, `urls`, `attribs`, `version`, `ordering`, `metakey`, `metadesc`, `access`, `hits`, `metadata`, `featured`, `language`, `xreference`, `note`) VALUES
+INSERT INTO `#__content` (`id`, `asset_id`, `title`, `alias`, `introtext`, `fulltext`, `state`, `catid`, `created`, `created_by`, `created_by_alias`, `modified`, `modified_by`, `checked_out`, `checked_out_time`, `publish_up`, `publish_down`, `images`, `urls`, `attribs`, `version`, `ordering`, `metakey`, `metadesc`, `access`, `hits`, `metadata`, `featured`, `language`, `xreference`, `note`) VALUES
 (25, 78, 'Texto 2 - Título da notícia entre 35 e 90 caracteres', 'texto-2-titulo-da-noticia-entre-35-e-90-caracteres', '<p>Subtítulo do texto 1. Se em uma linha, usar 90 caracteres. Se em duas linhas usar 190 caracteres</p>\r\n', '\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<blockquote>\r\n<p>Use o estilo \"Block Quote\", localizado nas opções do bloco da matéria, para criar um olho na sua matéria. Não há um limite de caracteres</p>\r\n</blockquote>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><object width=\"640\" height=\"480\" data=\"http://www.youtube-nocookie.com/v/Vj1MpR3iER4?hl=pt_BR&amp;version=3&amp;rel=0\" type=\"application/x-shockwave-flash\"><param name=\"allowFullScreen\" value=\"true\" /><param name=\"allowscriptaccess\" value=\"always\" /><param name=\"src\" value=\"http://www.youtube-nocookie.com/v/Vj1MpR3iER4?hl=pt_BR&amp;version=3&amp;rel=0\" /></object></p>', 0, 17, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 5, 8, '', '', 1, 1, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
 (26, 79, 'Conheça o novo modelo de plataforma digital do governo federal', 'conheca-o-novo-modelo-de-plataforma-digital-do-governo-federal', '<p style=\"text-align: left;\">Estrutura reúne o que há de mais adequado em soluções digitais de acessibilidade e de divulgação de informações nos mais variados formatos; conheça todos os detalhes deste novo modelo</p>\r\n', '\r\n<p style=\"text-align: left;\">Seja bem-vindo!</p>\r\n<blockquote>\r\n<p style=\"text-align: left;\"><a href=\"#\">Acesse os manuais que irão auxiliar na montagem de sites dos órgãos do governo federal</a></p>\r\n</blockquote>\r\n<p style=\"text-align: left;\">Para otimizar a comunicação com o cidadão, foi criada a Identidade Digital de Governo. Esse projeto busca padronizar os portais dos órgãos públicos federais e alinhar as informações com foco no cidadão.</p>\r\n<p style=\"text-align: left;\">Os conteúdos, módulos e funcionalidades foram criados para facilitar o acesso aos serviços oferecidos pelo Governo Federal, assim como possibilitam, por meio de vídeos, infográficos, textos, aplicativos, vídeos, que as notícias sejam facilmente compreendidas.</p>\r\n<p style=\"text-align: left;\">A nova Identidade também garante uma navegação acessível, para pessoas com deficiência, e adota conceito de web responsiva, ou seja, a páginas se adaptam automaticamente e podem ser visualizadas tanto em um computador quanto em smartphones e tablets, garantindo uma visualização mais uniforme.</p>\r\n<p style=\"text-align: left;\">Navegue pelo portal e conheça todas as aplicações possíveis para os mais variados conteúdos, sejam vídeos, imagens, áudios e textos.</p>\r\n<p style=\"text-align: left;\">Bom trabalho!</p>', 0, 17, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"www.youtube.com\\/v\\/BGzfIhIUF68?version=3&hl=pt_BR&rel=0\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"0\",\"link_author\":\"\",\"show_create_date\":\"1\",\"show_modify_date\":\"1\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"Saiba mais\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 16, 7, 'Internet, comunicação', '', 1, 92, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', 'identidade digital de governo', ''),
 (28, 88, 'Perguntas frequentes', 'perguntas-frequentes', '<p>Nesta seção são divulgadas as perguntas frequentes sobre o (a) [nome do órgão ou entidade] e ações no âmbito de sua competência.</p>\r\n', '\r\n<p>Caso o órgão ou entidade disponibilize uma seção de “Perguntas frequentes” em seu portal eletrônico, deverá remeter para o link que dá acesso a tal seção. O órgão/entidade que não divulga “Perguntas frequentes” deverá fazê-la e mantê-la constantemente atualizada, disponibilizando proativamente as respostas às perguntas usualmente formuladas pelos cidadãos.</p>\r\n<p>A <a class=\"external-link\" title=\"\" href=\"http://www.planalto.gov.br/ccivIl_03/Resolu%C3%A7%C3%A3o/2002/RES07-02web.htm\" target=\"_self\">Resolução nº 7, de 29 de julho de 2002</a>, do Comitê Eletrônico de Governo Eletrônico e os Padrões Web em Governo Eletrônico (Guia de administração do MPOG 8) orientam acerca de criação de seção dedicada às respostas às perguntas mais frequentes da sociedade.</p>', 1, 28, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 4, 0, 'Internet, Comunicação, LAI', '', 1, 16, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
@@ -1103,7 +1116,7 @@ INSERT INTO `idg2019_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, 
 (34, 97, 'Saiba como montar o menu da Lei de Acesso à Informação', 'saiba-como-montar-o-menu-da-lei-de-acesso-a-informacao', '<p>Órgãos do governo federal devem disponibilizar em seu site um menu especificado pela LAI</p>\r\n', '\r\n<p>Desde 1º de junho de 2013, todos os órgãos do Poder Executivo devem publicar em seus sites um rol de informações classificadas e desclassificadas, além de relatórios estatísticos sobre a Lei de Acesso à Informação (LAI).  Para orientar o cumprimento da exigência, o governo federal elaborou uma <a href=\"http://www.acessoainformacao.gov.br/acessoainformacaogov/espaco-gestor/arquivos/Guia_InformacoesClassificadas.pdf\">cartilha</a>, que visa nortear a publicação e a disposição dos dados nos endereços eletrônicos das entidades governamentais. </p>\r\n<p>No menu ao lado, abaixo do chapéu <strong>Sobre</strong>, estão todas as seções da legislação que que um órgão do governo federal deve publicar. Ao clicar em cada um deles o gestor de conteúdo terá uma explicação sobre qual informação deverá ser disponibilizada para o cidadão.</p>\r\n<p>A LAI tem por objetivo regulamentar o direito constitucional de acesso dos brasileiros às informações públicas. De acordo com a Controladoria Geral da União (CGU), o comando central da lei é “O acesso à informação é regra. O sigilo é a exceção”. Segundo o Coordenador-Geral de Promoção da Ética, Transparência e Integridade da entidade, Renato Capanema, o cidadão não precisa justificar a solicitação da informação. “O principio básico de uma cultura de acesso é justamente que a informação é pertencente à sociedade e não ao Estado. Com a LAI, o governo federal agora entrega a informação ao seu legítimo dono”, afirma.</p>\r\n<p>Por meio do e-SIC, sistema desenvolvido pela CGU, qualquer pessoa (física ou jurídica) pode encaminhar pedidos de acesso à informação para órgãos e entidades dos três Poderes da União, Estados, Distrito Federal e Municípios pela internet. Caso não possua acesso à web, o cidadão tem a opção de fazer seu cadastro na unidade física do Sistema de Informações ao Cidadão (SIC), ou também por telefone.</p>\r\n<p>A LAI prevê dois tipos de restrição à regra de cessão das informações: dados pessoais e informações classificadas por autoridades como sigilosas.</p>\r\n<p>As informações consideradas sigilosas são aquelas que podem colocar em risco a segurança da sociedade ou do Estado. Elas são classificadas em três níveis, a contar da data de sua produção:</p>\r\n<p>• Ultrassecreta: prazo de segredo de 25 anos (renovável uma única vez)</p>\r\n<p>• Secreta: prazo de segredo de 15 anos</p>\r\n<p>• Reservada: prazo de segredo de 5 anos</p>\r\n<p>As informações pessoais são aquelas relacionadas à pessoa natural identificada ou identificável e por isso têm seu acesso restrito, independentemente de classificação de sigilo, pelo prazo máximo de 100 anos a partir da sua data de produção. A intenção é respeitar a intimidade, vida privada, honra e imagem das pessoas.</p>\r\n<p>Caso a informação solicitada seja negada e o cidadão não concorde com a decisão, é possível entrar com recurso e pedir uma nova avaliação. A LAI prevê até quatro instâncias de recurso, podendo ser solicitado pessoalmente ou via internet. No <a href=\"http://www.acessoainformacao.gov.br/acessoainformacaogov/sic/como-entrar-recurso.asp\">site Acesso à Informação</a> é possível ver o passo a passo do processo. </p>\r\n<p>Dos pedidos recebidos em seu primeiro ano de vida (maio de 2012 a maio de 2013), 95,8% (83.483) foram respondidos, sendo 79,2% (66.185) de forma positiva, com a informação solicitada entregue ao cidadão. Outros 6,9% (5.764) tiveram acesso parcialmente concedido, eram perguntas duplicadas ou repetidas, tratavam de informação inexistente ou não eram de competência do órgão demandando. Apenas 9,8% (8.205) foram respondidos negativamente por se tratarem de pedidos de dados pessoais ou sigilosos.</p>\r\n<p>Fonte<br /><a class=\"external-link\" title=\"\" href=\"http://www.brasil.gov.br\" target=\"_self\">Portal Brasil</a></p>', 0, 17, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"0\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"1\",\"show_publish_date\":\"1\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"0\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 7, 6, '', '', 1, 5, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', 'Legislação', ''),
 (35, 99, 'Texto 3 - Título da notícia entre 35 e 90 caracteres', 'texto-3-titulo-da-noticia-entre-35-e-90-caracteres', '<p>Subtítulo do texto 3. Se em uma linha, usar 90 caracteres. Se em duas linhas usar 190 caracteres</p>\r\n', '\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<blockquote class=\"pullquote\">Use o estilo citação, localizado no campo corpo do texto, para criar um olho na sua matéria. Não há um limite de caracteres</blockquote>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', 1, 35, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/imagens_menu\\/foto-230-por-136-01.jpg\",\"float_intro\":\"\",\"image_intro_alt\":\"Foto no tamanho 230 pixels de largura por 136 pixels de altura\",\"image_intro_caption\":\"\",\"image_fulltext\":\"images\\/conteudo\\/thumb-imagem-conteudo.jpg\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"Legenda da foto (arquivo .JPG) deve ter at\\u00e9 60 caracteres, preferencialmente\",\"image_fulltext_caption\":\"Cr\\u00e9dito da imagem\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_intro\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 2, 0, '', '', 1, 44, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
 (36, 100, 'Texto 4 - Título da notícia entre 35 e 90 caracteres', 'texto-4-titulo-da-noticia-entre-35-e-90-caracteres', '<p>Subtítulo do texto 4. Se em uma linha, usar 90 caracteres. Se em duas linhas usar 190 caracteres</p>\r\n', '\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<blockquote>Use o estilo citação, localizado no campo corpo do texto, para criar um olho na sua matéria. Não há um limite de caracteres</blockquote>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p> </p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', 1, 35, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/imagens_menu\\/foto-230-por-136-02.jpg\",\"float_intro\":\"\",\"image_intro_alt\":\"Foto no tamanho 230 pixels de largura por 136 pixels de altura\",\"image_intro_caption\":\"\",\"image_fulltext\":\"images\\/conteudo\\/thumb-imagem-conteudo.jpg\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"Legenda da foto (arquivo .JPG) deve ter at\\u00e9 60 caracteres, preferencialmente\",\"image_fulltext_caption\":\"Cr\\u00e9dito da imagem\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 6, 0, '', '', 1, 3, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', '');
-INSERT INTO `idg2019_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, `fulltext`, `state`, `catid`, `created`, `created_by`, `created_by_alias`, `modified`, `modified_by`, `checked_out`, `checked_out_time`, `publish_up`, `publish_down`, `images`, `urls`, `attribs`, `version`, `ordering`, `metakey`, `metadesc`, `access`, `hits`, `metadata`, `featured`, `language`, `xreference`, `note`) VALUES
+INSERT INTO `#__content` (`id`, `asset_id`, `title`, `alias`, `introtext`, `fulltext`, `state`, `catid`, `created`, `created_by`, `created_by_alias`, `modified`, `modified_by`, `checked_out`, `checked_out_time`, `publish_up`, `publish_down`, `images`, `urls`, `attribs`, `version`, `ordering`, `metakey`, `metadesc`, `access`, `hits`, `metadata`, `featured`, `language`, `xreference`, `note`) VALUES
 (37, 101, 'Texto 5 - Título da notícia entre 35 e 90 caracteres', 'texto-5-titulo-da-noticia-entre-35-e-90-caracteres', '<p>Subtítulo do texto 5. Se em uma linha, usar 90 caracteres. Se em duas linhas usar 190 caracteres</p>\r\n', '\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<blockquote class=\"pullquote\">Use o estilo citação, localizado no campo corpo do texto, para criar um olho na sua matéria. Não há um limite de caracteres</blockquote>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', 1, 35, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/imagens_menu\\/foto-230-por-136-03.jpg\",\"float_intro\":\"\",\"image_intro_alt\":\"Foto no tamanho 230 pixels de largura por 136 pixels de altura\",\"image_intro_caption\":\"\",\"image_fulltext\":\"images\\/conteudo\\/thumb-imagem-conteudo.jpg\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"Legenda da foto (arquivo .JPG) deve ter at\\u00e9 60 caracteres, preferencialmente\",\"image_fulltext_caption\":\"Cr\\u00e9dito da imagem\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_intro\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 7, 0, '', '', 1, 1, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
 (39, 105, 'Imagem 1: título com até 45 caracteres', 'imagem-1-titulo-com-ate-45-caracteres', '<p>Espaço para incluir a legenda/descrição da imagem</p>', '', 1, 37, '2019-04-03 17:02:20', 929, '', '0000-00-00 00:00:00', 0, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/galeria_em_artigos\\/image01_peq.jpg\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"Nome do autor da imagem\",\"image_fulltext\":\"images\\/galeria_em_artigos\\/image01_grd.png\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"Nome do autor da imagem\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_intro\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 1, 0, '', '', 1, 2, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
 (40, 106, 'Imagem 2: título com até 45 caracteres', 'imagem-2-titulo-com-ate-45-caracteres', '<p>Espaço para incluir a legenda/descrição da imagem</p>', '', 1, 37, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/galeria_em_artigos\\/image02_peq.jpg\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"Nome do autor da imagem\",\"image_fulltext\":\"images\\/galeria_em_artigos\\/image02_grd.png\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"Nome do autor da imagem\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_intro\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 2, 0, '', '', 1, 0, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
@@ -1115,7 +1128,7 @@ INSERT INTO `idg2019_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, 
 (46, 145, 'Release 3: Título do release entre 35 e 90 caracteres', 'release-3-titulo-do-release-entre-35-e-90-caracteres', '<p>Subtítulo do texto 1. Se em uma linha, usar 90 caracteres. Se em duas linhas usar 190 caracteres</p>\r\n', '\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<blockquote>\r\n<p>Use o estilo \"Block Quote\", localizado nas opções do bloco da matéria, para criar um olho na sua matéria. Não há um limite de caracteres</p>\r\n</blockquote>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><object data=\"http://www.youtube-nocookie.com/v/Vj1MpR3iER4?hl=pt_BR&amp;version=3&amp;rel=0\" type=\"application/x-shockwave-flash\" width=\"640\" height=\"480\"><param name=\"allowFullScreen\" value=\"true\" /><param name=\"allowscriptaccess\" value=\"always\" /><param name=\"src\" value=\"http://www.youtube-nocookie.com/v/Vj1MpR3iER4?hl=pt_BR&amp;version=3&amp;rel=0\" /></object></p>', 1, 39, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 3, 0, '', '', 1, 0, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', 'Chapéu da editoria', ''),
 (47, 146, 'Release 4: Título do release entre 35 e 90 caracteres', 'release-4-titulo-do-release-entre-35-e-90-caracteres', '<p>Subtítulo do texto 1. Se em uma linha, usar 90 caracteres. Se em duas linhas usar 190 caracteres</p>\r\n', '\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<blockquote>\r\n<p>Use o estilo \"Block Quote\", localizado nas opções do bloco da matéria, para criar um olho na sua matéria. Não há um limite de caracteres</p>\r\n</blockquote>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><object data=\"http://www.youtube-nocookie.com/v/Vj1MpR3iER4?hl=pt_BR&amp;version=3&amp;rel=0\" type=\"application/x-shockwave-flash\" width=\"640\" height=\"480\"><param name=\"allowFullScreen\" value=\"true\" /><param name=\"allowscriptaccess\" value=\"always\" /><param name=\"src\" value=\"http://www.youtube-nocookie.com/v/Vj1MpR3iER4?hl=pt_BR&amp;version=3&amp;rel=0\" /></object></p>', 1, 39, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 4, 0, '', '', 1, 0, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', 'Chapéu da editoria', ''),
 (48, 147, 'Release 5: Título do release entre 35 e 90 caracteres', 'release-5-titulo-do-release-entre-35-e-90-caracteres', '<p>Subtítulo do texto 1. Se em uma linha, usar 90 caracteres. Se em duas linhas usar 190 caracteres</p>\r\n', '\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<blockquote>\r\n<p>Use o estilo \"Block Quote\", localizado nas opções do bloco da matéria, para criar um olho na sua matéria. Não há um limite de caracteres</p>\r\n</blockquote>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><object data=\"http://www.youtube-nocookie.com/v/Vj1MpR3iER4?hl=pt_BR&amp;version=3&amp;rel=0\" type=\"application/x-shockwave-flash\" width=\"640\" height=\"480\"><param name=\"allowFullScreen\" value=\"true\" /><param name=\"allowscriptaccess\" value=\"always\" /><param name=\"src\" value=\"http://www.youtube-nocookie.com/v/Vj1MpR3iER4?hl=pt_BR&amp;version=3&amp;rel=0\" /></object></p>', 1, 39, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 4, 0, '', '', 1, 0, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', 'Chapéu da editoria', '');
-INSERT INTO `idg2019_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, `fulltext`, `state`, `catid`, `created`, `created_by`, `created_by_alias`, `modified`, `modified_by`, `checked_out`, `checked_out_time`, `publish_up`, `publish_down`, `images`, `urls`, `attribs`, `version`, `ordering`, `metakey`, `metadesc`, `access`, `hits`, `metadata`, `featured`, `language`, `xreference`, `note`) VALUES
+INSERT INTO `#__content` (`id`, `asset_id`, `title`, `alias`, `introtext`, `fulltext`, `state`, `catid`, `created`, `created_by`, `created_by_alias`, `modified`, `modified_by`, `checked_out`, `checked_out_time`, `publish_up`, `publish_down`, `images`, `urls`, `attribs`, `version`, `ordering`, `metakey`, `metadesc`, `access`, `hits`, `metadata`, `featured`, `language`, `xreference`, `note`) VALUES
 (49, 173, 'O que é RSS?', 'o-que-e-rss', '<p>O RSS (Really Simple Syndication) é um formato de distribuição de informações em tempo real pela internet. Por esse sistema, o internauta não precisa abrir o navegador ou fazer busca de notícias, fotos ou vídeos em diferentes sites. Todo o conteúdo desejado vai até você automaticamente por um código de RSS. Basta escolher qual conteúdo quer receber.</p>\r\n<p>Há duas formas de usar RSS: diretamente de seu navegador ou por um programa de leitura.</p>\r\n<p>Se você preferir acessar a partir do próprio navegador, é preciso copiar e colar o link do RSS na barra de endereço para ser redirecionado para uma tela que lhe dará as opções e instruções de como ler o código. Existem também aplicativos e complementos dos navegadores que fazem esta função.</p>\r\n<p>A outra maneira é instalando um leitor de RSS (ou também conhecido RSS Reader) no seu computador. Existem inúmeros programas disponíveis para teste ou download gratuito na internet (como por exemplo o FeedReader). Faça a sua pesquisa e escolha aquele que melhor atenda a sua necessidade.</p>', '', 1, 2, '2019-04-03 17:02:20', 929, '', '0000-00-00 00:00:00', 0, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 1, 5, '', '', 1, 0, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
 (50, 176, 'Título da notícia em 3 linhas - até 50 caracteres', 'titulo-da-noticia-em-3-linhas-ate-50-caracteres', '<p>Subtítulo em quatro linhas com até 110 caracteres. Subtítulo em quatro linhas com até 110 caracteres.</p>\r\n', '\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<blockquote>Use o estilo citação, localizado no campo corpo do texto, para criar um olho na sua matéria. Não há um limite de caracteres</blockquote>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', 1, 9, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/conteudo\\/imagem-conteudo-200x130-a.jpg\",\"float_intro\":\"\",\"image_intro_alt\":\"Foto no tamanho 200 pixels de largura por 130 pixels de altura\",\"image_intro_caption\":\"\",\"image_fulltext\":\"images\\/conteudo\\/thumb-imagem-conteudo.jpg\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"Legenda da foto (arquivo .JPG) deve ter at\\u00e9 60 caracteres, preferencialmente\",\"image_fulltext_caption\":\"Cr\\u00e9dito da imagem\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 2, 2, '', '', 1, 5, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', 'Chapéu', ''),
 (51, 177, 'Título da notícia em 3 linhas - até 50 caracteres', 'titulo-da-noticia-em-3-linhas-ate-50-caracteres-3', '<p>Subtítulo em quatro linhas com até 110 caracteres. Subtítulo em quatro linhas com até 110 caracteres.</p>\r\n', '\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<blockquote>Use o estilo citação, localizado no campo corpo do texto, para criar um olho na sua matéria. Não há um limite de caracteres</blockquote>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', 1, 9, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/conteudo\\/imagem-conteudo-200x130-b.jpg\",\"float_intro\":\"\",\"image_intro_alt\":\"Texto alternativo.\",\"image_intro_caption\":\"\",\"image_fulltext\":\"images\\/conteudo\\/thumb-imagem_noticia_vertical.jpg\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"Legenda da foto (arquivo .JPG) deve ter at\\u00e9 60 caracteres, preferencialmente\",\"image_fulltext_caption\":\"Cr\\u00e9dito da imagem\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 2, 1, '', '', 1, 2, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', 'Chapéu', ''),
@@ -1123,7 +1136,7 @@ INSERT INTO `idg2019_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, 
 (53, 179, 'Título da notícia entre 40 e 50 caracteres com espaço', 'titulo-da-noticia-em-3-linhas-ate-50-caracteres', '<p>Subtítulo em uma linha com até 90 caracteres. Subtítulo em duas linhas com até 90 caracteres.</p>\r\n', '\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<blockquote>Use o estilo citação, localizado no campo corpo do texto, para criar um olho na sua matéria. Não há um limite de caracteres</blockquote>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', 1, 42, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/conteudo\\/imagem-conteudo-200x130-a.jpg\",\"float_intro\":\"\",\"image_intro_alt\":\"Foto no tamanho 200 pixels de largura por 130 pixels de altura\",\"image_intro_caption\":\"Cr\\u00e9dito da imagem\",\"image_fulltext\":\"images\\/conteudo\\/thumb-imagem-conteudo.jpg\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"Legenda da foto (arquivo .JPG) deve ter at\\u00e9 60 caracteres, preferencialmente\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 2, 0, '', '', 1, 0, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', 'Chapéu', ''),
 (54, 182, 'Pagina 1: titulo do texto institucional', 'pagina-1-titulo-do-texto-institucional', '<p>Espaço para inserir o subtítulo do texto institucional. Se em uma linha, usar 90 caracteres. Se em duas linhas usar 190 caracteres.</p>\r\n', '\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<h3>Segundo subtítulo em negrito</h3>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<h3>Terceiro subtítulo em negrito</h3>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><a href=\"http://www.joomla.org\" target=\"_blank\">Link externo 1</a><br />Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><a href=\"http://www.joomla.org\" target=\"_blank\">Link externo 2</a><br />Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><a href=\"http://www.joomla.org\" target=\"_blank\">Link externo 3</a><br />Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><a href=\"http://www.joomla.org\" target=\"_blank\">Link externo 4</a><br />Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><a href=\"http://www.joomla.org\" target=\"_blank\">Link externo 5</a><br />Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p> </p>', 1, 43, '2019-04-03 17:02:20', 929, '', '0000-00-00 00:00:00', 0, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 1, 2, '', '', 1, 14, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
 (55, 183, 'Pagina 2: titulo do texto institucional', 'pagina-2-titulo-do-texto-institucional-2', '<p>Espaço para inserir o subtítulo do texto institucional. Se em uma linha, usar 90 caracteres. Se em duas linhas usar 190 caracteres.</p>\r\n', '\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<h3>Segundo subtítulo em negrito</h3>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<h3>Terceiro subtítulo em negrito</h3>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><a href=\"http://www.joomla.org\" target=\"_blank\">Link externo 1</a><br />Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><a href=\"http://www.joomla.org\" target=\"_blank\">Link externo 2</a><br />Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><a href=\"http://www.joomla.org\" target=\"_blank\">Link externo 3</a><br />Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><a href=\"http://www.joomla.org\" target=\"_blank\">Link externo 4</a><br />Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><a href=\"http://www.joomla.org\" target=\"_blank\">Link externo 5</a><br />Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p> </p>', 1, 43, '2019-04-03 17:02:20', 929, '', '0000-00-00 00:00:00', 0, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 1, 1, '', '', 1, 50, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 1, '*', '', '');
-INSERT INTO `idg2019_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, `fulltext`, `state`, `catid`, `created`, `created_by`, `created_by_alias`, `modified`, `modified_by`, `checked_out`, `checked_out_time`, `publish_up`, `publish_down`, `images`, `urls`, `attribs`, `version`, `ordering`, `metakey`, `metadesc`, `access`, `hits`, `metadata`, `featured`, `language`, `xreference`, `note`) VALUES
+INSERT INTO `#__content` (`id`, `asset_id`, `title`, `alias`, `introtext`, `fulltext`, `state`, `catid`, `created`, `created_by`, `created_by_alias`, `modified`, `modified_by`, `checked_out`, `checked_out_time`, `publish_up`, `publish_down`, `images`, `urls`, `attribs`, `version`, `ordering`, `metakey`, `metadesc`, `access`, `hits`, `metadata`, `featured`, `language`, `xreference`, `note`) VALUES
 (56, 184, 'Pagina 3: titulo do texto institucional', 'pagina-3-titulo-do-texto-institucional-3', '<p>Espaço para inserir o subtítulo do texto institucional. Se em uma linha, usar 90 caracteres. Se em duas linhas usar 190 caracteres.</p>\r\n', '\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<h3>Segundo subtítulo em negrito</h3>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<h3>Terceiro subtítulo em negrito</h3>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><a href=\"http://www.joomla.org\" target=\"_blank\">Link externo 1</a><br />Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><a href=\"http://www.joomla.org\" target=\"_blank\">Link externo 2</a><br />Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><a href=\"http://www.joomla.org\" target=\"_blank\">Link externo 3</a><br />Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><a href=\"http://www.joomla.org\" target=\"_blank\">Link externo 4</a><br />Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><a href=\"http://www.joomla.org\" target=\"_blank\">Link externo 5</a><br />Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p> </p>', 1, 43, '2019-04-03 17:02:20', 929, '', '0000-00-00 00:00:00', 0, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 1, 0, '', '', 1, 4, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 1, '*', '', ''),
 (57, 192, 'Editoria B - Texto 02', 'editoria-b-texto-2', '<p>Subtítulo em três linhas com até 110 caracteres. Subtítulo em três linhas com até 110 caracteres.</p>\r\n', '\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<blockquote>Use o estilo citação, localizado no campo corpo do texto, para criar um olho na sua matéria. Não há um limite de caracteres</blockquote>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', 1, 14, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/imagens_menu\\/conteudos_de_marcacao\\/editoria_b\\/texto-2-titulo-da-noticia-entre-35-e-90-caracteres.jpeg\",\"float_intro\":\"\",\"image_intro_alt\":\"Foto no tamanho 230 pixels de largura por 136 pixels de altura\",\"image_intro_caption\":\"\",\"image_fulltext\":\"images\\/conteudo\\/thumb-imagem-conteudo.jpg\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"Legenda da foto (arquivo .JPG) deve ter at\\u00e9 60 caracteres, preferencialmente\",\"image_fulltext_caption\":\"Cr\\u00e9dito da imagem\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 23, 0, '', '', 1, 31, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 1, '*', 'Chapéu', ''),
 (58, 193, 'Editoria B - Texto 03', 'editoria-b-texto-3', '<p>Subtítulo em três linhas com até 110 caracteres. Subtítulo em três linhas com até 110 caracteres.</p>\r\n', '\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<blockquote>Use o estilo citação, localizado no campo corpo do texto, para criar um olho na sua matéria. Não há um limite de caracteres</blockquote>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', 1, 14, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/imagens_menu\\/conteudos_de_marcacao\\/editoria_b\\/texto-3-titulo-da-noticia-entre-35-e-90-caracteres.jpeg\",\"float_intro\":\"\",\"image_intro_alt\":\"Foto no tamanho 230 pixels de largura por 136 pixels de altura\",\"image_intro_caption\":\"\",\"image_fulltext\":\"images\\/conteudo\\/thumb-imagem-conteudo.jpg\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"Legenda da foto (arquivo .JPG) deve ter at\\u00e9 60 caracteres, preferencialmente\",\"image_fulltext_caption\":\"Cr\\u00e9dito da imagem\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 24, 0, '', '', 1, 31, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 1, '*', 'Chapéu', ''),
@@ -1131,7 +1144,7 @@ INSERT INTO `idg2019_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, 
 (60, 195, 'Editoria B - Texto 05', 'editoria-b-texto-5', '<p>Subtítulo em três linhas com até 110 caracteres. Subtítulo em três linhas com até 110 caracteres.</p>\r\n', '\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<blockquote>Use o estilo citação, localizado no campo corpo do texto, para criar um olho na sua matéria. Não há um limite de caracteres</blockquote>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', 1, 14, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/imagens_menu\\/conteudos_de_marcacao\\/editoria_b\\/texto-2-titulo-da-noticia-entre-35-e-90-caracteres.jpeg\",\"float_intro\":\"\",\"image_intro_alt\":\"Foto no tamanho 230 pixels de largura por 136 pixels de altura\",\"image_intro_caption\":\"\",\"image_fulltext\":\"images\\/conteudo\\/thumb-imagem-conteudo.jpg\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"Legenda da foto (arquivo .JPG) deve ter at\\u00e9 60 caracteres, preferencialmente\",\"image_fulltext_caption\":\"Cr\\u00e9dito da imagem\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 24, 0, '', '', 1, 31, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', 'Chapéu', ''),
 (61, 196, 'Editoria B - Texto 06', 'editoria-b-texto-6', '<p>Subtítulo em três linhas com até 110 caracteres. Subtítulo em três linhas com até 110 caracteres.</p>\r\n', '\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<blockquote>Use o estilo citação, localizado no campo corpo do texto, para criar um olho na sua matéria. Não há um limite de caracteres</blockquote>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', 1, 14, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/imagens_menu\\/conteudos_de_marcacao\\/editoria_b\\/texto-3-titulo-da-noticia-entre-35-e-90-caracteres.jpeg\",\"float_intro\":\"\",\"image_intro_alt\":\"Foto no tamanho 230 pixels de largura por 136 pixels de altura\",\"image_intro_caption\":\"\",\"image_fulltext\":\"images\\/conteudo\\/thumb-imagem-conteudo.jpg\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"Legenda da foto (arquivo .JPG) deve ter at\\u00e9 60 caracteres, preferencialmente\",\"image_fulltext_caption\":\"Cr\\u00e9dito da imagem\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 25, 0, '', '', 1, 31, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', 'Chapéu', ''),
 (62, 205, 'Editoria C - Texto 01', 'editoria-c-texto-01', '<p>Subtítulo em três linhas com até 110 caracteres. Subtítulo em três linhas com até 110 caracteres.</p>\r\n', '\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<blockquote>Use o estilo citação, localizado no campo corpo do texto, para criar um olho na sua matéria. Não há um limite de caracteres</blockquote>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', 1, 15, '2019-04-03 17:02:20', 929, '', '0000-00-00 00:00:00', 0, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/imagens_menu\\/conteudos_de_marcacao\\/editoria_c\\/texto-1-titulo-da-noticia-entre-35-e-90-caracteres.jpeg\",\"float_intro\":\"\",\"image_intro_alt\":\"Foto no tamanho 230 pixels de largura por 136 pixels de altura\",\"image_intro_caption\":\"\",\"image_fulltext\":\"images\\/conteudo\\/thumb-imagem-conteudo.jpg\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"Legenda da foto (arquivo .JPG) deve ter at\\u00e9 60 caracteres, preferencialmente\",\"image_fulltext_caption\":\"Cr\\u00e9dito da imagem\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 1, 0, '', '', 1, 1, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', 'Chapéu', '');
-INSERT INTO `idg2019_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, `fulltext`, `state`, `catid`, `created`, `created_by`, `created_by_alias`, `modified`, `modified_by`, `checked_out`, `checked_out_time`, `publish_up`, `publish_down`, `images`, `urls`, `attribs`, `version`, `ordering`, `metakey`, `metadesc`, `access`, `hits`, `metadata`, `featured`, `language`, `xreference`, `note`) VALUES
+INSERT INTO `#__content` (`id`, `asset_id`, `title`, `alias`, `introtext`, `fulltext`, `state`, `catid`, `created`, `created_by`, `created_by_alias`, `modified`, `modified_by`, `checked_out`, `checked_out_time`, `publish_up`, `publish_down`, `images`, `urls`, `attribs`, `version`, `ordering`, `metakey`, `metadesc`, `access`, `hits`, `metadata`, `featured`, `language`, `xreference`, `note`) VALUES
 (63, 206, 'Editoria C - Texto 02', 'editoria-c-texto-2', '<p>Subtítulo em três linhas com até 110 caracteres. Subtítulo em três linhas com até 110 caracteres.</p>\r\n', '\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<blockquote>Use o estilo citação, localizado no campo corpo do texto, para criar um olho na sua matéria. Não há um limite de caracteres</blockquote>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', 1, 15, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/imagens_menu\\/conteudos_de_marcacao\\/editoria_c\\/texto-2-titulo-da-noticia-entre-35-e-90-caracteres.jpeg\",\"float_intro\":\"\",\"image_intro_alt\":\"Foto no tamanho 230 pixels de largura por 136 pixels de altura\",\"image_intro_caption\":\"\",\"image_fulltext\":\"images\\/conteudo\\/thumb-imagem-conteudo.jpg\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"Legenda da foto (arquivo .JPG) deve ter at\\u00e9 60 caracteres, preferencialmente\",\"image_fulltext_caption\":\"Cr\\u00e9dito da imagem\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 2, 0, '', '', 1, 0, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', 'Chapéu', ''),
 (64, 207, 'Editoria C - Texto 03', 'editoria-c-texto-3', '<p>Subtítulo em três linhas com até 110 caracteres. Subtítulo em três linhas com até 110 caracteres.</p>\r\n', '\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<blockquote>Use o estilo citação, localizado no campo corpo do texto, para criar um olho na sua matéria. Não há um limite de caracteres</blockquote>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p><strong>Subtítulo em negrito</strong></p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', 1, 15, '2019-04-03 17:02:20', 929, '', '2019-04-03 17:02:20', 929, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/imagens_menu\\/conteudos_de_marcacao\\/editoria_c\\/texto-3-titulo-da-noticia-entre-35-e-90-caracteres.jpeg\",\"float_intro\":\"\",\"image_intro_alt\":\"Foto no tamanho 230 pixels de largura por 136 pixels de altura\",\"image_intro_caption\":\"\",\"image_fulltext\":\"images\\/conteudo\\/thumb-imagem-conteudo.jpg\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"Legenda da foto (arquivo .JPG) deve ter at\\u00e9 60 caracteres, preferencialmente\",\"image_fulltext_caption\":\"Cr\\u00e9dito da imagem\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 3, 0, '', '', 1, 0, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', 'Chapéu', ''),
 (65, 217, 'Imagem 1: título com até 45 caracteres', 'imagem-1-titulo-com-ate-45-caracteres', '<p>Espaço para incluir a legenda/descrição da imagem</p>', '', 1, 44, '2019-04-03 17:02:20', 929, '', '0000-00-00 00:00:00', 0, 0, '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/galeria_em_artigos\\/image01_peq.jpg\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"Nome do autor da imagem\",\"image_fulltext\":\"images\\/galeria_em_artigos\\/image01_grd.png\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"Nome do autor da imagem\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"show_title\":\"\",\"link_titles\":\"\",\"show_intro\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 1, 0, '', '', 1, 2, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
@@ -1150,7 +1163,7 @@ INSERT INTO `idg2019_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, 
 (78, 340, 'Entenda o que é o menu quente', 'entenda-o-que-e-o-menu-quente', '<p>ND.</p>', '', -2, 58, '2019-06-15 14:52:53', 936, '', '2019-06-15 14:59:09', 936, 0, '0000-00-00 00:00:00', '2019-10-09 16:31:36', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/conteudo\\/b39e4575-c6c3-462d-99db-4faaffbab4b0.png\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"article_layout\":\"\",\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"info_block_show_title\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_associations\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_page_title\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 3, 2, '', '', 1, 0, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
 (79, 341, 'Conheça os temas do Portal Institucional Padrão', 'conheca-os-temas-do-portal-institucional-padrao', '<p>ND.</p>', '', -2, 58, '2019-06-15 14:52:53', 936, '', '2019-06-15 14:57:14', 936, 0, '0000-00-00 00:00:00', '2019-10-09 16:31:36', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/conteudo\\/e89917a2-1493-441c-8e21-49fe15d48937.png\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"article_layout\":\"\",\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"info_block_show_title\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_associations\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_page_title\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 2, 1, '', '', 1, 1, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
 (80, 342, 'Conheça os temas do Portal Institucional Padrão (2)', 'conheca-os-temas-do-portal-institucional-padrao-2', '<p>ND.</p>', '', -2, 58, '2019-06-15 14:52:53', 936, '', '2019-06-15 14:58:19', 936, 0, '0000-00-00 00:00:00', '2019-06-15 14:52:53', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/conteudo\\/e89917a2-1493-441c-8e21-49fe15d48937.png\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"article_layout\":\"\",\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"info_block_show_title\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_associations\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_page_title\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 2, 0, '', '', 1, 0, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', '');
-INSERT INTO `idg2019_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, `fulltext`, `state`, `catid`, `created`, `created_by`, `created_by_alias`, `modified`, `modified_by`, `checked_out`, `checked_out_time`, `publish_up`, `publish_down`, `images`, `urls`, `attribs`, `version`, `ordering`, `metakey`, `metadesc`, `access`, `hits`, `metadata`, `featured`, `language`, `xreference`, `note`) VALUES
+INSERT INTO `#__content` (`id`, `asset_id`, `title`, `alias`, `introtext`, `fulltext`, `state`, `catid`, `created`, `created_by`, `created_by_alias`, `modified`, `modified_by`, `checked_out`, `checked_out_time`, `publish_up`, `publish_down`, `images`, `urls`, `attribs`, `version`, `ordering`, `metakey`, `metadesc`, `access`, `hits`, `metadata`, `featured`, `language`, `xreference`, `note`) VALUES
 (81, 347, 'Projeto da UFRB que incentiva mulheres a seguir carreira nas exatas ganha prêmio nacional', 'projeto-da-ufrb-que-incentiva-mulheres-a-seguir-carreira-nas-exatas-ganha-premio-nacional', '<p>O projeto de extensão da Universidade Federal do Recôncavo da Bahia (UFRB) que incentiva mulheres a seguir carreira na área das ciências exatas e tecnológicas conquistou o 3º lugar no concurso de Cases de Sucesso, realizado durante a XVI Reunião Nacional de Ramos Estudantis do&nbsp;<em>Institute of Electrical and Electronic Engineers - IEEE</em>&nbsp;(Instituto de Engenheiros Eletricistas e Eletrônicos), que ocorreu no campus de Guaratinguetá da Universidade Estadual Paulista (Unesp), entre os dias 20 e 23 de junho.</p>\r\n<figure><img src=\"https://www.ufrb.edu.br/portal/images/noticias2019/20190626_projeto_cetens1.png\" alt=\"\" /><figcaption>A coordenadora, professora Cristiane Pimentel, ao lado de participantes do projeto.</figcaption></figure>\r\n<p>O projeto “Princesas da Tecnologia” foi premiado na categoria&nbsp;<em>Women in Engineering – WIE</em>(Mulheres na Engenharia), dentre dez concorrentes nacionais que disputaram o concurso. Coordenado pela professora Cristiane Pimentel, o projeto buscou atrair o interesse de estudantes do terceiro ano do ensino médio, especialmente do sexo feminino, pelas profissões ligadas às&nbsp;<em>Science, Technology, Engineering, Mathematics – STEM&nbsp;</em>(Ciências, Tecnologia, Engenharia e Matemática) e, como consequência, reduzir os índices de evasão nesses cursos e apoiar uma maior diversidade do público discente na graduação.</p>\r\n<p>De acordo com as informações levantadas pelo projeto, apesar do Brasil ter um maior percentual de estudantes do sexo feminino nas universidades, grande parte dessas estudantes acaba optando por carreiras relacionadas às áreas de humanas e saúde. “Segundo o relatório&nbsp;<em>Gender and Education for All: The Leap to Equality</em>&nbsp;(Gênero e Educação para Todos: O Salto para a Igualdade), publicado pela UNESCO em 2007, o desinteresse das meninas pelas ciências e estudos técnicos é vista como uma questão social e ações de familiares e de educadores contribuem para essa falta de interesse”, apontou a pesquisa, como justificativa para a proposta.</p>\r\n<p>Inspirado em outras iniciativas do gênero, o “Princesas da Tecnologia” buscou sensibilizar a comunidade acadêmica e a sociedade sobre o papel da mulher, eliminando os estereótipos de gênero. O nome do projeto faz referência à cidade de Feira de Santana, conhecida como Princesa do Sertão, onde as atividades foram desenvolvidas no período de julho a dezembro de 2018. As ações ocorreram no Colégio Professora Tecla Mello e envolveram 90 alunos da escola estadual.</p>\r\n<p>Estudantes do Centro de Ciência e Tecnologia em Energia e Sustentabilidade (CETENS) da UFRB também colaboraram com o projeto. Ao todo, foram nove voluntários dos cursos de Bacharelado Interdisciplinar em Energia e Sustentabilidade, Engenharia de Produção, Engenharia de Materiais, Engenharia de Energias e Engenharia de Tecnologia Assistiva e Acessibilidade.</p>\r\n<figure><img src=\"https://www.ufrb.edu.br/portal/images/noticias2019/20190626_projeto_cetens.png\" alt=\"\" /><figcaption>Estudantes do CETENS fazem apresentações de projetos para alunos do ensino médio.</figcaption></figure>\r\n<p><strong>Etapas do projeto –&nbsp;</strong>No início das atividades, foi aplicado um questionário internacional de pesquisa intitulado&nbsp;<em>The Relevance of Science Education – ROSE</em>, com o objetivo de analisar o grau de interesse das alunas do ensino médio do Colégio Professora Tecla Mello pelos cursos&nbsp;<em>STEM</em>, especialmente os oferecidos pelo CETENS, e o conhecimento por parte delas sobre as oportunidades ou dificuldades que podem enfrentar nesses cursos.</p>\r\n<p>Após esta etapa, foram realizadas palestras com mulheres profissionais e docentes de cada curso do CETENS para divulgar o que faz o profissional dessas áreas, desmistificar as profissões e sanar as dúvidas. Em seguida, foi promovida uma visita técnica das alunas do Tecla Mello à UFRB para conhecer as instalações da universidade e, por fim, foram realizadas apresentações na escola de projetos desenvolvidos por estudantes do CETENS para demonstrar a aplicação prática.</p>\r\n<p>“As alunas tiveram a oportunidade de conversar com outros profissionais, gerando interesse pelas áreas e compartilhando experiências”, disse a professora Cristiane. Ao final das atividades, foi aplicado novamente o questionário ROSE para avaliar o impacto do projeto na escola. Foi constatado que houve redução na dúvida quanto ao curso de preferência para a graduação, passando de 67% para 27% o índice antes e após as ações. Também houve um aumento pelo interesse na área de exatas, passando de 31% para 42%, e dois cursos despertaram maior interesse: Engenharia de Produção e Engenharia de Energia.</p>\r\n<p>&nbsp;</p>', '', 1, 17, '2019-06-26 17:24:50', 931, '', '2019-10-02 17:39:27', 931, 0, '0000-00-00 00:00:00', '2019-06-26 17:24:50', '0000-00-00 00:00:00', '{\"image_intro\":\"https:\\/\\/www.ufrb.edu.br\\/portal\\/images\\/noticias2019\\/20190626_projeto_cetens1.png\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"article_layout\":\"\",\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"info_block_show_title\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_associations\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_page_title\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 15, 2, '', '', 1, 55, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', 'EXTENSÃO', ''),
 (82, 348, 'UFRB empossa nova diretoria do Campus Feira de Santana em mandato de quatro anos', 'ufrb-empossa-nova-diretoria-do-campus-feira-de-santana-em-mandato-de-quatro-anos', '<p>A Universidade Federal do Recôncavo da Bahia (UFRB) realizou a solenidade de posse da nova diretoria eleita do<a href=\"https://www.ufrb.edu.br/cetens/\" target=\"_blank\" rel=\"noopener\">&nbsp;Centro de Ciências e Tecnologia em Energia e Sustentabilidade (CETENS)</a>, em Feira de Santana, na manhã da última quarta-feira, dia 19 de junho, na Sala 07, do Pavilhão 2, na própria instituição.</p>\r\n<p>Os novos empossados nos cargos de diretor e vice-diretor, respectivamente, são os professores doutores Jacson Machado Nunes e Odair Vieira dos Santos, que substituíram as professora doutoras, Susana Couto Pimentel e Jacira Teixeira Castro, respectivamente. O mandato tem duração de quatro anos.</p>\r\n<p>A solenidade de posse foi presidida pelo reitor da UFRB, professor Silvio Soglia. Da mesa institucional ainda fizeram parte, a vice-reitora Georgina Gonçalves dos Santos, os novos diretores e ex-diretores; e o secretário de Trabalho, Turismo e Desenvolvimento Econômico de Feira de Santana, Antonio Carlos Borges Júnior.</p>\r\n<p>Após a formação da mesa, aconteceu a execução do Hino Nacional e os pronunciamentos das professoras Susana Couto e Jacira Castro.</p>\r\n<p>Susana Couto fez um balanço de sua gestão como diretora do CETENS, no período compreendido de 07 de julho de 2015 a 19 de junho de 2019. Ela prestou contas de sua atuação e agradeceu as pessoas que lhe apoiaram no cargo. Em seguida, discursou a vice-diretora cessante, Jacira Teixeira.</p>', '', 1, 17, '2019-06-26 18:10:20', 931, '', '2019-06-26 18:10:43', 931, 0, '0000-00-00 00:00:00', '2019-06-26 18:10:20', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/conteudo\\/possecetens.png\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"article_layout\":\"\",\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"info_block_show_title\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_associations\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_page_title\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 2, 1, '', '', 1, 8, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', 'POSSE', ''),
 (83, 349, 'Grupo da UFRB publica livro sobre atividade física e alimentação saudável na escola', 'grupo-da-ufrb-publica-livro-sobre-atividade-fisica-e-alimentacao-saudavel-na-escola', '<p>Os professores da Universidade Federal do Recôncavo da Bahia (UFRB), Teresa Maria Bianchini de Quadros, Alex Pinheiro Gordia e Vanessa Barbosa Facina, acabam de publicar o livro “Atividade Física e Alimentação Saudável na Escola: Um Programa de Educação para a Saúde” pela Phorte Editora. Também participaram da construção do livro nove estudantes dos cursos de Licenciatura em Educação Física e Bacharelado em Nutrição da Universidade.</p>\r\n<p>O livro de 304 páginas relata as experiências de dois anos do Programa de Educação pelo Trabalho para a Saúde (PET-Saúde) intitulado “Promoção da Saúde do Escolar”, realizado em Amargosa, Bahia. O intuito do programa foi contribuir para a formação integral de crianças e de adolescentes estudantes da rede pública de ensino do município de Amargosa por meio de ações de promoção, de prevenção e de atenção à saúde, com vistas ao enfrentamento das vulnerabilidades que comprometem o pleno crescimento/desenvolvimento de indivíduos nessa faixa etária.</p>\r\n<p>O livro é composto por três partes com um total de 16 capítulos. A Parte 1 é sobre “A promoção da saúde do escolar e o trabalho interdisciplinar” e está estruturada em dez capítulos, que têm por objetivo apresentar os planos de trabalho das dez oficinas realizadas com os escolares. Na Parte 2, “Envolvendo a comunidade escolar em ações de promoção da saúde”, estruturada em três capítulos, os autores apresentam estratégias que visam facilitar a ação de pais, merendeiras e professoras como agentes promotores da saúde do escolar. A Parte 3 refere-se aos “Relatos de experiência” de petianos, gestores, diretores, coordenação pedagógica e professores de escolas que participaram do programa e foi estruturada em três capítulos que apresentam a percepção dos atores envolvidos no PET Promoção da Saúde do Escolar, com foco na avaliação geral do programa.</p>\r\n<p>A professora Teresa Quadros explica que a escola é um espaço institucional de convivência social, que acolhe o escolar durante relevante parte de sua vida, com grande potencial para influenciar na adoção de modos de vida mais saudáveis. “Os escolares, quando bem informados, podem ser multiplicadores e estimular mudanças em suas famílias, fomentando novos hábitos alimentares e de atividade física. Com base nesse contexto, acreditamos que um programa de intervenção interdisciplinar, com foco no aumento da prática de atividade física, na diminuição do comportamento sedentário e na adoção de hábitos alimentares saudáveis, desenvolvido na escola, tenha sido a combinação ideal para a realização das atividades do PET Promoção da Saúde do Escolar”, afirma a professora.</p>\r\n<p>Os autores também reforçam a importância de ações como o PET-Saúde para promoção da saúde da população e para a formação inicial e continuada de estudantes de graduação e profissionais da área da saúde. O Programa tem o auxílio financeiro Ministério da Saúde, disponibilizado por meio de bolsas de estudos, que possibilitou o desenvolvimento do trabalho em Amargosa e a construção da obra. “O livro contribui para preencher uma importante lacuna da literatura sobre como planejar e desenvolver um programa de educação para saúde no ambiente escolar, com ênfase na prática de atividade física e na alimentação saudável”, diz Teresa.</p>', '', 1, 17, '2019-06-26 18:11:29', 931, '', '2019-06-26 18:11:29', 0, 0, '0000-00-00 00:00:00', '2019-06-26 18:11:29', '0000-00-00 00:00:00', '{\"image_intro\":\"images\\/conteudo\\/alimentacao-saudavel.jpg\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"article_layout\":\"\",\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"info_block_show_title\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_associations\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_page_title\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 1, 0, '', '', 1, 3, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', 'PUBLICAÇÃO', ''),
@@ -1167,7 +1180,7 @@ INSERT INTO `idg2019_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, 
 (94, 384, 'Manifestação na Ouvidoria', 'manifestacao-na-ouvidoria', '', '', 1, 60, '2019-10-07 16:42:53', 931, '', '2019-10-18 16:23:24', 931, 0, '0000-00-00 00:00:00', '2019-10-07 16:42:53', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"article_layout\":\"idg2019:servico\",\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"info_block_show_title\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_associations\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_page_title\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 8, 0, '', '', 1, 18, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
 (95, 394, 'Pró-Reitoria de Administração - PROAD', 'pro-reitoria-de-administracao-proad', '<p>A Pró-Reitoria de Administração (PROAD) tem a finalidade de auxiliar a Administração Superior, na coordenação das atividades relacionadas à gestão de logística, patrimonial, de contratos, de materiais e de aquisição de bens e serviços necessários à realização das atividades acadêmicas e administrativas da Universidade.</p>\r\n<p>A PROAD tem como competências institucionais:</p>\r\n<ul>\r\n<li>Realizar estudos visando à modernização administrativa, à proposição de alternativas necessárias ao aperfeiçoamento contínuo dos serviços, à desburocratização e ao aumento da produtividade;</li>\r\n<li>Participar da elaboração e executar a programação financeira da universidade, tendo em vista os compromissos e os recursos repassados pelo MEC, bem como os convênios e contratos e de outras agências financiadoras nacionais e estrangeiras;</li>\r\n<li>Participar juntamente com os órgãos da Universidade, da elaboração de normas, manuais, instruções, rotinas, fluxos, formulários e impressos;</li>\r\n<li>Propor medidas visando a racionalização do processo decisório;</li>\r\n<li>Autorizar, planejar, executar e acompanhar a realização dos processos licitatórios e de compras da Universidade;</li>\r\n<li>Planejar, elaborar, executar e acompanhar os contratos de serviços terceirizados da Universidade;</li>\r\n<li>Programar, executar e controlar os serviços de transportes e protocolo da Universidade;</li>\r\n<li>Garantir a segurança do campus e da sua estrutura física e patrimonial;</li>\r\n<li>Fazer a integração entre as atividades meio e fim da Universidade; e</li>\r\n<li>Executar quaisquer outras atividades que lhe forem delegadas pelo Reitor.</li>\r\n</ul>\r\n<div class=\"row\">\r\n<div class=\"col-sm-3 align-self-center\">\r\n<div class=\"card\">\r\n<div class=\"card-body\">\r\n<h5 class=\"card-title text-center\"><a href=\"documentos/category/1-pro-reitoria-de-administracao-proad\"><i class=\"fas fa-download fa-2x\"></i><br />Documentos</a></h5>\r\n</div>\r\n</div>\r\n</div>\r\n<div class=\"col-sm-3 align-self-center\">\r\n<div class=\"card\">\r\n<div class=\"card-body\">\r\n<h5 class=\"card-title text-center\"><a href=\"index.php?option=com_jevents&amp;view=day&amp;layout=listevents&amp;Itemid=361\"><i class=\"fas fa-calendar-alt fa-2x\"></i><br />Agenda da Autoridade</a></h5>\r\n</div>\r\n</div>\r\n</div>\r\n<div class=\"col-sm-3 align-self-center\">\r\n<div class=\"card\">\r\n<div class=\"card-body\">\r\n<h5 class=\"card-title text-center\"><a href=\"#\"><i class=\"fas fa-briefcase fa-2x\"></i><br />Serviços</a></h5>\r\n</div>\r\n</div>\r\n</div>\r\n<div class=\"col-sm-3 align-self-center\">\r\n<div class=\"card\">\r\n<div class=\"card-body\">\r\n<h5 class=\"card-title text-center\"><a href=\"index.php?option=com_content&amp;view=article&amp;id=99&amp;Itemid=362\"><i class=\"fas fa-id-card fa-2x\"></i><br />Cargos e Responsáveis</a></h5>\r\n</div>\r\n</div>\r\n</div>\r\n</div>', '', 1, 63, '2019-10-11 17:07:08', 931, '', '2019-10-15 17:00:45', 931, 0, '0000-00-00 00:00:00', '2019-10-11 17:07:08', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"article_layout\":\"idg2019:artigo-interno\",\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"info_block_show_title\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_associations\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_page_title\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 68, 1, '', '', 1, 170, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
 (97, 400, 'Área Administrativa', 'area-administrativa', '<p><strong>Manuais:</strong></p>\r\n<p>Em breve.</p>\r\n<p>Tutoriais:</p>\r\n<p><strong>Em breve.</strong></p>\r\n<p>Suporte:</p>\r\n<p><a href=\"https://www.ufrb.edu.br/ascom/suporte-a-sites\">https://www.ufrb.edu.br/ascom/suporte-a-sites</a></p>', '', 1, 2, '2019-10-14 15:06:59', 931, '', '2019-10-14 18:42:50', 931, 0, '0000-00-00 00:00:00', '2019-10-14 15:06:59', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"article_layout\":\"\",\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"info_block_show_title\":\"\",\"show_category\":\"0\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_associations\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"0\",\"show_publish_date\":\"0\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"0\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_page_title\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 8, 1, '', '', 2, 25, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', '');
-INSERT INTO `idg2019_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, `fulltext`, `state`, `catid`, `created`, `created_by`, `created_by_alias`, `modified`, `modified_by`, `checked_out`, `checked_out_time`, `publish_up`, `publish_down`, `images`, `urls`, `attribs`, `version`, `ordering`, `metakey`, `metadesc`, `access`, `hits`, `metadata`, `featured`, `language`, `xreference`, `note`) VALUES
+INSERT INTO `#__content` (`id`, `asset_id`, `title`, `alias`, `introtext`, `fulltext`, `state`, `catid`, `created`, `created_by`, `created_by_alias`, `modified`, `modified_by`, `checked_out`, `checked_out_time`, `publish_up`, `publish_down`, `images`, `urls`, `attribs`, `version`, `ordering`, `metakey`, `metadesc`, `access`, `hits`, `metadata`, `featured`, `language`, `xreference`, `note`) VALUES
 (98, 412, 'Agenda de Autoridades', 'agenda-de-autoridades', '<p style=\"text-align: center;\"><strong>Reitor</strong><br /><a href=\"index.php?option=com_jevents&amp;view=day&amp;layout=listevents&amp;Itemid=360\">Fábio Josué Souza dos Santos</a></p>\r\n<p style=\"text-align: center;\"><br /><strong>Vice-Reitor</strong><br />José Pereira Mascarenhas Bisneto</p>\r\n<p style=\"text-align: center;\"><br /><strong>Pró-Reitoria de Administração</strong><br /><a href=\"index.php?option=com_jevents&amp;view=day&amp;layout=listevents&amp;Itemid=361\">Rosilda Santana dos Santos</a></p>\r\n<p style=\"text-align: center;\"><br /><strong>Pró-Reitoria de Gestão de Pessoal</strong><br />Wagner Tavares da Silva</p>\r\n<p style=\"text-align: center;\"><br /><strong>Pró-Reitoria de Graduação</strong><br />Rosineide Pereira Mubarack Garcia</p>\r\n<p style=\"text-align: center;\"><br /><strong>Pró-Reitoria de Pesquisa, Pós-Graduação, Criação e Inovação</strong><br />Carlos Alfredo Lopes de Carvalho</p>\r\n<p style=\"text-align: center;\"><br /><strong>Pró-Reitoria de Extensão</strong><br />Tatiana Ribeiro Velloso</p>\r\n<p style=\"text-align: center;\"><br /><strong>Pró-Reitoria de Planejamento</strong><br />José Joaquim da Silva Ramos</p>\r\n<p style=\"text-align: center;\"><br /><strong>Pró-Reitoria de Políticas Afirmativas e Assuntos Estudantis</strong><br />Maria Goretti da Fonseca</p>', '', 1, 2, '2019-10-14 19:44:22', 931, '', '2019-10-14 19:56:32', 931, 0, '0000-00-00 00:00:00', '2019-10-14 19:44:22', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"article_layout\":\"idg2019:artigo-interno\",\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"info_block_show_title\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_associations\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"0\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_page_title\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 8, 0, '', '', 1, 20, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
 (99, 414, 'Cargos e Responsáveis', 'cargos-e-responsaveis-proad', '<div class=\'table-responsive\'>\r\n<table id=\"cargos\" class=\"table table-hover table-sm\">\r\n<thead>\r\n<tr><th>Setor</th><th>Nome</th><th>Cargo</th><th>Telefone</th><th>Email</th></tr>\r\n</thead>\r\n<!--Table head--> <!--Table body-->\r\n<tbody>\r\n<tr>\r\n<td><strong>Pró-Reitoria de Administração</strong></td>\r\n<td>Rosilda Santana dos Santos</td>\r\n<td>Pró-Reitora</td>\r\n<td>(75) 3621-5304</td>\r\n<td>proad@ufrb.edu.br</td>\r\n</tr>\r\n<tr>\r\n<td><strong>Coordenadoria de Contratos&nbsp;</strong></td>\r\n<td>Rodrigo de Souza</td>\r\n<td>Coordenador</td>\r\n<td>(75) 3621-9739</td>\r\n<td>ccont@proad.ufrb.edu.br</td>\r\n</tr>\r\n<tr>\r\n<td style=\"padding-left: 30px;\">Núcleo de Conformidade Contratual</td>\r\n<td>Héber Lima de Freitas</td>\r\n<td>Chefe</td>\r\n<td>(75) 3621-9739</td>\r\n<td>&nbsp;</td>\r\n</tr>\r\n<tr>\r\n<td style=\"padding-left: 30px;\">Núcleo de Gestão de Contratos</td>\r\n<td>Thiago Italo Rocha de Jesus</td>\r\n<td>Chefe</td>\r\n<td>(75) 3621-9739</td>\r\n<td>&nbsp;</td>\r\n</tr>\r\n<tr>\r\n<td style=\"padding-left: 60px;\">Divisão de Gestão de Atas</td>\r\n<td>Loíde Lima de Freitas</td>\r\n<td>Chefe</td>\r\n<td>(75) 3621-9739</td>\r\n<td>&nbsp;</td>\r\n</tr>\r\n<tr>\r\n<td style=\"padding-left: 30px;\">Núcleo de Reequilíbrio Econômico-Financeiro</td>\r\n<td>André Luis Botelho Dórea</td>\r\n<td>Chefe</td>\r\n<td>(75) 3621-9739</td>\r\n<td>&nbsp;</td>\r\n</tr>\r\n<tr>\r\n<td><strong>Coordenadoria de Serviços Operacionais</strong></td>\r\n<td>Joice Bruna das Graças Gonçalves</td>\r\n<td>Coordenadora</td>\r\n<td>(75) 3621-4108</td>\r\n<td>cso@proad.ufrb.edu.br</td>\r\n</tr>\r\n<tr>\r\n<td style=\"padding-left: 30px;\">Núcleo de Gestão de Frota</td>\r\n<td>Carlos Fernando Barroso do Amaral Junior</td>\r\n<td>Chefe</td>\r\n<td>(75) 3621-3051</td>\r\n<td>&nbsp;</td>\r\n</tr>\r\n<tr>\r\n<td style=\"padding-left: 30px;\">Núcleo de Manutenção da Frota</td>\r\n<td>Bartolomeu Santana Filho</td>\r\n<td>Chefe</td>\r\n<td>(75) 3621-3051</td>\r\n<td>&nbsp;</td>\r\n</tr>\r\n<tr>\r\n<td style=\"padding-left: 30px;\">Núcleo de Gestão de Protocolo Central</td>\r\n<td>Noel Pereira da Silva</td>\r\n<td>Chefe</td>\r\n<td>(75) 3621-4108</td>\r\n<td>&nbsp;</td>\r\n</tr>\r\n<tr>\r\n<td style=\"padding-left: 30px;\">Núcleo de gestão de Espaço Físico</td>\r\n<td>Anderson Alves Ribeiro</td>\r\n<td>Chefe</td>\r\n<td>(75) 3621-4108</td>\r\n<td>&nbsp;</td>\r\n</tr>\r\n<tr>\r\n<td><strong>Coordenadoria de Licitação e Compras</strong></td>\r\n<td>Emerson Franco Santa Bárbara</td>\r\n<td>Coordenador</td>\r\n<td>(75) 3621-6208</td>\r\n<td>clc@proad.ufrb.edu.br</td>\r\n</tr>\r\n<tr>\r\n<td style=\"padding-left: 30px;\">Núcleo de Gestão de Licitação</td>\r\n<td>Cláudio Antonio Faria Vargas</td>\r\n<td>Chefe</td>\r\n<td>(75) 3621-6208&nbsp;</td>\r\n<td>&nbsp;</td>\r\n</tr>\r\n<tr>\r\n<td style=\"padding-left: 30px;\">Núcleo de Aquisição Direta</td>\r\n<td>Levi Gomes da Silva</td>\r\n<td>Chefe</td>\r\n<td>(75) 3621-6208&nbsp;</td>\r\n<td>&nbsp;</td>\r\n</tr>\r\n<tr>\r\n<td style=\"padding-left: 30px;\">Núcleo de Gestão de Processos</td>\r\n<td>Bárbara Alves Andrade</td>\r\n<td>Chefe</td>\r\n<td>(75) 3621-6208&nbsp;</td>\r\n<td>&nbsp;</td>\r\n</tr>\r\n<tr>\r\n<td><strong>Coordenadoria de Material e Patrimônio</strong></td>\r\n<td>José Roberto de Santos Barbosa</td>\r\n<td>Coordenador</td>\r\n<td>(75) 3621-9979</td>\r\n<td>cmp@proad.ufrb.edu.br</td>\r\n</tr>\r\n<tr>\r\n<td style=\"padding-left: 30px;\">Núcleo de Apoio e Gestão de Fornecedores</td>\r\n<td>Nadia Pinto da Silva</td>\r\n<td>Chefe</td>\r\n<td>&nbsp;</td>\r\n<td>&nbsp;</td>\r\n</tr>\r\n<tr>\r\n<td style=\"padding-left: 30px;\">Núcleo de Apoio Administrativo</td>\r\n<td>&nbsp;</td>\r\n<td>Chefe</td>\r\n<td>&nbsp;</td>\r\n<td>&nbsp;</td>\r\n</tr>\r\n<tr>\r\n<td style=\"padding-left: 30px;\">Núcleo de Gestão do Almoxarifado</td>\r\n<td>Jarbas Queiroz dos Santos</td>\r\n<td>Chefe</td>\r\n<td>(75) 3621-9131</td>\r\n<td>&nbsp;</td>\r\n</tr>\r\n<tr>\r\n<td style=\"padding-left: 30px;\">Núcleo de Gestão de Manutenção de Bens Móveis</td>\r\n<td>João Maurício Peixoto da Silva</td>\r\n<td>Chefe</td>\r\n<td>&nbsp;</td>\r\n<td>&nbsp;</td>\r\n</tr>\r\n<tr>\r\n<td style=\"padding-left: 30px;\">Núcleo de Registro de Acompanhamento do Patrimônio Imobiliário</td>\r\n<td>Manuella Félix de Andrade</td>\r\n<td>Chefe</td>\r\n<td>(75) 3621-9436</td>\r\n<td>nurapi@proad.ufrb.edu.br</td>\r\n</tr>\r\n<tr>\r\n<td style=\"padding-left: 30px;\">Núcleo de Gestão do Patrimônio</td>\r\n<td>Deivison Leão Moraes Filho</td>\r\n<td>Chefe</td>\r\n<td>(75) 3621-9436</td>\r\n<td>nugpat@proad.ufrb.edu.br</td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n</div>', '', 1, 63, '2019-10-15 13:39:40', 931, '', '2019-10-15 16:56:57', 931, 0, '0000-00-00 00:00:00', '2019-10-15 13:39:40', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"article_layout\":\"idg2019:setores-interno\",\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"info_block_show_title\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_associations\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_page_title\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 26, 0, '', '', 1, 60, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
 (100, 416, 'Superintendência de Regulação e Registros Acadêmicos - SURRAC', 'superintendencia-de-regulacao-e-registros-academicos-surrac', '<p>A Superintendência de Regulação e Registros Acadêmicos (SURRAC) é um órgão da administração superior subordinado à Reitoria, que tem como finalidade realizar a regulação dos cursos de graduação, assim como, manter atualizados os dados institucionais referentes a graduação e pós-graduação.</p>\r\n<div class=\"row\">\r\n<div class=\"col-sm-3 align-self-center\">\r\n<div class=\"card\">\r\n<div class=\"card-body\">\r\n<h5 class=\"card-title text-center\"><a href=\"/portal2019/documentos/category/5-superintendencia-de-regulacao-e-registros-academicos-surrac\"><i class=\"fas fa-download fa-2x\" aria-hidden=\"true\"></i><br />Documentos</a></h5>\r\n</div>\r\n</div>\r\n</div>\r\n<div class=\"col-sm-3 align-self-center\">\r\n<div class=\"card\">\r\n<div class=\"card-body\">\r\n<h5 class=\"card-title text-center\"><a href=\"index.php?option=com_content&amp;view=article&amp;id=101&amp;Itemid=364\"><i class=\"fas fa-id-card fa-2x\" aria-hidden=\"true\"></i><br />Cargos e Responsáveis</a></h5>\r\n</div>\r\n</div>\r\n</div>\r\n</div>', '', 1, 67, '2019-10-15 17:25:50', 931, '', '2019-10-15 20:03:56', 931, 0, '0000-00-00 00:00:00', '2019-10-15 17:25:50', '0000-00-00 00:00:00', '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', '{\"article_layout\":\"idg2019:artigo-interno\",\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"info_block_show_title\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_associations\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_page_title\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 4, 0, '', '', 1, 26, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 0, '*', '', ''),
@@ -1176,28 +1189,27 @@ INSERT INTO `idg2019_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_contentitem_tag_map`
+-- Estrutura da tabela `#__contentitem_tag_map`
 --
 
-DROP TABLE IF EXISTS `idg2019_contentitem_tag_map`;
-CREATE TABLE IF NOT EXISTS `idg2019_contentitem_tag_map` (
-  `type_alias` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `core_content_id` int(10) UNSIGNED NOT NULL COMMENT 'PK from the core content table',
+CREATE TABLE IF NOT EXISTS `#__contentitem_tag_map` (
+  `type_alias` varchar(255) NOT NULL DEFAULT '',
+  `core_content_id` int(10) unsigned NOT NULL COMMENT 'PK from the core content table',
   `content_item_id` int(11) NOT NULL COMMENT 'PK from the content type table',
-  `tag_id` int(10) UNSIGNED NOT NULL COMMENT 'PK from the tag table',
+  `tag_id` int(10) unsigned NOT NULL COMMENT 'PK from the tag table',
   `tag_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Date of most recent save for this tag-item',
   `type_id` mediumint(8) NOT NULL COMMENT 'PK from the content_type table',
-  UNIQUE KEY `uc_ItemnameTagid` (`type_id`,`content_item_id`,`tag_id`) USING BTREE,
-  KEY `idx_tag_type` (`tag_id`,`type_id`) USING BTREE,
-  KEY `idx_date_id` (`tag_date`,`tag_id`) USING BTREE,
-  KEY `idx_core_content_id` (`core_content_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Maps items from content tables to tags' ROW_FORMAT=DYNAMIC;
+  UNIQUE KEY `uc_ItemnameTagid` (`type_id`,`content_item_id`,`tag_id`),
+  KEY `idx_tag_type` (`tag_id`,`type_id`),
+  KEY `idx_date_id` (`tag_date`,`tag_id`),
+  KEY `idx_core_content_id` (`core_content_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci COMMENT='Maps items from content tables to tags';
 
 --
--- Extraindo dados da tabela `idg2019_contentitem_tag_map`
+-- Extraindo dados da tabela `#__contentitem_tag_map`
 --
 
-INSERT INTO `idg2019_contentitem_tag_map` (`type_alias`, `core_content_id`, `content_item_id`, `tag_id`, `tag_date`, `type_id`) VALUES
+INSERT INTO `#__contentitem_tag_map` (`type_alias`, `core_content_id`, `content_item_id`, `tag_id`, `tag_date`, `type_id`) VALUES
 ('com_content.article', 1, 71, 6, '2019-04-03 20:02:20', 1),
 ('com_content.article', 1, 71, 7, '2019-04-03 20:02:20', 1),
 ('com_content.article', 3, 87, 9, '2019-10-18 16:24:29', 1),
@@ -1206,21 +1218,20 @@ INSERT INTO `idg2019_contentitem_tag_map` (`type_alias`, `core_content_id`, `con
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_content_frontpage`
+-- Estrutura da tabela `#__content_frontpage`
 --
 
-DROP TABLE IF EXISTS `idg2019_content_frontpage`;
-CREATE TABLE IF NOT EXISTS `idg2019_content_frontpage` (
-  `content_id` int(11) NOT NULL DEFAULT '0',
-  `ordering` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`content_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+CREATE TABLE IF NOT EXISTS `#__content_frontpage` (
+  `content_id` int(11) NOT NULL DEFAULT 0,
+  `ordering` int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`content_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 --
--- Extraindo dados da tabela `idg2019_content_frontpage`
+-- Extraindo dados da tabela `#__content_frontpage`
 --
 
-INSERT INTO `idg2019_content_frontpage` (`content_id`, `ordering`) VALUES
+INSERT INTO `#__content_frontpage` (`content_id`, `ordering`) VALUES
 (5, 3),
 (55, 5),
 (56, 4),
@@ -1230,43 +1241,41 @@ INSERT INTO `idg2019_content_frontpage` (`content_id`, `ordering`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_content_rating`
+-- Estrutura da tabela `#__content_rating`
 --
 
-DROP TABLE IF EXISTS `idg2019_content_rating`;
-CREATE TABLE IF NOT EXISTS `idg2019_content_rating` (
-  `content_id` int(11) NOT NULL DEFAULT '0',
-  `rating_sum` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `rating_count` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `lastip` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  PRIMARY KEY (`content_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+CREATE TABLE IF NOT EXISTS `#__content_rating` (
+  `content_id` int(11) NOT NULL DEFAULT 0,
+  `rating_sum` int(10) unsigned NOT NULL DEFAULT 0,
+  `rating_count` int(10) unsigned NOT NULL DEFAULT 0,
+  `lastip` varchar(50) NOT NULL DEFAULT '',
+  PRIMARY KEY (`content_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_content_types`
+-- Estrutura da tabela `#__content_types`
 --
 
-DROP TABLE IF EXISTS `idg2019_content_types`;
-CREATE TABLE IF NOT EXISTS `idg2019_content_types` (
-  `type_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `type_title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `type_alias` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `table` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `rules` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `field_mappings` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `router` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `content_history_options` varchar(5120) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'JSON string for com_contenthistory options',
-  PRIMARY KEY (`type_id`) USING BTREE,
-  KEY `idx_alias` (`type_alias`(100)) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+CREATE TABLE IF NOT EXISTS `#__content_types` (
+  `type_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `type_title` varchar(255) NOT NULL DEFAULT '',
+  `type_alias` varchar(400) NOT NULL DEFAULT '',
+  `table` varchar(255) NOT NULL DEFAULT '',
+  `rules` text NOT NULL,
+  `field_mappings` text NOT NULL,
+  `router` varchar(255) NOT NULL DEFAULT '',
+  `content_history_options` varchar(5120) COMMENT 'JSON string for com_contenthistory options',
+  PRIMARY KEY (`type_id`),
+  KEY `idx_alias` (`type_alias`(100))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=10000;
 
 --
--- Extraindo dados da tabela `idg2019_content_types`
+-- Extraindo dados da tabela `#__content_types`
 --
 
-INSERT INTO `idg2019_content_types` (`type_id`, `type_title`, `type_alias`, `table`, `rules`, `field_mappings`, `router`, `content_history_options`) VALUES
+INSERT INTO `#__content_types` (`type_id`, `type_title`, `type_alias`, `table`, `rules`, `field_mappings`, `router`, `content_history_options`) VALUES
 (1, 'Article', 'com_content.article', '{\"special\":{\"dbtable\":\"x3dts_content\",\"key\":\"id\",\"type\":\"Content\",\"prefix\":\"JTable\",\"config\":\"array()\"},\"common\":{\"dbtable\":\"x3dts_ucm_content\",\"key\":\"ucm_id\",\"type\":\"Corecontent\",\"prefix\":\"JTable\",\"config\":\"array()\"}}', '', '{\"common\":{\"core_content_item_id\":\"id\",\"core_title\":\"title\",\"core_state\":\"state\",\"core_alias\":\"alias\",\"core_created_time\":\"created\",\"core_modified_time\":\"modified\",\"core_body\":\"introtext\", \"core_hits\":\"hits\",\"core_publish_up\":\"publish_up\",\"core_publish_down\":\"publish_down\",\"core_access\":\"access\", \"core_params\":\"attribs\", \"core_featured\":\"featured\", \"core_metadata\":\"metadata\", \"core_language\":\"language\", \"core_images\":\"images\", \"core_urls\":\"urls\", \"core_version\":\"version\", \"core_ordering\":\"ordering\", \"core_metakey\":\"metakey\", \"core_metadesc\":\"metadesc\", \"core_catid\":\"catid\", \"core_xreference\":\"xreference\", \"asset_id\":\"asset_id\"}, \"special\": {\"fulltext\":\"fulltext\"}}', 'ContentHelperRoute::getArticleRoute', '{\"formFile\":\"administrator\\/components\\/com_content\\/models\\/forms\\/article.xml\", \"hideFields\":[\"asset_id\",\"checked_out\",\"checked_out_time\",\"version\"],\"ignoreChanges\":[\"modified_by\", \"modified\", \"checked_out\", \"checked_out_time\", \"version\", \"hits\"],\"convertToInt\":[\"publish_up\", \"publish_down\", \"featured\", \"ordering\"],\"displayLookup\":[{\"sourceColumn\":\"catid\",\"targetTable\":\"x3dts_categories\",\"targetColumn\":\"id\",\"displayColumn\":\"title\"},{\"sourceColumn\":\"created_by\",\"targetTable\":\"x3dts_users\",\"targetColumn\":\"id\",\"displayColumn\":\"name\"},{\"sourceColumn\":\"access\",\"targetTable\":\"x3dts_viewlevels\",\"targetColumn\":\"id\",\"displayColumn\":\"title\"},{\"sourceColumn\":\"modified_by\",\"targetTable\":\"x3dts_users\",\"targetColumn\":\"id\",\"displayColumn\":\"name\"} ]}'),
 (2, 'Weblink', 'com_weblinks.weblink', '{\"special\":{\"dbtable\":\"x3dts_weblinks\",\"key\":\"id\",\"type\":\"Weblink\",\"prefix\":\"WeblinksTable\",\"config\":\"array()\"},\"common\":{\"dbtable\":\"x3dts_ucm_content\",\"key\":\"ucm_id\",\"type\":\"Corecontent\",\"prefix\":\"JTable\",\"config\":\"array()\"}}', '', '{\"common\":{\"core_content_item_id\":\"id\",\"core_title\":\"title\",\"core_state\":\"state\",\"core_alias\":\"alias\",\"core_created_time\":\"created\",\"core_modified_time\":\"modified\",\"core_body\":\"description\", \"core_hits\":\"hits\",\"core_publish_up\":\"publish_up\",\"core_publish_down\":\"publish_down\",\"core_access\":\"access\", \"core_params\":\"params\", \"core_featured\":\"featured\", \"core_metadata\":\"metadata\", \"core_language\":\"language\", \"core_images\":\"images\", \"core_urls\":\"url\", \"core_version\":\"version\", \"core_ordering\":\"ordering\", \"core_metakey\":\"metakey\", \"core_metadesc\":\"metadesc\", \"core_catid\":\"catid\", \"core_xreference\":\"xreference\", \"asset_id\":\"null\"}, \"special\": {}}', 'WeblinksHelperRoute::getWeblinkRoute', '{\"formFile\":\"administrator\\/components\\/com_weblinks\\/models\\/forms\\/weblink.xml\", \"hideFields\":[\"asset_id\",\"checked_out\",\"checked_out_time\",\"version\",\"featured\",\"images\"], \"ignoreChanges\":[\"modified_by\", \"modified\", \"checked_out\", \"checked_out_time\", \"version\", \"hits\"], \"convertToInt\":[\"publish_up\", \"publish_down\", \"featured\", \"ordering\"], \"displayLookup\":[{\"sourceColumn\":\"catid\",\"targetTable\":\"x3dts_categories\",\"targetColumn\":\"id\",\"displayColumn\":\"title\"},{\"sourceColumn\":\"created_by\",\"targetTable\":\"x3dts_users\",\"targetColumn\":\"id\",\"displayColumn\":\"name\"},{\"sourceColumn\":\"access\",\"targetTable\":\"x3dts_viewlevels\",\"targetColumn\":\"id\",\"displayColumn\":\"title\"},{\"sourceColumn\":\"modified_by\",\"targetTable\":\"x3dts_users\",\"targetColumn\":\"id\",\"displayColumn\":\"name\"} ]}'),
 (3, 'Contact', 'com_contact.contact', '{\"special\":{\"dbtable\":\"x3dts_contact_details\",\"key\":\"id\",\"type\":\"Contact\",\"prefix\":\"ContactTable\",\"config\":\"array()\"},\"common\":{\"dbtable\":\"x3dts_ucm_content\",\"key\":\"ucm_id\",\"type\":\"Corecontent\",\"prefix\":\"JTable\",\"config\":\"array()\"}}', '', '{\"common\":{\"core_content_item_id\":\"id\",\"core_title\":\"name\",\"core_state\":\"published\",\"core_alias\":\"alias\",\"core_created_time\":\"created\",\"core_modified_time\":\"modified\",\"core_body\":\"address\", \"core_hits\":\"hits\",\"core_publish_up\":\"publish_up\",\"core_publish_down\":\"publish_down\",\"core_access\":\"access\", \"core_params\":\"params\", \"core_featured\":\"featured\", \"core_metadata\":\"metadata\", \"core_language\":\"language\", \"core_images\":\"image\", \"core_urls\":\"webpage\", \"core_version\":\"version\", \"core_ordering\":\"ordering\", \"core_metakey\":\"metakey\", \"core_metadesc\":\"metadesc\", \"core_catid\":\"catid\", \"core_xreference\":\"xreference\", \"asset_id\":\"null\"}, \"special\": {\"con_position\":\"con_position\",\"suburb\":\"suburb\",\"state\":\"state\",\"country\":\"country\",\"postcode\":\"postcode\",\"telephone\":\"telephone\",\"fax\":\"fax\",\"misc\":\"misc\",\"email_to\":\"email_to\",\"default_con\":\"default_con\",\"user_id\":\"user_id\",\"mobile\":\"mobile\",\"sortname1\":\"sortname1\",\"sortname2\":\"sortname2\",\"sortname3\":\"sortname3\"}}', 'ContactHelperRoute::getContactRoute', '{\"formFile\":\"administrator\\/components\\/com_contact\\/models\\/forms\\/contact.xml\",\"hideFields\":[\"default_con\",\"checked_out\",\"checked_out_time\",\"version\",\"xreference\"],\"ignoreChanges\":[\"modified_by\", \"modified\", \"checked_out\", \"checked_out_time\", \"version\", \"hits\"],\"convertToInt\":[\"publish_up\", \"publish_down\", \"featured\", \"ordering\"], \"displayLookup\":[ {\"sourceColumn\":\"created_by\",\"targetTable\":\"x3dts_users\",\"targetColumn\":\"id\",\"displayColumn\":\"name\"},{\"sourceColumn\":\"catid\",\"targetTable\":\"x3dts_categories\",\"targetColumn\":\"id\",\"displayColumn\":\"title\"},{\"sourceColumn\":\"modified_by\",\"targetTable\":\"x3dts_users\",\"targetColumn\":\"id\",\"displayColumn\":\"name\"},{\"sourceColumn\":\"access\",\"targetTable\":\"x3dts_viewlevels\",\"targetColumn\":\"id\",\"displayColumn\":\"title\"},{\"sourceColumn\":\"user_id\",\"targetTable\":\"x3dts_users\",\"targetColumn\":\"id\",\"displayColumn\":\"name\"} ] }'),
@@ -1286,52 +1295,51 @@ INSERT INTO `idg2019_content_types` (`type_id`, `type_title`, `type_alias`, `tab
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_core_log_searches`
+-- Estrutura da tabela `#__core_log_searches`
 --
 
-DROP TABLE IF EXISTS `idg2019_core_log_searches`;
-CREATE TABLE IF NOT EXISTS `idg2019_core_log_searches` (
-  `search_term` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `hits` int(10) UNSIGNED NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+CREATE TABLE IF NOT EXISTS `#__core_log_searches` (
+  `search_term` varchar(128) NOT NULL DEFAULT '',
+  `hits` int(10) unsigned NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_extensions`
+-- Estrutura da tabela `#__extensions`
 --
 
-DROP TABLE IF EXISTS `idg2019_extensions`;
-CREATE TABLE IF NOT EXISTS `idg2019_extensions` (
+CREATE TABLE IF NOT EXISTS `#__extensions` (
   `extension_id` int(11) NOT NULL AUTO_INCREMENT,
-  `package_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Parent package ID for extensions installed as a package.',
-  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `element` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `folder` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `package_id` int(11) NOT NULL DEFAULT 0 COMMENT 'Parent package ID for extensions installed as a package.',
+  `name` varchar(100) NOT NULL,
+  `type` varchar(20) NOT NULL,
+  `element` varchar(100) NOT NULL,
+  `folder` varchar(100) NOT NULL,
   `client_id` tinyint(3) NOT NULL,
-  `enabled` tinyint(3) NOT NULL DEFAULT '0',
-  `access` int(10) UNSIGNED NOT NULL DEFAULT '1',
-  `protected` tinyint(3) NOT NULL DEFAULT '0',
-  `manifest_cache` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `params` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `custom_data` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `system_data` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `checked_out` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `checked_out_time` datetime NOT NULL,
-  `ordering` int(11) DEFAULT '0',
-  `state` int(11) DEFAULT '0',
-  PRIMARY KEY (`extension_id`) USING BTREE,
-  KEY `element_clientid` (`element`,`client_id`) USING BTREE,
-  KEY `element_folder_clientid` (`element`,`folder`,`client_id`) USING BTREE,
-  KEY `extension` (`type`,`element`,`folder`,`client_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=10212 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `enabled` tinyint(3) NOT NULL DEFAULT 0,
+  `access` int(10) unsigned NOT NULL DEFAULT 1,
+  `protected` tinyint(3) NOT NULL DEFAULT 0,
+  `manifest_cache` text NOT NULL,
+  `params` text NOT NULL,
+  `custom_data` text NOT NULL,
+  `system_data` text NOT NULL,
+  `checked_out` int(10) unsigned NOT NULL DEFAULT 0,
+  `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `ordering` int(11) DEFAULT 0,
+  `state` int(11) DEFAULT 0,
+  PRIMARY KEY (`extension_id`),
+  KEY `element_clientid` (`element`,`client_id`),
+  KEY `element_folder_clientid` (`element`,`folder`,`client_id`),
+  KEY `extension` (`type`,`element`,`folder`,`client_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=10000;
+
 
 --
--- Extraindo dados da tabela `idg2019_extensions`
+-- Extraindo dados da tabela `#__extensions`
 --
 
-INSERT INTO `idg2019_extensions` (`extension_id`, `package_id`, `name`, `type`, `element`, `folder`, `client_id`, `enabled`, `access`, `protected`, `manifest_cache`, `params`, `custom_data`, `system_data`, `checked_out`, `checked_out_time`, `ordering`, `state`) VALUES
+INSERT INTO `#__extensions` (`extension_id`, `package_id`, `name`, `type`, `element`, `folder`, `client_id`, `enabled`, `access`, `protected`, `manifest_cache`, `params`, `custom_data`, `system_data`, `checked_out`, `checked_out_time`, `ordering`, `state`) VALUES
 (1, 0, 'com_mailto', 'component', 'com_mailto', '', 0, 1, 1, 1, '{\"name\":\"com_mailto\",\"type\":\"component\",\"creationDate\":\"April 2006\",\"author\":\"Joomla! Project\",\"copyright\":\"(C) 2005 - 2020 Open Source Matters. All rights reserved.\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"www.joomla.org\",\"version\":\"3.0.0\",\"description\":\"COM_MAILTO_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"mailto\"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (2, 0, 'com_wrapper', 'component', 'com_wrapper', '', 0, 1, 1, 1, '{\"name\":\"com_wrapper\",\"type\":\"component\",\"creationDate\":\"April 2006\",\"author\":\"Joomla! Project\",\"copyright\":\"(C) 2005 - 2020 Open Source Matters. All rights reserved.\\n\\t\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"www.joomla.org\",\"version\":\"3.0.0\",\"description\":\"COM_WRAPPER_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"wrapper\"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (3, 0, 'com_admin', 'component', 'com_admin', '', 1, 1, 1, 1, '{\"name\":\"com_admin\",\"type\":\"component\",\"creationDate\":\"April 2006\",\"author\":\"Joomla! Project\",\"copyright\":\"(C) 2005 - 2020 Open Source Matters. All rights reserved.\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"www.joomla.org\",\"version\":\"3.0.0\",\"description\":\"COM_ADMIN_XML_DESCRIPTION\",\"group\":\"\"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
@@ -1418,7 +1426,7 @@ INSERT INTO `idg2019_extensions` (`extension_id`, `package_id`, `name`, `type`, 
 (401, 0, 'plg_authentication_joomla', 'plugin', 'joomla', 'authentication', 0, 1, 1, 1, '{\"name\":\"plg_authentication_joomla\",\"type\":\"plugin\",\"creationDate\":\"November 2005\",\"author\":\"Joomla! Project\",\"copyright\":\"Copyright (C) 2005 - 2020 Open Source Matters. All rights reserved.\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"www.joomla.org\",\"version\":\"3.0.0\",\"description\":\"PLG_AUTH_JOOMLA_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"joomla\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (402, 0, 'plg_authentication_ldap', 'plugin', 'ldap', 'authentication', 0, 0, 1, 0, '{\"name\":\"plg_authentication_ldap\",\"type\":\"plugin\",\"creationDate\":\"November 2005\",\"author\":\"Joomla! Project\",\"copyright\":\"Copyright (C) 2005 - 2020 Open Source Matters. All rights reserved.\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"www.joomla.org\",\"version\":\"3.0.0\",\"description\":\"PLG_LDAP_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"ldap\"}', '{\"host\":\"\",\"port\":\"389\",\"use_ldapV3\":\"0\",\"negotiate_tls\":\"0\",\"no_referrals\":\"0\",\"auth_method\":\"bind\",\"base_dn\":\"\",\"search_string\":\"\",\"users_dn\":\"\",\"username\":\"admin\",\"password\":\"bobby7\",\"ldap_fullname\":\"fullName\",\"ldap_email\":\"mail\",\"ldap_uid\":\"uid\"}', '', '', 0, '0000-00-00 00:00:00', 3, 0),
 (403, 0, 'plg_content_contact', 'plugin', 'contact', 'content', 0, 1, 1, 0, '{\"name\":\"plg_content_contact\",\"type\":\"plugin\",\"creationDate\":\"January 2014\",\"author\":\"Joomla! Project\",\"copyright\":\"Copyright (C) 2005 - 2020 Open Source Matters. All rights reserved.\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"www.joomla.org\",\"version\":\"3.2.2\",\"description\":\"PLG_CONTENT_CONTACT_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"contact\"}', '', '', '', 0, '0000-00-00 00:00:00', 1, 0);
-INSERT INTO `idg2019_extensions` (`extension_id`, `package_id`, `name`, `type`, `element`, `folder`, `client_id`, `enabled`, `access`, `protected`, `manifest_cache`, `params`, `custom_data`, `system_data`, `checked_out`, `checked_out_time`, `ordering`, `state`) VALUES
+INSERT INTO `#__extensions` (`extension_id`, `package_id`, `name`, `type`, `element`, `folder`, `client_id`, `enabled`, `access`, `protected`, `manifest_cache`, `params`, `custom_data`, `system_data`, `checked_out`, `checked_out_time`, `ordering`, `state`) VALUES
 (404, 0, 'plg_content_emailcloak', 'plugin', 'emailcloak', 'content', 0, 0, 1, 0, '{\"name\":\"plg_content_emailcloak\",\"type\":\"plugin\",\"creationDate\":\"November 2005\",\"author\":\"Joomla! Project\",\"copyright\":\"Copyright (C) 2005 - 2020 Open Source Matters. All rights reserved.\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"www.joomla.org\",\"version\":\"3.0.0\",\"description\":\"PLG_CONTENT_EMAILCLOAK_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"emailcloak\"}', '{\"mode\":\"1\"}', '', '', 0, '0000-00-00 00:00:00', 1, 0),
 (405, 0, 'plg_content_geshi', 'plugin', 'geshi', 'content', 0, 0, 1, 0, '{\"legacy\":false,\"name\":\"plg_content_geshi\",\"type\":\"plugin\",\"creationDate\":\"November 2005\",\"author\":\"Joomla! Project\",\"copyright\":\"Copyright (C) 2005 - 2013 Open Source Matters. All rights reserved.\",\"authorEmail\":\"\",\"authorUrl\":\"qbnz.com\\/highlighter\",\"version\":\"2.5.0\",\"description\":\"PLG_CONTENT_GESHI_XML_DESCRIPTION\",\"group\":\"\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 2, 0),
 (406, 0, 'plg_content_loadmodule', 'plugin', 'loadmodule', 'content', 0, 1, 1, 0, '{\"name\":\"plg_content_loadmodule\",\"type\":\"plugin\",\"creationDate\":\"November 2005\",\"author\":\"Joomla! Project\",\"copyright\":\"Copyright (C) 2005 - 2020 Open Source Matters. All rights reserved.\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"www.joomla.org\",\"version\":\"3.0.0\",\"description\":\"PLG_LOADMODULE_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"loadmodule\"}', '{\"style\":\"xhtml\"}', '', '', 0, '2011-09-18 15:22:50', 0, 0),
@@ -1503,10 +1511,10 @@ INSERT INTO `idg2019_extensions` (`extension_id`, `package_id`, `name`, `type`, 
 (10016, 0, 'mod_barradogoverno', 'module', 'mod_barradogoverno', '', 0, 1, 0, 0, '{\"legacy\":false,\"name\":\"mod_barradogoverno\",\"type\":\"module\",\"creationDate\":\"Outubro 2013\",\"author\":\"Comunidade Joomla Calango e Grupo de Trabalho de Minist\\u00e9rios\",\"copyright\":\"Copyright (C) 2013 Comunidade Joomla Calango e Grupo de Trabalho de Minist\\u00e9rios\",\"authorEmail\":\"joomlagovbr@gmail.com\",\"authorUrl\":\"https:\\/\\/github.com\\/joomlagovbr\",\"version\":\"1.0\",\"description\":\"Mais informacoes na url do github.\",\"group\":\"\"}', '{\"layout\":\"default\",\"anexar_js_2014\":\"1\",\"endereco_js_2014\":\"http:\\/\\/barra.brasil.gov.br\\/barra.js?cor=verde\",\"mensagem_ie6_2014\":\"Seu navegador \\u00e9 incompat\\u00edvel com os novos padr\\u00f5es de tecnologia e por isso voc\\u00ea n\\u00e3o pode visualizar a nova barra do Governo Federal. Atualize ou troque seu navegador.\",\"correcoes_ie8_2014\":\"show_css\",\"link_css_ie8_2014\":\"{URL_SITE}\\/modules\\/mod_barradogoverno\\/assets\\/2014\\/css\\/ie8.css\",\"anexar_css_2012\":\"1\",\"cor_2012\":\"\",\"acesso_a_informacao_2012\":\"1\",\"largura_barra_2012\":\"970\",\"alinhamento_barra_2012\":\"\",\"link_acesso_a_informacao_2012\":\"http:\\/\\/www.acessoainformacao.gov.br\\/acessoainformacaogov\\/\",\"link_portal_brasil_2012\":\"http:\\/\\/www.brasil.gov.br\\/\",\"target_links_2012\":\"_blank\",\"head_manual\":\"\",\"html_manual\":\"\",\"anexar_head\":\"\",\"cache\":\"1\",\"cache_time\":\"900\"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (10017, 0, 'isis', 'template', 'isis', '', 1, 1, 1, 0, '{\"name\":\"isis\",\"type\":\"template\",\"creationDate\":\"3\\/30\\/2012\",\"author\":\"Kyle Ledbetter\",\"copyright\":\"Copyright (C) 2005 - 2020 Open Source Matters, Inc. All rights reserved.\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"\",\"version\":\"1.0\",\"description\":\"TPL_ISIS_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"templateDetails\"}', '{\"templateColor\":\"\",\"logoFile\":\"\"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (10021, 10002, 'BrazilianPortuguesept-BR', 'language', 'pt-BR', '', 0, 1, 0, 0, '{\"name\":\"Brazilian Portuguese (pt-BR)\",\"type\":\"language\",\"creationDate\":\"2020-04-22\",\"author\":\"Projeto Joomla!\",\"copyright\":\"Copyright (C) 2005-2020 Open Source Matters. Todos os direitos reservados.\",\"authorEmail\":\"helvecio.dasilva@community.joomla.org\",\"authorUrl\":\"http:\\/\\/brasil.joomla.com\",\"version\":\"3.9.18.1\",\"description\":\"pt-BR site language\",\"group\":\"\",\"filename\":\"install\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0);
-INSERT INTO `idg2019_extensions` (`extension_id`, `package_id`, `name`, `type`, `element`, `folder`, `client_id`, `enabled`, `access`, `protected`, `manifest_cache`, `params`, `custom_data`, `system_data`, `checked_out`, `checked_out_time`, `ordering`, `state`) VALUES
+INSERT INTO `#__extensions` (`extension_id`, `package_id`, `name`, `type`, `element`, `folder`, `client_id`, `enabled`, `access`, `protected`, `manifest_cache`, `params`, `custom_data`, `system_data`, `checked_out`, `checked_out_time`, `ordering`, `state`) VALUES
 (10022, 10002, 'BrazilianPortuguesept-BR', 'language', 'pt-BR', '', 1, 1, 0, 0, '{\"name\":\"Brazilian Portuguese (pt-BR)\",\"type\":\"language\",\"creationDate\":\"2020-04-22\",\"author\":\"Projeto Joomla!\",\"copyright\":\"Copyright (C) 2005-2020 Open Source Matters. Todos os direitos reservados.\",\"authorEmail\":\"helvecio.dasilva@community.joomla.org\",\"authorUrl\":\"http:\\/\\/brasil.joomla.com\",\"version\":\"3.9.18.1\",\"description\":\"Brazilian Portuguese Administrator language\",\"group\":\"\",\"filename\":\"install\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (10023, 0, 'TinyMCE Idioma Português (Brasil)', 'file', 'TinyMCE_pt-BR', '', 0, 1, 0, 0, '{\"name\":\"TinyMCE Idioma Portugu\\u00eas (Brasil)\",\"type\":\"file\",\"creationDate\":\"03 Set 2012\",\"author\":\"Ponto Mega\",\"copyright\":\"(C) 2005-2013 Brazilian Translation Team\",\"authorEmail\":\"traducao@pontomega.com.br\",\"authorUrl\":\"\",\"version\":\"3.5.1\",\"description\":\"\\n\\t\\t<h3><strong>Instala\\u00e7\\u00e3o do pacote de idioma Portugu\\u00eas (Brasil) para o editor TinyMCE 3.5.1 foi conclu\\u00eddo com sucesso.<\\/strong><\\/h3>\\n\\t\\t<p>N\\u00e3o se esque\\u00e7a de selecionar o idioma para PT <a href=\\\"index.php?option=com_plugins&amp;view=plugins&amp;filter_search=TinyMCE\\\"><strong>Gerenciamento de plug-in TinyMCE<\\/strong><\\/a><br \\/> Se voc\\u00ea usar a detec\\u00e7\\u00e3o autom\\u00e1tica, certifique-se de que est\\u00e3o instalados os pacotes de idiomas diferentes para TinyMCE correspondentes aos instalado para o Joomla !<p>\\n\\t\\t\\n\\t\",\"group\":\"\"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(10024, 0, 'blankcomponent', 'component', 'com_blankcomponent', '', 1, 1, 0, 0, '{\"name\":\"Blank Component\",\"type\":\"component\",\"creationDate\":\"03\\/11\\/2012\",\"author\":\"Omar Muhammad\",\"copyright\":\"Copyright \\u00a9 2012, Omar\'s Site, All Rights Reserved.\",\"authorEmail\":\"admin@omar84.com\",\"authorUrl\":\"http:\\/\\/omar84.com\",\"version\":\"3.0.0\",\"description\":\"Blank Component was made to make it possible to create a menu item page that contains only modules and no component.\",\"group\":\"\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(10024, 0, 'blankcomponent', 'component', 'com_blankcomponent', '', 1, 1, 0, 0, '{\"name\":\"Blank Component\",\"type\":\"component\",\"creationDate\":\"03\\/11\\/2012\",\"author\":\"Omar Muhammad\",\"copyright\":\"Copyright \\u00a9 2012, Omars Site, All Rights Reserved.\",\"authorEmail\":\"admin@omar84.com\",\"authorUrl\":\"http:\\/\\/omar84.com\",\"version\":\"3.0.0\",\"description\":\"Blank Component was made to make it possible to create a menu item page that contains only modules and no component.\",\"group\":\"\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (10025, 0, 'plg_search_contenttags', 'plugin', 'contenttags', 'search', 0, 1, 1, 0, '{\"name\":\"plg_search_contenttags\",\"type\":\"plugin\",\"creationDate\":\"Novembro 2013\",\"author\":\"Comunidade Joomla Calango e Grupo de Trabalho de Minist\\u00e9rios\",\"copyright\":\"Copyright (C) 2013 Comunidade Joomla Calango e Grupo de Trabalho de Minist\\u00e9rios\",\"authorEmail\":\"joomlagovbr@gmail.com\",\"authorUrl\":\"https:\\/\\/github.com\\/joomlagovbr\",\"version\":\"2.5.0\",\"description\":\"Plugin baseado no plugin nativo de conte\\u00fado, com a fun\\u00e7\\u00e3o de realizar buscas somente nas palavras-chave de conte\\u00fado.\",\"group\":\"\"}', '{\"search_limit\":\"50\",\"search_content\":\"0\",\"search_archived\":\"0\"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (10028, 10129, 'Content - Youtube Gallery', 'plugin', 'youtubegallery', 'content', 0, 1, 1, 0, '{\"name\":\"Content - Youtube Gallery\",\"type\":\"plugin\",\"creationDate\":\"June 2018\",\"author\":\"Ivan Komlev\",\"copyright\":\"Copyright (C) 2009-2018 Ivan Komlev. All rights reserved.\",\"authorEmail\":\"support@joomlaboat.com\",\"authorUrl\":\"http:\\/\\/www.joomlaboat.com\\/\",\"version\":\"4.4.5\",\"description\":\"\\n    <p>A plugin to show Youtube Gallery in any article.<\\/p>\\n<p>Plugin to show a catalog of selected YouTube (not only) videos. All you need is to create a Video List and a Theme (or you may download free Theme).<\\/p>\\n\\n\\n<hr>\\n\\n<h1>Plugin usage:<\\/h1>\\n\\n<p>Type the special keyword {youtubegallery=<i>Video List Name,Theme Name<\\/i>} or {youtubegalleryid=<i>Video List ID,Theme ID<\\/i>} inside of any article.<\\/p>\\n\\n<p>Example:<\\/p>\\n\\n<p style=\'color:#007000;\'>{youtubegallery=My First Gallery,Simple Grid} - will show the gallery \\\"My First Gallery\\\", but create Video List and Theme first.\\n\\n<hr\\/>\\n\\n<p>For more info <a href=\'http:\\/\\/joomlaboat.com\\/youtube-gallery\' target=\'_blank\'>click here<\\/a><\\/p>\\n\\n<p>To take the logo off <a href=\'http:\\/\\/joomlaboat.com\\/youtube-gallery#pro-version\' target=\'_blank\'>click here<\\/a><\\/p>\\n\\n    \",\"group\":\"\",\"filename\":\"youtubegallery\"}', '{\"cache\":\"0\",\"cache_time\":\"900\",\"cachemode\":\"static\"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (10029, 10129, 'Youtube Gallery Module', 'module', 'mod_youtubegallery', '', 0, 1, 0, 0, '{\"name\":\"Youtube Gallery Module\",\"type\":\"module\",\"creationDate\":\"June 2018\",\"author\":\"Ivan Komlev\",\"copyright\":\"Copyright (C) 2009-2018 Ivan Komlev. All rights reserved.\",\"authorEmail\":\"support@joomlaboat.com\",\"authorUrl\":\"http:\\/\\/www.joomlaboat.com\\/\",\"version\":\"4.4.5\",\"description\":\"<p>YoutubeGallery Module to show Video Gallery (Video List with Theme) already created in Components\\/YoutubeGallery.<\\/p>\\n    \",\"group\":\"\",\"filename\":\"mod_youtubegallery\"}', '{\"customitemid\":\"\",\"cache\":\"0\",\"cache_time\":\"900\",\"cachemode\":\"static\",\"allowcontentplugins\":\"0\"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
@@ -1556,7 +1564,7 @@ INSERT INTO `idg2019_extensions` (`extension_id`, `package_id`, `name`, `type`, 
 (10140, 0, 'PKG_JCE', 'package', 'pkg_jce', '', 0, 1, 1, 0, '{\"name\":\"PKG_JCE\",\"type\":\"package\",\"creationDate\":\"12-05-2020\",\"author\":\"Ryan Demmer\",\"copyright\":\"\",\"authorEmail\":\"\",\"authorUrl\":\"\",\"version\":\"2.8.12\",\"description\":\"PKG_JCE_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"pkg_jce\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (10144, 10147, 'com_j2xml', 'component', 'com_j2xml', '', 1, 1, 0, 0, '{\"name\":\"com_j2xml\",\"type\":\"component\",\"creationDate\":\"May 2020\",\"author\":\"Helios Ciancio\",\"copyright\":\"(C) 2010 - 2020 Helios Ciancio <info (at) eshiol (dot) it> (https:\\/\\/www.eshiol.it). All Rights Reserved.\",\"authorEmail\":\"info@eshiol.it\",\"authorUrl\":\"www.eshiol.it\",\"version\":\"3.7.207\",\"description\":\"COM_J2XML_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"j2xml\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (10145, 10147, 'plg_system_j2xml', 'plugin', 'j2xml', 'system', 0, 1, 1, 0, '{\"name\":\"plg_system_j2xml\",\"type\":\"plugin\",\"creationDate\":\"May 2020\",\"author\":\"Helios Ciancio\",\"copyright\":\"(C) 2010 - 2020 Helios Ciancio <info (at) eshiol (dot) it> (https:\\/\\/www.eshiol.it). All Rights Reserved.\",\"authorEmail\":\"info@eshiol.it\",\"authorUrl\":\"www.eshiol.it\",\"version\":\"3.7.49\",\"description\":\"PLG_SYSTEM_J2XML_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"j2xml\"}', '{\"debug\":\"0\",\"log\":\"eshiol.log.php\",\"phpconsole\":\"0\"}', '', '', 0, '0000-00-00 00:00:00', 0, 0);
-INSERT INTO `idg2019_extensions` (`extension_id`, `package_id`, `name`, `type`, `element`, `folder`, `client_id`, `enabled`, `access`, `protected`, `manifest_cache`, `params`, `custom_data`, `system_data`, `checked_out`, `checked_out_time`, `ordering`, `state`) VALUES
+INSERT INTO `#__extensions` (`extension_id`, `package_id`, `name`, `type`, `element`, `folder`, `client_id`, `enabled`, `access`, `protected`, `manifest_cache`, `params`, `custom_data`, `system_data`, `checked_out`, `checked_out_time`, `ordering`, `state`) VALUES
 (10146, 10147, 'cli_j2xml', 'file', 'cli_j2xml', '', 0, 1, 0, 0, '{\"name\":\"cli_j2xml\",\"type\":\"file\",\"creationDate\":\"May 2020\",\"author\":\"Helios Ciancio\",\"copyright\":\"(C) 2010 - 2020 Helios Ciancio <info (at) eshiol (dot) it> (https:\\/\\/www.eshiol.it). All Rights Reserved.\",\"authorEmail\":\"info@eshiol.it\",\"authorUrl\":\"www.eshiol.it\",\"version\":\"3.7.23\",\"description\":\"CLI_J2XML_XML_DESCRIPTION\",\"group\":\"\"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (10147, 0, 'pkg_j2xml', 'package', 'pkg_j2xml', '', 0, 1, 1, 0, '{\"name\":\"pkg_j2xml\",\"type\":\"package\",\"creationDate\":\"May 2020\",\"author\":\"Helios Ciancio\",\"copyright\":\"(C) 2010 - 2020 Helios Ciancio <info (at) eshiol (dot) it> (https:\\/\\/www.eshiol.it). All Rights Reserved.\",\"authorEmail\":\"\",\"authorUrl\":\"\",\"version\":\"3.7.207\",\"description\":\"PKG_J2XML_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"pkg_j2xml\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (10148, 0, 'PLG_J2XML_USERS', 'plugin', 'users', 'j2xml', 0, 1, 1, 0, '{\"name\":\"PLG_J2XML_USERS\",\"type\":\"plugin\",\"creationDate\":\"April 2019\",\"author\":\"Helios Ciancio\",\"copyright\":\"(C) 2016 - 2019 Helios Ciancio. All rights reserved.\",\"authorEmail\":\"info@eshiol.it\",\"authorUrl\":\"www.eshiol.it\",\"version\":\"3.7.10.95\",\"description\":\"PLG_J2XML_USERS_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"users\"}', '{\"new_usertype\":\"\",\"requireReset\":\"1\",\"debug\":\"\",\"log\":\"eshiol.log.php\",\"phpconsole\":\"0\"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
@@ -1616,49 +1624,48 @@ INSERT INTO `idg2019_extensions` (`extension_id`, `package_id`, `name`, `type`, 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_fields`
+-- Estrutura da tabela `#__fields`
 --
 
-DROP TABLE IF EXISTS `idg2019_fields`;
-CREATE TABLE IF NOT EXISTS `idg2019_fields` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `asset_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `context` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `group_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `label` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `default_value` text COLLATE utf8mb4_unicode_ci,
-  `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'text',
-  `note` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `state` tinyint(1) NOT NULL DEFAULT '0',
-  `required` tinyint(1) NOT NULL DEFAULT '0',
-  `checked_out` int(11) NOT NULL DEFAULT '0',
-  `checked_out_time` datetime NOT NULL,
-  `ordering` int(11) NOT NULL DEFAULT '0',
-  `params` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fieldparams` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `language` char(7) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `created_time` datetime NOT NULL,
-  `created_user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `modified_time` datetime NOT NULL,
-  `modified_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `access` int(11) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `idx_checkout` (`checked_out`) USING BTREE,
-  KEY `idx_state` (`state`) USING BTREE,
-  KEY `idx_created_user_id` (`created_user_id`) USING BTREE,
-  KEY `idx_access` (`access`) USING BTREE,
-  KEY `idx_context` (`context`(191)) USING BTREE,
-  KEY `idx_language` (`language`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+CREATE TABLE IF NOT EXISTS `#__fields` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `asset_id` int(10) unsigned NOT NULL DEFAULT 0,
+  `context` varchar(255) NOT NULL DEFAULT '',
+  `group_id` int(10) unsigned NOT NULL DEFAULT 0,
+  `title` varchar(255) NOT NULL DEFAULT '',
+  `name` varchar(255) NOT NULL DEFAULT '',
+  `label` varchar(255) NOT NULL DEFAULT '',
+  `default_value` text,
+  `type` varchar(255) NOT NULL DEFAULT 'text',
+  `note` varchar(255) NOT NULL DEFAULT '',
+  `description` text NOT NULL,
+  `state` tinyint(1) NOT NULL DEFAULT 0,
+  `required` tinyint(1) NOT NULL DEFAULT 0,
+  `checked_out` int(11) NOT NULL DEFAULT 0,
+  `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `ordering` int(11) NOT NULL DEFAULT 0,
+  `params` text NOT NULL,
+  `fieldparams` text NOT NULL,
+  `language` char(7) NOT NULL DEFAULT '',
+  `created_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `created_user_id` int(10) unsigned NOT NULL DEFAULT 0,
+  `modified_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `modified_by` int(10) unsigned NOT NULL DEFAULT 0,
+  `access` int(11) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id`),
+  KEY `idx_checkout` (`checked_out`),
+  KEY `idx_state` (`state`),
+  KEY `idx_created_user_id` (`created_user_id`),
+  KEY `idx_access` (`access`),
+  KEY `idx_context` (`context`(191)),
+  KEY `idx_language` (`language`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 --
--- Extraindo dados da tabela `idg2019_fields`
+-- Extraindo dados da tabela `#__fields`
 --
 
-INSERT INTO `idg2019_fields` (`id`, `asset_id`, `context`, `group_id`, `title`, `name`, `label`, `default_value`, `type`, `note`, `description`, `state`, `required`, `checked_out`, `checked_out_time`, `ordering`, `params`, `fieldparams`, `language`, `created_time`, `created_user_id`, `modified_time`, `modified_by`, `access`) VALUES
+INSERT INTO `#__fields` (`id`, `asset_id`, `context`, `group_id`, `title`, `name`, `label`, `default_value`, `type`, `note`, `description`, `state`, `required`, `checked_out`, `checked_out_time`, `ordering`, `params`, `fieldparams`, `language`, `created_time`, `created_user_id`, `modified_time`, `modified_by`, `access`) VALUES
 (1, 305, 'com_content.article', 1, 'Tamanho do Título', 'tamanho-do-titulo', 'Tamanho do Título', 'default', 'list', '', 'Escolha o tamanho do título a ser exibido para as chamadas em destaque', 0, 0, 0, '0000-00-00 00:00:00', 19, '{\"render_class\":\"\",\"class\":\"\",\"showlabel\":\"1\",\"show_on\":\"\",\"display\":\"2\",\"display_readonly\":\"2\"}', '{\"multiple\":\"\",\"options\":{\"options0\":{\"name\":\"Padr\\u00e3o\",\"value\":\"default\"},\"options1\":{\"name\":\"Grande\",\"value\":\"gr\"}}}', '*', '2019-04-12 03:10:48', 931, '2019-04-12 03:44:23', 931, 1),
 (2, 306, 'com_content.article', 1, 'Link do item', 'link-do-item', 'Link do item', '', 'url', '', 'Link utilizado para o item', 0, 0, 0, '0000-00-00 00:00:00', 13, '{\"hint\":\"\",\"render_class\":\"\",\"class\":\"\",\"showlabel\":\"1\",\"show_on\":\"\",\"display\":\"2\",\"display_readonly\":\"2\"}', '{\"schemes\":[\"http\",\"https\"],\"relative\":1}', '*', '2019-04-12 03:13:02', 931, '2019-04-12 03:43:56', 931, 1),
 (3, 307, 'com_content.article', 2, 'Chapéu', 'chapeu', 'Chapéu', '', 'text', '', 'Informação de \"chapéu\" acerca do tema do artigo. Tem um conceito mais próximo de tag do que de categoria.', 0, 0, 0, '0000-00-00 00:00:00', 15, '{\"hint\":\"\",\"render_class\":\"\",\"class\":\"\",\"showlabel\":\"1\",\"show_on\":\"\",\"display\":\"2\",\"display_readonly\":\"2\"}', '{\"filter\":\"\",\"maxlength\":50}', '*', '2019-04-12 03:14:07', 931, '2019-06-15 14:34:12', 936, 1),
@@ -1686,21 +1693,20 @@ INSERT INTO `idg2019_fields` (`id`, `asset_id`, `context`, `group_id`, `title`, 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_fields_categories`
+-- Estrutura da tabela `#__fields_categories`
 --
 
-DROP TABLE IF EXISTS `idg2019_fields_categories`;
-CREATE TABLE IF NOT EXISTS `idg2019_fields_categories` (
-  `field_id` int(11) NOT NULL DEFAULT '0',
-  `category_id` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`field_id`,`category_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+CREATE TABLE IF NOT EXISTS `#__fields_categories` (
+  `field_id` int(11) NOT NULL DEFAULT 0,
+  `category_id` int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`field_id`,`category_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 --
--- Extraindo dados da tabela `idg2019_fields_categories`
+-- Extraindo dados da tabela `#__fields_categories`
 --
 
-INSERT INTO `idg2019_fields_categories` (`field_id`, `category_id`) VALUES
+INSERT INTO `#__fields_categories` (`field_id`, `category_id`) VALUES
 (1, 17),
 (1, 58),
 (2, 17),
@@ -1734,42 +1740,41 @@ INSERT INTO `idg2019_fields_categories` (`field_id`, `category_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_fields_groups`
+-- Estrutura da tabela `#__fields_groups`
 --
 
-DROP TABLE IF EXISTS `idg2019_fields_groups`;
-CREATE TABLE IF NOT EXISTS `idg2019_fields_groups` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `asset_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `context` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `note` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `state` tinyint(1) NOT NULL DEFAULT '0',
-  `checked_out` int(11) NOT NULL DEFAULT '0',
-  `checked_out_time` datetime NOT NULL,
-  `ordering` int(11) NOT NULL DEFAULT '0',
-  `params` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `language` char(7) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `created` datetime NOT NULL,
-  `created_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `modified` datetime NOT NULL,
-  `modified_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `access` int(11) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `idx_checkout` (`checked_out`) USING BTREE,
-  KEY `idx_state` (`state`) USING BTREE,
-  KEY `idx_created_by` (`created_by`) USING BTREE,
-  KEY `idx_access` (`access`) USING BTREE,
-  KEY `idx_context` (`context`(191)) USING BTREE,
-  KEY `idx_language` (`language`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+CREATE TABLE IF NOT EXISTS `#__fields_groups` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `asset_id` int(10) unsigned NOT NULL DEFAULT 0,
+  `context` varchar(255) NOT NULL DEFAULT '',
+  `title` varchar(255) NOT NULL DEFAULT '',
+  `note` varchar(255) NOT NULL DEFAULT '',
+  `description` text NOT NULL,
+  `state` tinyint(1) NOT NULL DEFAULT 0,
+  `checked_out` int(11) NOT NULL DEFAULT 0,
+  `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `ordering` int(11) NOT NULL DEFAULT 0,
+  `params` text NOT NULL,
+  `language` char(7) NOT NULL DEFAULT '',
+  `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `created_by` int(10) unsigned NOT NULL DEFAULT 0,
+  `modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `modified_by` int(10) unsigned NOT NULL DEFAULT 0,
+  `access` int(11) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id`),
+  KEY `idx_checkout` (`checked_out`),
+  KEY `idx_state` (`state`),
+  KEY `idx_created_by` (`created_by`),
+  KEY `idx_access` (`access`),
+  KEY `idx_context` (`context`(191)),
+  KEY `idx_language` (`language`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 --
--- Extraindo dados da tabela `idg2019_fields_groups`
+-- Extraindo dados da tabela `#__fields_groups`
 --
 
-INSERT INTO `idg2019_fields_groups` (`id`, `asset_id`, `context`, `title`, `note`, `description`, `state`, `checked_out`, `checked_out_time`, `ordering`, `params`, `language`, `created`, `created_by`, `modified`, `modified_by`, `access`) VALUES
+INSERT INTO `#__fields_groups` (`id`, `asset_id`, `context`, `title`, `note`, `description`, `state`, `checked_out`, `checked_out_time`, `ordering`, `params`, `language`, `created`, `created_by`, `modified`, `modified_by`, `access`) VALUES
 (1, 304, 'com_content.article', 'Informações adicionais para chamadas em destaque', 'vr 0.1', 'Campos necessários para a montagem das \"caixas\" de banners presente na tela inicial do portal padrão', 1, 0, '0000-00-00 00:00:00', 0, '{\"display_readonly\":\"1\"}', '*', '2019-04-12 03:08:06', 931, '0000-00-00 00:00:00', 0, 1),
 (2, 310, 'com_content.article', 'Informações adicionais para notícias', 'vr 0.1', 'Informações adicionais pertinentes, como o \"chapéu\" da notícia.', 0, 0, '0000-00-00 00:00:00', 0, '{\"display_readonly\":\"1\"}', '*', '2019-04-12 03:22:51', 931, '0000-00-00 00:00:00', 0, 1),
 (3, 360, 'com_content.article', 'Serviços', '', 'Campos extras para Serviços.', 1, 0, '0000-00-00 00:00:00', 0, '{\"display_readonly\":\"1\"}', '*', '2019-10-02 19:18:48', 931, '0000-00-00 00:00:00', 0, 1),
@@ -1778,54 +1783,53 @@ INSERT INTO `idg2019_fields_groups` (`id`, `asset_id`, `context`, `title`, `note
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_fields_values`
+-- Estrutura da tabela `#__fields_values`
 --
 
-DROP TABLE IF EXISTS `idg2019_fields_values`;
-CREATE TABLE IF NOT EXISTS `idg2019_fields_values` (
-  `field_id` int(10) UNSIGNED NOT NULL,
-  `item_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Allow references to items which have strings as ids, eg. none db systems.',
-  `value` text COLLATE utf8mb4_unicode_ci,
-  KEY `idx_field_id` (`field_id`) USING BTREE,
-  KEY `idx_item_id` (`item_id`(191)) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+CREATE TABLE IF NOT EXISTS `#__fields_values` (
+  `field_id` int(10) unsigned NOT NULL,
+  `item_id` varchar(255) NOT NULL COMMENT 'Allow references to items which have strings as ids, eg. none db systems.',
+  `value` text,
+  KEY `idx_field_id` (`field_id`),
+  KEY `idx_item_id` (`item_id`(191))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 --
--- Extraindo dados da tabela `idg2019_fields_values`
+-- Extraindo dados da tabela `#__fields_values`
 --
 
-INSERT INTO `idg2019_fields_values` (`field_id`, `item_id`, `value`) VALUES
+INSERT INTO `#__fields_values` (`field_id`, `item_id`, `value`) VALUES
 (3, '72', 'novidade'),
 (2, '72', 'index.php/publicacoes/item/1-manual-de-administracao-tecnica-beta'),
 (4, '72', 'images/chamadas/foto_chamada_2colunas.jpg'),
 (5, '72', '#FFFFFF'),
 (1, '72', 'gr'),
 (7, '74', 'saiba mais'),
-(2, '74', 'http://localhost/idg2019/index.php/component/content/article/58-chamadas-em-destaque/74-nova-identidade-digital-de-governo?Itemid=101'),
+(2, '74', '/index.php/component/content/article/58-chamadas-em-destaque/74-nova-identidade-digital-de-governo?Itemid=101'),
 (6, '74', 'botao'),
 (5, '74', '#3ab09e'),
 (1, '74', 'gr'),
 (3, '74', 'novidade'),
 (6, '75', 'geral'),
 (1, '75', 'gr'),
-(2, '76', 'http://flaviodias.com/portalpadrao/'),
+(2, '76', ''),
 (6, '76', 'titulo'),
 (1, '76', 'gr'),
 (9, '76', 'Acessibilidade'),
 (9, '77', 'Dicas'),
-(2, '77', 'http://flaviodias.com/portalpadrao/'),
+(2, '77', ''),
 (6, '77', 'titulo'),
 (1, '77', 'default'),
 (9, '78', 'Tendência'),
-(2, '78', 'http://flaviodias.com/portalpadrao/'),
+(2, '78', ''),
 (6, '78', 'titulo'),
 (1, '78', 'default'),
 (9, '79', 'Temas'),
-(2, '79', 'http://flaviodias.com/portalpadrao/'),
+(2, '79', ''),
 (6, '79', 'titulo'),
 (1, '79', 'default'),
 (9, '80', 'Temas'),
-(2, '80', 'http://flaviodias.com/portalpadrao/'),
+(2, '80', ''),
 (6, '80', 'titulo'),
 (1, '80', 'default'),
 (2, '75', 'globo.com'),
@@ -1868,36 +1872,46 @@ INSERT INTO `idg2019_fields_values` (`field_id`, `item_id`, `value`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_finder_filters`
+-- Estrutura da tabela `#__finder_filters`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_filters`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_filters` (
-  `filter_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) NOT NULL,
-  `alias` varchar(255) NOT NULL,
-  `state` tinyint(1) NOT NULL DEFAULT '1',
-  `created` datetime NOT NULL,
-  `created_by` int(10) UNSIGNED NOT NULL,
-  `created_by_alias` varchar(255) NOT NULL,
-  `modified` datetime NOT NULL,
-  `modified_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `checked_out` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `checked_out_time` datetime NOT NULL,
-  `map_count` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `data` mediumtext NOT NULL,
-  `params` longtext,
-  PRIMARY KEY (`filter_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+CREATE TABLE IF NOT EXISTS `#__finder_links` (
+  `link_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `url` varchar(255) NOT NULL,
+  `route` varchar(255) NOT NULL,
+  `title` varchar(400) DEFAULT NULL,
+  `description` text,
+  `indexdate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `md5sum` varchar(32) DEFAULT NULL,
+  `published` tinyint(1) NOT NULL DEFAULT 1,
+  `state` int(5) DEFAULT 1,
+  `access` int(5) DEFAULT 0,
+  `language` varchar(8) NOT NULL,
+  `publish_start_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `publish_end_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `start_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `end_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `list_price` double unsigned NOT NULL DEFAULT 0,
+  `sale_price` double unsigned NOT NULL DEFAULT 0,
+  `type_id` int(11) NOT NULL,
+  `object` mediumblob NOT NULL,
+  PRIMARY KEY (`link_id`),
+  KEY `idx_type` (`type_id`),
+  KEY `idx_title` (`title`(100)),
+  KEY `idx_md5` (`md5sum`),
+  KEY `idx_url` (`url`(75)),
+  KEY `idx_published_list` (`published`,`state`,`access`,`publish_start_date`,`publish_end_date`,`list_price`),
+  KEY `idx_published_sale` (`published`,`state`,`access`,`publish_start_date`,`publish_end_date`,`sale_price`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_finder_links`
+-- Estrutura da tabela `#__finder_links`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_links`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_links` (
+DROP TABLE IF EXISTS `#__finder_links`;
+CREATE TABLE IF NOT EXISTS `#__finder_links` (
   `link_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `url` varchar(255) NOT NULL,
   `route` varchar(255) NOT NULL,
@@ -1927,304 +1941,287 @@ CREATE TABLE IF NOT EXISTS `idg2019_finder_links` (
 ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
--- Extraindo dados da tabela `idg2019_finder_links`
+-- Extraindo dados da tabela `#__finder_links`
 --
 
-INSERT INTO `idg2019_finder_links` (`link_id`, `url`, `route`, `title`, `description`, `indexdate`, `md5sum`, `published`, `state`, `access`, `language`, `publish_start_date`, `publish_end_date`, `start_date`, `end_date`, `list_price`, `sale_price`, `type_id`, `object`) VALUES
+INSERT INTO `#__finder_links` (`link_id`, `url`, `route`, `title`, `description`, `indexdate`, `md5sum`, `published`, `state`, `access`, `language`, `publish_start_date`, `publish_end_date`, `start_date`, `end_date`, `list_price`, `sale_price`, `type_id`, `object`) VALUES
 (1, 'index.php?option=com_k2&view=item&id=1', 'index.php?option=com_k2&view=item&id=1:manual-de-administracao-tecnica-beta', 'Manual de administração técnica (beta)', '', '2019-04-03 17:02:20', '940e84a8bd43c8137973674af7bf267a', 1, 1, 1, '*', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', 0, 0, 1, 0x4f3a31393a2246696e646572496e6465786572526573756c74223a31393a7b733a31313a22002a00656c656d656e7473223b613a32353a7b733a323a226964223b733a313a2231223b733a353a22616c696173223b733a33363a226d616e75616c2d64652d61646d696e697374726163616f2d7465636e6963612d62657461223b733a373a2273756d6d617279223b733a3234393a223c703e4d616e75616c2064652061646d696e6973747261c3a7c3a36f2074c3a9636e69636120646f20706f7274616c2070616472c3a36f20656d204a6f6f6d6c6120322e352c2076657273c3a36f20626574612e20417475616c6d656e74652c20706f7373756920746f646120612073657175656e63696120646520706173736f73207061726120637573746f6d697a6172206f206e6f6d6520646f2073c3ad74696f206520617320636f726573207072696e6369706169732064652061636f72646f20636f6d20756d20646f732071756174726f2070616472c3b5657320646520636f72657320646973706f6ec3ad766569732e3c2f703e223b733a343a22626f6479223b733a303a22223b733a353a226361746964223b733a313a2234223b733a31303a22637265617465645f6279223b733a333a22353736223b733a31363a22637265617465645f62795f616c696173223b733a303a22223b733a383a226d6f646966696564223b733a31393a22303030302d30302d30302030303a30303a3030223b733a31313a226d6f6469666965645f6279223b733a313a2230223b733a363a22706172616d73223b4f3a393a224a5265676973747279223a313a7b733a373a22002a0064617461223b4f3a383a22737464436c617373223a3135343a7b733a31303a22656e61626c655f637373223b733a313a2231223b733a31343a226a517565727948616e646c696e67223b733a393a22312e3872656d6f7465223b733a32313a226261636b656e644a517565727948616e646c696e67223b733a363a2272656d6f7465223b733a383a22757365724e616d65223b733a313a2231223b733a393a2275736572496d616765223b733a313a2231223b733a31353a22757365724465736372697074696f6e223b733a313a2231223b733a373a227573657255524c223b733a313a2231223b733a393a2275736572456d61696c223b733a313a2230223b733a31323a2275736572466565644c696e6b223b733a313a2231223b733a31323a22757365724665656449636f6e223b733a313a2231223b733a31333a22757365724974656d436f756e74223b733a323a223130223b733a31333a22757365724974656d5469746c65223b733a313a2231223b733a31393a22757365724974656d5469746c654c696e6b6564223b733a313a2231223b733a31393a22757365724974656d4461746543726561746564223b733a313a2231223b733a31333a22757365724974656d496d616765223b733a313a2231223b733a31373a22757365724974656d496e74726f54657874223b733a313a2231223b733a31363a22757365724974656d43617465676f7279223b733a313a2231223b733a31323a22757365724974656d54616773223b733a313a2231223b733a32323a22757365724974656d436f6d6d656e7473416e63686f72223b733a313a2231223b733a31363a22757365724974656d526561644d6f7265223b733a313a2231223b733a31373a22757365724974656d4b32506c7567696e73223b733a313a2231223b733a31323a227461674974656d436f756e74223b733a323a223130223b733a31323a227461674974656d5469746c65223b733a313a2231223b733a31383a227461674974656d5469746c654c696e6b6564223b733a313a2231223b733a31383a227461674974656d4461746543726561746564223b733a313a2231223b733a31323a227461674974656d496d616765223b733a313a2231223b733a31363a227461674974656d496e74726f54657874223b733a313a2231223b733a31353a227461674974656d43617465676f7279223b733a313a2231223b733a31353a227461674974656d526561644d6f7265223b733a313a2231223b733a31383a227461674974656d45787472614669656c6473223b733a313a2230223b733a31313a227461674f72646572696e67223b733a303a22223b733a31313a22746167466565644c696e6b223b733a313a2231223b733a31313a227461674665656449636f6e223b733a313a2231223b733a31363a2267656e657269634974656d436f756e74223b733a323a223130223b733a31363a2267656e657269634974656d5469746c65223b733a313a2231223b733a32323a2267656e657269634974656d5469746c654c696e6b6564223b733a313a2231223b733a32323a2267656e657269634974656d4461746543726561746564223b733a313a2231223b733a31363a2267656e657269634974656d496d616765223b733a313a2231223b733a32303a2267656e657269634974656d496e74726f54657874223b733a313a2231223b733a31393a2267656e657269634974656d43617465676f7279223b733a313a2231223b733a31393a2267656e657269634974656d526561644d6f7265223b733a313a2231223b733a32323a2267656e657269634974656d45787472614669656c6473223b733a313a2230223b733a31353a2267656e65726963466565644c696e6b223b733a313a2231223b733a31353a2267656e657269634665656449636f6e223b733a313a2231223b733a393a22666565644c696d6974223b733a323a223130223b733a31333a22666565644974656d496d616765223b733a313a2231223b733a31313a2266656564496d6753697a65223b733a313a2253223b733a31373a22666565644974656d496e74726f54657874223b733a313a2231223b733a31373a226665656454657874576f72644c696d6974223b733a303a22223b733a31363a22666565644974656d46756c6c54657874223b733a313a2231223b733a31323a22666565644974656d54616773223b733a313a2230223b733a31333a22666565644974656d566964656f223b733a313a2230223b733a31353a22666565644974656d47616c6c657279223b733a313a2230223b733a31393a22666565644974656d4174746163686d656e7473223b733a313a2230223b733a31343a2266656564426f677573456d61696c223b733a303a22223b733a31363a22696e74726f54657874436c65616e7570223b733a313a2230223b733a32373a22696e74726f54657874436c65616e75704578636c75646554616773223b733a303a22223b733a32333a22696e74726f54657874436c65616e757054616741747472223b733a303a22223b733a31353a2266756c6c54657874436c65616e7570223b733a313a2230223b733a32363a2266756c6c54657874436c65616e75704578636c75646554616773223b733a303a22223b733a32323a2266756c6c54657874436c65616e757054616741747472223b733a303a22223b733a31323a2278737346696c746572696e67223b733a313a2230223b733a31343a226c696e6b506f7075705769647468223b733a333a22393030223b733a31353a226c696e6b506f707570486569676874223b733a333a22363030223b733a31333a22696d616765735175616c697479223b733a333a22313030223b733a31313a226974656d496d6167655853223b733a333a22313030223b733a31303a226974656d496d61676553223b733a333a22323030223b733a31303a226974656d496d6167654d223b733a333a22343030223b733a31303a226974656d496d6167654c223b733a333a22363030223b733a31313a226974656d496d616765584c223b733a333a22393030223b733a31363a226974656d496d61676547656e65726963223b733a333a22333030223b733a31333a22636174496d6167655769647468223b733a333a22313030223b733a31353a22636174496d61676544656661756c74223b733a313a2231223b733a31343a2275736572496d6167655769647468223b733a333a22313030223b733a31363a2275736572496d61676544656661756c74223b733a313a2231223b733a31373a22636f6d6d656e746572496d675769647468223b733a323a223438223b733a31373a226f6e6c696e65496d616765456469746f72223b733a383a2273706c6173687570223b733a31343a22696d61676554696d657374616d70223b733a313a2230223b733a31363a22696d6167654d656d6f72794c696d6974223b733a303a22223b733a31363a22736f6369616c427574746f6e436f6465223b733a303a22223b733a31353a2274776974746572557365726e616d65223b733a303a22223b733a31333a2266616365626f6f6b496d616765223b733a363a224d656469756d223b733a383a22636f6d6d656e7473223b733a313a2231223b733a31363a22636f6d6d656e74734f72646572696e67223b733a343a2244455343223b733a31333a22636f6d6d656e74734c696d6974223b733a323a223130223b733a32303a22636f6d6d656e7473466f726d506f736974696f6e223b733a353a2262656c6f77223b733a31383a22636f6d6d656e74735075626c697368696e67223b733a313a2231223b733a31373a22636f6d6d656e74735265706f7274696e67223b733a313a2232223b733a32333a22636f6d6d656e74735265706f7274526563697069656e74223b733a303a22223b733a32343a22696e6c696e65436f6d6d656e74734d6f6465726174696f6e223b733a313a2230223b733a383a226772617661746172223b733a313a2231223b733a393a22726563617074636861223b733a313a2230223b733a32323a22726563617074636861466f7252656769737465726564223b733a313a2231223b733a31373a22636f6d6d656e7473466f726d4e6f746573223b733a313a2231223b733a32313a22636f6d6d656e7473466f726d4e6f74657354657874223b733a303a22223b733a31353a2266726f6e74656e6445646974696e67223b733a313a2231223b733a31323a2273686f77496d616765546162223b733a313a2231223b733a31393a2273686f77496d61676547616c6c657279546162223b733a313a2231223b733a31323a2273686f77566964656f546162223b733a313a2231223b733a31383a2273686f7745787472614669656c6473546162223b733a313a2231223b733a31383a2273686f774174746163686d656e7473546162223b733a313a2231223b733a31333a2273686f774b32506c7567696e73223b733a313a2231223b733a32323a2273696465426172446973706c617946726f6e74656e64223b733a313a2230223b733a31323a226d65726765456469746f7273223b733a313a2231223b733a31343a2273696465426172446973706c6179223b733a313a2231223b733a31373a226174746163686d656e7473466f6c646572223b733a303a22223b733a31363a2268696465496d706f7274427574746f6e223b733a313a2230223b733a31323a22676f6f676c65536561726368223b733a313a2230223b733a32313a22676f6f676c65536561726368436f6e7461696e6572223b733a32333a226b32476f6f676c65536561726368436f6e7461696e6572223b733a31333a224b325573657250726f66696c65223b733a313a2231223b733a31313a224b325573657247726f7570223b733a303a22223b733a383a227265646972656374223b733a303a22223b733a31313a2261646d696e536561726368223b733a363a2273696d706c65223b733a31323a22636f6f6b6965446f6d61696e223b733a303a22223b733a31333a2274616767696e6753797374656d223b733a313a2231223b733a383a226c6f636b54616773223b733a313a2230223b733a31333a2273686f7754616746696c746572223b733a313a2230223b733a393a226b325461674e6f726d223b733a313a2230223b733a31333a226b325461674e6f726d43617365223b733a353a226c6f776572223b733a33313a226b325461674e6f726d4164646974696f6e616c5265706c6163656d656e7473223b733a303a22223b733a32303a227265636170746368615f7075626c69635f6b6579223b733a303a22223b733a32313a227265636170746368615f707269766174655f6b6579223b733a303a22223b733a31353a227265636170746368615f7468656d65223b733a353a22636c65616e223b733a32333a227265636170746368614f6e526567697374726174696f6e223b733a313a2230223b733a31333a2273746f70466f72756d5370616d223b733a313a2230223b733a31393a2273746f70466f72756d5370616d4170694b6579223b733a303a22223b733a32313a2273686f774974656d73436f756e74657241646d696e223b733a313a2231223b733a31373a2273686f774368696c644361744974656d73223b733a313a2231223b733a32323a2264697361626c65436f6d706163744f72646572696e67223b733a313a2230223b733a31333a226d657461446573634c696d6974223b733a333a22313530223b733a32323a22656e666f7263655345465265706c6163656d656e7473223b733a313a2230223b733a31353a225345465265706c6163656d656e7473223b733a303a22223b733a353a226b32536566223b733a313a2230223b733a31333a226b325365664c6162656c436174223b733a373a22636f6e74656e74223b733a31333a226b325365664c6162656c546167223b733a333a22746167223b733a31343a226b325365664c6162656c55736572223b733a363a22617574686f72223b733a31363a226b325365664c6162656c536561726368223b733a363a22736561726368223b733a31343a226b325365664c6162656c44617465223b733a343a2264617465223b733a31343a226b325365664c6162656c4974656d223b733a313a2230223b733a32363a226b325365664c6162656c4974656d437573746f6d507265666978223b733a303a22223b733a31373a226b32536566496e736572744974656d4964223b733a313a2231223b733a32343a226b325365664974656d49645469746c65416c696173536570223b733a343a2264617368223b733a32323a226b325365665573654974656d5469746c65416c696173223b733a313a2231223b733a31363a226b32536566496e736572744361744964223b733a313a2231223b733a32333a226b3253656643617449645469746c65416c696173536570223b733a343a2264617368223b733a32313a226b325365665573654361745469746c65416c696173223b733a313a2231223b733a31363a2273683430345365664c6162656c436174223b733a303a22223b733a31373a2273683430345365664c6162656c55736572223b733a343a22626c6f67223b733a31373a2273683430345365664c6162656c4974656d223b733a313a2232223b733a31383a2273683430345365665469746c65416c696173223b733a353a22616c696173223b733a32393a2273683430345365664d6f644b32436f6e74656e7446656564416c696173223b733a343a2266656564223b733a32303a227368343034536566496e736572744974656d4964223b733a313a2230223b733a32363a227368343034536566496e73657274556e697175654974656d4964223b733a313a2230223b733a31333a226362496e746567726174696f6e223b733a313a2230223b7d7d733a373a226d6574616b6579223b733a303a22223b733a383a226d65746164657363223b733a303a22223b733a383a226d65746164617461223b4f3a393a224a5265676973747279223a313a7b733a373a22002a0064617461223b4f3a383a22737464436c617373223a323a7b733a363a22726f626f7473223b733a303a22223b733a363a22617574686f72223b733a303a22223b7d7d733a383a226f72646572696e67223b733a313a2231223b733a353a227472617368223b733a313a2230223b733a393a226361745f7472617368223b733a313a2230223b733a383a2263617465676f7279223b733a31333a225075626c696361c3a7c3b56573223b733a393a226361745f7374617465223b733a313a2231223b733a31303a226361745f616363657373223b733a313a2231223b733a343a22736c7567223b733a33383a22313a6d616e75616c2d64652d61646d696e697374726163616f2d7465636e6963612d62657461223b733a373a22636174736c7567223b733a31333a22343a7075626c696361636f6573223b733a363a22617574686f72223b733a31303a2253757065722055736572223b733a363a226c61796f7574223b733a343a226974656d223b733a343a2270617468223b733a36363a22696e6465782e7068702f636f6d706f6e656e742f6b322f6974656d2f312d6d616e75616c2d64652d61646d696e697374726163616f2d7465636e6963612d62657461223b733a31303a226d657461617574686f72223b4e3b7d733a31353a22002a00696e737472756374696f6e73223b613a353a7b693a313b613a333a7b693a303b733a353a227469746c65223b693a313b733a383a227375627469746c65223b693a323b733a323a226964223b7d693a323b613a323a7b693a303b733a373a2273756d6d617279223b693a313b733a343a22626f6479223b7d693a333b613a383a7b693a303b733a343a226d657461223b693a313b733a31303a226c6973745f7072696365223b693a323b733a31303a2273616c655f7072696365223b693a333b733a373a226d6574616b6579223b693a343b733a383a226d65746164657363223b693a353b733a31303a226d657461617574686f72223b693a363b733a363a22617574686f72223b693a373b733a31363a22637265617465645f62795f616c696173223b7d693a343b613a323a7b693a303b733a343a2270617468223b693a313b733a353a22616c696173223b7d693a353b613a313a7b693a303b733a383a22636f6d6d656e7473223b7d7d733a31313a22002a007461786f6e6f6d79223b613a343a7b733a343a2254797065223b613a313a7b733a373a224b32204974656d223b4f3a373a224a4f626a656374223a343a7b733a31303a22002a005f6572726f7273223b613a303a7b7d733a353a227469746c65223b733a373a224b32204974656d223b733a353a227374617465223b693a313b733a363a22616363657373223b693a313b7d7d733a363a22417574686f72223b613a313a7b733a31303a2253757065722055736572223b4f3a373a224a4f626a656374223a343a7b733a31303a22002a005f6572726f7273223b613a303a7b7d733a353a227469746c65223b733a31303a2253757065722055736572223b733a353a227374617465223b693a313b733a363a22616363657373223b693a313b7d7d733a31313a224b322043617465676f7279223b613a313a7b733a31333a225075626c696361c3a7c3b56573223b4f3a373a224a4f626a656374223a343a7b733a31303a22002a005f6572726f7273223b613a303a7b7d733a353a227469746c65223b733a31333a225075626c696361c3a7c3b56573223b733a353a227374617465223b693a313b733a363a22616363657373223b693a313b7d7d733a383a224c616e6775616765223b613a313a7b733a313a222a223b4f3a373a224a4f626a656374223a343a7b733a31303a22002a005f6572726f7273223b613a303a7b7d733a353a227469746c65223b733a313a222a223b733a353a227374617465223b693a313b733a363a22616363657373223b693a313b7d7d7d733a333a2275726c223b733a33383a22696e6465782e7068703f6f7074696f6e3d636f6d5f6b3226766965773d6974656d2669643d31223b733a353a22726f757465223b733a37353a22696e6465782e7068703f6f7074696f6e3d636f6d5f6b3226766965773d6974656d2669643d313a6d616e75616c2d64652d61646d696e697374726163616f2d7465636e6963612d62657461223b733a353a227469746c65223b733a34313a224d616e75616c2064652061646d696e6973747261c3a7c3a36f2074c3a9636e69636120286265746129223b733a31313a226465736372697074696f6e223b733a303a22223b733a393a227075626c6973686564223b4e3b733a353a227374617465223b693a313b733a363a22616363657373223b733a313a2231223b733a383a226c616e6775616765223b733a313a222a223b733a31383a227075626c6973685f73746172745f64617465223b733a31393a22323031332d31322d32322031323a34363a3136223b733a31363a227075626c6973685f656e645f64617465223b733a31393a22303030302d30302d30302030303a30303a3030223b733a31303a2273746172745f64617465223b733a31393a22323031332d31322d32322031323a34363a3136223b733a383a22656e645f64617465223b733a31393a22303030302d30302d30302030303a30303a3030223b733a31303a226c6973745f7072696365223b4e3b733a31303a2273616c655f7072696365223b4e3b733a373a22747970655f6964223b693a313b733a31353a2264656661756c744c616e6775616765223b733a353a2270742d4252223b7d),
 (19, 'index.php?option=com_k2&view=item&id=3', 'index.php?option=com_k2&view=item&id=3:teste-2', 'Teste 2', '', '2019-04-03 17:02:20', 'ac914a0513b8262740428a45d3b70402', 1, 1, 1, '*', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', 0, 0, 1, 0x4f3a31393a2246696e646572496e6465786572526573756c74223a31393a7b733a31313a22002a00656c656d656e7473223b613a32353a7b733a323a226964223b733a313a2233223b733a353a22616c696173223b733a373a2274657374652d32223b733a373a2273756d6d617279223b733a32373a223c703e446573637269c3a7c3a36f20646f206974656d2e3c2f703e223b733a343a22626f6479223b733a303a22223b733a353a226361746964223b733a313a2231223b733a31303a22637265617465645f6279223b733a333a22353736223b733a31363a22637265617465645f62795f616c696173223b733a303a22223b733a383a226d6f646966696564223b733a31393a22323031332d31322d32322031333a34323a3538223b733a31313a226d6f6469666965645f6279223b733a333a22353736223b733a363a22706172616d73223b4f3a393a224a5265676973747279223a313a7b733a373a22002a0064617461223b4f3a383a22737464436c617373223a3135343a7b733a31303a22656e61626c655f637373223b733a313a2231223b733a31343a226a517565727948616e646c696e67223b733a393a22312e3872656d6f7465223b733a32313a226261636b656e644a517565727948616e646c696e67223b733a363a2272656d6f7465223b733a383a22757365724e616d65223b733a313a2231223b733a393a2275736572496d616765223b733a313a2231223b733a31353a22757365724465736372697074696f6e223b733a313a2231223b733a373a227573657255524c223b733a313a2231223b733a393a2275736572456d61696c223b733a313a2230223b733a31323a2275736572466565644c696e6b223b733a313a2231223b733a31323a22757365724665656449636f6e223b733a313a2231223b733a31333a22757365724974656d436f756e74223b733a323a223130223b733a31333a22757365724974656d5469746c65223b733a313a2231223b733a31393a22757365724974656d5469746c654c696e6b6564223b733a313a2231223b733a31393a22757365724974656d4461746543726561746564223b733a313a2231223b733a31333a22757365724974656d496d616765223b733a313a2231223b733a31373a22757365724974656d496e74726f54657874223b733a313a2231223b733a31363a22757365724974656d43617465676f7279223b733a313a2231223b733a31323a22757365724974656d54616773223b733a313a2231223b733a32323a22757365724974656d436f6d6d656e7473416e63686f72223b733a313a2231223b733a31363a22757365724974656d526561644d6f7265223b733a313a2231223b733a31373a22757365724974656d4b32506c7567696e73223b733a313a2231223b733a31323a227461674974656d436f756e74223b733a323a223130223b733a31323a227461674974656d5469746c65223b733a313a2231223b733a31383a227461674974656d5469746c654c696e6b6564223b733a313a2231223b733a31383a227461674974656d4461746543726561746564223b733a313a2231223b733a31323a227461674974656d496d616765223b733a313a2231223b733a31363a227461674974656d496e74726f54657874223b733a313a2231223b733a31353a227461674974656d43617465676f7279223b733a313a2231223b733a31353a227461674974656d526561644d6f7265223b733a313a2231223b733a31383a227461674974656d45787472614669656c6473223b733a313a2230223b733a31313a227461674f72646572696e67223b733a303a22223b733a31313a22746167466565644c696e6b223b733a313a2231223b733a31313a227461674665656449636f6e223b733a313a2231223b733a31363a2267656e657269634974656d436f756e74223b733a323a223130223b733a31363a2267656e657269634974656d5469746c65223b733a313a2231223b733a32323a2267656e657269634974656d5469746c654c696e6b6564223b733a313a2231223b733a32323a2267656e657269634974656d4461746543726561746564223b733a313a2231223b733a31363a2267656e657269634974656d496d616765223b733a313a2231223b733a32303a2267656e657269634974656d496e74726f54657874223b733a313a2231223b733a31393a2267656e657269634974656d43617465676f7279223b733a313a2231223b733a31393a2267656e657269634974656d526561644d6f7265223b733a313a2231223b733a32323a2267656e657269634974656d45787472614669656c6473223b733a313a2230223b733a31353a2267656e65726963466565644c696e6b223b733a313a2231223b733a31353a2267656e657269634665656449636f6e223b733a313a2231223b733a393a22666565644c696d6974223b733a323a223130223b733a31333a22666565644974656d496d616765223b733a313a2231223b733a31313a2266656564496d6753697a65223b733a313a2253223b733a31373a22666565644974656d496e74726f54657874223b733a313a2231223b733a31373a226665656454657874576f72644c696d6974223b733a303a22223b733a31363a22666565644974656d46756c6c54657874223b733a313a2231223b733a31323a22666565644974656d54616773223b733a313a2230223b733a31333a22666565644974656d566964656f223b733a313a2230223b733a31353a22666565644974656d47616c6c657279223b733a313a2230223b733a31393a22666565644974656d4174746163686d656e7473223b733a313a2230223b733a31343a2266656564426f677573456d61696c223b733a303a22223b733a31363a22696e74726f54657874436c65616e7570223b733a313a2230223b733a32373a22696e74726f54657874436c65616e75704578636c75646554616773223b733a303a22223b733a32333a22696e74726f54657874436c65616e757054616741747472223b733a303a22223b733a31353a2266756c6c54657874436c65616e7570223b733a313a2230223b733a32363a2266756c6c54657874436c65616e75704578636c75646554616773223b733a303a22223b733a32323a2266756c6c54657874436c65616e757054616741747472223b733a303a22223b733a31323a2278737346696c746572696e67223b733a313a2230223b733a31343a226c696e6b506f7075705769647468223b733a333a22393030223b733a31353a226c696e6b506f707570486569676874223b733a333a22363030223b733a31333a22696d616765735175616c697479223b733a333a22313030223b733a31313a226974656d496d6167655853223b733a333a22313030223b733a31303a226974656d496d61676553223b733a333a22323030223b733a31303a226974656d496d6167654d223b733a333a22343030223b733a31303a226974656d496d6167654c223b733a333a22363030223b733a31313a226974656d496d616765584c223b733a333a22393030223b733a31363a226974656d496d61676547656e65726963223b733a333a22333030223b733a31333a22636174496d6167655769647468223b733a333a22313030223b733a31353a22636174496d61676544656661756c74223b733a313a2231223b733a31343a2275736572496d6167655769647468223b733a333a22313030223b733a31363a2275736572496d61676544656661756c74223b733a313a2231223b733a31373a22636f6d6d656e746572496d675769647468223b733a323a223438223b733a31373a226f6e6c696e65496d616765456469746f72223b733a383a2273706c6173687570223b733a31343a22696d61676554696d657374616d70223b733a313a2230223b733a31363a22696d6167654d656d6f72794c696d6974223b733a303a22223b733a31363a22736f6369616c427574746f6e436f6465223b733a303a22223b733a31353a2274776974746572557365726e616d65223b733a303a22223b733a31333a2266616365626f6f6b496d616765223b733a363a224d656469756d223b733a383a22636f6d6d656e7473223b733a313a2231223b733a31363a22636f6d6d656e74734f72646572696e67223b733a343a2244455343223b733a31333a22636f6d6d656e74734c696d6974223b733a323a223130223b733a32303a22636f6d6d656e7473466f726d506f736974696f6e223b733a353a2262656c6f77223b733a31383a22636f6d6d656e74735075626c697368696e67223b733a313a2231223b733a31373a22636f6d6d656e74735265706f7274696e67223b733a313a2232223b733a32333a22636f6d6d656e74735265706f7274526563697069656e74223b733a303a22223b733a32343a22696e6c696e65436f6d6d656e74734d6f6465726174696f6e223b733a313a2230223b733a383a226772617661746172223b733a313a2231223b733a393a22726563617074636861223b733a313a2230223b733a32323a22726563617074636861466f7252656769737465726564223b733a313a2231223b733a31373a22636f6d6d656e7473466f726d4e6f746573223b733a313a2231223b733a32313a22636f6d6d656e7473466f726d4e6f74657354657874223b733a303a22223b733a31353a2266726f6e74656e6445646974696e67223b733a313a2231223b733a31323a2273686f77496d616765546162223b733a313a2231223b733a31393a2273686f77496d61676547616c6c657279546162223b733a313a2231223b733a31323a2273686f77566964656f546162223b733a313a2231223b733a31383a2273686f7745787472614669656c6473546162223b733a313a2231223b733a31383a2273686f774174746163686d656e7473546162223b733a313a2231223b733a31333a2273686f774b32506c7567696e73223b733a313a2231223b733a32323a2273696465426172446973706c617946726f6e74656e64223b733a313a2230223b733a31323a226d65726765456469746f7273223b733a313a2231223b733a31343a2273696465426172446973706c6179223b733a313a2231223b733a31373a226174746163686d656e7473466f6c646572223b733a303a22223b733a31363a2268696465496d706f7274427574746f6e223b733a313a2230223b733a31323a22676f6f676c65536561726368223b733a313a2230223b733a32313a22676f6f676c65536561726368436f6e7461696e6572223b733a32333a226b32476f6f676c65536561726368436f6e7461696e6572223b733a31333a224b325573657250726f66696c65223b733a313a2231223b733a31313a224b325573657247726f7570223b733a303a22223b733a383a227265646972656374223b733a303a22223b733a31313a2261646d696e536561726368223b733a363a2273696d706c65223b733a31323a22636f6f6b6965446f6d61696e223b733a303a22223b733a31333a2274616767696e6753797374656d223b733a313a2231223b733a383a226c6f636b54616773223b733a313a2230223b733a31333a2273686f7754616746696c746572223b733a313a2230223b733a393a226b325461674e6f726d223b733a313a2230223b733a31333a226b325461674e6f726d43617365223b733a353a226c6f776572223b733a33313a226b325461674e6f726d4164646974696f6e616c5265706c6163656d656e7473223b733a303a22223b733a32303a227265636170746368615f7075626c69635f6b6579223b733a303a22223b733a32313a227265636170746368615f707269766174655f6b6579223b733a303a22223b733a31353a227265636170746368615f7468656d65223b733a353a22636c65616e223b733a32333a227265636170746368614f6e526567697374726174696f6e223b733a313a2230223b733a31333a2273746f70466f72756d5370616d223b733a313a2230223b733a31393a2273746f70466f72756d5370616d4170694b6579223b733a303a22223b733a32313a2273686f774974656d73436f756e74657241646d696e223b733a313a2231223b733a31373a2273686f774368696c644361744974656d73223b733a313a2231223b733a32323a2264697361626c65436f6d706163744f72646572696e67223b733a313a2230223b733a31333a226d657461446573634c696d6974223b733a333a22313530223b733a32323a22656e666f7263655345465265706c6163656d656e7473223b733a313a2230223b733a31353a225345465265706c6163656d656e7473223b733a303a22223b733a353a226b32536566223b733a313a2230223b733a31333a226b325365664c6162656c436174223b733a373a22636f6e74656e74223b733a31333a226b325365664c6162656c546167223b733a333a22746167223b733a31343a226b325365664c6162656c55736572223b733a363a22617574686f72223b733a31363a226b325365664c6162656c536561726368223b733a363a22736561726368223b733a31343a226b325365664c6162656c44617465223b733a343a2264617465223b733a31343a226b325365664c6162656c4974656d223b733a313a2230223b733a32363a226b325365664c6162656c4974656d437573746f6d507265666978223b733a303a22223b733a31373a226b32536566496e736572744974656d4964223b733a313a2231223b733a32343a226b325365664974656d49645469746c65416c696173536570223b733a343a2264617368223b733a32323a226b325365665573654974656d5469746c65416c696173223b733a313a2231223b733a31363a226b32536566496e736572744361744964223b733a313a2231223b733a32333a226b3253656643617449645469746c65416c696173536570223b733a343a2264617368223b733a32313a226b325365665573654361745469746c65416c696173223b733a313a2231223b733a31363a2273683430345365664c6162656c436174223b733a303a22223b733a31373a2273683430345365664c6162656c55736572223b733a343a22626c6f67223b733a31373a2273683430345365664c6162656c4974656d223b733a313a2232223b733a31383a2273683430345365665469746c65416c696173223b733a353a22616c696173223b733a32393a2273683430345365664d6f644b32436f6e74656e7446656564416c696173223b733a343a2266656564223b733a32303a227368343034536566496e736572744974656d4964223b733a313a2230223b733a32363a227368343034536566496e73657274556e697175654974656d4964223b733a313a2230223b733a31333a226362496e746567726174696f6e223b733a313a2230223b7d7d733a373a226d6574616b6579223b733a303a22223b733a383a226d65746164657363223b733a303a22223b733a383a226d65746164617461223b4f3a393a224a5265676973747279223a313a7b733a373a22002a0064617461223b4f3a383a22737464436c617373223a323a7b733a363a22726f626f7473223b733a303a22223b733a363a22617574686f72223b733a303a22223b7d7d733a383a226f72646572696e67223b733a313a2232223b733a353a227472617368223b733a313a2230223b733a393a226361745f7472617368223b733a313a2230223b733a383a2263617465676f7279223b733a373a22c3817564696f73223b733a393a226361745f7374617465223b733a313a2231223b733a31303a226361745f616363657373223b733a313a2231223b733a343a22736c7567223b733a393a22333a74657374652d32223b733a373a22636174736c7567223b733a383a22313a617564696f73223b733a363a22617574686f72223b733a31303a2253757065722055736572223b733a363a226c61796f7574223b733a343a226974656d223b733a343a2270617468223b733a33373a22696e6465782e7068702f636f6d706f6e656e742f6b322f6974656d2f332d74657374652d32223b733a31303a226d657461617574686f72223b4e3b7d733a31353a22002a00696e737472756374696f6e73223b613a353a7b693a313b613a333a7b693a303b733a353a227469746c65223b693a313b733a383a227375627469746c65223b693a323b733a323a226964223b7d693a323b613a323a7b693a303b733a373a2273756d6d617279223b693a313b733a343a22626f6479223b7d693a333b613a383a7b693a303b733a343a226d657461223b693a313b733a31303a226c6973745f7072696365223b693a323b733a31303a2273616c655f7072696365223b693a333b733a373a226d6574616b6579223b693a343b733a383a226d65746164657363223b693a353b733a31303a226d657461617574686f72223b693a363b733a363a22617574686f72223b693a373b733a31363a22637265617465645f62795f616c696173223b7d693a343b613a323a7b693a303b733a343a2270617468223b693a313b733a353a22616c696173223b7d693a353b613a313a7b693a303b733a383a22636f6d6d656e7473223b7d7d733a31313a22002a007461786f6e6f6d79223b613a343a7b733a343a2254797065223b613a313a7b733a373a224b32204974656d223b4f3a373a224a4f626a656374223a343a7b733a31303a22002a005f6572726f7273223b613a303a7b7d733a353a227469746c65223b733a373a224b32204974656d223b733a353a227374617465223b693a313b733a363a22616363657373223b693a313b7d7d733a363a22417574686f72223b613a313a7b733a31303a2253757065722055736572223b4f3a373a224a4f626a656374223a343a7b733a31303a22002a005f6572726f7273223b613a303a7b7d733a353a227469746c65223b733a31303a2253757065722055736572223b733a353a227374617465223b693a313b733a363a22616363657373223b693a313b7d7d733a31313a224b322043617465676f7279223b613a313a7b733a373a22c3817564696f73223b4f3a373a224a4f626a656374223a343a7b733a31303a22002a005f6572726f7273223b613a303a7b7d733a353a227469746c65223b733a373a22c3817564696f73223b733a353a227374617465223b693a313b733a363a22616363657373223b693a313b7d7d733a383a224c616e6775616765223b613a313a7b733a313a222a223b4f3a373a224a4f626a656374223a343a7b733a31303a22002a005f6572726f7273223b613a303a7b7d733a353a227469746c65223b733a313a222a223b733a353a227374617465223b693a313b733a363a22616363657373223b693a313b7d7d7d733a333a2275726c223b733a33383a22696e6465782e7068703f6f7074696f6e3d636f6d5f6b3226766965773d6974656d2669643d33223b733a353a22726f757465223b733a34363a22696e6465782e7068703f6f7074696f6e3d636f6d5f6b3226766965773d6974656d2669643d333a74657374652d32223b733a353a227469746c65223b733a373a2254657374652032223b733a31313a226465736372697074696f6e223b733a303a22223b733a393a227075626c6973686564223b4e3b733a353a227374617465223b693a313b733a363a22616363657373223b733a313a2231223b733a383a226c616e6775616765223b733a313a222a223b733a31383a227075626c6973685f73746172745f64617465223b733a31393a22323031332d31322d32322031323a34383a3438223b733a31363a227075626c6973685f656e645f64617465223b733a31393a22303030302d30302d30302030303a30303a3030223b733a31303a2273746172745f64617465223b733a31393a22323031332d31322d32322031333a33373a3235223b733a383a22656e645f64617465223b733a31393a22303030302d30302d30302030303a30303a3030223b733a31303a226c6973745f7072696365223b4e3b733a31303a2273616c655f7072696365223b4e3b733a373a22747970655f6964223b693a313b733a31353a2264656661756c744c616e6775616765223b733a353a2270742d4252223b7d),
 (20, 'index.php?option=com_k2&view=item&id=2', 'index.php?option=com_k2&view=item&id=2:teste&Itemid=147', 'Teste', '', '2019-04-03 17:02:20', '45a9000b81ff8d7c1eda93346813c82f', 1, 1, 1, '*', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', 0, 0, 1, 0x4f3a31393a2246696e646572496e6465786572526573756c74223a31393a7b733a31313a22002a00656c656d656e7473223b613a32353a7b733a323a226964223b733a313a2232223b733a353a22616c696173223b733a353a227465737465223b733a373a2273756d6d617279223b733a32373a223c703e446573637269c3a7c3a36f20646f206974656d2e3c2f703e223b733a343a22626f6479223b733a303a22223b733a353a226361746964223b733a313a2231223b733a31303a22637265617465645f6279223b733a333a22353736223b733a31363a22637265617465645f62795f616c696173223b733a303a22223b733a383a226d6f646966696564223b733a31393a22323031342d30312d30372031343a34393a3033223b733a31313a226d6f6469666965645f6279223b733a333a22353736223b733a363a22706172616d73223b4f3a393a224a5265676973747279223a313a7b733a373a22002a0064617461223b4f3a383a22737464436c617373223a3135343a7b733a31303a22656e61626c655f637373223b733a313a2231223b733a31343a226a517565727948616e646c696e67223b733a393a22312e3872656d6f7465223b733a32313a226261636b656e644a517565727948616e646c696e67223b733a363a2272656d6f7465223b733a383a22757365724e616d65223b733a313a2231223b733a393a2275736572496d616765223b733a313a2231223b733a31353a22757365724465736372697074696f6e223b733a313a2231223b733a373a227573657255524c223b733a313a2231223b733a393a2275736572456d61696c223b733a313a2230223b733a31323a2275736572466565644c696e6b223b733a313a2231223b733a31323a22757365724665656449636f6e223b733a313a2231223b733a31333a22757365724974656d436f756e74223b733a323a223130223b733a31333a22757365724974656d5469746c65223b733a313a2231223b733a31393a22757365724974656d5469746c654c696e6b6564223b733a313a2231223b733a31393a22757365724974656d4461746543726561746564223b733a313a2231223b733a31333a22757365724974656d496d616765223b733a313a2231223b733a31373a22757365724974656d496e74726f54657874223b733a313a2231223b733a31363a22757365724974656d43617465676f7279223b733a313a2231223b733a31323a22757365724974656d54616773223b733a313a2231223b733a32323a22757365724974656d436f6d6d656e7473416e63686f72223b733a313a2231223b733a31363a22757365724974656d526561644d6f7265223b733a313a2231223b733a31373a22757365724974656d4b32506c7567696e73223b733a313a2231223b733a31323a227461674974656d436f756e74223b733a323a223130223b733a31323a227461674974656d5469746c65223b733a313a2231223b733a31383a227461674974656d5469746c654c696e6b6564223b733a313a2231223b733a31383a227461674974656d4461746543726561746564223b733a313a2231223b733a31323a227461674974656d496d616765223b733a313a2231223b733a31363a227461674974656d496e74726f54657874223b733a313a2231223b733a31353a227461674974656d43617465676f7279223b733a313a2231223b733a31353a227461674974656d526561644d6f7265223b733a313a2231223b733a31383a227461674974656d45787472614669656c6473223b733a313a2230223b733a31313a227461674f72646572696e67223b733a303a22223b733a31313a22746167466565644c696e6b223b733a313a2231223b733a31313a227461674665656449636f6e223b733a313a2231223b733a31363a2267656e657269634974656d436f756e74223b733a323a223130223b733a31363a2267656e657269634974656d5469746c65223b733a313a2231223b733a32323a2267656e657269634974656d5469746c654c696e6b6564223b733a313a2231223b733a32323a2267656e657269634974656d4461746543726561746564223b733a313a2231223b733a31363a2267656e657269634974656d496d616765223b733a313a2231223b733a32303a2267656e657269634974656d496e74726f54657874223b733a313a2231223b733a31393a2267656e657269634974656d43617465676f7279223b733a313a2231223b733a31393a2267656e657269634974656d526561644d6f7265223b733a313a2231223b733a32323a2267656e657269634974656d45787472614669656c6473223b733a313a2230223b733a31353a2267656e65726963466565644c696e6b223b733a313a2231223b733a31353a2267656e657269634665656449636f6e223b733a313a2231223b733a393a22666565644c696d6974223b733a323a223130223b733a31333a22666565644974656d496d616765223b733a313a2231223b733a31313a2266656564496d6753697a65223b733a313a2253223b733a31373a22666565644974656d496e74726f54657874223b733a313a2231223b733a31373a226665656454657874576f72644c696d6974223b733a303a22223b733a31363a22666565644974656d46756c6c54657874223b733a313a2231223b733a31323a22666565644974656d54616773223b733a313a2230223b733a31333a22666565644974656d566964656f223b733a313a2230223b733a31353a22666565644974656d47616c6c657279223b733a313a2230223b733a31393a22666565644974656d4174746163686d656e7473223b733a313a2230223b733a31343a2266656564426f677573456d61696c223b733a303a22223b733a31363a22696e74726f54657874436c65616e7570223b733a313a2230223b733a32373a22696e74726f54657874436c65616e75704578636c75646554616773223b733a303a22223b733a32333a22696e74726f54657874436c65616e757054616741747472223b733a303a22223b733a31353a2266756c6c54657874436c65616e7570223b733a313a2230223b733a32363a2266756c6c54657874436c65616e75704578636c75646554616773223b733a303a22223b733a32323a2266756c6c54657874436c65616e757054616741747472223b733a303a22223b733a31323a2278737346696c746572696e67223b733a313a2230223b733a31343a226c696e6b506f7075705769647468223b733a333a22393030223b733a31353a226c696e6b506f707570486569676874223b733a333a22363030223b733a31333a22696d616765735175616c697479223b733a333a22313030223b733a31313a226974656d496d6167655853223b733a333a22313030223b733a31303a226974656d496d61676553223b733a333a22323030223b733a31303a226974656d496d6167654d223b733a333a22343030223b733a31303a226974656d496d6167654c223b733a333a22363030223b733a31313a226974656d496d616765584c223b733a333a22393030223b733a31363a226974656d496d61676547656e65726963223b733a333a22333030223b733a31333a22636174496d6167655769647468223b733a333a22313030223b733a31353a22636174496d61676544656661756c74223b733a313a2231223b733a31343a2275736572496d6167655769647468223b733a333a22313030223b733a31363a2275736572496d61676544656661756c74223b733a313a2231223b733a31373a22636f6d6d656e746572496d675769647468223b733a323a223438223b733a31373a226f6e6c696e65496d616765456469746f72223b733a383a2273706c6173687570223b733a31343a22696d61676554696d657374616d70223b733a313a2230223b733a31363a22696d6167654d656d6f72794c696d6974223b733a303a22223b733a31363a22736f6369616c427574746f6e436f6465223b733a303a22223b733a31353a2274776974746572557365726e616d65223b733a303a22223b733a31333a2266616365626f6f6b496d616765223b733a363a224d656469756d223b733a383a22636f6d6d656e7473223b733a313a2231223b733a31363a22636f6d6d656e74734f72646572696e67223b733a343a2244455343223b733a31333a22636f6d6d656e74734c696d6974223b733a323a223130223b733a32303a22636f6d6d656e7473466f726d506f736974696f6e223b733a353a2262656c6f77223b733a31383a22636f6d6d656e74735075626c697368696e67223b733a313a2231223b733a31373a22636f6d6d656e74735265706f7274696e67223b733a313a2232223b733a32333a22636f6d6d656e74735265706f7274526563697069656e74223b733a303a22223b733a32343a22696e6c696e65436f6d6d656e74734d6f6465726174696f6e223b733a313a2230223b733a383a226772617661746172223b733a313a2231223b733a393a22726563617074636861223b733a313a2230223b733a32323a22726563617074636861466f7252656769737465726564223b733a313a2231223b733a31373a22636f6d6d656e7473466f726d4e6f746573223b733a313a2231223b733a32313a22636f6d6d656e7473466f726d4e6f74657354657874223b733a303a22223b733a31353a2266726f6e74656e6445646974696e67223b733a313a2231223b733a31323a2273686f77496d616765546162223b733a313a2231223b733a31393a2273686f77496d61676547616c6c657279546162223b733a313a2231223b733a31323a2273686f77566964656f546162223b733a313a2231223b733a31383a2273686f7745787472614669656c6473546162223b733a313a2231223b733a31383a2273686f774174746163686d656e7473546162223b733a313a2231223b733a31333a2273686f774b32506c7567696e73223b733a313a2231223b733a32323a2273696465426172446973706c617946726f6e74656e64223b733a313a2230223b733a31323a226d65726765456469746f7273223b733a313a2231223b733a31343a2273696465426172446973706c6179223b733a313a2231223b733a31373a226174746163686d656e7473466f6c646572223b733a303a22223b733a31363a2268696465496d706f7274427574746f6e223b733a313a2230223b733a31323a22676f6f676c65536561726368223b733a313a2230223b733a32313a22676f6f676c65536561726368436f6e7461696e6572223b733a32333a226b32476f6f676c65536561726368436f6e7461696e6572223b733a31333a224b325573657250726f66696c65223b733a313a2231223b733a31313a224b325573657247726f7570223b733a303a22223b733a383a227265646972656374223b733a303a22223b733a31313a2261646d696e536561726368223b733a363a2273696d706c65223b733a31323a22636f6f6b6965446f6d61696e223b733a303a22223b733a31333a2274616767696e6753797374656d223b733a313a2231223b733a383a226c6f636b54616773223b733a313a2230223b733a31333a2273686f7754616746696c746572223b733a313a2230223b733a393a226b325461674e6f726d223b733a313a2230223b733a31333a226b325461674e6f726d43617365223b733a353a226c6f776572223b733a33313a226b325461674e6f726d4164646974696f6e616c5265706c6163656d656e7473223b733a303a22223b733a32303a227265636170746368615f7075626c69635f6b6579223b733a303a22223b733a32313a227265636170746368615f707269766174655f6b6579223b733a303a22223b733a31353a227265636170746368615f7468656d65223b733a353a22636c65616e223b733a32333a227265636170746368614f6e526567697374726174696f6e223b733a313a2230223b733a31333a2273746f70466f72756d5370616d223b733a313a2230223b733a31393a2273746f70466f72756d5370616d4170694b6579223b733a303a22223b733a32313a2273686f774974656d73436f756e74657241646d696e223b733a313a2231223b733a31373a2273686f774368696c644361744974656d73223b733a313a2231223b733a32323a2264697361626c65436f6d706163744f72646572696e67223b733a313a2230223b733a31333a226d657461446573634c696d6974223b733a333a22313530223b733a32323a22656e666f7263655345465265706c6163656d656e7473223b733a313a2230223b733a31353a225345465265706c6163656d656e7473223b733a303a22223b733a353a226b32536566223b733a313a2230223b733a31333a226b325365664c6162656c436174223b733a373a22636f6e74656e74223b733a31333a226b325365664c6162656c546167223b733a333a22746167223b733a31343a226b325365664c6162656c55736572223b733a363a22617574686f72223b733a31363a226b325365664c6162656c536561726368223b733a363a22736561726368223b733a31343a226b325365664c6162656c44617465223b733a343a2264617465223b733a31343a226b325365664c6162656c4974656d223b733a313a2230223b733a32363a226b325365664c6162656c4974656d437573746f6d507265666978223b733a303a22223b733a31373a226b32536566496e736572744974656d4964223b733a313a2231223b733a32343a226b325365664974656d49645469746c65416c696173536570223b733a343a2264617368223b733a32323a226b325365665573654974656d5469746c65416c696173223b733a313a2231223b733a31363a226b32536566496e736572744361744964223b733a313a2231223b733a32333a226b3253656643617449645469746c65416c696173536570223b733a343a2264617368223b733a32313a226b325365665573654361745469746c65416c696173223b733a313a2231223b733a31363a2273683430345365664c6162656c436174223b733a303a22223b733a31373a2273683430345365664c6162656c55736572223b733a343a22626c6f67223b733a31373a2273683430345365664c6162656c4974656d223b733a313a2232223b733a31383a2273683430345365665469746c65416c696173223b733a353a22616c696173223b733a32393a2273683430345365664d6f644b32436f6e74656e7446656564416c696173223b733a343a2266656564223b733a32303a227368343034536566496e736572744974656d4964223b733a313a2230223b733a32363a227368343034536566496e73657274556e697175654974656d4964223b733a313a2230223b733a31333a226362496e746567726174696f6e223b733a313a2230223b7d7d733a373a226d6574616b6579223b733a303a22223b733a383a226d65746164657363223b733a303a22223b733a383a226d65746164617461223b4f3a393a224a5265676973747279223a313a7b733a373a22002a0064617461223b4f3a383a22737464436c617373223a323a7b733a363a22726f626f7473223b733a303a22223b733a363a22617574686f72223b733a303a22223b7d7d733a383a226f72646572696e67223b733a313a2231223b733a353a227472617368223b733a313a2230223b733a393a226361745f7472617368223b733a313a2230223b733a383a2263617465676f7279223b733a373a22c3817564696f73223b733a393a226361745f7374617465223b733a313a2231223b733a31303a226361745f616363657373223b733a313a2231223b733a343a22736c7567223b733a373a22323a7465737465223b733a373a22636174736c7567223b733a383a22313a617564696f73223b733a363a22617574686f72223b733a31303a2253757065722055736572223b733a363a226c61796f7574223b733a343a226974656d223b733a343a2270617468223b733a34323a22696e6465782e7068702f323031332d31302d32372d31332d32362d33352f6974656d2f322d7465737465223b733a31303a226d657461617574686f72223b4e3b7d733a31353a22002a00696e737472756374696f6e73223b613a353a7b693a313b613a333a7b693a303b733a353a227469746c65223b693a313b733a383a227375627469746c65223b693a323b733a323a226964223b7d693a323b613a323a7b693a303b733a373a2273756d6d617279223b693a313b733a343a22626f6479223b7d693a333b613a383a7b693a303b733a343a226d657461223b693a313b733a31303a226c6973745f7072696365223b693a323b733a31303a2273616c655f7072696365223b693a333b733a373a226d6574616b6579223b693a343b733a383a226d65746164657363223b693a353b733a31303a226d657461617574686f72223b693a363b733a363a22617574686f72223b693a373b733a31363a22637265617465645f62795f616c696173223b7d693a343b613a323a7b693a303b733a343a2270617468223b693a313b733a353a22616c696173223b7d693a353b613a313a7b693a303b733a383a22636f6d6d656e7473223b7d7d733a31313a22002a007461786f6e6f6d79223b613a343a7b733a343a2254797065223b613a313a7b733a373a224b32204974656d223b4f3a373a224a4f626a656374223a343a7b733a31303a22002a005f6572726f7273223b613a303a7b7d733a353a227469746c65223b733a373a224b32204974656d223b733a353a227374617465223b693a313b733a363a22616363657373223b693a313b7d7d733a363a22417574686f72223b613a313a7b733a31303a2253757065722055736572223b4f3a373a224a4f626a656374223a343a7b733a31303a22002a005f6572726f7273223b613a303a7b7d733a353a227469746c65223b733a31303a2253757065722055736572223b733a353a227374617465223b693a313b733a363a22616363657373223b693a313b7d7d733a31313a224b322043617465676f7279223b613a313a7b733a373a22c3817564696f73223b4f3a373a224a4f626a656374223a343a7b733a31303a22002a005f6572726f7273223b613a303a7b7d733a353a227469746c65223b733a373a22c3817564696f73223b733a353a227374617465223b693a313b733a363a22616363657373223b693a313b7d7d733a383a224c616e6775616765223b613a313a7b733a313a222a223b4f3a373a224a4f626a656374223a343a7b733a31303a22002a005f6572726f7273223b613a303a7b7d733a353a227469746c65223b733a313a222a223b733a353a227374617465223b693a313b733a363a22616363657373223b693a313b7d7d7d733a333a2275726c223b733a33383a22696e6465782e7068703f6f7074696f6e3d636f6d5f6b3226766965773d6974656d2669643d32223b733a353a22726f757465223b733a35353a22696e6465782e7068703f6f7074696f6e3d636f6d5f6b3226766965773d6974656d2669643d323a7465737465264974656d69643d313437223b733a353a227469746c65223b733a353a225465737465223b733a31313a226465736372697074696f6e223b733a303a22223b733a393a227075626c6973686564223b4e3b733a353a227374617465223b693a313b733a363a22616363657373223b733a313a2231223b733a383a226c616e6775616765223b733a313a222a223b733a31383a227075626c6973685f73746172745f64617465223b733a31393a22323031332d31322d32322031323a34383a3438223b733a31363a227075626c6973685f656e645f64617465223b733a31393a22303030302d30302d30302030303a30303a3030223b733a31303a2273746172745f64617465223b733a31393a22323031332d31322d32322031323a34383a3438223b733a383a22656e645f64617465223b733a31393a22303030302d30302d30302030303a30303a3030223b733a31303a226c6973745f7072696365223b4e3b733a31303a2273616c655f7072696365223b4e3b733a373a22747970655f6964223b693a313b733a31353a2264656661756c744c616e6775616765223b733a353a2270742d4252223b7d);
-INSERT INTO `idg2019_finder_links` (`link_id`, `url`, `route`, `title`, `description`, `indexdate`, `md5sum`, `published`, `state`, `access`, `language`, `publish_start_date`, `publish_end_date`, `start_date`, `end_date`, `list_price`, `sale_price`, `type_id`, `object`) VALUES
+INSERT INTO `#__finder_links` (`link_id`, `url`, `route`, `title`, `description`, `indexdate`, `md5sum`, `published`, `state`, `access`, `language`, `publish_start_date`, `publish_end_date`, `start_date`, `end_date`, `list_price`, `sale_price`, `type_id`, `object`) VALUES
 (21, 'index.php?option=com_k2&view=item&id=5', 'index.php?option=com_k2&view=item&id=5:copia-de-teste', 'Cópia de Teste', '', '2019-04-03 17:02:20', 'c2d49b06903d872bca32ea3880b4cbb9', 1, 1, 1, '*', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', 0, 0, 1, 0x4f3a31393a2246696e646572496e6465786572526573756c74223a31393a7b733a31313a22002a00656c656d656e7473223b613a32353a7b733a323a226964223b733a313a2235223b733a353a22616c696173223b733a31343a22636f7069612d64652d7465737465223b733a373a2273756d6d617279223b733a32373a223c703e446573637269c3a7c3a36f20646f206974656d2e3c2f703e223b733a343a22626f6479223b733a303a22223b733a353a226361746964223b733a313a2232223b733a31303a22637265617465645f6279223b733a333a22353736223b733a31363a22637265617465645f62795f616c696173223b733a303a22223b733a383a226d6f646966696564223b733a31393a22323031342d30312d30372031343a34393a3337223b733a31313a226d6f6469666965645f6279223b733a333a22353736223b733a363a22706172616d73223b4f3a393a224a5265676973747279223a313a7b733a373a22002a0064617461223b4f3a383a22737464436c617373223a3135343a7b733a31303a22656e61626c655f637373223b733a313a2231223b733a31343a226a517565727948616e646c696e67223b733a393a22312e3872656d6f7465223b733a32313a226261636b656e644a517565727948616e646c696e67223b733a363a2272656d6f7465223b733a383a22757365724e616d65223b733a313a2231223b733a393a2275736572496d616765223b733a313a2231223b733a31353a22757365724465736372697074696f6e223b733a313a2231223b733a373a227573657255524c223b733a313a2231223b733a393a2275736572456d61696c223b733a313a2230223b733a31323a2275736572466565644c696e6b223b733a313a2231223b733a31323a22757365724665656449636f6e223b733a313a2231223b733a31333a22757365724974656d436f756e74223b733a323a223130223b733a31333a22757365724974656d5469746c65223b733a313a2231223b733a31393a22757365724974656d5469746c654c696e6b6564223b733a313a2231223b733a31393a22757365724974656d4461746543726561746564223b733a313a2231223b733a31333a22757365724974656d496d616765223b733a313a2231223b733a31373a22757365724974656d496e74726f54657874223b733a313a2231223b733a31363a22757365724974656d43617465676f7279223b733a313a2231223b733a31323a22757365724974656d54616773223b733a313a2231223b733a32323a22757365724974656d436f6d6d656e7473416e63686f72223b733a313a2231223b733a31363a22757365724974656d526561644d6f7265223b733a313a2231223b733a31373a22757365724974656d4b32506c7567696e73223b733a313a2231223b733a31323a227461674974656d436f756e74223b733a323a223130223b733a31323a227461674974656d5469746c65223b733a313a2231223b733a31383a227461674974656d5469746c654c696e6b6564223b733a313a2231223b733a31383a227461674974656d4461746543726561746564223b733a313a2231223b733a31323a227461674974656d496d616765223b733a313a2231223b733a31363a227461674974656d496e74726f54657874223b733a313a2231223b733a31353a227461674974656d43617465676f7279223b733a313a2231223b733a31353a227461674974656d526561644d6f7265223b733a313a2231223b733a31383a227461674974656d45787472614669656c6473223b733a313a2230223b733a31313a227461674f72646572696e67223b733a303a22223b733a31313a22746167466565644c696e6b223b733a313a2231223b733a31313a227461674665656449636f6e223b733a313a2231223b733a31363a2267656e657269634974656d436f756e74223b733a323a223130223b733a31363a2267656e657269634974656d5469746c65223b733a313a2231223b733a32323a2267656e657269634974656d5469746c654c696e6b6564223b733a313a2231223b733a32323a2267656e657269634974656d4461746543726561746564223b733a313a2231223b733a31363a2267656e657269634974656d496d616765223b733a313a2231223b733a32303a2267656e657269634974656d496e74726f54657874223b733a313a2231223b733a31393a2267656e657269634974656d43617465676f7279223b733a313a2231223b733a31393a2267656e657269634974656d526561644d6f7265223b733a313a2231223b733a32323a2267656e657269634974656d45787472614669656c6473223b733a313a2230223b733a31353a2267656e65726963466565644c696e6b223b733a313a2231223b733a31353a2267656e657269634665656449636f6e223b733a313a2231223b733a393a22666565644c696d6974223b733a323a223130223b733a31333a22666565644974656d496d616765223b733a313a2231223b733a31313a2266656564496d6753697a65223b733a313a2253223b733a31373a22666565644974656d496e74726f54657874223b733a313a2231223b733a31373a226665656454657874576f72644c696d6974223b733a303a22223b733a31363a22666565644974656d46756c6c54657874223b733a313a2231223b733a31323a22666565644974656d54616773223b733a313a2230223b733a31333a22666565644974656d566964656f223b733a313a2230223b733a31353a22666565644974656d47616c6c657279223b733a313a2230223b733a31393a22666565644974656d4174746163686d656e7473223b733a313a2230223b733a31343a2266656564426f677573456d61696c223b733a303a22223b733a31363a22696e74726f54657874436c65616e7570223b733a313a2230223b733a32373a22696e74726f54657874436c65616e75704578636c75646554616773223b733a303a22223b733a32333a22696e74726f54657874436c65616e757054616741747472223b733a303a22223b733a31353a2266756c6c54657874436c65616e7570223b733a313a2230223b733a32363a2266756c6c54657874436c65616e75704578636c75646554616773223b733a303a22223b733a32323a2266756c6c54657874436c65616e757054616741747472223b733a303a22223b733a31323a2278737346696c746572696e67223b733a313a2230223b733a31343a226c696e6b506f7075705769647468223b733a333a22393030223b733a31353a226c696e6b506f707570486569676874223b733a333a22363030223b733a31333a22696d616765735175616c697479223b733a333a22313030223b733a31313a226974656d496d6167655853223b733a333a22313030223b733a31303a226974656d496d61676553223b733a333a22323030223b733a31303a226974656d496d6167654d223b733a333a22343030223b733a31303a226974656d496d6167654c223b733a333a22363030223b733a31313a226974656d496d616765584c223b733a333a22393030223b733a31363a226974656d496d61676547656e65726963223b733a333a22333030223b733a31333a22636174496d6167655769647468223b733a333a22313030223b733a31353a22636174496d61676544656661756c74223b733a313a2231223b733a31343a2275736572496d6167655769647468223b733a333a22313030223b733a31363a2275736572496d61676544656661756c74223b733a313a2231223b733a31373a22636f6d6d656e746572496d675769647468223b733a323a223438223b733a31373a226f6e6c696e65496d616765456469746f72223b733a383a2273706c6173687570223b733a31343a22696d61676554696d657374616d70223b733a313a2230223b733a31363a22696d6167654d656d6f72794c696d6974223b733a303a22223b733a31363a22736f6369616c427574746f6e436f6465223b733a303a22223b733a31353a2274776974746572557365726e616d65223b733a303a22223b733a31333a2266616365626f6f6b496d616765223b733a363a224d656469756d223b733a383a22636f6d6d656e7473223b733a313a2231223b733a31363a22636f6d6d656e74734f72646572696e67223b733a343a2244455343223b733a31333a22636f6d6d656e74734c696d6974223b733a323a223130223b733a32303a22636f6d6d656e7473466f726d506f736974696f6e223b733a353a2262656c6f77223b733a31383a22636f6d6d656e74735075626c697368696e67223b733a313a2231223b733a31373a22636f6d6d656e74735265706f7274696e67223b733a313a2232223b733a32333a22636f6d6d656e74735265706f7274526563697069656e74223b733a303a22223b733a32343a22696e6c696e65436f6d6d656e74734d6f6465726174696f6e223b733a313a2230223b733a383a226772617661746172223b733a313a2231223b733a393a22726563617074636861223b733a313a2230223b733a32323a22726563617074636861466f7252656769737465726564223b733a313a2231223b733a31373a22636f6d6d656e7473466f726d4e6f746573223b733a313a2231223b733a32313a22636f6d6d656e7473466f726d4e6f74657354657874223b733a303a22223b733a31353a2266726f6e74656e6445646974696e67223b733a313a2231223b733a31323a2273686f77496d616765546162223b733a313a2231223b733a31393a2273686f77496d61676547616c6c657279546162223b733a313a2231223b733a31323a2273686f77566964656f546162223b733a313a2231223b733a31383a2273686f7745787472614669656c6473546162223b733a313a2231223b733a31383a2273686f774174746163686d656e7473546162223b733a313a2231223b733a31333a2273686f774b32506c7567696e73223b733a313a2231223b733a32323a2273696465426172446973706c617946726f6e74656e64223b733a313a2230223b733a31323a226d65726765456469746f7273223b733a313a2231223b733a31343a2273696465426172446973706c6179223b733a313a2231223b733a31373a226174746163686d656e7473466f6c646572223b733a303a22223b733a31363a2268696465496d706f7274427574746f6e223b733a313a2230223b733a31323a22676f6f676c65536561726368223b733a313a2230223b733a32313a22676f6f676c65536561726368436f6e7461696e6572223b733a32333a226b32476f6f676c65536561726368436f6e7461696e6572223b733a31333a224b325573657250726f66696c65223b733a313a2231223b733a31313a224b325573657247726f7570223b733a303a22223b733a383a227265646972656374223b733a303a22223b733a31313a2261646d696e536561726368223b733a363a2273696d706c65223b733a31323a22636f6f6b6965446f6d61696e223b733a303a22223b733a31333a2274616767696e6753797374656d223b733a313a2231223b733a383a226c6f636b54616773223b733a313a2230223b733a31333a2273686f7754616746696c746572223b733a313a2230223b733a393a226b325461674e6f726d223b733a313a2230223b733a31333a226b325461674e6f726d43617365223b733a353a226c6f776572223b733a33313a226b325461674e6f726d4164646974696f6e616c5265706c6163656d656e7473223b733a303a22223b733a32303a227265636170746368615f7075626c69635f6b6579223b733a303a22223b733a32313a227265636170746368615f707269766174655f6b6579223b733a303a22223b733a31353a227265636170746368615f7468656d65223b733a353a22636c65616e223b733a32333a227265636170746368614f6e526567697374726174696f6e223b733a313a2230223b733a31333a2273746f70466f72756d5370616d223b733a313a2230223b733a31393a2273746f70466f72756d5370616d4170694b6579223b733a303a22223b733a32313a2273686f774974656d73436f756e74657241646d696e223b733a313a2231223b733a31373a2273686f774368696c644361744974656d73223b733a313a2231223b733a32323a2264697361626c65436f6d706163744f72646572696e67223b733a313a2230223b733a31333a226d657461446573634c696d6974223b733a333a22313530223b733a32323a22656e666f7263655345465265706c6163656d656e7473223b733a313a2230223b733a31353a225345465265706c6163656d656e7473223b733a303a22223b733a353a226b32536566223b733a313a2230223b733a31333a226b325365664c6162656c436174223b733a373a22636f6e74656e74223b733a31333a226b325365664c6162656c546167223b733a333a22746167223b733a31343a226b325365664c6162656c55736572223b733a363a22617574686f72223b733a31363a226b325365664c6162656c536561726368223b733a363a22736561726368223b733a31343a226b325365664c6162656c44617465223b733a343a2264617465223b733a31343a226b325365664c6162656c4974656d223b733a313a2230223b733a32363a226b325365664c6162656c4974656d437573746f6d507265666978223b733a303a22223b733a31373a226b32536566496e736572744974656d4964223b733a313a2231223b733a32343a226b325365664974656d49645469746c65416c696173536570223b733a343a2264617368223b733a32323a226b325365665573654974656d5469746c65416c696173223b733a313a2231223b733a31363a226b32536566496e736572744361744964223b733a313a2231223b733a32333a226b3253656643617449645469746c65416c696173536570223b733a343a2264617368223b733a32313a226b325365665573654361745469746c65416c696173223b733a313a2231223b733a31363a2273683430345365664c6162656c436174223b733a303a22223b733a31373a2273683430345365664c6162656c55736572223b733a343a22626c6f67223b733a31373a2273683430345365664c6162656c4974656d223b733a313a2232223b733a31383a2273683430345365665469746c65416c696173223b733a353a22616c696173223b733a32393a2273683430345365664d6f644b32436f6e74656e7446656564416c696173223b733a343a2266656564223b733a32303a227368343034536566496e736572744974656d4964223b733a313a2230223b733a32363a227368343034536566496e73657274556e697175654974656d4964223b733a313a2230223b733a31333a226362496e746567726174696f6e223b733a313a2230223b7d7d733a373a226d6574616b6579223b733a303a22223b733a383a226d65746164657363223b733a303a22223b733a383a226d65746164617461223b4f3a393a224a5265676973747279223a313a7b733a373a22002a0064617461223b4f3a383a22737464436c617373223a323a7b733a363a22726f626f7473223b733a303a22223b733a363a22617574686f72223b733a303a22223b7d7d733a383a226f72646572696e67223b733a313a2231223b733a353a227472617368223b733a313a2230223b733a393a226361745f7472617368223b733a313a2230223b733a383a2263617465676f7279223b733a31303a22c3817564696f73202331223b733a393a226361745f7374617465223b733a313a2231223b733a31303a226361745f616363657373223b733a313a2231223b733a343a22736c7567223b733a31363a22353a636f7069612d64652d7465737465223b733a373a22636174736c7567223b733a31303a22323a617564696f732d31223b733a363a22617574686f72223b733a31303a2253757065722055736572223b733a363a226c61796f7574223b733a343a226974656d223b733a343a2270617468223b733a34343a22696e6465782e7068702f636f6d706f6e656e742f6b322f6974656d2f352d636f7069612d64652d7465737465223b733a31303a226d657461617574686f72223b4e3b7d733a31353a22002a00696e737472756374696f6e73223b613a353a7b693a313b613a333a7b693a303b733a353a227469746c65223b693a313b733a383a227375627469746c65223b693a323b733a323a226964223b7d693a323b613a323a7b693a303b733a373a2273756d6d617279223b693a313b733a343a22626f6479223b7d693a333b613a383a7b693a303b733a343a226d657461223b693a313b733a31303a226c6973745f7072696365223b693a323b733a31303a2273616c655f7072696365223b693a333b733a373a226d6574616b6579223b693a343b733a383a226d65746164657363223b693a353b733a31303a226d657461617574686f72223b693a363b733a363a22617574686f72223b693a373b733a31363a22637265617465645f62795f616c696173223b7d693a343b613a323a7b693a303b733a343a2270617468223b693a313b733a353a22616c696173223b7d693a353b613a313a7b693a303b733a383a22636f6d6d656e7473223b7d7d733a31313a22002a007461786f6e6f6d79223b613a343a7b733a343a2254797065223b613a313a7b733a373a224b32204974656d223b4f3a373a224a4f626a656374223a343a7b733a31303a22002a005f6572726f7273223b613a303a7b7d733a353a227469746c65223b733a373a224b32204974656d223b733a353a227374617465223b693a313b733a363a22616363657373223b693a313b7d7d733a363a22417574686f72223b613a313a7b733a31303a2253757065722055736572223b4f3a373a224a4f626a656374223a343a7b733a31303a22002a005f6572726f7273223b613a303a7b7d733a353a227469746c65223b733a31303a2253757065722055736572223b733a353a227374617465223b693a313b733a363a22616363657373223b693a313b7d7d733a31313a224b322043617465676f7279223b613a313a7b733a31303a22c3817564696f73202331223b4f3a373a224a4f626a656374223a343a7b733a31303a22002a005f6572726f7273223b613a303a7b7d733a353a227469746c65223b733a31303a22c3817564696f73202331223b733a353a227374617465223b693a313b733a363a22616363657373223b693a313b7d7d733a383a224c616e6775616765223b613a313a7b733a313a222a223b4f3a373a224a4f626a656374223a343a7b733a31303a22002a005f6572726f7273223b613a303a7b7d733a353a227469746c65223b733a313a222a223b733a353a227374617465223b693a313b733a363a22616363657373223b693a313b7d7d7d733a333a2275726c223b733a33383a22696e6465782e7068703f6f7074696f6e3d636f6d5f6b3226766965773d6974656d2669643d35223b733a353a22726f757465223b733a35333a22696e6465782e7068703f6f7074696f6e3d636f6d5f6b3226766965773d6974656d2669643d353a636f7069612d64652d7465737465223b733a353a227469746c65223b733a31353a2243c3b3706961206465205465737465223b733a31313a226465736372697074696f6e223b733a303a22223b733a393a227075626c6973686564223b4e3b733a353a227374617465223b693a313b733a363a22616363657373223b733a313a2231223b733a383a226c616e6775616765223b733a313a222a223b733a31383a227075626c6973685f73746172745f64617465223b733a31393a22323031332d31322d32322031323a34383a3438223b733a31363a227075626c6973685f656e645f64617465223b733a31393a22303030302d30302d30302030303a30303a3030223b733a31303a2273746172745f64617465223b733a31393a22323031332d31322d32322031333a33383a3533223b733a383a22656e645f64617465223b733a31393a22303030302d30302d30302030303a30303a3030223b733a31303a226c6973745f7072696365223b4e3b733a31303a2273616c655f7072696365223b4e3b733a373a22747970655f6964223b693a313b733a31353a2264656661756c744c616e6775616765223b733a353a2270742d4252223b7d),
 (22, 'index.php?option=com_k2&view=item&id=6', 'index.php?option=com_k2&view=item&id=6:copia-de-copia-de-teste', 'Cópia de Cópia de Teste', '', '2019-04-03 17:02:20', 'a9a0f26ce4e8a4c3455c71f7215d7268', 1, 1, 1, '*', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', 0, 0, 1, 0x4f3a31393a2246696e646572496e6465786572526573756c74223a31393a7b733a31313a22002a00656c656d656e7473223b613a32353a7b733a323a226964223b733a313a2236223b733a353a22616c696173223b733a32333a22636f7069612d64652d636f7069612d64652d7465737465223b733a373a2273756d6d617279223b733a32373a223c703e446573637269c3a7c3a36f20646f206974656d2e3c2f703e223b733a343a22626f6479223b733a303a22223b733a353a226361746964223b733a313a2232223b733a31303a22637265617465645f6279223b733a333a22353736223b733a31363a22637265617465645f62795f616c696173223b733a303a22223b733a383a226d6f646966696564223b733a31393a22323031342d30312d30372031343a35303a3032223b733a31313a226d6f6469666965645f6279223b733a333a22353736223b733a363a22706172616d73223b4f3a393a224a5265676973747279223a313a7b733a373a22002a0064617461223b4f3a383a22737464436c617373223a3135343a7b733a31303a22656e61626c655f637373223b733a313a2231223b733a31343a226a517565727948616e646c696e67223b733a393a22312e3872656d6f7465223b733a32313a226261636b656e644a517565727948616e646c696e67223b733a363a2272656d6f7465223b733a383a22757365724e616d65223b733a313a2231223b733a393a2275736572496d616765223b733a313a2231223b733a31353a22757365724465736372697074696f6e223b733a313a2231223b733a373a227573657255524c223b733a313a2231223b733a393a2275736572456d61696c223b733a313a2230223b733a31323a2275736572466565644c696e6b223b733a313a2231223b733a31323a22757365724665656449636f6e223b733a313a2231223b733a31333a22757365724974656d436f756e74223b733a323a223130223b733a31333a22757365724974656d5469746c65223b733a313a2231223b733a31393a22757365724974656d5469746c654c696e6b6564223b733a313a2231223b733a31393a22757365724974656d4461746543726561746564223b733a313a2231223b733a31333a22757365724974656d496d616765223b733a313a2231223b733a31373a22757365724974656d496e74726f54657874223b733a313a2231223b733a31363a22757365724974656d43617465676f7279223b733a313a2231223b733a31323a22757365724974656d54616773223b733a313a2231223b733a32323a22757365724974656d436f6d6d656e7473416e63686f72223b733a313a2231223b733a31363a22757365724974656d526561644d6f7265223b733a313a2231223b733a31373a22757365724974656d4b32506c7567696e73223b733a313a2231223b733a31323a227461674974656d436f756e74223b733a323a223130223b733a31323a227461674974656d5469746c65223b733a313a2231223b733a31383a227461674974656d5469746c654c696e6b6564223b733a313a2231223b733a31383a227461674974656d4461746543726561746564223b733a313a2231223b733a31323a227461674974656d496d616765223b733a313a2231223b733a31363a227461674974656d496e74726f54657874223b733a313a2231223b733a31353a227461674974656d43617465676f7279223b733a313a2231223b733a31353a227461674974656d526561644d6f7265223b733a313a2231223b733a31383a227461674974656d45787472614669656c6473223b733a313a2230223b733a31313a227461674f72646572696e67223b733a303a22223b733a31313a22746167466565644c696e6b223b733a313a2231223b733a31313a227461674665656449636f6e223b733a313a2231223b733a31363a2267656e657269634974656d436f756e74223b733a323a223130223b733a31363a2267656e657269634974656d5469746c65223b733a313a2231223b733a32323a2267656e657269634974656d5469746c654c696e6b6564223b733a313a2231223b733a32323a2267656e657269634974656d4461746543726561746564223b733a313a2231223b733a31363a2267656e657269634974656d496d616765223b733a313a2231223b733a32303a2267656e657269634974656d496e74726f54657874223b733a313a2231223b733a31393a2267656e657269634974656d43617465676f7279223b733a313a2231223b733a31393a2267656e657269634974656d526561644d6f7265223b733a313a2231223b733a32323a2267656e657269634974656d45787472614669656c6473223b733a313a2230223b733a31353a2267656e65726963466565644c696e6b223b733a313a2231223b733a31353a2267656e657269634665656449636f6e223b733a313a2231223b733a393a22666565644c696d6974223b733a323a223130223b733a31333a22666565644974656d496d616765223b733a313a2231223b733a31313a2266656564496d6753697a65223b733a313a2253223b733a31373a22666565644974656d496e74726f54657874223b733a313a2231223b733a31373a226665656454657874576f72644c696d6974223b733a303a22223b733a31363a22666565644974656d46756c6c54657874223b733a313a2231223b733a31323a22666565644974656d54616773223b733a313a2230223b733a31333a22666565644974656d566964656f223b733a313a2230223b733a31353a22666565644974656d47616c6c657279223b733a313a2230223b733a31393a22666565644974656d4174746163686d656e7473223b733a313a2230223b733a31343a2266656564426f677573456d61696c223b733a303a22223b733a31363a22696e74726f54657874436c65616e7570223b733a313a2230223b733a32373a22696e74726f54657874436c65616e75704578636c75646554616773223b733a303a22223b733a32333a22696e74726f54657874436c65616e757054616741747472223b733a303a22223b733a31353a2266756c6c54657874436c65616e7570223b733a313a2230223b733a32363a2266756c6c54657874436c65616e75704578636c75646554616773223b733a303a22223b733a32323a2266756c6c54657874436c65616e757054616741747472223b733a303a22223b733a31323a2278737346696c746572696e67223b733a313a2230223b733a31343a226c696e6b506f7075705769647468223b733a333a22393030223b733a31353a226c696e6b506f707570486569676874223b733a333a22363030223b733a31333a22696d616765735175616c697479223b733a333a22313030223b733a31313a226974656d496d6167655853223b733a333a22313030223b733a31303a226974656d496d61676553223b733a333a22323030223b733a31303a226974656d496d6167654d223b733a333a22343030223b733a31303a226974656d496d6167654c223b733a333a22363030223b733a31313a226974656d496d616765584c223b733a333a22393030223b733a31363a226974656d496d61676547656e65726963223b733a333a22333030223b733a31333a22636174496d6167655769647468223b733a333a22313030223b733a31353a22636174496d61676544656661756c74223b733a313a2231223b733a31343a2275736572496d6167655769647468223b733a333a22313030223b733a31363a2275736572496d61676544656661756c74223b733a313a2231223b733a31373a22636f6d6d656e746572496d675769647468223b733a323a223438223b733a31373a226f6e6c696e65496d616765456469746f72223b733a383a2273706c6173687570223b733a31343a22696d61676554696d657374616d70223b733a313a2230223b733a31363a22696d6167654d656d6f72794c696d6974223b733a303a22223b733a31363a22736f6369616c427574746f6e436f6465223b733a303a22223b733a31353a2274776974746572557365726e616d65223b733a303a22223b733a31333a2266616365626f6f6b496d616765223b733a363a224d656469756d223b733a383a22636f6d6d656e7473223b733a313a2231223b733a31363a22636f6d6d656e74734f72646572696e67223b733a343a2244455343223b733a31333a22636f6d6d656e74734c696d6974223b733a323a223130223b733a32303a22636f6d6d656e7473466f726d506f736974696f6e223b733a353a2262656c6f77223b733a31383a22636f6d6d656e74735075626c697368696e67223b733a313a2231223b733a31373a22636f6d6d656e74735265706f7274696e67223b733a313a2232223b733a32333a22636f6d6d656e74735265706f7274526563697069656e74223b733a303a22223b733a32343a22696e6c696e65436f6d6d656e74734d6f6465726174696f6e223b733a313a2230223b733a383a226772617661746172223b733a313a2231223b733a393a22726563617074636861223b733a313a2230223b733a32323a22726563617074636861466f7252656769737465726564223b733a313a2231223b733a31373a22636f6d6d656e7473466f726d4e6f746573223b733a313a2231223b733a32313a22636f6d6d656e7473466f726d4e6f74657354657874223b733a303a22223b733a31353a2266726f6e74656e6445646974696e67223b733a313a2231223b733a31323a2273686f77496d616765546162223b733a313a2231223b733a31393a2273686f77496d61676547616c6c657279546162223b733a313a2231223b733a31323a2273686f77566964656f546162223b733a313a2231223b733a31383a2273686f7745787472614669656c6473546162223b733a313a2231223b733a31383a2273686f774174746163686d656e7473546162223b733a313a2231223b733a31333a2273686f774b32506c7567696e73223b733a313a2231223b733a32323a2273696465426172446973706c617946726f6e74656e64223b733a313a2230223b733a31323a226d65726765456469746f7273223b733a313a2231223b733a31343a2273696465426172446973706c6179223b733a313a2231223b733a31373a226174746163686d656e7473466f6c646572223b733a303a22223b733a31363a2268696465496d706f7274427574746f6e223b733a313a2230223b733a31323a22676f6f676c65536561726368223b733a313a2230223b733a32313a22676f6f676c65536561726368436f6e7461696e6572223b733a32333a226b32476f6f676c65536561726368436f6e7461696e6572223b733a31333a224b325573657250726f66696c65223b733a313a2231223b733a31313a224b325573657247726f7570223b733a303a22223b733a383a227265646972656374223b733a303a22223b733a31313a2261646d696e536561726368223b733a363a2273696d706c65223b733a31323a22636f6f6b6965446f6d61696e223b733a303a22223b733a31333a2274616767696e6753797374656d223b733a313a2231223b733a383a226c6f636b54616773223b733a313a2230223b733a31333a2273686f7754616746696c746572223b733a313a2230223b733a393a226b325461674e6f726d223b733a313a2230223b733a31333a226b325461674e6f726d43617365223b733a353a226c6f776572223b733a33313a226b325461674e6f726d4164646974696f6e616c5265706c6163656d656e7473223b733a303a22223b733a32303a227265636170746368615f7075626c69635f6b6579223b733a303a22223b733a32313a227265636170746368615f707269766174655f6b6579223b733a303a22223b733a31353a227265636170746368615f7468656d65223b733a353a22636c65616e223b733a32333a227265636170746368614f6e526567697374726174696f6e223b733a313a2230223b733a31333a2273746f70466f72756d5370616d223b733a313a2230223b733a31393a2273746f70466f72756d5370616d4170694b6579223b733a303a22223b733a32313a2273686f774974656d73436f756e74657241646d696e223b733a313a2231223b733a31373a2273686f774368696c644361744974656d73223b733a313a2231223b733a32323a2264697361626c65436f6d706163744f72646572696e67223b733a313a2230223b733a31333a226d657461446573634c696d6974223b733a333a22313530223b733a32323a22656e666f7263655345465265706c6163656d656e7473223b733a313a2230223b733a31353a225345465265706c6163656d656e7473223b733a303a22223b733a353a226b32536566223b733a313a2230223b733a31333a226b325365664c6162656c436174223b733a373a22636f6e74656e74223b733a31333a226b325365664c6162656c546167223b733a333a22746167223b733a31343a226b325365664c6162656c55736572223b733a363a22617574686f72223b733a31363a226b325365664c6162656c536561726368223b733a363a22736561726368223b733a31343a226b325365664c6162656c44617465223b733a343a2264617465223b733a31343a226b325365664c6162656c4974656d223b733a313a2230223b733a32363a226b325365664c6162656c4974656d437573746f6d507265666978223b733a303a22223b733a31373a226b32536566496e736572744974656d4964223b733a313a2231223b733a32343a226b325365664974656d49645469746c65416c696173536570223b733a343a2264617368223b733a32323a226b325365665573654974656d5469746c65416c696173223b733a313a2231223b733a31363a226b32536566496e736572744361744964223b733a313a2231223b733a32333a226b3253656643617449645469746c65416c696173536570223b733a343a2264617368223b733a32313a226b325365665573654361745469746c65416c696173223b733a313a2231223b733a31363a2273683430345365664c6162656c436174223b733a303a22223b733a31373a2273683430345365664c6162656c55736572223b733a343a22626c6f67223b733a31373a2273683430345365664c6162656c4974656d223b733a313a2232223b733a31383a2273683430345365665469746c65416c696173223b733a353a22616c696173223b733a32393a2273683430345365664d6f644b32436f6e74656e7446656564416c696173223b733a343a2266656564223b733a32303a227368343034536566496e736572744974656d4964223b733a313a2230223b733a32363a227368343034536566496e73657274556e697175654974656d4964223b733a313a2230223b733a31333a226362496e746567726174696f6e223b733a313a2230223b7d7d733a373a226d6574616b6579223b733a303a22223b733a383a226d65746164657363223b733a303a22223b733a383a226d65746164617461223b4f3a393a224a5265676973747279223a313a7b733a373a22002a0064617461223b4f3a383a22737464436c617373223a323a7b733a363a22726f626f7473223b733a303a22223b733a363a22617574686f72223b733a303a22223b7d7d733a383a226f72646572696e67223b733a313a2232223b733a353a227472617368223b733a313a2230223b733a393a226361745f7472617368223b733a313a2230223b733a383a2263617465676f7279223b733a31303a22c3817564696f73202331223b733a393a226361745f7374617465223b733a313a2231223b733a31303a226361745f616363657373223b733a313a2231223b733a343a22736c7567223b733a32353a22363a636f7069612d64652d636f7069612d64652d7465737465223b733a373a22636174736c7567223b733a31303a22323a617564696f732d31223b733a363a22617574686f72223b733a31303a2253757065722055736572223b733a363a226c61796f7574223b733a343a226974656d223b733a343a2270617468223b733a35333a22696e6465782e7068702f636f6d706f6e656e742f6b322f6974656d2f362d636f7069612d64652d636f7069612d64652d7465737465223b733a31303a226d657461617574686f72223b4e3b7d733a31353a22002a00696e737472756374696f6e73223b613a353a7b693a313b613a333a7b693a303b733a353a227469746c65223b693a313b733a383a227375627469746c65223b693a323b733a323a226964223b7d693a323b613a323a7b693a303b733a373a2273756d6d617279223b693a313b733a343a22626f6479223b7d693a333b613a383a7b693a303b733a343a226d657461223b693a313b733a31303a226c6973745f7072696365223b693a323b733a31303a2273616c655f7072696365223b693a333b733a373a226d6574616b6579223b693a343b733a383a226d65746164657363223b693a353b733a31303a226d657461617574686f72223b693a363b733a363a22617574686f72223b693a373b733a31363a22637265617465645f62795f616c696173223b7d693a343b613a323a7b693a303b733a343a2270617468223b693a313b733a353a22616c696173223b7d693a353b613a313a7b693a303b733a383a22636f6d6d656e7473223b7d7d733a31313a22002a007461786f6e6f6d79223b613a343a7b733a343a2254797065223b613a313a7b733a373a224b32204974656d223b4f3a373a224a4f626a656374223a343a7b733a31303a22002a005f6572726f7273223b613a303a7b7d733a353a227469746c65223b733a373a224b32204974656d223b733a353a227374617465223b693a313b733a363a22616363657373223b693a313b7d7d733a363a22417574686f72223b613a313a7b733a31303a2253757065722055736572223b4f3a373a224a4f626a656374223a343a7b733a31303a22002a005f6572726f7273223b613a303a7b7d733a353a227469746c65223b733a31303a2253757065722055736572223b733a353a227374617465223b693a313b733a363a22616363657373223b693a313b7d7d733a31313a224b322043617465676f7279223b613a313a7b733a31303a22c3817564696f73202331223b4f3a373a224a4f626a656374223a343a7b733a31303a22002a005f6572726f7273223b613a303a7b7d733a353a227469746c65223b733a31303a22c3817564696f73202331223b733a353a227374617465223b693a313b733a363a22616363657373223b693a313b7d7d733a383a224c616e6775616765223b613a313a7b733a313a222a223b4f3a373a224a4f626a656374223a343a7b733a31303a22002a005f6572726f7273223b613a303a7b7d733a353a227469746c65223b733a313a222a223b733a353a227374617465223b693a313b733a363a22616363657373223b693a313b7d7d7d733a333a2275726c223b733a33383a22696e6465782e7068703f6f7074696f6e3d636f6d5f6b3226766965773d6974656d2669643d36223b733a353a22726f757465223b733a36323a22696e6465782e7068703f6f7074696f6e3d636f6d5f6b3226766965773d6974656d2669643d363a636f7069612d64652d636f7069612d64652d7465737465223b733a353a227469746c65223b733a32353a2243c3b37069612064652043c3b3706961206465205465737465223b733a31313a226465736372697074696f6e223b733a303a22223b733a393a227075626c6973686564223b4e3b733a353a227374617465223b693a313b733a363a22616363657373223b733a313a2231223b733a383a226c616e6775616765223b733a313a222a223b733a31383a227075626c6973685f73746172745f64617465223b733a31393a22323031332d31322d32322031323a34383a3438223b733a31363a227075626c6973685f656e645f64617465223b733a31393a22303030302d30302d30302030303a30303a3030223b733a31303a2273746172745f64617465223b733a31393a22323031332d31322d32322031333a34303a3337223b733a383a22656e645f64617465223b733a31393a22303030302d30302d30302030303a30303a3030223b733a31303a226c6973745f7072696365223b4e3b733a31303a2273616c655f7072696365223b4e3b733a373a22747970655f6964223b693a313b733a31353a2264656661756c744c616e6775616765223b733a353a2270742d4252223b7d),
 (24, 'index.php?option=com_k2&view=item&id=4', 'index.php?option=com_k2&view=item&id=4:teste&Itemid=147', 'Teste 3', '', '2019-04-03 17:02:20', '10851b938dafa7470996479ba2a85e05', 1, 1, 1, '*', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', 0, 0, 1, 0x4f3a31393a2246696e646572496e6465786572526573756c74223a31393a7b733a31313a22002a00656c656d656e7473223b613a32353a7b733a323a226964223b733a313a2234223b733a353a22616c696173223b733a353a227465737465223b733a373a2273756d6d617279223b733a32373a223c703e446573637269c3a7c3a36f20646f206974656d2e3c2f703e223b733a343a22626f6479223b733a303a22223b733a353a226361746964223b733a313a2231223b733a31303a22637265617465645f6279223b733a333a22353736223b733a31363a22637265617465645f62795f616c696173223b733a303a22223b733a383a226d6f646966696564223b733a31393a22323031342d30312d30372031343a35303a3435223b733a31313a226d6f6469666965645f6279223b733a333a22353736223b733a363a22706172616d73223b4f3a393a224a5265676973747279223a313a7b733a373a22002a0064617461223b4f3a383a22737464436c617373223a3135343a7b733a31303a22656e61626c655f637373223b733a313a2231223b733a31343a226a517565727948616e646c696e67223b733a393a22312e3872656d6f7465223b733a32313a226261636b656e644a517565727948616e646c696e67223b733a363a2272656d6f7465223b733a383a22757365724e616d65223b733a313a2231223b733a393a2275736572496d616765223b733a313a2231223b733a31353a22757365724465736372697074696f6e223b733a313a2231223b733a373a227573657255524c223b733a313a2231223b733a393a2275736572456d61696c223b733a313a2230223b733a31323a2275736572466565644c696e6b223b733a313a2231223b733a31323a22757365724665656449636f6e223b733a313a2231223b733a31333a22757365724974656d436f756e74223b733a323a223130223b733a31333a22757365724974656d5469746c65223b733a313a2231223b733a31393a22757365724974656d5469746c654c696e6b6564223b733a313a2231223b733a31393a22757365724974656d4461746543726561746564223b733a313a2231223b733a31333a22757365724974656d496d616765223b733a313a2231223b733a31373a22757365724974656d496e74726f54657874223b733a313a2231223b733a31363a22757365724974656d43617465676f7279223b733a313a2231223b733a31323a22757365724974656d54616773223b733a313a2231223b733a32323a22757365724974656d436f6d6d656e7473416e63686f72223b733a313a2231223b733a31363a22757365724974656d526561644d6f7265223b733a313a2231223b733a31373a22757365724974656d4b32506c7567696e73223b733a313a2231223b733a31323a227461674974656d436f756e74223b733a323a223130223b733a31323a227461674974656d5469746c65223b733a313a2231223b733a31383a227461674974656d5469746c654c696e6b6564223b733a313a2231223b733a31383a227461674974656d4461746543726561746564223b733a313a2231223b733a31323a227461674974656d496d616765223b733a313a2231223b733a31363a227461674974656d496e74726f54657874223b733a313a2231223b733a31353a227461674974656d43617465676f7279223b733a313a2231223b733a31353a227461674974656d526561644d6f7265223b733a313a2231223b733a31383a227461674974656d45787472614669656c6473223b733a313a2230223b733a31313a227461674f72646572696e67223b733a303a22223b733a31313a22746167466565644c696e6b223b733a313a2231223b733a31313a227461674665656449636f6e223b733a313a2231223b733a31363a2267656e657269634974656d436f756e74223b733a323a223130223b733a31363a2267656e657269634974656d5469746c65223b733a313a2231223b733a32323a2267656e657269634974656d5469746c654c696e6b6564223b733a313a2231223b733a32323a2267656e657269634974656d4461746543726561746564223b733a313a2231223b733a31363a2267656e657269634974656d496d616765223b733a313a2231223b733a32303a2267656e657269634974656d496e74726f54657874223b733a313a2231223b733a31393a2267656e657269634974656d43617465676f7279223b733a313a2231223b733a31393a2267656e657269634974656d526561644d6f7265223b733a313a2231223b733a32323a2267656e657269634974656d45787472614669656c6473223b733a313a2230223b733a31353a2267656e65726963466565644c696e6b223b733a313a2231223b733a31353a2267656e657269634665656449636f6e223b733a313a2231223b733a393a22666565644c696d6974223b733a323a223130223b733a31333a22666565644974656d496d616765223b733a313a2231223b733a31313a2266656564496d6753697a65223b733a313a2253223b733a31373a22666565644974656d496e74726f54657874223b733a313a2231223b733a31373a226665656454657874576f72644c696d6974223b733a303a22223b733a31363a22666565644974656d46756c6c54657874223b733a313a2231223b733a31323a22666565644974656d54616773223b733a313a2230223b733a31333a22666565644974656d566964656f223b733a313a2230223b733a31353a22666565644974656d47616c6c657279223b733a313a2230223b733a31393a22666565644974656d4174746163686d656e7473223b733a313a2230223b733a31343a2266656564426f677573456d61696c223b733a303a22223b733a31363a22696e74726f54657874436c65616e7570223b733a313a2230223b733a32373a22696e74726f54657874436c65616e75704578636c75646554616773223b733a303a22223b733a32333a22696e74726f54657874436c65616e757054616741747472223b733a303a22223b733a31353a2266756c6c54657874436c65616e7570223b733a313a2230223b733a32363a2266756c6c54657874436c65616e75704578636c75646554616773223b733a303a22223b733a32323a2266756c6c54657874436c65616e757054616741747472223b733a303a22223b733a31323a2278737346696c746572696e67223b733a313a2230223b733a31343a226c696e6b506f7075705769647468223b733a333a22393030223b733a31353a226c696e6b506f707570486569676874223b733a333a22363030223b733a31333a22696d616765735175616c697479223b733a333a22313030223b733a31313a226974656d496d6167655853223b733a333a22313030223b733a31303a226974656d496d61676553223b733a333a22323030223b733a31303a226974656d496d6167654d223b733a333a22343030223b733a31303a226974656d496d6167654c223b733a333a22363030223b733a31313a226974656d496d616765584c223b733a333a22393030223b733a31363a226974656d496d61676547656e65726963223b733a333a22333030223b733a31333a22636174496d6167655769647468223b733a333a22313030223b733a31353a22636174496d61676544656661756c74223b733a313a2231223b733a31343a2275736572496d6167655769647468223b733a333a22313030223b733a31363a2275736572496d61676544656661756c74223b733a313a2231223b733a31373a22636f6d6d656e746572496d675769647468223b733a323a223438223b733a31373a226f6e6c696e65496d616765456469746f72223b733a383a2273706c6173687570223b733a31343a22696d61676554696d657374616d70223b733a313a2230223b733a31363a22696d6167654d656d6f72794c696d6974223b733a303a22223b733a31363a22736f6369616c427574746f6e436f6465223b733a303a22223b733a31353a2274776974746572557365726e616d65223b733a303a22223b733a31333a2266616365626f6f6b496d616765223b733a363a224d656469756d223b733a383a22636f6d6d656e7473223b733a313a2231223b733a31363a22636f6d6d656e74734f72646572696e67223b733a343a2244455343223b733a31333a22636f6d6d656e74734c696d6974223b733a323a223130223b733a32303a22636f6d6d656e7473466f726d506f736974696f6e223b733a353a2262656c6f77223b733a31383a22636f6d6d656e74735075626c697368696e67223b733a313a2231223b733a31373a22636f6d6d656e74735265706f7274696e67223b733a313a2232223b733a32333a22636f6d6d656e74735265706f7274526563697069656e74223b733a303a22223b733a32343a22696e6c696e65436f6d6d656e74734d6f6465726174696f6e223b733a313a2230223b733a383a226772617661746172223b733a313a2231223b733a393a22726563617074636861223b733a313a2230223b733a32323a22726563617074636861466f7252656769737465726564223b733a313a2231223b733a31373a22636f6d6d656e7473466f726d4e6f746573223b733a313a2231223b733a32313a22636f6d6d656e7473466f726d4e6f74657354657874223b733a303a22223b733a31353a2266726f6e74656e6445646974696e67223b733a313a2231223b733a31323a2273686f77496d616765546162223b733a313a2231223b733a31393a2273686f77496d61676547616c6c657279546162223b733a313a2231223b733a31323a2273686f77566964656f546162223b733a313a2231223b733a31383a2273686f7745787472614669656c6473546162223b733a313a2231223b733a31383a2273686f774174746163686d656e7473546162223b733a313a2231223b733a31333a2273686f774b32506c7567696e73223b733a313a2231223b733a32323a2273696465426172446973706c617946726f6e74656e64223b733a313a2230223b733a31323a226d65726765456469746f7273223b733a313a2231223b733a31343a2273696465426172446973706c6179223b733a313a2231223b733a31373a226174746163686d656e7473466f6c646572223b733a303a22223b733a31363a2268696465496d706f7274427574746f6e223b733a313a2230223b733a31323a22676f6f676c65536561726368223b733a313a2230223b733a32313a22676f6f676c65536561726368436f6e7461696e6572223b733a32333a226b32476f6f676c65536561726368436f6e7461696e6572223b733a31333a224b325573657250726f66696c65223b733a313a2231223b733a31313a224b325573657247726f7570223b733a303a22223b733a383a227265646972656374223b733a303a22223b733a31313a2261646d696e536561726368223b733a363a2273696d706c65223b733a31323a22636f6f6b6965446f6d61696e223b733a303a22223b733a31333a2274616767696e6753797374656d223b733a313a2231223b733a383a226c6f636b54616773223b733a313a2230223b733a31333a2273686f7754616746696c746572223b733a313a2230223b733a393a226b325461674e6f726d223b733a313a2230223b733a31333a226b325461674e6f726d43617365223b733a353a226c6f776572223b733a33313a226b325461674e6f726d4164646974696f6e616c5265706c6163656d656e7473223b733a303a22223b733a32303a227265636170746368615f7075626c69635f6b6579223b733a303a22223b733a32313a227265636170746368615f707269766174655f6b6579223b733a303a22223b733a31353a227265636170746368615f7468656d65223b733a353a22636c65616e223b733a32333a227265636170746368614f6e526567697374726174696f6e223b733a313a2230223b733a31333a2273746f70466f72756d5370616d223b733a313a2230223b733a31393a2273746f70466f72756d5370616d4170694b6579223b733a303a22223b733a32313a2273686f774974656d73436f756e74657241646d696e223b733a313a2231223b733a31373a2273686f774368696c644361744974656d73223b733a313a2231223b733a32323a2264697361626c65436f6d706163744f72646572696e67223b733a313a2230223b733a31333a226d657461446573634c696d6974223b733a333a22313530223b733a32323a22656e666f7263655345465265706c6163656d656e7473223b733a313a2230223b733a31353a225345465265706c6163656d656e7473223b733a303a22223b733a353a226b32536566223b733a313a2230223b733a31333a226b325365664c6162656c436174223b733a373a22636f6e74656e74223b733a31333a226b325365664c6162656c546167223b733a333a22746167223b733a31343a226b325365664c6162656c55736572223b733a363a22617574686f72223b733a31363a226b325365664c6162656c536561726368223b733a363a22736561726368223b733a31343a226b325365664c6162656c44617465223b733a343a2264617465223b733a31343a226b325365664c6162656c4974656d223b733a313a2230223b733a32363a226b325365664c6162656c4974656d437573746f6d507265666978223b733a303a22223b733a31373a226b32536566496e736572744974656d4964223b733a313a2231223b733a32343a226b325365664974656d49645469746c65416c696173536570223b733a343a2264617368223b733a32323a226b325365665573654974656d5469746c65416c696173223b733a313a2231223b733a31363a226b32536566496e736572744361744964223b733a313a2231223b733a32333a226b3253656643617449645469746c65416c696173536570223b733a343a2264617368223b733a32313a226b325365665573654361745469746c65416c696173223b733a313a2231223b733a31363a2273683430345365664c6162656c436174223b733a303a22223b733a31373a2273683430345365664c6162656c55736572223b733a343a22626c6f67223b733a31373a2273683430345365664c6162656c4974656d223b733a313a2232223b733a31383a2273683430345365665469746c65416c696173223b733a353a22616c696173223b733a32393a2273683430345365664d6f644b32436f6e74656e7446656564416c696173223b733a343a2266656564223b733a32303a227368343034536566496e736572744974656d4964223b733a313a2230223b733a32363a227368343034536566496e73657274556e697175654974656d4964223b733a313a2230223b733a31333a226362496e746567726174696f6e223b733a313a2230223b7d7d733a373a226d6574616b6579223b733a303a22223b733a383a226d65746164657363223b733a303a22223b733a383a226d65746164617461223b4f3a393a224a5265676973747279223a313a7b733a373a22002a0064617461223b4f3a383a22737464436c617373223a323a7b733a363a22726f626f7473223b733a303a22223b733a363a22617574686f72223b733a303a22223b7d7d733a383a226f72646572696e67223b733a313a2233223b733a353a227472617368223b733a313a2230223b733a393a226361745f7472617368223b733a313a2230223b733a383a2263617465676f7279223b733a373a22c3817564696f73223b733a393a226361745f7374617465223b733a313a2231223b733a31303a226361745f616363657373223b733a313a2231223b733a343a22736c7567223b733a373a22343a7465737465223b733a373a22636174736c7567223b733a383a22313a617564696f73223b733a363a22617574686f72223b733a31303a2253757065722055736572223b733a363a226c61796f7574223b733a343a226974656d223b733a343a2270617468223b733a34323a22696e6465782e7068702f323031332d31302d32372d31332d32362d33352f6974656d2f342d7465737465223b733a31303a226d657461617574686f72223b4e3b7d733a31353a22002a00696e737472756374696f6e73223b613a353a7b693a313b613a333a7b693a303b733a353a227469746c65223b693a313b733a383a227375627469746c65223b693a323b733a323a226964223b7d693a323b613a323a7b693a303b733a373a2273756d6d617279223b693a313b733a343a22626f6479223b7d693a333b613a383a7b693a303b733a343a226d657461223b693a313b733a31303a226c6973745f7072696365223b693a323b733a31303a2273616c655f7072696365223b693a333b733a373a226d6574616b6579223b693a343b733a383a226d65746164657363223b693a353b733a31303a226d657461617574686f72223b693a363b733a363a22617574686f72223b693a373b733a31363a22637265617465645f62795f616c696173223b7d693a343b613a323a7b693a303b733a343a2270617468223b693a313b733a353a22616c696173223b7d693a353b613a313a7b693a303b733a383a22636f6d6d656e7473223b7d7d733a31313a22002a007461786f6e6f6d79223b613a343a7b733a343a2254797065223b613a313a7b733a373a224b32204974656d223b4f3a373a224a4f626a656374223a343a7b733a31303a22002a005f6572726f7273223b613a303a7b7d733a353a227469746c65223b733a373a224b32204974656d223b733a353a227374617465223b693a313b733a363a22616363657373223b693a313b7d7d733a363a22417574686f72223b613a313a7b733a31303a2253757065722055736572223b4f3a373a224a4f626a656374223a343a7b733a31303a22002a005f6572726f7273223b613a303a7b7d733a353a227469746c65223b733a31303a2253757065722055736572223b733a353a227374617465223b693a313b733a363a22616363657373223b693a313b7d7d733a31313a224b322043617465676f7279223b613a313a7b733a373a22c3817564696f73223b4f3a373a224a4f626a656374223a343a7b733a31303a22002a005f6572726f7273223b613a303a7b7d733a353a227469746c65223b733a373a22c3817564696f73223b733a353a227374617465223b693a313b733a363a22616363657373223b693a313b7d7d733a383a224c616e6775616765223b613a313a7b733a313a222a223b4f3a373a224a4f626a656374223a343a7b733a31303a22002a005f6572726f7273223b613a303a7b7d733a353a227469746c65223b733a313a222a223b733a353a227374617465223b693a313b733a363a22616363657373223b693a313b7d7d7d733a333a2275726c223b733a33383a22696e6465782e7068703f6f7074696f6e3d636f6d5f6b3226766965773d6974656d2669643d34223b733a353a22726f757465223b733a35353a22696e6465782e7068703f6f7074696f6e3d636f6d5f6b3226766965773d6974656d2669643d343a7465737465264974656d69643d313437223b733a353a227469746c65223b733a373a2254657374652033223b733a31313a226465736372697074696f6e223b733a303a22223b733a393a227075626c6973686564223b4e3b733a353a227374617465223b693a313b733a363a22616363657373223b733a313a2231223b733a383a226c616e6775616765223b733a313a222a223b733a31383a227075626c6973685f73746172745f64617465223b733a31393a22323031332d31322d32322031323a34383a3438223b733a31363a227075626c6973685f656e645f64617465223b733a31393a22303030302d30302d30302030303a30303a3030223b733a31303a2273746172745f64617465223b733a31393a22323031332d31322d32322031333a33383a3030223b733a383a22656e645f64617465223b733a31393a22303030302d30302d30302030303a30303a3030223b733a31303a226c6973745f7072696365223b4e3b733a31303a2273616c655f7072696365223b4e3b733a373a22747970655f6964223b693a313b733a31353a2264656661756c744c616e6775616765223b733a353a2270742d4252223b7d);
-INSERT INTO `idg2019_finder_links` (`link_id`, `url`, `route`, `title`, `description`, `indexdate`, `md5sum`, `published`, `state`, `access`, `language`, `publish_start_date`, `publish_end_date`, `start_date`, `end_date`, `list_price`, `sale_price`, `type_id`, `object`) VALUES
+INSERT INTO `#__finder_links` (`link_id`, `url`, `route`, `title`, `description`, `indexdate`, `md5sum`, `published`, `state`, `access`, `language`, `publish_start_date`, `publish_end_date`, `start_date`, `end_date`, `list_price`, `sale_price`, `type_id`, `object`) VALUES
 (29, 'index.php?option=com_k2&view=item&id=8', 'index.php?option=com_k2&view=item&id=8:copia-de-copia-de-teste-2', 'Cópia de Cópia de Cópia de Teste 2', '', '2019-04-03 17:02:20', '70db2a346eaf28a11937201b257af3b6', 1, 1, 1, '*', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', 0, 0, 1, 0x4f3a31393a2246696e646572496e6465786572526573756c74223a31393a7b733a31313a22002a00656c656d656e7473223b613a32353a7b733a323a226964223b733a313a2238223b733a353a22616c696173223b733a32353a22636f7069612d64652d636f7069612d64652d74657374652d32223b733a373a2273756d6d617279223b733a32373a223c703e446573637269c3a7c3a36f20646f206974656d2e3c2f703e223b733a343a22626f6479223b733a303a22223b733a353a226361746964223b733a313a2232223b733a31303a22637265617465645f6279223b733a333a22353736223b733a31363a22637265617465645f62795f616c696173223b733a303a22223b733a383a226d6f646966696564223b733a31393a22323031342d30312d30372031343a35323a3539223b733a31313a226d6f6469666965645f6279223b733a333a22353736223b733a363a22706172616d73223b4f3a393a224a5265676973747279223a313a7b733a373a22002a0064617461223b4f3a383a22737464436c617373223a3135343a7b733a31303a22656e61626c655f637373223b733a313a2231223b733a31343a226a517565727948616e646c696e67223b733a393a22312e3872656d6f7465223b733a32313a226261636b656e644a517565727948616e646c696e67223b733a363a2272656d6f7465223b733a383a22757365724e616d65223b733a313a2231223b733a393a2275736572496d616765223b733a313a2231223b733a31353a22757365724465736372697074696f6e223b733a313a2231223b733a373a227573657255524c223b733a313a2231223b733a393a2275736572456d61696c223b733a313a2230223b733a31323a2275736572466565644c696e6b223b733a313a2231223b733a31323a22757365724665656449636f6e223b733a313a2231223b733a31333a22757365724974656d436f756e74223b733a323a223130223b733a31333a22757365724974656d5469746c65223b733a313a2231223b733a31393a22757365724974656d5469746c654c696e6b6564223b733a313a2231223b733a31393a22757365724974656d4461746543726561746564223b733a313a2231223b733a31333a22757365724974656d496d616765223b733a313a2231223b733a31373a22757365724974656d496e74726f54657874223b733a313a2231223b733a31363a22757365724974656d43617465676f7279223b733a313a2231223b733a31323a22757365724974656d54616773223b733a313a2231223b733a32323a22757365724974656d436f6d6d656e7473416e63686f72223b733a313a2231223b733a31363a22757365724974656d526561644d6f7265223b733a313a2231223b733a31373a22757365724974656d4b32506c7567696e73223b733a313a2231223b733a31323a227461674974656d436f756e74223b733a323a223130223b733a31323a227461674974656d5469746c65223b733a313a2231223b733a31383a227461674974656d5469746c654c696e6b6564223b733a313a2231223b733a31383a227461674974656d4461746543726561746564223b733a313a2231223b733a31323a227461674974656d496d616765223b733a313a2231223b733a31363a227461674974656d496e74726f54657874223b733a313a2231223b733a31353a227461674974656d43617465676f7279223b733a313a2231223b733a31353a227461674974656d526561644d6f7265223b733a313a2231223b733a31383a227461674974656d45787472614669656c6473223b733a313a2230223b733a31313a227461674f72646572696e67223b733a303a22223b733a31313a22746167466565644c696e6b223b733a313a2231223b733a31313a227461674665656449636f6e223b733a313a2231223b733a31363a2267656e657269634974656d436f756e74223b733a323a223130223b733a31363a2267656e657269634974656d5469746c65223b733a313a2231223b733a32323a2267656e657269634974656d5469746c654c696e6b6564223b733a313a2231223b733a32323a2267656e657269634974656d4461746543726561746564223b733a313a2231223b733a31363a2267656e657269634974656d496d616765223b733a313a2231223b733a32303a2267656e657269634974656d496e74726f54657874223b733a313a2231223b733a31393a2267656e657269634974656d43617465676f7279223b733a313a2231223b733a31393a2267656e657269634974656d526561644d6f7265223b733a313a2231223b733a32323a2267656e657269634974656d45787472614669656c6473223b733a313a2230223b733a31353a2267656e65726963466565644c696e6b223b733a313a2231223b733a31353a2267656e657269634665656449636f6e223b733a313a2231223b733a393a22666565644c696d6974223b733a323a223130223b733a31333a22666565644974656d496d616765223b733a313a2231223b733a31313a2266656564496d6753697a65223b733a313a2253223b733a31373a22666565644974656d496e74726f54657874223b733a313a2231223b733a31373a226665656454657874576f72644c696d6974223b733a303a22223b733a31363a22666565644974656d46756c6c54657874223b733a313a2231223b733a31323a22666565644974656d54616773223b733a313a2230223b733a31333a22666565644974656d566964656f223b733a313a2230223b733a31353a22666565644974656d47616c6c657279223b733a313a2230223b733a31393a22666565644974656d4174746163686d656e7473223b733a313a2230223b733a31343a2266656564426f677573456d61696c223b733a303a22223b733a31363a22696e74726f54657874436c65616e7570223b733a313a2230223b733a32373a22696e74726f54657874436c65616e75704578636c75646554616773223b733a303a22223b733a32333a22696e74726f54657874436c65616e757054616741747472223b733a303a22223b733a31353a2266756c6c54657874436c65616e7570223b733a313a2230223b733a32363a2266756c6c54657874436c65616e75704578636c75646554616773223b733a303a22223b733a32323a2266756c6c54657874436c65616e757054616741747472223b733a303a22223b733a31323a2278737346696c746572696e67223b733a313a2230223b733a31343a226c696e6b506f7075705769647468223b733a333a22393030223b733a31353a226c696e6b506f707570486569676874223b733a333a22363030223b733a31333a22696d616765735175616c697479223b733a333a22313030223b733a31313a226974656d496d6167655853223b733a333a22313030223b733a31303a226974656d496d61676553223b733a333a22323030223b733a31303a226974656d496d6167654d223b733a333a22343030223b733a31303a226974656d496d6167654c223b733a333a22363030223b733a31313a226974656d496d616765584c223b733a333a22393030223b733a31363a226974656d496d61676547656e65726963223b733a333a22333030223b733a31333a22636174496d6167655769647468223b733a333a22313030223b733a31353a22636174496d61676544656661756c74223b733a313a2231223b733a31343a2275736572496d6167655769647468223b733a333a22313030223b733a31363a2275736572496d61676544656661756c74223b733a313a2231223b733a31373a22636f6d6d656e746572496d675769647468223b733a323a223438223b733a31373a226f6e6c696e65496d616765456469746f72223b733a383a2273706c6173687570223b733a31343a22696d61676554696d657374616d70223b733a313a2230223b733a31363a22696d6167654d656d6f72794c696d6974223b733a303a22223b733a31363a22736f6369616c427574746f6e436f6465223b733a303a22223b733a31353a2274776974746572557365726e616d65223b733a303a22223b733a31333a2266616365626f6f6b496d616765223b733a363a224d656469756d223b733a383a22636f6d6d656e7473223b733a313a2231223b733a31363a22636f6d6d656e74734f72646572696e67223b733a343a2244455343223b733a31333a22636f6d6d656e74734c696d6974223b733a323a223130223b733a32303a22636f6d6d656e7473466f726d506f736974696f6e223b733a353a2262656c6f77223b733a31383a22636f6d6d656e74735075626c697368696e67223b733a313a2231223b733a31373a22636f6d6d656e74735265706f7274696e67223b733a313a2232223b733a32333a22636f6d6d656e74735265706f7274526563697069656e74223b733a303a22223b733a32343a22696e6c696e65436f6d6d656e74734d6f6465726174696f6e223b733a313a2230223b733a383a226772617661746172223b733a313a2231223b733a393a22726563617074636861223b733a313a2230223b733a32323a22726563617074636861466f7252656769737465726564223b733a313a2231223b733a31373a22636f6d6d656e7473466f726d4e6f746573223b733a313a2231223b733a32313a22636f6d6d656e7473466f726d4e6f74657354657874223b733a303a22223b733a31353a2266726f6e74656e6445646974696e67223b733a313a2231223b733a31323a2273686f77496d616765546162223b733a313a2231223b733a31393a2273686f77496d61676547616c6c657279546162223b733a313a2231223b733a31323a2273686f77566964656f546162223b733a313a2231223b733a31383a2273686f7745787472614669656c6473546162223b733a313a2231223b733a31383a2273686f774174746163686d656e7473546162223b733a313a2231223b733a31333a2273686f774b32506c7567696e73223b733a313a2231223b733a32323a2273696465426172446973706c617946726f6e74656e64223b733a313a2230223b733a31323a226d65726765456469746f7273223b733a313a2231223b733a31343a2273696465426172446973706c6179223b733a313a2231223b733a31373a226174746163686d656e7473466f6c646572223b733a303a22223b733a31363a2268696465496d706f7274427574746f6e223b733a313a2230223b733a31323a22676f6f676c65536561726368223b733a313a2230223b733a32313a22676f6f676c65536561726368436f6e7461696e6572223b733a32333a226b32476f6f676c65536561726368436f6e7461696e6572223b733a31333a224b325573657250726f66696c65223b733a313a2231223b733a31313a224b325573657247726f7570223b733a303a22223b733a383a227265646972656374223b733a303a22223b733a31313a2261646d696e536561726368223b733a363a2273696d706c65223b733a31323a22636f6f6b6965446f6d61696e223b733a303a22223b733a31333a2274616767696e6753797374656d223b733a313a2231223b733a383a226c6f636b54616773223b733a313a2230223b733a31333a2273686f7754616746696c746572223b733a313a2230223b733a393a226b325461674e6f726d223b733a313a2230223b733a31333a226b325461674e6f726d43617365223b733a353a226c6f776572223b733a33313a226b325461674e6f726d4164646974696f6e616c5265706c6163656d656e7473223b733a303a22223b733a32303a227265636170746368615f7075626c69635f6b6579223b733a303a22223b733a32313a227265636170746368615f707269766174655f6b6579223b733a303a22223b733a31353a227265636170746368615f7468656d65223b733a353a22636c65616e223b733a32333a227265636170746368614f6e526567697374726174696f6e223b733a313a2230223b733a31333a2273746f70466f72756d5370616d223b733a313a2230223b733a31393a2273746f70466f72756d5370616d4170694b6579223b733a303a22223b733a32313a2273686f774974656d73436f756e74657241646d696e223b733a313a2231223b733a31373a2273686f774368696c644361744974656d73223b733a313a2231223b733a32323a2264697361626c65436f6d706163744f72646572696e67223b733a313a2230223b733a31333a226d657461446573634c696d6974223b733a333a22313530223b733a32323a22656e666f7263655345465265706c6163656d656e7473223b733a313a2230223b733a31353a225345465265706c6163656d656e7473223b733a303a22223b733a353a226b32536566223b733a313a2230223b733a31333a226b325365664c6162656c436174223b733a373a22636f6e74656e74223b733a31333a226b325365664c6162656c546167223b733a333a22746167223b733a31343a226b325365664c6162656c55736572223b733a363a22617574686f72223b733a31363a226b325365664c6162656c536561726368223b733a363a22736561726368223b733a31343a226b325365664c6162656c44617465223b733a343a2264617465223b733a31343a226b325365664c6162656c4974656d223b733a313a2230223b733a32363a226b325365664c6162656c4974656d437573746f6d507265666978223b733a303a22223b733a31373a226b32536566496e736572744974656d4964223b733a313a2231223b733a32343a226b325365664974656d49645469746c65416c696173536570223b733a343a2264617368223b733a32323a226b325365665573654974656d5469746c65416c696173223b733a313a2231223b733a31363a226b32536566496e736572744361744964223b733a313a2231223b733a32333a226b3253656643617449645469746c65416c696173536570223b733a343a2264617368223b733a32313a226b325365665573654361745469746c65416c696173223b733a313a2231223b733a31363a2273683430345365664c6162656c436174223b733a303a22223b733a31373a2273683430345365664c6162656c55736572223b733a343a22626c6f67223b733a31373a2273683430345365664c6162656c4974656d223b733a313a2232223b733a31383a2273683430345365665469746c65416c696173223b733a353a22616c696173223b733a32393a2273683430345365664d6f644b32436f6e74656e7446656564416c696173223b733a343a2266656564223b733a32303a227368343034536566496e736572744974656d4964223b733a313a2230223b733a32363a227368343034536566496e73657274556e697175654974656d4964223b733a313a2230223b733a31333a226362496e746567726174696f6e223b733a313a2230223b7d7d733a373a226d6574616b6579223b733a303a22223b733a383a226d65746164657363223b733a303a22223b733a383a226d65746164617461223b4f3a393a224a5265676973747279223a313a7b733a373a22002a0064617461223b4f3a383a22737464436c617373223a323a7b733a363a22726f626f7473223b733a303a22223b733a363a22617574686f72223b733a303a22223b7d7d733a383a226f72646572696e67223b733a313a2233223b733a353a227472617368223b733a313a2230223b733a393a226361745f7472617368223b733a313a2230223b733a383a2263617465676f7279223b733a31303a22c3817564696f73202331223b733a393a226361745f7374617465223b733a313a2231223b733a31303a226361745f616363657373223b733a313a2231223b733a343a22736c7567223b733a32373a22383a636f7069612d64652d636f7069612d64652d74657374652d32223b733a373a22636174736c7567223b733a31303a22323a617564696f732d31223b733a363a22617574686f72223b733a31303a2253757065722055736572223b733a363a226c61796f7574223b733a343a226974656d223b733a343a2270617468223b733a35353a22696e6465782e7068702f636f6d706f6e656e742f6b322f6974656d2f382d636f7069612d64652d636f7069612d64652d74657374652d32223b733a31303a226d657461617574686f72223b4e3b7d733a31353a22002a00696e737472756374696f6e73223b613a353a7b693a313b613a333a7b693a303b733a353a227469746c65223b693a313b733a383a227375627469746c65223b693a323b733a323a226964223b7d693a323b613a323a7b693a303b733a373a2273756d6d617279223b693a313b733a343a22626f6479223b7d693a333b613a383a7b693a303b733a343a226d657461223b693a313b733a31303a226c6973745f7072696365223b693a323b733a31303a2273616c655f7072696365223b693a333b733a373a226d6574616b6579223b693a343b733a383a226d65746164657363223b693a353b733a31303a226d657461617574686f72223b693a363b733a363a22617574686f72223b693a373b733a31363a22637265617465645f62795f616c696173223b7d693a343b613a323a7b693a303b733a343a2270617468223b693a313b733a353a22616c696173223b7d693a353b613a313a7b693a303b733a383a22636f6d6d656e7473223b7d7d733a31313a22002a007461786f6e6f6d79223b613a343a7b733a343a2254797065223b613a313a7b733a373a224b32204974656d223b4f3a373a224a4f626a656374223a343a7b733a31303a22002a005f6572726f7273223b613a303a7b7d733a353a227469746c65223b733a373a224b32204974656d223b733a353a227374617465223b693a313b733a363a22616363657373223b693a313b7d7d733a363a22417574686f72223b613a313a7b733a31303a2253757065722055736572223b4f3a373a224a4f626a656374223a343a7b733a31303a22002a005f6572726f7273223b613a303a7b7d733a353a227469746c65223b733a31303a2253757065722055736572223b733a353a227374617465223b693a313b733a363a22616363657373223b693a313b7d7d733a31313a224b322043617465676f7279223b613a313a7b733a31303a22c3817564696f73202331223b4f3a373a224a4f626a656374223a343a7b733a31303a22002a005f6572726f7273223b613a303a7b7d733a353a227469746c65223b733a31303a22c3817564696f73202331223b733a353a227374617465223b693a313b733a363a22616363657373223b693a313b7d7d733a383a224c616e6775616765223b613a313a7b733a313a222a223b4f3a373a224a4f626a656374223a343a7b733a31303a22002a005f6572726f7273223b613a303a7b7d733a353a227469746c65223b733a313a222a223b733a353a227374617465223b693a313b733a363a22616363657373223b693a313b7d7d7d733a333a2275726c223b733a33383a22696e6465782e7068703f6f7074696f6e3d636f6d5f6b3226766965773d6974656d2669643d38223b733a353a22726f757465223b733a36343a22696e6465782e7068703f6f7074696f6e3d636f6d5f6b3226766965773d6974656d2669643d383a636f7069612d64652d636f7069612d64652d74657374652d32223b733a353a227469746c65223b733a33373a2243c3b37069612064652043c3b37069612064652043c3b37069612064652054657374652032223b733a31313a226465736372697074696f6e223b733a303a22223b733a393a227075626c6973686564223b4e3b733a353a227374617465223b693a313b733a363a22616363657373223b733a313a2231223b733a383a226c616e6775616765223b733a313a222a223b733a31383a227075626c6973685f73746172745f64617465223b733a31393a22323031332d31322d32322031323a34383a3438223b733a31363a227075626c6973685f656e645f64617465223b733a31393a22303030302d30302d30302030303a30303a3030223b733a31303a2273746172745f64617465223b733a31393a22323031342d30312d30372031343a35323a3131223b733a383a22656e645f64617465223b733a31393a22303030302d30302d30302030303a30303a3030223b733a31303a226c6973745f7072696365223b4e3b733a31303a2273616c655f7072696365223b4e3b733a373a22747970655f6964223b693a313b733a31353a2264656661756c744c616e6775616765223b733a353a2270742d4252223b7d),
 (30, 'index.php?option=com_k2&view=item&id=7', 'index.php?option=com_k2&view=item&id=7:copia-de-copia-de-copia-de-teste', 'Cópia de Cópia de Cópia de Teste', '', '2019-04-03 17:02:20', '4cde40395711d3f216d63e2c592d8801', 1, 1, 1, '*', '2019-04-03 17:02:20', '0000-00-00 00:00:00', '2019-04-03 17:02:20', '0000-00-00 00:00:00', 0, 0, 1, 0x4f3a31393a2246696e646572496e6465786572526573756c74223a31393a7b733a31313a22002a00656c656d656e7473223b613a32353a7b733a323a226964223b733a313a2237223b733a353a22616c696173223b733a33323a22636f7069612d64652d636f7069612d64652d636f7069612d64652d7465737465223b733a373a2273756d6d617279223b733a32373a223c703e446573637269c3a7c3a36f20646f206974656d2e3c2f703e223b733a343a22626f6479223b733a303a22223b733a353a226361746964223b733a313a2233223b733a31303a22637265617465645f6279223b733a333a22353736223b733a31363a22637265617465645f62795f616c696173223b733a303a22223b733a383a226d6f646966696564223b733a31393a22323031342d30312d30372031343a35303a3237223b733a31313a226d6f6469666965645f6279223b733a333a22353736223b733a363a22706172616d73223b4f3a393a224a5265676973747279223a313a7b733a373a22002a0064617461223b4f3a383a22737464436c617373223a3135343a7b733a31303a22656e61626c655f637373223b733a313a2231223b733a31343a226a517565727948616e646c696e67223b733a393a22312e3872656d6f7465223b733a32313a226261636b656e644a517565727948616e646c696e67223b733a363a2272656d6f7465223b733a383a22757365724e616d65223b733a313a2231223b733a393a2275736572496d616765223b733a313a2231223b733a31353a22757365724465736372697074696f6e223b733a313a2231223b733a373a227573657255524c223b733a313a2231223b733a393a2275736572456d61696c223b733a313a2230223b733a31323a2275736572466565644c696e6b223b733a313a2231223b733a31323a22757365724665656449636f6e223b733a313a2231223b733a31333a22757365724974656d436f756e74223b733a323a223130223b733a31333a22757365724974656d5469746c65223b733a313a2231223b733a31393a22757365724974656d5469746c654c696e6b6564223b733a313a2231223b733a31393a22757365724974656d4461746543726561746564223b733a313a2231223b733a31333a22757365724974656d496d616765223b733a313a2231223b733a31373a22757365724974656d496e74726f54657874223b733a313a2231223b733a31363a22757365724974656d43617465676f7279223b733a313a2231223b733a31323a22757365724974656d54616773223b733a313a2231223b733a32323a22757365724974656d436f6d6d656e7473416e63686f72223b733a313a2231223b733a31363a22757365724974656d526561644d6f7265223b733a313a2231223b733a31373a22757365724974656d4b32506c7567696e73223b733a313a2231223b733a31323a227461674974656d436f756e74223b733a323a223130223b733a31323a227461674974656d5469746c65223b733a313a2231223b733a31383a227461674974656d5469746c654c696e6b6564223b733a313a2231223b733a31383a227461674974656d4461746543726561746564223b733a313a2231223b733a31323a227461674974656d496d616765223b733a313a2231223b733a31363a227461674974656d496e74726f54657874223b733a313a2231223b733a31353a227461674974656d43617465676f7279223b733a313a2231223b733a31353a227461674974656d526561644d6f7265223b733a313a2231223b733a31383a227461674974656d45787472614669656c6473223b733a313a2230223b733a31313a227461674f72646572696e67223b733a303a22223b733a31313a22746167466565644c696e6b223b733a313a2231223b733a31313a227461674665656449636f6e223b733a313a2231223b733a31363a2267656e657269634974656d436f756e74223b733a323a223130223b733a31363a2267656e657269634974656d5469746c65223b733a313a2231223b733a32323a2267656e657269634974656d5469746c654c696e6b6564223b733a313a2231223b733a32323a2267656e657269634974656d4461746543726561746564223b733a313a2231223b733a31363a2267656e657269634974656d496d616765223b733a313a2231223b733a32303a2267656e657269634974656d496e74726f54657874223b733a313a2231223b733a31393a2267656e657269634974656d43617465676f7279223b733a313a2231223b733a31393a2267656e657269634974656d526561644d6f7265223b733a313a2231223b733a32323a2267656e657269634974656d45787472614669656c6473223b733a313a2230223b733a31353a2267656e65726963466565644c696e6b223b733a313a2231223b733a31353a2267656e657269634665656449636f6e223b733a313a2231223b733a393a22666565644c696d6974223b733a323a223130223b733a31333a22666565644974656d496d616765223b733a313a2231223b733a31313a2266656564496d6753697a65223b733a313a2253223b733a31373a22666565644974656d496e74726f54657874223b733a313a2231223b733a31373a226665656454657874576f72644c696d6974223b733a303a22223b733a31363a22666565644974656d46756c6c54657874223b733a313a2231223b733a31323a22666565644974656d54616773223b733a313a2230223b733a31333a22666565644974656d566964656f223b733a313a2230223b733a31353a22666565644974656d47616c6c657279223b733a313a2230223b733a31393a22666565644974656d4174746163686d656e7473223b733a313a2230223b733a31343a2266656564426f677573456d61696c223b733a303a22223b733a31363a22696e74726f54657874436c65616e7570223b733a313a2230223b733a32373a22696e74726f54657874436c65616e75704578636c75646554616773223b733a303a22223b733a32333a22696e74726f54657874436c65616e757054616741747472223b733a303a22223b733a31353a2266756c6c54657874436c65616e7570223b733a313a2230223b733a32363a2266756c6c54657874436c65616e75704578636c75646554616773223b733a303a22223b733a32323a2266756c6c54657874436c65616e757054616741747472223b733a303a22223b733a31323a2278737346696c746572696e67223b733a313a2230223b733a31343a226c696e6b506f7075705769647468223b733a333a22393030223b733a31353a226c696e6b506f707570486569676874223b733a333a22363030223b733a31333a22696d616765735175616c697479223b733a333a22313030223b733a31313a226974656d496d6167655853223b733a333a22313030223b733a31303a226974656d496d61676553223b733a333a22323030223b733a31303a226974656d496d6167654d223b733a333a22343030223b733a31303a226974656d496d6167654c223b733a333a22363030223b733a31313a226974656d496d616765584c223b733a333a22393030223b733a31363a226974656d496d61676547656e65726963223b733a333a22333030223b733a31333a22636174496d6167655769647468223b733a333a22313030223b733a31353a22636174496d61676544656661756c74223b733a313a2231223b733a31343a2275736572496d6167655769647468223b733a333a22313030223b733a31363a2275736572496d61676544656661756c74223b733a313a2231223b733a31373a22636f6d6d656e746572496d675769647468223b733a323a223438223b733a31373a226f6e6c696e65496d616765456469746f72223b733a383a2273706c6173687570223b733a31343a22696d61676554696d657374616d70223b733a313a2230223b733a31363a22696d6167654d656d6f72794c696d6974223b733a303a22223b733a31363a22736f6369616c427574746f6e436f6465223b733a303a22223b733a31353a2274776974746572557365726e616d65223b733a303a22223b733a31333a2266616365626f6f6b496d616765223b733a363a224d656469756d223b733a383a22636f6d6d656e7473223b733a313a2231223b733a31363a22636f6d6d656e74734f72646572696e67223b733a343a2244455343223b733a31333a22636f6d6d656e74734c696d6974223b733a323a223130223b733a32303a22636f6d6d656e7473466f726d506f736974696f6e223b733a353a2262656c6f77223b733a31383a22636f6d6d656e74735075626c697368696e67223b733a313a2231223b733a31373a22636f6d6d656e74735265706f7274696e67223b733a313a2232223b733a32333a22636f6d6d656e74735265706f7274526563697069656e74223b733a303a22223b733a32343a22696e6c696e65436f6d6d656e74734d6f6465726174696f6e223b733a313a2230223b733a383a226772617661746172223b733a313a2231223b733a393a22726563617074636861223b733a313a2230223b733a32323a22726563617074636861466f7252656769737465726564223b733a313a2231223b733a31373a22636f6d6d656e7473466f726d4e6f746573223b733a313a2231223b733a32313a22636f6d6d656e7473466f726d4e6f74657354657874223b733a303a22223b733a31353a2266726f6e74656e6445646974696e67223b733a313a2231223b733a31323a2273686f77496d616765546162223b733a313a2231223b733a31393a2273686f77496d61676547616c6c657279546162223b733a313a2231223b733a31323a2273686f77566964656f546162223b733a313a2231223b733a31383a2273686f7745787472614669656c6473546162223b733a313a2231223b733a31383a2273686f774174746163686d656e7473546162223b733a313a2231223b733a31333a2273686f774b32506c7567696e73223b733a313a2231223b733a32323a2273696465426172446973706c617946726f6e74656e64223b733a313a2230223b733a31323a226d65726765456469746f7273223b733a313a2231223b733a31343a2273696465426172446973706c6179223b733a313a2231223b733a31373a226174746163686d656e7473466f6c646572223b733a303a22223b733a31363a2268696465496d706f7274427574746f6e223b733a313a2230223b733a31323a22676f6f676c65536561726368223b733a313a2230223b733a32313a22676f6f676c65536561726368436f6e7461696e6572223b733a32333a226b32476f6f676c65536561726368436f6e7461696e6572223b733a31333a224b325573657250726f66696c65223b733a313a2231223b733a31313a224b325573657247726f7570223b733a303a22223b733a383a227265646972656374223b733a303a22223b733a31313a2261646d696e536561726368223b733a363a2273696d706c65223b733a31323a22636f6f6b6965446f6d61696e223b733a303a22223b733a31333a2274616767696e6753797374656d223b733a313a2231223b733a383a226c6f636b54616773223b733a313a2230223b733a31333a2273686f7754616746696c746572223b733a313a2230223b733a393a226b325461674e6f726d223b733a313a2230223b733a31333a226b325461674e6f726d43617365223b733a353a226c6f776572223b733a33313a226b325461674e6f726d4164646974696f6e616c5265706c6163656d656e7473223b733a303a22223b733a32303a227265636170746368615f7075626c69635f6b6579223b733a303a22223b733a32313a227265636170746368615f707269766174655f6b6579223b733a303a22223b733a31353a227265636170746368615f7468656d65223b733a353a22636c65616e223b733a32333a227265636170746368614f6e526567697374726174696f6e223b733a313a2230223b733a31333a2273746f70466f72756d5370616d223b733a313a2230223b733a31393a2273746f70466f72756d5370616d4170694b6579223b733a303a22223b733a32313a2273686f774974656d73436f756e74657241646d696e223b733a313a2231223b733a31373a2273686f774368696c644361744974656d73223b733a313a2231223b733a32323a2264697361626c65436f6d706163744f72646572696e67223b733a313a2230223b733a31333a226d657461446573634c696d6974223b733a333a22313530223b733a32323a22656e666f7263655345465265706c6163656d656e7473223b733a313a2230223b733a31353a225345465265706c6163656d656e7473223b733a303a22223b733a353a226b32536566223b733a313a2230223b733a31333a226b325365664c6162656c436174223b733a373a22636f6e74656e74223b733a31333a226b325365664c6162656c546167223b733a333a22746167223b733a31343a226b325365664c6162656c55736572223b733a363a22617574686f72223b733a31363a226b325365664c6162656c536561726368223b733a363a22736561726368223b733a31343a226b325365664c6162656c44617465223b733a343a2264617465223b733a31343a226b325365664c6162656c4974656d223b733a313a2230223b733a32363a226b325365664c6162656c4974656d437573746f6d507265666978223b733a303a22223b733a31373a226b32536566496e736572744974656d4964223b733a313a2231223b733a32343a226b325365664974656d49645469746c65416c696173536570223b733a343a2264617368223b733a32323a226b325365665573654974656d5469746c65416c696173223b733a313a2231223b733a31363a226b32536566496e736572744361744964223b733a313a2231223b733a32333a226b3253656643617449645469746c65416c696173536570223b733a343a2264617368223b733a32313a226b325365665573654361745469746c65416c696173223b733a313a2231223b733a31363a2273683430345365664c6162656c436174223b733a303a22223b733a31373a2273683430345365664c6162656c55736572223b733a343a22626c6f67223b733a31373a2273683430345365664c6162656c4974656d223b733a313a2232223b733a31383a2273683430345365665469746c65416c696173223b733a353a22616c696173223b733a32393a2273683430345365664d6f644b32436f6e74656e7446656564416c696173223b733a343a2266656564223b733a32303a227368343034536566496e736572744974656d4964223b733a313a2230223b733a32363a227368343034536566496e73657274556e697175654974656d4964223b733a313a2230223b733a31333a226362496e746567726174696f6e223b733a313a2230223b7d7d733a373a226d6574616b6579223b733a303a22223b733a383a226d65746164657363223b733a303a22223b733a383a226d65746164617461223b4f3a393a224a5265676973747279223a313a7b733a373a22002a0064617461223b4f3a383a22737464436c617373223a323a7b733a363a22726f626f7473223b733a303a22223b733a363a22617574686f72223b733a303a22223b7d7d733a383a226f72646572696e67223b733a313a2231223b733a353a227472617368223b733a313a2230223b733a393a226361745f7472617368223b733a313a2230223b733a383a2263617465676f7279223b733a393a22417564696f73202332223b733a393a226361745f7374617465223b733a313a2231223b733a31303a226361745f616363657373223b733a313a2231223b733a343a22736c7567223b733a33343a22373a636f7069612d64652d636f7069612d64652d636f7069612d64652d7465737465223b733a373a22636174736c7567223b733a31303a22333a617564696f732d32223b733a363a22617574686f72223b733a31303a2253757065722055736572223b733a363a226c61796f7574223b733a343a226974656d223b733a343a2270617468223b733a36323a22696e6465782e7068702f636f6d706f6e656e742f6b322f6974656d2f372d636f7069612d64652d636f7069612d64652d636f7069612d64652d7465737465223b733a31303a226d657461617574686f72223b4e3b7d733a31353a22002a00696e737472756374696f6e73223b613a353a7b693a313b613a333a7b693a303b733a353a227469746c65223b693a313b733a383a227375627469746c65223b693a323b733a323a226964223b7d693a323b613a323a7b693a303b733a373a2273756d6d617279223b693a313b733a343a22626f6479223b7d693a333b613a383a7b693a303b733a343a226d657461223b693a313b733a31303a226c6973745f7072696365223b693a323b733a31303a2273616c655f7072696365223b693a333b733a373a226d6574616b6579223b693a343b733a383a226d65746164657363223b693a353b733a31303a226d657461617574686f72223b693a363b733a363a22617574686f72223b693a373b733a31363a22637265617465645f62795f616c696173223b7d693a343b613a323a7b693a303b733a343a2270617468223b693a313b733a353a22616c696173223b7d693a353b613a313a7b693a303b733a383a22636f6d6d656e7473223b7d7d733a31313a22002a007461786f6e6f6d79223b613a343a7b733a343a2254797065223b613a313a7b733a373a224b32204974656d223b4f3a373a224a4f626a656374223a343a7b733a31303a22002a005f6572726f7273223b613a303a7b7d733a353a227469746c65223b733a373a224b32204974656d223b733a353a227374617465223b693a313b733a363a22616363657373223b693a313b7d7d733a363a22417574686f72223b613a313a7b733a31303a2253757065722055736572223b4f3a373a224a4f626a656374223a343a7b733a31303a22002a005f6572726f7273223b613a303a7b7d733a353a227469746c65223b733a31303a2253757065722055736572223b733a353a227374617465223b693a313b733a363a22616363657373223b693a313b7d7d733a31313a224b322043617465676f7279223b613a313a7b733a393a22417564696f73202332223b4f3a373a224a4f626a656374223a343a7b733a31303a22002a005f6572726f7273223b613a303a7b7d733a353a227469746c65223b733a393a22417564696f73202332223b733a353a227374617465223b693a313b733a363a22616363657373223b693a313b7d7d733a383a224c616e6775616765223b613a313a7b733a313a222a223b4f3a373a224a4f626a656374223a343a7b733a31303a22002a005f6572726f7273223b613a303a7b7d733a353a227469746c65223b733a313a222a223b733a353a227374617465223b693a313b733a363a22616363657373223b693a313b7d7d7d733a333a2275726c223b733a33383a22696e6465782e7068703f6f7074696f6e3d636f6d5f6b3226766965773d6974656d2669643d37223b733a353a22726f757465223b733a37313a22696e6465782e7068703f6f7074696f6e3d636f6d5f6b3226766965773d6974656d2669643d373a636f7069612d64652d636f7069612d64652d636f7069612d64652d7465737465223b733a353a227469746c65223b733a33353a2243c3b37069612064652043c3b37069612064652043c3b3706961206465205465737465223b733a31313a226465736372697074696f6e223b733a303a22223b733a393a227075626c6973686564223b4e3b733a353a227374617465223b693a313b733a363a22616363657373223b733a313a2231223b733a383a226c616e6775616765223b733a313a222a223b733a31383a227075626c6973685f73746172745f64617465223b733a31393a22323031332d31322d32322031323a34383a3438223b733a31363a227075626c6973685f656e645f64617465223b733a31393a22303030302d30302d30302030303a30303a3030223b733a31303a2273746172745f64617465223b733a31393a22323031332d31322d32322031333a34313a3330223b733a383a22656e645f64617465223b733a31393a22303030302d30302d30302030303a30303a3030223b733a31303a226c6973745f7072696365223b4e3b733a31303a2273616c655f7072696365223b4e3b733a373a22747970655f6964223b693a313b733a31353a2264656661756c744c616e6775616765223b733a353a2270742d4252223b7d);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_finder_links_terms0`
+-- Estrutura da tabela `#__finder_links_terms0`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_links_terms0`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_links_terms0` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
-  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+CREATE TABLE IF NOT EXISTS `#__finder_links_terms0` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_finder_links_terms1`
+-- Table structure for table `#__finder_links_terms1`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_links_terms1`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_links_terms1` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
-  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+CREATE TABLE IF NOT EXISTS `#__finder_links_terms1` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_finder_links_terms2`
+-- Table structure for table `#__finder_links_terms2`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_links_terms2`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_links_terms2` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
-  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+CREATE TABLE IF NOT EXISTS `#__finder_links_terms2` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_finder_links_terms3`
+-- Table structure for table `#__finder_links_terms3`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_links_terms3`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_links_terms3` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
-  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+CREATE TABLE IF NOT EXISTS `#__finder_links_terms3` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_finder_links_terms4`
+-- Table structure for table `#__finder_links_terms4`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_links_terms4`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_links_terms4` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
-  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+CREATE TABLE IF NOT EXISTS `#__finder_links_terms4` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_finder_links_terms5`
+-- Table structure for table `#__finder_links_terms5`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_links_terms5`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_links_terms5` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
-  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+CREATE TABLE IF NOT EXISTS `#__finder_links_terms5` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_finder_links_terms6`
+-- Table structure for table `#__finder_links_terms6`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_links_terms6`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_links_terms6` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
-  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+CREATE TABLE IF NOT EXISTS `#__finder_links_terms6` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_finder_links_terms7`
+-- Table structure for table `#__finder_links_terms7`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_links_terms7`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_links_terms7` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
-  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+CREATE TABLE IF NOT EXISTS `#__finder_links_terms7` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_finder_links_terms8`
+-- Table structure for table `#__finder_links_terms8`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_links_terms8`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_links_terms8` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
-  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+CREATE TABLE IF NOT EXISTS `#__finder_links_terms8` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_finder_links_terms9`
+-- Table structure for table `#__finder_links_terms9`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_links_terms9`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_links_terms9` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
-  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+CREATE TABLE IF NOT EXISTS `#__finder_links_terms9` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_finder_links_termsa`
+-- Table structure for table `#__finder_links_termsa`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_links_termsa`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_links_termsa` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
-  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+CREATE TABLE IF NOT EXISTS `#__finder_links_termsa` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_finder_links_termsb`
+-- Table structure for table `#__finder_links_termsb`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_links_termsb`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_links_termsb` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
-  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+CREATE TABLE IF NOT EXISTS `#__finder_links_termsb` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_finder_links_termsc`
+-- Table structure for table `#__finder_links_termsc`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_links_termsc`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_links_termsc` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
-  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+CREATE TABLE IF NOT EXISTS `#__finder_links_termsc` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_finder_links_termsd`
+-- Table structure for table `#__finder_links_termsd`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_links_termsd`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_links_termsd` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
-  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+CREATE TABLE IF NOT EXISTS `#__finder_links_termsd` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_finder_links_termse`
+-- Table structure for table `#__finder_links_termse`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_links_termse`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_links_termse` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
-  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+CREATE TABLE IF NOT EXISTS `#__finder_links_termse` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_finder_links_termsf`
+-- Table structure for table `#__finder_links_termsf`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_links_termsf`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_links_termsf` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
-  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+CREATE TABLE IF NOT EXISTS `#__finder_links_termsf` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_finder_taxonomy`
+-- Estrutura da tabela `#__finder_taxonomy`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_taxonomy`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_taxonomy` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `parent_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+CREATE TABLE IF NOT EXISTS `#__finder_taxonomy` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `parent_id` int(10) unsigned NOT NULL DEFAULT 0,
   `title` varchar(255) NOT NULL,
-  `state` tinyint(1) UNSIGNED NOT NULL DEFAULT '1',
-  `access` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
-  `ordering` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `parent_id` (`parent_id`) USING BTREE,
-  KEY `state` (`state`) USING BTREE,
-  KEY `ordering` (`ordering`) USING BTREE,
-  KEY `access` (`access`) USING BTREE,
-  KEY `idx_parent_published` (`parent_id`,`state`,`access`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `state` tinyint(1) unsigned NOT NULL DEFAULT 1,
+  `access` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `ordering` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  KEY `parent_id` (`parent_id`),
+  KEY `state` (`state`),
+  KEY `ordering` (`ordering`),
+  KEY `access` (`access`),
+  KEY `idx_parent_published` (`parent_id`,`state`,`access`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `idg2019_finder_taxonomy`
+-- Extraindo dados da tabela `#__finder_taxonomy`
 --
 
-INSERT INTO `idg2019_finder_taxonomy` (`id`, `parent_id`, `title`, `state`, `access`, `ordering`) VALUES
+INSERT INTO `#__finder_taxonomy` (`id`, `parent_id`, `title`, `state`, `access`, `ordering`) VALUES
 (1, 0, 'ROOT', 0, 0, 0),
 (2, 1, 'Type', 1, 1, 0),
 (3, 2, 'K2 Item', 1, 1, 0),
@@ -2241,23 +2238,22 @@ INSERT INTO `idg2019_finder_taxonomy` (`id`, `parent_id`, `title`, `state`, `acc
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_finder_taxonomy_map`
+-- Estrutura da tabela `#__finder_taxonomy_map`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_taxonomy_map`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_taxonomy_map` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `node_id` int(10) UNSIGNED NOT NULL,
-  PRIMARY KEY (`link_id`,`node_id`) USING BTREE,
-  KEY `link_id` (`link_id`) USING BTREE,
-  KEY `node_id` (`node_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+CREATE TABLE IF NOT EXISTS `#__finder_taxonomy_map` (
+  `link_id` int(10) unsigned NOT NULL,
+  `node_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`node_id`),
+  KEY `link_id` (`link_id`),
+  KEY `node_id` (`node_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `idg2019_finder_taxonomy_map`
+-- Extraindo dados da tabela `#__finder_taxonomy_map`
 --
 
-INSERT INTO `idg2019_finder_taxonomy_map` (`link_id`, `node_id`) VALUES
+INSERT INTO `#__finder_taxonomy_map` (`link_id`, `node_id`) VALUES
 (1, 3),
 (1, 5),
 (1, 7),
@@ -2294,46 +2290,44 @@ INSERT INTO `idg2019_finder_taxonomy_map` (`link_id`, `node_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_finder_terms`
+-- Estrutura da tabela `#__finder_terms`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_terms`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_terms` (
-  `term_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `#__finder_terms` (
+  `term_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `term` varchar(75) NOT NULL,
   `stem` varchar(75) NOT NULL,
-  `common` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
-  `phrase` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
-  `weight` float UNSIGNED NOT NULL DEFAULT '0',
+  `common` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `phrase` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `weight` float unsigned NOT NULL DEFAULT 0,
   `soundex` varchar(75) NOT NULL,
-  `links` int(10) NOT NULL DEFAULT '0',
+  `links` int(10) NOT NULL DEFAULT 0,
   `language` char(3) NOT NULL DEFAULT '',
-  PRIMARY KEY (`term_id`) USING BTREE,
-  UNIQUE KEY `idx_term` (`term`) USING BTREE,
-  KEY `idx_term_phrase` (`term`,`phrase`) USING BTREE,
-  KEY `idx_stem_phrase` (`stem`,`phrase`) USING BTREE,
-  KEY `idx_soundex_phrase` (`soundex`,`phrase`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
+  PRIMARY KEY (`term_id`),
+  UNIQUE KEY `idx_term` (`term`),
+  KEY `idx_term_phrase` (`term`,`phrase`),
+  KEY `idx_stem_phrase` (`stem`,`phrase`),
+  KEY `idx_soundex_phrase` (`soundex`,`phrase`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_finder_terms_common`
+-- Estrutura da tabela `#__finder_terms_common`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_terms_common`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_terms_common` (
+CREATE TABLE IF NOT EXISTS `#__finder_terms_common` (
   `term` varchar(75) NOT NULL,
   `language` varchar(3) NOT NULL,
-  KEY `idx_word_lang` (`term`,`language`) USING BTREE,
-  KEY `idx_lang` (`language`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  KEY `idx_word_lang` (`term`,`language`),
+  KEY `idx_lang` (`language`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `idg2019_finder_terms_common`
+-- Extraindo dados da tabela `#__finder_terms_common`
 --
 
-INSERT INTO `idg2019_finder_terms_common` (`term`, `language`) VALUES
+INSERT INTO `#__finder_terms_common` (`term`, `language`) VALUES
 ('a', 'en'),
 ('about', 'en'),
 ('after', 'en'),
@@ -2345,7 +2339,7 @@ INSERT INTO `idg2019_finder_terms_common` (`term`, `language`) VALUES
 ('ani', 'en'),
 ('any', 'en'),
 ('are', 'en'),
-('aren\'t', 'en'),
+('aren''t', 'en'),
 ('as', 'en'),
 ('at', 'en'),
 ('be', 'en'),
@@ -2360,7 +2354,7 @@ INSERT INTO `idg2019_finder_terms_common` (`term`, `language`) VALUES
 ('in', 'en'),
 ('into', 'en'),
 ('is', 'en'),
-('isn\'t', 'en'),
+('isn''t', 'en'),
 ('it', 'en'),
 ('its', 'en'),
 ('me', 'en'),
@@ -2453,65 +2447,62 @@ INSERT INTO `idg2019_finder_terms_common` (`term`, `language`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_finder_tokens`
+-- Estrutura da tabela `#__finder_tokens`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_tokens`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_tokens` (
+CREATE TABLE IF NOT EXISTS `#__finder_tokens` (
   `term` varchar(75) NOT NULL,
   `stem` varchar(75) NOT NULL,
-  `common` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
-  `phrase` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
-  `weight` float UNSIGNED NOT NULL DEFAULT '1',
-  `context` tinyint(1) UNSIGNED NOT NULL DEFAULT '2',
+  `common` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `phrase` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `weight` float unsigned NOT NULL DEFAULT 1,
+  `context` tinyint(1) unsigned NOT NULL DEFAULT 2,
   `language` char(3) NOT NULL DEFAULT '',
-  KEY `idx_word` (`term`) USING HASH,
-  KEY `idx_context` (`context`) USING HASH
-) ENGINE=MEMORY DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED;
+  KEY `idx_word` (`term`),
+  KEY `idx_context` (`context`)
+) ENGINE=MEMORY DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_finder_tokens_aggregate`
+-- Estrutura da tabela `#__finder_tokens_aggregate`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_tokens_aggregate`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_tokens_aggregate` (
-  `term_id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `#__finder_tokens_aggregate` (
+  `term_id` int(10) unsigned NOT NULL,
   `map_suffix` char(1) NOT NULL,
   `term` varchar(75) NOT NULL,
   `stem` varchar(75) NOT NULL,
-  `common` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
-  `phrase` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
-  `term_weight` float UNSIGNED NOT NULL,
-  `context` tinyint(1) UNSIGNED NOT NULL DEFAULT '2',
-  `context_weight` float UNSIGNED NOT NULL,
-  `total_weight` float UNSIGNED NOT NULL,
+  `common` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `phrase` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `term_weight` float unsigned NOT NULL,
+  `context` tinyint(1) unsigned NOT NULL DEFAULT 2,
+  `context_weight` float unsigned NOT NULL,
+  `total_weight` float unsigned NOT NULL,
   `language` char(3) NOT NULL DEFAULT '',
-  KEY `token` (`term`) USING HASH,
-  KEY `keyword_id` (`term_id`) USING HASH
-) ENGINE=MEMORY DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED;
+  KEY `token` (`term`),
+  KEY `keyword_id` (`term_id`)
+) ENGINE=MEMORY DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_finder_types`
+-- Estrutura da tabela `#__finder_types`
 --
 
-DROP TABLE IF EXISTS `idg2019_finder_types`;
-CREATE TABLE IF NOT EXISTS `idg2019_finder_types` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `#__finder_types` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL,
   `mime` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `title` (`title`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `title` (`title`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `idg2019_finder_types`
+-- Extraindo dados da tabela `#__finder_types`
 --
 
-INSERT INTO `idg2019_finder_types` (`id`, `title`, `mime`) VALUES
+INSERT INTO `#__finder_types` (`id`, `title`, `mime`) VALUES
 (1, 'K2 Item', ''),
 (2, 'Tag', ''),
 (3, 'Category', ''),
@@ -2523,11 +2514,11 @@ INSERT INTO `idg2019_finder_types` (`id`, `title`, `mime`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_j2xml_websites`
+-- Estrutura da tabela `#__j2xml_websites`
 --
 
-DROP TABLE IF EXISTS `idg2019_j2xml_websites`;
-CREATE TABLE IF NOT EXISTS `idg2019_j2xml_websites` (
+DROP TABLE IF EXISTS `#__j2xml_websites`;
+CREATE TABLE IF NOT EXISTS `#__j2xml_websites` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `alias` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
@@ -2542,20 +2533,20 @@ CREATE TABLE IF NOT EXISTS `idg2019_j2xml_websites` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Extraindo dados da tabela `idg2019_j2xml_websites`
+-- Extraindo dados da tabela `#__j2xml_websites`
 --
 
-INSERT INTO `idg2019_j2xml_websites` (`id`, `title`, `alias`, `remote_url`, `username`, `password`, `state`, `checked_out`, `checked_out_time`, `type`) VALUES
+INSERT INTO `#__j2xml_websites` (`id`, `title`, `alias`, `remote_url`, `username`, `password`, `state`, `checked_out`, `checked_out_time`, `type`) VALUES
 (1, 'Portal Antigo', '', 'https://www.ufrb.edu.br/portal/', 'super', '123456', 1, 0, '0000-00-00 00:00:00', 0);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_jevents_catmap`
+-- Estrutura da tabela `#__jevents_catmap`
 --
 
-DROP TABLE IF EXISTS `idg2019_jevents_catmap`;
-CREATE TABLE IF NOT EXISTS `idg2019_jevents_catmap` (
+DROP TABLE IF EXISTS `#__jevents_catmap`;
+CREATE TABLE IF NOT EXISTS `#__jevents_catmap` (
   `evid` int(12) NOT NULL AUTO_INCREMENT,
   `catid` int(11) NOT NULL DEFAULT '1',
   `ordering` int(5) UNSIGNED NOT NULL DEFAULT '0',
@@ -2566,11 +2557,11 @@ CREATE TABLE IF NOT EXISTS `idg2019_jevents_catmap` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_jevents_exception`
+-- Estrutura da tabela `#__jevents_exception`
 --
 
-DROP TABLE IF EXISTS `idg2019_jevents_exception`;
-CREATE TABLE IF NOT EXISTS `idg2019_jevents_exception` (
+DROP TABLE IF EXISTS `#__jevents_exception`;
+CREATE TABLE IF NOT EXISTS `#__jevents_exception` (
   `ex_id` int(12) NOT NULL AUTO_INCREMENT,
   `rp_id` int(12) NOT NULL DEFAULT '0',
   `eventid` int(12) NOT NULL DEFAULT '1',
@@ -2587,11 +2578,11 @@ CREATE TABLE IF NOT EXISTS `idg2019_jevents_exception` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_jevents_filtermap`
+-- Estrutura da tabela `#__jevents_filtermap`
 --
 
-DROP TABLE IF EXISTS `idg2019_jevents_filtermap`;
-CREATE TABLE IF NOT EXISTS `idg2019_jevents_filtermap` (
+DROP TABLE IF EXISTS `#__jevents_filtermap`;
+CREATE TABLE IF NOT EXISTS `#__jevents_filtermap` (
   `fid` int(12) NOT NULL AUTO_INCREMENT,
   `userid` int(12) NOT NULL DEFAULT '0',
   `modid` int(12) NOT NULL DEFAULT '0',
@@ -2606,11 +2597,11 @@ CREATE TABLE IF NOT EXISTS `idg2019_jevents_filtermap` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_jevents_icsfile`
+-- Estrutura da tabela `#__jevents_icsfile`
 --
 
-DROP TABLE IF EXISTS `idg2019_jevents_icsfile`;
-CREATE TABLE IF NOT EXISTS `idg2019_jevents_icsfile` (
+DROP TABLE IF EXISTS `#__jevents_icsfile`;
+CREATE TABLE IF NOT EXISTS `#__jevents_icsfile` (
   `ics_id` int(12) NOT NULL AUTO_INCREMENT,
   `srcURL` varchar(500) NOT NULL DEFAULT '',
   `label` varchar(30) NOT NULL DEFAULT '',
@@ -2634,10 +2625,10 @@ CREATE TABLE IF NOT EXISTS `idg2019_jevents_icsfile` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `idg2019_jevents_icsfile`
+-- Extraindo dados da tabela `#__jevents_icsfile`
 --
 
-INSERT INTO `idg2019_jevents_icsfile` (`ics_id`, `srcURL`, `label`, `filename`, `icaltype`, `isdefault`, `ignoreembedcat`, `state`, `access`, `catid`, `created`, `created_by`, `created_by_alias`, `modified_by`, `refreshed`, `autorefresh`, `overlaps`) VALUES
+INSERT INTO `#__jevents_icsfile` (`ics_id`, `srcURL`, `label`, `filename`, `icaltype`, `isdefault`, `ignoreembedcat`, `state`, `access`, `catid`, `created`, `created_by`, `created_by_alias`, `modified_by`, `refreshed`, `autorefresh`, `overlaps`) VALUES
 (1, '', 'Default', 'Initial ICS File', 2, 0, 0, 0, 1, 64, '0000-00-00 00:00:00', 0, '', 0, '0000-00-00 00:00:00', 0, 0),
 (2, '', 'Fábio Josué Souza dos Santos', '_from_scratch_', 2, 0, 0, 1, 1, 65, '2019-10-14 14:29:03', 931, '', 0, '2019-10-14 14:29:03', 0, 0),
 (3, '', 'Rosilda Santana dos Santos', '_from_scratch_', 2, 0, 0, 1, 1, 66, '2019-10-14 15:10:29', 931, '', 0, '2019-10-14 15:10:29', 0, 0);
@@ -2645,11 +2636,11 @@ INSERT INTO `idg2019_jevents_icsfile` (`ics_id`, `srcURL`, `label`, `filename`, 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_jevents_repetition`
+-- Estrutura da tabela `#__jevents_repetition`
 --
 
-DROP TABLE IF EXISTS `idg2019_jevents_repetition`;
-CREATE TABLE IF NOT EXISTS `idg2019_jevents_repetition` (
+DROP TABLE IF EXISTS `#__jevents_repetition`;
+CREATE TABLE IF NOT EXISTS `#__jevents_repetition` (
   `rp_id` int(12) NOT NULL AUTO_INCREMENT,
   `eventid` int(12) NOT NULL DEFAULT '1',
   `eventdetail_id` int(12) NOT NULL DEFAULT '0',
@@ -2670,11 +2661,11 @@ CREATE TABLE IF NOT EXISTS `idg2019_jevents_repetition` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_jevents_rrule`
+-- Estrutura da tabela `#__jevents_rrule`
 --
 
-DROP TABLE IF EXISTS `idg2019_jevents_rrule`;
-CREATE TABLE IF NOT EXISTS `idg2019_jevents_rrule` (
+DROP TABLE IF EXISTS `#__jevents_rrule`;
+CREATE TABLE IF NOT EXISTS `#__jevents_rrule` (
   `rr_id` int(12) NOT NULL AUTO_INCREMENT,
   `eventid` int(12) NOT NULL DEFAULT '1',
   `freq` varchar(30) NOT NULL DEFAULT '',
@@ -2700,11 +2691,11 @@ CREATE TABLE IF NOT EXISTS `idg2019_jevents_rrule` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_jevents_translation`
+-- Estrutura da tabela `#__jevents_translation`
 --
 
-DROP TABLE IF EXISTS `idg2019_jevents_translation`;
-CREATE TABLE IF NOT EXISTS `idg2019_jevents_translation` (
+DROP TABLE IF EXISTS `#__jevents_translation`;
+CREATE TABLE IF NOT EXISTS `#__jevents_translation` (
   `translation_id` int(12) NOT NULL AUTO_INCREMENT,
   `evdet_id` int(12) NOT NULL DEFAULT '0',
   `description` longtext NOT NULL,
@@ -2721,11 +2712,11 @@ CREATE TABLE IF NOT EXISTS `idg2019_jevents_translation` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_jevents_vevdetail`
+-- Estrutura da tabela `#__jevents_vevdetail`
 --
 
-DROP TABLE IF EXISTS `idg2019_jevents_vevdetail`;
-CREATE TABLE IF NOT EXISTS `idg2019_jevents_vevdetail` (
+DROP TABLE IF EXISTS `#__jevents_vevdetail`;
+CREATE TABLE IF NOT EXISTS `#__jevents_vevdetail` (
   `evdet_id` int(12) NOT NULL AUTO_INCREMENT,
   `rawdata` longtext NOT NULL,
   `dtstart` int(11) NOT NULL DEFAULT '0',
@@ -2766,11 +2757,11 @@ CREATE TABLE IF NOT EXISTS `idg2019_jevents_vevdetail` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_jevents_vevent`
+-- Estrutura da tabela `#__jevents_vevent`
 --
 
-DROP TABLE IF EXISTS `idg2019_jevents_vevent`;
-CREATE TABLE IF NOT EXISTS `idg2019_jevents_vevent` (
+DROP TABLE IF EXISTS `#__jevents_vevent`;
+CREATE TABLE IF NOT EXISTS `#__jevents_vevent` (
   `ev_id` int(12) NOT NULL AUTO_INCREMENT,
   `icsid` int(12) NOT NULL DEFAULT '0',
   `catid` int(11) NOT NULL DEFAULT '1',
@@ -2797,11 +2788,11 @@ CREATE TABLE IF NOT EXISTS `idg2019_jevents_vevent` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_jev_defaults`
+-- Estrutura da tabela `#__jev_defaults`
 --
 
-DROP TABLE IF EXISTS `idg2019_jev_defaults`;
-CREATE TABLE IF NOT EXISTS `idg2019_jev_defaults` (
+DROP TABLE IF EXISTS `#__jev_defaults`;
+CREATE TABLE IF NOT EXISTS `#__jev_defaults` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL DEFAULT '',
   `name` varchar(50) NOT NULL DEFAULT '',
@@ -2819,11 +2810,11 @@ CREATE TABLE IF NOT EXISTS `idg2019_jev_defaults` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_jev_users`
+-- Estrutura da tabela `#__jev_users`
 --
 
-DROP TABLE IF EXISTS `idg2019_jev_users`;
-CREATE TABLE IF NOT EXISTS `idg2019_jev_users` (
+DROP TABLE IF EXISTS `#__jev_users`;
+CREATE TABLE IF NOT EXISTS `#__jev_users` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL DEFAULT '0',
   `published` tinyint(2) NOT NULL DEFAULT '0',
@@ -2849,11 +2840,11 @@ CREATE TABLE IF NOT EXISTS `idg2019_jev_users` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_k2_attachments`
+-- Estrutura da tabela `#__k2_attachments`
 --
 
-DROP TABLE IF EXISTS `idg2019_k2_attachments`;
-CREATE TABLE IF NOT EXISTS `idg2019_k2_attachments` (
+DROP TABLE IF EXISTS `#__k2_attachments`;
+CREATE TABLE IF NOT EXISTS `#__k2_attachments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `itemID` int(11) NOT NULL,
   `filename` varchar(255) NOT NULL,
@@ -2865,20 +2856,20 @@ CREATE TABLE IF NOT EXISTS `idg2019_k2_attachments` (
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
--- Extraindo dados da tabela `idg2019_k2_attachments`
+-- Extraindo dados da tabela `#__k2_attachments`
 --
 
-INSERT INTO `idg2019_k2_attachments` (`id`, `itemID`, `filename`, `title`, `titleAttribute`, `hits`) VALUES
+INSERT INTO `#__k2_attachments` (`id`, `itemID`, `filename`, `title`, `titleAttribute`, `hits`) VALUES
 (1, 1, '1._Manual_Portal_PadraYo.pdf', '1._Manual_Portal_PadraYo.pdf', '1._Manual_Portal_PadraYo.pdf', 3);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_k2_categories`
+-- Estrutura da tabela `#__k2_categories`
 --
 
-DROP TABLE IF EXISTS `idg2019_k2_categories`;
-CREATE TABLE IF NOT EXISTS `idg2019_k2_categories` (
+DROP TABLE IF EXISTS `#__k2_categories`;
+CREATE TABLE IF NOT EXISTS `#__k2_categories` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `alias` varchar(255) NOT NULL,
@@ -2904,10 +2895,10 @@ CREATE TABLE IF NOT EXISTS `idg2019_k2_categories` (
 ) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
--- Extraindo dados da tabela `idg2019_k2_categories`
+-- Extraindo dados da tabela `#__k2_categories`
 --
 
-INSERT INTO `idg2019_k2_categories` (`id`, `name`, `alias`, `description`, `parent`, `extraFieldsGroup`, `published`, `access`, `ordering`, `image`, `params`, `trash`, `plugins`, `language`) VALUES
+INSERT INTO `#__k2_categories` (`id`, `name`, `alias`, `description`, `parent`, `extraFieldsGroup`, `published`, `access`, `ordering`, `image`, `params`, `trash`, `plugins`, `language`) VALUES
 (1, 'Áudios', 'audios', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', 0, 1, 1, 1, 1, '', '{\"inheritFrom\":\"0\",\"theme\":\"audios\",\"num_leading_items\":\"0\",\"num_leading_columns\":\"1\",\"leadingImgSize\":\"none\",\"num_primary_items\":\"0\",\"num_primary_columns\":\"1\",\"primaryImgSize\":\"none\",\"num_secondary_items\":\"10\",\"num_secondary_columns\":\"1\",\"secondaryImgSize\":\"none\",\"num_links\":\"0\",\"num_links_columns\":\"1\",\"linksImgSize\":\"none\",\"catCatalogMode\":\"0\",\"catFeaturedItems\":\"1\",\"catOrdering\":\"\",\"catPagination\":\"2\",\"catPaginationResults\":\"1\",\"catTitle\":\"1\",\"catTitleItemCounter\":\"0\",\"catDescription\":\"1\",\"catImage\":\"0\",\"catFeedLink\":\"0\",\"catFeedIcon\":\"0\",\"subCategories\":\"1\",\"subCatColumns\":\"2\",\"subCatOrdering\":\"\",\"subCatTitle\":\"1\",\"subCatTitleItemCounter\":\"1\",\"subCatDescription\":\"1\",\"subCatImage\":\"1\",\"itemImageXS\":\"\",\"itemImageS\":\"\",\"itemImageM\":\"\",\"itemImageL\":\"\",\"itemImageXL\":\"\",\"catItemTitle\":\"1\",\"catItemTitleLinked\":\"1\",\"catItemFeaturedNotice\":\"0\",\"catItemAuthor\":\"1\",\"catItemDateCreated\":\"1\",\"catItemRating\":\"0\",\"catItemImage\":\"1\",\"catItemIntroText\":\"1\",\"catItemIntroTextWordLimit\":\"\",\"catItemExtraFields\":\"0\",\"catItemHits\":\"0\",\"catItemCategory\":\"1\",\"catItemTags\":\"1\",\"catItemAttachments\":\"0\",\"catItemAttachmentsCounter\":\"0\",\"catItemVideo\":\"1\",\"catItemVideoWidth\":\"\",\"catItemVideoHeight\":\"\",\"catItemAudioWidth\":\"200\",\"catItemAudioHeight\":\"200\",\"catItemVideoAutoPlay\":\"0\",\"catItemImageGallery\":\"0\",\"catItemDateModified\":\"0\",\"catItemReadMore\":\"1\",\"catItemCommentsAnchor\":\"0\",\"catItemK2Plugins\":\"1\",\"itemDateCreated\":\"1\",\"itemTitle\":\"1\",\"itemFeaturedNotice\":\"0\",\"itemAuthor\":\"1\",\"itemFontResizer\":\"0\",\"itemPrintButton\":\"0\",\"itemEmailButton\":\"0\",\"itemSocialButton\":\"0\",\"itemVideoAnchor\":\"0\",\"itemImageGalleryAnchor\":\"0\",\"itemCommentsAnchor\":\"0\",\"itemRating\":\"0\",\"itemImage\":\"0\",\"itemImgSize\":\"XSmall\",\"itemImageMainCaption\":\"0\",\"itemImageMainCredits\":\"0\",\"itemIntroText\":\"1\",\"itemFullText\":\"1\",\"itemExtraFields\":\"0\",\"itemDateModified\":\"1\",\"itemHits\":\"1\",\"itemCategory\":\"1\",\"itemTags\":\"1\",\"itemAttachments\":\"0\",\"itemAttachmentsCounter\":\"0\",\"itemVideo\":\"1\",\"itemVideoWidth\":\"\",\"itemVideoHeight\":\"\",\"itemAudioWidth\":\"\",\"itemAudioHeight\":\"\",\"itemVideoAutoPlay\":\"0\",\"itemVideoCaption\":\"1\",\"itemVideoCredits\":\"1\",\"itemImageGallery\":\"0\",\"itemNavigation\":\"1\",\"itemComments\":\"0\",\"itemTwitterButton\":\"0\",\"itemFacebookButton\":\"0\",\"itemGooglePlusOneButton\":\"0\",\"itemAuthorBlock\":\"0\",\"itemAuthorImage\":\"0\",\"itemAuthorDescription\":\"0\",\"itemAuthorURL\":\"0\",\"itemAuthorEmail\":\"0\",\"itemAuthorLatest\":\"0\",\"itemAuthorLatestLimit\":\"5\",\"itemRelated\":\"1\",\"itemRelatedLimit\":\"5\",\"itemRelatedTitle\":\"0\",\"itemRelatedCategory\":\"0\",\"itemRelatedImageSize\":\"0\",\"itemRelatedIntrotext\":\"0\",\"itemRelatedFulltext\":\"0\",\"itemRelatedAuthor\":\"0\",\"itemRelatedMedia\":\"0\",\"itemRelatedImageGallery\":\"0\",\"itemK2Plugins\":\"0\",\"catMetaDesc\":\"\",\"catMetaKey\":\"\",\"catMetaRobots\":\"\",\"catMetaAuthor\":\"\"}', 0, '', '*'),
 (2, 'Áudios #1', 'audios-1', '', 1, 1, 1, 1, 1, '', '{\"inheritFrom\":\"1\",\"theme\":\"audios\",\"num_leading_items\":\"2\",\"num_leading_columns\":\"1\",\"leadingImgSize\":\"Large\",\"num_primary_items\":\"4\",\"num_primary_columns\":\"2\",\"primaryImgSize\":\"Medium\",\"num_secondary_items\":\"4\",\"num_secondary_columns\":\"1\",\"secondaryImgSize\":\"Small\",\"num_links\":\"4\",\"num_links_columns\":\"1\",\"linksImgSize\":\"XSmall\",\"catCatalogMode\":\"0\",\"catFeaturedItems\":\"1\",\"catOrdering\":\"\",\"catPagination\":\"2\",\"catPaginationResults\":\"1\",\"catTitle\":\"1\",\"catTitleItemCounter\":\"1\",\"catDescription\":\"1\",\"catImage\":\"1\",\"catFeedLink\":\"1\",\"catFeedIcon\":\"1\",\"subCategories\":\"1\",\"subCatColumns\":\"2\",\"subCatOrdering\":\"\",\"subCatTitle\":\"1\",\"subCatTitleItemCounter\":\"1\",\"subCatDescription\":\"1\",\"subCatImage\":\"1\",\"itemImageXS\":\"\",\"itemImageS\":\"\",\"itemImageM\":\"\",\"itemImageL\":\"\",\"itemImageXL\":\"\",\"catItemTitle\":\"1\",\"catItemTitleLinked\":\"1\",\"catItemFeaturedNotice\":\"0\",\"catItemAuthor\":\"1\",\"catItemDateCreated\":\"1\",\"catItemRating\":\"0\",\"catItemImage\":\"1\",\"catItemIntroText\":\"1\",\"catItemIntroTextWordLimit\":\"\",\"catItemExtraFields\":\"0\",\"catItemHits\":\"0\",\"catItemCategory\":\"1\",\"catItemTags\":\"1\",\"catItemAttachments\":\"0\",\"catItemAttachmentsCounter\":\"0\",\"catItemVideo\":\"0\",\"catItemVideoWidth\":\"\",\"catItemVideoHeight\":\"\",\"catItemAudioWidth\":\"\",\"catItemAudioHeight\":\"\",\"catItemVideoAutoPlay\":\"0\",\"catItemImageGallery\":\"0\",\"catItemDateModified\":\"0\",\"catItemReadMore\":\"1\",\"catItemCommentsAnchor\":\"1\",\"catItemK2Plugins\":\"1\",\"itemDateCreated\":\"1\",\"itemTitle\":\"1\",\"itemFeaturedNotice\":\"1\",\"itemAuthor\":\"1\",\"itemFontResizer\":\"1\",\"itemPrintButton\":\"1\",\"itemEmailButton\":\"1\",\"itemSocialButton\":\"1\",\"itemVideoAnchor\":\"1\",\"itemImageGalleryAnchor\":\"1\",\"itemCommentsAnchor\":\"1\",\"itemRating\":\"1\",\"itemImage\":\"1\",\"itemImgSize\":\"Large\",\"itemImageMainCaption\":\"1\",\"itemImageMainCredits\":\"1\",\"itemIntroText\":\"1\",\"itemFullText\":\"1\",\"itemExtraFields\":\"1\",\"itemDateModified\":\"1\",\"itemHits\":\"1\",\"itemCategory\":\"1\",\"itemTags\":\"1\",\"itemAttachments\":\"1\",\"itemAttachmentsCounter\":\"1\",\"itemVideo\":\"1\",\"itemVideoWidth\":\"\",\"itemVideoHeight\":\"\",\"itemAudioWidth\":\"\",\"itemAudioHeight\":\"\",\"itemVideoAutoPlay\":\"0\",\"itemVideoCaption\":\"1\",\"itemVideoCredits\":\"1\",\"itemImageGallery\":\"1\",\"itemNavigation\":\"1\",\"itemComments\":\"1\",\"itemTwitterButton\":\"1\",\"itemFacebookButton\":\"1\",\"itemGooglePlusOneButton\":\"1\",\"itemAuthorBlock\":\"1\",\"itemAuthorImage\":\"1\",\"itemAuthorDescription\":\"1\",\"itemAuthorURL\":\"1\",\"itemAuthorEmail\":\"0\",\"itemAuthorLatest\":\"1\",\"itemAuthorLatestLimit\":\"5\",\"itemRelated\":\"1\",\"itemRelatedLimit\":\"5\",\"itemRelatedTitle\":\"1\",\"itemRelatedCategory\":\"0\",\"itemRelatedImageSize\":\"0\",\"itemRelatedIntrotext\":\"0\",\"itemRelatedFulltext\":\"0\",\"itemRelatedAuthor\":\"0\",\"itemRelatedMedia\":\"0\",\"itemRelatedImageGallery\":\"0\",\"itemK2Plugins\":\"1\",\"catMetaDesc\":\"\",\"catMetaKey\":\"\",\"catMetaRobots\":\"\",\"catMetaAuthor\":\"\"}', 0, '', '*'),
 (3, 'Audios #2', 'audios-2', '', 1, 1, 1, 1, 2, '', '{\"inheritFrom\":\"1\",\"theme\":\"audios\",\"num_leading_items\":\"2\",\"num_leading_columns\":\"1\",\"leadingImgSize\":\"Large\",\"num_primary_items\":\"4\",\"num_primary_columns\":\"2\",\"primaryImgSize\":\"Medium\",\"num_secondary_items\":\"4\",\"num_secondary_columns\":\"1\",\"secondaryImgSize\":\"Small\",\"num_links\":\"4\",\"num_links_columns\":\"1\",\"linksImgSize\":\"XSmall\",\"catCatalogMode\":\"0\",\"catFeaturedItems\":\"1\",\"catOrdering\":\"\",\"catPagination\":\"2\",\"catPaginationResults\":\"1\",\"catTitle\":\"1\",\"catTitleItemCounter\":\"1\",\"catDescription\":\"1\",\"catImage\":\"1\",\"catFeedLink\":\"1\",\"catFeedIcon\":\"1\",\"subCategories\":\"1\",\"subCatColumns\":\"2\",\"subCatOrdering\":\"\",\"subCatTitle\":\"1\",\"subCatTitleItemCounter\":\"1\",\"subCatDescription\":\"1\",\"subCatImage\":\"1\",\"itemImageXS\":\"\",\"itemImageS\":\"\",\"itemImageM\":\"\",\"itemImageL\":\"\",\"itemImageXL\":\"\",\"catItemTitle\":\"1\",\"catItemTitleLinked\":\"1\",\"catItemFeaturedNotice\":\"0\",\"catItemAuthor\":\"1\",\"catItemDateCreated\":\"1\",\"catItemRating\":\"0\",\"catItemImage\":\"1\",\"catItemIntroText\":\"1\",\"catItemIntroTextWordLimit\":\"\",\"catItemExtraFields\":\"0\",\"catItemHits\":\"0\",\"catItemCategory\":\"1\",\"catItemTags\":\"1\",\"catItemAttachments\":\"0\",\"catItemAttachmentsCounter\":\"0\",\"catItemVideo\":\"0\",\"catItemVideoWidth\":\"\",\"catItemVideoHeight\":\"\",\"catItemAudioWidth\":\"\",\"catItemAudioHeight\":\"\",\"catItemVideoAutoPlay\":\"0\",\"catItemImageGallery\":\"0\",\"catItemDateModified\":\"0\",\"catItemReadMore\":\"1\",\"catItemCommentsAnchor\":\"1\",\"catItemK2Plugins\":\"1\",\"itemDateCreated\":\"1\",\"itemTitle\":\"1\",\"itemFeaturedNotice\":\"1\",\"itemAuthor\":\"1\",\"itemFontResizer\":\"1\",\"itemPrintButton\":\"1\",\"itemEmailButton\":\"1\",\"itemSocialButton\":\"1\",\"itemVideoAnchor\":\"1\",\"itemImageGalleryAnchor\":\"1\",\"itemCommentsAnchor\":\"1\",\"itemRating\":\"1\",\"itemImage\":\"1\",\"itemImgSize\":\"Large\",\"itemImageMainCaption\":\"1\",\"itemImageMainCredits\":\"1\",\"itemIntroText\":\"1\",\"itemFullText\":\"1\",\"itemExtraFields\":\"1\",\"itemDateModified\":\"1\",\"itemHits\":\"1\",\"itemCategory\":\"1\",\"itemTags\":\"1\",\"itemAttachments\":\"1\",\"itemAttachmentsCounter\":\"1\",\"itemVideo\":\"1\",\"itemVideoWidth\":\"\",\"itemVideoHeight\":\"\",\"itemAudioWidth\":\"\",\"itemAudioHeight\":\"\",\"itemVideoAutoPlay\":\"0\",\"itemVideoCaption\":\"1\",\"itemVideoCredits\":\"1\",\"itemImageGallery\":\"1\",\"itemNavigation\":\"1\",\"itemComments\":\"1\",\"itemTwitterButton\":\"1\",\"itemFacebookButton\":\"1\",\"itemGooglePlusOneButton\":\"1\",\"itemAuthorBlock\":\"1\",\"itemAuthorImage\":\"1\",\"itemAuthorDescription\":\"1\",\"itemAuthorURL\":\"1\",\"itemAuthorEmail\":\"0\",\"itemAuthorLatest\":\"1\",\"itemAuthorLatestLimit\":\"5\",\"itemRelated\":\"1\",\"itemRelatedLimit\":\"5\",\"itemRelatedTitle\":\"1\",\"itemRelatedCategory\":\"0\",\"itemRelatedImageSize\":\"0\",\"itemRelatedIntrotext\":\"0\",\"itemRelatedFulltext\":\"0\",\"itemRelatedAuthor\":\"0\",\"itemRelatedMedia\":\"0\",\"itemRelatedImageGallery\":\"0\",\"itemK2Plugins\":\"1\",\"catMetaDesc\":\"\",\"catMetaKey\":\"\",\"catMetaRobots\":\"\",\"catMetaAuthor\":\"\"}', 0, '', '*'),
@@ -2917,11 +2908,11 @@ INSERT INTO `idg2019_k2_categories` (`id`, `name`, `alias`, `description`, `pare
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_k2_comments`
+-- Estrutura da tabela `#__k2_comments`
 --
 
-DROP TABLE IF EXISTS `idg2019_k2_comments`;
-CREATE TABLE IF NOT EXISTS `idg2019_k2_comments` (
+DROP TABLE IF EXISTS `#__k2_comments`;
+CREATE TABLE IF NOT EXISTS `#__k2_comments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `itemID` int(11) NOT NULL,
   `userID` int(11) NOT NULL,
@@ -2942,11 +2933,11 @@ CREATE TABLE IF NOT EXISTS `idg2019_k2_comments` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_k2_extra_fields`
+-- Estrutura da tabela `#__k2_extra_fields`
 --
 
-DROP TABLE IF EXISTS `idg2019_k2_extra_fields`;
-CREATE TABLE IF NOT EXISTS `idg2019_k2_extra_fields` (
+DROP TABLE IF EXISTS `#__k2_extra_fields`;
+CREATE TABLE IF NOT EXISTS `#__k2_extra_fields` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `value` text NOT NULL,
@@ -2961,42 +2952,42 @@ CREATE TABLE IF NOT EXISTS `idg2019_k2_extra_fields` (
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
--- Extraindo dados da tabela `idg2019_k2_extra_fields`
+-- Extraindo dados da tabela `#__k2_extra_fields`
 --
 
-INSERT INTO `idg2019_k2_extra_fields` (`id`, `name`, `value`, `type`, `group`, `published`, `ordering`) VALUES
+INSERT INTO `#__k2_extra_fields` (`id`, `name`, `value`, `type`, `group`, `published`, `ordering`) VALUES
 (1, 'oculta campos categoria áudio', '[{\"name\":null,\"value\":\"#####tabImage,tabImageGallery,tabExtraFields,tabAttachments\",\"editor\":null,\"rows\":\"\",\"cols\":\"\",\"target\":null,\"alias\":\"oculta_campos_audio\",\"required\":0,\"showNull\":0}]', 'textarea', 1, 1, 1),
 (2, 'oculta campos categoria publicações', '[{\"name\":null,\"value\":\"#####tabImage,tabImageGallery,tabExtraFields,tabVideo\",\"editor\":null,\"rows\":\"\",\"cols\":\"\",\"target\":null,\"alias\":\"oculta_campos_publicacoes\",\"required\":0,\"showNull\":0}]', 'textarea', 2, 1, 1);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_k2_extra_fields_groups`
+-- Estrutura da tabela `#__k2_extra_fields_groups`
 --
 
-DROP TABLE IF EXISTS `idg2019_k2_extra_fields_groups`;
-CREATE TABLE IF NOT EXISTS `idg2019_k2_extra_fields_groups` (
+DROP TABLE IF EXISTS `#__k2_extra_fields_groups`;
+CREATE TABLE IF NOT EXISTS `#__k2_extra_fields_groups` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
--- Extraindo dados da tabela `idg2019_k2_extra_fields_groups`
+-- Extraindo dados da tabela `#__k2_extra_fields_groups`
 --
 
-INSERT INTO `idg2019_k2_extra_fields_groups` (`id`, `name`) VALUES
+INSERT INTO `#__k2_extra_fields_groups` (`id`, `name`) VALUES
 (1, 'Oculta campos desnecessários à categoria. - Áudios'),
 (2, 'Oculta campos desnecessários à categoria. - Publicações');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_k2_items`
+-- Estrutura da tabela `#__k2_items`
 --
 
-DROP TABLE IF EXISTS `idg2019_k2_items`;
-CREATE TABLE IF NOT EXISTS `idg2019_k2_items` (
+DROP TABLE IF EXISTS `#__k2_items`;
+CREATE TABLE IF NOT EXISTS `#__k2_items` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `alias` varchar(255) DEFAULT NULL,
@@ -3046,10 +3037,10 @@ CREATE TABLE IF NOT EXISTS `idg2019_k2_items` (
 ) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
--- Extraindo dados da tabela `idg2019_k2_items`
+-- Extraindo dados da tabela `#__k2_items`
 --
 
-INSERT INTO `idg2019_k2_items` (`id`, `title`, `alias`, `catid`, `published`, `introtext`, `fulltext`, `video`, `gallery`, `extra_fields`, `extra_fields_search`, `created`, `created_by`, `created_by_alias`, `checked_out`, `checked_out_time`, `modified`, `modified_by`, `publish_up`, `publish_down`, `trash`, `access`, `ordering`, `featured`, `featured_ordering`, `image_caption`, `image_credits`, `video_caption`, `video_credits`, `hits`, `params`, `metadesc`, `metadata`, `metakey`, `plugins`, `language`) VALUES
+INSERT INTO `#__k2_items` (`id`, `title`, `alias`, `catid`, `published`, `introtext`, `fulltext`, `video`, `gallery`, `extra_fields`, `extra_fields_search`, `created`, `created_by`, `created_by_alias`, `checked_out`, `checked_out_time`, `modified`, `modified_by`, `publish_up`, `publish_down`, `trash`, `access`, `ordering`, `featured`, `featured_ordering`, `image_caption`, `image_credits`, `video_caption`, `video_credits`, `hits`, `params`, `metadesc`, `metadata`, `metakey`, `plugins`, `language`) VALUES
 (1, 'Manual de administração técnica (beta)', 'manual-de-administracao-tecnica-beta', 4, 1, '<p>Manual de administração técnica do portal padrão em Joomla 2.5, versão beta. Atualmente, possui toda a sequencia de passos para customizar o nome do sítio e as cores principais de acordo com um dos quatro padrões de cores disponíveis.</p>', '', NULL, NULL, '[{\"id\":\"2\",\"value\":\"\"}]', ' ', '2013-12-22 12:46:16', 576, '', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, '2013-12-22 12:46:16', '0000-00-00 00:00:00', 0, 1, 1, 0, 0, '', '', '', '', 1, '{\"catItemTitle\":\"\",\"catItemTitleLinked\":\"\",\"catItemFeaturedNotice\":\"\",\"catItemAuthor\":\"\",\"catItemDateCreated\":\"\",\"catItemRating\":\"\",\"catItemImage\":\"\",\"catItemIntroText\":\"\",\"catItemExtraFields\":\"\",\"catItemHits\":\"\",\"catItemCategory\":\"\",\"catItemTags\":\"\",\"catItemAttachments\":\"\",\"catItemAttachmentsCounter\":\"\",\"catItemVideo\":\"\",\"catItemVideoWidth\":\"\",\"catItemVideoHeight\":\"\",\"catItemAudioWidth\":\"\",\"catItemAudioHeight\":\"\",\"catItemVideoAutoPlay\":\"\",\"catItemImageGallery\":\"\",\"catItemDateModified\":\"\",\"catItemReadMore\":\"\",\"catItemCommentsAnchor\":\"\",\"catItemK2Plugins\":\"\",\"itemDateCreated\":\"\",\"itemTitle\":\"\",\"itemFeaturedNotice\":\"\",\"itemAuthor\":\"\",\"itemFontResizer\":\"\",\"itemPrintButton\":\"\",\"itemEmailButton\":\"\",\"itemSocialButton\":\"\",\"itemVideoAnchor\":\"\",\"itemImageGalleryAnchor\":\"\",\"itemCommentsAnchor\":\"\",\"itemRating\":\"\",\"itemImage\":\"\",\"itemImgSize\":\"\",\"itemImageMainCaption\":\"\",\"itemImageMainCredits\":\"\",\"itemIntroText\":\"\",\"itemFullText\":\"\",\"itemExtraFields\":\"\",\"itemDateModified\":\"\",\"itemHits\":\"\",\"itemCategory\":\"\",\"itemTags\":\"\",\"itemAttachments\":\"\",\"itemAttachmentsCounter\":\"\",\"itemVideo\":\"\",\"itemVideoWidth\":\"\",\"itemVideoHeight\":\"\",\"itemAudioWidth\":\"\",\"itemAudioHeight\":\"\",\"itemVideoAutoPlay\":\"\",\"itemVideoCaption\":\"\",\"itemVideoCredits\":\"\",\"itemImageGallery\":\"\",\"itemNavigation\":\"\",\"itemComments\":\"\",\"itemTwitterButton\":\"\",\"itemFacebookButton\":\"\",\"itemGooglePlusOneButton\":\"\",\"itemAuthorBlock\":\"\",\"itemAuthorImage\":\"\",\"itemAuthorDescription\":\"\",\"itemAuthorURL\":\"\",\"itemAuthorEmail\":\"\",\"itemAuthorLatest\":\"\",\"itemAuthorLatestLimit\":\"\",\"itemRelated\":\"\",\"itemRelatedLimit\":\"\",\"itemRelatedTitle\":\"\",\"itemRelatedCategory\":\"\",\"itemRelatedImageSize\":\"\",\"itemRelatedIntrotext\":\"\",\"itemRelatedFulltext\":\"\",\"itemRelatedAuthor\":\"\",\"itemRelatedMedia\":\"\",\"itemRelatedImageGallery\":\"\",\"itemK2Plugins\":\"\"}', '', 'robots=\nauthor=', '', '', '*'),
 (2, 'Teste', 'teste', 1, 1, '<p>Descrição do item.</p>', '', '{mp3}2{/mp3}', NULL, '[{\"id\":\"1\",\"value\":\"\"}]', ' ', '2013-12-22 12:48:48', 576, '', 0, '0000-00-00 00:00:00', '2014-01-07 14:49:03', 576, '2013-12-22 12:48:48', '0000-00-00 00:00:00', 0, 1, 1, 0, 0, '', '', '', '', 0, '{\"catItemTitle\":\"\",\"catItemTitleLinked\":\"\",\"catItemFeaturedNotice\":\"\",\"catItemAuthor\":\"\",\"catItemDateCreated\":\"\",\"catItemRating\":\"\",\"catItemImage\":\"\",\"catItemIntroText\":\"\",\"catItemExtraFields\":\"\",\"catItemHits\":\"\",\"catItemCategory\":\"\",\"catItemTags\":\"\",\"catItemAttachments\":\"\",\"catItemAttachmentsCounter\":\"\",\"catItemVideo\":\"\",\"catItemVideoWidth\":\"\",\"catItemVideoHeight\":\"\",\"catItemAudioWidth\":\"\",\"catItemAudioHeight\":\"\",\"catItemVideoAutoPlay\":\"\",\"catItemImageGallery\":\"\",\"catItemDateModified\":\"\",\"catItemReadMore\":\"\",\"catItemCommentsAnchor\":\"\",\"catItemK2Plugins\":\"\",\"itemDateCreated\":\"\",\"itemTitle\":\"\",\"itemFeaturedNotice\":\"\",\"itemAuthor\":\"\",\"itemFontResizer\":\"\",\"itemPrintButton\":\"\",\"itemEmailButton\":\"\",\"itemSocialButton\":\"\",\"itemVideoAnchor\":\"\",\"itemImageGalleryAnchor\":\"\",\"itemCommentsAnchor\":\"\",\"itemRating\":\"\",\"itemImage\":\"\",\"itemImgSize\":\"\",\"itemImageMainCaption\":\"\",\"itemImageMainCredits\":\"\",\"itemIntroText\":\"\",\"itemFullText\":\"\",\"itemExtraFields\":\"\",\"itemDateModified\":\"\",\"itemHits\":\"\",\"itemCategory\":\"\",\"itemTags\":\"\",\"itemAttachments\":\"\",\"itemAttachmentsCounter\":\"\",\"itemVideo\":\"\",\"itemVideoWidth\":\"\",\"itemVideoHeight\":\"\",\"itemAudioWidth\":\"\",\"itemAudioHeight\":\"\",\"itemVideoAutoPlay\":\"\",\"itemVideoCaption\":\"\",\"itemVideoCredits\":\"\",\"itemImageGallery\":\"\",\"itemNavigation\":\"\",\"itemComments\":\"\",\"itemTwitterButton\":\"\",\"itemFacebookButton\":\"\",\"itemGooglePlusOneButton\":\"\",\"itemAuthorBlock\":\"\",\"itemAuthorImage\":\"\",\"itemAuthorDescription\":\"\",\"itemAuthorURL\":\"\",\"itemAuthorEmail\":\"\",\"itemAuthorLatest\":\"\",\"itemAuthorLatestLimit\":\"\",\"itemRelated\":\"\",\"itemRelatedLimit\":\"\",\"itemRelatedTitle\":\"\",\"itemRelatedCategory\":\"\",\"itemRelatedImageSize\":\"\",\"itemRelatedIntrotext\":\"\",\"itemRelatedFulltext\":\"\",\"itemRelatedAuthor\":\"\",\"itemRelatedMedia\":\"\",\"itemRelatedImageGallery\":\"\",\"itemK2Plugins\":\"\"}', '', 'robots=\nauthor=', '', '', '*'),
 (3, 'Teste 2', 'teste-2', 1, 1, '<p>Descrição do item.</p>', '', '{mp3}3{/mp3}', NULL, '[{\"id\":\"1\",\"value\":\"\"}]', ' ', '2013-12-22 13:37:25', 576, '', 0, '0000-00-00 00:00:00', '2013-12-22 13:42:58', 576, '2013-12-22 12:48:48', '0000-00-00 00:00:00', 0, 1, 2, 0, 0, '', '', '', '', 0, '{\"catItemTitle\":\"\",\"catItemTitleLinked\":\"\",\"catItemFeaturedNotice\":\"\",\"catItemAuthor\":\"\",\"catItemDateCreated\":\"\",\"catItemRating\":\"\",\"catItemImage\":\"\",\"catItemIntroText\":\"\",\"catItemExtraFields\":\"\",\"catItemHits\":\"\",\"catItemCategory\":\"\",\"catItemTags\":\"\",\"catItemAttachments\":\"\",\"catItemAttachmentsCounter\":\"\",\"catItemVideo\":\"\",\"catItemVideoWidth\":\"\",\"catItemVideoHeight\":\"\",\"catItemAudioWidth\":\"\",\"catItemAudioHeight\":\"\",\"catItemVideoAutoPlay\":\"\",\"catItemImageGallery\":\"\",\"catItemDateModified\":\"\",\"catItemReadMore\":\"\",\"catItemCommentsAnchor\":\"\",\"catItemK2Plugins\":\"\",\"itemDateCreated\":\"\",\"itemTitle\":\"\",\"itemFeaturedNotice\":\"\",\"itemAuthor\":\"\",\"itemFontResizer\":\"\",\"itemPrintButton\":\"\",\"itemEmailButton\":\"\",\"itemSocialButton\":\"\",\"itemVideoAnchor\":\"\",\"itemImageGalleryAnchor\":\"\",\"itemCommentsAnchor\":\"\",\"itemRating\":\"\",\"itemImage\":\"\",\"itemImgSize\":\"\",\"itemImageMainCaption\":\"\",\"itemImageMainCredits\":\"\",\"itemIntroText\":\"\",\"itemFullText\":\"\",\"itemExtraFields\":\"\",\"itemDateModified\":\"\",\"itemHits\":\"\",\"itemCategory\":\"\",\"itemTags\":\"\",\"itemAttachments\":\"\",\"itemAttachmentsCounter\":\"\",\"itemVideo\":\"\",\"itemVideoWidth\":\"\",\"itemVideoHeight\":\"\",\"itemAudioWidth\":\"\",\"itemAudioHeight\":\"\",\"itemVideoAutoPlay\":\"\",\"itemVideoCaption\":\"\",\"itemVideoCredits\":\"\",\"itemImageGallery\":\"\",\"itemNavigation\":\"\",\"itemComments\":\"\",\"itemTwitterButton\":\"\",\"itemFacebookButton\":\"\",\"itemGooglePlusOneButton\":\"\",\"itemAuthorBlock\":\"\",\"itemAuthorImage\":\"\",\"itemAuthorDescription\":\"\",\"itemAuthorURL\":\"\",\"itemAuthorEmail\":\"\",\"itemAuthorLatest\":\"\",\"itemAuthorLatestLimit\":\"\",\"itemRelated\":\"\",\"itemRelatedLimit\":\"\",\"itemRelatedTitle\":\"\",\"itemRelatedCategory\":\"\",\"itemRelatedImageSize\":\"\",\"itemRelatedIntrotext\":\"\",\"itemRelatedFulltext\":\"\",\"itemRelatedAuthor\":\"\",\"itemRelatedMedia\":\"\",\"itemRelatedImageGallery\":\"\",\"itemK2Plugins\":\"\"}', '', 'robots=\nauthor=', '', '', '*'),
@@ -3062,31 +3053,31 @@ INSERT INTO `idg2019_k2_items` (`id`, `title`, `alias`, `catid`, `published`, `i
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_k2_log`
+-- Estrutura da tabela `#__k2_log`
 --
 
-DROP TABLE IF EXISTS `idg2019_k2_log`;
-CREATE TABLE IF NOT EXISTS `idg2019_k2_log` (
+DROP TABLE IF EXISTS `#__k2_log`;
+CREATE TABLE IF NOT EXISTS `#__k2_log` (
   `status` int(11) NOT NULL,
   `response` text NOT NULL,
   `timestamp` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
--- Extraindo dados da tabela `idg2019_k2_log`
+-- Extraindo dados da tabela `#__k2_log`
 --
 
-INSERT INTO `idg2019_k2_log` (`status`, `response`, `timestamp`) VALUES
+INSERT INTO `#__k2_log` (`status`, `response`, `timestamp`) VALUES
 (200, 'Anonymous metrics submitted - thank you for helping make K2 better!', '2019-10-03 14:01:18');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_k2_rating`
+-- Estrutura da tabela `#__k2_rating`
 --
 
-DROP TABLE IF EXISTS `idg2019_k2_rating`;
-CREATE TABLE IF NOT EXISTS `idg2019_k2_rating` (
+DROP TABLE IF EXISTS `#__k2_rating`;
+CREATE TABLE IF NOT EXISTS `#__k2_rating` (
   `itemID` int(11) NOT NULL DEFAULT '0',
   `rating_sum` int(11) UNSIGNED NOT NULL DEFAULT '0',
   `rating_count` int(11) UNSIGNED NOT NULL DEFAULT '0',
@@ -3097,11 +3088,11 @@ CREATE TABLE IF NOT EXISTS `idg2019_k2_rating` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_k2_tags`
+-- Estrutura da tabela `#__k2_tags`
 --
 
-DROP TABLE IF EXISTS `idg2019_k2_tags`;
-CREATE TABLE IF NOT EXISTS `idg2019_k2_tags` (
+DROP TABLE IF EXISTS `#__k2_tags`;
+CREATE TABLE IF NOT EXISTS `#__k2_tags` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `published` smallint(6) NOT NULL DEFAULT '0',
@@ -3110,21 +3101,21 @@ CREATE TABLE IF NOT EXISTS `idg2019_k2_tags` (
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
--- Extraindo dados da tabela `idg2019_k2_tags`
+-- Extraindo dados da tabela `#__k2_tags`
 --
 
-INSERT INTO `idg2019_k2_tags` (`id`, `name`, `published`) VALUES
+INSERT INTO `#__k2_tags` (`id`, `name`, `published`) VALUES
 (1, 'teste', 1),
 (2, 'internet', 1);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_k2_tags_xref`
+-- Estrutura da tabela `#__k2_tags_xref`
 --
 
-DROP TABLE IF EXISTS `idg2019_k2_tags_xref`;
-CREATE TABLE IF NOT EXISTS `idg2019_k2_tags_xref` (
+DROP TABLE IF EXISTS `#__k2_tags_xref`;
+CREATE TABLE IF NOT EXISTS `#__k2_tags_xref` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `tagID` int(11) NOT NULL,
   `itemID` int(11) NOT NULL,
@@ -3134,10 +3125,10 @@ CREATE TABLE IF NOT EXISTS `idg2019_k2_tags_xref` (
 ) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED;
 
 --
--- Extraindo dados da tabela `idg2019_k2_tags_xref`
+-- Extraindo dados da tabela `#__k2_tags_xref`
 --
 
-INSERT INTO `idg2019_k2_tags_xref` (`id`, `tagID`, `itemID`) VALUES
+INSERT INTO `#__k2_tags_xref` (`id`, `tagID`, `itemID`) VALUES
 (22, 1, 2),
 (21, 2, 3),
 (20, 1, 3),
@@ -3150,11 +3141,11 @@ INSERT INTO `idg2019_k2_tags_xref` (`id`, `tagID`, `itemID`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_k2_users`
+-- Estrutura da tabela `#__k2_users`
 --
 
-DROP TABLE IF EXISTS `idg2019_k2_users`;
-CREATE TABLE IF NOT EXISTS `idg2019_k2_users` (
+DROP TABLE IF EXISTS `#__k2_users`;
+CREATE TABLE IF NOT EXISTS `#__k2_users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `userID` int(11) NOT NULL,
   `userName` varchar(255) DEFAULT NULL,
@@ -3173,20 +3164,20 @@ CREATE TABLE IF NOT EXISTS `idg2019_k2_users` (
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
--- Extraindo dados da tabela `idg2019_k2_users`
+-- Extraindo dados da tabela `#__k2_users`
 --
 
-INSERT INTO `idg2019_k2_users` (`id`, `userID`, `userName`, `gender`, `description`, `image`, `url`, `group`, `plugins`, `ip`, `hostname`, `notes`) VALUES
+INSERT INTO `#__k2_users` (`id`, `userID`, `userName`, `gender`, `description`, `image`, `url`, `group`, `plugins`, `ip`, `hostname`, `notes`) VALUES
 (1, 931, 'super', 'm', '', NULL, NULL, 1, '', '2801:86:a000:25', '2801:86:a000:256:2d96:fa30:629e:23de', '');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_k2_user_groups`
+-- Estrutura da tabela `#__k2_user_groups`
 --
 
-DROP TABLE IF EXISTS `idg2019_k2_user_groups`;
-CREATE TABLE IF NOT EXISTS `idg2019_k2_user_groups` (
+DROP TABLE IF EXISTS `#__k2_user_groups`;
+CREATE TABLE IF NOT EXISTS `#__k2_user_groups` (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `permissions` text NOT NULL,
@@ -3194,96 +3185,95 @@ CREATE TABLE IF NOT EXISTS `idg2019_k2_user_groups` (
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
--- Extraindo dados da tabela `idg2019_k2_user_groups`
+-- Extraindo dados da tabela `#__k2_user_groups`
 --
 
-INSERT INTO `idg2019_k2_user_groups` (`id`, `name`, `permissions`) VALUES
+INSERT INTO `#__k2_user_groups` (`id`, `name`, `permissions`) VALUES
 (1, 'Registered', '{\"comment\":\"1\",\"frontEdit\":\"0\",\"add\":\"0\",\"editOwn\":\"0\",\"editAll\":\"0\",\"publish\":\"0\",\"inheritance\":0,\"categories\":\"all\"}'),
 (2, 'Site Owner', '{\"comment\":\"1\",\"frontEdit\":\"1\",\"add\":\"1\",\"editOwn\":\"1\",\"editAll\":\"1\",\"publish\":\"1\",\"inheritance\":1,\"categories\":\"all\"}');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_languages`
+-- Estrutura da tabela `#__languages`
 --
 
-DROP TABLE IF EXISTS `idg2019_languages`;
-CREATE TABLE IF NOT EXISTS `idg2019_languages` (
-  `lang_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `asset_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+CREATE TABLE IF NOT EXISTS `#__languages` (
+  `lang_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `asset_id` int(10) unsigned NOT NULL DEFAULT 0,
   `lang_code` char(7) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `title` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `title_native` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `sef` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `metakey` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `metadesc` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `sitename` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `published` int(11) NOT NULL DEFAULT '0',
-  `access` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `ordering` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`lang_id`) USING BTREE,
-  UNIQUE KEY `idx_sef` (`sef`) USING BTREE,
-  UNIQUE KEY `idx_langcode` (`lang_code`) USING BTREE,
-  KEY `idx_access` (`access`) USING BTREE,
-  KEY `idx_ordering` (`ordering`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `title` varchar(50) NOT NULL,
+  `title_native` varchar(50) NOT NULL,
+  `sef` varchar(50) NOT NULL,
+  `image` varchar(50) NOT NULL,
+  `description` varchar(512) NOT NULL,
+  `metakey` text NOT NULL,
+  `metadesc` text NOT NULL,
+  `sitename` varchar(1024) NOT NULL DEFAULT '',
+  `published` int(11) NOT NULL DEFAULT 0,
+  `access` int(10) unsigned NOT NULL DEFAULT 0,
+  `ordering` int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`lang_id`),
+  UNIQUE KEY `idx_sef` (`sef`),
+  UNIQUE KEY `idx_langcode` (`lang_code`),
+  KEY `idx_access` (`access`),
+  KEY `idx_ordering` (`ordering`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 --
--- Extraindo dados da tabela `idg2019_languages`
+-- Extraindo dados da tabela `#__languages`
 --
 
-INSERT INTO `idg2019_languages` (`lang_id`, `asset_id`, `lang_code`, `title`, `title_native`, `sef`, `image`, `description`, `metakey`, `metadesc`, `sitename`, `published`, `access`, `ordering`) VALUES
+INSERT INTO `#__languages` (`lang_id`, `asset_id`, `lang_code`, `title`, `title_native`, `sef`, `image`, `description`, `metakey`, `metadesc`, `sitename`, `published`, `access`, `ordering`) VALUES
 (1, 0, 'en-GB', 'English (UK)', 'English (UK)', 'en', 'en', '', '', '', '', 1, 0, 1);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_menu`
+-- Estrutura da tabela `#__menu`
 --
 
-DROP TABLE IF EXISTS `idg2019_menu`;
-CREATE TABLE IF NOT EXISTS `idg2019_menu` (
+CREATE TABLE IF NOT EXISTS `#__menu` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `menutype` varchar(24) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The type of menu this item belongs to. FK to x3dts_menu_types.menutype',
-  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The display title of the menu item.',
+  `menutype` varchar(24) NOT NULL COMMENT 'The type of menu this item belongs to. FK to #__menu_types.menutype',
+  `title` varchar(255) NOT NULL COMMENT 'The display title of the menu item.',
   `alias` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT 'The SEF alias of the menu item.',
-  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `path` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The computed path of the menu item based on the alias field.',
-  `link` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The actually link the menu item refers to.',
-  `type` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The type of link: Component, URL, Alias, Separator',
-  `published` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'The published state of the menu link.',
-  `parent_id` int(10) UNSIGNED NOT NULL DEFAULT '1' COMMENT 'The parent menu item in the menu tree.',
-  `level` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'The relative level in the tree.',
-  `component_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'FK to x3dts_extensions.id',
-  `checked_out` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'FK to x3dts_users.id',
+  `note` varchar(255) NOT NULL DEFAULT '',
+  `path` varchar(1024) NOT NULL COMMENT 'The computed path of the menu item based on the alias field.',
+  `link` varchar(1024) NOT NULL COMMENT 'The actually link the menu item refers to.',
+  `type` varchar(16) NOT NULL COMMENT 'The type of link: Component, URL, Alias, Separator',
+  `published` tinyint(4) NOT NULL DEFAULT 0 COMMENT 'The published state of the menu link.',
+  `parent_id` int(10) unsigned NOT NULL DEFAULT 1 COMMENT 'The parent menu item in the menu tree.',
+  `level` int(10) unsigned NOT NULL DEFAULT 0 COMMENT 'The relative level in the tree.',
+  `component_id` int(10) unsigned NOT NULL DEFAULT 0 COMMENT 'FK to #__extensions.id',
+  `checked_out` int(10) unsigned NOT NULL DEFAULT 0 COMMENT 'FK to #__users.id',
   `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT 'The time the menu item was checked out.',
-  `browserNav` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'The click behaviour of the link.',
-  `access` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'The access level required to view the menu item.',
-  `img` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The image of the menu item.',
-  `template_style_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `params` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'JSON encoded data for the menu item.',
-  `lft` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set lft.',
-  `rgt` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set rgt.',
-  `home` tinyint(3) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Indicates if this menu item is the home or default page.',
-  `language` char(7) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `client_id` tinyint(4) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `idx_client_id_parent_id_alias_language` (`client_id`,`parent_id`,`alias`(100),`language`) USING BTREE,
-  KEY `idx_componentid` (`component_id`,`menutype`,`published`,`access`) USING BTREE,
-  KEY `idx_menutype` (`menutype`) USING BTREE,
-  KEY `idx_left_right` (`lft`,`rgt`) USING BTREE,
-  KEY `idx_language` (`language`) USING BTREE,
-  KEY `idx_alias` (`alias`(100)) USING BTREE,
-  KEY `idx_path` (`path`(100)) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=412 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `browserNav` tinyint(4) NOT NULL DEFAULT 0 COMMENT 'The click behaviour of the link.',
+  `access` int(10) unsigned NOT NULL DEFAULT 0 COMMENT 'The access level required to view the menu item.',
+  `img` varchar(255) NOT NULL COMMENT 'The image of the menu item.',
+  `template_style_id` int(10) unsigned NOT NULL DEFAULT 0,
+  `params` text NOT NULL COMMENT 'JSON encoded data for the menu item.',
+  `lft` int(11) NOT NULL DEFAULT 0 COMMENT 'Nested set lft.',
+  `rgt` int(11) NOT NULL DEFAULT 0 COMMENT 'Nested set rgt.',
+  `home` tinyint(3) unsigned NOT NULL DEFAULT 0 COMMENT 'Indicates if this menu item is the home or default page.',
+  `language` char(7) NOT NULL DEFAULT '',
+  `client_id` tinyint(4) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_client_id_parent_id_alias_language` (`client_id`,`parent_id`,`alias`(100),`language`),
+  KEY `idx_componentid` (`component_id`,`menutype`,`published`,`access`),
+  KEY `idx_menutype` (`menutype`),
+  KEY `idx_left_right` (`lft`,`rgt`),
+  KEY `idx_alias` (`alias`(100)),
+  KEY `idx_path` (`path`(100)),
+  KEY `idx_language` (`language`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=102;
+
 
 --
--- Extraindo dados da tabela `idg2019_menu`
+-- Extraindo dados da tabela `#__menu`
 --
 
-INSERT INTO `idg2019_menu` (`id`, `menutype`, `title`, `alias`, `note`, `path`, `link`, `type`, `published`, `parent_id`, `level`, `component_id`, `checked_out`, `checked_out_time`, `browserNav`, `access`, `img`, `template_style_id`, `params`, `lft`, `rgt`, `home`, `language`, `client_id`) VALUES
+INSERT INTO `#__menu` (`id`, `menutype`, `title`, `alias`, `note`, `path`, `link`, `type`, `published`, `parent_id`, `level`, `component_id`, `checked_out`, `checked_out_time`, `browserNav`, `access`, `img`, `template_style_id`, `params`, `lft`, `rgt`, `home`, `language`, `client_id`) VALUES
 (1, '', 'Menu_Item_Root', 'root', '', '', '', '', 1, 0, 0, 0, 0, '0000-00-00 00:00:00', 0, 0, '', 0, '', 0, 425, 0, '*', 0),
 (2, 'main', 'com_banners', 'Banners', '', 'Banners', 'index.php?option=com_banners', 'component', 1, 1, 1, 4, 0, '0000-00-00 00:00:00', 0, 0, 'class:banners', 0, '', 93, 102, 0, '*', 1),
 (3, 'main', 'com_banners', 'Banners', '', 'Banners/Banners', 'index.php?option=com_banners', 'component', 1, 2, 2, 4, 0, '0000-00-00 00:00:00', 0, 0, 'class:banners', 0, '', 94, 95, 0, '*', 1),
@@ -3371,10 +3361,10 @@ INSERT INTO `idg2019_menu` (`id`, `menutype`, `title`, `alias`, `note`, `path`, 
 (172, 'sobre-o-site', 'Acessibilidade', '2013-10-27-18-11-17', '', '2013-10-27-18-11-17', 'index.php?Itemid=', 'alias', 1, 1, 1, 0, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{\"aliasoptions\":\"140\",\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_text\":1}', 237, 238, 0, '*', 0),
 (173, 'sobre-o-site', 'Mapa do site', '2013-10-27-18-11-18', '', '2013-10-27-18-11-18', 'index.php?Itemid=', 'alias', 1, 1, 1, 0, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{\"aliasoptions\":\"142\",\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_text\":1}', 239, 240, 0, '*', 0),
 (174, 'sobre-o-site', 'Versión en Español - Versão em Espanhol', '2013-10-27-18-13-04', '', '2013-10-27-18-13-04', 'index.php?Itemid=', 'alias', 1, 1, 1, 0, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{\"aliasoptions\":\"144\",\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_text\":1}', 241, 242, 0, '*', 0);
-INSERT INTO `idg2019_menu` (`id`, `menutype`, `title`, `alias`, `note`, `path`, `link`, `type`, `published`, `parent_id`, `level`, `component_id`, `checked_out`, `checked_out_time`, `browserNav`, `access`, `img`, `template_style_id`, `params`, `lft`, `rgt`, `home`, `language`, `client_id`) VALUES
+INSERT INTO `#__menu` (`id`, `menutype`, `title`, `alias`, `note`, `path`, `link`, `type`, `published`, `parent_id`, `level`, `component_id`, `checked_out`, `checked_out_time`, `browserNav`, `access`, `img`, `template_style_id`, `params`, `lft`, `rgt`, `home`, `language`, `client_id`) VALUES
 (175, 'sobre-o-site', 'English version - Versão em Inglês', '2013-10-27-18-13-5', '', '2013-10-27-18-13-5', 'index.php?Itemid=', 'alias', 1, 1, 1, 0, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{\"aliasoptions\":\"143\",\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_text\":1}', 243, 244, 0, '*', 0),
 (178, 'mainmenu', 'Galeria de imagens', 'galeria-de-imagens', '', 'galeria-de-imagens', 'index.php?option=com_content&view=category&layout=blog&id=36', 'component', 1, 1, 1, 22, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{\"layout_type\":\"blog\",\"show_category_heading_title_text\":\"\",\"show_category_title\":\"\",\"show_description\":\"\",\"show_description_image\":\"\",\"maxLevel\":\"2\",\"show_empty_categories\":\"\",\"show_no_articles\":\"\",\"show_subcat_desc\":\"1\",\"show_cat_num_articles\":\"\",\"page_subheading\":\"\",\"num_leading_articles\":\"2\",\"num_intro_articles\":\"3\",\"num_columns\":\"1\",\"num_links\":\"3\",\"multi_column_order\":\"\",\"show_subcategory_content\":\"2\",\"orderby_pri\":\"\",\"orderby_sec\":\"\",\"order_date\":\"\",\"show_pagination\":\"\",\"show_pagination_results\":\"\",\"show_title\":\"\",\"link_titles\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_vote\":\"\",\"show_readmore\":\"\",\"show_readmore_title\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"show_feed_link\":\"\",\"feed_summary\":\"\",\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_text\":1,\"page_title\":\"\",\"show_page_heading\":0,\"page_heading\":\"\",\"pageclass_sfx\":\"\",\"menu-meta_description\":\"\",\"menu-meta_keywords\":\"\",\"robots\":\"\",\"secure\":0}', 245, 246, 0, '*', 0),
-(179, 'main', 'com_postinstall', 'Post-installation messages', '', 'Post-installation messages', 'index.php?option=com_postinstall', 'component', 1, 1, 1, 32, 0, '0000-00-00 00:00:00', 0, 1, 'class:postinstall', 0, '', 135, 136, 0, '*', 1),
+(179, 'main', 'com_postinstall', 'Post-installation messages', '', 'Post-installation messages', 'index.php?option=com_postinstall', 'component', 1, 1, 1, 32, 0, '0000-00-00 00:00:00', 0, 1, 'class:postinstall', 0, '', 0, 0, 0, '*', 1),
 (180, 'main', 'Blank Component', 'blank-component', '', 'blank-component', 'index.php?option=com_blankcomponent', 'component', 1, 1, 1, 10024, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '', 247, 248, 0, '', 1),
 (181, 'mainmenu', 'Busca', 'busca', '', 'busca', 'index.php?option=com_search&view=search', 'component', 1, 1, 1, 19, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{\"search_areas\":\"\",\"show_date\":\"\",\"searchphrase\":\"0\",\"ordering\":\"newest\",\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_text\":1,\"page_title\":\"\",\"show_page_heading\":0,\"page_heading\":\"\",\"pageclass_sfx\":\"\",\"menu-meta_description\":\"\",\"menu-meta_keywords\":\"\",\"robots\":\"\",\"secure\":0}', 249, 250, 0, '*', 0),
 (182, 'servicos', 'Formulário para contato', 'formulario-de-contato', '', 'contato/formulario-de-contato', 'index.php?option=com_contact&view=contact&id=1', 'component', 0, 132, 2, 8, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{\"presentation_style\":\"\",\"show_contact_category\":\"\",\"show_contact_list\":\"\",\"show_tags\":\"\",\"show_name\":\"\",\"show_position\":\"\",\"show_email\":\"\",\"show_street_address\":\"\",\"show_suburb\":\"\",\"show_state\":\"\",\"show_postcode\":\"\",\"show_country\":\"\",\"show_telephone\":\"\",\"show_mobile\":\"\",\"show_fax\":\"\",\"show_webpage\":\"\",\"show_misc\":\"\",\"show_image\":\"\",\"allow_vcard\":\"\",\"show_articles\":\"\",\"show_links\":\"\",\"linka_name\":\"\",\"linkb_name\":\"\",\"linkc_name\":\"\",\"linkd_name\":\"\",\"linke_name\":\"\",\"show_email_form\":\"\",\"show_email_copy\":\"\",\"banned_email\":\"\",\"banned_subject\":\"\",\"banned_text\":\"\",\"validate_session\":\"\",\"custom_reply\":\"\",\"redirect\":\"\",\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_text\":1,\"page_title\":\"\",\"show_page_heading\":1,\"page_heading\":\"\",\"pageclass_sfx\":\"\",\"menu-meta_description\":\"\",\"menu-meta_keywords\":\"\",\"robots\":\"\",\"secure\":0}', 20, 21, 0, '*', 0),
@@ -3448,7 +3438,7 @@ INSERT INTO `idg2019_menu` (`id`, `menutype`, `title`, `alias`, `note`, `path`, 
 (359, 'agenda-de-autoridades', 'Agenda de Autoridades', 'agenda-de-autoridades', '', 'agenda-de-autoridades', 'index.php?option=com_content&view=article&id=98', 'component', 1, 1, 1, 22, 0, '0000-00-00 00:00:00', 0, 1, ' ', 0, '{\"show_title\":\"\",\"link_titles\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"info_block_show_title\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_associations\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_vote\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_hits\":\"\",\"show_tags\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_image_css\":\"\",\"menu_text\":1,\"menu_show\":1,\"page_title\":\"\",\"show_page_heading\":\"\",\"page_heading\":\"\",\"pageclass_sfx\":\"\",\"menu-meta_description\":\"\",\"menu-meta_keywords\":\"\",\"robots\":\"\",\"secure\":0}', 321, 326, 0, '*', 0),
 (360, 'agenda-de-autoridades', 'Agenda de Autoridades - Reitor', 'agenda-de-autoridades-reitor', '', 'agenda-de-autoridades/agenda-de-autoridades-reitor', 'index.php?option=com_jevents&view=day&layout=listevents', 'component', 1, 359, 2, 10177, 0, '0000-00-00 00:00:00', 0, 1, ' ', 0, '{\"com_calViewName\":\"global\",\"com_calUseIconic\":\"1\",\"iconstoshow\":[\"byyear\",\"bymonth\",\"byweek\",\"byday\",\"search\"],\"catidnew\":[\"65\"],\"include_subcats\":\"1\",\"fixedday\":\"\",\"com_showrepeats\":\"-1\",\"overridelayout\":\"\",\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_image_css\":\"\",\"menu_text\":1,\"menu_show\":1,\"page_title\":\"\",\"show_page_heading\":\"\",\"page_heading\":\"\",\"pageclass_sfx\":\"\",\"menu-meta_description\":\"\",\"menu-meta_keywords\":\"\",\"robots\":\"\",\"secure\":0}', 322, 323, 0, '*', 0),
 (361, 'agenda-de-autoridades', 'Agenda de Autoridades - Pró-Reitoria de Administração', 'agenda-de-autoridades-pro-reitoria-de-administracao', '', 'agenda-de-autoridades/agenda-de-autoridades-pro-reitoria-de-administracao', 'index.php?option=com_jevents&view=day&layout=listevents', 'component', 1, 359, 2, 10177, 0, '0000-00-00 00:00:00', 0, 1, ' ', 0, '{\"com_calViewName\":\"global\",\"com_calUseIconic\":\"1\",\"iconstoshow\":[\"byyear\",\"bymonth\",\"byweek\",\"byday\",\"search\"],\"catidnew\":[\"66\"],\"include_subcats\":\"1\",\"fixedday\":\"\",\"com_showrepeats\":\"-1\",\"overridelayout\":\"\",\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_image_css\":\"\",\"menu_text\":1,\"menu_show\":1,\"page_title\":\"\",\"show_page_heading\":\"\",\"page_heading\":\"\",\"pageclass_sfx\":\"\",\"menu-meta_description\":\"\",\"menu-meta_keywords\":\"\",\"robots\":\"\",\"secure\":0}', 324, 325, 0, '*', 0);
-INSERT INTO `idg2019_menu` (`id`, `menutype`, `title`, `alias`, `note`, `path`, `link`, `type`, `published`, `parent_id`, `level`, `component_id`, `checked_out`, `checked_out_time`, `browserNav`, `access`, `img`, `template_style_id`, `params`, `lft`, `rgt`, `home`, `language`, `client_id`) VALUES
+INSERT INTO `#__menu` (`id`, `menutype`, `title`, `alias`, `note`, `path`, `link`, `type`, `published`, `parent_id`, `level`, `component_id`, `checked_out`, `checked_out_time`, `browserNav`, `access`, `img`, `template_style_id`, `params`, `lft`, `rgt`, `home`, `language`, `client_id`) VALUES
 (362, 'setores', 'Cargos e Responsáveis', 'cargos-e-responsaveis-proad', '', 'proad/cargos-e-responsaveis-proad', 'index.php?option=com_content&view=article&id=99', 'component', 1, 320, 2, 22, 0, '0000-00-00 00:00:00', 0, 1, ' ', 0, '{\"show_title\":\"\",\"link_titles\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"info_block_show_title\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_associations\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_vote\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_hits\":\"\",\"show_tags\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_image_css\":\"\",\"menu_text\":1,\"menu_show\":1,\"page_title\":\"\",\"show_page_heading\":\"\",\"page_heading\":\"\",\"pageclass_sfx\":\"\",\"menu-meta_description\":\"\",\"menu-meta_keywords\":\"\",\"robots\":\"\",\"secure\":0}', 312, 313, 0, '*', 0),
 (363, 'setores', 'Superintendência de Regulação e Registros Acadêmicos - SURRAC', 'surrac', '', 'surrac', 'index.php?option=com_content&view=article&id=100', 'component', 1, 1, 1, 22, 0, '0000-00-00 00:00:00', 0, 1, ' ', 0, '{\"show_title\":\"\",\"link_titles\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"info_block_show_title\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_associations\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_vote\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_hits\":\"\",\"show_tags\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_image_css\":\"\",\"menu_text\":1,\"menu_show\":1,\"page_title\":\"\",\"show_page_heading\":\"\",\"page_heading\":\"\",\"pageclass_sfx\":\"\",\"menu-meta_description\":\"\",\"menu-meta_keywords\":\"\",\"robots\":\"\",\"secure\":0}', 327, 330, 0, '*', 0),
 (364, 'setores', 'Cargos e Responsáveis', 'cargos-e-responsaveis-surrac', '', 'surrac/cargos-e-responsaveis-surrac', 'index.php?option=com_content&view=article&id=101', 'component', 1, 363, 2, 22, 0, '0000-00-00 00:00:00', 0, 1, ' ', 0, '{\"show_title\":\"\",\"link_titles\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"info_block_show_title\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_associations\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_vote\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_hits\":\"\",\"show_tags\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_image_css\":\"\",\"menu_text\":1,\"menu_show\":1,\"page_title\":\"\",\"show_page_heading\":\"\",\"page_heading\":\"\",\"pageclass_sfx\":\"\",\"menu-meta_description\":\"\",\"menu-meta_keywords\":\"\",\"robots\":\"\",\"secure\":0}', 328, 329, 0, '*', 0),
@@ -3503,26 +3493,25 @@ INSERT INTO `idg2019_menu` (`id`, `menutype`, `title`, `alias`, `note`, `path`, 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_menu_types`
+-- Estrutura da tabela `#__menu_types`
 --
 
-DROP TABLE IF EXISTS `idg2019_menu_types`;
-CREATE TABLE IF NOT EXISTS `idg2019_menu_types` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `asset_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `menutype` varchar(24) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `title` varchar(48) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `client_id` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `idx_menutype` (`menutype`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+CREATE TABLE IF NOT EXISTS `#__menu_types` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `asset_id` int(10) unsigned NOT NULL DEFAULT 0,
+  `menutype` varchar(24) NOT NULL,
+  `title` varchar(48) NOT NULL,
+  `description` varchar(255) NOT NULL DEFAULT '',
+  `client_id` int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_menutype` (`menutype`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 --
--- Extraindo dados da tabela `idg2019_menu_types`
+-- Extraindo dados da tabela `#__menu_types`
 --
 
-INSERT INTO `idg2019_menu_types` (`id`, `asset_id`, `menutype`, `title`, `description`, `client_id`) VALUES
+INSERT INTO `#__menu_types` (`id`, `asset_id`, `menutype`, `title`, `description`, `client_id`) VALUES
 (1, 0, 'mainmenu', 'Main Menu', 'The main menu for the site', 0),
 (3, 320, 'informacao-ao-cidadao', 'Informação ao Cidadão', '', 0),
 (4, 0, 'em-destaque', 'Em destaque', '', 0),
@@ -3545,75 +3534,73 @@ INSERT INTO `idg2019_menu_types` (`id`, `asset_id`, `menutype`, `title`, `descri
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_messages`
+-- Estrutura da tabela `#__messages`
 --
 
-DROP TABLE IF EXISTS `idg2019_messages`;
-CREATE TABLE IF NOT EXISTS `idg2019_messages` (
-  `message_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `user_id_from` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `user_id_to` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `folder_id` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
-  `date_time` datetime NOT NULL,
-  `state` tinyint(1) NOT NULL DEFAULT '0',
-  `priority` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
-  `subject` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `message` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`message_id`) USING BTREE,
-  KEY `useridto_state` (`user_id_to`,`state`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+CREATE TABLE IF NOT EXISTS `#__messages` (
+  `message_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id_from` int(10) unsigned NOT NULL DEFAULT 0,
+  `user_id_to` int(10) unsigned NOT NULL DEFAULT 0,
+  `folder_id` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `date_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `state` tinyint(1) NOT NULL DEFAULT 0,
+  `priority` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `subject` varchar(255) NOT NULL DEFAULT '',
+  `message` text NOT NULL,
+  PRIMARY KEY (`message_id`),
+  KEY `useridto_state` (`user_id_to`,`state`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_messages_cfg`
+-- Table structure for table `#__messages_cfg`
 --
 
-DROP TABLE IF EXISTS `idg2019_messages_cfg`;
-CREATE TABLE IF NOT EXISTS `idg2019_messages_cfg` (
-  `user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `cfg_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `cfg_value` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  UNIQUE KEY `idx_user_var_name` (`user_id`,`cfg_name`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+CREATE TABLE IF NOT EXISTS `#__messages_cfg` (
+  `user_id` int(10) unsigned NOT NULL DEFAULT 0,
+  `cfg_name` varchar(100) NOT NULL DEFAULT '',
+  `cfg_value` varchar(255) NOT NULL DEFAULT '',
+  UNIQUE KEY `idx_user_var_name` (`user_id`,`cfg_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_modules`
+-- Table structure for table `#__modules`
 --
 
-DROP TABLE IF EXISTS `idg2019_modules`;
-CREATE TABLE IF NOT EXISTS `idg2019_modules` (
+CREATE TABLE IF NOT EXISTS `#__modules` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `asset_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'FK to the x3dts_assets table.',
-  `title` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `asset_id` int(10) unsigned NOT NULL DEFAULT 0 COMMENT 'FK to the #__assets table.',
+  `title` varchar(100) NOT NULL DEFAULT '',
+  `note` varchar(255) NOT NULL DEFAULT '',
   `content` text,
-  `ordering` int(11) NOT NULL DEFAULT '0',
-  `position` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `checked_out` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `checked_out_time` datetime NOT NULL,
-  `publish_up` datetime NOT NULL,
-  `publish_down` datetime NOT NULL,
-  `published` tinyint(1) NOT NULL DEFAULT '0',
-  `module` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `access` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `showtitle` tinyint(3) UNSIGNED NOT NULL DEFAULT '1',
-  `params` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `client_id` tinyint(4) NOT NULL DEFAULT '0',
-  `language` char(7) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `published` (`published`,`access`) USING BTREE,
-  KEY `newsfeeds` (`module`,`published`) USING BTREE,
-  KEY `idx_language` (`language`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=241 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `ordering` int(11) NOT NULL DEFAULT 0,
+  `position` varchar(50) NOT NULL DEFAULT '',
+  `checked_out` int(10) unsigned NOT NULL DEFAULT 0,
+  `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `publish_up` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `published` tinyint(1) NOT NULL DEFAULT 0,
+  `module` varchar(50) DEFAULT NULL,
+  `access` int(10) unsigned NOT NULL DEFAULT 0,
+  `showtitle` tinyint(3) unsigned NOT NULL DEFAULT 1,
+  `params` text NOT NULL,
+  `client_id` tinyint(4) NOT NULL DEFAULT 0,
+  `language` char(7) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `published` (`published`,`access`),
+  KEY `newsfeeds` (`module`,`published`),
+  KEY `idx_language` (`language`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=87;
+
 
 --
--- Extraindo dados da tabela `idg2019_modules`
+-- Extraindo dados da tabela `#__modules`
 --
 
-INSERT INTO `idg2019_modules` (`id`, `asset_id`, `title`, `note`, `content`, `ordering`, `position`, `checked_out`, `checked_out_time`, `publish_up`, `publish_down`, `published`, `module`, `access`, `showtitle`, `params`, `client_id`, `language`) VALUES
+INSERT INTO `#__modules` (`id`, `asset_id`, `title`, `note`, `content`, `ordering`, `position`, `checked_out`, `checked_out_time`, `publish_up`, `publish_down`, `published`, `module`, `access`, `showtitle`, `params`, `client_id`, `language`) VALUES
 (1, 128, 'Manuais', 'Antigo módulo relacionado ao \"Menu de apoio\", renomeado para menu de relevância em 24 de maio.', '', 6, 'menu-principal-interno', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_menu', 1, 1, '{\"menutype\":\"manuais\",\"base\":\"\",\"startLevel\":\"1\",\"endLevel\":\"0\",\"showAllChildren\":\"0\",\"tag_id\":\"\",\"class_sfx\":\"col-md-2\",\"window_open\":\"\",\"layout\":\"idg2019:menuprincipal\",\"moduleclass_sfx\":\"\",\"cache\":\"1\",\"cache_time\":\"900\",\"cachemode\":\"itemid\",\"module_tag\":\"div\",\"bootstrap_size\":\"0\",\"header_tag\":\"h3\",\"header_class\":\"\",\"style\":\"0\"}', 0, '*'),
 (2, 0, 'Login', '', '', 1, 'login', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_login', 1, 1, '', 1, '*'),
 (3, 0, 'Popular Articles', '', '', 3, 'cpanel', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'mod_popular', 3, 1, '{\"count\":\"5\",\"catid\":\"\",\"user_id\":\"0\",\"layout\":\"_:default\",\"moduleclass_sfx\":\"\",\"cache\":\"0\",\"automatic_title\":\"1\"}', 1, '*'),
@@ -3671,7 +3658,7 @@ INSERT INTO `idg2019_modules` (`id`, `asset_id`, `title`, `note`, `content`, `or
 (151, 137, 'Youtube Gallery Module', '', '', 0, '', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', -2, 'mod_youtubegallery', 1, 1, '', 0, '*'),
 (152, 139, 'ÁREA DE IMPRENSA', '', '', 1, 'pagina-interna-capa-area-de-imprensa', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_container', 1, 1, '{\"posicao\":\"pagina-interna-capa-area-de-imprensa-container\",\"moduleclass_sfx\":\"row-fluid variacao-module-01\",\"alternative_title\":\"\",\"title_outstanding\":\"1\",\"text_link_title\":\"\",\"url_link_title\":\"\",\"show_footer\":\"0\",\"text_link_footer\":\"\",\"url_link_footer\":\"\",\"disposicao\":\"linhas\",\"auto_divisor\":\"1\",\"title_outstanding_column1\":\"1\",\"text_link_title_column1\":\"\",\"url_link_title_column1\":\"\",\"footer_outstanding_column1\":\"0\",\"text_link_footer_column1\":\"\",\"url_link_footer_column1\":\"\",\"title_outstanding_column2\":\"1\",\"text_link_title_column2\":\"\",\"url_link_title_column2\":\"\",\"footer_outstanding_column2\":\"0\",\"text_link_footer_column2\":\"\",\"url_link_footer_column2\":\"\",\"title_outstanding_column3\":\"0\",\"text_link_title_column3\":\"\",\"url_link_title_column3\":\"\",\"footer_outstanding_column3\":\"0\",\"text_link_footer_column3\":\"\",\"url_link_footer_column3\":\"\",\"container_level1\":\"div\",\"container_level2\":\"div\",\"layout\":\"_:default\",\"cache\":\"1\",\"cache_time\":\"900\",\"numero_limite_colunas\":\"\",\"module_tag\":\"div\",\"bootstrap_size\":\"0\",\"header_tag\":\"h3\",\"header_class\":\"\",\"style\":\"0\"}', 0, '*'),
 (153, 140, 'Notícias', '', '', 1, 'pagina-interna-capa-area-de-imprensa-container', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_chamadas', 1, 1, '{\"layout\":\"padraogoverno01:listagem-simples-comdatas\",\"variacao\":\"1\",\"modelo\":\"article_content\",\"quantidade\":\"5\",\"id_article_unico\":\"\",\"id_item_unico\":0,\"titulo_alternativo\":\"\",\"link_saiba_mais\":\"\",\"link_saiba_mais_menu\":\"121\",\"link_saiba_mais_article\":\"\",\"texto_saiba_mais\":\"Acesse todas as not\\u00edcias\",\"habilitar_mensagem_vazia\":\"0\",\"mensagem_vazia\":\"\",\"chapeu\":\"cont.xreference\",\"destaque\":\"0\",\"somente_imagem\":\"0\",\"buscar_cat_tag\":\"1\",\"catid\":[\"17\"],\"visualizar_filho\":\"1\",\"nivel\":\"10\",\"ordem\":\"publish_up\",\"ordem_direction\":\"DESC\",\"chapeu_item1\":\"\",\"title_item1\":\"\",\"desc_item1\":\"\",\"image_item1\":\"\",\"image_item1_align\":\"\",\"image_item1_alt\":\"\",\"url_simple_item1\":\"\",\"url_menu_item1\":\"\",\"url_article_item1\":\"\",\"ordering_item1\":\"1\",\"chapeu_item2\":\"\",\"title_item2\":\"\",\"desc_item2\":\"\",\"image_item2\":\"\",\"image_item2_align\":\"\",\"image_item2_alt\":\"\",\"url_simple_item2\":\"\",\"url_menu_item2\":\"\",\"url_article_item2\":\"\",\"ordering_item2\":\"2\",\"chapeu_item3\":\"\",\"title_item3\":\"\",\"desc_item3\":\"\",\"image_item3\":\"\",\"image_item3_align\":\"\",\"image_item3_alt\":\"\",\"url_simple_item3\":\"\",\"url_menu_item3\":\"\",\"url_article_item3\":\"\",\"ordering_item3\":\"3\",\"limitar_caractere\":\"0\",\"limite_caractere\":\"\",\"exibir_imagem\":\"1\",\"exibir_introtext\":\"1\",\"exibir_title\":\"1\",\"subitem_class\":\"\",\"header_tag\":\"h3\",\"moduleclass_sfx\":\"no-margin\",\"owncache\":\"1\",\"cache_time\":\"900\",\"limite_campos_preenchimento_manual\":\"\",\"module_tag\":\"div\",\"bootstrap_size\":\"0\",\"header_class\":\"\",\"style\":\"0\"}', 0, '*');
-INSERT INTO `idg2019_modules` (`id`, `asset_id`, `title`, `note`, `content`, `ordering`, `position`, `checked_out`, `checked_out_time`, `publish_up`, `publish_down`, `published`, `module`, `access`, `showtitle`, `params`, `client_id`, `language`) VALUES
+INSERT INTO `#__modules` (`id`, `asset_id`, `title`, `note`, `content`, `ordering`, `position`, `checked_out`, `checked_out_time`, `publish_up`, `publish_down`, `published`, `module`, `access`, `showtitle`, `params`, `client_id`, `language`) VALUES
 (154, 141, 'Releases', '', '', 1, 'pagina-interna-capa-area-de-imprensa-container', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_chamadas', 1, 1, '{\"layout\":\"padraogoverno01:listagem-simples-comdatas\",\"variacao\":\"1\",\"modelo\":\"article_content\",\"quantidade\":\"5\",\"id_article_unico\":\"\",\"id_item_unico\":0,\"titulo_alternativo\":\"\",\"link_saiba_mais\":\"\",\"link_saiba_mais_menu\":\"121\",\"link_saiba_mais_article\":\"\",\"texto_saiba_mais\":\"Acesse todos os releases\",\"habilitar_mensagem_vazia\":\"0\",\"mensagem_vazia\":\"\",\"chapeu\":\"cont.xreference\",\"destaque\":\"0\",\"somente_imagem\":\"0\",\"buscar_cat_tag\":\"1\",\"catid\":[\"39\"],\"visualizar_filho\":\"0\",\"nivel\":\"10\",\"ordem\":\"title\",\"ordem_direction\":\"ASC\",\"chapeu_item1\":\"\",\"title_item1\":\"\",\"desc_item1\":\"\",\"image_item1\":\"\",\"image_item1_align\":\"\",\"image_item1_alt\":\"\",\"url_simple_item1\":\"\",\"url_menu_item1\":\"\",\"url_article_item1\":\"\",\"ordering_item1\":\"1\",\"chapeu_item2\":\"\",\"title_item2\":\"\",\"desc_item2\":\"\",\"image_item2\":\"\",\"image_item2_align\":\"\",\"image_item2_alt\":\"\",\"url_simple_item2\":\"\",\"url_menu_item2\":\"\",\"url_article_item2\":\"\",\"ordering_item2\":\"2\",\"chapeu_item3\":\"\",\"title_item3\":\"\",\"desc_item3\":\"\",\"image_item3\":\"\",\"image_item3_align\":\"\",\"image_item3_alt\":\"\",\"url_simple_item3\":\"\",\"url_menu_item3\":\"\",\"url_article_item3\":\"\",\"ordering_item3\":\"3\",\"limitar_caractere\":\"0\",\"limite_caractere\":\"\",\"exibir_imagem\":\"1\",\"exibir_introtext\":\"1\",\"exibir_title\":\"1\",\"subitem_class\":\"\",\"header_tag\":\"h3\",\"moduleclass_sfx\":\"\",\"owncache\":\"1\",\"cache_time\":\"900\",\"limite_campos_preenchimento_manual\":\"\",\"module_tag\":\"div\",\"bootstrap_size\":\"0\",\"header_class\":\"\",\"style\":\"0\"}', 0, '*'),
 (155, 148, 'Assessoria de Comunicação do Órgão', '', '<h2 style=\"text-align: center;\">Assessoria de Comunicação do Órgão</h2>\r\n<p style=\"text-align: center;\"><strong>ascomgeral@orgao.gov.br</strong><br /><strong>(DDD) 0800-000000</strong></p>\r\n<ul>\r\n<li>Assessor 1<br />Esplanada dos Ministérios, Bl. “L” - 9º Andar - Gabinete<br />70047-900 - Brasília - DF<br />Fone: XX - XXXX - XXXX<br />E-mail: email@orgao.gov.br</li>\r\n<li>Assessor 2<br />Esplanada dos Ministérios, Bl. “L” - 9º Andar - Gabinete<br />70047-900 - Brasília - DF<br />Fone: XX - XXXX - XXXX<br />E-mail: email@orgao.gov.br</li>\r\n<li>Assessor 3<br />Esplanada dos Ministérios, Bl. “L” - 9º Andar - Gabinete<br />70047-900 - Brasília - DF<br />Fone: XX - XXXX - XXXX<br />E-mail: email@orgao.gov.br</li>\r\n</ul>', 1, 'pagina-interna-capa-area-de-imprensa-container', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_custom', 1, 0, '{\"prepare_content\":\"0\",\"backgroundimage\":\"\",\"layout\":\"_:default\",\"moduleclass_sfx\":\" module-htmllist-01\",\"cache\":\"1\",\"cache_time\":\"900\",\"cachemode\":\"static\",\"module_tag\":\"div\",\"bootstrap_size\":\"0\",\"header_tag\":\"h3\",\"header_class\":\"\",\"style\":\"0\"}', 0, '*'),
 (156, 149, 'ÁREA DE IMPRENSA - linha 2', '', '', 2, 'pagina-interna-capa-area-de-imprensa', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_container', 1, 0, '{\"posicao\":\"pagina-interna-capa-area-de-imprensa-container-02\",\"moduleclass_sfx\":\"row-fluid\",\"alternative_title\":\"\",\"title_outstanding\":\"1\",\"text_link_title\":\"\",\"url_link_title\":\"\",\"show_footer\":\"0\",\"text_link_footer\":\"\",\"url_link_footer\":\"\",\"disposicao\":\"linhas\",\"auto_divisor\":\"0\",\"title_outstanding_column1\":\"0\",\"text_link_title_column1\":\"\",\"url_link_title_column1\":\"\",\"footer_outstanding_column1\":\"0\",\"text_link_footer_column1\":\"\",\"url_link_footer_column1\":\"\",\"title_outstanding_column2\":\"1\",\"text_link_title_column2\":\"\",\"url_link_title_column2\":\"\",\"footer_outstanding_column2\":\"0\",\"text_link_footer_column2\":\"\",\"url_link_footer_column2\":\"\",\"title_outstanding_column3\":\"0\",\"text_link_title_column3\":\"\",\"url_link_title_column3\":\"\",\"footer_outstanding_column3\":\"0\",\"text_link_footer_column3\":\"\",\"url_link_footer_column3\":\"\",\"container_level1\":\"div\",\"container_level2\":\"div\",\"layout\":\"_:default\",\"cache\":\"1\",\"cache_time\":\"900\",\"numero_limite_colunas\":\"\",\"module_tag\":\"div\",\"bootstrap_size\":\"0\",\"header_tag\":\"h3\",\"header_class\":\"\",\"style\":\"0\"}', 0, '*'),
@@ -3703,7 +3690,7 @@ INSERT INTO `idg2019_modules` (`id`, `asset_id`, `title`, `note`, `content`, `or
 (182, 197, 'Notícias da Editoria B - itens comuns', '', '', 1, 'pagina-interna-capa-editoria-b', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_chamadas', 1, 0, '{\"layout\":\"padraogoverno01:chamada-secundaria-chapeu-tit-topo\",\"variacao\":\"0\",\"modelo\":\"article_content\",\"quantidade\":\"3\",\"id_article_unico\":\"\",\"id_item_unico\":0,\"titulo_alternativo\":\"\",\"link_saiba_mais\":\"\",\"link_saiba_mais_menu\":\"\",\"link_saiba_mais_article\":\"\",\"texto_saiba_mais\":\"\",\"habilitar_mensagem_vazia\":\"0\",\"mensagem_vazia\":\"\",\"chapeu\":\"cont.xreference\",\"destaque\":\"1\",\"somente_imagem\":\"0\",\"buscar_cat_tag\":\"1\",\"catid\":[\"14\"],\"catid_components\":\"\",\"visualizar_filho\":\"0\",\"nivel\":\"10\",\"ordem\":\"publish_up\",\"ordem_direction\":\"DESC\",\"chapeu_item1\":\"\",\"title_item1\":\"T\\u00edtulo da not\\u00edcia em duas linhas em at\\u00e9 50 caracteres\",\"desc_item1\":\"\",\"show_image_item1\":\"\",\"image_item1\":\"\",\"image_item1_align\":\"\",\"image_item1_alt\":\"\",\"url_simple_item1\":\"\",\"url_menu_item1\":\"\",\"url_article_item1\":\"\",\"ordering_item1\":\"1\",\"variacao_item1\":\"0\",\"chapeu_item2\":\"\",\"title_item2\":\"T\\u00edtulo da not\\u00edcia em duas linhas em at\\u00e9 50 caracteres\",\"desc_item2\":\"\",\"show_image_item2\":\"\",\"image_item2\":\"\",\"image_item2_align\":\"\",\"image_item2_alt\":\"\",\"url_simple_item2\":\"\",\"url_menu_item2\":\"\",\"url_article_item2\":\"\",\"ordering_item2\":\"2\",\"variacao_item2\":\"0\",\"chapeu_item3\":\"\",\"title_item3\":\"T\\u00edtulo da not\\u00edcia em duas linhas em at\\u00e9 50 caracteres\",\"desc_item3\":\"\",\"show_image_item3\":\"\",\"image_item3\":\"\",\"image_item3_align\":\"\",\"image_item3_alt\":\"\",\"url_simple_item3\":\"\",\"url_menu_item3\":\"\",\"url_article_item3\":\"\",\"ordering_item3\":\"3\",\"variacao_item3\":\"0\",\"chapeu_item4\":\"\",\"title_item4\":\"\",\"desc_item4\":\"\",\"show_image_item4\":\"\",\"image_item4\":\"\",\"image_item4_align\":\"\",\"image_item4_alt\":\"\",\"url_simple_item4\":\"\",\"url_menu_item4\":\"\",\"url_article_item4\":\"\",\"ordering_item4\":\"4\",\"variacao_item4\":\"0\",\"limitar_caractere\":\"0\",\"limite_caractere\":\"\",\"exibir_imagem\":\"0\",\"exibir_introtext\":\"0\",\"exibir_title\":\"1\",\"subitem_class\":\"\",\"header_tag\":\"h3\",\"moduleclass_sfx\":\"no-margin module-bottom-group\",\"owncache\":\"1\",\"cache_time\":\"900\",\"limite_campos_preenchimento_manual\":\"\",\"module_tag\":\"div\",\"bootstrap_size\":\"0\",\"header_class\":\"\",\"style\":\"0\"}', 0, '*'),
 (183, 198, 'Galeria de vídeos alternativa', 'Configuração do mod_chamadas equivalente ao módulo do youtubegallery. Possui mais opções.', '', 1, 'pagina-interna-capa-editoria-b', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_chamadas', 1, 0, '{\"layout\":\"padraogoverno01:listagem-box02-videos\",\"variacao\":\"0\",\"modelo\":\"youtubegallery\",\"quantidade\":\"4\",\"id_article_unico\":\"\",\"id_item_unico\":0,\"titulo_alternativo\":\"V\\u00eddeos\",\"link_saiba_mais\":\"\",\"link_saiba_mais_menu\":\"184\",\"link_saiba_mais_article\":\"\",\"texto_saiba_mais\":\"Galeria de v\\u00eddeos\",\"habilitar_mensagem_vazia\":\"0\",\"mensagem_vazia\":\"\",\"chapeu\":\"cont.xreference\",\"destaque\":\"0\",\"somente_imagem\":\"0\",\"buscar_cat_tag\":\"1\",\"catid_components\":\"1\",\"visualizar_filho\":\"0\",\"nivel\":\"10\",\"ordem\":\"title\",\"ordem_direction\":\"ASC\",\"chapeu_item1\":\"\",\"title_item1\":\"V\\u00eddeo 1: t\\u00edtulo com at\\u00e9 45 caracteres\",\"desc_item1\":\"<p>Legenda do v\\u00eddeo 1. Para ficar em uma linha use 77 caracteres. Para ficar em duas, 157 caracteres<\\/p>\",\"show_image_item1\":\"\",\"image_item1\":\"\",\"image_item1_align\":\"\",\"image_item1_alt\":\"\",\"url_simple_item1\":\"\",\"url_menu_item1\":\"\",\"url_article_item1\":\"\",\"ordering_item1\":\"1\",\"variacao_item1\":\"0\",\"chapeu_item2\":\"\",\"title_item2\":\"V\\u00eddeo 2: t\\u00edtulo com at\\u00e9 45 caracteres\",\"desc_item2\":\"Legenda do v\\u00eddeo 2. Para ficar em uma linha use 77 caracteres. Para ficar em duas, 157 caracteres\",\"show_image_item2\":\"\",\"image_item2\":\"\",\"image_item2_align\":\"\",\"image_item2_alt\":\"\",\"url_simple_item2\":\"\",\"url_menu_item2\":\"\",\"url_article_item2\":\"\",\"ordering_item2\":\"2\",\"variacao_item2\":\"0\",\"chapeu_item3\":\"\",\"title_item3\":\"V\\u00eddeo 3: t\\u00edtulo com at\\u00e9 45 caracteres\",\"desc_item3\":\"Legenda do v\\u00eddeo 3. Para ficar em uma linha use 77 caracteres. Para ficar em duas, 157 caracteres\",\"show_image_item3\":\"\",\"image_item3\":\"\",\"image_item3_align\":\"\",\"image_item3_alt\":\"\",\"url_simple_item3\":\"\",\"url_menu_item3\":\"\",\"url_article_item3\":\"\",\"ordering_item3\":\"3\",\"variacao_item3\":\"0\",\"chapeu_item4\":\"\",\"title_item4\":\"V\\u00eddeo 4: t\\u00edtulo com at\\u00e9 45 caracteres\",\"desc_item4\":\"Legenda do v\\u00eddeo 4. Para ficar em uma linha use 77 caracteres. Para ficar em duas, 157 caracteres\",\"show_image_item4\":\"\",\"image_item4\":\"\",\"image_item4_align\":\"\",\"image_item4_alt\":\"\",\"url_simple_item4\":\"\",\"url_menu_item4\":\"\",\"url_article_item4\":\"\",\"ordering_item4\":\"4\",\"variacao_item4\":\"0\",\"limitar_caractere\":\"0\",\"limite_caractere\":\"\",\"exibir_imagem\":\"1\",\"exibir_introtext\":\"1\",\"exibir_title\":\"1\",\"subitem_class\":\"\",\"header_tag\":\"h3\",\"moduleclass_sfx\":\"module-box-02-videos\",\"owncache\":\"1\",\"cache_time\":\"900\",\"limite_campos_preenchimento_manual\":\"\",\"module_tag\":\"div\",\"bootstrap_size\":\"0\",\"header_class\":\"\",\"style\":\"0\"}', 0, '*'),
 (184, 199, 'Separador', '', '', 1, 'pagina-interna-capa-editoria-b', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_htmlcustom', 1, 0, '{\"htmlcode\":\"&nbsp;\",\"layout\":\"_:default\",\"moduleclass_sfx\":\"\",\"cache\":\"1\",\"cache_time\":\"900\",\"cachemode\":\"static\",\"module_tag\":\"div\",\"bootstrap_size\":\"0\",\"header_tag\":\"h3\",\"header_class\":\"\",\"style\":\"0\"}', 0, '*');
-INSERT INTO `idg2019_modules` (`id`, `asset_id`, `title`, `note`, `content`, `ordering`, `position`, `checked_out`, `checked_out_time`, `publish_up`, `publish_down`, `published`, `module`, `access`, `showtitle`, `params`, `client_id`, `language`) VALUES
+INSERT INTO `#__modules` (`id`, `asset_id`, `title`, `note`, `content`, `ordering`, `position`, `checked_out`, `checked_out_time`, `publish_up`, `publish_down`, `published`, `module`, `access`, `showtitle`, `params`, `client_id`, `language`) VALUES
 (185, 200, 'Programas: somente imagens', '', '', 1, 'pagina-interna-capa-editoria-b', 0, '0000-00-00 00:00:00', '2019-06-14 01:46:05', '0000-00-00 00:00:00', 1, 'mod_chamadas', 1, 0, '{\"layout\":\"idg2019:noticias-home-destaques\",\"variacao\":\"0\",\"modelo\":\"article_content\",\"quantidade\":\"3\",\"sizeImage\":\"Original\",\"id_article_unico\":\"\",\"id_item_unico\":0,\"titulo_alternativo\":\"\",\"link_saiba_mais\":\"\",\"link_saiba_mais_menu\":\"\",\"link_saiba_mais_article\":\"\",\"texto_saiba_mais\":\"\",\"link_secundario\":\"\",\"link_secundario_menu\":\"\",\"link_secundario_article\":\"\",\"texto_secundario\":\"\",\"habilitar_mensagem_vazia\":\"0\",\"mensagem_vazia\":\"\",\"chapeu\":\"cont.xreference\",\"largura_px\":\"\",\"altura_px\":\"\",\"destaque\":\"0\",\"somente_imagem\":\"1\",\"buscar_cat_tag\":\"1\",\"catid\":[\"35\"],\"catid_components\":\"\",\"visualizar_filho\":\"0\",\"nivel\":\"10\",\"ordem\":\"publish_up\",\"ordem_direction\":\"DESC\",\"chapeu_item1\":\"\",\"title_item1\":\"\",\"desc_item1\":\"\",\"show_image_item1\":\"\",\"image_item1\":\"\",\"image_item1_align\":\"\",\"image_item1_alt\":\"\",\"url_simple_item1\":\"\",\"url_menu_item1\":\"\",\"url_article_item1\":\"\",\"ordering_item1\":\"1\",\"variacao_item1\":\"0\",\"chapeu_item2\":\"\",\"title_item2\":\"\",\"desc_item2\":\"\",\"show_image_item2\":\"\",\"image_item2\":\"\",\"image_item2_align\":\"\",\"image_item2_alt\":\"\",\"url_simple_item2\":\"\",\"url_menu_item2\":\"\",\"url_article_item2\":\"\",\"ordering_item2\":\"2\",\"variacao_item2\":\"0\",\"chapeu_item3\":\"\",\"title_item3\":\"\",\"desc_item3\":\"\",\"show_image_item3\":\"\",\"image_item3\":\"\",\"image_item3_align\":\"\",\"image_item3_alt\":\"\",\"url_simple_item3\":\"\",\"url_menu_item3\":\"\",\"url_article_item3\":\"\",\"ordering_item3\":\"3\",\"variacao_item3\":\"0\",\"chapeu_item4\":\"\",\"title_item4\":\"\",\"desc_item4\":\"\",\"show_image_item4\":\"\",\"image_item4\":\"\",\"image_item4_align\":\"\",\"image_item4_alt\":\"\",\"url_simple_item4\":\"\",\"url_menu_item4\":\"\",\"url_article_item4\":\"\",\"ordering_item4\":\"4\",\"variacao_item4\":\"0\",\"limitar_caractere\":\"0\",\"limite_caractere\":\"\",\"exibir_imagem\":\"1\",\"exibir_introtext\":\"0\",\"exibir_title\":\"0\",\"subitem_class\":\"\",\"header_tag\":\"h3\",\"moduleclass_sfx\":\"\",\"owncache\":\"1\",\"cache_time\":\"900\",\"limite_campos_preenchimento_manual\":\"\",\"module_tag\":\"div\",\"bootstrap_size\":\"0\",\"header_class\":\"\",\"style\":\"0\"}', 0, '*'),
 (186, 201, 'EDITORIA C', '', '', 1, 'pagina-interna-capa-editoria-c', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_container', 1, 1, '{\"posicao\":\"pagina-interna-capa-editoria-c-container\",\"moduleclass_sfx\":\"row-fluid outstanding-02  module-bottom-group\",\"alternative_title\":\"\",\"title_outstanding\":\"1\",\"text_link_title\":\"\",\"url_link_title\":\"\",\"show_footer\":\"0\",\"text_link_footer\":\"\",\"url_link_footer\":\"\",\"disposicao\":\"linhas\",\"auto_divisor\":\"1\",\"title_outstanding_column1\":\"0\",\"text_link_title_column1\":\"\",\"url_link_title_column1\":\"\",\"footer_outstanding_column1\":\"0\",\"text_link_footer_column1\":\"\",\"url_link_footer_column1\":\"\",\"title_outstanding_column2\":\"0\",\"text_link_title_column2\":\"\",\"url_link_title_column2\":\"\",\"footer_outstanding_column2\":\"0\",\"text_link_footer_column2\":\"\",\"url_link_footer_column2\":\"\",\"title_outstanding_column3\":\"0\",\"text_link_title_column3\":\"\",\"url_link_title_column3\":\"\",\"footer_outstanding_column3\":\"0\",\"text_link_footer_column3\":\"\",\"url_link_footer_column3\":\"\",\"container_level1\":\"div\",\"container_level2\":\"div\",\"layout\":\"_:default\",\"cache\":\"1\",\"cache_time\":\"900\",\"numero_limite_colunas\":\"\",\"module_tag\":\"div\",\"bootstrap_size\":\"0\",\"header_tag\":\"h3\",\"header_class\":\"\",\"style\":\"0\"}', 0, '*'),
 (187, 202, 'Assuntos destaque editoria C', '', '', 1, 'pagina-interna-capa-editoria-c', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_container', 1, 0, '{\"posicao\":\"pagina-interna-capa-editoria-c-container-02\",\"moduleclass_sfx\":\"row-fluid\",\"alternative_title\":\"\",\"title_outstanding\":\"1\",\"text_link_title\":\"\",\"url_link_title\":\"\",\"show_footer\":\"0\",\"text_link_footer\":\"\",\"url_link_footer\":\"\",\"disposicao\":\"linhas\",\"auto_divisor\":\"1\",\"title_outstanding_column1\":\"1\",\"text_link_title_column1\":\"\",\"url_link_title_column1\":\"\",\"footer_outstanding_column1\":\"0\",\"text_link_footer_column1\":\"\",\"url_link_footer_column1\":\"\",\"title_outstanding_column2\":\"1\",\"text_link_title_column2\":\"\",\"url_link_title_column2\":\"\",\"footer_outstanding_column2\":\"0\",\"text_link_footer_column2\":\"\",\"url_link_footer_column2\":\"\",\"title_outstanding_column3\":\"1\",\"text_link_title_column3\":\"\",\"url_link_title_column3\":\"\",\"footer_outstanding_column3\":\"0\",\"text_link_footer_column3\":\"\",\"url_link_footer_column3\":\"\",\"container_level1\":\"div\",\"container_level2\":\"div\",\"layout\":\"_:default\",\"cache\":\"1\",\"cache_time\":\"900\",\"numero_limite_colunas\":\"\",\"module_tag\":\"div\",\"bootstrap_size\":\"0\",\"header_tag\":\"h3\",\"header_class\":\"\",\"style\":\"0\"}', 0, '*'),
@@ -3735,7 +3722,7 @@ INSERT INTO `idg2019_modules` (`id`, `asset_id`, `title`, `note`, `content`, `or
 (214, 324, 'Estilos de capa', '', '', 1, 'menu-rodape', 0, '0000-00-00 00:00:00', '2019-04-12 14:13:02', '0000-00-00 00:00:00', 1, 'mod_menu', 1, 1, '{\"menutype\":\"estilos\",\"base\":\"\",\"startLevel\":\"1\",\"endLevel\":\"0\",\"showAllChildren\":\"0\",\"tag_id\":\"\",\"class_sfx\":\"col-md-2\",\"window_open\":\"\",\"layout\":\"idg2019:menuprincipal\",\"moduleclass_sfx\":\"\",\"cache\":\"1\",\"cache_time\":\"900\",\"cachemode\":\"itemid\",\"module_tag\":\"div\",\"bootstrap_size\":\"0\",\"header_tag\":\"h3\",\"header_class\":\"\",\"style\":\"0\"}', 0, '*'),
 (215, 325, 'Assuntos', '', '', 2, 'menu-rodape', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_menu', 1, 1, '{\"menutype\":\"assuntos\",\"base\":\"\",\"startLevel\":\"1\",\"endLevel\":\"0\",\"showAllChildren\":\"0\",\"tag_id\":\"\",\"class_sfx\":\"col-md-2\",\"window_open\":\"\",\"layout\":\"idg2019:menuprincipal\",\"moduleclass_sfx\":\"\",\"cache\":\"1\",\"cache_time\":\"900\",\"cachemode\":\"itemid\",\"module_tag\":\"div\",\"bootstrap_size\":\"0\",\"header_tag\":\"h3\",\"header_class\":\"\",\"style\":\"0\"}', 0, '*'),
 (216, 326, 'Informação ao Cidadão', 'Antigo módulo \"Sobre\", que teve seu menu e título renomeados em 24 de maio p/ \"Acesso à Informação\"', '', 3, 'menu-rodape', 0, '0000-00-00 00:00:00', '2019-04-25 14:04:53', '0000-00-00 00:00:00', 1, 'mod_menu', 1, 1, '{\"menutype\":\"informacao-ao-cidadao\",\"base\":\"\",\"startLevel\":\"1\",\"endLevel\":\"1\",\"showAllChildren\":\"0\",\"tag_id\":\"\",\"class_sfx\":\"col-md-2\",\"window_open\":\"\",\"layout\":\"idg2019:menuprincipal\",\"moduleclass_sfx\":\"\",\"cache\":\"1\",\"cache_time\":\"900\",\"cachemode\":\"itemid\",\"module_tag\":\"div\",\"bootstrap_size\":\"0\",\"header_tag\":\"h3\",\"header_class\":\"\",\"style\":\"0\"}', 0, '*');
-INSERT INTO `idg2019_modules` (`id`, `asset_id`, `title`, `note`, `content`, `ordering`, `position`, `checked_out`, `checked_out_time`, `publish_up`, `publish_down`, `published`, `module`, `access`, `showtitle`, `params`, `client_id`, `language`) VALUES
+INSERT INTO `#__modules` (`id`, `asset_id`, `title`, `note`, `content`, `ordering`, `position`, `checked_out`, `checked_out_time`, `publish_up`, `publish_down`, `published`, `module`, `access`, `showtitle`, `params`, `client_id`, `language`) VALUES
 (217, 327, 'Central de conteúdos', '', '', 4, 'menu-rodape', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_menu', 1, 1, '{\"menutype\":\"central-de-conteudos\",\"base\":\"\",\"startLevel\":\"1\",\"endLevel\":\"1\",\"showAllChildren\":\"0\",\"tag_id\":\"\",\"class_sfx\":\"col-md-2\",\"window_open\":\"\",\"layout\":\"idg2019:menuprincipal\",\"moduleclass_sfx\":\"\",\"cache\":\"1\",\"cache_time\":\"900\",\"cachemode\":\"itemid\",\"module_tag\":\"div\",\"bootstrap_size\":\"0\",\"header_tag\":\"h3\",\"header_class\":\"\",\"style\":\"0\"}', 0, '*'),
 (218, 328, 'Contato', '', '', 5, 'menu-rodape', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_menu', 1, 1, '{\"menutype\":\"contato\",\"base\":\"\",\"startLevel\":\"1\",\"endLevel\":\"0\",\"showAllChildren\":\"0\",\"tag_id\":\"\",\"class_sfx\":\"col-md-2\",\"window_open\":\"\",\"layout\":\"idg2019:menuprincipal\",\"moduleclass_sfx\":\"\",\"cache\":\"1\",\"cache_time\":\"900\",\"cachemode\":\"itemid\",\"module_tag\":\"div\",\"bootstrap_size\":\"0\",\"header_tag\":\"h3\",\"header_class\":\"\",\"style\":\"0\"}', 0, '*'),
 (219, 329, 'Manuais', 'Antigo módulo relacionado ao \"Menu de apoio\", renomeado para menu de relevância em 24 de maio.', '', 9, 'menu-rodape', 0, '0000-00-00 00:00:00', '2019-04-25 14:05:39', '0000-00-00 00:00:00', 1, 'mod_menu', 1, 1, '{\"menutype\":\"manuais\",\"base\":\"\",\"startLevel\":\"1\",\"endLevel\":\"0\",\"showAllChildren\":\"0\",\"tag_id\":\"\",\"class_sfx\":\"col-md-2\",\"window_open\":\"\",\"layout\":\"idg2019:menuprincipal\",\"moduleclass_sfx\":\"\",\"cache\":\"1\",\"cache_time\":\"900\",\"cachemode\":\"itemid\",\"module_tag\":\"div\",\"bootstrap_size\":\"0\",\"header_tag\":\"h3\",\"header_class\":\"\",\"style\":\"0\"}', 0, '*'),
@@ -3764,21 +3751,20 @@ INSERT INTO `idg2019_modules` (`id`, `asset_id`, `title`, `note`, `content`, `or
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_modules_menu`
+-- Estrutura da tabela `#__modules_menu`
 --
 
-DROP TABLE IF EXISTS `idg2019_modules_menu`;
-CREATE TABLE IF NOT EXISTS `idg2019_modules_menu` (
-  `moduleid` int(11) NOT NULL DEFAULT '0',
-  `menuid` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`moduleid`,`menuid`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+CREATE TABLE IF NOT EXISTS `#__modules_menu` (
+  `moduleid` int(11) NOT NULL DEFAULT 0,
+  `menuid` int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`moduleid`,`menuid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 --
--- Extraindo dados da tabela `idg2019_modules_menu`
+-- Extraindo dados da tabela `#__modules_menu`
 --
 
-INSERT INTO `idg2019_modules_menu` (`moduleid`, `menuid`) VALUES
+INSERT INTO `#__modules_menu` (`moduleid`, `menuid`) VALUES
 (1, -181),
 (1, -142),
 (2, 0),
@@ -3934,59 +3920,58 @@ INSERT INTO `idg2019_modules_menu` (`moduleid`, `menuid`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_newsfeeds`
+-- Estrutura da tabela `#__newsfeeds`
 --
 
-DROP TABLE IF EXISTS `idg2019_newsfeeds`;
-CREATE TABLE IF NOT EXISTS `idg2019_newsfeeds` (
-  `catid` int(11) NOT NULL DEFAULT '0',
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+CREATE TABLE IF NOT EXISTS `#__newsfeeds` (
+  `catid` int(11) NOT NULL DEFAULT 0,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL DEFAULT '',
   `alias` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '',
-  `link` varchar(2048) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `published` tinyint(1) NOT NULL DEFAULT '0',
-  `numarticles` int(10) UNSIGNED NOT NULL DEFAULT '1',
-  `cache_time` int(10) UNSIGNED NOT NULL DEFAULT '3600',
-  `checked_out` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `checked_out_time` datetime NOT NULL,
-  `ordering` int(11) NOT NULL DEFAULT '0',
-  `rtl` tinyint(4) NOT NULL DEFAULT '0',
-  `access` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `language` char(7) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `params` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created` datetime NOT NULL,
-  `created_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `created_by_alias` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `modified` datetime NOT NULL,
-  `modified_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `metakey` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `metadesc` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `metadata` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `xreference` varchar(50) NOT NULL DEFAULT '',
-  `publish_up` datetime NOT NULL,
-  `publish_down` datetime NOT NULL,
-  `description` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `version` int(10) UNSIGNED NOT NULL DEFAULT '1',
-  `hits` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `images` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `idx_access` (`access`) USING BTREE,
-  KEY `idx_checkout` (`checked_out`) USING BTREE,
-  KEY `idx_state` (`published`) USING BTREE,
-  KEY `idx_catid` (`catid`) USING BTREE,
-  KEY `idx_createdby` (`created_by`) USING BTREE,
-  KEY `idx_language` (`language`) USING BTREE,
-  KEY `idx_xreference` (`xreference`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `link` varchar(2048) NOT NULL DEFAULT '',
+  `published` tinyint(1) NOT NULL DEFAULT 0,
+  `numarticles` int(10) unsigned NOT NULL DEFAULT 1,
+  `cache_time` int(10) unsigned NOT NULL DEFAULT 3600,
+  `checked_out` int(10) unsigned NOT NULL DEFAULT 0,
+  `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `ordering` int(11) NOT NULL DEFAULT 0,
+  `rtl` tinyint(4) NOT NULL DEFAULT 0,
+  `access` int(10) unsigned NOT NULL DEFAULT 0,
+  `language` char(7) NOT NULL DEFAULT '',
+  `params` text NOT NULL,
+  `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `created_by` int(10) unsigned NOT NULL DEFAULT 0,
+  `created_by_alias` varchar(255) NOT NULL DEFAULT '',
+  `modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `modified_by` int(10) unsigned NOT NULL DEFAULT 0,
+  `metakey` text NOT NULL,
+  `metadesc` text NOT NULL,
+  `metadata` text NOT NULL,
+  `xreference` varchar(50) NOT NULL DEFAULT '' COMMENT 'A reference to enable linkages to external data sets.',
+  `publish_up` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `description` text NOT NULL,
+  `version` int(10) unsigned NOT NULL DEFAULT 1,
+  `hits` int(10) unsigned NOT NULL DEFAULT 0,
+  `images` text NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_access` (`access`),
+  KEY `idx_checkout` (`checked_out`),
+  KEY `idx_state` (`published`),
+  KEY `idx_catid` (`catid`),
+  KEY `idx_createdby` (`created_by`),
+  KEY `idx_language` (`language`),
+  KEY `idx_xreference` (`xreference`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_oauth2_tokens`
+-- Estrutura da tabela `#__oauth2_tokens`
 --
 
-DROP TABLE IF EXISTS `idg2019_oauth2_tokens`;
-CREATE TABLE IF NOT EXISTS `idg2019_oauth2_tokens` (
+DROP TABLE IF EXISTS `#__oauth2_tokens`;
+CREATE TABLE IF NOT EXISTS `#__oauth2_tokens` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `client_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `client_secret` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
@@ -4004,23 +3989,22 @@ CREATE TABLE IF NOT EXISTS `idg2019_oauth2_tokens` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_overrider`
+-- Estrutura da tabela `#__overrider`
 --
 
-DROP TABLE IF EXISTS `idg2019_overrider`;
-CREATE TABLE IF NOT EXISTS `idg2019_overrider` (
+CREATE TABLE IF NOT EXISTS `#__overrider` (
   `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
-  `constant` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `string` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `file` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=5485 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `constant` varchar(255) NOT NULL,
+  `string` text NOT NULL,
+  `file` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 --
--- Extraindo dados da tabela `idg2019_overrider`
+-- Extraindo dados da tabela `#__overrider`
 --
 
-INSERT INTO `idg2019_overrider` (`id`, `constant`, `string`, `file`) VALUES
+INSERT INTO `#__overrider` (`id`, `constant`, `string`, `file`) VALUES
 (1, 'COM_AGENDADIRIGENTES_HELPER_MODELS_ERROR', 'Erro na helper do arquivo models.php. Arquivo de formato nao encontrado.', '/home/portal2019/language/pt-BR/pt-BR.com_agendadirigentes.ini'),
 (2, 'COM_AGENDADIRIGENTES_VIEW_AUTORIDADE_NOTFOUND', 'Autoridade n&atilde;o encontrada', '/home/portal2019/language/pt-BR/pt-BR.com_agendadirigentes.ini'),
 (3, 'COM_AGENDADIRIGENTES_VIEW_AUTORIDADE_PAGE_HEADING', 'Agenda de Autoridade', '/home/portal2019/language/pt-BR/pt-BR.com_agendadirigentes.ini'),
@@ -4434,7 +4418,7 @@ INSERT INTO `idg2019_overrider` (`id`, `constant`, `string`, `file`) VALUES
 (411, 'COM_MEDIA_ERROR_WARNFILENAME', 'Por favor, nome do arquivo deve conter apenas caracteres alfanuméricos, sem espaços.', '/home/portal2019/language/pt-BR/pt-BR.com_media.ini'),
 (412, 'COM_MEDIA_ERROR_WARNFILETOOLARGE', 'Este arquivo é muito grande para ser enviado.', '/home/portal2019/language/pt-BR/pt-BR.com_media.ini'),
 (413, 'COM_MEDIA_ERROR_WARNFILETYPE', 'Este tipo de arquivo não é suportado.', '/home/portal2019/language/pt-BR/pt-BR.com_media.ini');
-INSERT INTO `idg2019_overrider` (`id`, `constant`, `string`, `file`) VALUES
+INSERT INTO `#__overrider` (`id`, `constant`, `string`, `file`) VALUES
 (414, 'COM_MEDIA_ERROR_WARNIEXSS', 'Encontrado possível ataque IE XSS.', '/home/portal2019/language/pt-BR/pt-BR.com_media.ini'),
 (415, 'COM_MEDIA_ERROR_WARNINVALID_IMG', 'Não é uma imagem válida.', '/home/portal2019/language/pt-BR/pt-BR.com_media.ini'),
 (416, 'COM_MEDIA_ERROR_WARNINVALID_MIME', 'Tipo MIME detectado é inválido ou proibido.', '/home/portal2019/language/pt-BR/pt-BR.com_media.ini'),
@@ -4786,7 +4770,7 @@ INSERT INTO `idg2019_overrider` (`id`, `constant`, `string`, `file`) VALUES
 (762, 'COM_PHOCADOWNLOAD_FIELD_ALLOWED_FILE_TYPES_UPLOAD_LABEL', 'Tipos de Arquivos Permitidos (Upload)', '/home/portal2019/language/pt-BR/pt-BR.com_phocadownload.ini'),
 (763, 'COM_PHOCADOWNLOAD_FIELD_APPROVED_DESC', 'Configurar se o arquivo será ou não autorizados', '/home/portal2019/language/pt-BR/pt-BR.com_phocadownload.ini'),
 (764, 'COM_PHOCADOWNLOAD_FIELD_APPROVED_LABEL', 'Autorizado', '/home/portal2019/language/pt-BR/pt-BR.com_phocadownload.ini');
-INSERT INTO `idg2019_overrider` (`id`, `constant`, `string`, `file`) VALUES
+INSERT INTO `#__overrider` (`id`, `constant`, `string`, `file`) VALUES
 (765, 'COM_PHOCADOWNLOAD_FIELD_AUTHOR_DESC', 'Configurar Autor do Arquivo', '/home/portal2019/language/pt-BR/pt-BR.com_phocadownload.ini'),
 (766, 'COM_PHOCADOWNLOAD_FIELD_AUTHOR_EMAIL_DESC', 'Configurar email do autor', '/home/portal2019/language/pt-BR/pt-BR.com_phocadownload.ini'),
 (767, 'COM_PHOCADOWNLOAD_FIELD_AUTHOR_EMAIL_LABEL', 'Email do autor', '/home/portal2019/language/pt-BR/pt-BR.com_phocadownload.ini'),
@@ -5124,7 +5108,7 @@ INSERT INTO `idg2019_overrider` (`id`, `constant`, `string`, `file`) VALUES
 (1099, 'COM_PHOCADOWNLOAD_FILE_RATING', 'Avaliação do Arquivo', '/home/portal2019/language/pt-BR/pt-BR.com_phocadownload.sys.ini'),
 (1100, 'COM_PHOCADOWNLOAD_XML_DESCRIPTION', 'Phoca Download é o gerenciador de download para Joomla! CMS. Ele inclui componente, modulo e plugins e permite adicionar arquivos ao site para ser realizado o download por outros usuários.', '/home/portal2019/language/pt-BR/pt-BR.com_phocadownload.sys.ini'),
 (1101, 'COM_PHOCADOWNLOAD_CATEGORIES_GROUP', 'Lista de Categorias (Tela de Categorias)', '/home/portal2019/language/pt-BR/pt-BR.com_phocadownload.sys.ini');
-INSERT INTO `idg2019_overrider` (`id`, `constant`, `string`, `file`) VALUES
+INSERT INTO `#__overrider` (`id`, `constant`, `string`, `file`) VALUES
 (1102, 'COM_PHOCADOWNLOAD_CATEGORIES_GROUP_DESC', 'Esta tela lista as categorias', '/home/portal2019/language/pt-BR/pt-BR.com_phocadownload.sys.ini'),
 (1103, 'COM_PHOCADOWNLOAD_CATEGORY_GROUP', 'Lista de arquivos (Tela de Categoria)', '/home/portal2019/language/pt-BR/pt-BR.com_phocadownload.sys.ini'),
 (1104, 'COM_PHOCADOWNLOAD_CATEGORY_GROUP_DESC', 'Esta tela exibe a lista de arquivos', '/home/portal2019/language/pt-BR/pt-BR.com_phocadownload.sys.ini'),
@@ -5462,7 +5446,7 @@ INSERT INTO `idg2019_overrider` (`id`, `constant`, `string`, `file`) VALUES
 (1436, 'COM_PHOCAGALLERY_DISPLAY_NUM', 'Exibir números', '/home/portal2019/language/pt-BR/pt-BR.com_phocagallery.ini'),
 (1437, 'COM_PHOCAGALLERY_DISTANT_VIEW', 'Visão distante', '/home/portal2019/language/pt-BR/pt-BR.com_phocagallery.ini'),
 (1438, 'COM_PHOCAGALLERY_DOWNLOAD_IMAGE', 'Baixar: Posicione seu mouse sobre a imagem fora dessa caixa, clique com o botão direito do mouse e escolha Salva imagem como ou Baixar imagem.', '/home/portal2019/language/pt-BR/pt-BR.com_phocagallery.ini');
-INSERT INTO `idg2019_overrider` (`id`, `constant`, `string`, `file`) VALUES
+INSERT INTO `#__overrider` (`id`, `constant`, `string`, `file`) VALUES
 (1439, 'COM_PHOCAGALLERY_DRAG_FILES_HERE', 'Arraste arquivos aqui', '/home/portal2019/language/pt-BR/pt-BR.com_phocagallery.ini'),
 (1440, 'COM_PHOCAGALLERY_DROP_SHADOW', 'Sombra', '/home/portal2019/language/pt-BR/pt-BR.com_phocagallery.ini'),
 (1441, 'COM_PHOCAGALLERY_DROP_SHADOW_TR', 'Sombra transparente', '/home/portal2019/language/pt-BR/pt-BR.com_phocagallery.ini'),
@@ -5767,7 +5751,7 @@ INSERT INTO `idg2019_overrider` (`id`, `constant`, `string`, `file`) VALUES
 (1740, 'COM_PHOCAGALLERY_FIELD_ENABLE_APPROVE_USERIMAGE_LABEL', 'Habilitar autorização de imagem de usuário carregada', '/home/portal2019/language/pt-BR/pt-BR.com_phocagallery.ini'),
 (1741, 'COM_PHOCAGALLERY_FIELD_ENABLE_APPROVE_USERSUBCAT_DESC', 'Se SIM o sub-álbum de usuário será criado mas não autorizado e deverá ser autorizado pelo administrador. Se NÃO o sub-álbum será criado e autorizado', '/home/portal2019/language/pt-BR/pt-BR.com_phocagallery.ini'),
 (1742, 'COM_PHOCAGALLERY_FIELD_ENABLE_APPROVE_USERSUBCAT_LABEL', 'Habilitar autorização de sub-álbum de usuário', '/home/portal2019/language/pt-BR/pt-BR.com_phocagallery.ini');
-INSERT INTO `idg2019_overrider` (`id`, `constant`, `string`, `file`) VALUES
+INSERT INTO `#__overrider` (`id`, `constant`, `string`, `file`) VALUES
 (1743, 'COM_PHOCAGALLERY_FIELD_ENABLE_AVATAR_UPLOADING_DESC', 'Defina se usuário irá poder carregar avatar', '/home/portal2019/language/pt-BR/pt-BR.com_phocagallery.ini'),
 (1744, 'COM_PHOCAGALLERY_FIELD_ENABLE_AVATAR_UPLOADING_LABEL', 'Habilitar carregamento de avatar', '/home/portal2019/language/pt-BR/pt-BR.com_phocagallery.ini'),
 (1745, 'COM_PHOCAGALLERY_FIELD_ENABLE_COOLIRIS_DESC', 'Habilitar ou desabilitar apresentação por Cooliris', '/home/portal2019/language/pt-BR/pt-BR.com_phocagallery.ini'),
@@ -6062,7 +6046,7 @@ INSERT INTO `idg2019_overrider` (`id`, `constant`, `string`, `file`) VALUES
 (2034, 'COM_PHOCAGALLERY_GO_TO_PHOCA_GALLERY_USER_MANUAL', 'Ir para o manual do usuário do Phoca Gallery', '/home/portal2019/language/pt-BR/pt-BR.com_phocagallery.ini'),
 (2035, 'COM_PHOCAGALLERY_GPS.GPSALTITUDE', 'GPSAltitude', '/home/portal2019/language/pt-BR/pt-BR.com_phocagallery.ini'),
 (2036, 'COM_PHOCAGALLERY_GPS.GPSALTITUDEREF', 'GPSAltitudeRef', '/home/portal2019/language/pt-BR/pt-BR.com_phocagallery.ini');
-INSERT INTO `idg2019_overrider` (`id`, `constant`, `string`, `file`) VALUES
+INSERT INTO `#__overrider` (`id`, `constant`, `string`, `file`) VALUES
 (2037, 'COM_PHOCAGALLERY_GPS.GPSDATESTAMP', 'GPSDateStamp', '/home/portal2019/language/pt-BR/pt-BR.com_phocagallery.ini'),
 (2038, 'COM_PHOCAGALLERY_GPS.GPSLATITUDE', 'GPSLatitude', '/home/portal2019/language/pt-BR/pt-BR.com_phocagallery.ini'),
 (2039, 'COM_PHOCAGALLERY_GPS.GPSLATITUDEREF', 'GPSLatitudeRef', '/home/portal2019/language/pt-BR/pt-BR.com_phocagallery.ini'),
@@ -6435,7 +6419,7 @@ INSERT INTO `idg2019_overrider` (`id`, `constant`, `string`, `file`) VALUES
 (2406, 'COM_PHOCAGALLERY_SUCCESS_THEME_INSTALLED', 'Tema instalado', '/home/portal2019/language/pt-BR/pt-BR.com_phocagallery.ini'),
 (2407, 'COM_PHOCAGALLERY_SUCCESS_THUMBS_REGENERATING', 'Miniaturas criadas', '/home/portal2019/language/pt-BR/pt-BR.com_phocagallery.ini'),
 (2408, 'COM_PHOCAGALLERY_SUCCESS_UNPUBLISHING_CATEGORY', 'Categoria despublicada', '/home/portal2019/language/pt-BR/pt-BR.com_phocagallery.ini');
-INSERT INTO `idg2019_overrider` (`id`, `constant`, `string`, `file`) VALUES
+INSERT INTO `#__overrider` (`id`, `constant`, `string`, `file`) VALUES
 (2409, 'COM_PHOCAGALLERY_SUCCESS_UNPUBLISHING_ITEM', 'Ítem despublicado', '/home/portal2019/language/pt-BR/pt-BR.com_phocagallery.ini'),
 (2410, 'COM_PHOCAGALLERY_SWITCH_IMAGE', 'Mudar imagem', '/home/portal2019/language/pt-BR/pt-BR.com_phocagallery.ini'),
 (2411, 'COM_PHOCAGALLERY_THEME', 'Tema', '/home/portal2019/language/pt-BR/pt-BR.com_phocagallery.ini'),
@@ -6772,7 +6756,7 @@ INSERT INTO `idg2019_overrider` (`id`, `constant`, `string`, `file`) VALUES
 (2742, 'COM_WEBLINKS_FILTER_SEARCH_DESC', 'Filtro de Pesquisa de Weblinks', '/home/portal2019/language/pt-BR/pt-BR.com_weblinks.ini'),
 (2743, 'COM_WEBLINKS_FIELD_TITLE_DESC', 'Seu Weblink precisa ter um título.', '/home/portal2019/language/pt-BR/pt-BR.com_weblinks.ini'),
 (2744, 'COM_WEBLINKS_FIELD_URL_DESC', 'Você deve digitar uma URL.', '/home/portal2019/language/pt-BR/pt-BR.com_weblinks.ini');
-INSERT INTO `idg2019_overrider` (`id`, `constant`, `string`, `file`) VALUES
+INSERT INTO `#__overrider` (`id`, `constant`, `string`, `file`) VALUES
 (2745, 'COM_WEBLINKS_FIELD_URL_LABEL', 'URL', '/home/portal2019/language/pt-BR/pt-BR.com_weblinks.ini'),
 (2746, 'COM_WEBLINKS_FORM_CREATE_WEBLINK', 'Enviar um Weblink', '/home/portal2019/language/pt-BR/pt-BR.com_weblinks.ini'),
 (2747, 'COM_WEBLINKS_GRID_TITLE', 'Título', '/home/portal2019/language/pt-BR/pt-BR.com_weblinks.ini'),
@@ -7058,7 +7042,7 @@ INSERT INTO `idg2019_overrider` (`id`, `constant`, `string`, `file`) VALUES
 (3027, 'UTC__05_00__EASTERN_TIME__US__AMP__CANADA___BOGOTA__LIMA', '(UTC -05:00) Eastern Time (US &amp; Canada), Bogota, Lima', '/home/portal2019/language/pt-BR/pt-BR.ini'),
 (3028, 'UTC__04_30__VENEZUELA', '(UTC -04:30) Venezuela', '/home/portal2019/language/pt-BR/pt-BR.ini'),
 (3029, 'UTC__04_00__ATLANTIC_TIME__CANADA___CARACAS__LA_PAZ', '(UTC -04:00) Atlantic Time (Canada), Caracas, La Paz', '/home/portal2019/language/pt-BR/pt-BR.ini'),
-(3030, 'UTC__03_30__ST__JOHN_S__NEWFOUNDLAND__LABRADOR', '(UTC -03:30) St. John\'s, Newfoundland, Labrador', '/home/portal2019/language/pt-BR/pt-BR.ini'),
+(3030, 'UTC__03_30__ST__JOHN_S__NEWFOUNDLAND__LABRADOR', '(UTC -03:30) St. Johns, Newfoundland, Labrador', '/home/portal2019/language/pt-BR/pt-BR.ini'),
 (3031, 'UTC__03_00__BRAZIL__BUENOS_AIRES__GEORGETOWN', '(UTC -03:00) Brasil, Buenos Aires, Georgetown', '/home/portal2019/language/pt-BR/pt-BR.ini'),
 (3032, 'UTC__02_00__MID_ATLANTIC', '(UTC -02:00) Mid-Atlantic', '/home/portal2019/language/pt-BR/pt-BR.ini'),
 (3033, 'UTC__01_00__AZORES__CAPE_VERDE_ISLANDS', '(UTC -01:00) Azores, Cape Verde Islands', '/home/portal2019/language/pt-BR/pt-BR.ini'),
@@ -7197,7 +7181,7 @@ INSERT INTO `idg2019_overrider` (`id`, `constant`, `string`, `file`) VALUES
 (3166, 'JLIB_CLIENT_ERROR_JFTP_STORE_BAD_RESPONSE', 'JFTP: :store: Má resposta', '/home/portal2019/language/pt-BR/pt-BR.lib_joomla.ini'),
 (3167, 'JLIB_CLIENT_ERROR_JFTP_STORE_READING_LOCAL', 'JFTP: :store: Não é possível abrir o arquivo local para leitura. Caminho do local: %s', '/home/portal2019/language/pt-BR/pt-BR.lib_joomla.ini'),
 (3168, 'JLIB_CLIENT_ERROR_JFTP_STORE_FIND_LOCAL', 'JFTP: :store: Não é possível encontrar o arquivo local. Caminho do local: %s', '/home/portal2019/language/pt-BR/pt-BR.lib_joomla.ini');
-INSERT INTO `idg2019_overrider` (`id`, `constant`, `string`, `file`) VALUES
+INSERT INTO `#__overrider` (`id`, `constant`, `string`, `file`) VALUES
 (3169, 'JLIB_CLIENT_ERROR_JFTP_STORE_BAD_RESPONSE_STOR', 'JFTP: :store: Má resposta. Resposta do Servidor: %1$s [Esperado: 150 ou 125]. Caminho do envio: %2$s', '/home/portal2019/language/pt-BR/pt-BR.lib_joomla.ini'),
 (3170, 'JLIB_CLIENT_ERROR_JFTP_STORE_DATA_PORT', 'JFTP: :store: Não é possível gravar dados da porta especifica', '/home/portal2019/language/pt-BR/pt-BR.lib_joomla.ini'),
 (3171, 'JLIB_CLIENT_ERROR_JFTP_STORE_BAD_RESPONSE_TRANSFER', 'JFTP: :store: Falha de transferência. Resposta do Servidor: %1$s [Esperado: 226]. Caminho do envio: %2$s', '/home/portal2019/language/pt-BR/pt-BR.lib_joomla.ini'),
@@ -7299,7 +7283,6 @@ INSERT INTO `idg2019_overrider` (`id`, `constant`, `string`, `file`) VALUES
 (3267, 'JLIB_DATABASE_ERROR_USERGROUP_TITLE_EXISTS', 'Já existe um grupo de usuários com este título. Títulos devem ser únicos.', '/home/portal2019/language/pt-BR/pt-BR.lib_joomla.ini'),
 (3268, 'JLIB_DATABASE_ERROR_USERNAME_CANNOT_CHANGE', 'Não pode usar este nome de usuário', '/home/portal2019/language/pt-BR/pt-BR.lib_joomla.ini'),
 (3269, 'JLIB_DATABASE_ERROR_USERNAME_INUSE', 'Nome de usuário já existe', '/home/portal2019/language/pt-BR/pt-BR.lib_joomla.ini'),
-(3270, 'JLIB_DATABASE_ERROR_VALID_AZ09', 'Por favor, informe um nome de usuário válido. Sem espaços, com o mínimo de %d caracteres e <strong>não</strong> pode conter os seguintes caracteres: < > \\ \" \' &#37; ; ( ) &', '/home/portal2019/language/pt-BR/pt-BR.lib_joomla.ini'),
 (3271, 'JLIB_DATABASE_ERROR_VALID_MAIL', 'Por favor, informe um endereço de e-mail válido.', '/home/portal2019/language/pt-BR/pt-BR.lib_joomla.ini'),
 (3272, 'JLIB_DATABASE_ERROR_VIEWLEVEL', 'Nível de visualização deve ter um título', '/home/portal2019/language/pt-BR/pt-BR.lib_joomla.ini'),
 (3273, 'JLIB_DATABASE_FUNCTION_NOERROR', 'Funções de DB não informaram erros', '/home/portal2019/language/pt-BR/pt-BR.lib_joomla.ini'),
@@ -7542,7 +7525,7 @@ INSERT INTO `idg2019_overrider` (`id`, `constant`, `string`, `file`) VALUES
 (3510, 'JLIB_INSTALLER_ABORT_METHODNOTSUPPORTED', 'O  método não é suportado por este tipo de extensão', '/home/portal2019/language/pt-BR/pt-BR.lib_joomla.ini'),
 (3511, 'JLIB_INSTALLER_ABORT_METHODNOTSUPPORTED_TYPE', 'O  método não é suportado por este tipo de extensão: %s', '/home/portal2019/language/pt-BR/pt-BR.lib_joomla.ini'),
 (3512, 'JLIB_INSTALLER_ABORT_MOD_INSTALL_COPY_SETUP', 'Instalação de Módulos: Não foi possível copiar os arquivos de instalação.', '/home/portal2019/language/pt-BR/pt-BR.lib_joomla.ini');
-INSERT INTO `idg2019_overrider` (`id`, `constant`, `string`, `file`) VALUES
+INSERT INTO `#__overrider` (`id`, `constant`, `string`, `file`) VALUES
 (3513, 'JLIB_INSTALLER_ABORT_MOD_INSTALL_CREATE_DIRECTORY', 'Módulo %1$s: Falha ao criar diretório: %2$s', '/home/portal2019/language/pt-BR/pt-BR.lib_joomla.ini'),
 (3514, 'JLIB_INSTALLER_ABORT_MOD_INSTALL_CUSTOM_INSTALL_FAILURE', 'Instalação de Módulos: Falha na instalação personalizada', '/home/portal2019/language/pt-BR/pt-BR.lib_joomla.ini'),
 (3515, 'JLIB_INSTALLER_ABORT_MOD_INSTALL_DIRECTORY', 'Módulo %1$s: Outro módulo já está usando o diretório: %2$s', '/home/portal2019/language/pt-BR/pt-BR.lib_joomla.ini'),
@@ -7835,7 +7818,7 @@ INSERT INTO `idg2019_overrider` (`id`, `constant`, `string`, `file`) VALUES
 (3802, 'MOD_ARTICLES_CATEGORY_OPTION_OFF_VALUE', 'Desativado', '/home/portal2019/language/pt-BR/pt-BR.mod_articles_category.ini'),
 (3803, 'MOD_ARTICLES_CATEGORY_OPTION_ONLYFEATURED_VALUE', 'Somente', '/home/portal2019/language/pt-BR/pt-BR.mod_articles_category.ini'),
 (3804, 'MOD_ARTICLES_CATEGORY_OPTION_ORDERING_VALUE', 'Ordenação do Joomla!', '/home/portal2019/language/pt-BR/pt-BR.mod_articles_category.ini');
-INSERT INTO `idg2019_overrider` (`id`, `constant`, `string`, `file`) VALUES
+INSERT INTO `#__overrider` (`id`, `constant`, `string`, `file`) VALUES
 (3805, 'MOD_ARTICLES_CATEGORY_OPTION_ORDERINGFEATURED_VALUE', 'Ordem dos Destaques', '/home/portal2019/language/pt-BR/pt-BR.mod_articles_category.ini'),
 (3806, 'MOD_ARTICLES_CATEGORY_OPTION_RELATIVEDAY_VALUE', 'Data Relativa', '/home/portal2019/language/pt-BR/pt-BR.mod_articles_category.ini'),
 (3807, 'MOD_ARTICLES_CATEGORY_OPTION_STARTPUBLISHING_VALUE', 'Início da Publicação', '/home/portal2019/language/pt-BR/pt-BR.mod_articles_category.ini'),
@@ -7985,7 +7968,7 @@ INSERT INTO `idg2019_overrider` (`id`, `constant`, `string`, `file`) VALUES
 (3951, 'MOD_CHAMADA_FIELD_LIMITE_CARACTERE_LABEL', 'Número de caracteres', '/home/portal2019/language/pt-BR/pt-BR.mod_chamadas.ini'),
 (3952, 'MOD_CHAMADA_FIELD_LIMITE_CARACTERE_DESC', 'Informar limite de caracteres até o qual será procurada a última palavra completa, de forma a evitar o corte de palavras de forma indesejada.', '/home/portal2019/language/pt-BR/pt-BR.mod_chamadas.ini'),
 (3953, 'MOD_CHAMADA_FIELD_CHAPEU_LABEL', 'Campo de \'chapéu\'', '/home/portal2019/language/pt-BR/pt-BR.mod_chamadas.ini'),
-(3954, 'MOD_CHAMADA_FIELD_CHAPEU_DESC', 'Informe nome_tabela.nome_campo para o qual o chapéu será utilizado. Para fonte de dados article_content, utilize preferencialmente cont.xreference. Para não utilizar este campo, informe 0 ou nenhum\'. Utilize \'cont\' para se referir à tabela de conteúdo, \'cat\' para a categoria e \'mtag\' para o mapeamento de tags (este último somente na versão 3.x).', '/home/portal2019/language/pt-BR/pt-BR.mod_chamadas.ini'),
+(3954, 'MOD_CHAMADA_FIELD_CHAPEU_DESC', 'Informe nome_tabela.nome_campo para o qual o chapéu será utilizado. Para fonte de dados article_content, utilize preferencialmente cont.xreference. Para não utilizar este campo, informe 0 ou \'nenhum\'. Utilize \'cont\' para se referir à tabela de conteúdo, \'cat\' para a categoria e \'mtag\' para o mapeamento de tags (este último somente na versão 3.x).', '/home/portal2019/language/pt-BR/pt-BR.mod_chamadas.ini'),
 (3955, 'MOD_CHAMADA_FIELD_DESTAQUE_LABEL', 'Itens em destaque', '/home/portal2019/language/pt-BR/pt-BR.mod_chamadas.ini'),
 (3956, 'MOD_CHAMADA_FIELD_DESTAQUE_DESC', 'Escolha que tratamento será dado na consulta para os itens em destaque.', '/home/portal2019/language/pt-BR/pt-BR.mod_chamadas.ini'),
 (3957, 'MOD_CHAMADA_OPTION_TODOS_VALUE', 'Trazer todos os itens', '/home/portal2019/language/pt-BR/pt-BR.mod_chamadas.ini'),
@@ -8132,7 +8115,7 @@ INSERT INTO `idg2019_overrider` (`id`, `constant`, `string`, `file`) VALUES
 (4098, 'MOD_CHAMADA_FIELD_CATEGORY_DESC', 'Informe a(s) categoria(s) de CONTEÚDO PADRÃO DO JOOMLA a partir da(s) qual(is) os dados serão carregados. IMPORTANTE: a consideração das categorias filhas nos resultados da consulta somente ocorrem quando uma única categoria for selecionada. A seleção multi categorias é permitida, mas desabilita o carregamento de categorias filhas.', '/home/portal2019/language/pt-BR/pt-BR.mod_chamadas.ini'),
 (4099, 'JCATEGORY_COMPONENTS', 'IDs de categorias (outras fontes de dados)', '/home/portal2019/language/pt-BR/pt-BR.mod_chamadas.ini'),
 (4100, 'MOD_CHAMADA_FIELD_CATEGORY_DESC_COMPONENTS', 'Informe os IDs de categorias de outras fontes de dados, quando as categorias desejadas não fizerem parte da lista de categorias do componente de conteúdo padrão do Joomla (com_content).', '/home/portal2019/language/pt-BR/pt-BR.mod_chamadas.ini');
-INSERT INTO `idg2019_overrider` (`id`, `constant`, `string`, `file`) VALUES
+INSERT INTO `#__overrider` (`id`, `constant`, `string`, `file`) VALUES
 (4101, 'MOD_CHAMADA_XML_DESCRICAO', 'Módulo padrão do projeto de identidade de governo para exibição de artigos na página inicial. Permite diversos comportamentos diferentes.', '/home/portal2019/language/pt-BR/pt-BR.mod_chamadas.sys.ini'),
 (4102, 'MOD_CUSTOM', 'Personalizar HTML', '/home/portal2019/language/pt-BR/pt-BR.mod_custom.ini'),
 (4103, 'MOD_CUSTOM_FIELD_PREPARE_CONTENT_DESC', 'Opcionalmente preparar o conteúdo com o conteúdo Joomla Plug-ins.', '/home/portal2019/language/pt-BR/pt-BR.mod_custom.ini'),
@@ -8504,7 +8487,7 @@ INSERT INTO `idg2019_overrider` (`id`, `constant`, `string`, `file`) VALUES
 (4469, 'K2_THE_PATH_SEPARATOR_EG_A_RIGHT_ARROW', 'O separador de caminho, por exemplo, uma seta para a direita.', '/home/portal2019/language/pt-BR/pt-BR.mod_k2_tools.ini'),
 (4470, 'K2_THE_TEXT_TO_DISPLAY_BY_DEFAULT_IN_THE_SEARCH_BOX', 'O texto a ser exibido por padrão na caixa de pesquisa.', '/home/portal2019/language/pt-BR/pt-BR.mod_k2_tools.ini'),
 (4471, 'K2_THE_TIME_IN_SECONDS_BEFORE_THE_MODULE_IS_RECACHED', 'O tempo (em segundos) antes de o módulo é re-cached.', '/home/portal2019/language/pt-BR/pt-BR.mod_k2_tools.ini');
-INSERT INTO `idg2019_overrider` (`id`, `constant`, `string`, `file`) VALUES
+INSERT INTO `#__overrider` (`id`, `constant`, `string`, `file`) VALUES
 (4472, 'K2_THU', 'Qui', '/home/portal2019/language/pt-BR/pt-BR.mod_k2_tools.ini'),
 (4473, 'K2_TOOLS', 'K2 Tools é um módulo multi-função de filtragem de conteúdo ou apresentação de K2 de várias maneiras.', '/home/portal2019/language/pt-BR/pt-BR.mod_k2_tools.ini'),
 (4474, 'K2_TO_SELECT_MULTIPLE_CATEGORIES_PRESS_AND_KEEP_CTRLCMD_AND_THEN_CLICK_ON_THE_DESIRED_CATEGORIES', 'Para selecionar várias categorias, pressione e mantenha a tecla Ctrl / Cmd e clique nas categorias desejadas.', '/home/portal2019/language/pt-BR/pt-BR.mod_k2_tools.ini'),
@@ -8545,7 +8528,7 @@ INSERT INTO `idg2019_overrider` (`id`, `constant`, `string`, `file`) VALUES
 (4509, 'K2_MODERATE_COMMENTS_TO_MY_PUBLISHED_ITEMS', 'Moderar Comentários aos meus artigos publicados', '/home/portal2019/language/pt-BR/pt-BR.mod_k2_user.ini'),
 (4510, 'K2_MODULE_CLASS_SUFFIX', 'Sufixo módulo de classe', '/home/portal2019/language/pt-BR/pt-BR.mod_k2_user.ini'),
 (4511, 'K2_MODULE_CLASS_SUFFIX_DESCRIPTION', 'Um sufixo a ser aplicado à classe CSS do Módulo. Isto permite um estilo individual ao Módulo.', '/home/portal2019/language/pt-BR/pt-BR.mod_k2_user.ini'),
-(4512, 'K2_MOD_K2_USER_DESCRIPTION', 'K2 User é uma versão melhorada do módulo de login do Joomla!. Use-o para exibir uma caixa de login para seus usuários. Quando os usuários estiverem conectados, eles verão o bloco de usuário (barra de ferramentas), que lhes permite realizar tarefas como: adicionar / editar itens K2 (com base em seus direitos de acesso), moderar comentários de seus itens (de novo, com base em seus direitos de acesso) , atualizar os seus dados pessoais (perfil) e acessar rapidamente todos os seus itens publicados (a página de usuário / blog). Este módulo substitui o módulo \'Login K2\" na v2.5 e posterior. Se você estiver usando o módulo \"K2 Login\", por favor, certifique-se de substituí-lo por este. Na v2.6 do K2, o módulo \'K2 Login\' será removido permanentemente do pacote de extensão K2.', '/home/portal2019/language/pt-BR/pt-BR.mod_k2_user.ini'),
+(4512, 'K2_MOD_K2_USER_DESCRIPTION', 'K2 User é uma versão melhorada do módulo de login do Joomla!. Use-o para exibir uma caixa de login para seus usuários. Quando os usuários estiverem conectados, eles verão o bloco de usuário (barra de ferramentas), que lhes permite realizar tarefas como: adicionar / editar itens K2 (com base em seus direitos de acesso), moderar comentários de seus itens (de novo, com base em seus direitos de acesso) , atualizar os seus dados pessoais (perfil) e acessar rapidamente todos os seus itens publicados (a página de usuário / blog). Este módulo substitui o módulo \'Login K2\' na v2.5 e posterior. Se você estiver usando o módulo \"K2 Login\", por favor, certifique-se de substituí-lo por este. Na v2.6 do K2, o módulo \'K2 Login\' será removido permanentemente do pacote de extensão K2.', '/home/portal2019/language/pt-BR/pt-BR.mod_k2_user.ini'),
 (4513, 'K2_MY_ACCOUNT', 'Minha conta', '/home/portal2019/language/pt-BR/pt-BR.mod_k2_user.ini'),
 (4514, 'K2_MY_PAGE', 'Minha página', '/home/portal2019/language/pt-BR/pt-BR.mod_k2_user.ini'),
 (4515, 'K2_NAME', 'Nome', '/home/portal2019/language/pt-BR/pt-BR.mod_k2_user.ini'),
@@ -8840,7 +8823,7 @@ INSERT INTO `idg2019_overrider` (`id`, `constant`, `string`, `file`) VALUES
 (4804, 'MOD_WEBLINKS_FIELD_VALUE_NOFOLLOW', 'Não Seguir', '/home/portal2019/language/pt-BR/pt-BR.mod_weblinks.ini'),
 (4805, 'MOD_WEBLINKS_FIELD_VALUE_ORDER', 'Ordem', '/home/portal2019/language/pt-BR/pt-BR.mod_weblinks.ini'),
 (4806, 'MOD_WEBLINKS_HITS', 'Acessos', '/home/portal2019/language/pt-BR/pt-BR.mod_weblinks.ini');
-INSERT INTO `idg2019_overrider` (`id`, `constant`, `string`, `file`) VALUES
+INSERT INTO `#__overrider` (`id`, `constant`, `string`, `file`) VALUES
 (4807, 'MOD_WEBLINKS_XML_DESCRIPTION', 'Este módulo exibe links de uma categoria definida no componente Weblinks.', '/home/portal2019/language/pt-BR/pt-BR.mod_weblinks.ini'),
 (4808, 'MOD_WEBLINKS', 'Weblinks', '/home/portal2019/language/pt-BR/pt-BR.mod_weblinks.sys.ini'),
 (4809, 'MOD_WEBLINKS_XML_DESCRIPTION', 'Este módulo exibe links de uma categoria definida no componente Weblinks.', '/home/portal2019/language/pt-BR/pt-BR.mod_weblinks.sys.ini'),
@@ -9146,7 +9129,7 @@ INSERT INTO `idg2019_overrider` (`id`, `constant`, `string`, `file`) VALUES
 (5109, 'RL_ALL_RIGHTS_RESERVED', 'Todos os direitos reservados', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini'),
 (5110, 'RL_ALSO_ON_CHILD_ITEMS', 'Também nos items filhos', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini'),
 (5111, 'RL_ALSO_ON_CHILD_ITEMS_DESC', 'Atribuir também aos items filhos dos items selecionados?', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini');
-INSERT INTO `idg2019_overrider` (`id`, `constant`, `string`, `file`) VALUES
+INSERT INTO `#__overrider` (`id`, `constant`, `string`, `file`) VALUES
 (5112, 'RL_ANY', 'OU', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini'),
 (5113, 'RL_ANY_DESC', 'Serão publicados se <strong>qualquer</strong> (uma ou mais) das atribuições abaixo forem correspondidas.<br>Atribuição de grupos onde \'Ignore\' estiver selecionado serão ignoradas.', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini'),
 (5114, 'RL_ARE_YOU_SURE', 'Você tem certeza?', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini'),
@@ -9402,7 +9385,7 @@ INSERT INTO `idg2019_overrider` (`id`, `constant`, `string`, `file`) VALUES
 (5364, 'RL_OPTION_SELECT', '- Selecionar -', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini'),
 (5365, 'RL_OPTION_SELECT_CLIENT', '- Selecionar Cliente -', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini'),
 (5366, 'RL_OS', 'Sistemas Operacionais', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini'),
-(5367, 'RL_OS_DESC', 'Selecione os sistemas operacionais aos quais atribuir. Lembre-se que a detecção de sistemas operacionais nunca é 100&#37; prova d\'água. Os usuários podem configurar seu navegador para imitar outros sistemas operacionais.', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini'),
+(5367, 'RL_OS_DESC', 'Selecione os sistemas operacionais aos quais atribuir. Lembre-se que a detecção de sistemas operacionais nunca é 100&#37; prova dágua. Os usuários podem configurar seu navegador para imitar outros sistemas operacionais.', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini'),
 (5368, 'RL_OTHER_AREAS', 'Outras Áreas', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini'),
 (5369, 'RL_OTHER_OPTIONS', 'Outras Opções', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini'),
 (5370, 'RL_OTHER_SETTINGS', 'Outras Configurações', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini'),
@@ -9412,7 +9395,7 @@ INSERT INTO `idg2019_overrider` (`id`, `constant`, `string`, `file`) VALUES
 (5374, 'RL_PHP', 'PHP Customizado', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini'),
 (5375, 'RL_PHP_DESC', 'Digite um pequeno código PHP para avaliar. O código deve retornar o valor true or false (VERDADEIRO ou FALSO).<br><br>Por exemplo:<br><br>[[%1:code%]]', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini'),
 (5376, 'RL_PLACE_HTML_COMMENTS', 'Colocar comentários HTML', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini'),
-(5377, 'RL_PLACE_HTML_COMMENTS_DESC', 'Por padrão os comentários HTML são colocados ao redor da saída do esta extensão.<br><br>These comments can help you troubleshooting when you don\'t get the output you expect.<br><br>Caso prefira não ter esses comentários no seu HTML, desative esta opção.', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini'),
+(5377, 'RL_PLACE_HTML_COMMENTS_DESC', 'Por padrão os comentários HTML são colocados ao redor da saída do esta extensão.<br><br>These comments can help you troubleshooting when you dont get the output you expect.<br><br>Caso prefira não ter esses comentários no seu HTML, desative esta opção.', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini'),
 (5378, 'RL_PLG_EDITORS-XTD', 'Plugin Botão do Editor', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini'),
 (5379, 'RL_PLG_SYSTEM', 'Plugin de Sistema', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini'),
 (5380, 'RL_POSTALCODES', 'Código Postal', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini'),
@@ -9449,7 +9432,7 @@ INSERT INTO `idg2019_overrider` (`id`, `constant`, `string`, `file`) VALUES
 (5411, 'RL_SETTINGS_SECURITY', 'Configurações de Segurança', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini'),
 (5412, 'RL_SHOW_ASSIGNMENTS', 'Exibir Atribuições', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini'),
 (5413, 'RL_SHOW_ASSIGNMENTS_DESC', 'Selecione se para apenas exibir as atribuições selecionadas. Você pode usar isso para obter um visualização limpa das atribuições ativas.', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini');
-INSERT INTO `idg2019_overrider` (`id`, `constant`, `string`, `file`) VALUES
+INSERT INTO `#__overrider` (`id`, `constant`, `string`, `file`) VALUES
 (5414, 'RL_SHOW_ASSIGNMENTS_SELECTED_DESC', 'Todos os tipos de atribuições não selecionados estão neste momento ocultos da visualização.', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini'),
 (5415, 'RL_SHOW_COPYRIGHT', 'Costrar Direito de Cópia', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini'),
 (5416, 'RL_SHOW_COPYRIGHT_DESC', 'Se selecionado, informações adicionais de direito de cópia serão mostradas em vistas administrativas. As extensões Regular Labs nunca mostram informações de direito de cópia ou backlinks no frontend.', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini'),
@@ -9525,11 +9508,11 @@ INSERT INTO `idg2019_overrider` (`id`, `constant`, `string`, `file`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_phocadownload`
+-- Estrutura da tabela `#__phocadownload`
 --
 
-DROP TABLE IF EXISTS `idg2019_phocadownload`;
-CREATE TABLE IF NOT EXISTS `idg2019_phocadownload` (
+DROP TABLE IF EXISTS `#__phocadownload`;
+CREATE TABLE IF NOT EXISTS `#__phocadownload` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `catid` int(11) NOT NULL DEFAULT '0',
   `sectionid` int(11) NOT NULL DEFAULT '0',
@@ -9592,10 +9575,10 @@ CREATE TABLE IF NOT EXISTS `idg2019_phocadownload` (
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `idg2019_phocadownload`
+-- Extraindo dados da tabela `#__phocadownload`
 --
 
-INSERT INTO `idg2019_phocadownload` (`id`, `catid`, `sectionid`, `sid`, `owner_id`, `title`, `alias`, `project_name`, `filename`, `filename_play`, `filename_preview`, `filesize`, `author`, `author_email`, `author_url`, `license`, `license_url`, `image_filename`, `image_filename_spec1`, `image_filename_spec2`, `image_download`, `video_filename`, `link_external`, `mirror1link`, `mirror1title`, `mirror1target`, `mirror2link`, `mirror2title`, `mirror2target`, `description`, `features`, `changelog`, `notes`, `userid`, `version`, `directlink`, `date`, `publish_up`, `publish_down`, `hits`, `textonly`, `published`, `approved`, `checked_out`, `checked_out_time`, `ordering`, `access`, `confirm_license`, `unaccessible_file`, `token`, `tokenhits`, `tags_string`, `params`, `metakey`, `metadesc`, `metadata`, `language`) VALUES
+INSERT INTO `#__phocadownload` (`id`, `catid`, `sectionid`, `sid`, `owner_id`, `title`, `alias`, `project_name`, `filename`, `filename_play`, `filename_preview`, `filesize`, `author`, `author_email`, `author_url`, `license`, `license_url`, `image_filename`, `image_filename_spec1`, `image_filename_spec2`, `image_download`, `video_filename`, `link_external`, `mirror1link`, `mirror1title`, `mirror1target`, `mirror2link`, `mirror2title`, `mirror2target`, `description`, `features`, `changelog`, `notes`, `userid`, `version`, `directlink`, `date`, `publish_up`, `publish_down`, `hits`, `textonly`, `published`, `approved`, `checked_out`, `checked_out_time`, `ordering`, `access`, `confirm_license`, `unaccessible_file`, `token`, `tokenhits`, `tags_string`, `params`, `metakey`, `metadesc`, `metadata`, `language`) VALUES
 (1, 2, 0, 0, 0, 'Relatório de Gestão 2010', 'relatorio-de-gestao-2010', '', 'proad/RELATRIO DE GESTO DO EXERCCIO  2010.pdf', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '_self', '', '', '_self', '', '', '', '', 0, '', 0, '2019-10-11 17:22:31', '2019-10-11 17:22:41', '0000-00-00 00:00:00', 0, 0, 1, 1, 0, '0000-00-00 00:00:00', 1, 1, 0, 0, '7d433f09b351c235c9ba5f42a6eb064d20b04cb84a7f07361427f52443e277c5', 0, '', NULL, '', '', NULL, '*'),
 (2, 2, 0, 0, 0, 'Relatório de Gestão 2011', 'relatorio-de-gestao-2011', '', 'proad/RELATRIO DE GESTO DO EXERCCIO  2011.pdf', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '_self', '', '', '_self', '', '', '', '', 0, '', 0, '2019-10-11 17:22:31', '2019-10-11 17:22:50', '0000-00-00 00:00:00', 0, 0, 1, 1, 0, '0000-00-00 00:00:00', 2, 1, 0, 0, '9285ebd8b5ca1e43dd957ea5fe54e79b930b3750da457c2f15c0c3b159a84ff9', 0, '', NULL, '', '', NULL, '*'),
 (3, 2, 0, 0, 0, 'Relatório de Gestão 2012', 'relatorio-de-gestao-2012', '', 'proad/RELATRIO DE GESTO DO EXERCCIO  2012.pdf', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '_self', '', '', '_self', '', '', '', '', 0, '', 0, '2019-10-11 17:22:31', '2019-10-11 17:23:06', '0000-00-00 00:00:00', 0, 0, 1, 1, 0, '0000-00-00 00:00:00', 3, 1, 0, 0, 'ba5cdb9512fda565cef28001bcc642df1be45c9637eeaaa468f0a9f0b06732fd', 0, '', NULL, '', '', NULL, '*'),
@@ -9613,11 +9596,11 @@ INSERT INTO `idg2019_phocadownload` (`id`, `catid`, `sectionid`, `sid`, `owner_i
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_phocadownload_categories`
+-- Estrutura da tabela `#__phocadownload_categories`
 --
 
-DROP TABLE IF EXISTS `idg2019_phocadownload_categories`;
-CREATE TABLE IF NOT EXISTS `idg2019_phocadownload_categories` (
+DROP TABLE IF EXISTS `#__phocadownload_categories`;
+CREATE TABLE IF NOT EXISTS `#__phocadownload_categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `parent_id` int(11) NOT NULL DEFAULT '0',
   `section` int(11) NOT NULL DEFAULT '0',
@@ -9652,10 +9635,10 @@ CREATE TABLE IF NOT EXISTS `idg2019_phocadownload_categories` (
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `idg2019_phocadownload_categories`
+-- Extraindo dados da tabela `#__phocadownload_categories`
 --
 
-INSERT INTO `idg2019_phocadownload_categories` (`id`, `parent_id`, `section`, `title`, `name`, `alias`, `project_name`, `image`, `image_position`, `description`, `published`, `checked_out`, `checked_out_time`, `editor`, `ordering`, `access`, `uploaduserid`, `accessuserid`, `deleteuserid`, `date`, `count`, `hits`, `params`, `metakey`, `metadesc`, `metadata`, `language`) VALUES
+INSERT INTO `#__phocadownload_categories` (`id`, `parent_id`, `section`, `title`, `name`, `alias`, `project_name`, `image`, `image_position`, `description`, `published`, `checked_out`, `checked_out_time`, `editor`, `ordering`, `access`, `uploaduserid`, `accessuserid`, `deleteuserid`, `date`, `count`, `hits`, `params`, `metakey`, `metadesc`, `metadata`, `language`) VALUES
 (1, 0, 0, 'Pró-Reitoria de Administração - PROAD', '', 'pro-reitoria-de-administracao-proad', '', '', '', '', 1, 0, '0000-00-00 00:00:00', NULL, 1, 1, '0', '0', '0', '2019-10-11 17:18:40', 0, 0, NULL, '', '', NULL, '*'),
 (2, 1, 0, 'Relatórios de Gestão', '', 'relatorios-de-gestao', '', '', '', '', 1, 0, '0000-00-00 00:00:00', NULL, 2, 1, '0', '0', '0', '2019-10-11 17:18:56', 0, 0, NULL, '', '', NULL, '*'),
 (3, 1, 0, 'Notas Técnicas', '', 'notas-tecnicas', '', '', '', '', 1, 0, '0000-00-00 00:00:00', NULL, 3, 1, '0', '0', '0', '2019-10-11 17:19:05', 0, 0, NULL, '', '', NULL, '*'),
@@ -9665,11 +9648,11 @@ INSERT INTO `idg2019_phocadownload_categories` (`id`, `parent_id`, `section`, `t
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_phocadownload_file_votes`
+-- Estrutura da tabela `#__phocadownload_file_votes`
 --
 
-DROP TABLE IF EXISTS `idg2019_phocadownload_file_votes`;
-CREATE TABLE IF NOT EXISTS `idg2019_phocadownload_file_votes` (
+DROP TABLE IF EXISTS `#__phocadownload_file_votes`;
+CREATE TABLE IF NOT EXISTS `#__phocadownload_file_votes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fileid` int(11) NOT NULL DEFAULT '0',
   `userid` int(11) NOT NULL DEFAULT '0',
@@ -9687,11 +9670,11 @@ CREATE TABLE IF NOT EXISTS `idg2019_phocadownload_file_votes` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_phocadownload_file_votes_statistics`
+-- Estrutura da tabela `#__phocadownload_file_votes_statistics`
 --
 
-DROP TABLE IF EXISTS `idg2019_phocadownload_file_votes_statistics`;
-CREATE TABLE IF NOT EXISTS `idg2019_phocadownload_file_votes_statistics` (
+DROP TABLE IF EXISTS `#__phocadownload_file_votes_statistics`;
+CREATE TABLE IF NOT EXISTS `#__phocadownload_file_votes_statistics` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fileid` int(11) NOT NULL DEFAULT '0',
   `count` int(11) NOT NULL DEFAULT '0',
@@ -9703,11 +9686,11 @@ CREATE TABLE IF NOT EXISTS `idg2019_phocadownload_file_votes_statistics` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_phocadownload_layout`
+-- Estrutura da tabela `#__phocadownload_layout`
 --
 
-DROP TABLE IF EXISTS `idg2019_phocadownload_layout`;
-CREATE TABLE IF NOT EXISTS `idg2019_phocadownload_layout` (
+DROP TABLE IF EXISTS `#__phocadownload_layout`;
+CREATE TABLE IF NOT EXISTS `#__phocadownload_layout` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `categories` text,
   `category` text,
@@ -9719,20 +9702,20 @@ CREATE TABLE IF NOT EXISTS `idg2019_phocadownload_layout` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `idg2019_phocadownload_layout`
+-- Extraindo dados da tabela `#__phocadownload_layout`
 --
 
-INSERT INTO `idg2019_phocadownload_layout` (`id`, `categories`, `category`, `file`, `checked_out`, `checked_out_time`, `params`) VALUES
+INSERT INTO `#__phocadownload_layout` (`id`, `categories`, `category`, `file`, `checked_out`, `checked_out_time`, `params`) VALUES
 (1, '<div class=\"pd-categoriesbox\">\r\n<div class=\"pd-title\">{pdtitle}</div>\r\n{pdsubcategories}\r\n{pdclear}\r\n</div>', '<div class=\"pd-filebox\">\r\n{pdfiledesctop}\r\n{pdfile}\r\n<div class=\"pd-buttons\">{pdbuttondownload}</div>\r\n<div class=\"pd-buttons\">{pdbuttondetails}</div>\r\n<div class=\"pd-buttons\">{pdbuttonpreview}</div>\r\n<div class=\"pd-buttons\">{pdbuttonplay}</div>\r\n<div class=\"pd-mirrors\">{pdmirrorlink2} {pdmirrorlink1}</div>\r\n<div class=\"pd-rating\">{pdrating}</div>\r\n<div class=\"pd-tags\">{pdtags}</div>\r\n{pdfiledescbottom}\r\n<div class=\"pd-cb\"></div>\r\n</div>', '<div class=\"pd-filebox\">\r\n{pdimage}\r\n{pdfile}\r\n{pdfilesize}\r\n{pdversion}\r\n{pdlicense}\r\n{pdauthor}\r\n{pdauthoremail}\r\n{pdfiledate}\r\n{pddownloads}\r\n{pddescription}\r\n{pdfeatures}\r\n{pdchangelog}\r\n{pdnotes}\r\n<div class=\"pd-mirrors\">{pdmirrorlink2} {pdmirrorlink1}</div>\r\n<div class=\"pd-report\">{pdreportlink}</div>\r\n<div class=\"pd-rating\">{pdrating}</div>\r\n<div class=\"pd-tags\">{pdtags}</div>\r\n<div class=\"pd-cb\"></div>\r\n</div>', 0, '0000-00-00 00:00:00', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_phocadownload_licenses`
+-- Estrutura da tabela `#__phocadownload_licenses`
 --
 
-DROP TABLE IF EXISTS `idg2019_phocadownload_licenses`;
-CREATE TABLE IF NOT EXISTS `idg2019_phocadownload_licenses` (
+DROP TABLE IF EXISTS `#__phocadownload_licenses`;
+CREATE TABLE IF NOT EXISTS `#__phocadownload_licenses` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL DEFAULT '',
   `alias` varchar(255) NOT NULL DEFAULT '',
@@ -9748,11 +9731,11 @@ CREATE TABLE IF NOT EXISTS `idg2019_phocadownload_licenses` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_phocadownload_logging`
+-- Estrutura da tabela `#__phocadownload_logging`
 --
 
-DROP TABLE IF EXISTS `idg2019_phocadownload_logging`;
-CREATE TABLE IF NOT EXISTS `idg2019_phocadownload_logging` (
+DROP TABLE IF EXISTS `#__phocadownload_logging`;
+CREATE TABLE IF NOT EXISTS `#__phocadownload_logging` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `fileid` int(11) NOT NULL DEFAULT '0',
   `catid` int(11) NOT NULL DEFAULT '0',
@@ -9768,11 +9751,11 @@ CREATE TABLE IF NOT EXISTS `idg2019_phocadownload_logging` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_phocadownload_styles`
+-- Estrutura da tabela `#__phocadownload_styles`
 --
 
-DROP TABLE IF EXISTS `idg2019_phocadownload_styles`;
-CREATE TABLE IF NOT EXISTS `idg2019_phocadownload_styles` (
+DROP TABLE IF EXISTS `#__phocadownload_styles`;
+CREATE TABLE IF NOT EXISTS `#__phocadownload_styles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL DEFAULT '',
   `alias` varchar(255) NOT NULL DEFAULT '',
@@ -9789,10 +9772,10 @@ CREATE TABLE IF NOT EXISTS `idg2019_phocadownload_styles` (
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `idg2019_phocadownload_styles`
+-- Extraindo dados da tabela `#__phocadownload_styles`
 --
 
-INSERT INTO `idg2019_phocadownload_styles` (`id`, `title`, `alias`, `filename`, `menulink`, `type`, `published`, `checked_out`, `checked_out_time`, `ordering`, `params`, `language`) VALUES
+INSERT INTO `#__phocadownload_styles` (`id`, `title`, `alias`, `filename`, `menulink`, `type`, `published`, `checked_out`, `checked_out_time`, `ordering`, `params`, `language`) VALUES
 (1, 'Phocadownload', 'phocadownload', 'phocadownload.css', NULL, 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '*'),
 (2, 'Rating', 'rating', 'rating.css', NULL, 1, 1, 0, '0000-00-00 00:00:00', 2, NULL, '*'),
 (3, 'Button', 'button', 'button.css', NULL, 1, 0, 0, '0000-00-00 00:00:00', 3, NULL, '*'),
@@ -9803,11 +9786,11 @@ INSERT INTO `idg2019_phocadownload_styles` (`id`, `title`, `alias`, `filename`, 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_phocadownload_tags`
+-- Estrutura da tabela `#__phocadownload_tags`
 --
 
-DROP TABLE IF EXISTS `idg2019_phocadownload_tags`;
-CREATE TABLE IF NOT EXISTS `idg2019_phocadownload_tags` (
+DROP TABLE IF EXISTS `#__phocadownload_tags`;
+CREATE TABLE IF NOT EXISTS `#__phocadownload_tags` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL DEFAULT '',
   `alias` varchar(255) NOT NULL DEFAULT '',
@@ -9826,11 +9809,11 @@ CREATE TABLE IF NOT EXISTS `idg2019_phocadownload_tags` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_phocadownload_tags_ref`
+-- Estrutura da tabela `#__phocadownload_tags_ref`
 --
 
-DROP TABLE IF EXISTS `idg2019_phocadownload_tags_ref`;
-CREATE TABLE IF NOT EXISTS `idg2019_phocadownload_tags_ref` (
+DROP TABLE IF EXISTS `#__phocadownload_tags_ref`;
+CREATE TABLE IF NOT EXISTS `#__phocadownload_tags_ref` (
   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `fileid` int(11) NOT NULL DEFAULT '0',
   `tagid` int(11) NOT NULL DEFAULT '0',
@@ -9842,11 +9825,11 @@ CREATE TABLE IF NOT EXISTS `idg2019_phocadownload_tags_ref` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_phocadownload_user_stat`
+-- Estrutura da tabela `#__phocadownload_user_stat`
 --
 
-DROP TABLE IF EXISTS `idg2019_phocadownload_user_stat`;
-CREATE TABLE IF NOT EXISTS `idg2019_phocadownload_user_stat` (
+DROP TABLE IF EXISTS `#__phocadownload_user_stat`;
+CREATE TABLE IF NOT EXISTS `#__phocadownload_user_stat` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fileid` int(11) NOT NULL DEFAULT '0',
   `userid` int(11) NOT NULL DEFAULT '0',
@@ -9861,11 +9844,11 @@ CREATE TABLE IF NOT EXISTS `idg2019_phocadownload_user_stat` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_phocagallery`
+-- Estrutura da tabela `#__phocagallery`
 --
 
-DROP TABLE IF EXISTS `idg2019_phocagallery`;
-CREATE TABLE IF NOT EXISTS `idg2019_phocagallery` (
+DROP TABLE IF EXISTS `#__phocagallery`;
+CREATE TABLE IF NOT EXISTS `#__phocagallery` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `catid` int(11) NOT NULL DEFAULT '0',
   `sid` int(11) NOT NULL DEFAULT '0',
@@ -9910,10 +9893,10 @@ CREATE TABLE IF NOT EXISTS `idg2019_phocagallery` (
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
--- Extraindo dados da tabela `idg2019_phocagallery`
+-- Extraindo dados da tabela `#__phocagallery`
 --
 
-INSERT INTO `idg2019_phocagallery` (`id`, `catid`, `sid`, `title`, `alias`, `filename`, `format`, `description`, `date`, `hits`, `latitude`, `longitude`, `zoom`, `geotitle`, `userid`, `videocode`, `vmproductid`, `imgorigsize`, `published`, `approved`, `checked_out`, `checked_out_time`, `ordering`, `params`, `metakey`, `metadesc`, `metadata`, `extlink1`, `extlink2`, `extid`, `exttype`, `extl`, `extm`, `exts`, `exto`, `extw`, `exth`, `language`, `pcproductid`) VALUES
+INSERT INTO `#__phocagallery` (`id`, `catid`, `sid`, `title`, `alias`, `filename`, `format`, `description`, `date`, `hits`, `latitude`, `longitude`, `zoom`, `geotitle`, `userid`, `videocode`, `vmproductid`, `imgorigsize`, `published`, `approved`, `checked_out`, `checked_out_time`, `ordering`, `params`, `metakey`, `metadesc`, `metadata`, `extlink1`, `extlink2`, `extid`, `exttype`, `extl`, `extm`, `exts`, `exto`, `extw`, `exth`, `language`, `pcproductid`) VALUES
 (1, 1, 0, 'Imagem 1: título com até 45 caracteres', 'imagem-1-titulo-com-ate-45-caracteres', 'galeria2/image01_grd.png', 1, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', '2013-12-22 02:05:51', 13, '0', '0', 0, '', 0, '', 0, 70910, 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, 'teste, teste 2', 'Nome do fotógrafo.', NULL, 'www.teste1.com.br|teste|_self|1', 'www.teste2.com.br|teste2|_self|1', '', 0, '', '', '', '', '', '', '*', 0),
 (2, 1, 0, 'Imagem 2: título com até 45 caracteres', 'imagem-2-titulo-com-ate-45-caracteres', 'galeria2/image02_grd.png', 1, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', '2013-12-22 02:05:51', 5, '0', '0', 0, '', 0, '', 0, 103730, 1, 1, 0, '0000-00-00 00:00:00', 2, NULL, 'teste, teste 2', 'Nome do fotógrafo.', NULL, 'www.teste1.com.br|teste|_self|1', 'www.teste2.com.br|teste2|_self|1', '', 0, '', '', '', '', '', '', '*', 0),
 (3, 1, 0, 'Imagem 3: título com até 45 caracteres', 'imagem-3-titulo-com-ate-45-caracteres', 'galeria2/image03_grd.png', 1, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', '2013-12-22 02:05:51', 2, '0', '0', 0, '', 0, '', 0, 78834, 1, 1, 0, '0000-00-00 00:00:00', 3, NULL, 'teste, teste 2', 'Nome do fotógrafo.', NULL, 'www.teste1.com.br|teste|_self|1', 'www.teste2.com.br|teste2|_self|1', '', 0, '', '', '', '', '', '', '*', 0),
@@ -9930,11 +9913,11 @@ INSERT INTO `idg2019_phocagallery` (`id`, `catid`, `sid`, `title`, `alias`, `fil
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_phocagallery_categories`
+-- Estrutura da tabela `#__phocagallery_categories`
 --
 
-DROP TABLE IF EXISTS `idg2019_phocagallery_categories`;
-CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_categories` (
+DROP TABLE IF EXISTS `#__phocagallery_categories`;
+CREATE TABLE IF NOT EXISTS `#__phocagallery_categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `parent_id` int(11) NOT NULL DEFAULT '0',
   `owner_id` int(11) NOT NULL DEFAULT '0',
@@ -9984,10 +9967,10 @@ CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_categories` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
--- Extraindo dados da tabela `idg2019_phocagallery_categories`
+-- Extraindo dados da tabela `#__phocagallery_categories`
 --
 
-INSERT INTO `idg2019_phocagallery_categories` (`id`, `parent_id`, `owner_id`, `title`, `name`, `alias`, `image`, `section`, `image_position`, `description`, `date`, `published`, `approved`, `checked_out`, `checked_out_time`, `editor`, `ordering`, `access`, `count`, `hits`, `accessuserid`, `uploaduserid`, `deleteuserid`, `userfolder`, `latitude`, `longitude`, `zoom`, `geotitle`, `extid`, `exta`, `extu`, `extauth`, `extfbuid`, `extfbcatid`, `params`, `metakey`, `metadesc`, `metadata`, `language`, `image_id`, `imgurclient`, `imguralbum`) VALUES
+INSERT INTO `#__phocagallery_categories` (`id`, `parent_id`, `owner_id`, `title`, `name`, `alias`, `image`, `section`, `image_position`, `description`, `date`, `published`, `approved`, `checked_out`, `checked_out_time`, `editor`, `ordering`, `access`, `count`, `hits`, `accessuserid`, `uploaduserid`, `deleteuserid`, `userfolder`, `latitude`, `longitude`, `zoom`, `geotitle`, `extid`, `exta`, `extu`, `extauth`, `extfbuid`, `extfbcatid`, `params`, `metakey`, `metadesc`, `metadata`, `language`, `image_id`, `imgurclient`, `imguralbum`) VALUES
 (1, 0, 0, 'Galeria de imagens 01', '', 'galeria-de-imagens-01', '', '', '', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', '2013-12-22 01:53:21', 1, 1, 0, '0000-00-00 00:00:00', NULL, 1, 1, 0, 90, '0', '0', '0', 'galeria1', '', '', 0, '', '', '', '', '', 0, '', NULL, 'palavra01, palavra02', '', NULL, '*', 0, '', ''),
 (2, 1, 0, 'Galeria de imagens 02', '', 'galeria-de-imagens-02', '', '', '', '', '2014-01-07 22:39:14', 1, 1, 0, '0000-00-00 00:00:00', NULL, 1, 1, 0, 3, '0', '0', '0', 'galeria2', '', '', 0, '', '', '', '', '', 0, '', NULL, '', '', NULL, '*', 0, '', ''),
 (3, 2, 0, 'Galeria de imagens 03', '', 'galeria-de-imagens-3', '', '', '', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut laborae et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', '2014-01-07 22:41:06', 1, 1, 0, '0000-00-00 00:00:00', NULL, 1, 1, 0, 1, '0', '0', '0', 'galeria3', '', '', 0, '', '', '', '', '', 0, '', NULL, '', '', NULL, '*', 0, '', '');
@@ -9995,11 +9978,11 @@ INSERT INTO `idg2019_phocagallery_categories` (`id`, `parent_id`, `owner_id`, `t
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_phocagallery_comments`
+-- Estrutura da tabela `#__phocagallery_comments`
 --
 
-DROP TABLE IF EXISTS `idg2019_phocagallery_comments`;
-CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_comments` (
+DROP TABLE IF EXISTS `#__phocagallery_comments`;
+CREATE TABLE IF NOT EXISTS `#__phocagallery_comments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `catid` int(11) NOT NULL DEFAULT '0',
   `userid` int(11) NOT NULL DEFAULT '0',
@@ -10019,11 +10002,11 @@ CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_comments` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_phocagallery_fb_users`
+-- Estrutura da tabela `#__phocagallery_fb_users`
 --
 
-DROP TABLE IF EXISTS `idg2019_phocagallery_fb_users`;
-CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_fb_users` (
+DROP TABLE IF EXISTS `#__phocagallery_fb_users`;
+CREATE TABLE IF NOT EXISTS `#__phocagallery_fb_users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `appid` varchar(255) NOT NULL DEFAULT '',
   `appsid` varchar(255) NOT NULL DEFAULT '',
@@ -10050,11 +10033,11 @@ CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_fb_users` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_phocagallery_img_comments`
+-- Estrutura da tabela `#__phocagallery_img_comments`
 --
 
-DROP TABLE IF EXISTS `idg2019_phocagallery_img_comments`;
-CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_img_comments` (
+DROP TABLE IF EXISTS `#__phocagallery_img_comments`;
+CREATE TABLE IF NOT EXISTS `#__phocagallery_img_comments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `imgid` int(11) NOT NULL DEFAULT '0',
   `userid` int(11) NOT NULL DEFAULT '0',
@@ -10074,11 +10057,11 @@ CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_img_comments` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_phocagallery_img_votes`
+-- Estrutura da tabela `#__phocagallery_img_votes`
 --
 
-DROP TABLE IF EXISTS `idg2019_phocagallery_img_votes`;
-CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_img_votes` (
+DROP TABLE IF EXISTS `#__phocagallery_img_votes`;
+CREATE TABLE IF NOT EXISTS `#__phocagallery_img_votes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `imgid` int(11) NOT NULL DEFAULT '0',
   `userid` int(11) NOT NULL DEFAULT '0',
@@ -10096,11 +10079,11 @@ CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_img_votes` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_phocagallery_img_votes_statistics`
+-- Estrutura da tabela `#__phocagallery_img_votes_statistics`
 --
 
-DROP TABLE IF EXISTS `idg2019_phocagallery_img_votes_statistics`;
-CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_img_votes_statistics` (
+DROP TABLE IF EXISTS `#__phocagallery_img_votes_statistics`;
+CREATE TABLE IF NOT EXISTS `#__phocagallery_img_votes_statistics` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `imgid` int(11) NOT NULL DEFAULT '0',
   `count` int(11) NOT NULL DEFAULT '0',
@@ -10112,11 +10095,11 @@ CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_img_votes_statistics` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_phocagallery_styles`
+-- Estrutura da tabela `#__phocagallery_styles`
 --
 
-DROP TABLE IF EXISTS `idg2019_phocagallery_styles`;
-CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_styles` (
+DROP TABLE IF EXISTS `#__phocagallery_styles`;
+CREATE TABLE IF NOT EXISTS `#__phocagallery_styles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL DEFAULT '',
   `alias` varchar(255) NOT NULL DEFAULT '',
@@ -10133,10 +10116,10 @@ CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_styles` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
--- Extraindo dados da tabela `idg2019_phocagallery_styles`
+-- Extraindo dados da tabela `#__phocagallery_styles`
 --
 
-INSERT INTO `idg2019_phocagallery_styles` (`id`, `title`, `alias`, `filename`, `menulink`, `type`, `published`, `checked_out`, `checked_out_time`, `ordering`, `params`, `language`) VALUES
+INSERT INTO `#__phocagallery_styles` (`id`, `title`, `alias`, `filename`, `menulink`, `type`, `published`, `checked_out`, `checked_out_time`, `ordering`, `params`, `language`) VALUES
 (1, 'Phocagallery', 'phocagallery', 'phocagallery.css', '', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '*'),
 (2, 'Rating', '', 'rating.css', NULL, 1, 1, 0, '0000-00-00 00:00:00', 2, NULL, '*'),
 (3, 'Default', '', 'default.css', NULL, 2, 1, 0, '0000-00-00 00:00:00', 3, NULL, '*'),
@@ -10145,11 +10128,11 @@ INSERT INTO `idg2019_phocagallery_styles` (`id`, `title`, `alias`, `filename`, `
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_phocagallery_tags`
+-- Estrutura da tabela `#__phocagallery_tags`
 --
 
-DROP TABLE IF EXISTS `idg2019_phocagallery_tags`;
-CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_tags` (
+DROP TABLE IF EXISTS `#__phocagallery_tags`;
+CREATE TABLE IF NOT EXISTS `#__phocagallery_tags` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL DEFAULT '',
   `alias` varchar(255) NOT NULL DEFAULT '',
@@ -10166,21 +10149,21 @@ CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_tags` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
--- Extraindo dados da tabela `idg2019_phocagallery_tags`
+-- Extraindo dados da tabela `#__phocagallery_tags`
 --
 
-INSERT INTO `idg2019_phocagallery_tags` (`id`, `title`, `alias`, `link_cat`, `link_ext`, `description`, `published`, `checked_out`, `checked_out_time`, `ordering`, `params`, `language`) VALUES
+INSERT INTO `#__phocagallery_tags` (`id`, `title`, `alias`, `link_cat`, `link_ext`, `description`, `published`, `checked_out`, `checked_out_time`, `ordering`, `params`, `language`) VALUES
 (1, 'Internet', 'internet', 0, '', '', 1, 0, '0000-00-00 00:00:00', 1, NULL, ''),
 (2, 'Educação', 'educacao', 0, '', '', 1, 0, '0000-00-00 00:00:00', 2, NULL, '');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_phocagallery_tags_ref`
+-- Estrutura da tabela `#__phocagallery_tags_ref`
 --
 
-DROP TABLE IF EXISTS `idg2019_phocagallery_tags_ref`;
-CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_tags_ref` (
+DROP TABLE IF EXISTS `#__phocagallery_tags_ref`;
+CREATE TABLE IF NOT EXISTS `#__phocagallery_tags_ref` (
   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `imgid` int(11) NOT NULL DEFAULT '0',
   `tagid` int(11) NOT NULL DEFAULT '0',
@@ -10190,21 +10173,21 @@ CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_tags_ref` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
--- Extraindo dados da tabela `idg2019_phocagallery_tags_ref`
+-- Extraindo dados da tabela `#__phocagallery_tags_ref`
 --
 
-INSERT INTO `idg2019_phocagallery_tags_ref` (`id`, `imgid`, `tagid`) VALUES
+INSERT INTO `#__phocagallery_tags_ref` (`id`, `imgid`, `tagid`) VALUES
 (1, 1, 1),
 (2, 1, 2);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_phocagallery_user`
+-- Estrutura da tabela `#__phocagallery_user`
 --
 
-DROP TABLE IF EXISTS `idg2019_phocagallery_user`;
-CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_user` (
+DROP TABLE IF EXISTS `#__phocagallery_user`;
+CREATE TABLE IF NOT EXISTS `#__phocagallery_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `userid` int(11) NOT NULL DEFAULT '0',
   `avatar` varchar(40) NOT NULL DEFAULT '',
@@ -10222,11 +10205,11 @@ CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_user` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_phocagallery_votes`
+-- Estrutura da tabela `#__phocagallery_votes`
 --
 
-DROP TABLE IF EXISTS `idg2019_phocagallery_votes`;
-CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_votes` (
+DROP TABLE IF EXISTS `#__phocagallery_votes`;
+CREATE TABLE IF NOT EXISTS `#__phocagallery_votes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `catid` int(11) NOT NULL DEFAULT '0',
   `userid` int(11) NOT NULL DEFAULT '0',
@@ -10244,11 +10227,11 @@ CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_votes` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_phocagallery_votes_statistics`
+-- Estrutura da tabela `#__phocagallery_votes_statistics`
 --
 
-DROP TABLE IF EXISTS `idg2019_phocagallery_votes_statistics`;
-CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_votes_statistics` (
+DROP TABLE IF EXISTS `#__phocagallery_votes_statistics`;
+CREATE TABLE IF NOT EXISTS `#__phocagallery_votes_statistics` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `catid` int(11) NOT NULL DEFAULT '0',
   `count` int(11) NOT NULL DEFAULT '0',
@@ -10260,11 +10243,11 @@ CREATE TABLE IF NOT EXISTS `idg2019_phocagallery_votes_statistics` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_plg_system_adminexile`
+-- Estrutura da tabela `#__plg_system_adminexile`
 --
 
-DROP TABLE IF EXISTS `idg2019_plg_system_adminexile`;
-CREATE TABLE IF NOT EXISTS `idg2019_plg_system_adminexile` (
+DROP TABLE IF EXISTS `#__plg_system_adminexile`;
+CREATE TABLE IF NOT EXISTS `#__plg_system_adminexile` (
   `ip` varchar(45) NOT NULL,
   `firstattempt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `lastattempt` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -10276,187 +10259,142 @@ CREATE TABLE IF NOT EXISTS `idg2019_plg_system_adminexile` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_postinstall_messages`
+-- Estrutura da tabela `#__postinstall_messages`
 --
 
-DROP TABLE IF EXISTS `idg2019_postinstall_messages`;
-CREATE TABLE IF NOT EXISTS `idg2019_postinstall_messages` (
-  `postinstall_message_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `extension_id` bigint(20) NOT NULL DEFAULT '700' COMMENT 'FK to x3dts_extensions',
-  `title_key` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'Lang key for the title',
-  `description_key` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'Lang key for description',
-  `action_key` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `language_extension` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'com_postinstall' COMMENT 'Extension holding lang keys',
-  `language_client_id` tinyint(3) NOT NULL DEFAULT '1',
-  `type` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'link' COMMENT 'Message type - message, link, action',
-  `action_file` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT 'RAD URI to the PHP file containing action method',
-  `action` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT 'Action method name or URL',
-  `condition_file` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'RAD URI to file holding display condition method',
-  `condition_method` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Display condition method, must return boolean',
-  `version_introduced` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '3.2.0' COMMENT 'Version when this message was introduced',
-  `enabled` tinyint(3) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`postinstall_message_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+CREATE TABLE IF NOT EXISTS `#__postinstall_messages` (
+  `postinstall_message_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `extension_id` bigint(20) NOT NULL DEFAULT 700 COMMENT 'FK to #__extensions',
+  `title_key` varchar(255) NOT NULL DEFAULT '' COMMENT 'Lang key for the title',
+  `description_key` varchar(255) NOT NULL DEFAULT '' COMMENT 'Lang key for description',
+  `action_key` varchar(255) NOT NULL DEFAULT '',
+  `language_extension` varchar(255) NOT NULL DEFAULT 'com_postinstall' COMMENT 'Extension holding lang keys',
+  `language_client_id` tinyint(3) NOT NULL DEFAULT 1,
+  `type` varchar(10) NOT NULL DEFAULT 'link' COMMENT 'Message type - message, link, action',
+  `action_file` varchar(255) DEFAULT '' COMMENT 'RAD URI to the PHP file containing action method',
+  `action` varchar(255) DEFAULT '' COMMENT 'Action method name or URL',
+  `condition_file` varchar(255) DEFAULT NULL COMMENT 'RAD URI to file holding display condition method',
+  `condition_method` varchar(255) DEFAULT NULL COMMENT 'Display condition method, must return boolean',
+  `version_introduced` varchar(50) NOT NULL DEFAULT '3.2.0' COMMENT 'Version when this message was introduced',
+  `enabled` tinyint(3) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`postinstall_message_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 --
--- Extraindo dados da tabela `idg2019_postinstall_messages`
+-- Extraindo dados da tabela `#__postinstall_messages`
 --
 
-INSERT INTO `idg2019_postinstall_messages` (`postinstall_message_id`, `extension_id`, `title_key`, `description_key`, `action_key`, `language_extension`, `language_client_id`, `type`, `action_file`, `action`, `condition_file`, `condition_method`, `version_introduced`, `enabled`) VALUES
-(1, 700, 'PLG_TWOFACTORAUTH_TOTP_POSTINSTALL_TITLE', 'PLG_TWOFACTORAUTH_TOTP_POSTINSTALL_BODY', 'PLG_TWOFACTORAUTH_TOTP_POSTINSTALL_ACTION', 'plg_twofactorauth_totp', 1, 'action', 'site://plugins/twofactorauth/totp/postinstall/actions.php', 'twofactorauth_postinstall_action', 'site://plugins/twofactorauth/totp/postinstall/actions.php', 'twofactorauth_postinstall_condition', '3.2.0', 0),
-(2, 700, 'COM_CPANEL_MSG_EACCELERATOR_TITLE', 'COM_CPANEL_MSG_EACCELERATOR_BODY', 'COM_CPANEL_MSG_EACCELERATOR_BUTTON', 'com_cpanel', 1, 'action', 'admin://components/com_admin/postinstall/eaccelerator.php', 'admin_postinstall_eaccelerator_action', 'admin://components/com_admin/postinstall/eaccelerator.php', 'admin_postinstall_eaccelerator_condition', '3.2.0', 1),
-(4, 700, 'COM_CPANEL_MSG_JOOMLA40_PRE_CHECKS_TITLE', 'COM_CPANEL_MSG_JOOMLA40_PRE_CHECKS_BODY', '', 'com_cpanel', 1, 'message', '', '', 'admin://components/com_admin/postinstall/joomla40checks.php', 'admin_postinstall_joomla40checks_condition', '3.7.0', 0),
-(5, 700, 'TPL_HATHOR_MESSAGE_POSTINSTALL_TITLE', 'TPL_HATHOR_MESSAGE_POSTINSTALL_BODY', 'TPL_HATHOR_MESSAGE_POSTINSTALL_ACTION', 'tpl_hathor', 1, 'action', 'admin://templates/hathor/postinstall/hathormessage.php', 'hathormessage_postinstall_action', 'admin://templates/hathor/postinstall/hathormessage.php', 'hathormessage_postinstall_condition', '3.7.0', 1),
-(6, 700, 'PLG_PLG_RECAPTCHA_VERSION_1_POSTINSTALL_TITLE', 'PLG_PLG_RECAPTCHA_VERSION_1_POSTINSTALL_BODY', 'PLG_PLG_RECAPTCHA_VERSION_1_POSTINSTALL_ACTION', 'plg_captcha_recaptcha', 1, 'action', 'site://plugins/captcha/recaptcha/postinstall/actions.php', 'recaptcha_postinstall_action', 'site://plugins/captcha/recaptcha/postinstall/actions.php', 'recaptcha_postinstall_condition', '3.8.6', 1),
-(7, 700, 'COM_CPANEL_MSG_UPDATEDEFAULTSETTINGS_TITLE', 'COM_CPANEL_MSG_UPDATEDEFAULTSETTINGS_BODY', '', 'com_cpanel', 1, 'message', '', '', 'admin://components/com_admin/postinstall/updatedefaultsettings.php', 'admin_postinstall_updatedefaultsettings_condition', '3.8.8', 0);
+INSERT INTO `#__postinstall_messages` (`extension_id`, `title_key`, `description_key`, `action_key`, `language_extension`, `language_client_id`, `type`, `action_file`, `action`, `condition_file`, `condition_method`, `version_introduced`, `enabled`) VALUES
+(700, 'PLG_TWOFACTORAUTH_TOTP_POSTINSTALL_TITLE', 'PLG_TWOFACTORAUTH_TOTP_POSTINSTALL_BODY', 'PLG_TWOFACTORAUTH_TOTP_POSTINSTALL_ACTION', 'plg_twofactorauth_totp', 1, 'action', 'site://plugins/twofactorauth/totp/postinstall/actions.php', 'twofactorauth_postinstall_action', 'site://plugins/twofactorauth/totp/postinstall/actions.php', 'twofactorauth_postinstall_condition', '3.2.0', 1),
+(700, 'COM_CPANEL_WELCOME_BEGINNERS_TITLE', 'COM_CPANEL_WELCOME_BEGINNERS_MESSAGE', '', 'com_cpanel', 1, 'message', '', '', '', '', '3.2.0', 1),
+(700, 'COM_CPANEL_MSG_STATS_COLLECTION_TITLE', 'COM_CPANEL_MSG_STATS_COLLECTION_BODY', '', 'com_cpanel', 1, 'message', '', '', 'admin://components/com_admin/postinstall/statscollection.php', 'admin_postinstall_statscollection_condition', '3.5.0', 1),
+(700, 'PLG_SYSTEM_UPDATENOTIFICATION_POSTINSTALL_UPDATECACHETIME', 'PLG_SYSTEM_UPDATENOTIFICATION_POSTINSTALL_UPDATECACHETIME_BODY', 'PLG_SYSTEM_UPDATENOTIFICATION_POSTINSTALL_UPDATECACHETIME_ACTION', 'plg_system_updatenotification', 1, 'action', 'site://plugins/system/updatenotification/postinstall/updatecachetime.php', 'updatecachetime_postinstall_action', 'site://plugins/system/updatenotification/postinstall/updatecachetime.php', 'updatecachetime_postinstall_condition', '3.6.3', 1),
+(700, 'COM_CPANEL_MSG_JOOMLA40_PRE_CHECKS_TITLE', 'COM_CPANEL_MSG_JOOMLA40_PRE_CHECKS_BODY', '', 'com_cpanel', 1, 'message', '', '', 'admin://components/com_admin/postinstall/joomla40checks.php', 'admin_postinstall_joomla40checks_condition', '3.7.0', 1),
+(700, 'TPL_HATHOR_MESSAGE_POSTINSTALL_TITLE', 'TPL_HATHOR_MESSAGE_POSTINSTALL_BODY', 'TPL_HATHOR_MESSAGE_POSTINSTALL_ACTION', 'tpl_hathor', 1, 'action', 'admin://templates/hathor/postinstall/hathormessage.php', 'hathormessage_postinstall_action', 'admin://templates/hathor/postinstall/hathormessage.php', 'hathormessage_postinstall_condition', '3.7.0', 1),
+(700, 'PLG_PLG_RECAPTCHA_VERSION_1_POSTINSTALL_TITLE', 'PLG_PLG_RECAPTCHA_VERSION_1_POSTINSTALL_BODY', 'PLG_PLG_RECAPTCHA_VERSION_1_POSTINSTALL_ACTION', 'plg_captcha_recaptcha', 1, 'action', 'site://plugins/captcha/recaptcha/postinstall/actions.php', 'recaptcha_postinstall_action', 'site://plugins/captcha/recaptcha/postinstall/actions.php', 'recaptcha_postinstall_condition', '3.8.6', 1),
+(700, 'COM_ACTIONLOGS_POSTINSTALL_TITLE', 'COM_ACTIONLOGS_POSTINSTALL_BODY', '', 'com_actionlogs', 1, 'message', '', '', '', '', '3.9.0', 1),
+(700, 'COM_PRIVACY_POSTINSTALL_TITLE', 'COM_PRIVACY_POSTINSTALL_BODY', '', 'com_privacy', 1, 'message', '', '', '', '', '3.9.0', 1);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_privacy_consents`
+-- Estrutura da tabela `#__privacy_consents`
 --
 
-DROP TABLE IF EXISTS `idg2019_privacy_consents`;
-CREATE TABLE IF NOT EXISTS `idg2019_privacy_consents` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `state` int(10) NOT NULL DEFAULT '1',
-  `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `subject` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remind` tinyint(4) NOT NULL DEFAULT '0',
-  `token` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`),
-  KEY `idx_user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `idg2019_privacy_requests`
---
-
-DROP TABLE IF EXISTS `idg2019_privacy_requests`;
-CREATE TABLE IF NOT EXISTS `idg2019_privacy_requests` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+CREATE TABLE IF NOT EXISTS `#__privacy_requests` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `email` varchar(100) NOT NULL DEFAULT '',
   `requested_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `status` tinyint(4) NOT NULL DEFAULT '0',
-  `request_type` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `confirm_token` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `status` tinyint(4) NOT NULL DEFAULT 0,
+  `request_type` varchar(25) NOT NULL DEFAULT '',
+  `confirm_token` varchar(100) NOT NULL DEFAULT '',
   `confirm_token_created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_redirect_links`
+-- Table structure for table `#__privacy_consents`
 --
 
-DROP TABLE IF EXISTS `idg2019_redirect_links`;
-CREATE TABLE IF NOT EXISTS `idg2019_redirect_links` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `old_url` varchar(2048) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `new_url` varchar(2048) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `referer` varchar(2048) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+CREATE TABLE IF NOT EXISTS `#__privacy_consents` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) unsigned NOT NULL DEFAULT 0,
+  `state` INT(10) NOT NULL DEFAULT 1,
+  `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `subject` varchar(255) NOT NULL DEFAULT '',
+  `body` text NOT NULL,
+  `remind` tinyint(4) NOT NULL DEFAULT 0,
+  `token` varchar(100) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  KEY `idx_user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `#__redirect_links`
+--
+
+CREATE TABLE IF NOT EXISTS `#__redirect_links` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `old_url` varchar(2048) NOT NULL,
+  `new_url` varchar(2048),
+  `referer` varchar(2048) NOT NULL,
   `comment` varchar(255) NOT NULL DEFAULT '',
-  `hits` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `hits` int(10) unsigned NOT NULL DEFAULT 0,
   `published` tinyint(4) NOT NULL,
-  `created_date` datetime NOT NULL,
-  `modified_date` datetime NOT NULL,
-  `header` smallint(3) NOT NULL DEFAULT '301',
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `idx_link_modifed` (`modified_date`) USING BTREE,
-  KEY `idx_old_url` (`old_url`(100)) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `created_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `modified_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `header` smallint(3) NOT NULL DEFAULT 301,
+  PRIMARY KEY (`id`),
+  KEY `idx_old_url` (`old_url`(100)),
+  KEY `idx_link_modifed` (`modified_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
---
--- Extraindo dados da tabela `idg2019_redirect_links`
---
-
-INSERT INTO `idg2019_redirect_links` (`id`, `old_url`, `new_url`, `referer`, `comment`, `hits`, `published`, `created_date`, `modified_date`, `header`) VALUES
-(1, 'http://10.200.1.43/INTERNET/portal_modelo_3x/index.php/editoria-a/menu-de-3-nivel', '', 'http://10.200.1.43/INTERNET/portal_modelo_3x/index.php/editoria-a/menu-de-2-nivel', '', 1, 0, '2019-04-03 17:02:20', '0000-00-00 00:00:00', 301),
-(2, 'http://localhost/joomlagovbr/joomla-2.5/index.php/component/content/category', '', 'http://localhost/joomlagovbr/joomla-2.5/', '', 1, 0, '2019-04-03 17:02:20', '0000-00-00 00:00:00', 301),
-(3, 'http://localhost/joomlagovbr/joomla-3.1/index.php/component/content/category/37-galeria-de-imagens/galeria-1', '', 'http://localhost/joomlagovbr/joomla-3.1/', '', 1, 0, '2019-04-03 17:02:20', '0000-00-00 00:00:00', 301),
-(4, 'http://localhost/joomlagovbr/joomla-3.x/index.php/contato/formulario-de-contato/', '', 'http://localhost/joomlagovbr/joomla-3.x/index.php/contato', '', 1, 0, '2019-04-03 17:02:20', '0000-00-00 00:00:00', 301),
-(5, 'http://localhost/joomlagovbr/joomla-3.x/index.php?Itemid=144', '', 'http://localhost/joomlagovbr/joomla-3.x/index.php/mapa-do-site', '', 1, 0, '2019-04-03 17:02:20', '0000-00-00 00:00:00', 301),
-(6, 'http://localhost/joomlagovbr/joomla-3.x/index.php?Itemid=143', '', 'http://localhost/joomlagovbr/joomla-3.x/index.php?Itemid=144', '', 1, 0, '2019-04-03 17:02:20', '0000-00-00 00:00:00', 301),
-(7, 'http://localhost/joomla-3.x.dev/index.php/index.php?option=com_agendadedirigentes&view=calendario&data=2014-09-01&id=5&Itemid=150', '', 'http://localhost/joomla-3.x.dev/index.php/teste-agenda?view=autoridade&id=1&dia=2014-09-16', '', 2, 0, '2019-04-03 17:02:20', '0000-00-00 00:00:00', 301),
-(8, 'http://localhost/joomla-3.x.dev/index.php/index.php?option=com_agendadedirigentes&view=calendario&data=2014-09-14&id=5&Itemid=150', '', 'http://localhost/joomla-3.x.dev/index.php/teste-agenda?view=autoridade&id=1&dia=2014-09-16', '', 1, 0, '2019-04-03 17:02:20', '0000-00-00 00:00:00', 301),
-(9, 'http://localhost/joomla-3.x.dev/index.php/index.php?option=com_agendadedirigentes&view=calendario&data=2014-08-31&id=5&Itemid=150', '', 'http://localhost/joomla-3.x.dev/index.php/teste-agenda?view=autoridade&id=1&dia=2014-09-16', '', 1, 0, '2019-04-03 17:02:20', '0000-00-00 00:00:00', 301),
-(10, 'http://localhost/joomla-3.x.dev/index.php/index.php?option=com_agendadedirigentes&view=calendario&data=2014-09-30&id=5&Itemid=150', '', 'http://localhost/joomla-3.x.dev/index.php/teste-agenda?view=autoridade&id=1&dia=2014-09-16', '', 1, 0, '2019-04-03 17:02:20', '0000-00-00 00:00:00', 301),
-(11, 'http://localhost/joomla-3.x.dev/index.php/index.php?option=com_agendadedirigentes&view=calendario&data=2014-09-21&id=5&Itemid=150', '', 'http://localhost/joomla-3.x.dev/index.php/teste-agenda?view=autoridade&id=1&dia=2014-09-16', '', 1, 0, '2019-04-03 17:02:20', '0000-00-00 00:00:00', 301),
-(12, 'http://localhost/joomla-3.x.dev/index.php/index.php?option=com_agendadedirigentes&view=calendario&data=2014-09-29&id=5&Itemid=150', '', 'http://localhost/joomla-3.x.dev/index.php/teste-agenda?view=autoridade&id=1&dia=2014-09-16', '', 1, 0, '2019-04-03 17:02:20', '0000-00-00 00:00:00', 301),
-(13, 'http://localhost/joomla-3.x.dev/index.php/index.php?option=com_agendadedirigentes&view=calendario&data=2014-09-23&id=5&Itemid=150', '', 'http://localhost/joomla-3.x.dev/index.php/teste-agenda?view=autoridade&id=1&dia=2014-09-16', '', 1, 0, '2019-04-03 17:02:20', '0000-00-00 00:00:00', 301),
-(14, 'http://localhost/joomla-3.x.dev/index.php/index.php?option=com_agendadedirigentes&view=autoridade&dia=2014-09-29&id=1', '', 'http://localhost/joomla-3.x.dev/index.php/teste-agenda?view=autoridade&id=1&dia=2014-09-16', '', 2, 0, '2019-04-03 17:02:20', '0000-00-00 00:00:00', 301),
-(15, 'http://localhost/joomla-3.x.dev/index.php?cor=amarelo&Itemid=126', '', 'http://localhost/joomla-3.x.dev/', '', 1, 0, '2019-04-03 17:02:20', '0000-00-00 00:00:00', 301),
-(16, 'https://ufrb.edu.br/portal2019/assunto-22?id=4595:&catid=63', NULL, 'https://ufrb.edu.br/portal2019/assunto-22', '', 2, 0, '2019-09-20 11:24:27', '0000-00-00 00:00:00', 301),
-(17, 'https://www.ufrb.edu.br/portal2019/guia-de-estilo', NULL, 'https://www.ufrb.edu.br/portal2019/', '', 1, 0, '2019-10-03 14:46:24', '0000-00-00 00:00:00', 301),
-(18, 'https://www.ufrb.edu.br/portal2019/index.php?option=com_agendadirigentes&view=compromissos', NULL, '', '', 1, 0, '2019-10-14 17:14:05', '0000-00-00 00:00:00', 301);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_schemas`
+-- Estrutura da tabela `#__schemas`
 --
 
-DROP TABLE IF EXISTS `idg2019_schemas`;
-CREATE TABLE IF NOT EXISTS `idg2019_schemas` (
+CREATE TABLE IF NOT EXISTS `#__schemas` (
   `extension_id` int(11) NOT NULL,
-  `version_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`extension_id`,`version_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `version_id` varchar(20) NOT NULL,
+  PRIMARY KEY (`extension_id`,`version_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
---
--- Extraindo dados da tabela `idg2019_schemas`
---
-
-INSERT INTO `idg2019_schemas` (`extension_id`, `version_id`) VALUES
-(700, '3.9.16-2020-03-04'),
-(10030, '4.2.9'),
-(10034, '4.3.14'),
-(10061, '0.0.6'),
-(10144, '3.7.173'),
-(10176, '3.1.7');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_session`
+-- Estrutura da tabela `#__session`
 --
 
-DROP TABLE IF EXISTS `idg2019_session`;
-CREATE TABLE IF NOT EXISTS `idg2019_session` (
+CREATE TABLE IF NOT EXISTS `#__session` (
   `session_id` varbinary(192) NOT NULL,
-  `client_id` tinyint(3) UNSIGNED DEFAULT NULL,
-  `guest` tinyint(3) UNSIGNED DEFAULT '1',
-  `time` int(11) NOT NULL DEFAULT '0',
-  `data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `userid` int(11) DEFAULT '0',
-  `username` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT '',
-  PRIMARY KEY (`session_id`) USING BTREE,
-  KEY `userid` (`userid`) USING BTREE,
-  KEY `time` (`time`) USING BTREE,
-  KEY `client_id_guest` (`client_id`,`guest`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
-
---
--- Extraindo dados da tabela `idg2019_session`
---
-
-INSERT INTO `idg2019_session` (`session_id`, `client_id`, `guest`, `time`, `data`, `userid`, `username`) VALUES
-(0x3538303032337037647067367132696b34333832356367367532, 1, 1, 1592162053, 'joomla|s:736:\"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjozOntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjM6e3M6NzoiY291bnRlciI7aToxO3M6NToidGltZXIiO086ODoic3RkQ2xhc3MiOjM6e3M6NToic3RhcnQiO2k6MTU5MjE2MjA1MztzOjQ6Imxhc3QiO2k6MTU5MjE2MjA1MztzOjM6Im5vdyI7aToxNTkyMTYyMDUzO31zOjU6InRva2VuIjtzOjMyOiJZcFN5YXpUdFNqWVNUSEFEN0tDeHR4N1VPMnVMZjFYUiI7fXM6ODoicmVnaXN0cnkiO086MjQ6Ikpvb21sYVxSZWdpc3RyeVxSZWdpc3RyeSI6Mzp7czo3OiIAKgBkYXRhIjtPOjg6InN0ZENsYXNzIjowOnt9czoxNDoiACoAaW5pdGlhbGl6ZWQiO2I6MDtzOjk6InNlcGFyYXRvciI7czoxOiIuIjt9czo0OiJ1c2VyIjtPOjIwOiJKb29tbGFcQ01TXFVzZXJcVXNlciI6MTp7czoyOiJpZCI7aTowO319fXM6MTQ6IgAqAGluaXRpYWxpemVkIjtiOjA7czo5OiJzZXBhcmF0b3IiO3M6MToiLiI7fQ==\";', 0, ''),
-(0x66696676343864366c643567726e646734687267646531636433, 0, 1, 1592161622, 'joomla|s:664:\"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjozOntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjI6e3M6NzoiY291bnRlciI7aToyO3M6NToidGltZXIiO086ODoic3RkQ2xhc3MiOjM6e3M6NToic3RhcnQiO2k6MTU5MjE2MTYyMTtzOjQ6Imxhc3QiO2k6MTU5MjE2MTYyMTtzOjM6Im5vdyI7aToxNTkyMTYxNjIxO319czo4OiJyZWdpc3RyeSI7TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjA6e31zOjE0OiIAKgBpbml0aWFsaXplZCI7YjowO3M6OToic2VwYXJhdG9yIjtzOjE6Ii4iO31zOjQ6InVzZXIiO086MjA6Ikpvb21sYVxDTVNcVXNlclxVc2VyIjoxOntzOjI6ImlkIjtpOjA7fX19czoxNDoiACoAaW5pdGlhbGl6ZWQiO2I6MDtzOjk6InNlcGFyYXRvciI7czoxOiIuIjt9\";', 0, '');
+  `client_id` tinyint(3) unsigned DEFAULT NULL,
+  `guest` tinyint(3) unsigned DEFAULT 1,
+  `time` int(11) NOT NULL DEFAULT 0,
+  `data` mediumtext,
+  `userid` int(11) DEFAULT 0,
+  `username` varchar(150) DEFAULT '',
+  PRIMARY KEY (`session_id`),
+  KEY `userid` (`userid`),
+  KEY `time` (`time`),
+  KEY `client_id_guest` (`client_id`, `guest`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_slideshowck_styles`
+-- Estrutura da tabela `#__slideshowck_styles`
 --
 
-DROP TABLE IF EXISTS `idg2019_slideshowck_styles`;
-CREATE TABLE IF NOT EXISTS `idg2019_slideshowck_styles` (
+DROP TABLE IF EXISTS `#__slideshowck_styles`;
+CREATE TABLE IF NOT EXISTS `#__slideshowck_styles` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` text NOT NULL,
   `state` int(10) NOT NULL DEFAULT '1',
@@ -10469,56 +10407,55 @@ CREATE TABLE IF NOT EXISTS `idg2019_slideshowck_styles` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_tags`
+-- Estrutura da tabela `#__tags`
 --
 
-DROP TABLE IF EXISTS `idg2019_tags`;
-CREATE TABLE IF NOT EXISTS `idg2019_tags` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `parent_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `lft` int(11) NOT NULL DEFAULT '0',
-  `rgt` int(11) NOT NULL DEFAULT '0',
-  `level` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `path` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+CREATE TABLE IF NOT EXISTS `#__tags` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `parent_id` int(10) unsigned NOT NULL DEFAULT 0,
+  `lft` int(11) NOT NULL DEFAULT 0,
+  `rgt` int(11) NOT NULL DEFAULT 0,
+  `level` int(10) unsigned NOT NULL DEFAULT 0,
+  `path` varchar(400) NOT NULL DEFAULT '',
+  `title` varchar(255) NOT NULL,
   `alias` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '',
-  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `published` tinyint(1) NOT NULL DEFAULT '0',
-  `checked_out` int(11) UNSIGNED NOT NULL DEFAULT '0',
-  `checked_out_time` datetime NOT NULL,
-  `access` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `params` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `metadesc` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The meta description for the page.',
-  `metakey` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The meta keywords for the page.',
-  `metadata` varchar(2048) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'JSON encoded metadata properties.',
-  `created_user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `created_time` datetime NOT NULL,
-  `created_by_alias` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `modified_user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `modified_time` datetime NOT NULL,
-  `images` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `urls` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `hits` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `language` char(7) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `version` int(10) UNSIGNED NOT NULL DEFAULT '1',
-  `publish_up` datetime NOT NULL,
-  `publish_down` datetime NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `tag_idx` (`published`,`access`) USING BTREE,
-  KEY `idx_access` (`access`) USING BTREE,
-  KEY `idx_checkout` (`checked_out`) USING BTREE,
-  KEY `idx_left_right` (`lft`,`rgt`) USING BTREE,
-  KEY `idx_language` (`language`) USING BTREE,
-  KEY `idx_path` (`path`(100)) USING BTREE,
-  KEY `idx_alias` (`alias`(100)) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `note` varchar(255) NOT NULL DEFAULT '',
+  `description` mediumtext NOT NULL,
+  `published` tinyint(1) NOT NULL DEFAULT 0,
+  `checked_out` int(11) unsigned NOT NULL DEFAULT 0,
+  `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `access` int(10) unsigned NOT NULL DEFAULT 0,
+  `params` text NOT NULL,
+  `metadesc` varchar(1024) NOT NULL COMMENT 'The meta description for the page.',
+  `metakey` varchar(1024) NOT NULL COMMENT 'The meta keywords for the page.',
+  `metadata` varchar(2048) NOT NULL COMMENT 'JSON encoded metadata properties.',
+  `created_user_id` int(10) unsigned NOT NULL DEFAULT 0,
+  `created_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `created_by_alias` varchar(255) NOT NULL DEFAULT '',
+  `modified_user_id` int(10) unsigned NOT NULL DEFAULT 0,
+  `modified_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `images` text NOT NULL,
+  `urls` text NOT NULL,
+  `hits` int(10) unsigned NOT NULL DEFAULT 0,
+  `language` char(7) NOT NULL,
+  `version` int(10) unsigned NOT NULL DEFAULT 1,
+  `publish_up` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `tag_idx` (`published`,`access`),
+  KEY `idx_access` (`access`),
+  KEY `idx_checkout` (`checked_out`),
+  KEY `idx_path` (`path`(100)),
+  KEY `idx_left_right` (`lft`,`rgt`),
+  KEY `idx_alias` (`alias`(100)),
+  KEY `idx_language` (`language`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 --
--- Extraindo dados da tabela `idg2019_tags`
+-- Extraindo dados da tabela `#__tags`
 --
 
-INSERT INTO `idg2019_tags` (`id`, `parent_id`, `lft`, `rgt`, `level`, `path`, `title`, `alias`, `note`, `description`, `published`, `checked_out`, `checked_out_time`, `access`, `params`, `metadesc`, `metakey`, `metadata`, `created_user_id`, `created_time`, `created_by_alias`, `modified_user_id`, `modified_time`, `images`, `urls`, `hits`, `language`, `version`, `publish_up`, `publish_down`) VALUES
+INSERT INTO `#__tags` (`id`, `parent_id`, `lft`, `rgt`, `level`, `path`, `title`, `alias`, `note`, `description`, `published`, `checked_out`, `checked_out_time`, `access`, `params`, `metadesc`, `metakey`, `metadata`, `created_user_id`, `created_time`, `created_by_alias`, `modified_user_id`, `modified_time`, `images`, `urls`, `hits`, `language`, `version`, `publish_up`, `publish_down`) VALUES
 (1, 0, 0, 17, 0, '', 'ROOT', 'root', '', '', 1, 0, '0000-00-00 00:00:00', 1, '{}', '', '', '', 929, '2019-04-03 17:02:20', '', 0, '0000-00-00 00:00:00', '', '', 0, '*', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (2, 1, 1, 4, 1, 'educacao', 'Educação', 'educacao', '', '', 1, 0, '0000-00-00 00:00:00', 1, '{\"tag_layout\":\"\",\"tag_link_class\":\"label label-info\",\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '', '', '{\"author\":\"\",\"robots\":\"\"}', 929, '2019-04-03 17:02:20', '', 0, '0000-00-00 00:00:00', '', '', 0, '*', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (3, 1, 5, 6, 1, 'saude', 'Saúde', 'saude', '', '', 1, 0, '0000-00-00 00:00:00', 1, '{\"tag_layout\":\"\",\"tag_link_class\":\"label label-info\",\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '', '', '{\"author\":\"\",\"robots\":\"\"}', 929, '2019-04-03 17:02:20', '', 0, '0000-00-00 00:00:00', '', '', 0, '*', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
@@ -10532,28 +10469,28 @@ INSERT INTO `idg2019_tags` (`id`, `parent_id`, `lft`, `rgt`, `level`, `path`, `t
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_template_styles`
+-- Estrutura da tabela `#__template_styles`
 --
 
-DROP TABLE IF EXISTS `idg2019_template_styles`;
-CREATE TABLE IF NOT EXISTS `idg2019_template_styles` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `template` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `client_id` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+CREATE TABLE IF NOT EXISTS `#__template_styles` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `template` varchar(50) NOT NULL DEFAULT '',
+  `client_id` tinyint(1) unsigned NOT NULL DEFAULT 0,
   `home` char(7) NOT NULL DEFAULT '0',
-  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `params` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `idx_template` (`template`) USING BTREE,
+  `title` varchar(255) NOT NULL DEFAULT '',
+  `params` text NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_template` (`template`),
   KEY `idx_client_id` (`client_id`),
   KEY `idx_client_id_home` (`client_id`,`home`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=9;
+
 
 --
--- Extraindo dados da tabela `idg2019_template_styles`
+-- Extraindo dados da tabela `#__template_styles`
 --
 
-INSERT INTO `idg2019_template_styles` (`id`, `template`, `client_id`, `home`, `title`, `params`) VALUES
+INSERT INTO `#__template_styles` (`id`, `template`, `client_id`, `home`, `title`, `params`) VALUES
 (2, 'bluestork', 1, '0', 'Bluestork - Default', '{\"useRoundedCorners\":\"1\",\"showSiteName\":\"0\"}'),
 (7, 'padraogoverno01', 0, '0', 'padraogoverno01 - Default', '{\"cor\":\"verde\",\"font_style_url\":\"{LOCALFONT}\",\"icon_style\":\"bitmap-portal-brasil\",\"denominacao\":\"Denomina\\u00e7\\u00e3o do \\u00f3rg\\u00e3o\",\"nome_principal\":\"Nome principal\",\"subordinacao\":\"subordina\\u00e7\\u00e3o\",\"classe_nome_principal\":\"\",\"rodape_acesso_informacao\":1,\"rodape_logo_brasil\":1,\"mensagem_final_ferramenta\":\"\",\"clear_default_javascript\":1,\"local_mainscript\":\"footer\",\"anexar_js_barra2014\":\"1\",\"endereco_js_barra2014\":\"http:\\/\\/barra.brasil.gov.br\\/barra.js?cor=verde\",\"google_analytics_id\":\"\",\"google_analytics_domain_name\":\"\",\"google_analytics_allow_linker\":0,\"allow_set_color\":\"1\",\"meta_generator\":\"\"}'),
 (9, 'isis', 1, '1', 'isis - Default', '{\"templateColor\":\"\",\"logoFile\":\"\"}'),
@@ -10567,26 +10504,25 @@ INSERT INTO `idg2019_template_styles` (`id`, `template`, `client_id`, `home`, `t
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_ucm_base`
+-- Estrutura da tabela `#__ucm_base`
 --
 
-DROP TABLE IF EXISTS `idg2019_ucm_base`;
-CREATE TABLE IF NOT EXISTS `idg2019_ucm_base` (
-  `ucm_id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `#__ucm_base` (
+  `ucm_id` int(10) unsigned NOT NULL,
   `ucm_item_id` int(10) NOT NULL,
   `ucm_type_id` int(11) NOT NULL,
   `ucm_language_id` int(11) NOT NULL,
-  PRIMARY KEY (`ucm_id`) USING BTREE,
-  KEY `idx_ucm_item_id` (`ucm_item_id`) USING BTREE,
-  KEY `idx_ucm_type_id` (`ucm_type_id`) USING BTREE,
-  KEY `idx_ucm_language_id` (`ucm_language_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  PRIMARY KEY (`ucm_id`),
+  KEY `idx_ucm_item_id` (`ucm_item_id`),
+  KEY `idx_ucm_type_id` (`ucm_type_id`),
+  KEY `idx_ucm_language_id` (`ucm_language_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 --
--- Extraindo dados da tabela `idg2019_ucm_base`
+-- Extraindo dados da tabela `#__ucm_base`
 --
 
-INSERT INTO `idg2019_ucm_base` (`ucm_id`, `ucm_item_id`, `ucm_type_id`, `ucm_language_id`) VALUES
+INSERT INTO `#__ucm_base` (`ucm_id`, `ucm_item_id`, `ucm_type_id`, `ucm_language_id`) VALUES
 (1, 71, 1, 0),
 (2, 94, 1, 0),
 (3, 87, 1, 0);
@@ -10594,63 +10530,62 @@ INSERT INTO `idg2019_ucm_base` (`ucm_id`, `ucm_item_id`, `ucm_type_id`, `ucm_lan
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_ucm_content`
+-- Estrutura da tabela `#__ucm_content`
 --
 
-DROP TABLE IF EXISTS `idg2019_ucm_content`;
-CREATE TABLE IF NOT EXISTS `idg2019_ucm_content` (
-  `core_content_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `core_type_alias` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'FK to the content types table',
+CREATE TABLE IF NOT EXISTS `#__ucm_content` (
+  `core_content_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `core_type_alias` varchar(400) NOT NULL DEFAULT '' COMMENT 'FK to the content types table',
   `core_title` varchar(400) NOT NULL DEFAULT '',
   `core_alias` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '',
   `core_body` mediumtext,
-  `core_state` tinyint(1) NOT NULL DEFAULT '0',
+  `core_state` tinyint(1) NOT NULL DEFAULT 0,
   `core_checked_out_time` varchar(255) NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `core_checked_out_user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `core_access` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `core_checked_out_user_id` int(10) unsigned NOT NULL DEFAULT 0,
+  `core_access` int(10) unsigned NOT NULL DEFAULT 0,
   `core_params` text,
-  `core_featured` tinyint(4) UNSIGNED NOT NULL DEFAULT '0',
+  `core_featured` tinyint(4) unsigned NOT NULL DEFAULT 0,
   `core_metadata` varchar(2048) NOT NULL DEFAULT '' COMMENT 'JSON encoded metadata properties.',
-  `core_created_user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `core_created_by_alias` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `core_created_time` datetime NOT NULL,
-  `core_modified_user_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Most recent user that modified',
-  `core_modified_time` datetime NOT NULL,
+  `core_created_user_id` int(10) unsigned NOT NULL DEFAULT 0,
+  `core_created_by_alias` varchar(255) NOT NULL DEFAULT '',
+  `core_created_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `core_modified_user_id` int(10) unsigned NOT NULL DEFAULT 0 COMMENT 'Most recent user that modified',
+  `core_modified_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `core_language` char(7) NOT NULL DEFAULT '',
   `core_publish_up` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `core_publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `core_content_item_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'ID from the individual type table',
-  `asset_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'FK to the #__assets table.',
+  `core_content_item_id` int(10) unsigned NOT NULL DEFAULT 0 COMMENT 'ID from the individual type table',
+  `asset_id` int(10) unsigned NOT NULL DEFAULT 0 COMMENT 'FK to the #__assets table.',
   `core_images` text,
   `core_urls` text,
-  `core_hits` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `core_version` int(10) UNSIGNED NOT NULL DEFAULT '1',
-  `core_ordering` int(11) NOT NULL DEFAULT '0',
+  `core_hits` int(10) unsigned NOT NULL DEFAULT 0,
+  `core_version` int(10) unsigned NOT NULL DEFAULT 1,
+  `core_ordering` int(11) NOT NULL DEFAULT 0,
   `core_metakey` text,
   `core_metadesc` text,
-  `core_catid` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `core_catid` int(10) unsigned NOT NULL DEFAULT 0,
   `core_xreference` varchar(50) NOT NULL DEFAULT '' COMMENT 'A reference to enable linkages to external data sets.',
-  `core_type_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  PRIMARY KEY (`core_content_id`) USING BTREE,
-  KEY `tag_idx` (`core_state`,`core_access`) USING BTREE,
-  KEY `idx_access` (`core_access`) USING BTREE,
-  KEY `idx_language` (`core_language`) USING BTREE,
-  KEY `idx_modified_time` (`core_modified_time`) USING BTREE,
-  KEY `idx_created_time` (`core_created_time`) USING BTREE,
-  KEY `idx_core_modified_user_id` (`core_modified_user_id`) USING BTREE,
-  KEY `idx_core_checked_out_user_id` (`core_checked_out_user_id`) USING BTREE,
-  KEY `idx_core_created_user_id` (`core_created_user_id`) USING BTREE,
-  KEY `idx_core_type_id` (`core_type_id`) USING BTREE,
-  KEY `idx_alias` (`core_alias`(100)) USING BTREE,
-  KEY `idx_title` (`core_title`(100)) USING BTREE,
-  KEY `idx_content_type` (`core_type_alias`(100)) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='Contains core content data in name spaced fields' ROW_FORMAT=DYNAMIC;
+  `core_type_id` int(10) unsigned NOT NULL DEFAULT 0,
+  PRIMARY KEY (`core_content_id`),
+  KEY `tag_idx` (`core_state`,`core_access`),
+  KEY `idx_access` (`core_access`),
+  KEY `idx_alias` (`core_alias`(100)),
+  KEY `idx_language` (`core_language`),
+  KEY `idx_title` (`core_title`(100)),
+  KEY `idx_modified_time` (`core_modified_time`),
+  KEY `idx_created_time` (`core_created_time`),
+  KEY `idx_content_type` (`core_type_alias`(100)),
+  KEY `idx_core_modified_user_id` (`core_modified_user_id`),
+  KEY `idx_core_checked_out_user_id` (`core_checked_out_user_id`),
+  KEY `idx_core_created_user_id` (`core_created_user_id`),
+  KEY `idx_core_type_id` (`core_type_id`)
+ ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci COMMENT='Contains core content data in name spaced fields';
 
 --
--- Extraindo dados da tabela `idg2019_ucm_content`
+-- Extraindo dados da tabela `#__ucm_content`
 --
 
-INSERT INTO `idg2019_ucm_content` (`core_content_id`, `core_type_alias`, `core_title`, `core_alias`, `core_body`, `core_state`, `core_checked_out_time`, `core_checked_out_user_id`, `core_access`, `core_params`, `core_featured`, `core_metadata`, `core_created_user_id`, `core_created_by_alias`, `core_created_time`, `core_modified_user_id`, `core_modified_time`, `core_language`, `core_publish_up`, `core_publish_down`, `core_content_item_id`, `asset_id`, `core_images`, `core_urls`, `core_hits`, `core_version`, `core_ordering`, `core_metakey`, `core_metadesc`, `core_catid`, `core_xreference`, `core_type_id`) VALUES
+INSERT INTO `#__ucm_content` (`core_content_id`, `core_type_alias`, `core_title`, `core_alias`, `core_body`, `core_state`, `core_checked_out_time`, `core_checked_out_user_id`, `core_access`, `core_params`, `core_featured`, `core_metadata`, `core_created_user_id`, `core_created_by_alias`, `core_created_time`, `core_modified_user_id`, `core_modified_time`, `core_language`, `core_publish_up`, `core_publish_down`, `core_content_item_id`, `asset_id`, `core_images`, `core_urls`, `core_hits`, `core_version`, `core_ordering`, `core_metakey`, `core_metadesc`, `core_catid`, `core_xreference`, `core_type_id`) VALUES
 (1, 'com_content.article', 'Site Secom, Portal do Planalto e Portal Brasil adotam nova identidade digital', 'site-secom-portal-do-planalto-e-portal-brasil-adotam-nova-identidade-digital', '<p>Todos os sítios e portais do Governo Federal podem adotar o modelo</p>\r\n', -2, '', 0, 1, '{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"0\",\"show_modify_date\":\"0\",\"show_publish_date\":\"0\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"0\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 0, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 929, '', '2019-04-03 17:02:20', 929, '2019-04-03 17:02:20', '*', '2019-04-03 17:02:20', '0000-00-00 00:00:00', 71, 275, '{\"image_intro\":\"images\\/conteudo\\/thumb-modelos-portal-modelo.jpg\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"images\\/conteudo\\/thumb-modelos-portal-modelo.jpg\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', 8, 9, 2, '', '', 17, '', 1),
 (2, 'com_content.article', 'Manifestação na Ouvidoria', 'manifestacao-na-ouvidoria', '', 1, '0000-00-00 00:00:00', 0, 1, '{\"article_layout\":\"idg2019:servico\",\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"info_block_show_title\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_associations\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_page_title\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 0, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 931, '', '2019-10-07 16:42:53', 931, '2019-10-18 16:23:24', '*', '2019-10-07 16:42:53', '0000-00-00 00:00:00', 94, 388, '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', 16, 8, 0, '', '', 60, '', 1),
 (3, 'com_content.article', 'Aproveitamento de Estudos', 'aproveitamento-de-estudos', '', 1, '0000-00-00 00:00:00', 0, 1, '{\"article_layout\":\"idg2019:servico\",\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"info_block_show_title\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_associations\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_page_title\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}', 0, '{\"robots\":\"\",\"author\":\"\",\"rights\":\"\",\"xreference\":\"\"}', 931, '', '2019-10-02 19:31:57', 931, '2019-10-18 16:24:29', '*', '2019-10-02 19:31:57', '0000-00-00 00:00:00', 87, 418, '{\"image_intro\":\"\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}', '{\"urla\":false,\"urlatext\":\"\",\"targeta\":\"\",\"urlb\":false,\"urlbtext\":\"\",\"targetb\":\"\",\"urlc\":false,\"urlctext\":\"\",\"targetc\":\"\"}', 51, 12, 2, '', '', 60, '', 1);
@@ -10658,56 +10593,54 @@ INSERT INTO `idg2019_ucm_content` (`core_content_id`, `core_type_alias`, `core_t
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_ucm_history`
+-- Estrutura da tabela `#__ucm_history`
 --
 
-DROP TABLE IF EXISTS `idg2019_ucm_history`;
-CREATE TABLE IF NOT EXISTS `idg2019_ucm_history` (
-  `version_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `ucm_item_id` int(10) UNSIGNED NOT NULL,
-  `ucm_type_id` int(10) UNSIGNED NOT NULL,
-  `version_note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'Optional version name',
-  `save_date` datetime NOT NULL,
-  `editor_user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `character_count` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Number of characters in this version.',
-  `sha1_hash` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'SHA1 hash of the version_data column.',
-  `version_data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'json-encoded string of version data',
-  `keep_forever` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0=auto delete; 1=keep',
-  PRIMARY KEY (`version_id`) USING BTREE,
-  KEY `idx_ucm_item_id` (`ucm_type_id`,`ucm_item_id`) USING BTREE,
-  KEY `idx_save_date` (`save_date`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+CREATE TABLE IF NOT EXISTS `#__ucm_history` (
+  `version_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `ucm_item_id` int(10) unsigned NOT NULL,
+  `ucm_type_id` int(10) unsigned NOT NULL,
+  `version_note` varchar(255) NOT NULL DEFAULT '' COMMENT 'Optional version name',
+  `save_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `editor_user_id` int(10) unsigned NOT NULL DEFAULT 0,
+  `character_count` int(10) unsigned NOT NULL DEFAULT 0 COMMENT 'Number of characters in this version.',
+  `sha1_hash` varchar(50) NOT NULL DEFAULT '' COMMENT 'SHA1 hash of the version_data column.',
+  `version_data` mediumtext NOT NULL COMMENT 'json-encoded string of version data',
+  `keep_forever` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0=auto delete; 1=keep',
+  PRIMARY KEY (`version_id`),
+  KEY `idx_ucm_item_id` (`ucm_type_id`,`ucm_item_id`),
+  KEY `idx_save_date` (`save_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_updates`
+-- Estrutura da tabela `#__updates`
 --
 
-DROP TABLE IF EXISTS `idg2019_updates`;
-CREATE TABLE IF NOT EXISTS `idg2019_updates` (
+CREATE TABLE IF NOT EXISTS `#__updates` (
   `update_id` int(11) NOT NULL AUTO_INCREMENT,
-  `update_site_id` int(11) DEFAULT '0',
-  `extension_id` int(11) DEFAULT '0',
-  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT '',
-  `description` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `element` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT '',
-  `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT '',
-  `folder` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT '',
-  `client_id` tinyint(3) DEFAULT '0',
-  `version` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT '',
-  `data` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `detailsurl` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `infourl` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `extra_query` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT '',
-  PRIMARY KEY (`update_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8 COMMENT='Available Updates' ROW_FORMAT=DYNAMIC;
+  `update_site_id` int(11) DEFAULT 0,
+  `extension_id` int(11) DEFAULT 0,
+  `name` varchar(100) DEFAULT '',
+  `description` text NOT NULL,
+  `element` varchar(100) DEFAULT '',
+  `type` varchar(20) DEFAULT '',
+  `folder` varchar(20) DEFAULT '',
+  `client_id` tinyint(3) DEFAULT 0,
+  `version` varchar(32) DEFAULT '',
+  `data` text NOT NULL,
+  `detailsurl` text NOT NULL,
+  `infourl` text NOT NULL,
+  `extra_query` varchar(1000) DEFAULT '',
+  PRIMARY KEY (`update_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci COMMENT='Available Updates';
 
 --
--- Extraindo dados da tabela `idg2019_updates`
+-- Extraindo dados da tabela `#__updates`
 --
 
-INSERT INTO `idg2019_updates` (`update_id`, `update_site_id`, `extension_id`, `name`, `description`, `element`, `type`, `folder`, `client_id`, `version`, `data`, `detailsurl`, `infourl`, `extra_query`) VALUES
+INSERT INTO `#__updates` (`update_id`, `update_site_id`, `extension_id`, `name`, `description`, `element`, `type`, `folder`, `client_id`, `version`, `data`, `detailsurl`, `infourl`, `extra_query`) VALUES
 (1, 46, 0, 'Armenian', '', 'pkg_hy-AM', 'package', '', 0, '3.4.4.1', '', 'https://update.joomla.org/language/details3/hy-AM_details.xml', '', ''),
 (2, 46, 0, 'Malay', '', 'pkg_ms-MY', 'package', '', 0, '3.4.1.2', '', 'https://update.joomla.org/language/details3/ms-MY_details.xml', '', ''),
 (3, 46, 0, 'Romanian', '', 'pkg_ro-RO', 'package', '', 0, '3.9.13.1', '', 'https://update.joomla.org/language/details3/ro-RO_details.xml', '', ''),
@@ -10788,26 +10721,25 @@ INSERT INTO `idg2019_updates` (`update_id`, `update_site_id`, `extension_id`, `n
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_update_sites`
+-- Estrutura da tabela `#__update_sites`
 --
 
-DROP TABLE IF EXISTS `idg2019_update_sites`;
-CREATE TABLE IF NOT EXISTS `idg2019_update_sites` (
+CREATE TABLE IF NOT EXISTS `#__update_sites` (
   `update_site_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT '',
-  `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT '',
-  `location` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `enabled` int(11) DEFAULT '0',
-  `last_check_timestamp` bigint(20) DEFAULT '0',
-  `extra_query` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT '',
-  PRIMARY KEY (`update_site_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8 COMMENT='Update Sites' ROW_FORMAT=DYNAMIC;
+  `name` varchar(100) DEFAULT '',
+  `type` varchar(20) DEFAULT '',
+  `location` text NOT NULL,
+  `enabled` int(11) DEFAULT 0,
+  `last_check_timestamp` bigint(20) DEFAULT 0,
+  `extra_query` varchar(1000) DEFAULT '',
+  PRIMARY KEY (`update_site_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci COMMENT='Update Sites';
 
 --
--- Extraindo dados da tabela `idg2019_update_sites`
+-- Extraindo dados da tabela `#__update_sites`
 --
 
-INSERT INTO `idg2019_update_sites` (`update_site_id`, `name`, `type`, `location`, `enabled`, `last_check_timestamp`, `extra_query`) VALUES
+INSERT INTO `#__update_sites` (`update_site_id`, `name`, `type`, `location`, `enabled`, `last_check_timestamp`, `extra_query`) VALUES
 (1, 'Joomla Core', 'collection', 'https://update.joomla.org/core/list.xml', 1, 1590962163, ''),
 (2, 'Joomla Extension Directory', 'collection', 'http://update.joomla.org/jed/list.xml', 1, 1590962164, ''),
 (8, 'Joomla! Update Component Update Site', 'extension', 'http://update.joomla.org/core/extensions/com_joomlaupdate.xml', 1, 1590962164, ''),
@@ -10832,21 +10764,20 @@ INSERT INTO `idg2019_update_sites` (`update_site_id`, `name`, `type`, `location`
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_update_sites_extensions`
+-- Estrutura da tabela `#__update_sites_extensions`
 --
 
-DROP TABLE IF EXISTS `idg2019_update_sites_extensions`;
-CREATE TABLE IF NOT EXISTS `idg2019_update_sites_extensions` (
-  `update_site_id` int(11) NOT NULL DEFAULT '0',
-  `extension_id` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`update_site_id`,`extension_id`) USING BTREE
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Links extensions to update sites' ROW_FORMAT=DYNAMIC;
+CREATE TABLE IF NOT EXISTS `#__update_sites_extensions` (
+  `update_site_id` int(11) NOT NULL DEFAULT 0,
+  `extension_id` int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`update_site_id`,`extension_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci COMMENT='Links extensions to update sites';
 
 --
--- Extraindo dados da tabela `idg2019_update_sites_extensions`
+-- Extraindo dados da tabela `#__update_sites_extensions`
 --
 
-INSERT INTO `idg2019_update_sites_extensions` (`update_site_id`, `extension_id`) VALUES
+INSERT INTO `#__update_sites_extensions` (`update_site_id`, `extension_id`) VALUES
 (1, 700),
 (2, 700),
 (8, 28),
@@ -10871,210 +10802,206 @@ INSERT INTO `idg2019_update_sites_extensions` (`update_site_id`, `extension_id`)
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_usergroups`
+-- Estrutura da tabela `#__usergroups`
 --
 
-DROP TABLE IF EXISTS `idg2019_usergroups`;
-CREATE TABLE IF NOT EXISTS `idg2019_usergroups` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
-  `parent_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Adjacency List Reference Id',
-  `lft` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set lft.',
-  `rgt` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set rgt.',
-  `title` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `idx_usergroup_parent_title_lookup` (`parent_id`,`title`) USING BTREE,
-  KEY `idx_usergroup_title_lookup` (`title`) USING BTREE,
-  KEY `idx_usergroup_adjacency_lookup` (`parent_id`) USING BTREE,
+CREATE TABLE IF NOT EXISTS `#__usergroups` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
+  `parent_id` int(10) unsigned NOT NULL DEFAULT 0 COMMENT 'Adjacency List Reference Id',
+  `lft` int(11) NOT NULL DEFAULT 0 COMMENT 'Nested set lft.',
+  `rgt` int(11) NOT NULL DEFAULT 0 COMMENT 'Nested set rgt.',
+  `title` varchar(100) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_usergroup_parent_title_lookup` (`parent_id`,`title`),
+  KEY `idx_usergroup_title_lookup` (`title`),
+  KEY `idx_usergroup_adjacency_lookup` (`parent_id`),
   KEY `idx_usergroup_nested_set_lookup` (`lft`,`rgt`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 --
--- Extraindo dados da tabela `idg2019_usergroups`
+-- Extraindo dados da tabela `#__usergroups`
 --
 
-INSERT INTO `idg2019_usergroups` (`id`, `parent_id`, `lft`, `rgt`, `title`) VALUES
+INSERT INTO `#__usergroups` (`id`, `parent_id`, `lft`, `rgt`, `title`) VALUES
 (1, 0, 1, 18, 'Public'),
-(2, 1, 6, 15, 'Registered'),
-(3, 2, 7, 14, 'Author'),
+(2, 1, 8, 15, 'Registered'),
+(3, 2, 9, 14, 'Author'),
 (4, 3, 10, 13, 'Editor'),
 (5, 4, 11, 12, 'Publisher'),
-(6, 1, 2, 5, 'Manager'),
-(7, 6, 3, 4, 'Administrator'),
+(6, 1, 4, 7, 'Manager'),
+(7, 6, 5, 6, 'Administrator'),
 (8, 1, 16, 17, 'Super Users'),
+(9, 1, 2, 3, 'Guest'),
 (13, 3, 8, 9, 'Agente de Dirigentes - Gabinete do Ministro');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_users`
+-- Estrutura da tabela `#__users`
 --
 
-DROP TABLE IF EXISTS `idg2019_users`;
-CREATE TABLE IF NOT EXISTS `idg2019_users` (
+CREATE TABLE IF NOT EXISTS `#__users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `username` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `password` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `block` tinyint(4) NOT NULL DEFAULT '0',
-  `sendEmail` tinyint(4) DEFAULT '0',
-  `registerDate` datetime NOT NULL,
-  `lastvisitDate` datetime NOT NULL,
-  `activation` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `params` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `lastResetTime` datetime NOT NULL COMMENT 'Date of last password reset',
-  `resetCount` int(11) NOT NULL DEFAULT '0' COMMENT 'Count of password resets since lastResetTime',
-  `otpKey` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'Two factor authentication encrypted keys',
-  `otep` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'One time emergency passwords',
-  `requireReset` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'Require user to reset password on next login',
-  PRIMARY KEY (`id`) USING BTREE,
+  `name` varchar(400) NOT NULL DEFAULT '',
+  `username` varchar(150) NOT NULL DEFAULT '',
+  `email` varchar(100) NOT NULL DEFAULT '',
+  `password` varchar(100) NOT NULL DEFAULT '',
+  `block` tinyint(4) NOT NULL DEFAULT 0,
+  `sendEmail` tinyint(4) DEFAULT 0,
+  `registerDate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `lastvisitDate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `activation` varchar(100) NOT NULL DEFAULT '',
+  `params` text NOT NULL,
+  `lastResetTime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT 'Date of last password reset',
+  `resetCount` int(11) NOT NULL DEFAULT 0 COMMENT 'Count of password resets since lastResetTime',
+  `otpKey` varchar(1000) NOT NULL DEFAULT '' COMMENT 'Two factor authentication encrypted keys',
+  `otep` varchar(1000) NOT NULL DEFAULT '' COMMENT 'One time emergency passwords',
+  `requireReset` tinyint(4) NOT NULL DEFAULT 0 COMMENT 'Require user to reset password on next login',
+  PRIMARY KEY (`id`),
+  KEY `idx_name` (`name`(100)),
+  KEY `idx_block` (`block`),
   UNIQUE KEY `idx_username` (`username`),
-  KEY `idx_block` (`block`) USING BTREE,
-  KEY `email` (`email`) USING BTREE,
-  KEY `idx_name` (`name`(100)) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=932 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  KEY `email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 --
--- Extraindo dados da tabela `idg2019_users`
+-- Extraindo dados da tabela `#__users`
 --
 
-INSERT INTO `idg2019_users` (`id`, `name`, `username`, `email`, `password`, `block`, `sendEmail`, `registerDate`, `lastvisitDate`, `activation`, `params`, `lastResetTime`, `resetCount`, `otpKey`, `otep`, `requireReset`) VALUES
+INSERT INTO `#__users` (`id`, `name`, `username`, `email`, `password`, `block`, `sendEmail`, `registerDate`, `lastvisitDate`, `activation`, `params`, `lastResetTime`, `resetCount`, `otpKey`, `otep`, `requireReset`) VALUES
 (931, 'super', 'super', 'tiagovtg@gmail.com', '$2y$10$j5zeBX5ggg5S2rGccW5JBeTU6QudOFAY5jSiiB6JM9Pk7EG3Ds6du', 0, 0, '2019-04-05 16:25:23', '2020-06-14 19:14:12', '', '{\"admin_style\":\"\",\"admin_language\":\"\",\"language\":\"\",\"editor\":\"\",\"helpsite\":\"\",\"timezone\":\"\"}', '0000-00-00 00:00:00', 0, '', '', 0);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_user_keys`
+-- Estrutura da tabela `#__user_keys`
 --
 
-DROP TABLE IF EXISTS `idg2019_user_keys`;
-CREATE TABLE IF NOT EXISTS `idg2019_user_keys` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `user_id` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `series` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+CREATE TABLE IF NOT EXISTS `#__user_keys` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(150) NOT NULL,
+  `token` varchar(255) NOT NULL,
+  `series` varchar(191) NOT NULL,
   `invalid` tinyint(4) NOT NULL,
-  `time` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `uastring` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `series` (`series`) USING BTREE,
-  KEY `user_id` (`user_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `time` varchar(200) NOT NULL,
+  `uastring` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `series` (`series`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_user_notes`
+-- Estrutura da tabela `#__user_notes`
 --
 
-DROP TABLE IF EXISTS `idg2019_user_notes`;
-CREATE TABLE IF NOT EXISTS `idg2019_user_notes` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `catid` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `subject` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `body` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `state` tinyint(3) NOT NULL DEFAULT '0',
-  `checked_out` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `checked_out_time` datetime NOT NULL,
-  `created_user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `created_time` datetime NOT NULL,
-  `modified_user_id` int(10) UNSIGNED NOT NULL,
-  `modified_time` datetime NOT NULL,
-  `review_time` datetime NOT NULL,
-  `publish_up` datetime NOT NULL,
-  `publish_down` datetime NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `idx_user_id` (`user_id`) USING BTREE,
-  KEY `idx_category_id` (`catid`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+CREATE TABLE IF NOT EXISTS `#__user_notes` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) unsigned NOT NULL DEFAULT 0,
+  `catid` int(10) unsigned NOT NULL DEFAULT 0,
+  `subject` varchar(100) NOT NULL DEFAULT '',
+  `body` text NOT NULL,
+  `state` tinyint(3) NOT NULL DEFAULT 0,
+  `checked_out` int(10) unsigned NOT NULL DEFAULT 0,
+  `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `created_user_id` int(10) unsigned NOT NULL DEFAULT 0,
+  `created_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `modified_user_id` int(10) unsigned NOT NULL,
+  `modified_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `review_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `publish_up` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `idx_user_id` (`user_id`),
+  KEY `idx_category_id` (`catid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_user_profiles`
+-- Estrutura da tabela `#__user_profiles`
 --
 
-DROP TABLE IF EXISTS `idg2019_user_profiles`;
-CREATE TABLE IF NOT EXISTS `idg2019_user_profiles` (
+CREATE TABLE IF NOT EXISTS `#__user_profiles` (
   `user_id` int(11) NOT NULL,
-  `profile_key` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `profile_value` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ordering` int(11) NOT NULL DEFAULT '0',
-  UNIQUE KEY `idx_user_id_profile_key` (`user_id`,`profile_key`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Simple user profile storage table' ROW_FORMAT=DYNAMIC;
+  `profile_key` varchar(100) NOT NULL,
+  `profile_value` text NOT NULL,
+  `ordering` int(11) NOT NULL DEFAULT 0,
+  UNIQUE KEY `idx_user_id_profile_key` (`user_id`,`profile_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci COMMENT='Simple user profile storage table';
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_user_usergroup_map`
+-- Estrutura da tabela `#__user_usergroup_map`
 --
 
-DROP TABLE IF EXISTS `idg2019_user_usergroup_map`;
-CREATE TABLE IF NOT EXISTS `idg2019_user_usergroup_map` (
-  `user_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Foreign Key to x3dts_users.id',
-  `group_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Foreign Key to x3dts_usergroups.id',
-  PRIMARY KEY (`user_id`,`group_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+CREATE TABLE IF NOT EXISTS `#__user_usergroup_map` (
+  `user_id` int(10) unsigned NOT NULL DEFAULT 0 COMMENT 'Foreign Key to #__users.id',
+  `group_id` int(10) unsigned NOT NULL DEFAULT 0 COMMENT 'Foreign Key to #__usergroups.id',
+  PRIMARY KEY (`user_id`,`group_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+
 
 --
--- Extraindo dados da tabela `idg2019_user_usergroup_map`
+-- Extraindo dados da tabela `#__user_usergroup_map`
 --
 
-INSERT INTO `idg2019_user_usergroup_map` (`user_id`, `group_id`) VALUES
+INSERT INTO `#__user_usergroup_map` (`user_id`, `group_id`) VALUES
 (931, 8);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_utf8_conversion`
+-- Estrutura da tabela `#__utf8_conversion`
 --
 
-DROP TABLE IF EXISTS `idg2019_utf8_conversion`;
-CREATE TABLE IF NOT EXISTS `idg2019_utf8_conversion` (
-  `converted` tinyint(4) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+CREATE TABLE IF NOT EXISTS `#__utf8_conversion` (
+  `converted` tinyint(4) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 --
--- Extraindo dados da tabela `idg2019_utf8_conversion`
+-- Dumping data for table `#__utf8_conversion`
 --
 
-INSERT INTO `idg2019_utf8_conversion` (`converted`) VALUES
-(4);
+INSERT INTO `#__utf8_conversion` (`converted`) VALUES (0);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_viewlevels`
+-- Estrutura da tabela `#__viewlevels`
 --
 
-DROP TABLE IF EXISTS `idg2019_viewlevels`;
-CREATE TABLE IF NOT EXISTS `idg2019_viewlevels` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
-  `title` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `ordering` int(11) NOT NULL DEFAULT '0',
-  `rules` varchar(5120) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'JSON encoded access control.',
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `idx_assetgroup_title_lookup` (`title`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+CREATE TABLE IF NOT EXISTS `#__viewlevels` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
+  `title` varchar(100) NOT NULL DEFAULT '',
+  `ordering` int(11) NOT NULL DEFAULT 0,
+  `rules` varchar(5120) NOT NULL COMMENT 'JSON encoded access control.',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_assetgroup_title_lookup` (`title`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=7;
+
 
 --
--- Extraindo dados da tabela `idg2019_viewlevels`
+-- Extraindo dados da tabela `#__viewlevels`
 --
 
-INSERT INTO `idg2019_viewlevels` (`id`, `title`, `ordering`, `rules`) VALUES
+INSERT INTO `#__viewlevels` (`id`, `title`, `ordering`, `rules`) VALUES
 (1, 'Public', 0, '[1]'),
-(2, 'Registered', 1, '[6,2,8]'),
-(3, 'Special', 2, '[6,3,13,8]');
+(2, 'Registered', 2, '[6,2,8]'),
+(3, 'Special', 3, '[6,3,8]'),
+(5, 'Guest', 1, '[9]'),
+(6, 'Super Users', 4, '[8]');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_weblinks`
+-- Estrutura da tabela `#__weblinks`
 --
 
-DROP TABLE IF EXISTS `idg2019_weblinks`;
-CREATE TABLE IF NOT EXISTS `idg2019_weblinks` (
+DROP TABLE IF EXISTS `#__weblinks`;
+CREATE TABLE IF NOT EXISTS `#__weblinks` (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `catid` int(11) NOT NULL DEFAULT '0',
   `title` varchar(250) NOT NULL DEFAULT '',
@@ -11117,11 +11044,11 @@ CREATE TABLE IF NOT EXISTS `idg2019_weblinks` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_wf_profiles`
+-- Estrutura da tabela `#__wf_profiles`
 --
 
-DROP TABLE IF EXISTS `idg2019_wf_profiles`;
-CREATE TABLE IF NOT EXISTS `idg2019_wf_profiles` (
+DROP TABLE IF EXISTS `#__wf_profiles`;
+CREATE TABLE IF NOT EXISTS `#__wf_profiles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `description` text NOT NULL,
@@ -11141,10 +11068,10 @@ CREATE TABLE IF NOT EXISTS `idg2019_wf_profiles` (
 ) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `idg2019_wf_profiles`
+-- Extraindo dados da tabela `#__wf_profiles`
 --
 
-INSERT INTO `idg2019_wf_profiles` (`id`, `name`, `description`, `users`, `types`, `components`, `area`, `device`, `rows`, `plugins`, `published`, `ordering`, `checked_out`, `checked_out_time`, `params`) VALUES
+INSERT INTO `#__wf_profiles` (`id`, `name`, `description`, `users`, `types`, `components`, `area`, `device`, `rows`, `plugins`, `published`, `ordering`, `checked_out`, `checked_out_time`, `params`) VALUES
 (1, 'Default', 'Default Profile for all users', '', '3,4,5,6,8,13,7', '', 0, 'desktop,tablet,phone', 'help,newdocument,undo,redo,spacer,bold,italic,underline,strikethrough,justifyfull,justifycenter,justifyleft,justifyright,spacer,blockquote,formatselect,styleselect,removeformat,cleanup;fontselect,fontsizeselect,fontcolor,spacer,clipboard,indent,outdent,lists,sub,sup,textcase,charmap,hr;directionality,fullscreen,print,searchreplace,spacer,table,style,xhtmlxtras;visualaid,visualchars,visualblocks,nonbreaking,anchor,unlink,link,imgmanager,spellchecker,article', 'formatselect,styleselect,cleanup,fontselect,fontsizeselect,fontcolor,clipboard,lists,textcase,charmap,hr,directionality,fullscreen,print,searchreplace,table,style,xhtmlxtras,visualchars,visualblocks,nonbreaking,anchor,link,imgmanager,spellchecker,article,spellchecker,article,browser,contextmenu,inlinepopups,media,preview,source', 1, 1, 0, '0000-00-00 00:00:00', '{\"editor\":{\"toolbar_theme\":\"default\"}}'),
 (2, 'Front End', 'Sample Front-end Profile', '', '3,4,5', '', 1, 'desktop,tablet,phone', 'help,newdocument,undo,redo,spacer,bold,italic,underline,strikethrough,justifyfull,justifycenter,justifyleft,justifyright,spacer,formatselect,styleselect;clipboard,searchreplace,indent,outdent,lists,cleanup,charmap,removeformat,hr,sub,sup,textcase,nonbreaking,visualchars,visualblocks;fullscreen,print,visualaid,style,xhtmlxtras,anchor,unlink,link,imgmanager,spellchecker,article', 'charmap,contextmenu,inlinepopups,help,clipboard,searchreplace,fullscreen,preview,print,style,textcase,nonbreaking,visualchars,visualblocks,xhtmlxtras,imgmanager,anchor,link,spellchecker,article,lists,formatselect,styleselect,hr', 0, 2, 0, '0000-00-00 00:00:00', '{\"editor\":{\"toolbar_theme\":\"default\"}}'),
 (3, 'Blogger', 'Simple Blogging Profile', '', '3,4,5,6,8,13,7', '', 0, 'desktop,tablet,phone', 'bold,italic,strikethrough,lists,blockquote,spacer,justifyleft,justifycenter,justifyright,spacer,link,unlink,imgmanager,article,spellchecker,fullscreen,kitchensink;formatselect,styleselect,underline,justifyfull,clipboard,removeformat,charmap,indent,outdent,undo,redo,help', 'link,imgmanager,article,spellchecker,fullscreen,kitchensink,clipboard,contextmenu,inlinepopups,lists,formatselect,styleselect,textpattern', 0, 3, 0, '0000-00-00 00:00:00', '{\"editor\":{\"toolbar_theme\":\"default\"}}'),
@@ -11154,11 +11081,11 @@ INSERT INTO `idg2019_wf_profiles` (`id`, `name`, `description`, `users`, `types`
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_youtubegallery_categories`
+-- Estrutura da tabela `#__youtubegallery_categories`
 --
 
-DROP TABLE IF EXISTS `idg2019_youtubegallery_categories`;
-CREATE TABLE IF NOT EXISTS `idg2019_youtubegallery_categories` (
+DROP TABLE IF EXISTS `#__youtubegallery_categories`;
+CREATE TABLE IF NOT EXISTS `#__youtubegallery_categories` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `categoryname` varchar(50) NOT NULL,
   `description` text NOT NULL,
@@ -11170,21 +11097,21 @@ CREATE TABLE IF NOT EXISTS `idg2019_youtubegallery_categories` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_youtubegallery_settings`
+-- Estrutura da tabela `#__youtubegallery_settings`
 --
 
-DROP TABLE IF EXISTS `idg2019_youtubegallery_settings`;
-CREATE TABLE IF NOT EXISTS `idg2019_youtubegallery_settings` (
+DROP TABLE IF EXISTS `#__youtubegallery_settings`;
+CREATE TABLE IF NOT EXISTS `#__youtubegallery_settings` (
   `option` varchar(50) NOT NULL,
   `value` varchar(1024) NOT NULL,
   PRIMARY KEY (`option`) USING BTREE
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
--- Extraindo dados da tabela `idg2019_youtubegallery_settings`
+-- Extraindo dados da tabela `#__youtubegallery_settings`
 --
 
-INSERT INTO `idg2019_youtubegallery_settings` (`option`, `value`) VALUES
+INSERT INTO `#__youtubegallery_settings` (`option`, `value`) VALUES
 ('vimeo_api_client_id', ''),
 ('vimeo_api_client_secret', ''),
 ('youtube_public_api', 'AIzaSyBDPLGESeCrQC9ZqrBL6CUfPwwbtbryZoc');
@@ -11192,11 +11119,11 @@ INSERT INTO `idg2019_youtubegallery_settings` (`option`, `value`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_youtubegallery_themes`
+-- Estrutura da tabela `#__youtubegallery_themes`
 --
 
-DROP TABLE IF EXISTS `idg2019_youtubegallery_themes`;
-CREATE TABLE IF NOT EXISTS `idg2019_youtubegallery_themes` (
+DROP TABLE IF EXISTS `#__youtubegallery_themes`;
+CREATE TABLE IF NOT EXISTS `#__youtubegallery_themes` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `themename` varchar(50) NOT NULL,
   `showtitle` tinyint(1) NOT NULL,
@@ -11252,21 +11179,21 @@ CREATE TABLE IF NOT EXISTS `idg2019_youtubegallery_themes` (
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
--- Extraindo dados da tabela `idg2019_youtubegallery_themes`
+-- Extraindo dados da tabela `#__youtubegallery_themes`
 --
 
-INSERT INTO `idg2019_youtubegallery_themes` (`id`, `themename`, `showtitle`, `playvideo`, `repeat`, `fullscreen`, `autoplay`, `related`, `showinfo`, `bgcolor`, `cols`, `width`, `height`, `cssstyle`, `navbarstyle`, `thumbnailstyle`, `linestyle`, `showlistname`, `listnamestyle`, `showactivevideotitle`, `activevideotitlestyle`, `color1`, `color2`, `border`, `description`, `descr_position`, `descr_style`, `openinnewwindow`, `rel`, `hrefaddon`, `pagination`, `customlimit`, `controls`, `youtubeparams`, `playertype`, `useglass`, `logocover`, `customlayout`, `prepareheadtags`, `muteonplay`, `volume`, `orderby`, `customnavlayout`, `responsive`, `mediafolder`, `readonly`, `headscript`, `themedescription`, `nocookie`, `changepagetitle`, `allowplaylist`) VALUES
+INSERT INTO `#__youtubegallery_themes` (`id`, `themename`, `showtitle`, `playvideo`, `repeat`, `fullscreen`, `autoplay`, `related`, `showinfo`, `bgcolor`, `cols`, `width`, `height`, `cssstyle`, `navbarstyle`, `thumbnailstyle`, `linestyle`, `showlistname`, `listnamestyle`, `showactivevideotitle`, `activevideotitlestyle`, `color1`, `color2`, `border`, `description`, `descr_position`, `descr_style`, `openinnewwindow`, `rel`, `hrefaddon`, `pagination`, `customlimit`, `controls`, `youtubeparams`, `playertype`, `useglass`, `logocover`, `customlayout`, `prepareheadtags`, `muteonplay`, `volume`, `orderby`, `customnavlayout`, `responsive`, `mediafolder`, `readonly`, `headscript`, `themedescription`, `nocookie`, `changepagetitle`, `allowplaylist`) VALUES
 (1, 'Tema para módulos', 1, 1, 0, 0, 0, 1, 1, '', 1, 459, 344, '', '', '', '', 1, '', 1, '', '', '', 0, 1, 1, '', 0, '', '', 0, 4, 1, '', 1, 0, '', '', 1, 0, 50, 'publisheddate desc', '', 1, '', 0, '', '', 0, 0, 0),
 (2, 'Tema para componente', 0, 0, 0, 0, 0, 0, 1, '', 1, 400, 300, '', '', '', '', 0, '', 0, '', '', '', 1, 0, 0, '', 0, '', '', 0, 10, 1, '', 1, 0, '', '[if:videoplayer]\r\n<h1 class=\"secondaryHeading\">[videotitle]</h1>\r\n\r\n<div class=\"subtitle\"></div>\r\n<div class=\"content-header-options-1 row-fluid\">\r\n<div class=\"documentByLine span10\">\r\n<span>publicado em [video:publisheddate: d/m/Y]</span>\r\n</div>\r\n<div class=\"span2\">\r\n<a class=\"pull-right\" href=\"javascript:history.back()\"><i class=\"icon-angle-left\">&nbsp;</i>voltar</a>\r\n</div>\r\n</div>\r\n\r\n<div class=\"row-fluid subtitle\">\r\n<div class=\"span7\">\r\n[videoplayer]\r\n</div>\r\n<div class=\"span5\">\r\n[if:videodescription]\r\n<p>[videodescription]</p>\r\n[endif:videodescription]\r\n\r\n</div>\r\n\r\n</div>\r\n[endif:videoplayer]\r\n\r\n<div class=\"tile-list-1\">\r\n[navigationbar:1]\r\n</div>\r\n\r\n[pagination]', 1, 0, 50, 'publisheddate desc', '<div class=\"tileItem\">\r\n<div class=\"span10 tileContent\">\r\n<div class=\"tileImage img-rounded\">\r\n[a][image][/a]\r\n</div>\r\n<h2 class=\"tileHeadline\">\r\n[a][title][/a]\r\n</h2>\r\n<span class=\"description\">\r\n[if:description]\r\n[description:22] [...]\r\n[endif:description]\r\n</span>\r\n</div>\r\n<div class=\"span2 tileInfo\">\r\n<ul>\r\n<li><i class=\"icon-fixed-width icon-calendar\"></i>  [publisheddate:d/m/Y]</li>\r\n<li><i class=\"icon-fixed-width icon-time\"></i> [publisheddate:H\\hi]</li>\r\n</ul>  \r\n</div>\r\n</div>', 1, '', 0, '', '', 0, 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_youtubegallery_videolists`
+-- Estrutura da tabela `#__youtubegallery_videolists`
 --
 
-DROP TABLE IF EXISTS `idg2019_youtubegallery_videolists`;
-CREATE TABLE IF NOT EXISTS `idg2019_youtubegallery_videolists` (
+DROP TABLE IF EXISTS `#__youtubegallery_videolists`;
+CREATE TABLE IF NOT EXISTS `#__youtubegallery_videolists` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `listname` varchar(50) NOT NULL,
   `videolist` text,
@@ -11283,20 +11210,20 @@ CREATE TABLE IF NOT EXISTS `idg2019_youtubegallery_videolists` (
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
--- Extraindo dados da tabela `idg2019_youtubegallery_videolists`
+-- Extraindo dados da tabela `#__youtubegallery_videolists`
 --
 
-INSERT INTO `idg2019_youtubegallery_videolists` (`id`, `listname`, `videolist`, `catid`, `updateperiod`, `lastplaylistupdate`, `description`, `author`, `watchusergroup`, `authorurl`, `image`, `note`) VALUES
+INSERT INTO `#__youtubegallery_videolists` (`id`, `listname`, `videolist`, `catid`, `updateperiod`, `lastplaylistupdate`, `description`, `author`, `watchusergroup`, `authorurl`, `image`, `note`) VALUES
 (1, 'Galeria de vídeos', 'http://www.youtube.com/user/CanalPortalBrasil?feature=watch', 0, 1, '2019-10-03 14:44:46', '', '', 0, '', '', '');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `idg2019_youtubegallery_videos`
+-- Estrutura da tabela `#__youtubegallery_videos`
 --
 
-DROP TABLE IF EXISTS `idg2019_youtubegallery_videos`;
-CREATE TABLE IF NOT EXISTS `idg2019_youtubegallery_videos` (
+DROP TABLE IF EXISTS `#__youtubegallery_videos`;
+CREATE TABLE IF NOT EXISTS `#__youtubegallery_videos` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `listid` int(11) NOT NULL,
   `parentid` int(11) NOT NULL,
@@ -11346,10 +11273,10 @@ CREATE TABLE IF NOT EXISTS `idg2019_youtubegallery_videos` (
 ) ENGINE=MyISAM AUTO_INCREMENT=155 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
--- Extraindo dados da tabela `idg2019_youtubegallery_videos`
+-- Extraindo dados da tabela `#__youtubegallery_videos`
 --
 
-INSERT INTO `idg2019_youtubegallery_videos` (`id`, `listid`, `parentid`, `videosource`, `videoid`, `imageurl`, `title`, `description`, `custom_imageurl`, `custom_title`, `custom_description`, `specialparams`, `lastupdate`, `allowupdates`, `status`, `isvideo`, `link`, `ordering`, `publisheddate`, `duration`, `rating_average`, `rating_max`, `rating_min`, `rating_numRaters`, `statistics_favoriteCount`, `statistics_viewCount`, `keywords`, `startsecond`, `endsecond`, `likes`, `dislikes`, `commentcount`, `channel_username`, `channel_title`, `channel_subscribers`, `channel_subscribed`, `channel_location`, `channel_commentcount`, `channel_viewcount`, `channel_videocount`, `channel_description`, `channel_totaluploadviews`, `alias`, `rawdata`, `datalink`) VALUES
+INSERT INTO `#__youtubegallery_videos` (`id`, `listid`, `parentid`, `videosource`, `videoid`, `imageurl`, `title`, `description`, `custom_imageurl`, `custom_title`, `custom_description`, `specialparams`, `lastupdate`, `allowupdates`, `status`, `isvideo`, `link`, `ordering`, `publisheddate`, `duration`, `rating_average`, `rating_max`, `rating_min`, `rating_numRaters`, `statistics_favoriteCount`, `statistics_viewCount`, `keywords`, `startsecond`, `endsecond`, `likes`, `dislikes`, `commentcount`, `channel_username`, `channel_title`, `channel_subscribers`, `channel_subscribed`, `channel_location`, `channel_commentcount`, `channel_viewcount`, `channel_videocount`, `channel_description`, `channel_totaluploadviews`, `alias`, `rawdata`, `datalink`) VALUES
 (123, 1, 0, 'youtubeuseruploads', 'CanalPortalBrasil', '', '', '', '', '', '', '', '2018-01-31 17:50:39', 1, 0, 0, '', 10000, '0000-00-00 00:00:00', 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, 0, 0, '', '', 0, 0, '', 0, 0, 0, '', 0, '', '', ''),
 (154, 1, 0, 'youtubeuseruploads', '', '', '', '', '', '', '', '', '2019-10-03 14:44:46', 1, 0, 0, '', 10000, '0000-00-00 00:00:00', 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, 0, 0, '', '', 0, 0, '', 0, 0, 0, '', 0, '', '', '');
 
@@ -11358,17 +11285,14 @@ INSERT INTO `idg2019_youtubegallery_videos` (`id`, `listid`, `parentid`, `videos
 --
 
 --
--- Indexes for table `idg2019_k2_items`
+-- Indexes for table `#__k2_items`
 --
-ALTER TABLE `idg2019_k2_items` ADD FULLTEXT KEY `search` (`title`,`introtext`,`fulltext`,`extra_fields_search`,`image_caption`,`image_credits`,`video_caption`,`video_credits`,`metadesc`,`metakey`);
-ALTER TABLE `idg2019_k2_items` ADD FULLTEXT KEY `title` (`title`);
+ALTER TABLE `#__k2_items` ADD FULLTEXT KEY `search` (`title`,`introtext`,`fulltext`,`extra_fields_search`,`image_caption`,`image_credits`,`video_caption`,`video_credits`,`metadesc`,`metakey`);
+ALTER TABLE `#__k2_items` ADD FULLTEXT KEY `title` (`title`);
 
 --
--- Indexes for table `idg2019_k2_tags`
+-- Indexes for table `#__k2_tags`
 --
-ALTER TABLE `idg2019_k2_tags` ADD FULLTEXT KEY `name` (`name`);
+ALTER TABLE `#__k2_tags` ADD FULLTEXT KEY `name` (`name`);
 COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
