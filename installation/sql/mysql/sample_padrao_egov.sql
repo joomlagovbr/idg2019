@@ -1,30 +1,49 @@
-SET FOREIGN_KEY_CHECKS=0;
+-- phpMyAdmin SQL Dump
+-- version 4.8.5
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1:3306
+-- Generation Time: 23-Jun-2020 às 02:23
+-- Versão do servidor: 5.7.26
+-- versão do PHP: 7.2.18
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `joomla`
 --
 
+-- --------------------------------------------------------
+
 --
 -- Estrutura da tabela `#__action_logs`
 --
 
+DROP TABLE IF EXISTS `#__action_logs`;
 CREATE TABLE IF NOT EXISTS `#__action_logs` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `message_language_key` varchar(255) NOT NULL DEFAULT '',
-  `message` text NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `message_language_key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `message` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `log_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `extension` varchar(50) NOT NULL DEFAULT '',
-  `user_id` int(11) NOT NULL DEFAULT 0,
-  `item_id` int(11) NOT NULL DEFAULT 0,
-  `ip_address` VARCHAR(40) NOT NULL DEFAULT '0.0.0.0',
+  `extension` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `user_id` int(11) NOT NULL DEFAULT '0',
+  `item_id` int(11) NOT NULL DEFAULT '0',
+  `ip_address` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0.0.0.0',
   PRIMARY KEY (`id`),
   KEY `idx_user_id` (`user_id`),
-  KEY `idx_user_id_logdate` (`user_id`, `log_date`),
-  KEY `idx_user_id_extension` (`user_id`, `extension`),
-  KEY `idx_extension_item_id` (`extension`, `item_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+  KEY `idx_user_id_logdate` (`user_id`,`log_date`),
+  KEY `idx_user_id_extension` (`user_id`,`extension`),
+  KEY `idx_extension_item_id` (`extension`,`item_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -32,31 +51,12 @@ CREATE TABLE IF NOT EXISTS `#__action_logs` (
 -- Estrutura da tabela `#__action_logs_extensions`
 --
 
+DROP TABLE IF EXISTS `#__action_logs_extensions`;
 CREATE TABLE IF NOT EXISTS `#__action_logs_extensions` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `extension` varchar(255) NOT NULL DEFAULT '',
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `extension` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
-
-INSERT INTO `#__action_logs_extensions` (`id`, `extension`) VALUES
-(1, 'com_banners'),
-(2, 'com_cache'),
-(3, 'com_categories'),
-(4, 'com_config'),
-(5, 'com_contact'),
-(6, 'com_content'),
-(7, 'com_installer'),
-(8, 'com_media'),
-(9, 'com_menus'),
-(10, 'com_messages'),
-(11, 'com_modules'),
-(12, 'com_newsfeeds'),
-(13, 'com_plugins'),
-(14, 'com_redirect'),
-(15, 'com_tags'),
-(16, 'com_templates'),
-(17, 'com_users'),
-(18, 'com_checkin');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -64,13 +64,14 @@ INSERT INTO `#__action_logs_extensions` (`id`, `extension`) VALUES
 -- Estrutura da tabela `#__action_logs_users`
 --
 
+DROP TABLE IF EXISTS `#__action_logs_users`;
 CREATE TABLE IF NOT EXISTS `#__action_logs_users` (
   `user_id` int(11) UNSIGNED NOT NULL,
   `notify` tinyint(1) UNSIGNED NOT NULL,
-  `extensions` text NOT NULL,
+  `extensions` text COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`user_id`),
   KEY `idx_notify` (`notify`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -78,38 +79,17 @@ CREATE TABLE IF NOT EXISTS `#__action_logs_users` (
 -- Estrutura da tabela `#__action_log_config`
 --
 
+DROP TABLE IF EXISTS `#__action_log_config`;
 CREATE TABLE IF NOT EXISTS `#__action_log_config` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `type_title` varchar(255) NOT NULL DEFAULT '',
-  `type_alias` varchar(255) NOT NULL DEFAULT '',
-  `id_holder` varchar(255),
-  `title_holder` varchar(255),
-  `table_name` varchar(255),
-  `text_prefix` varchar(255),
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `type_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `type_alias` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `id_holder` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title_holder` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `table_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `text_prefix` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
-
-INSERT INTO `#__action_log_config` (`id`, `type_title`, `type_alias`, `id_holder`, `title_holder`, `table_name`, `text_prefix`) VALUES
-(1, 'article', 'com_content.article', 'id' ,'title' , '#__content', 'PLG_ACTIONLOG_JOOMLA'),
-(2, 'article', 'com_content.form', 'id', 'title' , '#__content', 'PLG_ACTIONLOG_JOOMLA'),
-(3, 'banner', 'com_banners.banner', 'id' ,'name' , '#__banners', 'PLG_ACTIONLOG_JOOMLA'),
-(4, 'user_note', 'com_users.note', 'id', 'subject' ,'#__user_notes', 'PLG_ACTIONLOG_JOOMLA'),
-(5, 'media', 'com_media.file', '' , 'name' , '',  'PLG_ACTIONLOG_JOOMLA'),
-(6, 'category', 'com_categories.category', 'id' , 'title' , '#__categories', 'PLG_ACTIONLOG_JOOMLA'),
-(7, 'menu', 'com_menus.menu', 'id' ,'title' , '#__menu_types', 'PLG_ACTIONLOG_JOOMLA'),
-(8, 'menu_item', 'com_menus.item', 'id' , 'title' , '#__menu', 'PLG_ACTIONLOG_JOOMLA'),
-(9, 'newsfeed', 'com_newsfeeds.newsfeed', 'id' ,'name' , '#__newsfeeds', 'PLG_ACTIONLOG_JOOMLA'),
-(10, 'link', 'com_redirect.link', 'id', 'old_url' , '#__redirect_links', 'PLG_ACTIONLOG_JOOMLA'),
-(11, 'tag', 'com_tags.tag', 'id', 'title' , '#__tags', 'PLG_ACTIONLOG_JOOMLA'),
-(12, 'style', 'com_templates.style', 'id' , 'title' , '#__template_styles', 'PLG_ACTIONLOG_JOOMLA'),
-(13, 'plugin', 'com_plugins.plugin', 'extension_id' , 'name' , '#__extensions', 'PLG_ACTIONLOG_JOOMLA'),
-(14, 'component_config', 'com_config.component', 'extension_id' , 'name', '', 'PLG_ACTIONLOG_JOOMLA'),
-(15, 'contact', 'com_contact.contact', 'id', 'name', '#__contact_details', 'PLG_ACTIONLOG_JOOMLA'),
-(16, 'module', 'com_modules.module', 'id' ,'title', '#__modules', 'PLG_ACTIONLOG_JOOMLA'),
-(17, 'access_level', 'com_users.level', 'id' , 'title', '#__viewlevels', 'PLG_ACTIONLOG_JOOMLA'),
-(18, 'banner_client', 'com_banners.client', 'id', 'name', '#__banner_clients', 'PLG_ACTIONLOG_JOOMLA'),
-(19, 'application_config', 'com_config.application', '', 'name', '', 'PLG_ACTIONLOG_JOOMLA');
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -337,20 +317,21 @@ INSERT INTO `#__agendadirigentes_dirigentes_compromissos` (`dirigente_id`, `comp
 -- Estrutura da tabela `#__assets`
 --
 
+DROP TABLE IF EXISTS `#__assets`;
 CREATE TABLE IF NOT EXISTS `#__assets` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
-  `parent_id` int(11) NOT NULL DEFAULT 0 COMMENT 'Nested set parent.',
-  `lft` int(11) NOT NULL DEFAULT 0 COMMENT 'Nested set lft.',
-  `rgt` int(11) NOT NULL DEFAULT 0 COMMENT 'Nested set rgt.',
-  `level` int(10) unsigned NOT NULL COMMENT 'The cached level in the nested tree.',
-  `name` varchar(50) NOT NULL COMMENT 'The unique name for the asset.\n',
-  `title` varchar(100) NOT NULL COMMENT 'The descriptive title for the asset.',
-  `rules` varchar(5120) NOT NULL COMMENT 'JSON encoded access control.',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `idx_asset_name` (`name`),
-  KEY `idx_lft_rgt` (`lft`,`rgt`),
-  KEY `idx_parent_id` (`parent_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
+  `parent_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set parent.',
+  `lft` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set lft.',
+  `rgt` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set rgt.',
+  `level` int(10) UNSIGNED NOT NULL COMMENT 'The cached level in the nested tree.',
+  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The unique name for the asset.\n',
+  `title` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The descriptive title for the asset.',
+  `rules` varchar(5120) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'JSON encoded access control.',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE KEY `idx_asset_name` (`name`) USING BTREE,
+  KEY `idx_lft_rgt` (`lft`,`rgt`) USING BTREE,
+  KEY `idx_parent_id` (`parent_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=421 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `#__assets`
@@ -734,13 +715,14 @@ INSERT INTO `#__assets` (`id`, `parent_id`, `lft`, `rgt`, `level`, `name`, `titl
 -- Estrutura da tabela `#__associations`
 --
 
+DROP TABLE IF EXISTS `#__associations`;
 CREATE TABLE IF NOT EXISTS `#__associations` (
   `id` int(11) NOT NULL COMMENT 'A reference to the associated item.',
-  `context` varchar(50) NOT NULL COMMENT 'The context of the associated item.',
-  `key` char(32) NOT NULL COMMENT 'The key for the association computed from an md5 on associated ids.',
-  PRIMARY KEY (`context`,`id`),
-  KEY `idx_key` (`key`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+  `context` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The context of the associated item.',
+  `key` char(32) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The key for the association computed from an md5 on associated ids.',
+  PRIMARY KEY (`context`,`id`) USING BTREE,
+  KEY `idx_key` (`key`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
@@ -748,48 +730,49 @@ CREATE TABLE IF NOT EXISTS `#__associations` (
 -- Estrutura da tabela `#__banners`
 --
 
+DROP TABLE IF EXISTS `#__banners`;
 CREATE TABLE IF NOT EXISTS `#__banners` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `cid` int(11) NOT NULL DEFAULT 0,
-  `type` int(11) NOT NULL DEFAULT 0,
-  `name` varchar(255) NOT NULL DEFAULT '',
+  `cid` int(11) NOT NULL DEFAULT '0',
+  `type` int(11) NOT NULL DEFAULT '0',
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `alias` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '',
-  `imptotal` int(11) NOT NULL DEFAULT 0,
-  `impmade` int(11) NOT NULL DEFAULT 0,
-  `clicks` int(11) NOT NULL DEFAULT 0,
-  `clickurl` varchar(200) NOT NULL DEFAULT '',
-  `state` tinyint(3) NOT NULL DEFAULT 0,
-  `catid` int(10) unsigned NOT NULL DEFAULT 0,
-  `description` text NOT NULL,
-  `custombannercode` varchar(2048) NOT NULL,
-  `sticky` tinyint(1) unsigned NOT NULL DEFAULT 0,
-  `ordering` int(11) NOT NULL DEFAULT 0,
-  `metakey` text NOT NULL,
-  `params` text NOT NULL,
-  `own_prefix` tinyint(1) NOT NULL DEFAULT 0,
-  `metakey_prefix` varchar(400) NOT NULL DEFAULT '',
-  `purchase_type` tinyint(4) NOT NULL DEFAULT -1,
-  `track_clicks` tinyint(4) NOT NULL DEFAULT -1,
-  `track_impressions` tinyint(4) NOT NULL DEFAULT -1,
-  `checked_out` int(10) unsigned NOT NULL DEFAULT 0,
-  `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `publish_up` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `reset` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `language` char(7) NOT NULL DEFAULT '',
-  `created_by` int(10) unsigned NOT NULL DEFAULT 0,
-  `created_by_alias` varchar(255) NOT NULL DEFAULT '',
-  `modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `modified_by` int(10) unsigned NOT NULL DEFAULT 0,
-  `version` int(10) unsigned NOT NULL DEFAULT 1,
-  PRIMARY KEY (`id`),
-  KEY `idx_state` (`state`),
-  KEY `idx_own_prefix` (`own_prefix`),
-  KEY `idx_metakey_prefix` (`metakey_prefix`(100)),
-  KEY `idx_banner_catid` (`catid`),
-  KEY `idx_language` (`language`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+  `imptotal` int(11) NOT NULL DEFAULT '0',
+  `impmade` int(11) NOT NULL DEFAULT '0',
+  `clicks` int(11) NOT NULL DEFAULT '0',
+  `clickurl` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `state` tinyint(3) NOT NULL DEFAULT '0',
+  `catid` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `description` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `custombannercode` varchar(2048) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sticky` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `ordering` int(11) NOT NULL DEFAULT '0',
+  `metakey` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `params` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `own_prefix` tinyint(1) NOT NULL DEFAULT '0',
+  `metakey_prefix` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `purchase_type` tinyint(4) NOT NULL DEFAULT '-1',
+  `track_clicks` tinyint(4) NOT NULL DEFAULT '-1',
+  `track_impressions` tinyint(4) NOT NULL DEFAULT '-1',
+  `checked_out` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `checked_out_time` datetime NOT NULL,
+  `publish_up` datetime NOT NULL,
+  `publish_down` datetime NOT NULL,
+  `reset` datetime NOT NULL,
+  `created` datetime NOT NULL,
+  `language` char(7) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `created_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `created_by_alias` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `modified` datetime NOT NULL,
+  `modified_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `version` int(10) UNSIGNED NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `idx_state` (`state`) USING BTREE,
+  KEY `idx_own_prefix` (`own_prefix`) USING BTREE,
+  KEY `idx_banner_catid` (`catid`) USING BTREE,
+  KEY `idx_language` (`language`) USING BTREE,
+  KEY `idx_metakey_prefix` (`metakey_prefix`(100))
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `#__banners`
@@ -800,12 +783,12 @@ INSERT INTO `#__banners` (`id`, `cid`, `type`, `name`, `alias`, `imptotal`, `imp
 (2, 0, 0, 'Portais adotam nova identidade', 'portais-adotam-nova-identidade', 0, 481, 4, 'http://portalpadrao.joomlacalango.org/index.php/component/content/article?id=71', 1, 56, 'Todos os sítios e portais do Governo Federal podem adotar o modelo', '', 0, 2, '', '{\"imageurl\":\"images\\/banners\\/banner-rotativo-home-01.jpg\",\"width\":\"\",\"height\":\"\",\"alt\":\"Site Secom, Portal do Planalto e Portal Brasil adotam nova identidade digital\"}', 0, '', -1, 0, 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2019-04-03 17:02:20', '*', 0, '', '2019-04-03 17:02:20', 929, 5),
 (3, 0, 0, 'Saiba mais sobre o Portal Institucional Padrão do Governo Federal', 'saiba-mais-sobre-o-portal-institucional-padrao-do-governo-federal', 0, 469, 1, 'http://portalpadrao.joomlacalango.org/index.php/component/content/article?id=72', 1, 56, 'O modelo permite que o portal de cada órgão seja reconhecido como propriedade digital do Governo Federal', '', 0, 3, '', '{\"imageurl\":\"images\\/banners\\/banner-rotativo-home-02.jpg\",\"width\":\"\",\"height\":\"\",\"alt\":\"Saiba mais sobre o Portal Institucional Padr\\u00e3o do Governo Federal\"}', 0, '', -1, 0, 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2019-04-03 17:02:20', '*', 0, '', '2019-04-03 17:02:20', 929, 4),
 (4, 0, 0, 'Conheça os templates para informativos da Identidade Padrão', 'conheca-os-templates-para-informativos-da-identidade-padrao', 0, 469, 1, 'http://{SITE}/index.php/component/content/article?id=71', 1, 56, 'Modelos podem ser utilizados para comunicação digital via mailing', '', 0, 4, '', '{\"imageurl\":\"images\\/banners\\/banner-rotativo-home-03.jpg\",\"width\":\"\",\"height\":\"\",\"alt\":\"Conhe\\u00e7a os templates para informativos da Identidade Padr\\u00e3o\"}', 0, '', -1, 0, 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2019-04-03 17:02:20', '*', 0, '', '2019-04-03 17:02:20', 929, 4),
-(5, 0, 0, 'Governo lança a nova Identidade Padrão de Comunicação Digital', 'nova-idg-2019-joomla', 0, 1997, 7, 'http://w096084.mec.gov.br/joomlaidg2019/', 1, 57, '<p>https://www.youtube.com/embed/ZZ4zg0kzP-w</p>', '', 0, 5, '', '{\"imageurl\":\"images\\/banners\\/banner1.jpeg\",\"width\":\"\",\"height\":\"\",\"alt\":\"Nova IDG 2019 - Joomla\"}', 0, '', -1, 0, 0, 0, '0000-00-00 00:00:00', '2019-06-26 17:21:31', '0000-00-00 00:00:00', '2019-05-04 00:00:00', '2019-04-04 16:56:38', '*', 929, '', '2019-06-26 18:57:58', 931, 11),
-(6, 0, 0, 'Dados Abertos', 'dados-abertos', 0, 1494, 0, 'http://www.portalpadrao.gov.br/', 1, 59, '<p> sem ac rhoncus mollis ante nisi gravida nisl at fermentum nisl felis vestibulum turpis.</p>', '', 0, 6, '', '{\"imageurl\":\"images\\/sampledata\\/ico1.png\",\"width\":\"\",\"height\":\"\",\"alt\":\"Dados Abertos\"}', 0, '', -1, 0, 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2019-07-18 00:00:00', '2019-06-18 23:18:33', '*', 929, '', '2019-06-18 23:41:08', 929, 2),
-(7, 0, 0, 'Ouvidoria', 'ouvidoria', 0, 1494, 0, 'http://www.portalpadrao.gov.br/', 1, 59, '', '', 0, 7, '', '{\"imageurl\":\"images\\/sampledata\\/ico2.png\",\"width\":\"\",\"height\":\"\",\"alt\":\"Ouvidoria\"}', 0, '', -1, 0, 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2019-07-18 00:00:00', '2019-06-18 23:19:21', '*', 929, '', '0000-00-00 00:00:00', 0, 1),
-(8, 0, 0, 'Participa BR', 'participa-br', 0, 1494, 0, 'http://www.portalpadrao.gov.br/', 1, 59, '', '', 0, 8, '', '{\"imageurl\":\"images\\/sampledata\\/ico4.png\",\"width\":\"\",\"height\":\"\",\"alt\":\"Participa BR\"}', 0, '', -1, 0, 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2019-07-18 00:00:00', '2019-06-18 23:20:03', '*', 929, '', '0000-00-00 00:00:00', 0, 1),
-(9, 0, 0, 'Audiência Pública', 'audiencia-publica', 0, 1494, 0, 'http://www.portalpadrao.gov.br/', 1, 59, '', '', 0, 9, '', '{\"imageurl\":\"images\\/sampledata\\/ico3.png\",\"width\":\"\",\"height\":\"\",\"alt\":\"Audi\\u00eancia P\\u00fablica\"}', 0, '', -1, 0, 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2019-07-18 00:00:00', '2019-06-18 23:20:38', '*', 929, '', '0000-00-00 00:00:00', 0, 1),
-(10, 0, 0, 'Lorem ipsum dolor sit', 'lorem-ipsum-dolor-sit', 0, 1494, 0, 'http://www.portalpadrao.gov.br/', 1, 59, '', '', 0, 10, '', '{\"imageurl\":\"images\\/sampledata\\/ico2.png\",\"width\":\"\",\"height\":\"\",\"alt\":\"Lorem ipsum dolor sit\"}', 0, '', -1, 0, 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2019-07-18 00:00:00', '2019-06-18 23:21:27', '*', 929, '', '0000-00-00 00:00:00', 0, 1),
+(5, 0, 0, 'Governo lança a nova Identidade Padrão de Comunicação Digital', 'nova-idg-2019-joomla', 0, 1999, 7, 'http://w096084.mec.gov.br/joomlaidg2019/', 1, 57, '<p>https://www.youtube.com/embed/ZZ4zg0kzP-w</p>', '', 0, 5, '', '{\"imageurl\":\"images\\/banners\\/banner1.jpeg\",\"width\":\"\",\"height\":\"\",\"alt\":\"Nova IDG 2019 - Joomla\"}', 0, '', -1, 0, 0, 0, '0000-00-00 00:00:00', '2019-06-26 17:21:31', '0000-00-00 00:00:00', '2019-05-04 00:00:00', '2019-04-04 16:56:38', '*', 929, '', '2019-06-26 18:57:58', 931, 11),
+(6, 0, 0, 'Dados Abertos', 'dados-abertos', 0, 1496, 0, 'http://www.portalpadrao.gov.br/', 1, 59, '<p> sem ac rhoncus mollis ante nisi gravida nisl at fermentum nisl felis vestibulum turpis.</p>', '', 0, 6, '', '{\"imageurl\":\"images\\/sampledata\\/ico1.png\",\"width\":\"\",\"height\":\"\",\"alt\":\"Dados Abertos\"}', 0, '', -1, 0, 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2019-07-18 00:00:00', '2019-06-18 23:18:33', '*', 929, '', '2019-06-18 23:41:08', 929, 2),
+(7, 0, 0, 'Ouvidoria', 'ouvidoria', 0, 1496, 0, 'http://www.portalpadrao.gov.br/', 1, 59, '', '', 0, 7, '', '{\"imageurl\":\"images\\/sampledata\\/ico2.png\",\"width\":\"\",\"height\":\"\",\"alt\":\"Ouvidoria\"}', 0, '', -1, 0, 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2019-07-18 00:00:00', '2019-06-18 23:19:21', '*', 929, '', '0000-00-00 00:00:00', 0, 1),
+(8, 0, 0, 'Participa BR', 'participa-br', 0, 1496, 0, 'http://www.portalpadrao.gov.br/', 1, 59, '', '', 0, 8, '', '{\"imageurl\":\"images\\/sampledata\\/ico4.png\",\"width\":\"\",\"height\":\"\",\"alt\":\"Participa BR\"}', 0, '', -1, 0, 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2019-07-18 00:00:00', '2019-06-18 23:20:03', '*', 929, '', '0000-00-00 00:00:00', 0, 1),
+(9, 0, 0, 'Audiência Pública', 'audiencia-publica', 0, 1496, 0, 'http://www.portalpadrao.gov.br/', 1, 59, '', '', 0, 9, '', '{\"imageurl\":\"images\\/sampledata\\/ico3.png\",\"width\":\"\",\"height\":\"\",\"alt\":\"Audi\\u00eancia P\\u00fablica\"}', 0, '', -1, 0, 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2019-07-18 00:00:00', '2019-06-18 23:20:38', '*', 929, '', '0000-00-00 00:00:00', 0, 1),
+(10, 0, 0, 'Lorem ipsum dolor sit', 'lorem-ipsum-dolor-sit', 0, 1496, 0, 'http://www.portalpadrao.gov.br/', 1, 59, '', '', 0, 10, '', '{\"imageurl\":\"images\\/sampledata\\/ico2.png\",\"width\":\"\",\"height\":\"\",\"alt\":\"Lorem ipsum dolor sit\"}', 0, '', -1, 0, 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2019-07-18 00:00:00', '2019-06-18 23:21:27', '*', 929, '', '0000-00-00 00:00:00', 0, 1),
 (11, 0, 0, 'Pré-matrícula no período de 26 a 28 de junho', 'teste', 0, 8, 1, 'https://www.ufrb.edu.br/portal/images/noticias2019/concurso-tecnicos-2.png', 1, 57, '', '', 0, 11, '', '{\"imageurl\":\"images\\/conteudo\\/concurso-tecnicos-2.png\",\"width\":\"\",\"height\":\"\",\"alt\":\"Pr\\u00e9-matr\\u00edcula no per\\u00edodo de 26 a 28 de junho\"}', 0, '', -1, 0, 0, 0, '0000-00-00 00:00:00', '2019-06-26 18:21:48', '0000-00-00 00:00:00', '2019-07-26 00:00:00', '2019-06-26 17:19:37', '*', 931, '', '2019-06-26 18:23:17', 931, 5);
 
 -- --------------------------------------------------------
@@ -814,25 +797,26 @@ INSERT INTO `#__banners` (`id`, `cid`, `type`, `name`, `alias`, `imptotal`, `imp
 -- Estrutura da tabela `#__banner_clients`
 --
 
+DROP TABLE IF EXISTS `#__banner_clients`;
 CREATE TABLE IF NOT EXISTS `#__banner_clients` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL DEFAULT '',
-  `contact` varchar(255) NOT NULL DEFAULT '',
-  `email` varchar(255) NOT NULL DEFAULT '',
-  `extrainfo` text NOT NULL,
-  `state` tinyint(3) NOT NULL DEFAULT 0,
-  `checked_out` int(10) unsigned NOT NULL DEFAULT 0,
-  `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `metakey` text NOT NULL,
-  `own_prefix` tinyint(4) NOT NULL DEFAULT 0,
-  `metakey_prefix` varchar(400) NOT NULL DEFAULT '',
-  `purchase_type` tinyint(4) NOT NULL DEFAULT -1,
-  `track_clicks` tinyint(4) NOT NULL DEFAULT -1,
-  `track_impressions` tinyint(4) NOT NULL DEFAULT -1,
-  PRIMARY KEY (`id`),
-  KEY `idx_own_prefix` (`own_prefix`),
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `contact` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `extrainfo` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `state` tinyint(3) NOT NULL DEFAULT '0',
+  `checked_out` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `checked_out_time` datetime NOT NULL,
+  `metakey` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `own_prefix` tinyint(4) NOT NULL DEFAULT '0',
+  `metakey_prefix` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `purchase_type` tinyint(4) NOT NULL DEFAULT '-1',
+  `track_clicks` tinyint(4) NOT NULL DEFAULT '-1',
+  `track_impressions` tinyint(4) NOT NULL DEFAULT '-1',
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `idx_own_prefix` (`own_prefix`) USING BTREE,
   KEY `idx_metakey_prefix` (`metakey_prefix`(100))
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
@@ -840,16 +824,17 @@ CREATE TABLE IF NOT EXISTS `#__banner_clients` (
 -- Estrutura da tabela `#__banner_tracks`
 --
 
+DROP TABLE IF EXISTS `#__banner_tracks`;
 CREATE TABLE IF NOT EXISTS `#__banner_tracks` (
   `track_date` datetime NOT NULL,
-  `track_type` int(10) unsigned NOT NULL,
-  `banner_id` int(10) unsigned NOT NULL,
-  `count` int(10) unsigned NOT NULL DEFAULT 0,
-  PRIMARY KEY (`track_date`,`track_type`,`banner_id`),
-  KEY `idx_track_date` (`track_date`),
-  KEY `idx_track_type` (`track_type`),
-  KEY `idx_banner_id` (`banner_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+  `track_type` int(10) UNSIGNED NOT NULL,
+  `banner_id` int(10) UNSIGNED NOT NULL,
+  `count` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  PRIMARY KEY (`track_date`,`track_type`,`banner_id`) USING BTREE,
+  KEY `idx_track_date` (`track_date`) USING BTREE,
+  KEY `idx_track_type` (`track_type`) USING BTREE,
+  KEY `idx_banner_id` (`banner_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
@@ -857,43 +842,44 @@ CREATE TABLE IF NOT EXISTS `#__banner_tracks` (
 -- Estrutura da tabela `#__categories`
 --
 
+DROP TABLE IF EXISTS `#__categories`;
 CREATE TABLE IF NOT EXISTS `#__categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `asset_id` int(10) unsigned NOT NULL DEFAULT 0 COMMENT 'FK to the #__assets table.',
-  `parent_id` int(10) unsigned NOT NULL DEFAULT 0,
-  `lft` int(11) NOT NULL DEFAULT 0,
-  `rgt` int(11) NOT NULL DEFAULT 0,
-  `level` int(10) unsigned NOT NULL DEFAULT 0,
-  `path` varchar(400) NOT NULL DEFAULT '',
-  `extension` varchar(50) NOT NULL DEFAULT '',
-  `title` varchar(255) NOT NULL DEFAULT '',
+  `asset_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'FK to the x3dts_assets table.',
+  `parent_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `lft` int(11) NOT NULL DEFAULT '0',
+  `rgt` int(11) NOT NULL DEFAULT '0',
+  `level` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `path` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `extension` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `alias` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '',
-  `note` varchar(255) NOT NULL DEFAULT '',
-  `description` mediumtext,
-  `published` tinyint(1) NOT NULL DEFAULT 0,
-  `checked_out` int(11) unsigned NOT NULL DEFAULT 0,
-  `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `access` int(10) unsigned NOT NULL DEFAULT 0,
-  `params` text,
-  `metadesc` varchar(1024) NOT NULL DEFAULT '' COMMENT 'The meta description for the page.',
-  `metakey` varchar(1024) NOT NULL DEFAULT '' COMMENT 'The meta keywords for the page.',
-  `metadata` varchar(2048) NOT NULL DEFAULT '' COMMENT 'JSON encoded metadata properties.',
-  `created_user_id` int(10) unsigned NOT NULL DEFAULT 0,
-  `created_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `modified_user_id` int(10) unsigned NOT NULL DEFAULT 0,
-  `modified_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `hits` int(10) unsigned NOT NULL DEFAULT 0,
-  `language` char(7) NOT NULL DEFAULT '',
-  `version` int(10) unsigned NOT NULL DEFAULT 1,
-  PRIMARY KEY (`id`),
-  KEY `cat_idx` (`extension`,`published`,`access`),
-  KEY `idx_access` (`access`),
-  KEY `idx_checkout` (`checked_out`),
+  `note` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `description` longtext COLLATE utf8mb4_unicode_ci,
+  `published` tinyint(1) NOT NULL DEFAULT '0',
+  `checked_out` int(11) UNSIGNED NOT NULL DEFAULT '0',
+  `checked_out_time` datetime NOT NULL,
+  `access` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `params` mediumtext COLLATE utf8mb4_unicode_ci,
+  `metadesc` varchar(1024) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'The meta description for the page.',
+  `metakey` varchar(1024) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'The meta keywords for the page.',
+  `metadata` varchar(2048) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'JSON encoded metadata properties.',
+  `created_user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `created_time` datetime NOT NULL,
+  `modified_user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `modified_time` datetime NOT NULL,
+  `hits` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `language` char(7) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `version` int(10) UNSIGNED NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `cat_idx` (`extension`,`published`,`access`) USING BTREE,
+  KEY `idx_access` (`access`) USING BTREE,
+  KEY `idx_checkout` (`checked_out`) USING BTREE,
+  KEY `idx_left_right` (`lft`,`rgt`) USING BTREE,
+  KEY `idx_language` (`language`) USING BTREE,
   KEY `idx_path` (`path`(100)),
-  KEY `idx_left_right` (`lft`,`rgt`),
-  KEY `idx_alias` (`alias`(100)),
-  KEY `idx_language` (`language`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+  KEY `idx_alias` (`alias`(100))
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `#__categories`
@@ -963,60 +949,61 @@ INSERT INTO `#__categories` (`id`, `asset_id`, `parent_id`, `lft`, `rgt`, `level
 -- Estrutura da tabela `#__contact_details`
 --
 
+DROP TABLE IF EXISTS `#__contact_details`;
 CREATE TABLE IF NOT EXISTS `#__contact_details` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `alias` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `con_position` varchar(255),
-  `address` text,
-  `suburb` varchar(100),
-  `state` varchar(100),
-  `country` varchar(100),
-  `postcode` varchar(100),
-  `telephone` varchar(255),
-  `fax` varchar(255),
-  `misc` mediumtext,
-  `image` varchar(255),
-  `email_to` varchar(255),
-  `default_con` tinyint(1) unsigned NOT NULL DEFAULT 0,
-  `published` tinyint(1) NOT NULL DEFAULT 0,
-  `checked_out` int(10) unsigned NOT NULL DEFAULT 0,
-  `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `ordering` int(11) NOT NULL DEFAULT 0,
-  `params` text NOT NULL,
-  `user_id` int(11) NOT NULL DEFAULT 0,
-  `catid` int(11) NOT NULL DEFAULT 0,
-  `access` int(10) unsigned NOT NULL DEFAULT 0,
-  `mobile` varchar(255) NOT NULL DEFAULT '',
-  `webpage` varchar(255) NOT NULL DEFAULT '',
-  `sortname1` varchar(255) NOT NULL DEFAULT '',
-  `sortname2` varchar(255) NOT NULL DEFAULT '',
-  `sortname3` varchar(255) NOT NULL DEFAULT '',
-  `language` varchar(7) NOT NULL,
-  `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `created_by` int(10) unsigned NOT NULL DEFAULT 0,
-  `created_by_alias` varchar(255) NOT NULL DEFAULT '',
-  `modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `modified_by` int(10) unsigned NOT NULL DEFAULT 0,
-  `metakey` text NOT NULL,
-  `metadesc` text NOT NULL,
-  `metadata` text NOT NULL,
-  `featured` tinyint(3) unsigned NOT NULL DEFAULT 0 COMMENT 'Set if contact is featured.',
-  `xreference` varchar(50) NOT NULL DEFAULT '' COMMENT 'A reference to enable linkages to external data sets.',
-  `publish_up` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `version` int(10) unsigned NOT NULL DEFAULT 1,
-  `hits` int(10) unsigned NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`),
-  KEY `idx_access` (`access`),
-  KEY `idx_checkout` (`checked_out`),
-  KEY `idx_state` (`published`),
-  KEY `idx_catid` (`catid`),
-  KEY `idx_createdby` (`created_by`),
-  KEY `idx_featured_catid` (`featured`,`catid`),
-  KEY `idx_language` (`language`),
-  KEY `idx_xreference` (`xreference`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `alias` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '',
+  `con_position` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` mediumtext COLLATE utf8mb4_unicode_ci,
+  `suburb` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `state` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `country` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `postcode` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `telephone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fax` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `misc` longtext COLLATE utf8mb4_unicode_ci,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email_to` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `default_con` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `published` tinyint(1) NOT NULL DEFAULT '0',
+  `checked_out` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `checked_out_time` datetime NOT NULL,
+  `ordering` int(11) NOT NULL DEFAULT '0',
+  `params` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` int(11) NOT NULL DEFAULT '0',
+  `catid` int(11) NOT NULL DEFAULT '0',
+  `access` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `mobile` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `webpage` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `sortname1` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `sortname2` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `sortname3` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `language` varchar(7) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created` datetime NOT NULL,
+  `created_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `created_by_alias` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `modified` datetime NOT NULL,
+  `modified_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `metakey` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `metadesc` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `metadata` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `featured` tinyint(3) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Set if article is featured.',
+  `xreference` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'A reference to enable linkages to external data sets.',
+  `publish_up` datetime NOT NULL,
+  `publish_down` datetime NOT NULL,
+  `version` int(10) UNSIGNED NOT NULL DEFAULT '1',
+  `hits` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `idx_access` (`access`) USING BTREE,
+  KEY `idx_checkout` (`checked_out`) USING BTREE,
+  KEY `idx_state` (`published`) USING BTREE,
+  KEY `idx_catid` (`catid`) USING BTREE,
+  KEY `idx_createdby` (`created_by`) USING BTREE,
+  KEY `idx_featured_catid` (`featured`,`catid`) USING BTREE,
+  KEY `idx_language` (`language`) USING BTREE,
+  KEY `idx_xreference` (`xreference`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `#__contact_details`
@@ -1031,49 +1018,50 @@ INSERT INTO `#__contact_details` (`id`, `name`, `alias`, `con_position`, `addres
 -- Estrutura da tabela `#__content`
 --
 
+DROP TABLE IF EXISTS `#__content`;
 CREATE TABLE IF NOT EXISTS `#__content` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `asset_id` int(10) unsigned NOT NULL DEFAULT 0 COMMENT 'FK to the #__assets table.',
-  `title` varchar(255) NOT NULL DEFAULT '',
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `asset_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'FK to the x3dts_assets table.',
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `alias` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '',
-  `introtext` mediumtext NOT NULL,
-  `fulltext` mediumtext NOT NULL,
-  `state` tinyint(3) NOT NULL DEFAULT 0,
-  `catid` int(10) unsigned NOT NULL DEFAULT 0,
-  `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `created_by` int(10) unsigned NOT NULL DEFAULT 0,
-  `created_by_alias` varchar(255) NOT NULL DEFAULT '',
-  `modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `modified_by` int(10) unsigned NOT NULL DEFAULT 0,
-  `checked_out` int(10) unsigned NOT NULL DEFAULT 0,
-  `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `publish_up` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `images` text NOT NULL,
-  `urls` text NOT NULL,
-  `attribs` varchar(5120) NOT NULL,
-  `version` int(10) unsigned NOT NULL DEFAULT 1,
-  `ordering` int(11) NOT NULL DEFAULT 0,
-  `metakey` text NOT NULL,
-  `metadesc` text NOT NULL,
-  `access` int(10) unsigned NOT NULL DEFAULT 0,
-  `hits` int(10) unsigned NOT NULL DEFAULT 0,
-  `metadata` text NOT NULL,
-  `featured` tinyint(3) unsigned NOT NULL DEFAULT 0 COMMENT 'Set if article is featured.',
-  `language` char(7) NOT NULL COMMENT 'The language code for the article.',
-  `xreference` varchar(50) NOT NULL DEFAULT '' COMMENT 'A reference to enable linkages to external data sets.',
-  `note` varchar(255) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`),
-  KEY `idx_access` (`access`),
-  KEY `idx_checkout` (`checked_out`),
-  KEY `idx_state` (`state`),
-  KEY `idx_catid` (`catid`),
-  KEY `idx_createdby` (`created_by`),
-  KEY `idx_featured_catid` (`featured`,`catid`),
-  KEY `idx_language` (`language`),
-  KEY `idx_xreference` (`xreference`),
+  `introtext` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fulltext` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `state` tinyint(3) NOT NULL DEFAULT '0',
+  `catid` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `created` datetime NOT NULL,
+  `created_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `created_by_alias` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `modified` datetime NOT NULL,
+  `modified_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `checked_out` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `checked_out_time` datetime NOT NULL,
+  `publish_up` datetime NOT NULL,
+  `publish_down` datetime NOT NULL,
+  `images` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `urls` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `attribs` varchar(5120) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `version` int(10) UNSIGNED NOT NULL DEFAULT '1',
+  `ordering` int(11) NOT NULL DEFAULT '0',
+  `metakey` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `metadesc` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `access` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `hits` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `metadata` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `featured` tinyint(3) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Set if article is featured.',
+  `language` char(7) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The language code for the article.',
+  `xreference` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `note` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `idx_access` (`access`) USING BTREE,
+  KEY `idx_checkout` (`checked_out`) USING BTREE,
+  KEY `idx_state` (`state`) USING BTREE,
+  KEY `idx_catid` (`catid`) USING BTREE,
+  KEY `idx_createdby` (`created_by`) USING BTREE,
+  KEY `idx_featured_catid` (`featured`,`catid`) USING BTREE,
+  KEY `idx_language` (`language`) USING BTREE,
+  KEY `idx_xreference` (`xreference`) USING BTREE,
   KEY `idx_alias` (`alias`(191))
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=102 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `#__content`
@@ -1192,18 +1180,19 @@ INSERT INTO `#__content` (`id`, `asset_id`, `title`, `alias`, `introtext`, `full
 -- Estrutura da tabela `#__contentitem_tag_map`
 --
 
+DROP TABLE IF EXISTS `#__contentitem_tag_map`;
 CREATE TABLE IF NOT EXISTS `#__contentitem_tag_map` (
-  `type_alias` varchar(255) NOT NULL DEFAULT '',
-  `core_content_id` int(10) unsigned NOT NULL COMMENT 'PK from the core content table',
+  `type_alias` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `core_content_id` int(10) UNSIGNED NOT NULL COMMENT 'PK from the core content table',
   `content_item_id` int(11) NOT NULL COMMENT 'PK from the content type table',
-  `tag_id` int(10) unsigned NOT NULL COMMENT 'PK from the tag table',
+  `tag_id` int(10) UNSIGNED NOT NULL COMMENT 'PK from the tag table',
   `tag_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Date of most recent save for this tag-item',
   `type_id` mediumint(8) NOT NULL COMMENT 'PK from the content_type table',
-  UNIQUE KEY `uc_ItemnameTagid` (`type_id`,`content_item_id`,`tag_id`),
-  KEY `idx_tag_type` (`tag_id`,`type_id`),
-  KEY `idx_date_id` (`tag_date`,`tag_id`),
-  KEY `idx_core_content_id` (`core_content_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci COMMENT='Maps items from content tables to tags';
+  UNIQUE KEY `uc_ItemnameTagid` (`type_id`,`content_item_id`,`tag_id`) USING BTREE,
+  KEY `idx_tag_type` (`tag_id`,`type_id`) USING BTREE,
+  KEY `idx_date_id` (`tag_date`,`tag_id`) USING BTREE,
+  KEY `idx_core_content_id` (`core_content_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Maps items from content tables to tags' ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `#__contentitem_tag_map`
@@ -1221,11 +1210,12 @@ INSERT INTO `#__contentitem_tag_map` (`type_alias`, `core_content_id`, `content_
 -- Estrutura da tabela `#__content_frontpage`
 --
 
+DROP TABLE IF EXISTS `#__content_frontpage`;
 CREATE TABLE IF NOT EXISTS `#__content_frontpage` (
-  `content_id` int(11) NOT NULL DEFAULT 0,
-  `ordering` int(11) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`content_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+  `content_id` int(11) NOT NULL DEFAULT '0',
+  `ordering` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`content_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `#__content_frontpage`
@@ -1244,13 +1234,14 @@ INSERT INTO `#__content_frontpage` (`content_id`, `ordering`) VALUES
 -- Estrutura da tabela `#__content_rating`
 --
 
+DROP TABLE IF EXISTS `#__content_rating`;
 CREATE TABLE IF NOT EXISTS `#__content_rating` (
-  `content_id` int(11) NOT NULL DEFAULT 0,
-  `rating_sum` int(10) unsigned NOT NULL DEFAULT 0,
-  `rating_count` int(10) unsigned NOT NULL DEFAULT 0,
-  `lastip` varchar(50) NOT NULL DEFAULT '',
-  PRIMARY KEY (`content_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+  `content_id` int(11) NOT NULL DEFAULT '0',
+  `rating_sum` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `rating_count` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `lastip` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`content_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
@@ -1258,18 +1249,19 @@ CREATE TABLE IF NOT EXISTS `#__content_rating` (
 -- Estrutura da tabela `#__content_types`
 --
 
+DROP TABLE IF EXISTS `#__content_types`;
 CREATE TABLE IF NOT EXISTS `#__content_types` (
-  `type_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `type_title` varchar(255) NOT NULL DEFAULT '',
-  `type_alias` varchar(400) NOT NULL DEFAULT '',
-  `table` varchar(255) NOT NULL DEFAULT '',
-  `rules` text NOT NULL,
-  `field_mappings` text NOT NULL,
-  `router` varchar(255) NOT NULL DEFAULT '',
-  `content_history_options` varchar(5120) COMMENT 'JSON string for com_contenthistory options',
-  PRIMARY KEY (`type_id`),
+  `type_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `type_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `type_alias` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `table` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `rules` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `field_mappings` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `router` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `content_history_options` varchar(5120) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'JSON string for com_contenthistory options',
+  PRIMARY KEY (`type_id`) USING BTREE,
   KEY `idx_alias` (`type_alias`(100))
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=10000;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `#__content_types`
@@ -1298,10 +1290,11 @@ INSERT INTO `#__content_types` (`type_id`, `type_title`, `type_alias`, `table`, 
 -- Estrutura da tabela `#__core_log_searches`
 --
 
+DROP TABLE IF EXISTS `#__core_log_searches`;
 CREATE TABLE IF NOT EXISTS `#__core_log_searches` (
-  `search_term` varchar(128) NOT NULL DEFAULT '',
-  `hits` int(10) unsigned NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+  `search_term` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `hits` int(10) UNSIGNED NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
@@ -1309,31 +1302,31 @@ CREATE TABLE IF NOT EXISTS `#__core_log_searches` (
 -- Estrutura da tabela `#__extensions`
 --
 
+DROP TABLE IF EXISTS `#__extensions`;
 CREATE TABLE IF NOT EXISTS `#__extensions` (
   `extension_id` int(11) NOT NULL AUTO_INCREMENT,
-  `package_id` int(11) NOT NULL DEFAULT 0 COMMENT 'Parent package ID for extensions installed as a package.',
-  `name` varchar(100) NOT NULL,
-  `type` varchar(20) NOT NULL,
-  `element` varchar(100) NOT NULL,
-  `folder` varchar(100) NOT NULL,
+  `package_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Parent package ID for extensions installed as a package.',
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `element` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `folder` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `client_id` tinyint(3) NOT NULL,
-  `enabled` tinyint(3) NOT NULL DEFAULT 0,
-  `access` int(10) unsigned NOT NULL DEFAULT 1,
-  `protected` tinyint(3) NOT NULL DEFAULT 0,
-  `manifest_cache` text NOT NULL,
-  `params` text NOT NULL,
-  `custom_data` text NOT NULL,
-  `system_data` text NOT NULL,
-  `checked_out` int(10) unsigned NOT NULL DEFAULT 0,
-  `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `ordering` int(11) DEFAULT 0,
-  `state` int(11) DEFAULT 0,
-  PRIMARY KEY (`extension_id`),
-  KEY `element_clientid` (`element`,`client_id`),
-  KEY `element_folder_clientid` (`element`,`folder`,`client_id`),
-  KEY `extension` (`type`,`element`,`folder`,`client_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=10000;
-
+  `enabled` tinyint(3) NOT NULL DEFAULT '0',
+  `access` int(10) UNSIGNED NOT NULL DEFAULT '1',
+  `protected` tinyint(3) NOT NULL DEFAULT '0',
+  `manifest_cache` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `params` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `custom_data` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `system_data` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `checked_out` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `checked_out_time` datetime NOT NULL,
+  `ordering` int(11) DEFAULT '0',
+  `state` int(11) DEFAULT '0',
+  PRIMARY KEY (`extension_id`) USING BTREE,
+  KEY `element_clientid` (`element`,`client_id`) USING BTREE,
+  KEY `element_folder_clientid` (`element`,`folder`,`client_id`) USING BTREE,
+  KEY `extension` (`type`,`element`,`folder`,`client_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=10215 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `#__extensions`
@@ -1376,7 +1369,7 @@ INSERT INTO `#__extensions` (`extension_id`, `package_id`, `name`, `type`, `elem
 (100, 0, 'PHPMailer', 'library', 'phpmailer', '', 0, 1, 1, 1, 'false', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (101, 0, 'SimplePie', 'library', 'simplepie', '', 0, 1, 1, 1, '{\"name\":\"SimplePie\",\"type\":\"library\",\"creationDate\":\"2004\",\"author\":\"SimplePie\",\"copyright\":\"Copyright (c) 2004-2009, Ryan Parman and Geoffrey Sneddon\",\"authorEmail\":\"\",\"authorUrl\":\"http:\\/\\/simplepie.org\\/\",\"version\":\"1.2\",\"description\":\"LIB_SIMPLEPIE_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"simplepie\"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (102, 0, 'LIB_PHPUTF8', 'library', 'phputf8', '', 0, 1, 1, 1, '{\"name\":\"LIB_PHPUTF8\",\"type\":\"library\",\"creationDate\":\"2006\",\"author\":\"Harry Fuecks\",\"copyright\":\"Copyright various authors\",\"authorEmail\":\"hfuecks@gmail.com\",\"authorUrl\":\"http:\\/\\/sourceforge.net\\/projects\\/phputf8\",\"version\":\"0.5\",\"description\":\"LIB_PHPUTF8_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"phputf8\"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(103, 0, 'LIB_JOOMLA', 'library', 'joomla', '', 0, 1, 1, 1, '{\"name\":\"LIB_JOOMLA\",\"type\":\"library\",\"creationDate\":\"2008\",\"author\":\"Joomla! Project\",\"copyright\":\"Copyright (C) 2005 - 2020 Open Source Matters. All rights reserved.\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"https:\\/\\/www.joomla.org\",\"version\":\"13.1\",\"description\":\"LIB_JOOMLA_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"joomla\"}', '{\"mediaversion\":\"680f66154d441045d3efdf54b7d0c5d8\"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(103, 0, 'LIB_JOOMLA', 'library', 'joomla', '', 0, 1, 1, 1, '{\"name\":\"LIB_JOOMLA\",\"type\":\"library\",\"creationDate\":\"2008\",\"author\":\"Joomla! Project\",\"copyright\":\"Copyright (C) 2005 - 2020 Open Source Matters. All rights reserved.\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"https:\\/\\/www.joomla.org\",\"version\":\"13.1\",\"description\":\"LIB_JOOMLA_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"joomla\"}', '{\"mediaversion\":\"0f93de8d9a1ac79461282cfb37ae0dc0\"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (104, 0, 'LIB_IDNA', 'library', 'idna_convert', '', 0, 1, 1, 1, '{\"name\":\"LIB_IDNA\",\"type\":\"library\",\"creationDate\":\"2004\",\"author\":\"phlyLabs\",\"copyright\":\"2004-2011 phlyLabs Berlin, http:\\/\\/phlylabs.de\",\"authorEmail\":\"phlymail@phlylabs.de\",\"authorUrl\":\"http:\\/\\/phlylabs.de\",\"version\":\"0.8.0\",\"description\":\"LIB_IDNA_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"idna_convert\"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (105, 0, 'FOF', 'library', 'fof', '', 0, 1, 1, 1, '{\"name\":\"FOF\",\"type\":\"library\",\"creationDate\":\"2015-04-22 13:15:32\",\"author\":\"Nicholas K. Dionysopoulos \\/ Akeeba Ltd\",\"copyright\":\"(C)2011-2015 Nicholas K. Dionysopoulos\",\"authorEmail\":\"nicholas@akeebabackup.com\",\"authorUrl\":\"https:\\/\\/www.akeebabackup.com\",\"version\":\"2.4.3\",\"description\":\"LIB_FOF_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"fof\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (106, 0, 'LIB_PHPASS', 'library', 'phpass', '', 0, 1, 1, 1, '{\"name\":\"LIB_PHPASS\",\"type\":\"library\",\"creationDate\":\"2004-2006\",\"author\":\"Solar Designer\",\"copyright\":\"\",\"authorEmail\":\"solar@openwall.com\",\"authorUrl\":\"http:\\/\\/www.openwall.com\\/phpass\\/\",\"version\":\"0.3\",\"description\":\"LIB_PHPASS_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"phpass\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
@@ -1433,7 +1426,7 @@ INSERT INTO `#__extensions` (`extension_id`, `package_id`, `name`, `type`, `elem
 (407, 0, 'plg_content_pagebreak', 'plugin', 'pagebreak', 'content', 0, 1, 1, 0, '{\"name\":\"plg_content_pagebreak\",\"type\":\"plugin\",\"creationDate\":\"November 2005\",\"author\":\"Joomla! Project\",\"copyright\":\"Copyright (C) 2005 - 2020 Open Source Matters. All rights reserved.\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"www.joomla.org\",\"version\":\"3.0.0\",\"description\":\"PLG_CONTENT_PAGEBREAK_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"pagebreak\"}', '{\"title\":\"1\",\"multipage_toc\":\"1\",\"showall\":\"1\"}', '', '', 0, '0000-00-00 00:00:00', 4, 0),
 (408, 0, 'plg_content_pagenavigation', 'plugin', 'pagenavigation', 'content', 0, 1, 1, 0, '{\"name\":\"plg_content_pagenavigation\",\"type\":\"plugin\",\"creationDate\":\"January 2006\",\"author\":\"Joomla! Project\",\"copyright\":\"Copyright (C) 2005 - 2020 Open Source Matters. All rights reserved.\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"www.joomla.org\",\"version\":\"3.0.0\",\"description\":\"PLG_PAGENAVIGATION_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"pagenavigation\"}', '{\"position\":\"1\"}', '', '', 0, '0000-00-00 00:00:00', 5, 0),
 (409, 0, 'plg_content_vote', 'plugin', 'vote', 'content', 0, 0, 1, 0, '{\"name\":\"plg_content_vote\",\"type\":\"plugin\",\"creationDate\":\"November 2005\",\"author\":\"Joomla! Project\",\"copyright\":\"Copyright (C) 2005 - 2020 Open Source Matters. All rights reserved.\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"www.joomla.org\",\"version\":\"3.0.0\",\"description\":\"PLG_VOTE_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"vote\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 6, 0),
-(410, 0, 'plg_editors_codemirror', 'plugin', 'codemirror', 'editors', 0, 1, 1, 1, '{\"name\":\"plg_editors_codemirror\",\"type\":\"plugin\",\"creationDate\":\"28 March 2011\",\"author\":\"Marijn Haverbeke\",\"copyright\":\"Copyright (C) 2014 - 2017 by Marijn Haverbeke <marijnh@gmail.com> and others\",\"authorEmail\":\"marijnh@gmail.com\",\"authorUrl\":\"http:\\/\\/codemirror.net\\/\",\"version\":\"5.40.0\",\"description\":\"PLG_CODEMIRROR_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"codemirror\"}', '{\"lineNumbers\":\"1\",\"lineWrapping\":\"1\",\"matchTags\":\"1\",\"matchBrackets\":\"1\",\"marker-gutter\":\"1\",\"autoCloseTags\":\"1\",\"autoCloseBrackets\":\"1\",\"autoFocus\":\"1\",\"theme\":\"default\",\"tabmode\":\"indent\"}', '', '', 0, '0000-00-00 00:00:00', 1, 0),
+(410, 0, 'plg_editors_codemirror', 'plugin', 'codemirror', 'editors', 0, 1, 1, 1, '{\"name\":\"plg_editors_codemirror\",\"type\":\"plugin\",\"creationDate\":\"28 March 2011\",\"author\":\"Marijn Haverbeke\",\"copyright\":\"Copyright (C) 2014 - 2017 by Marijn Haverbeke <marijnh@gmail.com> and others\",\"authorEmail\":\"marijnh@gmail.com\",\"authorUrl\":\"https:\\/\\/codemirror.net\\/\",\"version\":\"5.52.2\",\"description\":\"PLG_CODEMIRROR_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"codemirror\"}', '{\"lineNumbers\":\"1\",\"lineWrapping\":\"1\",\"matchTags\":\"1\",\"matchBrackets\":\"1\",\"marker-gutter\":\"1\",\"autoCloseTags\":\"1\",\"autoCloseBrackets\":\"1\",\"autoFocus\":\"1\",\"theme\":\"default\",\"tabmode\":\"indent\"}', '', '', 0, '0000-00-00 00:00:00', 1, 0),
 (411, 0, 'plg_editors_none', 'plugin', 'none', 'editors', 0, 1, 1, 1, '{\"name\":\"plg_editors_none\",\"type\":\"plugin\",\"creationDate\":\"September 2005\",\"author\":\"Joomla! Project\",\"copyright\":\"Copyright (C) 2005 - 2020 Open Source Matters. All rights reserved.\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"www.joomla.org\",\"version\":\"3.0.0\",\"description\":\"PLG_NONE_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"none\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 2, 0),
 (412, 0, 'plg_editors_tinymce', 'plugin', 'tinymce', 'editors', 0, 1, 1, 0, '{\"name\":\"plg_editors_tinymce\",\"type\":\"plugin\",\"creationDate\":\"2005-2019\",\"author\":\"Tiny Technologies, Inc\",\"copyright\":\"Tiny Technologies, Inc\",\"authorEmail\":\"N\\/A\",\"authorUrl\":\"https:\\/\\/www.tiny.cloud\",\"version\":\"4.5.11\",\"description\":\"PLG_TINY_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"tinymce\"}', '{\"mode\":\"2\",\"skin\":\"0\",\"mobile\":\"0\",\"entity_encoding\":\"raw\",\"lang_mode\":\"0\",\"lang_code\":\"pt-BR\",\"text_direction\":\"ltr\",\"content_css\":\"1\",\"content_css_custom\":\"lista-fontes-tinymce.css\",\"relative_urls\":\"1\",\"newlines\":\"0\",\"invalid_elements\":\"script,applet,iframe\",\"extended_elements\":\"blockquote\",\"html_height\":\"550\",\"html_width\":\"750\",\"resizing\":\"1\",\"element_path\":\"1\",\"fonts\":\"0\",\"paste\":\"1\",\"searchreplace\":\"1\",\"insertdate\":\"0\",\"colors\":\"0\",\"table\":\"1\",\"smilies\":\"0\",\"hr\":\"0\",\"link\":\"1\",\"media\":\"1\",\"print\":\"1\",\"directionality\":\"0\",\"fullscreen\":\"1\",\"alignment\":\"1\",\"visualchars\":\"0\",\"visualblocks\":\"0\",\"nonbreaking\":\"0\",\"template\":\"0\",\"blockquote\":\"1\",\"wordcount\":\"1\",\"image_advtab\":\"1\",\"advlist\":\"1\",\"autosave\":\"1\",\"contextmenu\":\"1\",\"inlinepopups\":\"1\",\"custom_plugin\":\"\",\"custom_button\":\"\"}', '', '', 0, '0000-00-00 00:00:00', 3, 0),
 (413, 0, 'plg_editors-xtd_article', 'plugin', 'article', 'editors-xtd', 0, 0, 1, 1, '{\"name\":\"plg_editors-xtd_article\",\"type\":\"plugin\",\"creationDate\":\"October 2009\",\"author\":\"Joomla! Project\",\"copyright\":\"Copyright (C) 2005 - 2020 Open Source Matters. All rights reserved.\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"www.joomla.org\",\"version\":\"3.0.0\",\"description\":\"PLG_ARTICLE_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"article\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 1, 0),
@@ -1498,10 +1491,10 @@ INSERT INTO `#__extensions` (`extension_id`, `package_id`, `name`, `type`, `elem
 (478, 0, 'plg_editors-xtd_fields', 'plugin', 'fields', 'editors-xtd', 0, 1, 1, 0, '{\"name\":\"plg_editors-xtd_fields\",\"type\":\"plugin\",\"creationDate\":\"February 2017\",\"author\":\"Joomla! Project\",\"copyright\":\"Copyright (C) 2005 - 2020 Open Source Matters. All rights reserved.\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"www.joomla.org\",\"version\":\"3.7.0\",\"description\":\"PLG_EDITORS-XTD_FIELDS_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"fields\"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (479, 0, 'plg_sampledata_blog', 'plugin', 'blog', 'sampledata', 0, 0, 1, 0, '{\"name\":\"plg_sampledata_blog\",\"type\":\"plugin\",\"creationDate\":\"July 2017\",\"author\":\"Joomla! Project\",\"copyright\":\"Copyright (C) 2005 - 2020 Open Source Matters. All rights reserved.\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"www.joomla.org\",\"version\":\"3.8.0\",\"description\":\"PLG_SAMPLEDATA_BLOG_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"blog\"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (480, 0, 'plg_system_sessiongc', 'plugin', 'sessiongc', 'system', 0, 1, 1, 0, '{\"name\":\"plg_system_sessiongc\",\"type\":\"plugin\",\"creationDate\":\"February 2018\",\"author\":\"Joomla! Project\",\"copyright\":\"Copyright (C) 2005 - 2020 Open Source Matters. All rights reserved.\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"www.joomla.org\",\"version\":\"3.8.6\",\"description\":\"PLG_SYSTEM_SESSIONGC_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"sessiongc\"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(600, 0, 'English (en-GB)', 'language', 'en-GB', '', 0, 1, 1, 1, '{\"name\":\"English (en-GB)\",\"type\":\"language\",\"creationDate\":\"April 2020\",\"author\":\"Joomla! Project\",\"copyright\":\"Copyright (C) 2005 - 2020 Open Source Matters. All rights reserved.\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"www.joomla.org\",\"version\":\"3.9.18\",\"description\":\"en-GB site language\",\"group\":\"\"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(601, 0, 'English (en-GB)', 'language', 'en-GB', '', 1, 1, 1, 1, '{\"name\":\"English (en-GB)\",\"type\":\"language\",\"creationDate\":\"April 2020\",\"author\":\"Joomla! Project\",\"copyright\":\"Copyright (C) 2005 - 2020 Open Source Matters. All rights reserved.\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"www.joomla.org\",\"version\":\"3.9.18\",\"description\":\"en-GB administrator language\",\"group\":\"\"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(700, 0, 'files_joomla', 'file', 'joomla', '', 0, 1, 1, 1, '{\"name\":\"files_joomla\",\"type\":\"file\",\"creationDate\":\"April 2020\",\"author\":\"Joomla! Project\",\"copyright\":\"(C) 2005 - 2020 Open Source Matters. All rights reserved\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"www.joomla.org\",\"version\":\"3.9.18\",\"description\":\"FILES_JOOMLA_XML_DESCRIPTION\",\"group\":\"\"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(10002, 0, 'Brazilian Portuguese (pt-BR) Language Pack', 'package', 'pkg_pt-BR', '', 0, 1, 1, 0, '{\"name\":\"Brazilian Portuguese (pt-BR) Language Pack\",\"type\":\"package\",\"creationDate\":\"2020-04-22\",\"author\":\"Projeto Joomla!\",\"copyright\":\"Copyright (C) 2005 - 2020 Open Source Matters, Inc. Todos os direitos reservados.\",\"authorEmail\":\"helvecio.dasilva@community.joomla.org\",\"authorUrl\":\"http:\\/\\/brasil.joomla.com\",\"version\":\"3.9.18.1\",\"description\":\"<div style=\\\"text-align: left;\\\">\\n <h2>Tradu\\u00e7\\u00e3o Portugu\\u00eas Brasileiro (pt-BR) para Joomla! 3.9.18 instalada com sucesso!<\\/h2>\\n <h3>Vers\\u00e3o 3.9.18.1<\\/h3>\\n <p>Por favor, informe qualquer problema ou assunto relacionado encontrado, na p\\u00e1gina <a href=\\\"https:\\/\\/www.facebook.com\\/groups\\/traduzjoomla\\/\\\" target=\\\"_blank\\\">Grupo Tradu\\u00e7\\u00f5es Joomla pt-BR<\\/a> no Facebook.<\\/p>\\n <p>Traduzido pela <em>Equipe de Tradu\\u00e7\\u00e3o Portugu\\u00eas Brasileiro<\\/em>.<\\/p>\\n<\\/div>\",\"group\":\"\",\"filename\":\"pkg_pt-BR\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(600, 0, 'English (en-GB)', 'language', 'en-GB', '', 0, 1, 1, 1, '{\"name\":\"English (en-GB)\",\"type\":\"language\",\"creationDate\":\"June 2020\",\"author\":\"Joomla! Project\",\"copyright\":\"Copyright (C) 2005 - 2020 Open Source Matters. All rights reserved.\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"www.joomla.org\",\"version\":\"3.9.19\",\"description\":\"en-GB site language\",\"group\":\"\"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(601, 0, 'English (en-GB)', 'language', 'en-GB', '', 1, 1, 1, 1, '{\"name\":\"English (en-GB)\",\"type\":\"language\",\"creationDate\":\"June 2020\",\"author\":\"Joomla! Project\",\"copyright\":\"Copyright (C) 2005 - 2020 Open Source Matters. All rights reserved.\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"www.joomla.org\",\"version\":\"3.9.19\",\"description\":\"en-GB administrator language\",\"group\":\"\"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(700, 0, 'files_joomla', 'file', 'joomla', '', 0, 1, 1, 1, '{\"name\":\"files_joomla\",\"type\":\"file\",\"creationDate\":\"June 2020\",\"author\":\"Joomla! Project\",\"copyright\":\"(C) 2005 - 2020 Open Source Matters. All rights reserved\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"www.joomla.org\",\"version\":\"3.9.19\",\"description\":\"FILES_JOOMLA_XML_DESCRIPTION\",\"group\":\"\"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(10002, 0, 'Brazilian Portuguese (pt-BR) Language Pack', 'package', 'pkg_pt-BR', '', 0, 1, 1, 0, '{\"name\":\"Brazilian Portuguese (pt-BR) Language Pack\",\"type\":\"package\",\"creationDate\":\"Junho de 2020\",\"author\":\"Projeto Joomla!\",\"copyright\":\"Copyright (C) 2005 - 2020 Open Source Matters, Inc. Todos os direitos reservados.\",\"authorEmail\":\"helvecio.dasilva@community.joomla.org\",\"authorUrl\":\"http:\\/\\/brasil.joomla.com\",\"version\":\"3.9.19.1\",\"description\":\"<div style=\\\"text-align: left;\\\">\\n <h2>Tradu\\u00e7\\u00e3o Portugu\\u00eas Brasileiro (pt-BR) para Joomla! 3.9.19 instalada com sucesso!<\\/h2>\\n <h3>Vers\\u00e3o 3.9.19.1<\\/h3>\\n <p>Por favor, informe qualquer problema ou assunto relacionado encontrado, na p\\u00e1gina <a href=\\\"https:\\/\\/www.facebook.com\\/groups\\/traduzjoomla\\/\\\" target=\\\"_blank\\\">Grupo Tradu\\u00e7\\u00f5es Joomla pt-BR<\\/a> no Facebook.<\\/p>\\n <p>Traduzido pela <em>Equipe de Tradu\\u00e7\\u00e3o Portugu\\u00eas Brasileiro<\\/em>.<\\/p>\\n<\\/div>\",\"group\":\"\",\"filename\":\"pkg_pt-BR\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (10007, 0, 'padraogoverno01', 'template', 'padraogoverno01', '', 0, 1, 1, 0, '{\"legacy\":false,\"name\":\"padraogoverno01\",\"type\":\"template\",\"creationDate\":\"Outubro 2013\",\"author\":\"Comunidade Joomla Calango e Grupo de Trabalho de Minist\\u00e9rios\",\"copyright\":\"Copyright (C) 2013 Comunidade Joomla Calango e Grupo de Trabalho de Minist\\u00e9rios.\",\"authorEmail\":\"joomlagovbr@gmail.com\",\"authorUrl\":\"https:\\/\\/github.com\\/joomlagovbr\",\"version\":\"2.5.0\",\"description\":\"Mais informacoes na URL do github.\",\"group\":\"\"}', '{\"wrapperSmall\":\"53\",\"wrapperLarge\":\"72\",\"sitetitle\":\"\",\"sitedescription\":\"\",\"navposition\":\"center\",\"templatecolor\":\"nature\"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (10008, 0, 'mod_container', 'module', 'mod_container', '', 0, 1, 1, 0, '{\"legacy\":false,\"name\":\"mod_container\",\"type\":\"module\",\"creationDate\":\"Outubro 2013\",\"author\":\"Comunidade Joomla Calango e Grupo de Trabalho de Minist\\u00e9rios\",\"copyright\":\"Copyright (C) 2013 Comunidade Joomla Calango e Grupo de Trabalho de Minist\\u00e9rios\",\"authorEmail\":\"joomlagovbr@gmail.com\",\"authorUrl\":\"https:\\/\\/github.com\\/joomlagovbr\",\"version\":\"1.0\",\"description\":\"Mais informacoes na url do github.\",\"group\":\"\"}', '{\"posicao\":\"\",\"cache\":\"1\",\"cache_time\":\"900\"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (10010, 0, 'plg_system_scriptsfooter', 'plugin', 'scriptsfooter', 'system', 0, 0, 1, 0, '{\"legacy\":false,\"name\":\"plg_system_scriptsfooter\",\"type\":\"plugin\",\"creationDate\":\"Outubro 2013\",\"author\":\"Comunidade Joomla Calango e Grupo de Trabalho de Minist\\u00e9rios\",\"copyright\":\"Copyright (C) 2013 Comunidade Joomla Calango e Grupo de Trabalho de Minist\\u00e9rios\",\"authorEmail\":\"joomlagovbr@gmail.com\",\"authorUrl\":\"https:\\/\\/github.com\\/joomlagovbr\",\"version\":\"1.0\",\"description\":\"Mais informacoes na url do github.\",\"group\":\"\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
@@ -1510,11 +1503,11 @@ INSERT INTO `#__extensions` (`extension_id`, `package_id`, `name`, `type`, `elem
 (10015, 0, 'mod_chamadas', 'module', 'mod_chamadas', '', 0, 1, 1, 0, '{\"legacy\":false,\"name\":\"mod_chamadas\",\"type\":\"module\",\"creationDate\":\"Outubro 2013\",\"author\":\"Roberson Pinheiro\",\"copyright\":\"Copyright (C) 2005 - 2013 Open Source Matters. All rights reserved.\",\"authorEmail\":\"roberson.augusto@gmail.com\",\"authorUrl\":\"\",\"version\":\"3.0.0\",\"description\":\"MOD_CHAMADA_XML_DESCRICAO\",\"group\":\"\"}', '{\"modelo\":\"article_content\",\"quantidade\":\"4\",\"habilitar_mensagem_vazia\":\"0\",\"limitar_caractere\":\"0\",\"limite_caractere\":\"\",\"destaque\":\"show\",\"somente_imagem\":\"0\",\"buscar_cat_tag\":\"1\",\"visualizar_filho\":\"0\",\"nivel\":\"10\",\"exibir_imagem\":\"1\",\"exibir_introtext\":\"1\",\"exibir_title\":\"1\",\"ordem\":\"title\",\"ordem_direction\":\"ASC\",\"owncache\":\"1\",\"cache_time\":\"900\"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (10016, 0, 'mod_barradogoverno', 'module', 'mod_barradogoverno', '', 0, 1, 0, 0, '{\"legacy\":false,\"name\":\"mod_barradogoverno\",\"type\":\"module\",\"creationDate\":\"Outubro 2013\",\"author\":\"Comunidade Joomla Calango e Grupo de Trabalho de Minist\\u00e9rios\",\"copyright\":\"Copyright (C) 2013 Comunidade Joomla Calango e Grupo de Trabalho de Minist\\u00e9rios\",\"authorEmail\":\"joomlagovbr@gmail.com\",\"authorUrl\":\"https:\\/\\/github.com\\/joomlagovbr\",\"version\":\"1.0\",\"description\":\"Mais informacoes na url do github.\",\"group\":\"\"}', '{\"layout\":\"default\",\"anexar_js_2014\":\"1\",\"endereco_js_2014\":\"http:\\/\\/barra.brasil.gov.br\\/barra.js?cor=verde\",\"mensagem_ie6_2014\":\"Seu navegador \\u00e9 incompat\\u00edvel com os novos padr\\u00f5es de tecnologia e por isso voc\\u00ea n\\u00e3o pode visualizar a nova barra do Governo Federal. Atualize ou troque seu navegador.\",\"correcoes_ie8_2014\":\"show_css\",\"link_css_ie8_2014\":\"{URL_SITE}\\/modules\\/mod_barradogoverno\\/assets\\/2014\\/css\\/ie8.css\",\"anexar_css_2012\":\"1\",\"cor_2012\":\"\",\"acesso_a_informacao_2012\":\"1\",\"largura_barra_2012\":\"970\",\"alinhamento_barra_2012\":\"\",\"link_acesso_a_informacao_2012\":\"http:\\/\\/www.acessoainformacao.gov.br\\/acessoainformacaogov\\/\",\"link_portal_brasil_2012\":\"http:\\/\\/www.brasil.gov.br\\/\",\"target_links_2012\":\"_blank\",\"head_manual\":\"\",\"html_manual\":\"\",\"anexar_head\":\"\",\"cache\":\"1\",\"cache_time\":\"900\"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (10017, 0, 'isis', 'template', 'isis', '', 1, 1, 1, 0, '{\"name\":\"isis\",\"type\":\"template\",\"creationDate\":\"3\\/30\\/2012\",\"author\":\"Kyle Ledbetter\",\"copyright\":\"Copyright (C) 2005 - 2020 Open Source Matters, Inc. All rights reserved.\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"\",\"version\":\"1.0\",\"description\":\"TPL_ISIS_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"templateDetails\"}', '{\"templateColor\":\"\",\"logoFile\":\"\"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(10021, 10002, 'BrazilianPortuguesept-BR', 'language', 'pt-BR', '', 0, 1, 0, 0, '{\"name\":\"Brazilian Portuguese (pt-BR)\",\"type\":\"language\",\"creationDate\":\"2020-04-22\",\"author\":\"Projeto Joomla!\",\"copyright\":\"Copyright (C) 2005-2020 Open Source Matters. Todos os direitos reservados.\",\"authorEmail\":\"helvecio.dasilva@community.joomla.org\",\"authorUrl\":\"http:\\/\\/brasil.joomla.com\",\"version\":\"3.9.18.1\",\"description\":\"pt-BR site language\",\"group\":\"\",\"filename\":\"install\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0);
+(10021, 10002, 'BrazilianPortuguesept-BR', 'language', 'pt-BR', '', 0, 1, 0, 0, '{\"name\":\"Brazilian Portuguese (pt-BR)\",\"type\":\"language\",\"creationDate\":\"Junho de 2020\",\"author\":\"Projeto Joomla!\",\"copyright\":\"Copyright (C) 2005-2020 Open Source Matters. Todos os direitos reservados.\",\"authorEmail\":\"helvecio.dasilva@community.joomla.org\",\"authorUrl\":\"http:\\/\\/brasil.joomla.com\",\"version\":\"3.9.19.1\",\"description\":\"pt-BR site language\",\"group\":\"\",\"filename\":\"install\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0);
 INSERT INTO `#__extensions` (`extension_id`, `package_id`, `name`, `type`, `element`, `folder`, `client_id`, `enabled`, `access`, `protected`, `manifest_cache`, `params`, `custom_data`, `system_data`, `checked_out`, `checked_out_time`, `ordering`, `state`) VALUES
-(10022, 10002, 'BrazilianPortuguesept-BR', 'language', 'pt-BR', '', 1, 1, 0, 0, '{\"name\":\"Brazilian Portuguese (pt-BR)\",\"type\":\"language\",\"creationDate\":\"2020-04-22\",\"author\":\"Projeto Joomla!\",\"copyright\":\"Copyright (C) 2005-2020 Open Source Matters. Todos os direitos reservados.\",\"authorEmail\":\"helvecio.dasilva@community.joomla.org\",\"authorUrl\":\"http:\\/\\/brasil.joomla.com\",\"version\":\"3.9.18.1\",\"description\":\"Brazilian Portuguese Administrator language\",\"group\":\"\",\"filename\":\"install\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(10022, 10002, 'BrazilianPortuguesept-BR', 'language', 'pt-BR', '', 1, 1, 0, 0, '{\"name\":\"Brazilian Portuguese (pt-BR)\",\"type\":\"language\",\"creationDate\":\"Junho de 2020\",\"author\":\"Projeto Joomla!\",\"copyright\":\"Copyright (C) 2005-2020 Open Source Matters. Todos os direitos reservados.\",\"authorEmail\":\"helvecio.dasilva@community.joomla.org\",\"authorUrl\":\"http:\\/\\/brasil.joomla.com\",\"version\":\"3.9.19.1\",\"description\":\"Brazilian Portuguese Administrator language\",\"group\":\"\",\"filename\":\"install\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (10023, 0, 'TinyMCE Idioma Português (Brasil)', 'file', 'TinyMCE_pt-BR', '', 0, 1, 0, 0, '{\"name\":\"TinyMCE Idioma Portugu\\u00eas (Brasil)\",\"type\":\"file\",\"creationDate\":\"03 Set 2012\",\"author\":\"Ponto Mega\",\"copyright\":\"(C) 2005-2013 Brazilian Translation Team\",\"authorEmail\":\"traducao@pontomega.com.br\",\"authorUrl\":\"\",\"version\":\"3.5.1\",\"description\":\"\\n\\t\\t<h3><strong>Instala\\u00e7\\u00e3o do pacote de idioma Portugu\\u00eas (Brasil) para o editor TinyMCE 3.5.1 foi conclu\\u00eddo com sucesso.<\\/strong><\\/h3>\\n\\t\\t<p>N\\u00e3o se esque\\u00e7a de selecionar o idioma para PT <a href=\\\"index.php?option=com_plugins&amp;view=plugins&amp;filter_search=TinyMCE\\\"><strong>Gerenciamento de plug-in TinyMCE<\\/strong><\\/a><br \\/> Se voc\\u00ea usar a detec\\u00e7\\u00e3o autom\\u00e1tica, certifique-se de que est\\u00e3o instalados os pacotes de idiomas diferentes para TinyMCE correspondentes aos instalado para o Joomla !<p>\\n\\t\\t\\n\\t\",\"group\":\"\"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(10024, 0, 'blankcomponent', 'component', 'com_blankcomponent', '', 1, 1, 0, 0, '{\"name\":\"Blank Component\",\"type\":\"component\",\"creationDate\":\"03\\/11\\/2012\",\"author\":\"Omar Muhammad\",\"copyright\":\"Copyright \\u00a9 2012, Omars Site, All Rights Reserved.\",\"authorEmail\":\"admin@omar84.com\",\"authorUrl\":\"http:\\/\\/omar84.com\",\"version\":\"3.0.0\",\"description\":\"Blank Component was made to make it possible to create a menu item page that contains only modules and no component.\",\"group\":\"\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(10024, 0, 'blankcomponent', 'component', 'com_blankcomponent', '', 1, 1, 0, 0, '{\"name\":\"Blank Component\",\"type\":\"component\",\"creationDate\":\"03\\/11\\/2012\",\"author\":\"Omar Muhammad\",\"copyright\":\"Copyright \\u00a9 2012, Omar\'s Site, All Rights Reserved.\",\"authorEmail\":\"admin@omar84.com\",\"authorUrl\":\"http:\\/\\/omar84.com\",\"version\":\"3.0.0\",\"description\":\"Blank Component was made to make it possible to create a menu item page that contains only modules and no component.\",\"group\":\"\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (10025, 0, 'plg_search_contenttags', 'plugin', 'contenttags', 'search', 0, 1, 1, 0, '{\"name\":\"plg_search_contenttags\",\"type\":\"plugin\",\"creationDate\":\"Novembro 2013\",\"author\":\"Comunidade Joomla Calango e Grupo de Trabalho de Minist\\u00e9rios\",\"copyright\":\"Copyright (C) 2013 Comunidade Joomla Calango e Grupo de Trabalho de Minist\\u00e9rios\",\"authorEmail\":\"joomlagovbr@gmail.com\",\"authorUrl\":\"https:\\/\\/github.com\\/joomlagovbr\",\"version\":\"2.5.0\",\"description\":\"Plugin baseado no plugin nativo de conte\\u00fado, com a fun\\u00e7\\u00e3o de realizar buscas somente nas palavras-chave de conte\\u00fado.\",\"group\":\"\"}', '{\"search_limit\":\"50\",\"search_content\":\"0\",\"search_archived\":\"0\"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (10028, 10129, 'Content - Youtube Gallery', 'plugin', 'youtubegallery', 'content', 0, 1, 1, 0, '{\"name\":\"Content - Youtube Gallery\",\"type\":\"plugin\",\"creationDate\":\"June 2018\",\"author\":\"Ivan Komlev\",\"copyright\":\"Copyright (C) 2009-2018 Ivan Komlev. All rights reserved.\",\"authorEmail\":\"support@joomlaboat.com\",\"authorUrl\":\"http:\\/\\/www.joomlaboat.com\\/\",\"version\":\"4.4.5\",\"description\":\"\\n    <p>A plugin to show Youtube Gallery in any article.<\\/p>\\n<p>Plugin to show a catalog of selected YouTube (not only) videos. All you need is to create a Video List and a Theme (or you may download free Theme).<\\/p>\\n\\n\\n<hr>\\n\\n<h1>Plugin usage:<\\/h1>\\n\\n<p>Type the special keyword {youtubegallery=<i>Video List Name,Theme Name<\\/i>} or {youtubegalleryid=<i>Video List ID,Theme ID<\\/i>} inside of any article.<\\/p>\\n\\n<p>Example:<\\/p>\\n\\n<p style=\'color:#007000;\'>{youtubegallery=My First Gallery,Simple Grid} - will show the gallery \\\"My First Gallery\\\", but create Video List and Theme first.\\n\\n<hr\\/>\\n\\n<p>For more info <a href=\'http:\\/\\/joomlaboat.com\\/youtube-gallery\' target=\'_blank\'>click here<\\/a><\\/p>\\n\\n<p>To take the logo off <a href=\'http:\\/\\/joomlaboat.com\\/youtube-gallery#pro-version\' target=\'_blank\'>click here<\\/a><\\/p>\\n\\n    \",\"group\":\"\",\"filename\":\"youtubegallery\"}', '{\"cache\":\"0\",\"cache_time\":\"900\",\"cachemode\":\"static\"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (10029, 10129, 'Youtube Gallery Module', 'module', 'mod_youtubegallery', '', 0, 1, 0, 0, '{\"name\":\"Youtube Gallery Module\",\"type\":\"module\",\"creationDate\":\"June 2018\",\"author\":\"Ivan Komlev\",\"copyright\":\"Copyright (C) 2009-2018 Ivan Komlev. All rights reserved.\",\"authorEmail\":\"support@joomlaboat.com\",\"authorUrl\":\"http:\\/\\/www.joomlaboat.com\\/\",\"version\":\"4.4.5\",\"description\":\"<p>YoutubeGallery Module to show Video Gallery (Video List with Theme) already created in Components\\/YoutubeGallery.<\\/p>\\n    \",\"group\":\"\",\"filename\":\"mod_youtubegallery\"}', '{\"customitemid\":\"\",\"cache\":\"0\",\"cache_time\":\"900\",\"cachemode\":\"static\",\"allowcontentplugins\":\"0\"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
@@ -1546,22 +1539,22 @@ INSERT INTO `#__extensions` (`extension_id`, `package_id`, `name`, `type`, `elem
 (10105, 0, 'plg_installer_packageinstaller', 'plugin', 'packageinstaller', 'installer', 0, 1, 1, 0, '{\"name\":\"plg_installer_packageinstaller\",\"type\":\"plugin\",\"creationDate\":\"May 2016\",\"author\":\"Joomla! Project\",\"copyright\":\"Copyright (C) 2005 - 2020 Open Source Matters. All rights reserved.\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"www.joomla.org\",\"version\":\"3.6.0\",\"description\":\"PLG_INSTALLER_PACKAGEINSTALLER_PLUGIN_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"packageinstaller\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (10111, 0, 'PLG_INSTALLER_URLINSTALLER', 'plugin', 'urlinstaller', 'installer', 0, 0, 1, 0, '{\"name\":\"PLG_INSTALLER_URLINSTALLER\",\"type\":\"plugin\",\"creationDate\":\"May 2016\",\"author\":\"Joomla! Project\",\"copyright\":\"Copyright (C) 2005 - 2020 Open Source Matters. All rights reserved.\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"www.joomla.org\",\"version\":\"3.6.0\",\"description\":\"PLG_INSTALLER_URLINSTALLER_PLUGIN_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"urlinstaller\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (10112, 0, 'plg_installer_webinstaller', 'plugin', 'webinstaller', 'installer', 0, 1, 1, 0, '{\"name\":\"plg_installer_webinstaller\",\"type\":\"plugin\",\"creationDate\":\"28 April 2017\",\"author\":\"Joomla! Project\",\"copyright\":\"Copyright (C) 2013 - 2019 Open Source Matters. All rights reserved.\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"www.joomla.org\",\"version\":\"2.0.1\",\"description\":\"PLG_INSTALLER_WEBINSTALLER_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"webinstaller\"}', '{\"tab_position\":\"0\"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(10120, 0, 'plg_system_regularlabs', 'plugin', 'regularlabs', 'system', 0, 1, 1, 0, '{\"name\":\"plg_system_regularlabs\",\"type\":\"plugin\",\"creationDate\":\"March 2020\",\"author\":\"Regular Labs (Peter van Westen)\",\"copyright\":\"Copyright \\u00a9 2018 Regular Labs - All Rights Reserved\",\"authorEmail\":\"info@regularlabs.com\",\"authorUrl\":\"https:\\/\\/www.regularlabs.com\",\"version\":\"20.3.22179\",\"description\":\"PLG_SYSTEM_REGULARLABS_DESC\",\"group\":\"\",\"filename\":\"regularlabs\"}', '{\"combine_admin_menu\":\"0\",\"show_help_menu\":\"1\",\"max_list_count\":\"5000\"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(10121, 0, 'plg_editors-xtd_articlesanywhere', 'plugin', 'articlesanywhere', 'editors-xtd', 0, 1, 1, 0, '{\"name\":\"plg_editors-xtd_articlesanywhere\",\"type\":\"plugin\",\"creationDate\":\"March 2020\",\"author\":\"Regular Labs (Peter van Westen)\",\"copyright\":\"Copyright \\u00a9 2018 Regular Labs - All Rights Reserved\",\"authorEmail\":\"info@regularlabs.com\",\"authorUrl\":\"https:\\/\\/www.regularlabs.com\",\"version\":\"10.1.4\",\"description\":\"PLG_EDITORS-XTD_ARTICLESANYWHERE_DESC\",\"group\":\"\",\"filename\":\"articlesanywhere\"}', '[]', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(10122, 0, 'plg_system_articlesanywhere', 'plugin', 'articlesanywhere', 'system', 0, 1, 1, 0, '{\"name\":\"plg_system_articlesanywhere\",\"type\":\"plugin\",\"creationDate\":\"March 2020\",\"author\":\"Regular Labs (Peter van Westen)\",\"copyright\":\"Copyright \\u00a9 2018 Regular Labs - All Rights Reserved\",\"authorEmail\":\"info@regularlabs.com\",\"authorUrl\":\"https:\\/\\/www.regularlabs.com\",\"version\":\"10.1.4\",\"description\":\"PLG_SYSTEM_ARTICLESANYWHERE_DESC\",\"group\":\"\",\"filename\":\"articlesanywhere\"}', '{\"@notice_limit\":\"RL_ONLY_AVAILABLE_IN_PRO\",\"@notice_ordering\":\"RL_ONLY_AVAILABLE_IN_PRO\",\"@notice_ordering_direction\":\"RL_ONLY_AVAILABLE_IN_PRO\",\"ignore_language\":\"0\",\"ignore_access\":\"0\",\"ignore_state\":\"0\",\"use_ellipsis\":\"1\",\"increase_hits_on_text\":\"1\",\"fix_html_syntax\":\"1\",\"place_comments\":\"1\",\"@notice_articles\":\"RL_ONLY_AVAILABLE_IN_PRO\",\"@notice_components\":\"RL_ONLY_AVAILABLE_IN_PRO\",\"@notice_otherareas\":\"RL_ONLY_AVAILABLE_IN_PRO\",\"button_text\":\"Article\",\"enable_frontend\":\"1\",\"data_layout_enable\":\"0\",\"data_layout_layout\":\"\",\"data_title_enable\":\"1\",\"data_title_heading\":\"\",\"data_intro_image_enable\":\"0\",\"data_text_enable\":\"1\",\"data_text_type\":\"text\",\"data_text_length\":\"\",\"data_text_strip\":\"0\",\"data_readmore_enable\":\"1\",\"data_readmore_text\":\"\",\"data_readmore_class\":\"\",\"div_enable\":\"0\",\"div_width\":\"\",\"div_height\":\"\",\"div_float\":\"\",\"div_class\":\"\",\"@notice_content_type\":\"RL_ONLY_AVAILABLE_IN_PRO\",\"article_tag\":\"article\",\"@notice_articles_tag\":\"RL_ONLY_AVAILABLE_IN_PRO\",\"tag_characters\":\"{.}\",\"tag_characters_data\":\"[.]\",\"force_content_triggers\":\"0\",\"use_query_cache\":\"1\",\"query_cache_time\":\"\"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(10120, 0, 'plg_system_regularlabs', 'plugin', 'regularlabs', 'system', 0, 1, 1, 0, '{\"name\":\"plg_system_regularlabs\",\"type\":\"plugin\",\"creationDate\":\"June 2020\",\"author\":\"Regular Labs (Peter van Westen)\",\"copyright\":\"Copyright \\u00a9 2018 Regular Labs - All Rights Reserved\",\"authorEmail\":\"info@regularlabs.com\",\"authorUrl\":\"https:\\/\\/www.regularlabs.com\",\"version\":\"20.6.16076\",\"description\":\"PLG_SYSTEM_REGULARLABS_DESC\",\"group\":\"\",\"filename\":\"regularlabs\"}', '{\"combine_admin_menu\":\"0\",\"show_help_menu\":\"1\",\"max_list_count\":\"5000\"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(10121, 0, 'plg_editors-xtd_articlesanywhere', 'plugin', 'articlesanywhere', 'editors-xtd', 0, 1, 1, 0, '{\"name\":\"plg_editors-xtd_articlesanywhere\",\"type\":\"plugin\",\"creationDate\":\"June 2020\",\"author\":\"Regular Labs (Peter van Westen)\",\"copyright\":\"Copyright \\u00a9 2018 Regular Labs - All Rights Reserved\",\"authorEmail\":\"info@regularlabs.com\",\"authorUrl\":\"https:\\/\\/www.regularlabs.com\",\"version\":\"10.2.0\",\"description\":\"PLG_EDITORS-XTD_ARTICLESANYWHERE_DESC\",\"group\":\"\",\"filename\":\"articlesanywhere\"}', '[]', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(10122, 0, 'plg_system_articlesanywhere', 'plugin', 'articlesanywhere', 'system', 0, 1, 1, 0, '{\"name\":\"plg_system_articlesanywhere\",\"type\":\"plugin\",\"creationDate\":\"June 2020\",\"author\":\"Regular Labs (Peter van Westen)\",\"copyright\":\"Copyright \\u00a9 2018 Regular Labs - All Rights Reserved\",\"authorEmail\":\"info@regularlabs.com\",\"authorUrl\":\"https:\\/\\/www.regularlabs.com\",\"version\":\"10.2.0\",\"description\":\"PLG_SYSTEM_ARTICLESANYWHERE_DESC\",\"group\":\"\",\"filename\":\"articlesanywhere\"}', '{\"@notice_limit\":\"RL_ONLY_AVAILABLE_IN_PRO\",\"@notice_ordering\":\"RL_ONLY_AVAILABLE_IN_PRO\",\"@notice_ordering_direction\":\"RL_ONLY_AVAILABLE_IN_PRO\",\"ignore_language\":\"0\",\"ignore_access\":\"0\",\"ignore_state\":\"0\",\"use_ellipsis\":\"1\",\"increase_hits_on_text\":\"1\",\"fix_html_syntax\":\"1\",\"place_comments\":\"1\",\"@notice_articles\":\"RL_ONLY_AVAILABLE_IN_PRO\",\"@notice_components\":\"RL_ONLY_AVAILABLE_IN_PRO\",\"@notice_otherareas\":\"RL_ONLY_AVAILABLE_IN_PRO\",\"button_text\":\"Article\",\"enable_frontend\":\"1\",\"data_layout_enable\":\"0\",\"data_layout_layout\":\"\",\"data_title_enable\":\"1\",\"data_title_heading\":\"\",\"data_intro_image_enable\":\"0\",\"data_text_enable\":\"1\",\"data_text_type\":\"text\",\"data_text_length\":\"\",\"data_text_strip\":\"0\",\"data_readmore_enable\":\"1\",\"data_readmore_text\":\"\",\"data_readmore_class\":\"\",\"div_enable\":\"0\",\"div_width\":\"\",\"div_height\":\"\",\"div_float\":\"\",\"div_class\":\"\",\"@notice_content_type\":\"RL_ONLY_AVAILABLE_IN_PRO\",\"article_tag\":\"article\",\"@notice_articles_tag\":\"RL_ONLY_AVAILABLE_IN_PRO\",\"tag_characters\":\"{.}\",\"tag_characters_data\":\"[.]\",\"force_content_triggers\":\"0\",\"use_query_cache\":\"1\",\"query_cache_time\":\"\"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (10124, 0, 'plg_system_stats', 'plugin', 'stats', 'system', 0, 0, 1, 0, '{\"name\":\"plg_system_stats\",\"type\":\"plugin\",\"creationDate\":\"November 2013\",\"author\":\"Joomla! Project\",\"copyright\":\"Copyright (C) 2005 - 2020 Open Source Matters. All rights reserved.\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"www.joomla.org\",\"version\":\"3.5.0\",\"description\":\"PLG_SYSTEM_STATS_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"stats\"}', '{\"interval\":\"12\",\"mode\":\"1\",\"lastrun\":\"\"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (10125, 0, 'plg_system_updatenotification', 'plugin', 'updatenotification', 'system', 0, 0, 1, 0, '{\"name\":\"plg_system_updatenotification\",\"type\":\"plugin\",\"creationDate\":\"May 2015\",\"author\":\"Joomla! Project\",\"copyright\":\"Copyright (C) 2005 - 2020 Open Source Matters. All rights reserved.\",\"authorEmail\":\"admin@joomla.org\",\"authorUrl\":\"www.joomla.org\",\"version\":\"3.5.0\",\"description\":\"PLG_SYSTEM_UPDATENOTIFICATION_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"updatenotification\"}', '{\"email\":\"\",\"language_override\":\"\",\"lastrun\":\"0\"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (10129, 0, 'Youtube Gallery v4.4.5 Package (Free)', 'package', 'pkg_pkg_youtubegallery', '', 0, 1, 1, 0, '{\"name\":\"Youtube Gallery v4.4.5 Package (Free)\",\"type\":\"package\",\"creationDate\":\"June 2018\",\"author\":\"JoomlaBoat.com\",\"copyright\":\"\",\"authorEmail\":\"\",\"authorUrl\":\"\",\"version\":\"4.4.5\",\"description\":\"Youtube Gallery v4.4.5 (Free) for Joomla 3.x\",\"group\":\"\",\"filename\":\"pkg_youtubegallery\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (10131, 0, 'IDG 2019', 'template', 'idg2019', '', 0, 1, 1, 0, '{\"name\":\"IDG 2019\",\"type\":\"template\",\"creationDate\":\"2019\",\"author\":\"Comunidade Joomla Calango e Grupo de Trabalho de Minist\\u00e9rios\",\"copyright\":\"Copyright (C) 2013 Comunidade Joomla Calango e Grupo de Trabalho de Minist\\u00e9rios.\",\"authorEmail\":\"joomlagovbr@gmail.com\",\"authorUrl\":\"https:\\/\\/github.com\\/joomlagovbr\",\"version\":\"4.0.0\",\"description\":\"Mais informacoes na URL do github.\",\"group\":\"\",\"filename\":\"templateDetails\"}', '{\"nome_principal\":\"Nome principal\",\"rodape_acesso_informacao\":\"1\",\"rodape_logo_brasil\":\"1\",\"mensagem_final_ferramenta\":\"\",\"clear_default_javascript\":\"0\",\"local_mainscript\":\"footer\",\"google_analytics_id\":\"\",\"google_analytics_domain_name\":\"\",\"google_analytics_allow_linker\":\"0\"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(10132, 10140, 'COM_JCE', 'component', 'com_jce', '', 1, 1, 0, 0, '{\"name\":\"COM_JCE\",\"type\":\"component\",\"creationDate\":\"12-05-2020\",\"author\":\"Ryan Demmer\",\"copyright\":\"Copyright (C) 2006 - 2020 Ryan Demmer. All rights reserved\",\"authorEmail\":\"info@joomlacontenteditor.net\",\"authorUrl\":\"www.joomlacontenteditor.net\",\"version\":\"2.8.12\",\"description\":\"COM_JCE_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"jce\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(10133, 10140, 'plg_editors_jce', 'plugin', 'jce', 'editors', 0, 1, 1, 0, '{\"name\":\"plg_editors_jce\",\"type\":\"plugin\",\"creationDate\":\"12-05-2020\",\"author\":\"Ryan Demmer\",\"copyright\":\"Copyright (C) 2006 - 2020 Ryan Demmer. All rights reserved\",\"authorEmail\":\"info@joomlacontenteditor.net\",\"authorUrl\":\"http:\\/\\/www.joomlacontenteditor.net\",\"version\":\"2.8.12\",\"description\":\"WF_EDITOR_PLUGIN_DESC\",\"group\":\"\",\"filename\":\"jce\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(10134, 10140, 'plg_content_jce', 'plugin', 'jce', 'content', 0, 1, 1, 0, '{\"name\":\"plg_content_jce\",\"type\":\"plugin\",\"creationDate\":\"12-05-2020\",\"author\":\"Ryan Demmer\",\"copyright\":\"Copyright (C) 2006 - 2020 Ryan Demmer. All rights reserved\",\"authorEmail\":\"info@joomlacontenteditor.net\",\"authorUrl\":\"http:\\/\\/www.joomlacontenteditor.net\",\"version\":\"2.8.12\",\"description\":\"PLG_CONTENT_JCE_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"jce\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(10135, 10140, 'plg_extension_jce', 'plugin', 'jce', 'extension', 0, 1, 1, 0, '{\"name\":\"plg_extension_jce\",\"type\":\"plugin\",\"creationDate\":\"12-05-2020\",\"author\":\"Ryan Demmer\",\"copyright\":\"Copyright (C) 2006 - 2020 Ryan Demmer. All rights reserved\",\"authorEmail\":\"info@joomlacontenteditor.net\",\"authorUrl\":\"http:\\/\\/www.joomlacontenteditor.net\",\"version\":\"2.8.12\",\"description\":\"PLG_EXTENSION_JCE_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"jce\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(10136, 10140, 'plg_fields_mediajce', 'plugin', 'mediajce', 'fields', 0, 1, 1, 0, '{\"name\":\"plg_fields_mediajce\",\"type\":\"plugin\",\"creationDate\":\"12-05-2020\",\"author\":\"Ryan Demmer\",\"copyright\":\"Copyright (C) 2006 - 2020 Ryan Demmer. All rights reserved\",\"authorEmail\":\"info@joomlacontenteditor.net\",\"authorUrl\":\"https:\\/\\/www.joomlacontenteditor.net\",\"version\":\"2.8.12\",\"description\":\"PLG_FIELDS_MEDIAJCE_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"mediajce\"}', '[]', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(10137, 10140, 'plg_installer_jce', 'plugin', 'jce', 'installer', 0, 1, 1, 0, '{\"name\":\"plg_installer_jce\",\"type\":\"plugin\",\"creationDate\":\"12-05-2020\",\"author\":\"Ryan Demmer\",\"copyright\":\"Copyright (C) 2006 - 2020 Ryan Demmer. All rights reserved\",\"authorEmail\":\"info@joomlacontenteditor.net\",\"authorUrl\":\"http:\\/\\/www.joomlacontenteditor.net\",\"version\":\"2.8.12\",\"description\":\"PLG_INSTALLER_JCE_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"jce\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(10138, 10140, 'plg_quickicon_jce', 'plugin', 'jce', 'quickicon', 0, 1, 1, 0, '{\"name\":\"plg_quickicon_jce\",\"type\":\"plugin\",\"creationDate\":\"12-05-2020\",\"author\":\"Ryan Demmer\",\"copyright\":\"Copyright (C) 2006 - 2020 Ryan Demmer. All rights reserved\",\"authorEmail\":\"info@joomlacontenteditor.net\",\"authorUrl\":\"http:\\/\\/www.joomlacontenteditor.net\",\"version\":\"2.8.12\",\"description\":\"PLG_QUICKICON_JCE_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"jce\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(10139, 10140, 'plg_system_jce', 'plugin', 'jce', 'system', 0, 1, 1, 0, '{\"name\":\"plg_system_jce\",\"type\":\"plugin\",\"creationDate\":\"12-05-2020\",\"author\":\"Ryan Demmer\",\"copyright\":\"Copyright (C) 2006 - 2020 Ryan Demmer. All rights reserved\",\"authorEmail\":\"info@joomlacontenteditor.net\",\"authorUrl\":\"http:\\/\\/www.joomlacontenteditor.net\",\"version\":\"2.8.12\",\"description\":\"PLG_SYSTEM_JCE_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"jce\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(10140, 0, 'PKG_JCE', 'package', 'pkg_jce', '', 0, 1, 1, 0, '{\"name\":\"PKG_JCE\",\"type\":\"package\",\"creationDate\":\"12-05-2020\",\"author\":\"Ryan Demmer\",\"copyright\":\"\",\"authorEmail\":\"\",\"authorUrl\":\"\",\"version\":\"2.8.12\",\"description\":\"PKG_JCE_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"pkg_jce\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(10132, 10140, 'COM_JCE', 'component', 'com_jce', '', 1, 1, 0, 0, '{\"name\":\"COM_JCE\",\"type\":\"component\",\"creationDate\":\"19-06-2020\",\"author\":\"Ryan Demmer\",\"copyright\":\"Copyright (C) 2006 - 2020 Ryan Demmer. All rights reserved\",\"authorEmail\":\"info@joomlacontenteditor.net\",\"authorUrl\":\"www.joomlacontenteditor.net\",\"version\":\"2.8.14\",\"description\":\"COM_JCE_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"jce\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(10133, 10140, 'plg_editors_jce', 'plugin', 'jce', 'editors', 0, 1, 1, 0, '{\"name\":\"plg_editors_jce\",\"type\":\"plugin\",\"creationDate\":\"19-06-2020\",\"author\":\"Ryan Demmer\",\"copyright\":\"Copyright (C) 2006 - 2020 Ryan Demmer. All rights reserved\",\"authorEmail\":\"info@joomlacontenteditor.net\",\"authorUrl\":\"http:\\/\\/www.joomlacontenteditor.net\",\"version\":\"2.8.14\",\"description\":\"WF_EDITOR_PLUGIN_DESC\",\"group\":\"\",\"filename\":\"jce\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(10134, 10140, 'plg_content_jce', 'plugin', 'jce', 'content', 0, 1, 1, 0, '{\"name\":\"plg_content_jce\",\"type\":\"plugin\",\"creationDate\":\"19-06-2020\",\"author\":\"Ryan Demmer\",\"copyright\":\"Copyright (C) 2006 - 2020 Ryan Demmer. All rights reserved\",\"authorEmail\":\"info@joomlacontenteditor.net\",\"authorUrl\":\"http:\\/\\/www.joomlacontenteditor.net\",\"version\":\"2.8.14\",\"description\":\"PLG_CONTENT_JCE_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"jce\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(10135, 10140, 'plg_extension_jce', 'plugin', 'jce', 'extension', 0, 1, 1, 0, '{\"name\":\"plg_extension_jce\",\"type\":\"plugin\",\"creationDate\":\"19-06-2020\",\"author\":\"Ryan Demmer\",\"copyright\":\"Copyright (C) 2006 - 2020 Ryan Demmer. All rights reserved\",\"authorEmail\":\"info@joomlacontenteditor.net\",\"authorUrl\":\"http:\\/\\/www.joomlacontenteditor.net\",\"version\":\"2.8.14\",\"description\":\"PLG_EXTENSION_JCE_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"jce\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(10136, 10140, 'plg_fields_mediajce', 'plugin', 'mediajce', 'fields', 0, 1, 1, 0, '{\"name\":\"plg_fields_mediajce\",\"type\":\"plugin\",\"creationDate\":\"19-06-2020\",\"author\":\"Ryan Demmer\",\"copyright\":\"Copyright (C) 2006 - 2020 Ryan Demmer. All rights reserved\",\"authorEmail\":\"info@joomlacontenteditor.net\",\"authorUrl\":\"https:\\/\\/www.joomlacontenteditor.net\",\"version\":\"2.8.14\",\"description\":\"PLG_FIELDS_MEDIAJCE_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"mediajce\"}', '[]', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(10137, 10140, 'plg_installer_jce', 'plugin', 'jce', 'installer', 0, 1, 1, 0, '{\"name\":\"plg_installer_jce\",\"type\":\"plugin\",\"creationDate\":\"19-06-2020\",\"author\":\"Ryan Demmer\",\"copyright\":\"Copyright (C) 2006 - 2020 Ryan Demmer. All rights reserved\",\"authorEmail\":\"info@joomlacontenteditor.net\",\"authorUrl\":\"http:\\/\\/www.joomlacontenteditor.net\",\"version\":\"2.8.14\",\"description\":\"PLG_INSTALLER_JCE_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"jce\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(10138, 10140, 'plg_quickicon_jce', 'plugin', 'jce', 'quickicon', 0, 1, 1, 0, '{\"name\":\"plg_quickicon_jce\",\"type\":\"plugin\",\"creationDate\":\"19-06-2020\",\"author\":\"Ryan Demmer\",\"copyright\":\"Copyright (C) 2006 - 2020 Ryan Demmer. All rights reserved\",\"authorEmail\":\"info@joomlacontenteditor.net\",\"authorUrl\":\"http:\\/\\/www.joomlacontenteditor.net\",\"version\":\"2.8.14\",\"description\":\"PLG_QUICKICON_JCE_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"jce\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(10139, 10140, 'plg_system_jce', 'plugin', 'jce', 'system', 0, 1, 1, 0, '{\"name\":\"plg_system_jce\",\"type\":\"plugin\",\"creationDate\":\"19-06-2020\",\"author\":\"Ryan Demmer\",\"copyright\":\"Copyright (C) 2006 - 2020 Ryan Demmer. All rights reserved\",\"authorEmail\":\"info@joomlacontenteditor.net\",\"authorUrl\":\"http:\\/\\/www.joomlacontenteditor.net\",\"version\":\"2.8.14\",\"description\":\"PLG_SYSTEM_JCE_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"jce\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(10140, 0, 'PKG_JCE', 'package', 'pkg_jce', '', 0, 1, 1, 0, '{\"name\":\"PKG_JCE\",\"type\":\"package\",\"creationDate\":\"19-06-2020\",\"author\":\"Ryan Demmer\",\"copyright\":\"\",\"authorEmail\":\"\",\"authorUrl\":\"\",\"version\":\"2.8.14\",\"description\":\"PKG_JCE_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"pkg_jce\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (10144, 10147, 'com_j2xml', 'component', 'com_j2xml', '', 1, 1, 0, 0, '{\"name\":\"com_j2xml\",\"type\":\"component\",\"creationDate\":\"May 2020\",\"author\":\"Helios Ciancio\",\"copyright\":\"(C) 2010 - 2020 Helios Ciancio <info (at) eshiol (dot) it> (https:\\/\\/www.eshiol.it). All Rights Reserved.\",\"authorEmail\":\"info@eshiol.it\",\"authorUrl\":\"www.eshiol.it\",\"version\":\"3.7.207\",\"description\":\"COM_J2XML_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"j2xml\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (10145, 10147, 'plg_system_j2xml', 'plugin', 'j2xml', 'system', 0, 1, 1, 0, '{\"name\":\"plg_system_j2xml\",\"type\":\"plugin\",\"creationDate\":\"May 2020\",\"author\":\"Helios Ciancio\",\"copyright\":\"(C) 2010 - 2020 Helios Ciancio <info (at) eshiol (dot) it> (https:\\/\\/www.eshiol.it). All Rights Reserved.\",\"authorEmail\":\"info@eshiol.it\",\"authorUrl\":\"www.eshiol.it\",\"version\":\"3.7.49\",\"description\":\"PLG_SYSTEM_J2XML_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"j2xml\"}', '{\"debug\":\"0\",\"log\":\"eshiol.log.php\",\"phpconsole\":\"0\"}', '', '', 0, '0000-00-00 00:00:00', 0, 0);
 INSERT INTO `#__extensions` (`extension_id`, `package_id`, `name`, `type`, `element`, `folder`, `client_id`, `enabled`, `access`, `protected`, `manifest_cache`, `params`, `custom_data`, `system_data`, `checked_out`, `checked_out_time`, `ordering`, `state`) VALUES
@@ -1619,7 +1612,8 @@ INSERT INTO `#__extensions` (`extension_id`, `package_id`, `name`, `type`, `elem
 (10207, 10192, 'googl Shortener', 'library', 'googl', '', 0, 1, 1, 0, '{\"name\":\"googl Shortener\",\"type\":\"library\",\"creationDate\":\"May 2020\",\"author\":\"Sebastian Wyder package by Carlos Camara\",\"copyright\":\"(C) 2010-2019 GWE Systems Ltd. All rights reserved.\",\"authorEmail\":\"carcam@jevents.net\",\"authorUrl\":\"www.gwesystems.com\",\"version\":\"3.4.57\",\"description\":\"Googl Shortener library created by Sebastian Wyder (https:\\/\\/github.com\\/sebi\\/googl-php) and package by Carlos C\\u00e1mara (http:\\/\\/www.jevents.net)\",\"group\":\"\",\"filename\":\"googl\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (10208, 10192, 'JEvents - Bootstrap Modal Library', 'library', 'jevents/jevmodal', '', 0, 1, 1, 0, '{\"name\":\"JEvents - Bootstrap Modal Library\",\"type\":\"library\",\"creationDate\":\"May 2020\",\"author\":\"GWE Systems Ltd\",\"copyright\":\"(C) 2015-2019 GWE Systems Ltd. All rights reserved.\",\"authorEmail\":\"via website\",\"authorUrl\":\"www.gwesystems.com\",\"version\":\"3.4.57\",\"description\":\"Bootstrap Modal Library for JEvents\",\"group\":\"\",\"filename\":\"jevmodal\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (10209, 10192, 'JEvents - Typeahead Library', 'library', 'jevents/jevtypeahead', '', 0, 1, 1, 0, '{\"name\":\"JEvents - Typeahead Library\",\"type\":\"library\",\"creationDate\":\"May 2020\",\"author\":\"GWE Systems Ltd\",\"copyright\":\"(C) 2015 GWE Systems Ltd. All rights reserved.\",\"authorEmail\":\"carcam@jevents.net\",\"authorUrl\":\"www.gwesystems.com\",\"version\":\"3.4.57\",\"description\":\"Typeahead Library for JEvents\",\"group\":\"\",\"filename\":\"jevtypeahead\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(10211, 0, 'Regular Labs Library', 'library', 'regularlabs', '', 0, 1, 1, 0, '{\"name\":\"Regular Labs Library\",\"type\":\"library\",\"creationDate\":\"March 2020\",\"author\":\"Regular Labs (Peter van Westen)\",\"copyright\":\"Copyright \\u00a9 2018 Regular Labs - All Rights Reserved\",\"authorEmail\":\"info@regularlabs.com\",\"authorUrl\":\"https:\\/\\/www.regularlabs.com\",\"version\":\"20.3.22179\",\"description\":\"\",\"group\":\"\",\"filename\":\"regularlabs\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0);
+(10213, 0, 'Regular Labs Library', 'library', 'regularlabs', '', 0, 1, 1, 0, '{\"name\":\"Regular Labs Library\",\"type\":\"library\",\"creationDate\":\"June 2020\",\"author\":\"Regular Labs (Peter van Westen)\",\"copyright\":\"Copyright \\u00a9 2018 Regular Labs - All Rights Reserved\",\"authorEmail\":\"info@regularlabs.com\",\"authorUrl\":\"https:\\/\\/www.regularlabs.com\",\"version\":\"20.6.16076\",\"description\":\"\",\"group\":\"\",\"filename\":\"regularlabs\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(10214, 0, 'j2xml', 'library', 'eshiol\\J2xml', '', 0, 1, 1, 0, '{\"name\":\"j2xml\",\"type\":\"library\",\"creationDate\":\"May 2020\",\"author\":\"Helios Ciancio\",\"copyright\":\"(C) 2010 - 2020 Helios Ciancio <info (at) eshiol (dot) it> (https:\\/\\/www.eshiol.it). All Rights Reserved.\",\"authorEmail\":\"info@eshiol.it\",\"authorUrl\":\"www.eshiol.it\",\"version\":\"20.5.348\",\"description\":\"LIB_J2XML_XML_DESCRIPTION\",\"group\":\"\",\"filename\":\"J2xml\"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1627,39 +1621,40 @@ INSERT INTO `#__extensions` (`extension_id`, `package_id`, `name`, `type`, `elem
 -- Estrutura da tabela `#__fields`
 --
 
+DROP TABLE IF EXISTS `#__fields`;
 CREATE TABLE IF NOT EXISTS `#__fields` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `asset_id` int(10) unsigned NOT NULL DEFAULT 0,
-  `context` varchar(255) NOT NULL DEFAULT '',
-  `group_id` int(10) unsigned NOT NULL DEFAULT 0,
-  `title` varchar(255) NOT NULL DEFAULT '',
-  `name` varchar(255) NOT NULL DEFAULT '',
-  `label` varchar(255) NOT NULL DEFAULT '',
-  `default_value` text,
-  `type` varchar(255) NOT NULL DEFAULT 'text',
-  `note` varchar(255) NOT NULL DEFAULT '',
-  `description` text NOT NULL,
-  `state` tinyint(1) NOT NULL DEFAULT 0,
-  `required` tinyint(1) NOT NULL DEFAULT 0,
-  `checked_out` int(11) NOT NULL DEFAULT 0,
-  `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `ordering` int(11) NOT NULL DEFAULT 0,
-  `params` text NOT NULL,
-  `fieldparams` text NOT NULL,
-  `language` char(7) NOT NULL DEFAULT '',
-  `created_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `created_user_id` int(10) unsigned NOT NULL DEFAULT 0,
-  `modified_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `modified_by` int(10) unsigned NOT NULL DEFAULT 0,
-  `access` int(11) NOT NULL DEFAULT 1,
-  PRIMARY KEY (`id`),
-  KEY `idx_checkout` (`checked_out`),
-  KEY `idx_state` (`state`),
-  KEY `idx_created_user_id` (`created_user_id`),
-  KEY `idx_access` (`access`),
-  KEY `idx_context` (`context`(191)),
-  KEY `idx_language` (`language`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `asset_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `context` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `group_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `label` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `default_value` text COLLATE utf8mb4_unicode_ci,
+  `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'text',
+  `note` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `state` tinyint(1) NOT NULL DEFAULT '0',
+  `required` tinyint(1) NOT NULL DEFAULT '0',
+  `checked_out` int(11) NOT NULL DEFAULT '0',
+  `checked_out_time` datetime NOT NULL,
+  `ordering` int(11) NOT NULL DEFAULT '0',
+  `params` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fieldparams` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `language` char(7) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `created_time` datetime NOT NULL,
+  `created_user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `modified_time` datetime NOT NULL,
+  `modified_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `access` int(11) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `idx_checkout` (`checked_out`) USING BTREE,
+  KEY `idx_state` (`state`) USING BTREE,
+  KEY `idx_created_user_id` (`created_user_id`) USING BTREE,
+  KEY `idx_access` (`access`) USING BTREE,
+  KEY `idx_language` (`language`) USING BTREE,
+  KEY `idx_context` (`context`(191))
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `#__fields`
@@ -1696,11 +1691,12 @@ INSERT INTO `#__fields` (`id`, `asset_id`, `context`, `group_id`, `title`, `name
 -- Estrutura da tabela `#__fields_categories`
 --
 
+DROP TABLE IF EXISTS `#__fields_categories`;
 CREATE TABLE IF NOT EXISTS `#__fields_categories` (
-  `field_id` int(11) NOT NULL DEFAULT 0,
-  `category_id` int(11) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`field_id`,`category_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+  `field_id` int(11) NOT NULL DEFAULT '0',
+  `category_id` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`field_id`,`category_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `#__fields_categories`
@@ -1743,32 +1739,33 @@ INSERT INTO `#__fields_categories` (`field_id`, `category_id`) VALUES
 -- Estrutura da tabela `#__fields_groups`
 --
 
+DROP TABLE IF EXISTS `#__fields_groups`;
 CREATE TABLE IF NOT EXISTS `#__fields_groups` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `asset_id` int(10) unsigned NOT NULL DEFAULT 0,
-  `context` varchar(255) NOT NULL DEFAULT '',
-  `title` varchar(255) NOT NULL DEFAULT '',
-  `note` varchar(255) NOT NULL DEFAULT '',
-  `description` text NOT NULL,
-  `state` tinyint(1) NOT NULL DEFAULT 0,
-  `checked_out` int(11) NOT NULL DEFAULT 0,
-  `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `ordering` int(11) NOT NULL DEFAULT 0,
-  `params` text NOT NULL,
-  `language` char(7) NOT NULL DEFAULT '',
-  `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `created_by` int(10) unsigned NOT NULL DEFAULT 0,
-  `modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `modified_by` int(10) unsigned NOT NULL DEFAULT 0,
-  `access` int(11) NOT NULL DEFAULT 1,
-  PRIMARY KEY (`id`),
-  KEY `idx_checkout` (`checked_out`),
-  KEY `idx_state` (`state`),
-  KEY `idx_created_by` (`created_by`),
-  KEY `idx_access` (`access`),
-  KEY `idx_context` (`context`(191)),
-  KEY `idx_language` (`language`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `asset_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `context` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `note` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `state` tinyint(1) NOT NULL DEFAULT '0',
+  `checked_out` int(11) NOT NULL DEFAULT '0',
+  `checked_out_time` datetime NOT NULL,
+  `ordering` int(11) NOT NULL DEFAULT '0',
+  `params` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `language` char(7) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `created` datetime NOT NULL,
+  `created_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `modified` datetime NOT NULL,
+  `modified_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `access` int(11) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `idx_checkout` (`checked_out`) USING BTREE,
+  KEY `idx_state` (`state`) USING BTREE,
+  KEY `idx_created_by` (`created_by`) USING BTREE,
+  KEY `idx_access` (`access`) USING BTREE,
+  KEY `idx_language` (`language`) USING BTREE,
+  KEY `idx_context` (`context`(191))
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `#__fields_groups`
@@ -1786,13 +1783,14 @@ INSERT INTO `#__fields_groups` (`id`, `asset_id`, `context`, `title`, `note`, `d
 -- Estrutura da tabela `#__fields_values`
 --
 
+DROP TABLE IF EXISTS `#__fields_values`;
 CREATE TABLE IF NOT EXISTS `#__fields_values` (
-  `field_id` int(10) unsigned NOT NULL,
-  `item_id` varchar(255) NOT NULL COMMENT 'Allow references to items which have strings as ids, eg. none db systems.',
-  `value` text,
-  KEY `idx_field_id` (`field_id`),
+  `field_id` int(10) UNSIGNED NOT NULL,
+  `item_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Allow references to items which have strings as ids, eg. none db systems.',
+  `value` text COLLATE utf8mb4_unicode_ci,
+  KEY `idx_field_id` (`field_id`) USING BTREE,
   KEY `idx_item_id` (`item_id`(191))
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `#__fields_values`
@@ -1805,31 +1803,31 @@ INSERT INTO `#__fields_values` (`field_id`, `item_id`, `value`) VALUES
 (5, '72', '#FFFFFF'),
 (1, '72', 'gr'),
 (7, '74', 'saiba mais'),
-(2, '74', '/index.php/component/content/article/58-chamadas-em-destaque/74-nova-identidade-digital-de-governo?Itemid=101'),
+(2, '74', 'http://localhost/idg2019/index.php/component/content/article/58-chamadas-em-destaque/74-nova-identidade-digital-de-governo?Itemid=101'),
 (6, '74', 'botao'),
 (5, '74', '#3ab09e'),
 (1, '74', 'gr'),
 (3, '74', 'novidade'),
 (6, '75', 'geral'),
 (1, '75', 'gr'),
-(2, '76', ''),
+(2, '76', 'http://flaviodias.com/portalpadrao/'),
 (6, '76', 'titulo'),
 (1, '76', 'gr'),
 (9, '76', 'Acessibilidade'),
 (9, '77', 'Dicas'),
-(2, '77', ''),
+(2, '77', 'http://flaviodias.com/portalpadrao/'),
 (6, '77', 'titulo'),
 (1, '77', 'default'),
 (9, '78', 'Tendência'),
-(2, '78', ''),
+(2, '78', 'http://flaviodias.com/portalpadrao/'),
 (6, '78', 'titulo'),
 (1, '78', 'default'),
 (9, '79', 'Temas'),
-(2, '79', ''),
+(2, '79', 'http://flaviodias.com/portalpadrao/'),
 (6, '79', 'titulo'),
 (1, '79', 'default'),
 (9, '80', 'Temas'),
-(2, '80', ''),
+(2, '80', 'http://flaviodias.com/portalpadrao/'),
 (6, '80', 'titulo'),
 (1, '80', 'default'),
 (2, '75', 'globo.com'),
@@ -1875,34 +1873,24 @@ INSERT INTO `#__fields_values` (`field_id`, `item_id`, `value`) VALUES
 -- Estrutura da tabela `#__finder_filters`
 --
 
-CREATE TABLE IF NOT EXISTS `#__finder_links` (
-  `link_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `url` varchar(255) NOT NULL,
-  `route` varchar(255) NOT NULL,
-  `title` varchar(400) DEFAULT NULL,
-  `description` text,
-  `indexdate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `md5sum` varchar(32) DEFAULT NULL,
-  `published` tinyint(1) NOT NULL DEFAULT 1,
-  `state` int(5) DEFAULT 1,
-  `access` int(5) DEFAULT 0,
-  `language` varchar(8) NOT NULL,
-  `publish_start_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `publish_end_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `start_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `end_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `list_price` double unsigned NOT NULL DEFAULT 0,
-  `sale_price` double unsigned NOT NULL DEFAULT 0,
-  `type_id` int(11) NOT NULL,
-  `object` mediumblob NOT NULL,
-  PRIMARY KEY (`link_id`),
-  KEY `idx_type` (`type_id`),
-  KEY `idx_title` (`title`(100)),
-  KEY `idx_md5` (`md5sum`),
-  KEY `idx_url` (`url`(75)),
-  KEY `idx_published_list` (`published`,`state`,`access`,`publish_start_date`,`publish_end_date`,`list_price`),
-  KEY `idx_published_sale` (`published`,`state`,`access`,`publish_start_date`,`publish_end_date`,`sale_price`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
+DROP TABLE IF EXISTS `#__finder_filters`;
+CREATE TABLE IF NOT EXISTS `#__finder_filters` (
+  `filter_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `alias` varchar(255) NOT NULL,
+  `state` tinyint(1) NOT NULL DEFAULT '1',
+  `created` datetime NOT NULL,
+  `created_by` int(10) UNSIGNED NOT NULL,
+  `created_by_alias` varchar(255) NOT NULL,
+  `modified` datetime NOT NULL,
+  `modified_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `checked_out` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `checked_out_time` datetime NOT NULL,
+  `map_count` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `data` longtext NOT NULL,
+  `params` longtext,
+  PRIMARY KEY (`filter_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
@@ -1916,7 +1904,7 @@ CREATE TABLE IF NOT EXISTS `#__finder_links` (
   `url` varchar(255) NOT NULL,
   `route` varchar(255) NOT NULL,
   `title` varchar(400) DEFAULT NULL,
-  `description` text,
+  `description` mediumtext,
   `indexdate` datetime NOT NULL,
   `md5sum` varchar(32) DEFAULT NULL,
   `published` tinyint(1) NOT NULL DEFAULT '1',
@@ -1937,8 +1925,8 @@ CREATE TABLE IF NOT EXISTS `#__finder_links` (
   KEY `idx_url` (`url`(75)) USING BTREE,
   KEY `idx_published_list` (`published`,`state`,`access`,`publish_start_date`,`publish_end_date`,`list_price`) USING BTREE,
   KEY `idx_published_sale` (`published`,`state`,`access`,`publish_start_date`,`publish_end_date`,`sale_price`) USING BTREE,
-  KEY `idx_title` (`title`(100)) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  KEY `idx_title` (`title`(100))
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `#__finder_links`
@@ -1962,239 +1950,255 @@ INSERT INTO `#__finder_links` (`link_id`, `url`, `route`, `title`, `description`
 -- Estrutura da tabela `#__finder_links_terms0`
 --
 
+DROP TABLE IF EXISTS `#__finder_links_terms0`;
 CREATE TABLE IF NOT EXISTS `#__finder_links_terms0` (
-  `link_id` int(10) unsigned NOT NULL,
-  `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
+  `link_id` int(10) UNSIGNED NOT NULL,
+  `term_id` int(10) UNSIGNED NOT NULL,
+  `weight` float UNSIGNED NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
+  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `#__finder_links_terms1`
+-- Estrutura da tabela `#__finder_links_terms1`
 --
 
+DROP TABLE IF EXISTS `#__finder_links_terms1`;
 CREATE TABLE IF NOT EXISTS `#__finder_links_terms1` (
-  `link_id` int(10) unsigned NOT NULL,
-  `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
+  `link_id` int(10) UNSIGNED NOT NULL,
+  `term_id` int(10) UNSIGNED NOT NULL,
+  `weight` float UNSIGNED NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
+  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `#__finder_links_terms2`
+-- Estrutura da tabela `#__finder_links_terms2`
 --
 
+DROP TABLE IF EXISTS `#__finder_links_terms2`;
 CREATE TABLE IF NOT EXISTS `#__finder_links_terms2` (
-  `link_id` int(10) unsigned NOT NULL,
-  `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
+  `link_id` int(10) UNSIGNED NOT NULL,
+  `term_id` int(10) UNSIGNED NOT NULL,
+  `weight` float UNSIGNED NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
+  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `#__finder_links_terms3`
+-- Estrutura da tabela `#__finder_links_terms3`
 --
 
+DROP TABLE IF EXISTS `#__finder_links_terms3`;
 CREATE TABLE IF NOT EXISTS `#__finder_links_terms3` (
-  `link_id` int(10) unsigned NOT NULL,
-  `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
+  `link_id` int(10) UNSIGNED NOT NULL,
+  `term_id` int(10) UNSIGNED NOT NULL,
+  `weight` float UNSIGNED NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
+  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `#__finder_links_terms4`
+-- Estrutura da tabela `#__finder_links_terms4`
 --
 
+DROP TABLE IF EXISTS `#__finder_links_terms4`;
 CREATE TABLE IF NOT EXISTS `#__finder_links_terms4` (
-  `link_id` int(10) unsigned NOT NULL,
-  `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
+  `link_id` int(10) UNSIGNED NOT NULL,
+  `term_id` int(10) UNSIGNED NOT NULL,
+  `weight` float UNSIGNED NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
+  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `#__finder_links_terms5`
+-- Estrutura da tabela `#__finder_links_terms5`
 --
 
+DROP TABLE IF EXISTS `#__finder_links_terms5`;
 CREATE TABLE IF NOT EXISTS `#__finder_links_terms5` (
-  `link_id` int(10) unsigned NOT NULL,
-  `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
+  `link_id` int(10) UNSIGNED NOT NULL,
+  `term_id` int(10) UNSIGNED NOT NULL,
+  `weight` float UNSIGNED NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
+  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `#__finder_links_terms6`
+-- Estrutura da tabela `#__finder_links_terms6`
 --
 
+DROP TABLE IF EXISTS `#__finder_links_terms6`;
 CREATE TABLE IF NOT EXISTS `#__finder_links_terms6` (
-  `link_id` int(10) unsigned NOT NULL,
-  `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
+  `link_id` int(10) UNSIGNED NOT NULL,
+  `term_id` int(10) UNSIGNED NOT NULL,
+  `weight` float UNSIGNED NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
+  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `#__finder_links_terms7`
+-- Estrutura da tabela `#__finder_links_terms7`
 --
 
+DROP TABLE IF EXISTS `#__finder_links_terms7`;
 CREATE TABLE IF NOT EXISTS `#__finder_links_terms7` (
-  `link_id` int(10) unsigned NOT NULL,
-  `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
+  `link_id` int(10) UNSIGNED NOT NULL,
+  `term_id` int(10) UNSIGNED NOT NULL,
+  `weight` float UNSIGNED NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
+  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `#__finder_links_terms8`
+-- Estrutura da tabela `#__finder_links_terms8`
 --
 
+DROP TABLE IF EXISTS `#__finder_links_terms8`;
 CREATE TABLE IF NOT EXISTS `#__finder_links_terms8` (
-  `link_id` int(10) unsigned NOT NULL,
-  `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
+  `link_id` int(10) UNSIGNED NOT NULL,
+  `term_id` int(10) UNSIGNED NOT NULL,
+  `weight` float UNSIGNED NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
+  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `#__finder_links_terms9`
+-- Estrutura da tabela `#__finder_links_terms9`
 --
 
+DROP TABLE IF EXISTS `#__finder_links_terms9`;
 CREATE TABLE IF NOT EXISTS `#__finder_links_terms9` (
-  `link_id` int(10) unsigned NOT NULL,
-  `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
+  `link_id` int(10) UNSIGNED NOT NULL,
+  `term_id` int(10) UNSIGNED NOT NULL,
+  `weight` float UNSIGNED NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
+  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `#__finder_links_termsa`
+-- Estrutura da tabela `#__finder_links_termsa`
 --
 
+DROP TABLE IF EXISTS `#__finder_links_termsa`;
 CREATE TABLE IF NOT EXISTS `#__finder_links_termsa` (
-  `link_id` int(10) unsigned NOT NULL,
-  `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
+  `link_id` int(10) UNSIGNED NOT NULL,
+  `term_id` int(10) UNSIGNED NOT NULL,
+  `weight` float UNSIGNED NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
+  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `#__finder_links_termsb`
+-- Estrutura da tabela `#__finder_links_termsb`
 --
 
+DROP TABLE IF EXISTS `#__finder_links_termsb`;
 CREATE TABLE IF NOT EXISTS `#__finder_links_termsb` (
-  `link_id` int(10) unsigned NOT NULL,
-  `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
+  `link_id` int(10) UNSIGNED NOT NULL,
+  `term_id` int(10) UNSIGNED NOT NULL,
+  `weight` float UNSIGNED NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
+  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `#__finder_links_termsc`
+-- Estrutura da tabela `#__finder_links_termsc`
 --
 
+DROP TABLE IF EXISTS `#__finder_links_termsc`;
 CREATE TABLE IF NOT EXISTS `#__finder_links_termsc` (
-  `link_id` int(10) unsigned NOT NULL,
-  `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
+  `link_id` int(10) UNSIGNED NOT NULL,
+  `term_id` int(10) UNSIGNED NOT NULL,
+  `weight` float UNSIGNED NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
+  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `#__finder_links_termsd`
+-- Estrutura da tabela `#__finder_links_termsd`
 --
 
+DROP TABLE IF EXISTS `#__finder_links_termsd`;
 CREATE TABLE IF NOT EXISTS `#__finder_links_termsd` (
-  `link_id` int(10) unsigned NOT NULL,
-  `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
+  `link_id` int(10) UNSIGNED NOT NULL,
+  `term_id` int(10) UNSIGNED NOT NULL,
+  `weight` float UNSIGNED NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
+  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `#__finder_links_termse`
+-- Estrutura da tabela `#__finder_links_termse`
 --
 
+DROP TABLE IF EXISTS `#__finder_links_termse`;
 CREATE TABLE IF NOT EXISTS `#__finder_links_termse` (
-  `link_id` int(10) unsigned NOT NULL,
-  `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
+  `link_id` int(10) UNSIGNED NOT NULL,
+  `term_id` int(10) UNSIGNED NOT NULL,
+  `weight` float UNSIGNED NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
+  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `#__finder_links_termsf`
+-- Estrutura da tabela `#__finder_links_termsf`
 --
 
+DROP TABLE IF EXISTS `#__finder_links_termsf`;
 CREATE TABLE IF NOT EXISTS `#__finder_links_termsf` (
-  `link_id` int(10) unsigned NOT NULL,
-  `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
+  `link_id` int(10) UNSIGNED NOT NULL,
+  `term_id` int(10) UNSIGNED NOT NULL,
+  `weight` float UNSIGNED NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`) USING BTREE,
+  KEY `idx_term_weight` (`term_id`,`weight`) USING BTREE,
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
@@ -2202,20 +2206,21 @@ CREATE TABLE IF NOT EXISTS `#__finder_links_termsf` (
 -- Estrutura da tabela `#__finder_taxonomy`
 --
 
+DROP TABLE IF EXISTS `#__finder_taxonomy`;
 CREATE TABLE IF NOT EXISTS `#__finder_taxonomy` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `parent_id` int(10) unsigned NOT NULL DEFAULT 0,
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `parent_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `title` varchar(255) NOT NULL,
-  `state` tinyint(1) unsigned NOT NULL DEFAULT 1,
-  `access` tinyint(1) unsigned NOT NULL DEFAULT 0,
-  `ordering` tinyint(1) unsigned NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`),
-  KEY `parent_id` (`parent_id`),
-  KEY `state` (`state`),
-  KEY `ordering` (`ordering`),
-  KEY `access` (`access`),
-  KEY `idx_parent_published` (`parent_id`,`state`,`access`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
+  `state` tinyint(1) UNSIGNED NOT NULL DEFAULT '1',
+  `access` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `ordering` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `parent_id` (`parent_id`) USING BTREE,
+  KEY `state` (`state`) USING BTREE,
+  KEY `ordering` (`ordering`) USING BTREE,
+  KEY `access` (`access`) USING BTREE,
+  KEY `idx_parent_published` (`parent_id`,`state`,`access`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `#__finder_taxonomy`
@@ -2241,13 +2246,14 @@ INSERT INTO `#__finder_taxonomy` (`id`, `parent_id`, `title`, `state`, `access`,
 -- Estrutura da tabela `#__finder_taxonomy_map`
 --
 
+DROP TABLE IF EXISTS `#__finder_taxonomy_map`;
 CREATE TABLE IF NOT EXISTS `#__finder_taxonomy_map` (
-  `link_id` int(10) unsigned NOT NULL,
-  `node_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`node_id`),
-  KEY `link_id` (`link_id`),
-  KEY `node_id` (`node_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
+  `link_id` int(10) UNSIGNED NOT NULL,
+  `node_id` int(10) UNSIGNED NOT NULL,
+  PRIMARY KEY (`link_id`,`node_id`) USING BTREE,
+  KEY `link_id` (`link_id`) USING BTREE,
+  KEY `node_id` (`node_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `#__finder_taxonomy_map`
@@ -2293,22 +2299,23 @@ INSERT INTO `#__finder_taxonomy_map` (`link_id`, `node_id`) VALUES
 -- Estrutura da tabela `#__finder_terms`
 --
 
+DROP TABLE IF EXISTS `#__finder_terms`;
 CREATE TABLE IF NOT EXISTS `#__finder_terms` (
-  `term_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `term_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `term` varchar(75) NOT NULL,
   `stem` varchar(75) NOT NULL,
-  `common` tinyint(1) unsigned NOT NULL DEFAULT 0,
-  `phrase` tinyint(1) unsigned NOT NULL DEFAULT 0,
-  `weight` float unsigned NOT NULL DEFAULT 0,
+  `common` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `phrase` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `weight` float UNSIGNED NOT NULL DEFAULT '0',
   `soundex` varchar(75) NOT NULL,
-  `links` int(10) NOT NULL DEFAULT 0,
+  `links` int(10) NOT NULL DEFAULT '0',
   `language` char(3) NOT NULL DEFAULT '',
-  PRIMARY KEY (`term_id`),
-  UNIQUE KEY `idx_term` (`term`),
-  KEY `idx_term_phrase` (`term`,`phrase`),
-  KEY `idx_stem_phrase` (`stem`,`phrase`),
-  KEY `idx_soundex_phrase` (`soundex`,`phrase`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
+  PRIMARY KEY (`term_id`) USING BTREE,
+  UNIQUE KEY `idx_term` (`term`) USING BTREE,
+  KEY `idx_term_phrase` (`term`,`phrase`) USING BTREE,
+  KEY `idx_stem_phrase` (`stem`,`phrase`) USING BTREE,
+  KEY `idx_soundex_phrase` (`soundex`,`phrase`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
@@ -2316,12 +2323,13 @@ CREATE TABLE IF NOT EXISTS `#__finder_terms` (
 -- Estrutura da tabela `#__finder_terms_common`
 --
 
+DROP TABLE IF EXISTS `#__finder_terms_common`;
 CREATE TABLE IF NOT EXISTS `#__finder_terms_common` (
   `term` varchar(75) NOT NULL,
   `language` varchar(3) NOT NULL,
-  KEY `idx_word_lang` (`term`,`language`),
-  KEY `idx_lang` (`language`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
+  KEY `idx_word_lang` (`term`,`language`) USING BTREE,
+  KEY `idx_lang` (`language`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `#__finder_terms_common`
@@ -2339,7 +2347,7 @@ INSERT INTO `#__finder_terms_common` (`term`, `language`) VALUES
 ('ani', 'en'),
 ('any', 'en'),
 ('are', 'en'),
-('aren''t', 'en'),
+('aren\'t', 'en'),
 ('as', 'en'),
 ('at', 'en'),
 ('be', 'en'),
@@ -2354,7 +2362,7 @@ INSERT INTO `#__finder_terms_common` (`term`, `language`) VALUES
 ('in', 'en'),
 ('into', 'en'),
 ('is', 'en'),
-('isn''t', 'en'),
+('isn\'t', 'en'),
 ('it', 'en'),
 ('its', 'en'),
 ('me', 'en'),
@@ -2450,17 +2458,18 @@ INSERT INTO `#__finder_terms_common` (`term`, `language`) VALUES
 -- Estrutura da tabela `#__finder_tokens`
 --
 
+DROP TABLE IF EXISTS `#__finder_tokens`;
 CREATE TABLE IF NOT EXISTS `#__finder_tokens` (
   `term` varchar(75) NOT NULL,
   `stem` varchar(75) NOT NULL,
-  `common` tinyint(1) unsigned NOT NULL DEFAULT 0,
-  `phrase` tinyint(1) unsigned NOT NULL DEFAULT 0,
-  `weight` float unsigned NOT NULL DEFAULT 1,
-  `context` tinyint(1) unsigned NOT NULL DEFAULT 2,
+  `common` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `phrase` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `weight` float UNSIGNED NOT NULL DEFAULT '1',
+  `context` tinyint(1) UNSIGNED NOT NULL DEFAULT '2',
   `language` char(3) NOT NULL DEFAULT '',
-  KEY `idx_word` (`term`),
-  KEY `idx_context` (`context`)
-) ENGINE=MEMORY DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
+  KEY `idx_word` (`term`) USING HASH,
+  KEY `idx_context` (`context`) USING HASH
+) ENGINE=MEMORY DEFAULT CHARSET=utf8mb4 ROW_FORMAT=FIXED;
 
 -- --------------------------------------------------------
 
@@ -2468,21 +2477,22 @@ CREATE TABLE IF NOT EXISTS `#__finder_tokens` (
 -- Estrutura da tabela `#__finder_tokens_aggregate`
 --
 
+DROP TABLE IF EXISTS `#__finder_tokens_aggregate`;
 CREATE TABLE IF NOT EXISTS `#__finder_tokens_aggregate` (
-  `term_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) UNSIGNED NOT NULL,
   `map_suffix` char(1) NOT NULL,
   `term` varchar(75) NOT NULL,
   `stem` varchar(75) NOT NULL,
-  `common` tinyint(1) unsigned NOT NULL DEFAULT 0,
-  `phrase` tinyint(1) unsigned NOT NULL DEFAULT 0,
-  `term_weight` float unsigned NOT NULL,
-  `context` tinyint(1) unsigned NOT NULL DEFAULT 2,
-  `context_weight` float unsigned NOT NULL,
-  `total_weight` float unsigned NOT NULL,
+  `common` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `phrase` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `term_weight` float UNSIGNED NOT NULL,
+  `context` tinyint(1) UNSIGNED NOT NULL DEFAULT '2',
+  `context_weight` float UNSIGNED NOT NULL,
+  `total_weight` float UNSIGNED NOT NULL,
   `language` char(3) NOT NULL DEFAULT '',
-  KEY `token` (`term`),
-  KEY `keyword_id` (`term_id`)
-) ENGINE=MEMORY DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
+  KEY `token` (`term`) USING HASH,
+  KEY `keyword_id` (`term_id`) USING HASH
+) ENGINE=MEMORY DEFAULT CHARSET=utf8mb4 ROW_FORMAT=FIXED;
 
 -- --------------------------------------------------------
 
@@ -2490,13 +2500,14 @@ CREATE TABLE IF NOT EXISTS `#__finder_tokens_aggregate` (
 -- Estrutura da tabela `#__finder_types`
 --
 
+DROP TABLE IF EXISTS `#__finder_types`;
 CREATE TABLE IF NOT EXISTS `#__finder_types` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL,
   `mime` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `title` (`title`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_general_ci;
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE KEY `title` (`title`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `#__finder_types`
@@ -3198,27 +3209,28 @@ INSERT INTO `#__k2_user_groups` (`id`, `name`, `permissions`) VALUES
 -- Estrutura da tabela `#__languages`
 --
 
+DROP TABLE IF EXISTS `#__languages`;
 CREATE TABLE IF NOT EXISTS `#__languages` (
-  `lang_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `asset_id` int(10) unsigned NOT NULL DEFAULT 0,
+  `lang_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `asset_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `lang_code` char(7) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `title` varchar(50) NOT NULL,
-  `title_native` varchar(50) NOT NULL,
-  `sef` varchar(50) NOT NULL,
-  `image` varchar(50) NOT NULL,
-  `description` varchar(512) NOT NULL,
-  `metakey` text NOT NULL,
-  `metadesc` text NOT NULL,
-  `sitename` varchar(1024) NOT NULL DEFAULT '',
-  `published` int(11) NOT NULL DEFAULT 0,
-  `access` int(10) unsigned NOT NULL DEFAULT 0,
-  `ordering` int(11) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`lang_id`),
-  UNIQUE KEY `idx_sef` (`sef`),
-  UNIQUE KEY `idx_langcode` (`lang_code`),
-  KEY `idx_access` (`access`),
-  KEY `idx_ordering` (`ordering`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+  `title` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title_native` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sef` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(512) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `metakey` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `metadesc` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sitename` varchar(1024) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `published` int(11) NOT NULL DEFAULT '0',
+  `access` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `ordering` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`lang_id`) USING BTREE,
+  UNIQUE KEY `idx_sef` (`sef`) USING BTREE,
+  UNIQUE KEY `idx_langcode` (`lang_code`) USING BTREE,
+  KEY `idx_access` (`access`) USING BTREE,
+  KEY `idx_ordering` (`ordering`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `#__languages`
@@ -3233,41 +3245,41 @@ INSERT INTO `#__languages` (`lang_id`, `asset_id`, `lang_code`, `title`, `title_
 -- Estrutura da tabela `#__menu`
 --
 
+DROP TABLE IF EXISTS `#__menu`;
 CREATE TABLE IF NOT EXISTS `#__menu` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `menutype` varchar(24) NOT NULL COMMENT 'The type of menu this item belongs to. FK to #__menu_types.menutype',
-  `title` varchar(255) NOT NULL COMMENT 'The display title of the menu item.',
+  `menutype` varchar(24) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The type of menu this item belongs to. FK to x3dts_menu_types.menutype',
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The display title of the menu item.',
   `alias` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT 'The SEF alias of the menu item.',
-  `note` varchar(255) NOT NULL DEFAULT '',
-  `path` varchar(1024) NOT NULL COMMENT 'The computed path of the menu item based on the alias field.',
-  `link` varchar(1024) NOT NULL COMMENT 'The actually link the menu item refers to.',
-  `type` varchar(16) NOT NULL COMMENT 'The type of link: Component, URL, Alias, Separator',
-  `published` tinyint(4) NOT NULL DEFAULT 0 COMMENT 'The published state of the menu link.',
-  `parent_id` int(10) unsigned NOT NULL DEFAULT 1 COMMENT 'The parent menu item in the menu tree.',
-  `level` int(10) unsigned NOT NULL DEFAULT 0 COMMENT 'The relative level in the tree.',
-  `component_id` int(10) unsigned NOT NULL DEFAULT 0 COMMENT 'FK to #__extensions.id',
-  `checked_out` int(10) unsigned NOT NULL DEFAULT 0 COMMENT 'FK to #__users.id',
+  `note` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `path` varchar(1024) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The computed path of the menu item based on the alias field.',
+  `link` varchar(1024) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The actually link the menu item refers to.',
+  `type` varchar(16) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The type of link: Component, URL, Alias, Separator',
+  `published` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'The published state of the menu link.',
+  `parent_id` int(10) UNSIGNED NOT NULL DEFAULT '1' COMMENT 'The parent menu item in the menu tree.',
+  `level` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'The relative level in the tree.',
+  `component_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'FK to x3dts_extensions.id',
+  `checked_out` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'FK to x3dts_users.id',
   `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT 'The time the menu item was checked out.',
-  `browserNav` tinyint(4) NOT NULL DEFAULT 0 COMMENT 'The click behaviour of the link.',
-  `access` int(10) unsigned NOT NULL DEFAULT 0 COMMENT 'The access level required to view the menu item.',
-  `img` varchar(255) NOT NULL COMMENT 'The image of the menu item.',
-  `template_style_id` int(10) unsigned NOT NULL DEFAULT 0,
-  `params` text NOT NULL COMMENT 'JSON encoded data for the menu item.',
-  `lft` int(11) NOT NULL DEFAULT 0 COMMENT 'Nested set lft.',
-  `rgt` int(11) NOT NULL DEFAULT 0 COMMENT 'Nested set rgt.',
-  `home` tinyint(3) unsigned NOT NULL DEFAULT 0 COMMENT 'Indicates if this menu item is the home or default page.',
-  `language` char(7) NOT NULL DEFAULT '',
-  `client_id` tinyint(4) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`),
+  `browserNav` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'The click behaviour of the link.',
+  `access` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'The access level required to view the menu item.',
+  `img` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The image of the menu item.',
+  `template_style_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `params` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'JSON encoded data for the menu item.',
+  `lft` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set lft.',
+  `rgt` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set rgt.',
+  `home` tinyint(3) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Indicates if this menu item is the home or default page.',
+  `language` char(7) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `client_id` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `idx_client_id_parent_id_alias_language` (`client_id`,`parent_id`,`alias`(100),`language`),
-  KEY `idx_componentid` (`component_id`,`menutype`,`published`,`access`),
-  KEY `idx_menutype` (`menutype`),
-  KEY `idx_left_right` (`lft`,`rgt`),
+  KEY `idx_componentid` (`component_id`,`menutype`,`published`,`access`) USING BTREE,
+  KEY `idx_menutype` (`menutype`) USING BTREE,
+  KEY `idx_left_right` (`lft`,`rgt`) USING BTREE,
+  KEY `idx_language` (`language`) USING BTREE,
   KEY `idx_alias` (`alias`(100)),
-  KEY `idx_path` (`path`(100)),
-  KEY `idx_language` (`language`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=102;
-
+  KEY `idx_path` (`path`(100))
+) ENGINE=InnoDB AUTO_INCREMENT=417 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `#__menu`
@@ -3364,7 +3376,7 @@ INSERT INTO `#__menu` (`id`, `menutype`, `title`, `alias`, `note`, `path`, `link
 INSERT INTO `#__menu` (`id`, `menutype`, `title`, `alias`, `note`, `path`, `link`, `type`, `published`, `parent_id`, `level`, `component_id`, `checked_out`, `checked_out_time`, `browserNav`, `access`, `img`, `template_style_id`, `params`, `lft`, `rgt`, `home`, `language`, `client_id`) VALUES
 (175, 'sobre-o-site', 'English version - Versão em Inglês', '2013-10-27-18-13-5', '', '2013-10-27-18-13-5', 'index.php?Itemid=', 'alias', 1, 1, 1, 0, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{\"aliasoptions\":\"143\",\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_text\":1}', 243, 244, 0, '*', 0),
 (178, 'mainmenu', 'Galeria de imagens', 'galeria-de-imagens', '', 'galeria-de-imagens', 'index.php?option=com_content&view=category&layout=blog&id=36', 'component', 1, 1, 1, 22, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{\"layout_type\":\"blog\",\"show_category_heading_title_text\":\"\",\"show_category_title\":\"\",\"show_description\":\"\",\"show_description_image\":\"\",\"maxLevel\":\"2\",\"show_empty_categories\":\"\",\"show_no_articles\":\"\",\"show_subcat_desc\":\"1\",\"show_cat_num_articles\":\"\",\"page_subheading\":\"\",\"num_leading_articles\":\"2\",\"num_intro_articles\":\"3\",\"num_columns\":\"1\",\"num_links\":\"3\",\"multi_column_order\":\"\",\"show_subcategory_content\":\"2\",\"orderby_pri\":\"\",\"orderby_sec\":\"\",\"order_date\":\"\",\"show_pagination\":\"\",\"show_pagination_results\":\"\",\"show_title\":\"\",\"link_titles\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_vote\":\"\",\"show_readmore\":\"\",\"show_readmore_title\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"show_feed_link\":\"\",\"feed_summary\":\"\",\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_text\":1,\"page_title\":\"\",\"show_page_heading\":0,\"page_heading\":\"\",\"pageclass_sfx\":\"\",\"menu-meta_description\":\"\",\"menu-meta_keywords\":\"\",\"robots\":\"\",\"secure\":0}', 245, 246, 0, '*', 0),
-(179, 'main', 'com_postinstall', 'Post-installation messages', '', 'Post-installation messages', 'index.php?option=com_postinstall', 'component', 1, 1, 1, 32, 0, '0000-00-00 00:00:00', 0, 1, 'class:postinstall', 0, '', 0, 0, 0, '*', 1),
+(179, 'main', 'com_postinstall', 'Post-installation messages', '', 'Post-installation messages', 'index.php?option=com_postinstall', 'component', 1, 1, 1, 32, 0, '0000-00-00 00:00:00', 0, 1, 'class:postinstall', 0, '', 135, 136, 0, '*', 1),
 (180, 'main', 'Blank Component', 'blank-component', '', 'blank-component', 'index.php?option=com_blankcomponent', 'component', 1, 1, 1, 10024, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '', 247, 248, 0, '', 1),
 (181, 'mainmenu', 'Busca', 'busca', '', 'busca', 'index.php?option=com_search&view=search', 'component', 1, 1, 1, 19, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{\"search_areas\":\"\",\"show_date\":\"\",\"searchphrase\":\"0\",\"ordering\":\"newest\",\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_text\":1,\"page_title\":\"\",\"show_page_heading\":0,\"page_heading\":\"\",\"pageclass_sfx\":\"\",\"menu-meta_description\":\"\",\"menu-meta_keywords\":\"\",\"robots\":\"\",\"secure\":0}', 249, 250, 0, '*', 0),
 (182, 'servicos', 'Formulário para contato', 'formulario-de-contato', '', 'contato/formulario-de-contato', 'index.php?option=com_contact&view=contact&id=1', 'component', 0, 132, 2, 8, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{\"presentation_style\":\"\",\"show_contact_category\":\"\",\"show_contact_list\":\"\",\"show_tags\":\"\",\"show_name\":\"\",\"show_position\":\"\",\"show_email\":\"\",\"show_street_address\":\"\",\"show_suburb\":\"\",\"show_state\":\"\",\"show_postcode\":\"\",\"show_country\":\"\",\"show_telephone\":\"\",\"show_mobile\":\"\",\"show_fax\":\"\",\"show_webpage\":\"\",\"show_misc\":\"\",\"show_image\":\"\",\"allow_vcard\":\"\",\"show_articles\":\"\",\"show_links\":\"\",\"linka_name\":\"\",\"linkb_name\":\"\",\"linkc_name\":\"\",\"linkd_name\":\"\",\"linke_name\":\"\",\"show_email_form\":\"\",\"show_email_copy\":\"\",\"banned_email\":\"\",\"banned_subject\":\"\",\"banned_text\":\"\",\"validate_session\":\"\",\"custom_reply\":\"\",\"redirect\":\"\",\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_text\":1,\"page_title\":\"\",\"show_page_heading\":1,\"page_heading\":\"\",\"pageclass_sfx\":\"\",\"menu-meta_description\":\"\",\"menu-meta_keywords\":\"\",\"robots\":\"\",\"secure\":0}', 20, 21, 0, '*', 0),
@@ -3442,53 +3454,53 @@ INSERT INTO `#__menu` (`id`, `menutype`, `title`, `alias`, `note`, `path`, `link
 (362, 'setores', 'Cargos e Responsáveis', 'cargos-e-responsaveis-proad', '', 'proad/cargos-e-responsaveis-proad', 'index.php?option=com_content&view=article&id=99', 'component', 1, 320, 2, 22, 0, '0000-00-00 00:00:00', 0, 1, ' ', 0, '{\"show_title\":\"\",\"link_titles\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"info_block_show_title\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_associations\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_vote\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_hits\":\"\",\"show_tags\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_image_css\":\"\",\"menu_text\":1,\"menu_show\":1,\"page_title\":\"\",\"show_page_heading\":\"\",\"page_heading\":\"\",\"pageclass_sfx\":\"\",\"menu-meta_description\":\"\",\"menu-meta_keywords\":\"\",\"robots\":\"\",\"secure\":0}', 312, 313, 0, '*', 0),
 (363, 'setores', 'Superintendência de Regulação e Registros Acadêmicos - SURRAC', 'surrac', '', 'surrac', 'index.php?option=com_content&view=article&id=100', 'component', 1, 1, 1, 22, 0, '0000-00-00 00:00:00', 0, 1, ' ', 0, '{\"show_title\":\"\",\"link_titles\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"info_block_show_title\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_associations\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_vote\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_hits\":\"\",\"show_tags\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_image_css\":\"\",\"menu_text\":1,\"menu_show\":1,\"page_title\":\"\",\"show_page_heading\":\"\",\"page_heading\":\"\",\"pageclass_sfx\":\"\",\"menu-meta_description\":\"\",\"menu-meta_keywords\":\"\",\"robots\":\"\",\"secure\":0}', 327, 330, 0, '*', 0),
 (364, 'setores', 'Cargos e Responsáveis', 'cargos-e-responsaveis-surrac', '', 'surrac/cargos-e-responsaveis-surrac', 'index.php?option=com_content&view=article&id=101', 'component', 1, 363, 2, 22, 0, '0000-00-00 00:00:00', 0, 1, ' ', 0, '{\"show_title\":\"\",\"link_titles\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"info_block_show_title\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_associations\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_vote\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_hits\":\"\",\"show_tags\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"menu-anchor_title\":\"\",\"menu-anchor_css\":\"\",\"menu_image\":\"\",\"menu_image_css\":\"\",\"menu_text\":1,\"menu_show\":1,\"page_title\":\"\",\"show_page_heading\":\"\",\"page_heading\":\"\",\"pageclass_sfx\":\"\",\"menu-meta_description\":\"\",\"menu-meta_keywords\":\"\",\"robots\":\"\",\"secure\":0}', 328, 329, 0, '*', 0),
-(365, 'main', 'COM_JCE', 'com-jce', '', 'com-jce', 'index.php?option=com_jce&view=cpanel', 'component', 1, 1, 1, 10132, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_jce/media/img/menu/logo.png', 0, '{}', 331, 340, 0, '', 1),
-(366, 'main', 'COM_JCE_MENU_CPANEL', 'com-jce-menu-cpanel', '', 'com-jce/com-jce-menu-cpanel', 'index.php?option=com_jce', 'component', 1, 365, 2, 10132, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '{}', 332, 333, 0, '', 1),
-(367, 'main', 'COM_JCE_MENU_CONFIG', 'com-jce-menu-config', '', 'com-jce/com-jce-menu-config', 'index.php?option=com_jce&view=config', 'component', 1, 365, 2, 10132, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '{}', 334, 335, 0, '', 1),
-(368, 'main', 'COM_JCE_MENU_PROFILES', 'com-jce-menu-profiles', '', 'com-jce/com-jce-menu-profiles', 'index.php?option=com_jce&view=profiles', 'component', 1, 365, 2, 10132, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '{}', 336, 337, 0, '', 1),
-(369, 'main', 'COM_JCE_MENU_FILEBROWSER', 'com-jce-menu-filebrowser', '', 'com-jce/com-jce-menu-filebrowser', 'index.php?option=com_jce&view=browser', 'component', 1, 365, 2, 10132, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '{}', 338, 339, 0, '', 1),
-(370, 'main', 'COM_K2', 'com-k2', '', 'com-k2', 'index.php?option=com_k2&view=items', 'component', 1, 1, 1, 10035, 0, '0000-00-00 00:00:00', 0, 1, '../media/k2/assets/images/backend/k2_logo_16x16.png', 0, '{}', 341, 362, 0, '', 1),
-(371, 'main', 'K2_ITEMS', 'k2-items', '', 'com-k2/k2-items', 'index.php?option=com_k2&view=items', 'component', 1, 370, 2, 10035, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '{}', 342, 343, 0, '', 1),
-(372, 'main', 'K2_CATEGORIES', 'k2-categories', '', 'com-k2/k2-categories', 'index.php?option=com_k2&view=categories', 'component', 1, 370, 2, 10035, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '{}', 344, 345, 0, '', 1),
-(373, 'main', 'K2_TAGS', 'k2-tags', '', 'com-k2/k2-tags', 'index.php?option=com_k2&view=tags', 'component', 1, 370, 2, 10035, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '{}', 346, 347, 0, '', 1),
-(374, 'main', 'K2_COMMENTS', 'k2-comments', '', 'com-k2/k2-comments', 'index.php?option=com_k2&view=comments', 'component', 1, 370, 2, 10035, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '{}', 348, 349, 0, '', 1),
-(375, 'main', 'K2_USERS', 'k2-users', '', 'com-k2/k2-users', 'index.php?option=com_k2&view=users', 'component', 1, 370, 2, 10035, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '{}', 350, 351, 0, '', 1),
-(376, 'main', 'K2_USER_GROUPS', 'k2-user-groups', '', 'com-k2/k2-user-groups', 'index.php?option=com_k2&view=usergroups', 'component', 1, 370, 2, 10035, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '{}', 352, 353, 0, '', 1),
-(377, 'main', 'K2_EXTRA_FIELDS', 'k2-extra-fields', '', 'com-k2/k2-extra-fields', 'index.php?option=com_k2&view=extrafields', 'component', 1, 370, 2, 10035, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '{}', 354, 355, 0, '', 1),
-(378, 'main', 'K2_EXTRA_FIELD_GROUPS', 'k2-extra-field-groups', '', 'com-k2/k2-extra-field-groups', 'index.php?option=com_k2&view=extrafieldsgroups', 'component', 1, 370, 2, 10035, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '{}', 356, 357, 0, '', 1),
-(379, 'main', 'K2_MEDIA_MANAGER', 'k2-media-manager', '', 'com-k2/k2-media-manager', 'index.php?option=com_k2&view=media', 'component', 1, 370, 2, 10035, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '{}', 358, 359, 0, '', 1),
-(380, 'main', 'K2_INFORMATION', 'k2-information', '', 'com-k2/k2-information', 'index.php?option=com_k2&view=info', 'component', 1, 370, 2, 10035, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '{}', 360, 361, 0, '', 1),
-(381, 'main', 'com_j2xml', 'com-j2xml', '', 'com-j2xml', 'index.php?option=com_j2xml', 'component', 1, 1, 1, 10144, 0, '0000-00-00 00:00:00', 0, 1, 'class:j2xml', 0, '{}', 363, 368, 0, '', 1),
-(382, 'main', 'com_j2xml_menu_cpanel', 'com-j2xml-menu-cpanel', '', 'com-j2xml/com-j2xml-menu-cpanel', 'index.php?option=com_j2xml&view=cpanel', 'component', 1, 381, 2, 10144, 0, '0000-00-00 00:00:00', 0, 1, 'class:cpanel', 0, '{}', 364, 365, 0, '', 1),
-(383, 'main', 'com_j2xml_menu_websites', 'com-j2xml-menu-websites', '', 'com-j2xml/com-j2xml-menu-websites', 'index.php?option=com_j2xml&view=websites', 'component', 1, 381, 2, 10144, 0, '0000-00-00 00:00:00', 0, 1, 'class:websites', 0, '{}', 366, 367, 0, '', 1),
-(384, 'main', 'COM_PHOCADOWNLOAD', 'com-phocadownload', '', 'com-phocadownload', 'index.php?option=com_phocadownload', 'component', 1, 1, 1, 10176, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocadownload/images/administrator/icon-16-pdl-menu.png', 0, '{}', 369, 396, 0, '', 1),
-(385, 'main', 'COM_PHOCADOWNLOAD_CONTROLPANEL', 'com-phocadownload-controlpanel', '', 'com-phocadownload/com-phocadownload-controlpanel', 'index.php?option=com_phocadownload', 'component', 1, 384, 2, 10176, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocadownload/images/administrator/icon-16-pdl-control-panel.png', 0, '{}', 370, 371, 0, '', 1),
-(386, 'main', 'COM_PHOCADOWNLOAD_FILES', 'com-phocadownload-files', '', 'com-phocadownload/com-phocadownload-files', 'index.php?option=com_phocadownload&view=phocadownloadfiles', 'component', 1, 384, 2, 10176, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocadownload/images/administrator/icon-16-pdl-menu-files.png', 0, '{}', 372, 373, 0, '', 1),
-(387, 'main', 'COM_PHOCADOWNLOAD_CATEGORIES', 'com-phocadownload-categories', '', 'com-phocadownload/com-phocadownload-categories', 'index.php?option=com_phocadownload&view=phocadownloadcats', 'component', 1, 384, 2, 10176, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocadownload/images/administrator/icon-16-pdl-menu-category.png', 0, '{}', 374, 375, 0, '', 1),
-(388, 'main', 'COM_PHOCADOWNLOAD_LICENSES', 'com-phocadownload-licenses', '', 'com-phocadownload/com-phocadownload-licenses', 'index.php?option=com_phocadownload&view=phocadownloadlics', 'component', 1, 384, 2, 10176, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocadownload/images/administrator/icon-16-pdl-menu-lic.png', 0, '{}', 376, 377, 0, '', 1),
-(389, 'main', 'COM_PHOCADOWNLOAD_STATISTICS', 'com-phocadownload-statistics', '', 'com-phocadownload/com-phocadownload-statistics', 'index.php?option=com_phocadownload&view=phocadownloadstat', 'component', 1, 384, 2, 10176, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocadownload/images/administrator/icon-16-pdl-menu-stat.png', 0, '{}', 378, 379, 0, '', 1),
-(390, 'main', 'COM_PHOCADOWNLOAD_DOWNLOADS', 'com-phocadownload-downloads', '', 'com-phocadownload/com-phocadownload-downloads', 'index.php?option=com_phocadownload&view=phocadownloaddownloads', 'component', 1, 384, 2, 10176, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocadownload/images/administrator/icon-16-pdl-menu-downloads.png', 0, '{}', 380, 381, 0, '', 1),
-(391, 'main', 'COM_PHOCADOWNLOAD_UPLOADS', 'com-phocadownload-uploads', '', 'com-phocadownload/com-phocadownload-uploads', 'index.php?option=com_phocadownload&view=phocadownloaduploads', 'component', 1, 384, 2, 10176, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocadownload/images/administrator/icon-16-pdl-menu-uploads.png', 0, '{}', 382, 383, 0, '', 1),
-(392, 'main', 'COM_PHOCADOWNLOAD_FILE_RATING', 'com-phocadownload-file-rating', '', 'com-phocadownload/com-phocadownload-file-rating', 'index.php?option=com_phocadownload&view=phocadownloadrafile', 'component', 1, 384, 2, 10176, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocadownload/images/administrator/icon-16-pdl-menu-vote-file.png', 0, '{}', 384, 385, 0, '', 1),
-(393, 'main', 'COM_PHOCADOWNLOAD_TAGS', 'com-phocadownload-tags', '', 'com-phocadownload/com-phocadownload-tags', 'index.php?option=com_phocadownload&view=phocadownloadtags', 'component', 1, 384, 2, 10176, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocadownload/images/administrator/icon-16-pdl-menu-tags.png', 0, '{}', 386, 387, 0, '', 1),
-(394, 'main', 'COM_PHOCADOWNLOAD_LAYOUT', 'com-phocadownload-layout', '', 'com-phocadownload/com-phocadownload-layout', 'index.php?option=com_phocadownload&view=phocadownloadlayouts', 'component', 1, 384, 2, 10176, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocadownload/images/administrator/icon-16-pdl-menu-layout.png', 0, '{}', 388, 389, 0, '', 1),
-(395, 'main', 'COM_PHOCADOWNLOAD_STYLES', 'com-phocadownload-styles', '', 'com-phocadownload/com-phocadownload-styles', 'index.php?option=com_phocadownload&view=phocadownloadstyles', 'component', 1, 384, 2, 10176, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocadownload/images/administrator/icon-16-pdl-menu-style.png', 0, '{}', 390, 391, 0, '', 1),
-(396, 'main', 'COM_PHOCADOWNLOAD_LOGGING', 'com-phocadownload-logging', '', 'com-phocadownload/com-phocadownload-logging', 'index.php?option=com_phocadownload&view=phocadownloadlogs', 'component', 1, 384, 2, 10176, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocadownload/images/administrator/icon-16-pdl-menu-logs.png', 0, '{}', 392, 393, 0, '', 1),
-(397, 'main', 'COM_PHOCADOWNLOAD_INFO', 'com-phocadownload-info', '', 'com-phocadownload/com-phocadownload-info', 'index.php?option=com_phocadownload&view=phocadownloadinfo', 'component', 1, 384, 2, 10176, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocadownload/images/administrator/icon-16-pdl-menu-info.png', 0, '{}', 394, 395, 0, '', 1),
-(398, 'main', 'COM_JEVENTS_MENU', 'com-jevents-menu', '', 'com-jevents-menu', 'index.php?option=com_jevents', 'component', 1, 1, 1, 10177, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '{}', 397, 398, 0, '', 1),
-(399, 'main', 'COM_PHOCAGALLERY', 'com-phocagallery', '', 'com-phocagallery', 'index.php?option=com_phocagallery', 'component', 1, 1, 1, 10034, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocagallery/images/administrator/icon-16-pg-menu.png', 0, '{}', 399, 424, 0, '', 1),
-(400, 'main', 'COM_PHOCAGALLERY_CONTROLPANEL', 'com-phocagallery-controlpanel', '', 'com-phocagallery/com-phocagallery-controlpanel', 'index.php?option=com_phocagallery', 'component', 1, 399, 2, 10034, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocagallery/images/administrator/icon-16-pg-control-panel.png', 0, '{}', 400, 401, 0, '', 1),
-(401, 'main', 'COM_PHOCAGALLERY_IMAGES', 'com-phocagallery-images', '', 'com-phocagallery/com-phocagallery-images', 'index.php?option=com_phocagallery&view=phocagalleryimgs', 'component', 1, 399, 2, 10034, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocagallery/images/administrator/icon-16-pg-menu-gal.png', 0, '{}', 402, 403, 0, '', 1),
-(402, 'main', 'COM_PHOCAGALLERY_CATEGORIES', 'com-phocagallery-categories', '', 'com-phocagallery/com-phocagallery-categories', 'index.php?option=com_phocagallery&view=phocagallerycs', 'component', 1, 399, 2, 10034, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocagallery/images/administrator/icon-16-pg-menu-cat.png', 0, '{}', 404, 405, 0, '', 1),
-(403, 'main', 'COM_PHOCAGALLERY_THEMES', 'com-phocagallery-themes', '', 'com-phocagallery/com-phocagallery-themes', 'index.php?option=com_phocagallery&view=phocagalleryt', 'component', 1, 399, 2, 10034, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocagallery/images/administrator/icon-16-pg-menu-theme.png', 0, '{}', 406, 407, 0, '', 1),
-(404, 'main', 'COM_PHOCAGALLERY_CATEGORYRATING', 'com-phocagallery-categoryrating', '', 'com-phocagallery/com-phocagallery-categoryrating', 'index.php?option=com_phocagallery&view=phocagalleryra', 'component', 1, 399, 2, 10034, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocagallery/images/administrator/icon-16-pg-menu-vote.png', 0, '{}', 408, 409, 0, '', 1),
-(405, 'main', 'COM_PHOCAGALLERY_IMAGERATING', 'com-phocagallery-imagerating', '', 'com-phocagallery/com-phocagallery-imagerating', 'index.php?option=com_phocagallery&view=phocagalleryraimg', 'component', 1, 399, 2, 10034, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocagallery/images/administrator/icon-16-pg-menu-vote-img.png', 0, '{}', 410, 411, 0, '', 1),
-(406, 'main', 'COM_PHOCAGALLERY_CATEGORYCOMMENTS', 'com-phocagallery-categorycomments', '', 'com-phocagallery/com-phocagallery-categorycomments', 'index.php?option=com_phocagallery&view=phocagallerycos', 'component', 1, 399, 2, 10034, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocagallery/images/administrator/icon-16-pg-menu-comment.png', 0, '{}', 412, 413, 0, '', 1),
-(407, 'main', 'COM_PHOCAGALLERY_IMAGECOMMENTS', 'com-phocagallery-imagecomments', '', 'com-phocagallery/com-phocagallery-imagecomments', 'index.php?option=com_phocagallery&view=phocagallerycoimgs', 'component', 1, 399, 2, 10034, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocagallery/images/administrator/icon-16-pg-menu-comment-img.png', 0, '{}', 414, 415, 0, '', 1),
-(408, 'main', 'COM_PHOCAGALLERY_USERS', 'com-phocagallery-users', '', 'com-phocagallery/com-phocagallery-users', 'index.php?option=com_phocagallery&view=phocagalleryusers', 'component', 1, 399, 2, 10034, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocagallery/images/administrator/icon-16-pg-menu-users.png', 0, '{}', 416, 417, 0, '', 1),
-(409, 'main', 'COM_PHOCAGALLERY_TAGS', 'com-phocagallery-tags', '', 'com-phocagallery/com-phocagallery-tags', 'index.php?option=com_phocagallery&view=phocagallerytags', 'component', 1, 399, 2, 10034, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocagallery/images/administrator/icon-16-pg-menu-tags.png', 0, '{}', 418, 419, 0, '', 1),
-(410, 'main', 'COM_PHOCAGALLERY_STYLES', 'com-phocagallery-styles', '', 'com-phocagallery/com-phocagallery-styles', 'index.php?option=com_phocagallery&view=phocagalleryefs', 'component', 1, 399, 2, 10034, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocagallery/images/administrator/icon-16-pg-menu-styles.png', 0, '{}', 420, 421, 0, '', 1),
-(411, 'main', 'COM_PHOCAGALLERY_INFO', 'com-phocagallery-info', '', 'com-phocagallery/com-phocagallery-info', 'index.php?option=com_phocagallery&view=phocagalleryin', 'component', 1, 399, 2, 10034, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocagallery/images/administrator/icon-16-pg-menu-info.png', 0, '{}', 422, 423, 0, '', 1);
+(370, 'main', 'COM_K2', 'com-k2', '', 'com-k2', 'index.php?option=com_k2&view=items', 'component', 1, 1, 1, 10035, 0, '0000-00-00 00:00:00', 0, 1, '../media/k2/assets/images/backend/k2_logo_16x16.png', 0, '{}', 331, 352, 0, '', 1),
+(371, 'main', 'K2_ITEMS', 'k2-items', '', 'com-k2/k2-items', 'index.php?option=com_k2&view=items', 'component', 1, 370, 2, 10035, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '{}', 332, 333, 0, '', 1),
+(372, 'main', 'K2_CATEGORIES', 'k2-categories', '', 'com-k2/k2-categories', 'index.php?option=com_k2&view=categories', 'component', 1, 370, 2, 10035, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '{}', 334, 335, 0, '', 1),
+(373, 'main', 'K2_TAGS', 'k2-tags', '', 'com-k2/k2-tags', 'index.php?option=com_k2&view=tags', 'component', 1, 370, 2, 10035, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '{}', 336, 337, 0, '', 1),
+(374, 'main', 'K2_COMMENTS', 'k2-comments', '', 'com-k2/k2-comments', 'index.php?option=com_k2&view=comments', 'component', 1, 370, 2, 10035, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '{}', 338, 339, 0, '', 1),
+(375, 'main', 'K2_USERS', 'k2-users', '', 'com-k2/k2-users', 'index.php?option=com_k2&view=users', 'component', 1, 370, 2, 10035, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '{}', 340, 341, 0, '', 1),
+(376, 'main', 'K2_USER_GROUPS', 'k2-user-groups', '', 'com-k2/k2-user-groups', 'index.php?option=com_k2&view=usergroups', 'component', 1, 370, 2, 10035, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '{}', 342, 343, 0, '', 1),
+(377, 'main', 'K2_EXTRA_FIELDS', 'k2-extra-fields', '', 'com-k2/k2-extra-fields', 'index.php?option=com_k2&view=extrafields', 'component', 1, 370, 2, 10035, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '{}', 344, 345, 0, '', 1),
+(378, 'main', 'K2_EXTRA_FIELD_GROUPS', 'k2-extra-field-groups', '', 'com-k2/k2-extra-field-groups', 'index.php?option=com_k2&view=extrafieldsgroups', 'component', 1, 370, 2, 10035, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '{}', 346, 347, 0, '', 1),
+(379, 'main', 'K2_MEDIA_MANAGER', 'k2-media-manager', '', 'com-k2/k2-media-manager', 'index.php?option=com_k2&view=media', 'component', 1, 370, 2, 10035, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '{}', 348, 349, 0, '', 1),
+(380, 'main', 'K2_INFORMATION', 'k2-information', '', 'com-k2/k2-information', 'index.php?option=com_k2&view=info', 'component', 1, 370, 2, 10035, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '{}', 350, 351, 0, '', 1),
+(381, 'main', 'com_j2xml', 'com-j2xml', '', 'com-j2xml', 'index.php?option=com_j2xml', 'component', 1, 1, 1, 10144, 0, '0000-00-00 00:00:00', 0, 1, 'class:j2xml', 0, '{}', 353, 358, 0, '', 1),
+(382, 'main', 'com_j2xml_menu_cpanel', 'com-j2xml-menu-cpanel', '', 'com-j2xml/com-j2xml-menu-cpanel', 'index.php?option=com_j2xml&view=cpanel', 'component', 1, 381, 2, 10144, 0, '0000-00-00 00:00:00', 0, 1, 'class:cpanel', 0, '{}', 354, 355, 0, '', 1),
+(383, 'main', 'com_j2xml_menu_websites', 'com-j2xml-menu-websites', '', 'com-j2xml/com-j2xml-menu-websites', 'index.php?option=com_j2xml&view=websites', 'component', 1, 381, 2, 10144, 0, '0000-00-00 00:00:00', 0, 1, 'class:websites', 0, '{}', 356, 357, 0, '', 1),
+(384, 'main', 'COM_PHOCADOWNLOAD', 'com-phocadownload', '', 'com-phocadownload', 'index.php?option=com_phocadownload', 'component', 1, 1, 1, 10176, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocadownload/images/administrator/icon-16-pdl-menu.png', 0, '{}', 359, 386, 0, '', 1),
+(385, 'main', 'COM_PHOCADOWNLOAD_CONTROLPANEL', 'com-phocadownload-controlpanel', '', 'com-phocadownload/com-phocadownload-controlpanel', 'index.php?option=com_phocadownload', 'component', 1, 384, 2, 10176, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocadownload/images/administrator/icon-16-pdl-control-panel.png', 0, '{}', 360, 361, 0, '', 1),
+(386, 'main', 'COM_PHOCADOWNLOAD_FILES', 'com-phocadownload-files', '', 'com-phocadownload/com-phocadownload-files', 'index.php?option=com_phocadownload&view=phocadownloadfiles', 'component', 1, 384, 2, 10176, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocadownload/images/administrator/icon-16-pdl-menu-files.png', 0, '{}', 362, 363, 0, '', 1),
+(387, 'main', 'COM_PHOCADOWNLOAD_CATEGORIES', 'com-phocadownload-categories', '', 'com-phocadownload/com-phocadownload-categories', 'index.php?option=com_phocadownload&view=phocadownloadcats', 'component', 1, 384, 2, 10176, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocadownload/images/administrator/icon-16-pdl-menu-category.png', 0, '{}', 364, 365, 0, '', 1),
+(388, 'main', 'COM_PHOCADOWNLOAD_LICENSES', 'com-phocadownload-licenses', '', 'com-phocadownload/com-phocadownload-licenses', 'index.php?option=com_phocadownload&view=phocadownloadlics', 'component', 1, 384, 2, 10176, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocadownload/images/administrator/icon-16-pdl-menu-lic.png', 0, '{}', 366, 367, 0, '', 1),
+(389, 'main', 'COM_PHOCADOWNLOAD_STATISTICS', 'com-phocadownload-statistics', '', 'com-phocadownload/com-phocadownload-statistics', 'index.php?option=com_phocadownload&view=phocadownloadstat', 'component', 1, 384, 2, 10176, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocadownload/images/administrator/icon-16-pdl-menu-stat.png', 0, '{}', 368, 369, 0, '', 1),
+(390, 'main', 'COM_PHOCADOWNLOAD_DOWNLOADS', 'com-phocadownload-downloads', '', 'com-phocadownload/com-phocadownload-downloads', 'index.php?option=com_phocadownload&view=phocadownloaddownloads', 'component', 1, 384, 2, 10176, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocadownload/images/administrator/icon-16-pdl-menu-downloads.png', 0, '{}', 370, 371, 0, '', 1),
+(391, 'main', 'COM_PHOCADOWNLOAD_UPLOADS', 'com-phocadownload-uploads', '', 'com-phocadownload/com-phocadownload-uploads', 'index.php?option=com_phocadownload&view=phocadownloaduploads', 'component', 1, 384, 2, 10176, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocadownload/images/administrator/icon-16-pdl-menu-uploads.png', 0, '{}', 372, 373, 0, '', 1),
+(392, 'main', 'COM_PHOCADOWNLOAD_FILE_RATING', 'com-phocadownload-file-rating', '', 'com-phocadownload/com-phocadownload-file-rating', 'index.php?option=com_phocadownload&view=phocadownloadrafile', 'component', 1, 384, 2, 10176, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocadownload/images/administrator/icon-16-pdl-menu-vote-file.png', 0, '{}', 374, 375, 0, '', 1),
+(393, 'main', 'COM_PHOCADOWNLOAD_TAGS', 'com-phocadownload-tags', '', 'com-phocadownload/com-phocadownload-tags', 'index.php?option=com_phocadownload&view=phocadownloadtags', 'component', 1, 384, 2, 10176, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocadownload/images/administrator/icon-16-pdl-menu-tags.png', 0, '{}', 376, 377, 0, '', 1),
+(394, 'main', 'COM_PHOCADOWNLOAD_LAYOUT', 'com-phocadownload-layout', '', 'com-phocadownload/com-phocadownload-layout', 'index.php?option=com_phocadownload&view=phocadownloadlayouts', 'component', 1, 384, 2, 10176, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocadownload/images/administrator/icon-16-pdl-menu-layout.png', 0, '{}', 378, 379, 0, '', 1),
+(395, 'main', 'COM_PHOCADOWNLOAD_STYLES', 'com-phocadownload-styles', '', 'com-phocadownload/com-phocadownload-styles', 'index.php?option=com_phocadownload&view=phocadownloadstyles', 'component', 1, 384, 2, 10176, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocadownload/images/administrator/icon-16-pdl-menu-style.png', 0, '{}', 380, 381, 0, '', 1),
+(396, 'main', 'COM_PHOCADOWNLOAD_LOGGING', 'com-phocadownload-logging', '', 'com-phocadownload/com-phocadownload-logging', 'index.php?option=com_phocadownload&view=phocadownloadlogs', 'component', 1, 384, 2, 10176, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocadownload/images/administrator/icon-16-pdl-menu-logs.png', 0, '{}', 382, 383, 0, '', 1),
+(397, 'main', 'COM_PHOCADOWNLOAD_INFO', 'com-phocadownload-info', '', 'com-phocadownload/com-phocadownload-info', 'index.php?option=com_phocadownload&view=phocadownloadinfo', 'component', 1, 384, 2, 10176, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocadownload/images/administrator/icon-16-pdl-menu-info.png', 0, '{}', 384, 385, 0, '', 1),
+(398, 'main', 'COM_JEVENTS_MENU', 'com-jevents-menu', '', 'com-jevents-menu', 'index.php?option=com_jevents', 'component', 1, 1, 1, 10177, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '{}', 387, 388, 0, '', 1),
+(399, 'main', 'COM_PHOCAGALLERY', 'com-phocagallery', '', 'com-phocagallery', 'index.php?option=com_phocagallery', 'component', 1, 1, 1, 10034, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocagallery/images/administrator/icon-16-pg-menu.png', 0, '{}', 389, 414, 0, '', 1),
+(400, 'main', 'COM_PHOCAGALLERY_CONTROLPANEL', 'com-phocagallery-controlpanel', '', 'com-phocagallery/com-phocagallery-controlpanel', 'index.php?option=com_phocagallery', 'component', 1, 399, 2, 10034, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocagallery/images/administrator/icon-16-pg-control-panel.png', 0, '{}', 390, 391, 0, '', 1),
+(401, 'main', 'COM_PHOCAGALLERY_IMAGES', 'com-phocagallery-images', '', 'com-phocagallery/com-phocagallery-images', 'index.php?option=com_phocagallery&view=phocagalleryimgs', 'component', 1, 399, 2, 10034, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocagallery/images/administrator/icon-16-pg-menu-gal.png', 0, '{}', 392, 393, 0, '', 1),
+(402, 'main', 'COM_PHOCAGALLERY_CATEGORIES', 'com-phocagallery-categories', '', 'com-phocagallery/com-phocagallery-categories', 'index.php?option=com_phocagallery&view=phocagallerycs', 'component', 1, 399, 2, 10034, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocagallery/images/administrator/icon-16-pg-menu-cat.png', 0, '{}', 394, 395, 0, '', 1),
+(403, 'main', 'COM_PHOCAGALLERY_THEMES', 'com-phocagallery-themes', '', 'com-phocagallery/com-phocagallery-themes', 'index.php?option=com_phocagallery&view=phocagalleryt', 'component', 1, 399, 2, 10034, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocagallery/images/administrator/icon-16-pg-menu-theme.png', 0, '{}', 396, 397, 0, '', 1),
+(404, 'main', 'COM_PHOCAGALLERY_CATEGORYRATING', 'com-phocagallery-categoryrating', '', 'com-phocagallery/com-phocagallery-categoryrating', 'index.php?option=com_phocagallery&view=phocagalleryra', 'component', 1, 399, 2, 10034, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocagallery/images/administrator/icon-16-pg-menu-vote.png', 0, '{}', 398, 399, 0, '', 1),
+(405, 'main', 'COM_PHOCAGALLERY_IMAGERATING', 'com-phocagallery-imagerating', '', 'com-phocagallery/com-phocagallery-imagerating', 'index.php?option=com_phocagallery&view=phocagalleryraimg', 'component', 1, 399, 2, 10034, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocagallery/images/administrator/icon-16-pg-menu-vote-img.png', 0, '{}', 400, 401, 0, '', 1),
+(406, 'main', 'COM_PHOCAGALLERY_CATEGORYCOMMENTS', 'com-phocagallery-categorycomments', '', 'com-phocagallery/com-phocagallery-categorycomments', 'index.php?option=com_phocagallery&view=phocagallerycos', 'component', 1, 399, 2, 10034, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocagallery/images/administrator/icon-16-pg-menu-comment.png', 0, '{}', 402, 403, 0, '', 1),
+(407, 'main', 'COM_PHOCAGALLERY_IMAGECOMMENTS', 'com-phocagallery-imagecomments', '', 'com-phocagallery/com-phocagallery-imagecomments', 'index.php?option=com_phocagallery&view=phocagallerycoimgs', 'component', 1, 399, 2, 10034, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocagallery/images/administrator/icon-16-pg-menu-comment-img.png', 0, '{}', 404, 405, 0, '', 1),
+(408, 'main', 'COM_PHOCAGALLERY_USERS', 'com-phocagallery-users', '', 'com-phocagallery/com-phocagallery-users', 'index.php?option=com_phocagallery&view=phocagalleryusers', 'component', 1, 399, 2, 10034, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocagallery/images/administrator/icon-16-pg-menu-users.png', 0, '{}', 406, 407, 0, '', 1),
+(409, 'main', 'COM_PHOCAGALLERY_TAGS', 'com-phocagallery-tags', '', 'com-phocagallery/com-phocagallery-tags', 'index.php?option=com_phocagallery&view=phocagallerytags', 'component', 1, 399, 2, 10034, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocagallery/images/administrator/icon-16-pg-menu-tags.png', 0, '{}', 408, 409, 0, '', 1),
+(410, 'main', 'COM_PHOCAGALLERY_STYLES', 'com-phocagallery-styles', '', 'com-phocagallery/com-phocagallery-styles', 'index.php?option=com_phocagallery&view=phocagalleryefs', 'component', 1, 399, 2, 10034, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocagallery/images/administrator/icon-16-pg-menu-styles.png', 0, '{}', 410, 411, 0, '', 1),
+(411, 'main', 'COM_PHOCAGALLERY_INFO', 'com-phocagallery-info', '', 'com-phocagallery/com-phocagallery-info', 'index.php?option=com_phocagallery&view=phocagalleryin', 'component', 1, 399, 2, 10034, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_phocagallery/images/administrator/icon-16-pg-menu-info.png', 0, '{}', 412, 413, 0, '', 1),
+(412, 'main', 'COM_JCE', 'com-jce', '', 'com-jce', 'index.php?option=com_jce&view=cpanel', 'component', 1, 1, 1, 10132, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_jce/media/img/menu/logo.png', 0, '{}', 415, 424, 0, '', 1),
+(413, 'main', 'COM_JCE_MENU_CPANEL', 'com-jce-menu-cpanel', '', 'com-jce/com-jce-menu-cpanel', 'index.php?option=com_jce', 'component', 1, 412, 2, 10132, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '{}', 416, 417, 0, '', 1),
+(414, 'main', 'COM_JCE_MENU_CONFIG', 'com-jce-menu-config', '', 'com-jce/com-jce-menu-config', 'index.php?option=com_jce&view=config', 'component', 1, 412, 2, 10132, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '{}', 418, 419, 0, '', 1),
+(415, 'main', 'COM_JCE_MENU_PROFILES', 'com-jce-menu-profiles', '', 'com-jce/com-jce-menu-profiles', 'index.php?option=com_jce&view=profiles', 'component', 1, 412, 2, 10132, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '{}', 420, 421, 0, '', 1),
+(416, 'main', 'COM_JCE_MENU_FILEBROWSER', 'com-jce-menu-filebrowser', '', 'com-jce/com-jce-menu-filebrowser', 'index.php?option=com_jce&view=browser', 'component', 1, 412, 2, 10132, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '{}', 422, 423, 0, '', 1);
 
 -- --------------------------------------------------------
 
@@ -3496,16 +3508,17 @@ INSERT INTO `#__menu` (`id`, `menutype`, `title`, `alias`, `note`, `path`, `link
 -- Estrutura da tabela `#__menu_types`
 --
 
+DROP TABLE IF EXISTS `#__menu_types`;
 CREATE TABLE IF NOT EXISTS `#__menu_types` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `asset_id` int(10) unsigned NOT NULL DEFAULT 0,
-  `menutype` varchar(24) NOT NULL,
-  `title` varchar(48) NOT NULL,
-  `description` varchar(255) NOT NULL DEFAULT '',
-  `client_id` int(11) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `idx_menutype` (`menutype`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `asset_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `menutype` varchar(24) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar(48) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `client_id` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE KEY `idx_menutype` (`menutype`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `#__menu_types`
@@ -3537,64 +3550,66 @@ INSERT INTO `#__menu_types` (`id`, `asset_id`, `menutype`, `title`, `description
 -- Estrutura da tabela `#__messages`
 --
 
+DROP TABLE IF EXISTS `#__messages`;
 CREATE TABLE IF NOT EXISTS `#__messages` (
-  `message_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id_from` int(10) unsigned NOT NULL DEFAULT 0,
-  `user_id_to` int(10) unsigned NOT NULL DEFAULT 0,
-  `folder_id` tinyint(3) unsigned NOT NULL DEFAULT 0,
-  `date_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `state` tinyint(1) NOT NULL DEFAULT 0,
-  `priority` tinyint(1) unsigned NOT NULL DEFAULT 0,
-  `subject` varchar(255) NOT NULL DEFAULT '',
-  `message` text NOT NULL,
-  PRIMARY KEY (`message_id`),
-  KEY `useridto_state` (`user_id_to`,`state`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+  `message_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id_from` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `user_id_to` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `folder_id` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
+  `date_time` datetime NOT NULL,
+  `state` tinyint(1) NOT NULL DEFAULT '0',
+  `priority` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `subject` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `message` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`message_id`) USING BTREE,
+  KEY `useridto_state` (`user_id_to`,`state`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `#__messages_cfg`
+-- Estrutura da tabela `#__messages_cfg`
 --
 
+DROP TABLE IF EXISTS `#__messages_cfg`;
 CREATE TABLE IF NOT EXISTS `#__messages_cfg` (
-  `user_id` int(10) unsigned NOT NULL DEFAULT 0,
-  `cfg_name` varchar(100) NOT NULL DEFAULT '',
-  `cfg_value` varchar(255) NOT NULL DEFAULT '',
-  UNIQUE KEY `idx_user_var_name` (`user_id`,`cfg_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+  `user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `cfg_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `cfg_value` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  UNIQUE KEY `idx_user_var_name` (`user_id`,`cfg_name`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `#__modules`
+-- Estrutura da tabela `#__modules`
 --
 
+DROP TABLE IF EXISTS `#__modules`;
 CREATE TABLE IF NOT EXISTS `#__modules` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `asset_id` int(10) unsigned NOT NULL DEFAULT 0 COMMENT 'FK to the #__assets table.',
-  `title` varchar(100) NOT NULL DEFAULT '',
-  `note` varchar(255) NOT NULL DEFAULT '',
-  `content` text,
-  `ordering` int(11) NOT NULL DEFAULT 0,
-  `position` varchar(50) NOT NULL DEFAULT '',
-  `checked_out` int(10) unsigned NOT NULL DEFAULT 0,
-  `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `publish_up` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `published` tinyint(1) NOT NULL DEFAULT 0,
-  `module` varchar(50) DEFAULT NULL,
-  `access` int(10) unsigned NOT NULL DEFAULT 0,
-  `showtitle` tinyint(3) unsigned NOT NULL DEFAULT 1,
-  `params` text NOT NULL,
-  `client_id` tinyint(4) NOT NULL DEFAULT 0,
-  `language` char(7) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `published` (`published`,`access`),
-  KEY `newsfeeds` (`module`,`published`),
-  KEY `idx_language` (`language`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=87;
-
+  `asset_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'FK to the x3dts_assets table.',
+  `title` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `note` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `content` mediumtext COLLATE utf8mb4_unicode_ci,
+  `ordering` int(11) NOT NULL DEFAULT '0',
+  `position` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `checked_out` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `checked_out_time` datetime NOT NULL,
+  `publish_up` datetime NOT NULL,
+  `publish_down` datetime NOT NULL,
+  `published` tinyint(1) NOT NULL DEFAULT '0',
+  `module` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `access` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `showtitle` tinyint(3) UNSIGNED NOT NULL DEFAULT '1',
+  `params` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `client_id` tinyint(4) NOT NULL DEFAULT '0',
+  `language` char(7) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `published` (`published`,`access`) USING BTREE,
+  KEY `newsfeeds` (`module`,`published`) USING BTREE,
+  KEY `idx_language` (`language`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=241 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `#__modules`
@@ -3754,11 +3769,12 @@ INSERT INTO `#__modules` (`id`, `asset_id`, `title`, `note`, `content`, `orderin
 -- Estrutura da tabela `#__modules_menu`
 --
 
+DROP TABLE IF EXISTS `#__modules_menu`;
 CREATE TABLE IF NOT EXISTS `#__modules_menu` (
-  `moduleid` int(11) NOT NULL DEFAULT 0,
-  `menuid` int(11) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`moduleid`,`menuid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+  `moduleid` int(11) NOT NULL DEFAULT '0',
+  `menuid` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`moduleid`,`menuid`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `#__modules_menu`
@@ -3923,46 +3939,47 @@ INSERT INTO `#__modules_menu` (`moduleid`, `menuid`) VALUES
 -- Estrutura da tabela `#__newsfeeds`
 --
 
+DROP TABLE IF EXISTS `#__newsfeeds`;
 CREATE TABLE IF NOT EXISTS `#__newsfeeds` (
-  `catid` int(11) NOT NULL DEFAULT 0,
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL DEFAULT '',
+  `catid` int(11) NOT NULL DEFAULT '0',
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `alias` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '',
-  `link` varchar(2048) NOT NULL DEFAULT '',
-  `published` tinyint(1) NOT NULL DEFAULT 0,
-  `numarticles` int(10) unsigned NOT NULL DEFAULT 1,
-  `cache_time` int(10) unsigned NOT NULL DEFAULT 3600,
-  `checked_out` int(10) unsigned NOT NULL DEFAULT 0,
-  `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `ordering` int(11) NOT NULL DEFAULT 0,
-  `rtl` tinyint(4) NOT NULL DEFAULT 0,
-  `access` int(10) unsigned NOT NULL DEFAULT 0,
-  `language` char(7) NOT NULL DEFAULT '',
-  `params` text NOT NULL,
-  `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `created_by` int(10) unsigned NOT NULL DEFAULT 0,
-  `created_by_alias` varchar(255) NOT NULL DEFAULT '',
-  `modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `modified_by` int(10) unsigned NOT NULL DEFAULT 0,
-  `metakey` text NOT NULL,
-  `metadesc` text NOT NULL,
-  `metadata` text NOT NULL,
-  `xreference` varchar(50) NOT NULL DEFAULT '' COMMENT 'A reference to enable linkages to external data sets.',
-  `publish_up` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `description` text NOT NULL,
-  `version` int(10) unsigned NOT NULL DEFAULT 1,
-  `hits` int(10) unsigned NOT NULL DEFAULT 0,
-  `images` text NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `idx_access` (`access`),
-  KEY `idx_checkout` (`checked_out`),
-  KEY `idx_state` (`published`),
-  KEY `idx_catid` (`catid`),
-  KEY `idx_createdby` (`created_by`),
-  KEY `idx_language` (`language`),
-  KEY `idx_xreference` (`xreference`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+  `link` varchar(2048) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `published` tinyint(1) NOT NULL DEFAULT '0',
+  `numarticles` int(10) UNSIGNED NOT NULL DEFAULT '1',
+  `cache_time` int(10) UNSIGNED NOT NULL DEFAULT '3600',
+  `checked_out` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `checked_out_time` datetime NOT NULL,
+  `ordering` int(11) NOT NULL DEFAULT '0',
+  `rtl` tinyint(4) NOT NULL DEFAULT '0',
+  `access` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `language` char(7) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `params` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created` datetime NOT NULL,
+  `created_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `created_by_alias` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `modified` datetime NOT NULL,
+  `modified_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `metakey` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `metadesc` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `metadata` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `xreference` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `publish_up` datetime NOT NULL,
+  `publish_down` datetime NOT NULL,
+  `description` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `version` int(10) UNSIGNED NOT NULL DEFAULT '1',
+  `hits` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `images` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `idx_access` (`access`) USING BTREE,
+  KEY `idx_checkout` (`checked_out`) USING BTREE,
+  KEY `idx_state` (`published`) USING BTREE,
+  KEY `idx_catid` (`catid`) USING BTREE,
+  KEY `idx_createdby` (`created_by`) USING BTREE,
+  KEY `idx_language` (`language`) USING BTREE,
+  KEY `idx_xreference` (`xreference`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
@@ -3992,13 +4009,14 @@ CREATE TABLE IF NOT EXISTS `#__oauth2_tokens` (
 -- Estrutura da tabela `#__overrider`
 --
 
+DROP TABLE IF EXISTS `#__overrider`;
 CREATE TABLE IF NOT EXISTS `#__overrider` (
   `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
-  `constant` varchar(255) NOT NULL,
-  `string` text NOT NULL,
-  `file` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+  `constant` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `string` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `file` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=5485 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `#__overrider`
@@ -7042,7 +7060,7 @@ INSERT INTO `#__overrider` (`id`, `constant`, `string`, `file`) VALUES
 (3027, 'UTC__05_00__EASTERN_TIME__US__AMP__CANADA___BOGOTA__LIMA', '(UTC -05:00) Eastern Time (US &amp; Canada), Bogota, Lima', '/home/portal2019/language/pt-BR/pt-BR.ini'),
 (3028, 'UTC__04_30__VENEZUELA', '(UTC -04:30) Venezuela', '/home/portal2019/language/pt-BR/pt-BR.ini'),
 (3029, 'UTC__04_00__ATLANTIC_TIME__CANADA___CARACAS__LA_PAZ', '(UTC -04:00) Atlantic Time (Canada), Caracas, La Paz', '/home/portal2019/language/pt-BR/pt-BR.ini'),
-(3030, 'UTC__03_30__ST__JOHN_S__NEWFOUNDLAND__LABRADOR', '(UTC -03:30) St. Johns, Newfoundland, Labrador', '/home/portal2019/language/pt-BR/pt-BR.ini'),
+(3030, 'UTC__03_30__ST__JOHN_S__NEWFOUNDLAND__LABRADOR', '(UTC -03:30) St. John\'s, Newfoundland, Labrador', '/home/portal2019/language/pt-BR/pt-BR.ini'),
 (3031, 'UTC__03_00__BRAZIL__BUENOS_AIRES__GEORGETOWN', '(UTC -03:00) Brasil, Buenos Aires, Georgetown', '/home/portal2019/language/pt-BR/pt-BR.ini'),
 (3032, 'UTC__02_00__MID_ATLANTIC', '(UTC -02:00) Mid-Atlantic', '/home/portal2019/language/pt-BR/pt-BR.ini'),
 (3033, 'UTC__01_00__AZORES__CAPE_VERDE_ISLANDS', '(UTC -01:00) Azores, Cape Verde Islands', '/home/portal2019/language/pt-BR/pt-BR.ini'),
@@ -7283,6 +7301,7 @@ INSERT INTO `#__overrider` (`id`, `constant`, `string`, `file`) VALUES
 (3267, 'JLIB_DATABASE_ERROR_USERGROUP_TITLE_EXISTS', 'Já existe um grupo de usuários com este título. Títulos devem ser únicos.', '/home/portal2019/language/pt-BR/pt-BR.lib_joomla.ini'),
 (3268, 'JLIB_DATABASE_ERROR_USERNAME_CANNOT_CHANGE', 'Não pode usar este nome de usuário', '/home/portal2019/language/pt-BR/pt-BR.lib_joomla.ini'),
 (3269, 'JLIB_DATABASE_ERROR_USERNAME_INUSE', 'Nome de usuário já existe', '/home/portal2019/language/pt-BR/pt-BR.lib_joomla.ini'),
+(3270, 'JLIB_DATABASE_ERROR_VALID_AZ09', 'Por favor, informe um nome de usuário válido. Sem espaços, com o mínimo de %d caracteres e <strong>não</strong> pode conter os seguintes caracteres: < > \\ \" \' &#37; ; ( ) &', '/home/portal2019/language/pt-BR/pt-BR.lib_joomla.ini'),
 (3271, 'JLIB_DATABASE_ERROR_VALID_MAIL', 'Por favor, informe um endereço de e-mail válido.', '/home/portal2019/language/pt-BR/pt-BR.lib_joomla.ini'),
 (3272, 'JLIB_DATABASE_ERROR_VIEWLEVEL', 'Nível de visualização deve ter um título', '/home/portal2019/language/pt-BR/pt-BR.lib_joomla.ini'),
 (3273, 'JLIB_DATABASE_FUNCTION_NOERROR', 'Funções de DB não informaram erros', '/home/portal2019/language/pt-BR/pt-BR.lib_joomla.ini'),
@@ -7968,7 +7987,7 @@ INSERT INTO `#__overrider` (`id`, `constant`, `string`, `file`) VALUES
 (3951, 'MOD_CHAMADA_FIELD_LIMITE_CARACTERE_LABEL', 'Número de caracteres', '/home/portal2019/language/pt-BR/pt-BR.mod_chamadas.ini'),
 (3952, 'MOD_CHAMADA_FIELD_LIMITE_CARACTERE_DESC', 'Informar limite de caracteres até o qual será procurada a última palavra completa, de forma a evitar o corte de palavras de forma indesejada.', '/home/portal2019/language/pt-BR/pt-BR.mod_chamadas.ini'),
 (3953, 'MOD_CHAMADA_FIELD_CHAPEU_LABEL', 'Campo de \'chapéu\'', '/home/portal2019/language/pt-BR/pt-BR.mod_chamadas.ini'),
-(3954, 'MOD_CHAMADA_FIELD_CHAPEU_DESC', 'Informe nome_tabela.nome_campo para o qual o chapéu será utilizado. Para fonte de dados article_content, utilize preferencialmente cont.xreference. Para não utilizar este campo, informe 0 ou \'nenhum\'. Utilize \'cont\' para se referir à tabela de conteúdo, \'cat\' para a categoria e \'mtag\' para o mapeamento de tags (este último somente na versão 3.x).', '/home/portal2019/language/pt-BR/pt-BR.mod_chamadas.ini'),
+(3954, 'MOD_CHAMADA_FIELD_CHAPEU_DESC', 'Informe nome_tabela.nome_campo para o qual o chapéu será utilizado. Para fonte de dados article_content, utilize preferencialmente cont.xreference. Para não utilizar este campo, informe 0 ou nenhum\'. Utilize \'cont\' para se referir à tabela de conteúdo, \'cat\' para a categoria e \'mtag\' para o mapeamento de tags (este último somente na versão 3.x).', '/home/portal2019/language/pt-BR/pt-BR.mod_chamadas.ini'),
 (3955, 'MOD_CHAMADA_FIELD_DESTAQUE_LABEL', 'Itens em destaque', '/home/portal2019/language/pt-BR/pt-BR.mod_chamadas.ini'),
 (3956, 'MOD_CHAMADA_FIELD_DESTAQUE_DESC', 'Escolha que tratamento será dado na consulta para os itens em destaque.', '/home/portal2019/language/pt-BR/pt-BR.mod_chamadas.ini'),
 (3957, 'MOD_CHAMADA_OPTION_TODOS_VALUE', 'Trazer todos os itens', '/home/portal2019/language/pt-BR/pt-BR.mod_chamadas.ini'),
@@ -8528,7 +8547,7 @@ INSERT INTO `#__overrider` (`id`, `constant`, `string`, `file`) VALUES
 (4509, 'K2_MODERATE_COMMENTS_TO_MY_PUBLISHED_ITEMS', 'Moderar Comentários aos meus artigos publicados', '/home/portal2019/language/pt-BR/pt-BR.mod_k2_user.ini'),
 (4510, 'K2_MODULE_CLASS_SUFFIX', 'Sufixo módulo de classe', '/home/portal2019/language/pt-BR/pt-BR.mod_k2_user.ini'),
 (4511, 'K2_MODULE_CLASS_SUFFIX_DESCRIPTION', 'Um sufixo a ser aplicado à classe CSS do Módulo. Isto permite um estilo individual ao Módulo.', '/home/portal2019/language/pt-BR/pt-BR.mod_k2_user.ini'),
-(4512, 'K2_MOD_K2_USER_DESCRIPTION', 'K2 User é uma versão melhorada do módulo de login do Joomla!. Use-o para exibir uma caixa de login para seus usuários. Quando os usuários estiverem conectados, eles verão o bloco de usuário (barra de ferramentas), que lhes permite realizar tarefas como: adicionar / editar itens K2 (com base em seus direitos de acesso), moderar comentários de seus itens (de novo, com base em seus direitos de acesso) , atualizar os seus dados pessoais (perfil) e acessar rapidamente todos os seus itens publicados (a página de usuário / blog). Este módulo substitui o módulo \'Login K2\' na v2.5 e posterior. Se você estiver usando o módulo \"K2 Login\", por favor, certifique-se de substituí-lo por este. Na v2.6 do K2, o módulo \'K2 Login\' será removido permanentemente do pacote de extensão K2.', '/home/portal2019/language/pt-BR/pt-BR.mod_k2_user.ini'),
+(4512, 'K2_MOD_K2_USER_DESCRIPTION', 'K2 User é uma versão melhorada do módulo de login do Joomla!. Use-o para exibir uma caixa de login para seus usuários. Quando os usuários estiverem conectados, eles verão o bloco de usuário (barra de ferramentas), que lhes permite realizar tarefas como: adicionar / editar itens K2 (com base em seus direitos de acesso), moderar comentários de seus itens (de novo, com base em seus direitos de acesso) , atualizar os seus dados pessoais (perfil) e acessar rapidamente todos os seus itens publicados (a página de usuário / blog). Este módulo substitui o módulo \'Login K2\" na v2.5 e posterior. Se você estiver usando o módulo \"K2 Login\", por favor, certifique-se de substituí-lo por este. Na v2.6 do K2, o módulo \'K2 Login\' será removido permanentemente do pacote de extensão K2.', '/home/portal2019/language/pt-BR/pt-BR.mod_k2_user.ini'),
 (4513, 'K2_MY_ACCOUNT', 'Minha conta', '/home/portal2019/language/pt-BR/pt-BR.mod_k2_user.ini'),
 (4514, 'K2_MY_PAGE', 'Minha página', '/home/portal2019/language/pt-BR/pt-BR.mod_k2_user.ini'),
 (4515, 'K2_NAME', 'Nome', '/home/portal2019/language/pt-BR/pt-BR.mod_k2_user.ini'),
@@ -9385,7 +9404,7 @@ INSERT INTO `#__overrider` (`id`, `constant`, `string`, `file`) VALUES
 (5364, 'RL_OPTION_SELECT', '- Selecionar -', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini'),
 (5365, 'RL_OPTION_SELECT_CLIENT', '- Selecionar Cliente -', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini'),
 (5366, 'RL_OS', 'Sistemas Operacionais', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini'),
-(5367, 'RL_OS_DESC', 'Selecione os sistemas operacionais aos quais atribuir. Lembre-se que a detecção de sistemas operacionais nunca é 100&#37; prova dágua. Os usuários podem configurar seu navegador para imitar outros sistemas operacionais.', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini'),
+(5367, 'RL_OS_DESC', 'Selecione os sistemas operacionais aos quais atribuir. Lembre-se que a detecção de sistemas operacionais nunca é 100&#37; prova d\'água. Os usuários podem configurar seu navegador para imitar outros sistemas operacionais.', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini'),
 (5368, 'RL_OTHER_AREAS', 'Outras Áreas', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini'),
 (5369, 'RL_OTHER_OPTIONS', 'Outras Opções', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini'),
 (5370, 'RL_OTHER_SETTINGS', 'Outras Configurações', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini'),
@@ -9395,7 +9414,7 @@ INSERT INTO `#__overrider` (`id`, `constant`, `string`, `file`) VALUES
 (5374, 'RL_PHP', 'PHP Customizado', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini'),
 (5375, 'RL_PHP_DESC', 'Digite um pequeno código PHP para avaliar. O código deve retornar o valor true or false (VERDADEIRO ou FALSO).<br><br>Por exemplo:<br><br>[[%1:code%]]', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini'),
 (5376, 'RL_PLACE_HTML_COMMENTS', 'Colocar comentários HTML', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini'),
-(5377, 'RL_PLACE_HTML_COMMENTS_DESC', 'Por padrão os comentários HTML são colocados ao redor da saída do esta extensão.<br><br>These comments can help you troubleshooting when you dont get the output you expect.<br><br>Caso prefira não ter esses comentários no seu HTML, desative esta opção.', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini'),
+(5377, 'RL_PLACE_HTML_COMMENTS_DESC', 'Por padrão os comentários HTML são colocados ao redor da saída do esta extensão.<br><br>These comments can help you troubleshooting when you don\'t get the output you expect.<br><br>Caso prefira não ter esses comentários no seu HTML, desative esta opção.', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini'),
 (5378, 'RL_PLG_EDITORS-XTD', 'Plugin Botão do Editor', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini'),
 (5379, 'RL_PLG_SYSTEM', 'Plugin de Sistema', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini'),
 (5380, 'RL_POSTALCODES', 'Código Postal', '/home/portal2019/plugins/system/regularlabs/language/pt-BR/pt-BR.plg_system_regularlabs.ini'),
@@ -10262,38 +10281,37 @@ CREATE TABLE IF NOT EXISTS `#__plg_system_adminexile` (
 -- Estrutura da tabela `#__postinstall_messages`
 --
 
+DROP TABLE IF EXISTS `#__postinstall_messages`;
 CREATE TABLE IF NOT EXISTS `#__postinstall_messages` (
-  `postinstall_message_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `extension_id` bigint(20) NOT NULL DEFAULT 700 COMMENT 'FK to #__extensions',
-  `title_key` varchar(255) NOT NULL DEFAULT '' COMMENT 'Lang key for the title',
-  `description_key` varchar(255) NOT NULL DEFAULT '' COMMENT 'Lang key for description',
-  `action_key` varchar(255) NOT NULL DEFAULT '',
-  `language_extension` varchar(255) NOT NULL DEFAULT 'com_postinstall' COMMENT 'Extension holding lang keys',
-  `language_client_id` tinyint(3) NOT NULL DEFAULT 1,
-  `type` varchar(10) NOT NULL DEFAULT 'link' COMMENT 'Message type - message, link, action',
-  `action_file` varchar(255) DEFAULT '' COMMENT 'RAD URI to the PHP file containing action method',
-  `action` varchar(255) DEFAULT '' COMMENT 'Action method name or URL',
-  `condition_file` varchar(255) DEFAULT NULL COMMENT 'RAD URI to file holding display condition method',
-  `condition_method` varchar(255) DEFAULT NULL COMMENT 'Display condition method, must return boolean',
-  `version_introduced` varchar(50) NOT NULL DEFAULT '3.2.0' COMMENT 'Version when this message was introduced',
-  `enabled` tinyint(3) NOT NULL DEFAULT 1,
-  PRIMARY KEY (`postinstall_message_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+  `postinstall_message_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `extension_id` bigint(20) NOT NULL DEFAULT '700' COMMENT 'FK to x3dts_extensions',
+  `title_key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'Lang key for the title',
+  `description_key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'Lang key for description',
+  `action_key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `language_extension` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'com_postinstall' COMMENT 'Extension holding lang keys',
+  `language_client_id` tinyint(3) NOT NULL DEFAULT '1',
+  `type` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'link' COMMENT 'Message type - message, link, action',
+  `action_file` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT 'RAD URI to the PHP file containing action method',
+  `action` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT 'Action method name or URL',
+  `condition_file` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'RAD URI to file holding display condition method',
+  `condition_method` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Display condition method, must return boolean',
+  `version_introduced` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '3.2.0' COMMENT 'Version when this message was introduced',
+  `enabled` tinyint(3) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`postinstall_message_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `#__postinstall_messages`
 --
 
-INSERT INTO `#__postinstall_messages` (`extension_id`, `title_key`, `description_key`, `action_key`, `language_extension`, `language_client_id`, `type`, `action_file`, `action`, `condition_file`, `condition_method`, `version_introduced`, `enabled`) VALUES
-(700, 'PLG_TWOFACTORAUTH_TOTP_POSTINSTALL_TITLE', 'PLG_TWOFACTORAUTH_TOTP_POSTINSTALL_BODY', 'PLG_TWOFACTORAUTH_TOTP_POSTINSTALL_ACTION', 'plg_twofactorauth_totp', 1, 'action', 'site://plugins/twofactorauth/totp/postinstall/actions.php', 'twofactorauth_postinstall_action', 'site://plugins/twofactorauth/totp/postinstall/actions.php', 'twofactorauth_postinstall_condition', '3.2.0', 1),
-(700, 'COM_CPANEL_WELCOME_BEGINNERS_TITLE', 'COM_CPANEL_WELCOME_BEGINNERS_MESSAGE', '', 'com_cpanel', 1, 'message', '', '', '', '', '3.2.0', 1),
-(700, 'COM_CPANEL_MSG_STATS_COLLECTION_TITLE', 'COM_CPANEL_MSG_STATS_COLLECTION_BODY', '', 'com_cpanel', 1, 'message', '', '', 'admin://components/com_admin/postinstall/statscollection.php', 'admin_postinstall_statscollection_condition', '3.5.0', 1),
-(700, 'PLG_SYSTEM_UPDATENOTIFICATION_POSTINSTALL_UPDATECACHETIME', 'PLG_SYSTEM_UPDATENOTIFICATION_POSTINSTALL_UPDATECACHETIME_BODY', 'PLG_SYSTEM_UPDATENOTIFICATION_POSTINSTALL_UPDATECACHETIME_ACTION', 'plg_system_updatenotification', 1, 'action', 'site://plugins/system/updatenotification/postinstall/updatecachetime.php', 'updatecachetime_postinstall_action', 'site://plugins/system/updatenotification/postinstall/updatecachetime.php', 'updatecachetime_postinstall_condition', '3.6.3', 1),
-(700, 'COM_CPANEL_MSG_JOOMLA40_PRE_CHECKS_TITLE', 'COM_CPANEL_MSG_JOOMLA40_PRE_CHECKS_BODY', '', 'com_cpanel', 1, 'message', '', '', 'admin://components/com_admin/postinstall/joomla40checks.php', 'admin_postinstall_joomla40checks_condition', '3.7.0', 1),
-(700, 'TPL_HATHOR_MESSAGE_POSTINSTALL_TITLE', 'TPL_HATHOR_MESSAGE_POSTINSTALL_BODY', 'TPL_HATHOR_MESSAGE_POSTINSTALL_ACTION', 'tpl_hathor', 1, 'action', 'admin://templates/hathor/postinstall/hathormessage.php', 'hathormessage_postinstall_action', 'admin://templates/hathor/postinstall/hathormessage.php', 'hathormessage_postinstall_condition', '3.7.0', 1),
-(700, 'PLG_PLG_RECAPTCHA_VERSION_1_POSTINSTALL_TITLE', 'PLG_PLG_RECAPTCHA_VERSION_1_POSTINSTALL_BODY', 'PLG_PLG_RECAPTCHA_VERSION_1_POSTINSTALL_ACTION', 'plg_captcha_recaptcha', 1, 'action', 'site://plugins/captcha/recaptcha/postinstall/actions.php', 'recaptcha_postinstall_action', 'site://plugins/captcha/recaptcha/postinstall/actions.php', 'recaptcha_postinstall_condition', '3.8.6', 1),
-(700, 'COM_ACTIONLOGS_POSTINSTALL_TITLE', 'COM_ACTIONLOGS_POSTINSTALL_BODY', '', 'com_actionlogs', 1, 'message', '', '', '', '', '3.9.0', 1),
-(700, 'COM_PRIVACY_POSTINSTALL_TITLE', 'COM_PRIVACY_POSTINSTALL_BODY', '', 'com_privacy', 1, 'message', '', '', '', '', '3.9.0', 1);
+INSERT INTO `#__postinstall_messages` (`postinstall_message_id`, `extension_id`, `title_key`, `description_key`, `action_key`, `language_extension`, `language_client_id`, `type`, `action_file`, `action`, `condition_file`, `condition_method`, `version_introduced`, `enabled`) VALUES
+(1, 700, 'PLG_TWOFACTORAUTH_TOTP_POSTINSTALL_TITLE', 'PLG_TWOFACTORAUTH_TOTP_POSTINSTALL_BODY', 'PLG_TWOFACTORAUTH_TOTP_POSTINSTALL_ACTION', 'plg_twofactorauth_totp', 1, 'action', 'site://plugins/twofactorauth/totp/postinstall/actions.php', 'twofactorauth_postinstall_action', 'site://plugins/twofactorauth/totp/postinstall/actions.php', 'twofactorauth_postinstall_condition', '3.2.0', 0),
+(2, 700, 'COM_CPANEL_MSG_EACCELERATOR_TITLE', 'COM_CPANEL_MSG_EACCELERATOR_BODY', 'COM_CPANEL_MSG_EACCELERATOR_BUTTON', 'com_cpanel', 1, 'action', 'admin://components/com_admin/postinstall/eaccelerator.php', 'admin_postinstall_eaccelerator_action', 'admin://components/com_admin/postinstall/eaccelerator.php', 'admin_postinstall_eaccelerator_condition', '3.2.0', 1),
+(4, 700, 'COM_CPANEL_MSG_JOOMLA40_PRE_CHECKS_TITLE', 'COM_CPANEL_MSG_JOOMLA40_PRE_CHECKS_BODY', '', 'com_cpanel', 1, 'message', '', '', 'admin://components/com_admin/postinstall/joomla40checks.php', 'admin_postinstall_joomla40checks_condition', '3.7.0', 0),
+(5, 700, 'TPL_HATHOR_MESSAGE_POSTINSTALL_TITLE', 'TPL_HATHOR_MESSAGE_POSTINSTALL_BODY', 'TPL_HATHOR_MESSAGE_POSTINSTALL_ACTION', 'tpl_hathor', 1, 'action', 'admin://templates/hathor/postinstall/hathormessage.php', 'hathormessage_postinstall_action', 'admin://templates/hathor/postinstall/hathormessage.php', 'hathormessage_postinstall_condition', '3.7.0', 1),
+(6, 700, 'PLG_PLG_RECAPTCHA_VERSION_1_POSTINSTALL_TITLE', 'PLG_PLG_RECAPTCHA_VERSION_1_POSTINSTALL_BODY', 'PLG_PLG_RECAPTCHA_VERSION_1_POSTINSTALL_ACTION', 'plg_captcha_recaptcha', 1, 'action', 'site://plugins/captcha/recaptcha/postinstall/actions.php', 'recaptcha_postinstall_action', 'site://plugins/captcha/recaptcha/postinstall/actions.php', 'recaptcha_postinstall_condition', '3.8.6', 1),
+(7, 700, 'COM_CPANEL_MSG_UPDATEDEFAULTSETTINGS_TITLE', 'COM_CPANEL_MSG_UPDATEDEFAULTSETTINGS_BODY', '', 'com_cpanel', 1, 'message', '', '', 'admin://components/com_admin/postinstall/updatedefaultsettings.php', 'admin_postinstall_updatedefaultsettings_condition', '3.8.8', 0),
+(8, 700, 'COM_CPANEL_MSG_TEXTFILTER3919_TITLE', 'COM_CPANEL_MSG_TEXTFILTER3919_BODY', '', 'com_cpanel', 1, 'message', '', '', 'admin://components/com_admin/postinstall/textfilter3919.php', 'admin_postinstall_textfilter3919_condition', '3.9.19', 1);
 
 -- --------------------------------------------------------
 
@@ -10301,35 +10319,37 @@ INSERT INTO `#__postinstall_messages` (`extension_id`, `title_key`, `description
 -- Estrutura da tabela `#__privacy_consents`
 --
 
-CREATE TABLE IF NOT EXISTS `#__privacy_requests` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `email` varchar(100) NOT NULL DEFAULT '',
-  `requested_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `status` tinyint(4) NOT NULL DEFAULT 0,
-  `request_type` varchar(25) NOT NULL DEFAULT '',
-  `confirm_token` varchar(100) NOT NULL DEFAULT '',
-  `confirm_token_created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+DROP TABLE IF EXISTS `#__privacy_consents`;
+CREATE TABLE IF NOT EXISTS `#__privacy_consents` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `state` int(10) NOT NULL DEFAULT '1',
+  `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `subject` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remind` tinyint(4) NOT NULL DEFAULT '0',
+  `token` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  KEY `idx_user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `#__privacy_consents`
+-- Estrutura da tabela `#__privacy_requests`
 --
 
-CREATE TABLE IF NOT EXISTS `#__privacy_consents` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(10) unsigned NOT NULL DEFAULT 0,
-  `state` INT(10) NOT NULL DEFAULT 1,
-  `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `subject` varchar(255) NOT NULL DEFAULT '',
-  `body` text NOT NULL,
-  `remind` tinyint(4) NOT NULL DEFAULT 0,
-  `token` varchar(100) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`),
-  KEY `idx_user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+DROP TABLE IF EXISTS `#__privacy_requests`;
+CREATE TABLE IF NOT EXISTS `#__privacy_requests` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `requested_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `status` tinyint(4) NOT NULL DEFAULT '0',
+  `request_type` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `confirm_token` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `confirm_token_created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -10337,22 +10357,46 @@ CREATE TABLE IF NOT EXISTS `#__privacy_consents` (
 -- Estrutura da tabela `#__redirect_links`
 --
 
+DROP TABLE IF EXISTS `#__redirect_links`;
 CREATE TABLE IF NOT EXISTS `#__redirect_links` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `old_url` varchar(2048) NOT NULL,
-  `new_url` varchar(2048),
-  `referer` varchar(2048) NOT NULL,
-  `comment` varchar(255) NOT NULL DEFAULT '',
-  `hits` int(10) unsigned NOT NULL DEFAULT 0,
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `old_url` varchar(2048) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `new_url` varchar(2048) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `referer` varchar(2048) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `comment` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `hits` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `published` tinyint(4) NOT NULL,
-  `created_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `modified_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `header` smallint(3) NOT NULL DEFAULT 301,
-  PRIMARY KEY (`id`),
-  KEY `idx_old_url` (`old_url`(100)),
-  KEY `idx_link_modifed` (`modified_date`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+  `created_date` datetime NOT NULL,
+  `modified_date` datetime NOT NULL,
+  `header` smallint(3) NOT NULL DEFAULT '301',
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `idx_link_modifed` (`modified_date`) USING BTREE,
+  KEY `idx_old_url` (`old_url`(100))
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
+--
+-- Extraindo dados da tabela `#__redirect_links`
+--
+
+INSERT INTO `#__redirect_links` (`id`, `old_url`, `new_url`, `referer`, `comment`, `hits`, `published`, `created_date`, `modified_date`, `header`) VALUES
+(1, 'http://10.200.1.43/INTERNET/portal_modelo_3x/index.php/editoria-a/menu-de-3-nivel', '', 'http://10.200.1.43/INTERNET/portal_modelo_3x/index.php/editoria-a/menu-de-2-nivel', '', 1, 0, '2019-04-03 17:02:20', '0000-00-00 00:00:00', 301),
+(2, 'http://localhost/joomlagovbr/joomla-2.5/index.php/component/content/category', '', 'http://localhost/joomlagovbr/joomla-2.5/', '', 1, 0, '2019-04-03 17:02:20', '0000-00-00 00:00:00', 301),
+(3, 'http://localhost/joomlagovbr/joomla-3.1/index.php/component/content/category/37-galeria-de-imagens/galeria-1', '', 'http://localhost/joomlagovbr/joomla-3.1/', '', 1, 0, '2019-04-03 17:02:20', '0000-00-00 00:00:00', 301),
+(4, 'http://localhost/joomlagovbr/joomla-3.x/index.php/contato/formulario-de-contato/', '', 'http://localhost/joomlagovbr/joomla-3.x/index.php/contato', '', 1, 0, '2019-04-03 17:02:20', '0000-00-00 00:00:00', 301),
+(5, 'http://localhost/joomlagovbr/joomla-3.x/index.php?Itemid=144', '', 'http://localhost/joomlagovbr/joomla-3.x/index.php/mapa-do-site', '', 1, 0, '2019-04-03 17:02:20', '0000-00-00 00:00:00', 301),
+(6, 'http://localhost/joomlagovbr/joomla-3.x/index.php?Itemid=143', '', 'http://localhost/joomlagovbr/joomla-3.x/index.php?Itemid=144', '', 1, 0, '2019-04-03 17:02:20', '0000-00-00 00:00:00', 301),
+(7, 'http://localhost/joomla-3.x.dev/index.php/index.php?option=com_agendadedirigentes&view=calendario&data=2014-09-01&id=5&Itemid=150', '', 'http://localhost/joomla-3.x.dev/index.php/teste-agenda?view=autoridade&id=1&dia=2014-09-16', '', 2, 0, '2019-04-03 17:02:20', '0000-00-00 00:00:00', 301),
+(8, 'http://localhost/joomla-3.x.dev/index.php/index.php?option=com_agendadedirigentes&view=calendario&data=2014-09-14&id=5&Itemid=150', '', 'http://localhost/joomla-3.x.dev/index.php/teste-agenda?view=autoridade&id=1&dia=2014-09-16', '', 1, 0, '2019-04-03 17:02:20', '0000-00-00 00:00:00', 301),
+(9, 'http://localhost/joomla-3.x.dev/index.php/index.php?option=com_agendadedirigentes&view=calendario&data=2014-08-31&id=5&Itemid=150', '', 'http://localhost/joomla-3.x.dev/index.php/teste-agenda?view=autoridade&id=1&dia=2014-09-16', '', 1, 0, '2019-04-03 17:02:20', '0000-00-00 00:00:00', 301),
+(10, 'http://localhost/joomla-3.x.dev/index.php/index.php?option=com_agendadedirigentes&view=calendario&data=2014-09-30&id=5&Itemid=150', '', 'http://localhost/joomla-3.x.dev/index.php/teste-agenda?view=autoridade&id=1&dia=2014-09-16', '', 1, 0, '2019-04-03 17:02:20', '0000-00-00 00:00:00', 301),
+(11, 'http://localhost/joomla-3.x.dev/index.php/index.php?option=com_agendadedirigentes&view=calendario&data=2014-09-21&id=5&Itemid=150', '', 'http://localhost/joomla-3.x.dev/index.php/teste-agenda?view=autoridade&id=1&dia=2014-09-16', '', 1, 0, '2019-04-03 17:02:20', '0000-00-00 00:00:00', 301),
+(12, 'http://localhost/joomla-3.x.dev/index.php/index.php?option=com_agendadedirigentes&view=calendario&data=2014-09-29&id=5&Itemid=150', '', 'http://localhost/joomla-3.x.dev/index.php/teste-agenda?view=autoridade&id=1&dia=2014-09-16', '', 1, 0, '2019-04-03 17:02:20', '0000-00-00 00:00:00', 301),
+(13, 'http://localhost/joomla-3.x.dev/index.php/index.php?option=com_agendadedirigentes&view=calendario&data=2014-09-23&id=5&Itemid=150', '', 'http://localhost/joomla-3.x.dev/index.php/teste-agenda?view=autoridade&id=1&dia=2014-09-16', '', 1, 0, '2019-04-03 17:02:20', '0000-00-00 00:00:00', 301),
+(14, 'http://localhost/joomla-3.x.dev/index.php/index.php?option=com_agendadedirigentes&view=autoridade&dia=2014-09-29&id=1', '', 'http://localhost/joomla-3.x.dev/index.php/teste-agenda?view=autoridade&id=1&dia=2014-09-16', '', 2, 0, '2019-04-03 17:02:20', '0000-00-00 00:00:00', 301),
+(15, 'http://localhost/joomla-3.x.dev/index.php?cor=amarelo&Itemid=126', '', 'http://localhost/joomla-3.x.dev/', '', 1, 0, '2019-04-03 17:02:20', '0000-00-00 00:00:00', 301),
+(16, 'https://ufrb.edu.br/portal2019/assunto-22?id=4595:&catid=63', NULL, 'https://ufrb.edu.br/portal2019/assunto-22', '', 2, 0, '2019-09-20 11:24:27', '0000-00-00 00:00:00', 301),
+(17, 'https://www.ufrb.edu.br/portal2019/guia-de-estilo', NULL, 'https://www.ufrb.edu.br/portal2019/', '', 1, 0, '2019-10-03 14:46:24', '0000-00-00 00:00:00', 301),
+(18, 'https://www.ufrb.edu.br/portal2019/index.php?option=com_agendadirigentes&view=compromissos', NULL, '', '', 1, 0, '2019-10-14 17:14:05', '0000-00-00 00:00:00', 301);
 
 -- --------------------------------------------------------
 
@@ -10360,12 +10404,24 @@ CREATE TABLE IF NOT EXISTS `#__redirect_links` (
 -- Estrutura da tabela `#__schemas`
 --
 
+DROP TABLE IF EXISTS `#__schemas`;
 CREATE TABLE IF NOT EXISTS `#__schemas` (
   `extension_id` int(11) NOT NULL,
-  `version_id` varchar(20) NOT NULL,
-  PRIMARY KEY (`extension_id`,`version_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+  `version_id` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`extension_id`,`version_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
+--
+-- Extraindo dados da tabela `#__schemas`
+--
+
+INSERT INTO `#__schemas` (`extension_id`, `version_id`) VALUES
+(700, '3.9.19-2020-06-01'),
+(10030, '4.2.9'),
+(10034, '4.3.14'),
+(10061, '0.0.6'),
+(10144, '3.7.173'),
+(10176, '3.1.7');
 
 -- --------------------------------------------------------
 
@@ -10373,19 +10429,28 @@ CREATE TABLE IF NOT EXISTS `#__schemas` (
 -- Estrutura da tabela `#__session`
 --
 
+DROP TABLE IF EXISTS `#__session`;
 CREATE TABLE IF NOT EXISTS `#__session` (
   `session_id` varbinary(192) NOT NULL,
-  `client_id` tinyint(3) unsigned DEFAULT NULL,
-  `guest` tinyint(3) unsigned DEFAULT 1,
-  `time` int(11) NOT NULL DEFAULT 0,
-  `data` mediumtext,
-  `userid` int(11) DEFAULT 0,
-  `username` varchar(150) DEFAULT '',
-  PRIMARY KEY (`session_id`),
-  KEY `userid` (`userid`),
-  KEY `time` (`time`),
-  KEY `client_id_guest` (`client_id`, `guest`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+  `client_id` tinyint(3) UNSIGNED DEFAULT NULL,
+  `guest` tinyint(3) UNSIGNED DEFAULT '1',
+  `time` int(11) NOT NULL DEFAULT '0',
+  `data` longtext COLLATE utf8mb4_unicode_ci,
+  `userid` int(11) DEFAULT '0',
+  `username` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT '',
+  PRIMARY KEY (`session_id`) USING BTREE,
+  KEY `userid` (`userid`) USING BTREE,
+  KEY `time` (`time`) USING BTREE,
+  KEY `client_id_guest` (`client_id`,`guest`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Extraindo dados da tabela `#__session`
+--
+
+INSERT INTO `#__session` (`session_id`, `client_id`, `guest`, `time`, `data`, `userid`, `username`) VALUES
+(0x3375356d6862356465716d666938306a62716762696f6d693467, 0, 1, 1592878013, 'joomla|s:664:\"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjozOntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjI6e3M6NzoiY291bnRlciI7aToxO3M6NToidGltZXIiO086ODoic3RkQ2xhc3MiOjM6e3M6NToic3RhcnQiO2k6MTU5Mjg3ODAxMjtzOjQ6Imxhc3QiO2k6MTU5Mjg3ODAxMjtzOjM6Im5vdyI7aToxNTkyODc4MDEyO319czo4OiJyZWdpc3RyeSI7TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjA6e31zOjE0OiIAKgBpbml0aWFsaXplZCI7YjowO3M6OToic2VwYXJhdG9yIjtzOjE6Ii4iO31zOjQ6InVzZXIiO086MjA6Ikpvb21sYVxDTVNcVXNlclxVc2VyIjoxOntzOjI6ImlkIjtpOjA7fX19czoxNDoiACoAaW5pdGlhbGl6ZWQiO2I6MDtzOjk6InNlcGFyYXRvciI7czoxOiIuIjt9\";', 0, ''),
+(0x716636733761396f6f6264646f6e6c30387036366c3173343737, 1, 1, 1592878083, 'joomla|s:736:\"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjozOntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjM6e3M6NzoiY291bnRlciI7aToxO3M6NToidGltZXIiO086ODoic3RkQ2xhc3MiOjM6e3M6NToic3RhcnQiO2k6MTU5Mjg3ODA4MztzOjQ6Imxhc3QiO2k6MTU5Mjg3ODA4MztzOjM6Im5vdyI7aToxNTkyODc4MDgzO31zOjU6InRva2VuIjtzOjMyOiJEUzlBSFU0Q2xTckJmbldWUHFxdXhLYmQ2QmZKdUJaeSI7fXM6ODoicmVnaXN0cnkiO086MjQ6Ikpvb21sYVxSZWdpc3RyeVxSZWdpc3RyeSI6Mzp7czo3OiIAKgBkYXRhIjtPOjg6InN0ZENsYXNzIjowOnt9czoxNDoiACoAaW5pdGlhbGl6ZWQiO2I6MDtzOjk6InNlcGFyYXRvciI7czoxOiIuIjt9czo0OiJ1c2VyIjtPOjIwOiJKb29tbGFcQ01TXFVzZXJcVXNlciI6MTp7czoyOiJpZCI7aTowO319fXM6MTQ6IgAqAGluaXRpYWxpemVkIjtiOjA7czo5OiJzZXBhcmF0b3IiO3M6MToiLiI7fQ==\";', 0, '');
 
 -- --------------------------------------------------------
 
@@ -10410,46 +10475,47 @@ CREATE TABLE IF NOT EXISTS `#__slideshowck_styles` (
 -- Estrutura da tabela `#__tags`
 --
 
+DROP TABLE IF EXISTS `#__tags`;
 CREATE TABLE IF NOT EXISTS `#__tags` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `parent_id` int(10) unsigned NOT NULL DEFAULT 0,
-  `lft` int(11) NOT NULL DEFAULT 0,
-  `rgt` int(11) NOT NULL DEFAULT 0,
-  `level` int(10) unsigned NOT NULL DEFAULT 0,
-  `path` varchar(400) NOT NULL DEFAULT '',
-  `title` varchar(255) NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `parent_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `lft` int(11) NOT NULL DEFAULT '0',
+  `rgt` int(11) NOT NULL DEFAULT '0',
+  `level` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `path` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `alias` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '',
-  `note` varchar(255) NOT NULL DEFAULT '',
-  `description` mediumtext NOT NULL,
-  `published` tinyint(1) NOT NULL DEFAULT 0,
-  `checked_out` int(11) unsigned NOT NULL DEFAULT 0,
-  `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `access` int(10) unsigned NOT NULL DEFAULT 0,
-  `params` text NOT NULL,
-  `metadesc` varchar(1024) NOT NULL COMMENT 'The meta description for the page.',
-  `metakey` varchar(1024) NOT NULL COMMENT 'The meta keywords for the page.',
-  `metadata` varchar(2048) NOT NULL COMMENT 'JSON encoded metadata properties.',
-  `created_user_id` int(10) unsigned NOT NULL DEFAULT 0,
-  `created_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `created_by_alias` varchar(255) NOT NULL DEFAULT '',
-  `modified_user_id` int(10) unsigned NOT NULL DEFAULT 0,
-  `modified_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `images` text NOT NULL,
-  `urls` text NOT NULL,
-  `hits` int(10) unsigned NOT NULL DEFAULT 0,
-  `language` char(7) NOT NULL,
-  `version` int(10) unsigned NOT NULL DEFAULT 1,
-  `publish_up` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`),
-  KEY `tag_idx` (`published`,`access`),
-  KEY `idx_access` (`access`),
-  KEY `idx_checkout` (`checked_out`),
+  `note` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `published` tinyint(1) NOT NULL DEFAULT '0',
+  `checked_out` int(11) UNSIGNED NOT NULL DEFAULT '0',
+  `checked_out_time` datetime NOT NULL,
+  `access` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `params` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `metadesc` varchar(1024) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The meta description for the page.',
+  `metakey` varchar(1024) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The meta keywords for the page.',
+  `metadata` varchar(2048) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'JSON encoded metadata properties.',
+  `created_user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `created_time` datetime NOT NULL,
+  `created_by_alias` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `modified_user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `modified_time` datetime NOT NULL,
+  `images` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `urls` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `hits` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `language` char(7) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `version` int(10) UNSIGNED NOT NULL DEFAULT '1',
+  `publish_up` datetime NOT NULL,
+  `publish_down` datetime NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `tag_idx` (`published`,`access`) USING BTREE,
+  KEY `idx_access` (`access`) USING BTREE,
+  KEY `idx_checkout` (`checked_out`) USING BTREE,
+  KEY `idx_left_right` (`lft`,`rgt`) USING BTREE,
+  KEY `idx_language` (`language`) USING BTREE,
   KEY `idx_path` (`path`(100)),
-  KEY `idx_left_right` (`lft`,`rgt`),
-  KEY `idx_alias` (`alias`(100)),
-  KEY `idx_language` (`language`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+  KEY `idx_alias` (`alias`(100))
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `#__tags`
@@ -10472,19 +10538,19 @@ INSERT INTO `#__tags` (`id`, `parent_id`, `lft`, `rgt`, `level`, `path`, `title`
 -- Estrutura da tabela `#__template_styles`
 --
 
+DROP TABLE IF EXISTS `#__template_styles`;
 CREATE TABLE IF NOT EXISTS `#__template_styles` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `template` varchar(50) NOT NULL DEFAULT '',
-  `client_id` tinyint(1) unsigned NOT NULL DEFAULT 0,
-  `home` char(7) NOT NULL DEFAULT '0',
-  `title` varchar(255) NOT NULL DEFAULT '',
-  `params` text NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `idx_template` (`template`),
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `template` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `client_id` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `home` char(7) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `params` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `idx_template` (`template`) USING BTREE,
   KEY `idx_client_id` (`client_id`),
   KEY `idx_client_id_home` (`client_id`,`home`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=9;
-
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `#__template_styles`
@@ -10507,16 +10573,17 @@ INSERT INTO `#__template_styles` (`id`, `template`, `client_id`, `home`, `title`
 -- Estrutura da tabela `#__ucm_base`
 --
 
+DROP TABLE IF EXISTS `#__ucm_base`;
 CREATE TABLE IF NOT EXISTS `#__ucm_base` (
-  `ucm_id` int(10) unsigned NOT NULL,
+  `ucm_id` int(10) UNSIGNED NOT NULL,
   `ucm_item_id` int(10) NOT NULL,
   `ucm_type_id` int(11) NOT NULL,
   `ucm_language_id` int(11) NOT NULL,
-  PRIMARY KEY (`ucm_id`),
-  KEY `idx_ucm_item_id` (`ucm_item_id`),
-  KEY `idx_ucm_type_id` (`ucm_type_id`),
-  KEY `idx_ucm_language_id` (`ucm_language_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+  PRIMARY KEY (`ucm_id`) USING BTREE,
+  KEY `idx_ucm_item_id` (`ucm_item_id`) USING BTREE,
+  KEY `idx_ucm_type_id` (`ucm_type_id`) USING BTREE,
+  KEY `idx_ucm_language_id` (`ucm_language_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `#__ucm_base`
@@ -10533,53 +10600,54 @@ INSERT INTO `#__ucm_base` (`ucm_id`, `ucm_item_id`, `ucm_type_id`, `ucm_language
 -- Estrutura da tabela `#__ucm_content`
 --
 
+DROP TABLE IF EXISTS `#__ucm_content`;
 CREATE TABLE IF NOT EXISTS `#__ucm_content` (
-  `core_content_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `core_type_alias` varchar(400) NOT NULL DEFAULT '' COMMENT 'FK to the content types table',
-  `core_title` varchar(400) NOT NULL DEFAULT '',
+  `core_content_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `core_type_alias` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'FK to the content types table',
+  `core_title` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `core_alias` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '',
-  `core_body` mediumtext,
-  `core_state` tinyint(1) NOT NULL DEFAULT 0,
-  `core_checked_out_time` varchar(255) NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `core_checked_out_user_id` int(10) unsigned NOT NULL DEFAULT 0,
-  `core_access` int(10) unsigned NOT NULL DEFAULT 0,
-  `core_params` text,
-  `core_featured` tinyint(4) unsigned NOT NULL DEFAULT 0,
-  `core_metadata` varchar(2048) NOT NULL DEFAULT '' COMMENT 'JSON encoded metadata properties.',
-  `core_created_user_id` int(10) unsigned NOT NULL DEFAULT 0,
-  `core_created_by_alias` varchar(255) NOT NULL DEFAULT '',
-  `core_created_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `core_modified_user_id` int(10) unsigned NOT NULL DEFAULT 0 COMMENT 'Most recent user that modified',
-  `core_modified_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `core_language` char(7) NOT NULL DEFAULT '',
+  `core_body` longtext COLLATE utf8mb4_unicode_ci,
+  `core_state` tinyint(1) NOT NULL DEFAULT '0',
+  `core_checked_out_time` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `core_checked_out_user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `core_access` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `core_params` mediumtext COLLATE utf8mb4_unicode_ci,
+  `core_featured` tinyint(4) UNSIGNED NOT NULL DEFAULT '0',
+  `core_metadata` varchar(2048) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'JSON encoded metadata properties.',
+  `core_created_user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `core_created_by_alias` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `core_created_time` datetime NOT NULL,
+  `core_modified_user_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Most recent user that modified',
+  `core_modified_time` datetime NOT NULL,
+  `core_language` char(7) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `core_publish_up` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `core_publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `core_content_item_id` int(10) unsigned NOT NULL DEFAULT 0 COMMENT 'ID from the individual type table',
-  `asset_id` int(10) unsigned NOT NULL DEFAULT 0 COMMENT 'FK to the #__assets table.',
-  `core_images` text,
-  `core_urls` text,
-  `core_hits` int(10) unsigned NOT NULL DEFAULT 0,
-  `core_version` int(10) unsigned NOT NULL DEFAULT 1,
-  `core_ordering` int(11) NOT NULL DEFAULT 0,
-  `core_metakey` text,
-  `core_metadesc` text,
-  `core_catid` int(10) unsigned NOT NULL DEFAULT 0,
-  `core_xreference` varchar(50) NOT NULL DEFAULT '' COMMENT 'A reference to enable linkages to external data sets.',
-  `core_type_id` int(10) unsigned NOT NULL DEFAULT 0,
-  PRIMARY KEY (`core_content_id`),
-  KEY `tag_idx` (`core_state`,`core_access`),
-  KEY `idx_access` (`core_access`),
+  `core_content_item_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'ID from the individual type table',
+  `asset_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'FK to the #__assets table.',
+  `core_images` mediumtext COLLATE utf8mb4_unicode_ci,
+  `core_urls` mediumtext COLLATE utf8mb4_unicode_ci,
+  `core_hits` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `core_version` int(10) UNSIGNED NOT NULL DEFAULT '1',
+  `core_ordering` int(11) NOT NULL DEFAULT '0',
+  `core_metakey` mediumtext COLLATE utf8mb4_unicode_ci,
+  `core_metadesc` mediumtext COLLATE utf8mb4_unicode_ci,
+  `core_catid` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `core_xreference` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'A reference to enable linkages to external data sets.',
+  `core_type_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  PRIMARY KEY (`core_content_id`) USING BTREE,
+  KEY `tag_idx` (`core_state`,`core_access`) USING BTREE,
+  KEY `idx_access` (`core_access`) USING BTREE,
+  KEY `idx_language` (`core_language`) USING BTREE,
+  KEY `idx_modified_time` (`core_modified_time`) USING BTREE,
+  KEY `idx_created_time` (`core_created_time`) USING BTREE,
+  KEY `idx_core_modified_user_id` (`core_modified_user_id`) USING BTREE,
+  KEY `idx_core_checked_out_user_id` (`core_checked_out_user_id`) USING BTREE,
+  KEY `idx_core_created_user_id` (`core_created_user_id`) USING BTREE,
+  KEY `idx_core_type_id` (`core_type_id`) USING BTREE,
   KEY `idx_alias` (`core_alias`(100)),
-  KEY `idx_language` (`core_language`),
   KEY `idx_title` (`core_title`(100)),
-  KEY `idx_modified_time` (`core_modified_time`),
-  KEY `idx_created_time` (`core_created_time`),
-  KEY `idx_content_type` (`core_type_alias`(100)),
-  KEY `idx_core_modified_user_id` (`core_modified_user_id`),
-  KEY `idx_core_checked_out_user_id` (`core_checked_out_user_id`),
-  KEY `idx_core_created_user_id` (`core_created_user_id`),
-  KEY `idx_core_type_id` (`core_type_id`)
- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci COMMENT='Contains core content data in name spaced fields';
+  KEY `idx_content_type` (`core_type_alias`(100))
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Contains core content data in name spaced fields' ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `#__ucm_content`
@@ -10596,21 +10664,22 @@ INSERT INTO `#__ucm_content` (`core_content_id`, `core_type_alias`, `core_title`
 -- Estrutura da tabela `#__ucm_history`
 --
 
+DROP TABLE IF EXISTS `#__ucm_history`;
 CREATE TABLE IF NOT EXISTS `#__ucm_history` (
-  `version_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `ucm_item_id` int(10) unsigned NOT NULL,
-  `ucm_type_id` int(10) unsigned NOT NULL,
-  `version_note` varchar(255) NOT NULL DEFAULT '' COMMENT 'Optional version name',
-  `save_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `editor_user_id` int(10) unsigned NOT NULL DEFAULT 0,
-  `character_count` int(10) unsigned NOT NULL DEFAULT 0 COMMENT 'Number of characters in this version.',
-  `sha1_hash` varchar(50) NOT NULL DEFAULT '' COMMENT 'SHA1 hash of the version_data column.',
-  `version_data` mediumtext NOT NULL COMMENT 'json-encoded string of version data',
-  `keep_forever` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0=auto delete; 1=keep',
-  PRIMARY KEY (`version_id`),
-  KEY `idx_ucm_item_id` (`ucm_type_id`,`ucm_item_id`),
-  KEY `idx_save_date` (`save_date`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+  `version_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `ucm_item_id` int(10) UNSIGNED NOT NULL,
+  `ucm_type_id` int(10) UNSIGNED NOT NULL,
+  `version_note` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'Optional version name',
+  `save_date` datetime NOT NULL,
+  `editor_user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `character_count` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Number of characters in this version.',
+  `sha1_hash` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'SHA1 hash of the version_data column.',
+  `version_data` longtext COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'json-encoded string of version data',
+  `keep_forever` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0=auto delete; 1=keep',
+  PRIMARY KEY (`version_id`) USING BTREE,
+  KEY `idx_ucm_item_id` (`ucm_type_id`,`ucm_item_id`) USING BTREE,
+  KEY `idx_save_date` (`save_date`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
@@ -10618,105 +10687,106 @@ CREATE TABLE IF NOT EXISTS `#__ucm_history` (
 -- Estrutura da tabela `#__updates`
 --
 
+DROP TABLE IF EXISTS `#__updates`;
 CREATE TABLE IF NOT EXISTS `#__updates` (
   `update_id` int(11) NOT NULL AUTO_INCREMENT,
-  `update_site_id` int(11) DEFAULT 0,
-  `extension_id` int(11) DEFAULT 0,
-  `name` varchar(100) DEFAULT '',
-  `description` text NOT NULL,
-  `element` varchar(100) DEFAULT '',
-  `type` varchar(20) DEFAULT '',
-  `folder` varchar(20) DEFAULT '',
-  `client_id` tinyint(3) DEFAULT 0,
-  `version` varchar(32) DEFAULT '',
-  `data` text NOT NULL,
-  `detailsurl` text NOT NULL,
-  `infourl` text NOT NULL,
-  `extra_query` varchar(1000) DEFAULT '',
-  PRIMARY KEY (`update_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci COMMENT='Available Updates';
+  `update_site_id` int(11) DEFAULT '0',
+  `extension_id` int(11) DEFAULT '0',
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT '',
+  `description` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `element` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT '',
+  `type` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT '',
+  `folder` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT '',
+  `client_id` tinyint(3) DEFAULT '0',
+  `version` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT '',
+  `data` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `detailsurl` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `infourl` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `extra_query` varchar(1000) COLLATE utf8mb4_unicode_ci DEFAULT '',
+  PRIMARY KEY (`update_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Available Updates' ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `#__updates`
 --
 
 INSERT INTO `#__updates` (`update_id`, `update_site_id`, `extension_id`, `name`, `description`, `element`, `type`, `folder`, `client_id`, `version`, `data`, `detailsurl`, `infourl`, `extra_query`) VALUES
-(1, 46, 0, 'Armenian', '', 'pkg_hy-AM', 'package', '', 0, '3.4.4.1', '', 'https://update.joomla.org/language/details3/hy-AM_details.xml', '', ''),
-(2, 46, 0, 'Malay', '', 'pkg_ms-MY', 'package', '', 0, '3.4.1.2', '', 'https://update.joomla.org/language/details3/ms-MY_details.xml', '', ''),
-(3, 46, 0, 'Romanian', '', 'pkg_ro-RO', 'package', '', 0, '3.9.13.1', '', 'https://update.joomla.org/language/details3/ro-RO_details.xml', '', ''),
-(4, 46, 0, 'Flemish', '', 'pkg_nl-BE', 'package', '', 0, '3.9.18.1', '', 'https://update.joomla.org/language/details3/nl-BE_details.xml', '', ''),
-(5, 46, 0, 'Chinese Traditional', '', 'pkg_zh-TW', 'package', '', 0, '3.8.0.1', '', 'https://update.joomla.org/language/details3/zh-TW_details.xml', '', ''),
-(6, 46, 0, 'French', '', 'pkg_fr-FR', 'package', '', 0, '3.9.18.1', '', 'https://update.joomla.org/language/details3/fr-FR_details.xml', '', ''),
-(7, 46, 0, 'Galician', '', 'pkg_gl-ES', 'package', '', 0, '3.3.1.2', '', 'https://update.joomla.org/language/details3/gl-ES_details.xml', '', ''),
-(8, 46, 0, 'Georgian', '', 'pkg_ka-GE', 'package', '', 0, '3.9.18.1', '', 'https://update.joomla.org/language/details3/ka-GE_details.xml', '', ''),
-(9, 46, 0, 'Greek', '', 'pkg_el-GR', 'package', '', 0, '3.9.18.1', '', 'https://update.joomla.org/language/details3/el-GR_details.xml', '', ''),
-(10, 46, 0, 'Japanese', '', 'pkg_ja-JP', 'package', '', 0, '3.9.18.1', '', 'https://update.joomla.org/language/details3/ja-JP_details.xml', '', ''),
-(11, 46, 0, 'Hebrew', '', 'pkg_he-IL', 'package', '', 0, '3.1.1.2', '', 'https://update.joomla.org/language/details3/he-IL_details.xml', '', ''),
-(12, 46, 0, 'Bengali', '', 'pkg_bn-BD', 'package', '', 0, '3.8.10.1', '', 'https://update.joomla.org/language/details3/bn-BD_details.xml', '', ''),
-(13, 46, 0, 'Hungarian', '', 'pkg_hu-HU', 'package', '', 0, '3.9.12.1', '', 'https://update.joomla.org/language/details3/hu-HU_details.xml', '', ''),
-(14, 46, 0, 'Afrikaans', '', 'pkg_af-ZA', 'package', '', 0, '3.9.16.1', '', 'https://update.joomla.org/language/details3/af-ZA_details.xml', '', ''),
-(15, 46, 0, 'Arabic Unitag', '', 'pkg_ar-AA', 'package', '', 0, '3.9.18.1', '', 'https://update.joomla.org/language/details3/ar-AA_details.xml', '', ''),
-(16, 46, 0, 'Belarusian', '', 'pkg_be-BY', 'package', '', 0, '3.2.1.2', '', 'https://update.joomla.org/language/details3/be-BY_details.xml', '', ''),
-(17, 46, 0, 'Bulgarian', '', 'pkg_bg-BG', 'package', '', 0, '3.6.5.2', '', 'https://update.joomla.org/language/details3/bg-BG_details.xml', '', ''),
-(18, 46, 0, 'Catalan', '', 'pkg_ca-ES', 'package', '', 0, '3.9.11.2', '', 'https://update.joomla.org/language/details3/ca-ES_details.xml', '', ''),
-(19, 46, 0, 'Chinese Simplified', '', 'pkg_zh-CN', 'package', '', 0, '3.9.18.1', '', 'https://update.joomla.org/language/details3/zh-CN_details.xml', '', ''),
-(20, 46, 0, 'Croatian', '', 'pkg_hr-HR', 'package', '', 0, '3.9.18.1', '', 'https://update.joomla.org/language/details3/hr-HR_details.xml', '', ''),
-(21, 46, 0, 'Czech', '', 'pkg_cs-CZ', 'package', '', 0, '3.9.16.1', '', 'https://update.joomla.org/language/details3/cs-CZ_details.xml', '', ''),
-(22, 46, 0, 'Danish', '', 'pkg_da-DK', 'package', '', 0, '3.9.17.1', '', 'https://update.joomla.org/language/details3/da-DK_details.xml', '', ''),
-(23, 46, 0, 'Dutch', '', 'pkg_nl-NL', 'package', '', 0, '3.9.18.1', '', 'https://update.joomla.org/language/details3/nl-NL_details.xml', '', ''),
-(24, 46, 0, 'Esperanto', '', 'pkg_eo-XX', 'package', '', 0, '3.8.11.1', '', 'https://update.joomla.org/language/details3/eo-XX_details.xml', '', ''),
-(25, 46, 0, 'Estonian', '', 'pkg_et-EE', 'package', '', 0, '3.9.14.2', '', 'https://update.joomla.org/language/details3/et-EE_details.xml', '', ''),
-(26, 46, 0, 'Italian', '', 'pkg_it-IT', 'package', '', 0, '3.9.18.2', '', 'https://update.joomla.org/language/details3/it-IT_details.xml', '', ''),
-(27, 46, 0, 'Khmer', '', 'pkg_km-KH', 'package', '', 0, '3.4.5.1', '', 'https://update.joomla.org/language/details3/km-KH_details.xml', '', ''),
-(28, 46, 0, 'Korean', '', 'pkg_ko-KR', 'package', '', 0, '3.8.9.1', '', 'https://update.joomla.org/language/details3/ko-KR_details.xml', '', ''),
-(29, 46, 0, 'Latvian', '', 'pkg_lv-LV', 'package', '', 0, '3.7.3.1', '', 'https://update.joomla.org/language/details3/lv-LV_details.xml', '', ''),
-(30, 46, 0, 'Lithuanian', '', 'pkg_lt-LT', 'package', '', 0, '3.9.6.1', '', 'https://update.joomla.org/language/details3/lt-LT_details.xml', '', ''),
-(31, 46, 0, 'Macedonian', '', 'pkg_mk-MK', 'package', '', 0, '3.6.5.1', '', 'https://update.joomla.org/language/details3/mk-MK_details.xml', '', ''),
-(32, 46, 0, 'Norwegian Bokmal', '', 'pkg_nb-NO', 'package', '', 0, '3.8.11.1', '', 'https://update.joomla.org/language/details3/nb-NO_details.xml', '', ''),
-(33, 46, 0, 'Norwegian Nynorsk', '', 'pkg_nn-NO', 'package', '', 0, '3.4.2.1', '', 'https://update.joomla.org/language/details3/nn-NO_details.xml', '', ''),
-(34, 46, 0, 'Persian', '', 'pkg_fa-IR', 'package', '', 0, '3.9.18.1', '', 'https://update.joomla.org/language/details3/fa-IR_details.xml', '', ''),
-(35, 46, 0, 'Polish', '', 'pkg_pl-PL', 'package', '', 0, '3.9.13.1', '', 'https://update.joomla.org/language/details3/pl-PL_details.xml', '', ''),
-(36, 46, 0, 'Portuguese', '', 'pkg_pt-PT', 'package', '', 0, '3.9.15.1', '', 'https://update.joomla.org/language/details3/pt-PT_details.xml', '', ''),
-(37, 46, 0, 'Russian', '', 'pkg_ru-RU', 'package', '', 0, '3.9.18.1', '', 'https://update.joomla.org/language/details3/ru-RU_details.xml', '', ''),
-(38, 46, 0, 'English AU', '', 'pkg_en-AU', 'package', '', 0, '3.9.18.1', '', 'https://update.joomla.org/language/details3/en-AU_details.xml', '', ''),
-(39, 46, 0, 'Slovak', '', 'pkg_sk-SK', 'package', '', 0, '3.9.18.1', '', 'https://update.joomla.org/language/details3/sk-SK_details.xml', '', ''),
-(40, 46, 0, 'English US', '', 'pkg_en-US', 'package', '', 0, '3.9.18.1', '', 'https://update.joomla.org/language/details3/en-US_details.xml', '', ''),
-(41, 46, 0, 'Swedish', '', 'pkg_sv-SE', 'package', '', 0, '3.9.18.1', '', 'https://update.joomla.org/language/details3/sv-SE_details.xml', '', ''),
-(42, 46, 0, 'Syriac', '', 'pkg_sy-IQ', 'package', '', 0, '3.4.5.1', '', 'https://update.joomla.org/language/details3/sy-IQ_details.xml', '', ''),
-(43, 46, 0, 'Tamil', '', 'pkg_ta-IN', 'package', '', 0, '3.9.18.1', '', 'https://update.joomla.org/language/details3/ta-IN_details.xml', '', ''),
-(44, 46, 0, 'Thai', '', 'pkg_th-TH', 'package', '', 0, '3.9.18.1', '', 'https://update.joomla.org/language/details3/th-TH_details.xml', '', ''),
-(45, 46, 0, 'Turkish', '', 'pkg_tr-TR', 'package', '', 0, '3.9.4.1', '', 'https://update.joomla.org/language/details3/tr-TR_details.xml', '', ''),
-(46, 46, 0, 'Ukrainian', '', 'pkg_uk-UA', 'package', '', 0, '3.9.18.8', '', 'https://update.joomla.org/language/details3/uk-UA_details.xml', '', ''),
-(47, 46, 0, 'Uyghur', '', 'pkg_ug-CN', 'package', '', 0, '3.7.5.2', '', 'https://update.joomla.org/language/details3/ug-CN_details.xml', '', ''),
-(48, 46, 0, 'Albanian', '', 'pkg_sq-AL', 'package', '', 0, '3.1.1.2', '', 'https://update.joomla.org/language/details3/sq-AL_details.xml', '', ''),
-(49, 46, 0, 'Basque', '', 'pkg_eu-ES', 'package', '', 0, '3.7.5.1', '', 'https://update.joomla.org/language/details3/eu-ES_details.xml', '', ''),
-(50, 46, 0, 'Hindi', '', 'pkg_hi-IN', 'package', '', 0, '3.3.6.2', '', 'https://update.joomla.org/language/details3/hi-IN_details.xml', '', ''),
-(51, 46, 0, 'German DE', '', 'pkg_de-DE', 'package', '', 0, '3.9.18.1', '', 'https://update.joomla.org/language/details3/de-DE_details.xml', '', ''),
-(52, 46, 0, 'Serbian Latin', '', 'pkg_sr-YU', 'package', '', 0, '3.9.18.1', '', 'https://update.joomla.org/language/details3/sr-YU_details.xml', '', ''),
-(53, 46, 0, 'Spanish', '', 'pkg_es-ES', 'package', '', 0, '3.9.18.1', '', 'https://update.joomla.org/language/details3/es-ES_details.xml', '', ''),
-(54, 46, 0, 'Bosnian', '', 'pkg_bs-BA', 'package', '', 0, '3.9.18.1', '', 'https://update.joomla.org/language/details3/bs-BA_details.xml', '', ''),
-(55, 46, 0, 'Serbian Cyrillic', '', 'pkg_sr-RS', 'package', '', 0, '3.9.18.1', '', 'https://update.joomla.org/language/details3/sr-RS_details.xml', '', ''),
-(56, 46, 0, 'Vietnamese', '', 'pkg_vi-VN', 'package', '', 0, '3.2.1.2', '', 'https://update.joomla.org/language/details3/vi-VN_details.xml', '', ''),
-(57, 46, 0, 'Bahasa Indonesia', '', 'pkg_id-ID', 'package', '', 0, '3.6.2.1', '', 'https://update.joomla.org/language/details3/id-ID_details.xml', '', ''),
-(58, 46, 0, 'Finnish', '', 'pkg_fi-FI', 'package', '', 0, '3.9.16.1', '', 'https://update.joomla.org/language/details3/fi-FI_details.xml', '', ''),
-(59, 46, 0, 'Swahili', '', 'pkg_sw-KE', 'package', '', 0, '3.9.18.1', '', 'https://update.joomla.org/language/details3/sw-KE_details.xml', '', ''),
-(60, 46, 0, 'Montenegrin', '', 'pkg_srp-ME', 'package', '', 0, '3.3.1.2', '', 'https://update.joomla.org/language/details3/srp-ME_details.xml', '', ''),
-(61, 46, 0, 'English CA', '', 'pkg_en-CA', 'package', '', 0, '3.9.18.1', '', 'https://update.joomla.org/language/details3/en-CA_details.xml', '', ''),
-(62, 46, 0, 'French CA', '', 'pkg_fr-CA', 'package', '', 0, '3.6.5.1', '', 'https://update.joomla.org/language/details3/fr-CA_details.xml', '', ''),
-(63, 46, 0, 'Welsh', '', 'pkg_cy-GB', 'package', '', 0, '3.9.18.1', '', 'https://update.joomla.org/language/details3/cy-GB_details.xml', '', ''),
-(64, 46, 0, 'Sinhala', '', 'pkg_si-LK', 'package', '', 0, '3.3.1.2', '', 'https://update.joomla.org/language/details3/si-LK_details.xml', '', ''),
-(65, 46, 0, 'Dari Persian', '', 'pkg_prs-AF', 'package', '', 0, '3.4.4.3', '', 'https://update.joomla.org/language/details3/prs-AF_details.xml', '', ''),
-(66, 46, 0, 'Turkmen', '', 'pkg_tk-TM', 'package', '', 0, '3.5.0.2', '', 'https://update.joomla.org/language/details3/tk-TM_details.xml', '', ''),
-(67, 46, 0, 'Irish', '', 'pkg_ga-IE', 'package', '', 0, '3.8.13.1', '', 'https://update.joomla.org/language/details3/ga-IE_details.xml', '', ''),
-(68, 46, 0, 'Dzongkha', '', 'pkg_dz-BT', 'package', '', 0, '3.6.2.1', '', 'https://update.joomla.org/language/details3/dz-BT_details.xml', '', ''),
-(69, 46, 0, 'Slovenian', '', 'pkg_sl-SI', 'package', '', 0, '3.9.18.1', '', 'https://update.joomla.org/language/details3/sl-SI_details.xml', '', ''),
-(70, 46, 0, 'Spanish CO', '', 'pkg_es-CO', 'package', '', 0, '3.9.15.1', '', 'https://update.joomla.org/language/details3/es-CO_details.xml', '', ''),
-(71, 46, 0, 'German CH', '', 'pkg_de-CH', 'package', '', 0, '3.9.18.1', '', 'https://update.joomla.org/language/details3/de-CH_details.xml', '', ''),
-(72, 46, 0, 'German AT', '', 'pkg_de-AT', 'package', '', 0, '3.9.18.1', '', 'https://update.joomla.org/language/details3/de-AT_details.xml', '', ''),
-(73, 46, 0, 'German LI', '', 'pkg_de-LI', 'package', '', 0, '3.9.18.1', '', 'https://update.joomla.org/language/details3/de-LI_details.xml', '', ''),
-(74, 46, 0, 'German LU', '', 'pkg_de-LU', 'package', '', 0, '3.9.18.1', '', 'https://update.joomla.org/language/details3/de-LU_details.xml', '', ''),
-(75, 46, 0, 'English NZ', '', 'pkg_en-NZ', 'package', '', 0, '3.9.18.1', '', 'https://update.joomla.org/language/details3/en-NZ_details.xml', '', ''),
-(76, 46, 0, 'Kazakh', '', 'pkg_kk-KZ', 'package', '', 0, '3.9.17.1', '', 'https://update.joomla.org/language/details3/kk-KZ_details.xml', '', '');
+(2, 46, 0, 'Armenian', '', 'pkg_hy-AM', 'package', '', 0, '3.4.4.1', '', 'https://update.joomla.org/language/details3/hy-AM_details.xml', '', ''),
+(3, 46, 0, 'Malay', '', 'pkg_ms-MY', 'package', '', 0, '3.4.1.2', '', 'https://update.joomla.org/language/details3/ms-MY_details.xml', '', ''),
+(4, 46, 0, 'Romanian', '', 'pkg_ro-RO', 'package', '', 0, '3.9.13.1', '', 'https://update.joomla.org/language/details3/ro-RO_details.xml', '', ''),
+(5, 46, 0, 'Flemish', '', 'pkg_nl-BE', 'package', '', 0, '3.9.19.2', '', 'https://update.joomla.org/language/details3/nl-BE_details.xml', '', ''),
+(6, 46, 0, 'Chinese Traditional', '', 'pkg_zh-TW', 'package', '', 0, '3.8.0.1', '', 'https://update.joomla.org/language/details3/zh-TW_details.xml', '', ''),
+(7, 46, 0, 'French', '', 'pkg_fr-FR', 'package', '', 0, '3.9.19.2', '', 'https://update.joomla.org/language/details3/fr-FR_details.xml', '', ''),
+(8, 46, 0, 'Galician', '', 'pkg_gl-ES', 'package', '', 0, '3.3.1.2', '', 'https://update.joomla.org/language/details3/gl-ES_details.xml', '', ''),
+(9, 46, 0, 'Georgian', '', 'pkg_ka-GE', 'package', '', 0, '3.9.19.1', '', 'https://update.joomla.org/language/details3/ka-GE_details.xml', '', ''),
+(10, 46, 0, 'Greek', '', 'pkg_el-GR', 'package', '', 0, '3.9.18.1', '', 'https://update.joomla.org/language/details3/el-GR_details.xml', '', ''),
+(11, 46, 0, 'Japanese', '', 'pkg_ja-JP', 'package', '', 0, '3.9.19.1', '', 'https://update.joomla.org/language/details3/ja-JP_details.xml', '', ''),
+(12, 46, 0, 'Hebrew', '', 'pkg_he-IL', 'package', '', 0, '3.1.1.2', '', 'https://update.joomla.org/language/details3/he-IL_details.xml', '', ''),
+(13, 46, 0, 'Bengali', '', 'pkg_bn-BD', 'package', '', 0, '3.8.10.1', '', 'https://update.joomla.org/language/details3/bn-BD_details.xml', '', ''),
+(14, 46, 0, 'Hungarian', '', 'pkg_hu-HU', 'package', '', 0, '3.9.19.1', '', 'https://update.joomla.org/language/details3/hu-HU_details.xml', '', ''),
+(15, 46, 0, 'Afrikaans', '', 'pkg_af-ZA', 'package', '', 0, '3.9.16.1', '', 'https://update.joomla.org/language/details3/af-ZA_details.xml', '', ''),
+(16, 46, 0, 'Arabic Unitag', '', 'pkg_ar-AA', 'package', '', 0, '3.9.19.1', '', 'https://update.joomla.org/language/details3/ar-AA_details.xml', '', ''),
+(17, 46, 0, 'Belarusian', '', 'pkg_be-BY', 'package', '', 0, '3.2.1.2', '', 'https://update.joomla.org/language/details3/be-BY_details.xml', '', ''),
+(18, 46, 0, 'Bulgarian', '', 'pkg_bg-BG', 'package', '', 0, '3.6.5.2', '', 'https://update.joomla.org/language/details3/bg-BG_details.xml', '', ''),
+(19, 46, 0, 'Catalan', '', 'pkg_ca-ES', 'package', '', 0, '3.9.11.2', '', 'https://update.joomla.org/language/details3/ca-ES_details.xml', '', ''),
+(20, 46, 0, 'Chinese Simplified', '', 'pkg_zh-CN', 'package', '', 0, '3.9.19.1', '', 'https://update.joomla.org/language/details3/zh-CN_details.xml', '', ''),
+(21, 46, 0, 'Croatian', '', 'pkg_hr-HR', 'package', '', 0, '3.9.19.2', '', 'https://update.joomla.org/language/details3/hr-HR_details.xml', '', ''),
+(22, 46, 0, 'Czech', '', 'pkg_cs-CZ', 'package', '', 0, '3.9.19.1', '', 'https://update.joomla.org/language/details3/cs-CZ_details.xml', '', ''),
+(23, 46, 0, 'Danish', '', 'pkg_da-DK', 'package', '', 0, '3.9.19.1', '', 'https://update.joomla.org/language/details3/da-DK_details.xml', '', ''),
+(24, 46, 0, 'Dutch', '', 'pkg_nl-NL', 'package', '', 0, '3.9.19.2', '', 'https://update.joomla.org/language/details3/nl-NL_details.xml', '', ''),
+(25, 46, 0, 'Esperanto', '', 'pkg_eo-XX', 'package', '', 0, '3.8.11.1', '', 'https://update.joomla.org/language/details3/eo-XX_details.xml', '', ''),
+(26, 46, 0, 'Estonian', '', 'pkg_et-EE', 'package', '', 0, '3.9.14.2', '', 'https://update.joomla.org/language/details3/et-EE_details.xml', '', ''),
+(27, 46, 0, 'Italian', '', 'pkg_it-IT', 'package', '', 0, '3.9.19.1', '', 'https://update.joomla.org/language/details3/it-IT_details.xml', '', ''),
+(28, 46, 0, 'Khmer', '', 'pkg_km-KH', 'package', '', 0, '3.4.5.1', '', 'https://update.joomla.org/language/details3/km-KH_details.xml', '', ''),
+(29, 46, 0, 'Korean', '', 'pkg_ko-KR', 'package', '', 0, '3.8.9.1', '', 'https://update.joomla.org/language/details3/ko-KR_details.xml', '', ''),
+(30, 46, 0, 'Latvian', '', 'pkg_lv-LV', 'package', '', 0, '3.7.3.1', '', 'https://update.joomla.org/language/details3/lv-LV_details.xml', '', ''),
+(31, 46, 0, 'Lithuanian', '', 'pkg_lt-LT', 'package', '', 0, '3.9.6.1', '', 'https://update.joomla.org/language/details3/lt-LT_details.xml', '', ''),
+(32, 46, 0, 'Macedonian', '', 'pkg_mk-MK', 'package', '', 0, '3.6.5.1', '', 'https://update.joomla.org/language/details3/mk-MK_details.xml', '', ''),
+(33, 46, 0, 'Norwegian Bokmal', '', 'pkg_nb-NO', 'package', '', 0, '3.8.11.1', '', 'https://update.joomla.org/language/details3/nb-NO_details.xml', '', ''),
+(34, 46, 0, 'Norwegian Nynorsk', '', 'pkg_nn-NO', 'package', '', 0, '3.4.2.1', '', 'https://update.joomla.org/language/details3/nn-NO_details.xml', '', ''),
+(35, 46, 0, 'Persian', '', 'pkg_fa-IR', 'package', '', 0, '3.9.19.1', '', 'https://update.joomla.org/language/details3/fa-IR_details.xml', '', ''),
+(36, 46, 0, 'Polish', '', 'pkg_pl-PL', 'package', '', 0, '3.9.13.1', '', 'https://update.joomla.org/language/details3/pl-PL_details.xml', '', ''),
+(37, 46, 0, 'Portuguese', '', 'pkg_pt-PT', 'package', '', 0, '3.9.15.1', '', 'https://update.joomla.org/language/details3/pt-PT_details.xml', '', ''),
+(38, 46, 0, 'Russian', '', 'pkg_ru-RU', 'package', '', 0, '3.9.19.1', '', 'https://update.joomla.org/language/details3/ru-RU_details.xml', '', ''),
+(39, 46, 0, 'English AU', '', 'pkg_en-AU', 'package', '', 0, '3.9.19.1', '', 'https://update.joomla.org/language/details3/en-AU_details.xml', '', ''),
+(40, 46, 0, 'Slovak', '', 'pkg_sk-SK', 'package', '', 0, '3.9.19.1', '', 'https://update.joomla.org/language/details3/sk-SK_details.xml', '', ''),
+(41, 46, 0, 'English US', '', 'pkg_en-US', 'package', '', 0, '3.9.19.1', '', 'https://update.joomla.org/language/details3/en-US_details.xml', '', ''),
+(42, 46, 0, 'Swedish', '', 'pkg_sv-SE', 'package', '', 0, '3.9.19.1', '', 'https://update.joomla.org/language/details3/sv-SE_details.xml', '', ''),
+(43, 46, 0, 'Syriac', '', 'pkg_sy-IQ', 'package', '', 0, '3.4.5.1', '', 'https://update.joomla.org/language/details3/sy-IQ_details.xml', '', ''),
+(44, 46, 0, 'Tamil', '', 'pkg_ta-IN', 'package', '', 0, '3.9.19.2', '', 'https://update.joomla.org/language/details3/ta-IN_details.xml', '', ''),
+(45, 46, 0, 'Thai', '', 'pkg_th-TH', 'package', '', 0, '3.9.19.1', '', 'https://update.joomla.org/language/details3/th-TH_details.xml', '', ''),
+(46, 46, 0, 'Turkish', '', 'pkg_tr-TR', 'package', '', 0, '3.9.4.1', '', 'https://update.joomla.org/language/details3/tr-TR_details.xml', '', ''),
+(47, 46, 0, 'Ukrainian', '', 'pkg_uk-UA', 'package', '', 0, '3.9.19.1', '', 'https://update.joomla.org/language/details3/uk-UA_details.xml', '', ''),
+(48, 46, 0, 'Uyghur', '', 'pkg_ug-CN', 'package', '', 0, '3.7.5.2', '', 'https://update.joomla.org/language/details3/ug-CN_details.xml', '', ''),
+(49, 46, 0, 'Albanian', '', 'pkg_sq-AL', 'package', '', 0, '3.1.1.2', '', 'https://update.joomla.org/language/details3/sq-AL_details.xml', '', ''),
+(50, 46, 0, 'Basque', '', 'pkg_eu-ES', 'package', '', 0, '3.7.5.1', '', 'https://update.joomla.org/language/details3/eu-ES_details.xml', '', ''),
+(51, 46, 0, 'Hindi', '', 'pkg_hi-IN', 'package', '', 0, '3.3.6.2', '', 'https://update.joomla.org/language/details3/hi-IN_details.xml', '', ''),
+(52, 46, 0, 'German DE', '', 'pkg_de-DE', 'package', '', 0, '3.9.19.2', '', 'https://update.joomla.org/language/details3/de-DE_details.xml', '', ''),
+(53, 46, 0, 'Serbian Latin', '', 'pkg_sr-YU', 'package', '', 0, '3.9.19.1', '', 'https://update.joomla.org/language/details3/sr-YU_details.xml', '', ''),
+(54, 46, 0, 'Spanish', '', 'pkg_es-ES', 'package', '', 0, '3.9.18.1', '', 'https://update.joomla.org/language/details3/es-ES_details.xml', '', ''),
+(55, 46, 0, 'Bosnian', '', 'pkg_bs-BA', 'package', '', 0, '3.9.19.1', '', 'https://update.joomla.org/language/details3/bs-BA_details.xml', '', ''),
+(56, 46, 0, 'Serbian Cyrillic', '', 'pkg_sr-RS', 'package', '', 0, '3.9.19.1', '', 'https://update.joomla.org/language/details3/sr-RS_details.xml', '', ''),
+(57, 46, 0, 'Vietnamese', '', 'pkg_vi-VN', 'package', '', 0, '3.2.1.2', '', 'https://update.joomla.org/language/details3/vi-VN_details.xml', '', ''),
+(58, 46, 0, 'Bahasa Indonesia', '', 'pkg_id-ID', 'package', '', 0, '3.6.2.1', '', 'https://update.joomla.org/language/details3/id-ID_details.xml', '', ''),
+(59, 46, 0, 'Finnish', '', 'pkg_fi-FI', 'package', '', 0, '3.9.16.1', '', 'https://update.joomla.org/language/details3/fi-FI_details.xml', '', ''),
+(60, 46, 0, 'Swahili', '', 'pkg_sw-KE', 'package', '', 0, '3.9.19.1', '', 'https://update.joomla.org/language/details3/sw-KE_details.xml', '', ''),
+(61, 46, 0, 'Montenegrin', '', 'pkg_srp-ME', 'package', '', 0, '3.3.1.2', '', 'https://update.joomla.org/language/details3/srp-ME_details.xml', '', ''),
+(62, 46, 0, 'English CA', '', 'pkg_en-CA', 'package', '', 0, '3.9.19.1', '', 'https://update.joomla.org/language/details3/en-CA_details.xml', '', ''),
+(63, 46, 0, 'French CA', '', 'pkg_fr-CA', 'package', '', 0, '3.6.5.1', '', 'https://update.joomla.org/language/details3/fr-CA_details.xml', '', ''),
+(64, 46, 0, 'Welsh', '', 'pkg_cy-GB', 'package', '', 0, '3.9.19.1', '', 'https://update.joomla.org/language/details3/cy-GB_details.xml', '', ''),
+(65, 46, 0, 'Sinhala', '', 'pkg_si-LK', 'package', '', 0, '3.3.1.2', '', 'https://update.joomla.org/language/details3/si-LK_details.xml', '', ''),
+(66, 46, 0, 'Dari Persian', '', 'pkg_prs-AF', 'package', '', 0, '3.4.4.3', '', 'https://update.joomla.org/language/details3/prs-AF_details.xml', '', ''),
+(67, 46, 0, 'Turkmen', '', 'pkg_tk-TM', 'package', '', 0, '3.5.0.2', '', 'https://update.joomla.org/language/details3/tk-TM_details.xml', '', ''),
+(68, 46, 0, 'Irish', '', 'pkg_ga-IE', 'package', '', 0, '3.8.13.1', '', 'https://update.joomla.org/language/details3/ga-IE_details.xml', '', ''),
+(69, 46, 0, 'Dzongkha', '', 'pkg_dz-BT', 'package', '', 0, '3.6.2.1', '', 'https://update.joomla.org/language/details3/dz-BT_details.xml', '', ''),
+(70, 46, 0, 'Slovenian', '', 'pkg_sl-SI', 'package', '', 0, '3.9.19.1', '', 'https://update.joomla.org/language/details3/sl-SI_details.xml', '', ''),
+(71, 46, 0, 'Spanish CO', '', 'pkg_es-CO', 'package', '', 0, '3.9.15.1', '', 'https://update.joomla.org/language/details3/es-CO_details.xml', '', ''),
+(72, 46, 0, 'German CH', '', 'pkg_de-CH', 'package', '', 0, '3.9.19.2', '', 'https://update.joomla.org/language/details3/de-CH_details.xml', '', ''),
+(73, 46, 0, 'German AT', '', 'pkg_de-AT', 'package', '', 0, '3.9.19.2', '', 'https://update.joomla.org/language/details3/de-AT_details.xml', '', ''),
+(74, 46, 0, 'German LI', '', 'pkg_de-LI', 'package', '', 0, '3.9.19.2', '', 'https://update.joomla.org/language/details3/de-LI_details.xml', '', ''),
+(75, 46, 0, 'German LU', '', 'pkg_de-LU', 'package', '', 0, '3.9.19.2', '', 'https://update.joomla.org/language/details3/de-LU_details.xml', '', ''),
+(76, 46, 0, 'English NZ', '', 'pkg_en-NZ', 'package', '', 0, '3.9.19.1', '', 'https://update.joomla.org/language/details3/en-NZ_details.xml', '', ''),
+(77, 46, 0, 'Kazakh', '', 'pkg_kk-KZ', 'package', '', 0, '3.9.17.1', '', 'https://update.joomla.org/language/details3/kk-KZ_details.xml', '', '');
 
 -- --------------------------------------------------------
 
@@ -10724,42 +10794,43 @@ INSERT INTO `#__updates` (`update_id`, `update_site_id`, `extension_id`, `name`,
 -- Estrutura da tabela `#__update_sites`
 --
 
+DROP TABLE IF EXISTS `#__update_sites`;
 CREATE TABLE IF NOT EXISTS `#__update_sites` (
   `update_site_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) DEFAULT '',
-  `type` varchar(20) DEFAULT '',
-  `location` text NOT NULL,
-  `enabled` int(11) DEFAULT 0,
-  `last_check_timestamp` bigint(20) DEFAULT 0,
-  `extra_query` varchar(1000) DEFAULT '',
-  PRIMARY KEY (`update_site_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci COMMENT='Update Sites';
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT '',
+  `type` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT '',
+  `location` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `enabled` int(11) DEFAULT '0',
+  `last_check_timestamp` bigint(20) DEFAULT '0',
+  `extra_query` varchar(1000) COLLATE utf8mb4_unicode_ci DEFAULT '',
+  PRIMARY KEY (`update_site_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Update Sites' ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `#__update_sites`
 --
 
 INSERT INTO `#__update_sites` (`update_site_id`, `name`, `type`, `location`, `enabled`, `last_check_timestamp`, `extra_query`) VALUES
-(1, 'Joomla Core', 'collection', 'https://update.joomla.org/core/list.xml', 1, 1590962163, ''),
-(2, 'Joomla Extension Directory', 'collection', 'http://update.joomla.org/jed/list.xml', 1, 1590962164, ''),
-(8, 'Joomla! Update Component Update Site', 'extension', 'http://update.joomla.org/core/extensions/com_joomlaupdate.xml', 1, 1590962164, ''),
-(9, 'Joomla! Update Component Update Site', 'extension', 'https://update.joomla.org/core/extensions/com_joomlaupdate.xml', 1, 1590962165, ''),
-(35, 'Blackdale', 'extension', 'http://updates.blackdale.com/update/modblank250/modblank250.xml', 1, 1590962166, ''),
-(36, 'AllVideos', 'extension', 'http://cdn.joomlaworks.org/updates/allvideos.xml', 1, 1590962167, ''),
-(37, 'WebInstaller Update Site', 'extension', 'https://appscdn.joomla.org/webapps/jedapps/webinstaller.xml', 1, 1590962168, ''),
-(38, 'J2XML - Users', 'extension', 'https://www.eshiol.it/files/plg_j2xml_users/update.xml', 1, 1590962170, ''),
-(39, 'Regular Labs - Articles Anywhere', 'extension', 'https://download.regularlabs.com/updates.xml?e=articlesanywhere&type=.xml', 1, 1590962172, ''),
-(40, 'K2 Updates', 'extension', 'http://getk2.org/app/update.xml', 1, 1590962174, ''),
-(41, 'COM_PHOCADOWNLOAD', 'extension', 'https://raw.githubusercontent.com/PhocaCz/PhocaDownload/master/manifest.xml', 1, 1590962175, ''),
-(42, 'com_phocagallery', 'extension', 'https://raw.githubusercontent.com/PhocaCz/PhocaGallery/master/manifest.xml', 1, 1590962175, ''),
-(43, 'J2XML', 'extension', 'https://www.eshiol.it/files/j2xml37/j2xml.xml', 1, 1590962177, ''),
-(45, 'JEvents Updates', 'extension', 'https://www.jevents.net/updates/-/pkg_jevents-update-3.4.50.xml', 1, 1590962179, ''),
-(46, 'Accredited Joomla! Translations', 'collection', 'http://update.joomla.org/language/translationlist_3.xml', 1, 1590962180, ''),
-(47, 'Youtube Gallery', 'extension', 'https://joomlaboat.com/updates/extensions/youtubegallery-free.xml', 1, 1590962181, ''),
-(48, 'JCE Editor Package', 'extension', 'https://cdn.joomlacontenteditor.net/updates/xml/editor/pkg_jce.xml', 1, 1590962185, ''),
-(49, 'Accredited Joomla! Translations', 'collection', 'https://update.joomla.org/language/translationlist_3.xml', 1, 1590962185, ''),
-(50, 'JEvents Updates', 'extension', 'https://www.jevents.net/updates/pkg_jevents-update.xml', 1, 1590962186, ''),
-(51, 'AllVideos', 'extension', 'https://cdn.joomlaworks.org/updates/allvideos.xml', 1, 1590962189, '');
+(1, 'Joomla Core', 'collection', 'https://update.joomla.org/core/list.xml', 1, 1592877610, ''),
+(2, 'Joomla Extension Directory', 'collection', 'http://update.joomla.org/jed/list.xml', 1, 1592877610, ''),
+(8, 'Joomla! Update Component Update Site', 'extension', 'http://update.joomla.org/core/extensions/com_joomlaupdate.xml', 1, 1592877784, ''),
+(9, 'Joomla! Update Component Update Site', 'extension', 'https://update.joomla.org/core/extensions/com_joomlaupdate.xml', 1, 1592877784, ''),
+(35, 'Blackdale', 'extension', 'http://updates.blackdale.com/update/modblank250/modblank250.xml', 0, 0, ''),
+(36, 'AllVideos', 'extension', 'http://cdn.joomlaworks.org/updates/allvideos.xml', 1, 1592877612, ''),
+(37, 'WebInstaller Update Site', 'extension', 'https://appscdn.joomla.org/webapps/jedapps/webinstaller.xml', 1, 1592877613, ''),
+(38, 'J2XML - Users', 'extension', 'https://www.eshiol.it/files/plg_j2xml_users/update.xml', 1, 1592877617, ''),
+(39, 'Regular Labs - Articles Anywhere', 'extension', 'https://download.regularlabs.com/updates.xml?e=articlesanywhere&type=.xml', 1, 1592877618, ''),
+(40, 'K2 Updates', 'extension', 'http://getk2.org/app/update.xml', 1, 1592877619, ''),
+(41, 'COM_PHOCADOWNLOAD', 'extension', 'https://raw.githubusercontent.com/PhocaCz/PhocaDownload/master/manifest.xml', 1, 1592877619, ''),
+(42, 'com_phocagallery', 'extension', 'https://raw.githubusercontent.com/PhocaCz/PhocaGallery/master/manifest.xml', 1, 1592877620, ''),
+(43, 'J2XML', 'extension', 'https://www.eshiol.it/files/j2xml37/j2xml.xml', 1, 1592877621, ''),
+(45, 'JEvents Updates', 'extension', 'https://www.jevents.net/updates/-/pkg_jevents-update-3.4.50.xml', 1, 1592877622, ''),
+(46, 'Accredited Joomla! Translations', 'collection', 'http://update.joomla.org/language/translationlist_3.xml', 1, 1592877623, ''),
+(47, 'Youtube Gallery', 'extension', 'https://joomlaboat.com/updates/extensions/youtubegallery-free.xml', 1, 1592877624, ''),
+(49, 'Accredited Joomla! Translations', 'collection', 'https://update.joomla.org/language/translationlist_3.xml', 1, 1592877625, ''),
+(50, 'JEvents Updates', 'extension', 'https://www.jevents.net/updates/pkg_jevents-update.xml', 1, 1592877625, ''),
+(51, 'AllVideos', 'extension', 'https://cdn.joomlaworks.org/updates/allvideos.xml', 1, 1592877626, ''),
+(52, 'JCE Editor Package', 'extension', 'https://cdn.joomlacontenteditor.net/updates/xml/editor/pkg_jce.xml', 1, 1592877628, '');
 
 -- --------------------------------------------------------
 
@@ -10767,11 +10838,12 @@ INSERT INTO `#__update_sites` (`update_site_id`, `name`, `type`, `location`, `en
 -- Estrutura da tabela `#__update_sites_extensions`
 --
 
+DROP TABLE IF EXISTS `#__update_sites_extensions`;
 CREATE TABLE IF NOT EXISTS `#__update_sites_extensions` (
-  `update_site_id` int(11) NOT NULL DEFAULT 0,
-  `extension_id` int(11) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`update_site_id`,`extension_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci COMMENT='Links extensions to update sites';
+  `update_site_id` int(11) NOT NULL DEFAULT '0',
+  `extension_id` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`update_site_id`,`extension_id`) USING BTREE
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Links extensions to update sites' ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `#__update_sites_extensions`
@@ -10794,10 +10866,10 @@ INSERT INTO `#__update_sites_extensions` (`update_site_id`, `extension_id`) VALU
 (45, 10192),
 (46, 10002),
 (47, 10129),
-(48, 10140),
 (49, 10002),
 (50, 10192),
-(51, 10050);
+(51, 10050),
+(52, 10140);
 
 -- --------------------------------------------------------
 
@@ -10805,18 +10877,19 @@ INSERT INTO `#__update_sites_extensions` (`update_site_id`, `extension_id`) VALU
 -- Estrutura da tabela `#__usergroups`
 --
 
+DROP TABLE IF EXISTS `#__usergroups`;
 CREATE TABLE IF NOT EXISTS `#__usergroups` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
-  `parent_id` int(10) unsigned NOT NULL DEFAULT 0 COMMENT 'Adjacency List Reference Id',
-  `lft` int(11) NOT NULL DEFAULT 0 COMMENT 'Nested set lft.',
-  `rgt` int(11) NOT NULL DEFAULT 0 COMMENT 'Nested set rgt.',
-  `title` varchar(100) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `idx_usergroup_parent_title_lookup` (`parent_id`,`title`),
-  KEY `idx_usergroup_title_lookup` (`title`),
-  KEY `idx_usergroup_adjacency_lookup` (`parent_id`),
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
+  `parent_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Adjacency List Reference Id',
+  `lft` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set lft.',
+  `rgt` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set rgt.',
+  `title` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE KEY `idx_usergroup_parent_title_lookup` (`parent_id`,`title`) USING BTREE,
+  KEY `idx_usergroup_title_lookup` (`title`) USING BTREE,
+  KEY `idx_usergroup_adjacency_lookup` (`parent_id`) USING BTREE,
   KEY `idx_usergroup_nested_set_lookup` (`lft`,`rgt`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `#__usergroups`
@@ -10824,14 +10897,13 @@ CREATE TABLE IF NOT EXISTS `#__usergroups` (
 
 INSERT INTO `#__usergroups` (`id`, `parent_id`, `lft`, `rgt`, `title`) VALUES
 (1, 0, 1, 18, 'Public'),
-(2, 1, 8, 15, 'Registered'),
-(3, 2, 9, 14, 'Author'),
+(2, 1, 6, 15, 'Registered'),
+(3, 2, 7, 14, 'Author'),
 (4, 3, 10, 13, 'Editor'),
 (5, 4, 11, 12, 'Publisher'),
-(6, 1, 4, 7, 'Manager'),
-(7, 6, 5, 6, 'Administrator'),
+(6, 1, 2, 5, 'Manager'),
+(7, 6, 3, 4, 'Administrator'),
 (8, 1, 16, 17, 'Super Users'),
-(9, 1, 2, 3, 'Guest'),
 (13, 3, 8, 9, 'Agente de Dirigentes - Gabinete do Ministro');
 
 -- --------------------------------------------------------
@@ -10840,36 +10912,37 @@ INSERT INTO `#__usergroups` (`id`, `parent_id`, `lft`, `rgt`, `title`) VALUES
 -- Estrutura da tabela `#__users`
 --
 
+DROP TABLE IF EXISTS `#__users`;
 CREATE TABLE IF NOT EXISTS `#__users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(400) NOT NULL DEFAULT '',
-  `username` varchar(150) NOT NULL DEFAULT '',
-  `email` varchar(100) NOT NULL DEFAULT '',
-  `password` varchar(100) NOT NULL DEFAULT '',
-  `block` tinyint(4) NOT NULL DEFAULT 0,
-  `sendEmail` tinyint(4) DEFAULT 0,
-  `registerDate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `lastvisitDate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `activation` varchar(100) NOT NULL DEFAULT '',
-  `params` text NOT NULL,
-  `lastResetTime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT 'Date of last password reset',
-  `resetCount` int(11) NOT NULL DEFAULT 0 COMMENT 'Count of password resets since lastResetTime',
-  `otpKey` varchar(1000) NOT NULL DEFAULT '' COMMENT 'Two factor authentication encrypted keys',
-  `otep` varchar(1000) NOT NULL DEFAULT '' COMMENT 'One time emergency passwords',
-  `requireReset` tinyint(4) NOT NULL DEFAULT 0 COMMENT 'Require user to reset password on next login',
-  PRIMARY KEY (`id`),
-  KEY `idx_name` (`name`(100)),
-  KEY `idx_block` (`block`),
+  `name` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `username` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `password` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `block` tinyint(4) NOT NULL DEFAULT '0',
+  `sendEmail` tinyint(4) DEFAULT '0',
+  `registerDate` datetime NOT NULL,
+  `lastvisitDate` datetime NOT NULL,
+  `activation` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `params` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lastResetTime` datetime NOT NULL COMMENT 'Date of last password reset',
+  `resetCount` int(11) NOT NULL DEFAULT '0' COMMENT 'Count of password resets since lastResetTime',
+  `otpKey` varchar(1000) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'Two factor authentication encrypted keys',
+  `otep` varchar(1000) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'One time emergency passwords',
+  `requireReset` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'Require user to reset password on next login',
+  PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `idx_username` (`username`),
-  KEY `email` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+  KEY `idx_block` (`block`) USING BTREE,
+  KEY `email` (`email`) USING BTREE,
+  KEY `idx_name` (`name`(100))
+) ENGINE=InnoDB AUTO_INCREMENT=932 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `#__users`
 --
 
 INSERT INTO `#__users` (`id`, `name`, `username`, `email`, `password`, `block`, `sendEmail`, `registerDate`, `lastvisitDate`, `activation`, `params`, `lastResetTime`, `resetCount`, `otpKey`, `otep`, `requireReset`) VALUES
-(931, 'super', 'super', 'tiagovtg@gmail.com', '$2y$10$j5zeBX5ggg5S2rGccW5JBeTU6QudOFAY5jSiiB6JM9Pk7EG3Ds6du', 0, 0, '2019-04-05 16:25:23', '2020-06-14 19:14:12', '', '{\"admin_style\":\"\",\"admin_language\":\"\",\"language\":\"\",\"editor\":\"\",\"helpsite\":\"\",\"timezone\":\"\"}', '0000-00-00 00:00:00', 0, '', '', 0);
+(931, 'super', 'super', 'tiagovtg@gmail.com', '$2y$10$mFFUZTFpEZoO2JoEhPNtg.Ev/e9zxXTCTff9b9KwXUFner1SaepEu', 0, 0, '2019-04-05 16:25:23', '2020-06-23 02:08:02', '', '{\"admin_style\":\"\",\"admin_language\":\"\",\"language\":\"\",\"editor\":\"\",\"helpsite\":\"\",\"timezone\":\"\"}', '0000-00-00 00:00:00', 0, '', '', 0);
 
 -- --------------------------------------------------------
 
@@ -10877,18 +10950,19 @@ INSERT INTO `#__users` (`id`, `name`, `username`, `email`, `password`, `block`, 
 -- Estrutura da tabela `#__user_keys`
 --
 
+DROP TABLE IF EXISTS `#__user_keys`;
 CREATE TABLE IF NOT EXISTS `#__user_keys` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` varchar(150) NOT NULL,
-  `token` varchar(255) NOT NULL,
-  `series` varchar(191) NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `series` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `invalid` tinyint(4) NOT NULL,
-  `time` varchar(200) NOT NULL,
-  `uastring` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `series` (`series`),
-  KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+  `time` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uastring` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE KEY `series` (`series`) USING BTREE,
+  KEY `user_id` (`user_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
@@ -10896,26 +10970,27 @@ CREATE TABLE IF NOT EXISTS `#__user_keys` (
 -- Estrutura da tabela `#__user_notes`
 --
 
+DROP TABLE IF EXISTS `#__user_notes`;
 CREATE TABLE IF NOT EXISTS `#__user_notes` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(10) unsigned NOT NULL DEFAULT 0,
-  `catid` int(10) unsigned NOT NULL DEFAULT 0,
-  `subject` varchar(100) NOT NULL DEFAULT '',
-  `body` text NOT NULL,
-  `state` tinyint(3) NOT NULL DEFAULT 0,
-  `checked_out` int(10) unsigned NOT NULL DEFAULT 0,
-  `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `created_user_id` int(10) unsigned NOT NULL DEFAULT 0,
-  `created_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `modified_user_id` int(10) unsigned NOT NULL,
-  `modified_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `review_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `publish_up` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`),
-  KEY `idx_user_id` (`user_id`),
-  KEY `idx_category_id` (`catid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `catid` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `subject` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `body` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `state` tinyint(3) NOT NULL DEFAULT '0',
+  `checked_out` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `checked_out_time` datetime NOT NULL,
+  `created_user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `created_time` datetime NOT NULL,
+  `modified_user_id` int(10) UNSIGNED NOT NULL,
+  `modified_time` datetime NOT NULL,
+  `review_time` datetime NOT NULL,
+  `publish_up` datetime NOT NULL,
+  `publish_down` datetime NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `idx_user_id` (`user_id`) USING BTREE,
+  KEY `idx_category_id` (`catid`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
@@ -10923,13 +10998,14 @@ CREATE TABLE IF NOT EXISTS `#__user_notes` (
 -- Estrutura da tabela `#__user_profiles`
 --
 
+DROP TABLE IF EXISTS `#__user_profiles`;
 CREATE TABLE IF NOT EXISTS `#__user_profiles` (
   `user_id` int(11) NOT NULL,
-  `profile_key` varchar(100) NOT NULL,
-  `profile_value` text NOT NULL,
-  `ordering` int(11) NOT NULL DEFAULT 0,
-  UNIQUE KEY `idx_user_id_profile_key` (`user_id`,`profile_key`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci COMMENT='Simple user profile storage table';
+  `profile_key` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `profile_value` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ordering` int(11) NOT NULL DEFAULT '0',
+  UNIQUE KEY `idx_user_id_profile_key` (`user_id`,`profile_key`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Simple user profile storage table' ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
@@ -10937,12 +11013,12 @@ CREATE TABLE IF NOT EXISTS `#__user_profiles` (
 -- Estrutura da tabela `#__user_usergroup_map`
 --
 
+DROP TABLE IF EXISTS `#__user_usergroup_map`;
 CREATE TABLE IF NOT EXISTS `#__user_usergroup_map` (
-  `user_id` int(10) unsigned NOT NULL DEFAULT 0 COMMENT 'Foreign Key to #__users.id',
-  `group_id` int(10) unsigned NOT NULL DEFAULT 0 COMMENT 'Foreign Key to #__usergroups.id',
-  PRIMARY KEY (`user_id`,`group_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
-
+  `user_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Foreign Key to x3dts_users.id',
+  `group_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Foreign Key to x3dts_usergroups.id',
+  PRIMARY KEY (`user_id`,`group_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `#__user_usergroup_map`
@@ -10957,15 +11033,17 @@ INSERT INTO `#__user_usergroup_map` (`user_id`, `group_id`) VALUES
 -- Estrutura da tabela `#__utf8_conversion`
 --
 
+DROP TABLE IF EXISTS `#__utf8_conversion`;
 CREATE TABLE IF NOT EXISTS `#__utf8_conversion` (
-  `converted` tinyint(4) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+  `converted` tinyint(4) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Dumping data for table `#__utf8_conversion`
+-- Extraindo dados da tabela `#__utf8_conversion`
 --
 
-INSERT INTO `#__utf8_conversion` (`converted`) VALUES (0);
+INSERT INTO `#__utf8_conversion` (`converted`) VALUES
+(5);
 
 -- --------------------------------------------------------
 
@@ -10973,15 +11051,15 @@ INSERT INTO `#__utf8_conversion` (`converted`) VALUES (0);
 -- Estrutura da tabela `#__viewlevels`
 --
 
+DROP TABLE IF EXISTS `#__viewlevels`;
 CREATE TABLE IF NOT EXISTS `#__viewlevels` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
-  `title` varchar(100) NOT NULL DEFAULT '',
-  `ordering` int(11) NOT NULL DEFAULT 0,
-  `rules` varchar(5120) NOT NULL COMMENT 'JSON encoded access control.',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `idx_assetgroup_title_lookup` (`title`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=7;
-
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
+  `title` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `ordering` int(11) NOT NULL DEFAULT '0',
+  `rules` varchar(5120) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'JSON encoded access control.',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE KEY `idx_assetgroup_title_lookup` (`title`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Extraindo dados da tabela `#__viewlevels`
@@ -10989,10 +11067,8 @@ CREATE TABLE IF NOT EXISTS `#__viewlevels` (
 
 INSERT INTO `#__viewlevels` (`id`, `title`, `ordering`, `rules`) VALUES
 (1, 'Public', 0, '[1]'),
-(2, 'Registered', 2, '[6,2,8]'),
-(3, 'Special', 3, '[6,3,8]'),
-(5, 'Guest', 1, '[9]'),
-(6, 'Super Users', 4, '[8]');
+(2, 'Registered', 1, '[6,2,8]'),
+(3, 'Special', 2, '[6,3,13,8]');
 
 -- --------------------------------------------------------
 
@@ -11296,3 +11372,6 @@ ALTER TABLE `#__k2_items` ADD FULLTEXT KEY `title` (`title`);
 ALTER TABLE `#__k2_tags` ADD FULLTEXT KEY `name` (`name`);
 COMMIT;
 
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
