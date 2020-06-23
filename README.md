@@ -3,7 +3,7 @@ Baseada na IDG 2.0, versão da Identidade Digital do Governo Federal, versão ai
 
 Se tiverem dificuldades, podem entrar em contato: tiagovtg@gmail.com
 
-- DADOS DE ACESSO: essa versão é auto instalável, crie seu banco, user, senha e use na etapa 2 como toda instalação joomla, já na etapa 3 use a versão sample_padrao_egov para gerar o conteudo automatico.
+- INSTALAÇÃO: Tem um PDF de nome Infograficoportal.pdf, sigam as instruções. ⚙
 
 Portal padrão em CMS Joomla 3.9.18 06/2020
 
