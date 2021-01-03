@@ -1,6 +1,9 @@
 # IDG 2020 (Egov2)
 Baseada na IDG 2.0, versão da Identidade Digital do Governo Federal, versão ainda em desenvolvimento, cedida em parceria com Cesar da UFRB de conteúdo fiction apneas como demonstração(ipsum) para montagem de layout.
 
+Vesão em WordPress do IDG
+https://github.com/culturagovbr/IDG-WP
+
 Se tiverem dificuldades, podem entrar em contato: tiagovtg@gmail.com
 
 - INSTALAÇÃO: Tem um PDF de nome Infograficoportal.pdf, sigam as instruções. ⚙
