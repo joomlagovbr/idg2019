@@ -85,3 +85,6 @@ require __DIR__.'/_helper.php';
 
 	
 <!-- </div> -->
+
+<?php /* resolve problema de rodapé escondendo conteúdo (https://github.com/joomlagovbr/idg2019/issues/13) */?>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
