@@ -322,7 +322,7 @@ class TemplateContentArticleHelper {
 			return $output;
 		}
 		else{
-		 	return JURI::base().'templates/padraogoverno2019/img/capesFace.jpg';	
+		 	return JURI::base().'templates/idg2019/img/img-destaque1.png';	
 		}
 	}
 }
