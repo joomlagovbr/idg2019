@@ -8,10 +8,10 @@ Se tiverem dificuldades, podem entrar em contato: tiagovtg@gmail.com
 
 - INSTALAÇÃO: Tem um PDF de nome Infograficoportal.pdf, sigam as instruções. ⚙
 
-## Portal padrão em CMS Joomla 3.9.18 06/2020
+## Portal padrão em CMS Joomla 3.10.11 10/2022
 
 Sobre esta versão
-O Joomla 3.9.18 é recomendado PHP 7.2.+, mas funciona com PHP 5.3+
+O Joomla 3.10.11 é recomendado PHP 7.2.+, mas funciona com PHP 5.3+
 
 Acompanhe as atualizações do projeto
 Participe do grupo do google chamado Joomla! e-Gov para se manter informado sobre o Portal Padrão em CMS Joomla. As atualizações não possuem data programada e ocorrem de acordo com a disponibilidade dos voluntários participantes.
