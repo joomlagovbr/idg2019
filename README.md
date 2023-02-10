@@ -2,6 +2,8 @@
 Baseada na IDG 2.0, versão da Identidade Digital do Governo Federal, versão ainda em desenvolvimento, cedida em parceria com Cesar da UFRB de conteúdo fiction apneas como demonstração(ipsum) para montagem de layout.
 
 Vesão em WordPress do IDG
+https://github.com/tiagovtg/WPGovIDG
+ou
 https://github.com/culturagovbr/IDG-WP
 
 Se tiverem dificuldades, podem entrar em contato: tiagovtg@gmail.com
